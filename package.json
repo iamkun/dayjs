@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo ok",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "url": "https://github.com/xx45/dayjs.git"
   },
   "devDependencies": {
-    "semantic-release": "^15.1.5"
+    "semantic-release": "^15.1.5",
+    "travis-deploy-once": "^4.4.1"
   }
 }
