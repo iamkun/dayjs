@@ -1,0 +1,6 @@
+# OSX
+.DS_Store
+# IDE
+.idea
+# npm
+node_modules/
