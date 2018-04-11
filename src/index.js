@@ -7,6 +7,7 @@ class Dayjs {
 
   parseConfig(config) {
     if (!config) return new Date()
+    if (config instanceof Date) return config
     if (/^(\d){8}$/.test(config)) {
       this.utc = true
       const y = config.substr(0, 4)
@@ -32,6 +33,17 @@ class Dayjs {
 
   toString() {
     return this.date.toUTCString()
+  }
+
+  startOf(arg) {
+    switch (arg) {
+      case 'year':
+        return new Dayjs(new Date(this.year(), 0, 1))
+      case 'month':
+        return new Dayjs(new Date(this.year(), this.month(), 1))
+      default:
+        return this
+    }
   }
 }
 
