@@ -17,6 +17,14 @@ class Dayjs {
     return false
   }
 
+  year() {
+    return this.date.getFullYear()
+  }
+
+  month() {
+    return this.date.getMonth()
+  }
+
   unix() {
     const zonePad = this.utc ? this.date.getTimezoneOffset() * 60 * 1000 : 0
     return Math.floor((this.date.getTime() + zonePad) / 1000)
