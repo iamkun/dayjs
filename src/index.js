@@ -4,7 +4,7 @@ class Moment {
   }
 
   toString() {
-    return this.date.toDateString()
+    return this.date.toString()
   }
 }
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo ok",
+    "test": "jest",
     "lint": "./node_modules/.bin/eslint src/*"
   },
   "pre-commit": [
@@ -21,9 +21,12 @@
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
+    "jest": "^22.4.3",
     "pre-commit": "^1.2.2"
   }
 }
