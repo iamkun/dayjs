@@ -4,7 +4,10 @@ cache:
     - ~/.npm
     - node_modules
 node_js:
-  - '4'
+  - '6'
+script:
+  - npm run lint
+  - npm test
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       nvm install v8.10.0 && nvm use v8.10.0;
