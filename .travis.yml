@@ -7,9 +7,9 @@ node_js:
   - '4'
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      nvm install v8.10.0 && nvm use v8.10.0
-      npm install -g travis-deploy-once semantic-release
-      travis-deploy-once "semantic-release"
+      nvm install v8.10.0 && nvm use v8.10.0;
+      npm install -g travis-deploy-once semantic-release;
+      travis-deploy-once "semantic-release";
     fi
 branches:
   except:
