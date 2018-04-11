@@ -7,6 +7,7 @@ node_js:
   - '6'
 install:
   - npm install -g codecov
+  - npm install
 script:
   - npm run lint
   - npm test
