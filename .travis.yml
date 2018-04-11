@@ -5,9 +5,12 @@ cache:
     - node_modules
 node_js:
   - '6'
+install:
+  - npm install -g codecov
 script:
   - npm run lint
   - npm test
+  - codecov
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       nvm install v8.10.0 && nvm use v8.10.0;
