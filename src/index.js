@@ -15,7 +15,7 @@ class Dayjs {
       const d = config.substr(6, 2)
       return `${y}-${m}-${d}`
     }
-    return false
+    return config
   }
 
   year() {
