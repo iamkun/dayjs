@@ -1,6 +1,11 @@
 # OSX
 .DS_Store
+
 # IDE
 .idea
+
 # npm
-node_modules/
+node_modules
+
+# jest
+coverage
