@@ -2,14 +2,15 @@ language: node_js
 cache:
   directories:
     - ~/.npm
-notifications:
-  email: false
+    - node_modules
 node_js:
   - '4'
 after_success:
-  - nvm install v8.10.0 && nvm use v8.10.0
-  - npm install -g travis-deploy-once semantic-release
-  - travis-deploy-once "semantic-release"
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      nvm install v8.10.0 && nvm use v8.10.0
+      npm install -g travis-deploy-once semantic-release
+      travis-deploy-once "semantic-release"
+    fi
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
