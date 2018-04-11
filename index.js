@@ -1,3 +1,3 @@
-module.exports = {
-  test: 'ok1'
-}
+import Moment from './src'
+
+console.log(new Moment())
