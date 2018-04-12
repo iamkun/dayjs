@@ -1,0 +1,4 @@
+export const SECONDS_A_MINUTE = 60
+export const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60
+export const SECONDS_A_DAY = SECONDS_A_HOUR * 24
+export const SECONDS_A_WEEK = SECONDS_A_DAY * 7
