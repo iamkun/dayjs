@@ -127,7 +127,7 @@ class Dayjs {
         case 'ss':
           return padStart(String(this.mSecond), 2, '0')
         case 'Z':
-          return this.timeZoneString.replace('00', ':00')
+          return `${this.timeZoneString.slice(0, -2)}:00`
         case 'ZZ':
           return this.timeZoneString
         default:
