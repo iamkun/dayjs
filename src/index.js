@@ -1,12 +1,17 @@
 import * as Constant from './constant'
 
+const padStart = (string, length, pad) => {
+  if (!string || string.length >= length) return string
+  return `${Array((length + 1) - string.length).join(pad)}${string}`
+}
+
 class Dayjs {
   constructor(config) {
     this.utc = false
     const args = this.parseConfig(config)
     this.date = new Date(args)
     this.timeZone = this.date.getTimezoneOffset() / 60
-    this.timeZoneString = String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200').padStart(5, '+')
+    this.timeZoneString = padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.mYear = this.date.getFullYear()
     this.mMonth = this.date.getMonth()
     this.mDay = this.date.getDate()
@@ -100,11 +105,11 @@ class Dayjs {
         case 'M':
           return String(this.mMonth + 1)
         case 'MM':
-          return String(this.mMonth + 1).padStart(2, '0')
+          return padStart(String(this.mMonth + 1), 2, '0')
         case 'D':
           return String(this.mDay)
         case 'DD':
-          return String(this.mDay).padStart(2, '0')
+          return padStart(String(this.mDay), 2, '0')
         case 'd':
           return String(this.mWeek)
         case 'dddd':
@@ -112,15 +117,15 @@ class Dayjs {
         case 'H':
           return String(this.mHour)
         case 'HH':
-          return String(this.mHour).padStart(2, '0')
+          return padStart(String(this.mHour), 2, '0')
         case 'm':
           return String(this.mMinute)
         case 'mm':
-          return String(this.mMinute).padStart(2, '0')
+          return padStart(String(this.mMinute), 2, '0')
         case 's':
           return String(this.mSecond)
         case 'ss':
-          return String(this.mSecond).padStart(2, '0')
+          return padStart(String(this.mSecond), 2, '0')
         case 'Z':
           return this.timeZoneString.replace('00', ':00')
         case 'ZZ':
