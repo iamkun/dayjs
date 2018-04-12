@@ -1,3 +1,5 @@
+import * as Constant from './constant'
+
 class Dayjs {
   constructor(config) {
     this.utc = false
@@ -47,6 +49,36 @@ class Dayjs {
       default:
         return this
     }
+  }
+
+  add(number, string) {
+    let step
+    switch (string) {
+      case 'm':
+      case 'minutes':
+        step = Constant.SECONDS_A_MINUTE
+        break
+      case 'h':
+      case 'hours':
+        step = Constant.SECONDS_A_HOUR
+        break
+      case 'd':
+      case 'days':
+        step = Constant.SECONDS_A_DAY
+        break
+      case 'w':
+      case 'weeks':
+        step = Constant.SECONDS_A_WEEK
+        break
+      default: // s seconds
+        step = 1
+    }
+    const nextTimeStamp = this.unix() + (number * step)
+    return new Dayjs(nextTimeStamp * 1000)
+  }
+
+  subtract(number, string) {
+    return this.add(number * -1, string)
   }
 
   format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
