@@ -3,6 +3,8 @@ class Dayjs {
     this.utc = false
     const args = this.parseConfig(config)
     this.date = new Date(args)
+    this.timeZone = this.date.getTimezoneOffset() / 60
+    this.timeZoneString = String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200').padStart(5, '+')
   }
 
   parseConfig(config) {
@@ -27,7 +29,8 @@ class Dayjs {
   }
 
   unix() {
-    const zonePad = this.utc ? this.date.getTimezoneOffset() * 60 * 1000 : 0
+    // timezone(hour) * 60 * 60 * 1000 => ms
+    const zonePad = !this.utc ? 0 : this.timeZone * 60 * 60 * 1000
     return Math.floor((this.date.getTime() + zonePad) / 1000)
   }
 
@@ -44,6 +47,57 @@ class Dayjs {
       default:
         return this
     }
+  }
+
+  format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
+    const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const { date } = this
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const week = date.getDay()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
+
+    return formatStr.replace(/Y{2,4}|M{1,2}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+      switch (match) {
+        case 'YY':
+          return String(year).slice(-2)
+        case 'YYYY':
+          return String(year)
+        case 'M':
+          return String(month)
+        case 'MM':
+          return String(month).padStart(2, '0')
+        case 'D':
+          return String(day)
+        case 'DD':
+          return String(day).padStart(2, '0')
+        case 'd':
+          return String(week)
+        case 'dddd':
+          return weeks[week]
+        case 'H':
+          return String(hour)
+        case 'HH':
+          return String(hour).padStart(2, '0')
+        case 'm':
+          return String(minute)
+        case 'mm':
+          return String(minute).padStart(2, '0')
+        case 's':
+          return String(second)
+        case 'ss':
+          return String(second).padStart(2, '0')
+        case 'Z':
+          return this.timeZoneString.replace('00', ':00')
+        case 'ZZ':
+          return this.timeZoneString
+        default:
+          return match
+      }
+    })
   }
 }
 
