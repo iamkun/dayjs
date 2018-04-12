@@ -7,6 +7,13 @@ class Dayjs {
     this.date = new Date(args)
     this.timeZone = this.date.getTimezoneOffset() / 60
     this.timeZoneString = String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200').padStart(5, '+')
+    this.mYear = this.date.getFullYear()
+    this.mMonth = this.date.getMonth()
+    this.mDay = this.date.getDate()
+    this.mWeek = this.date.getDay()
+    this.mHour = this.date.getHours()
+    this.mMinute = this.date.getMinutes()
+    this.mSecond = this.date.getSeconds()
   }
 
   parseConfig(config) {
@@ -23,11 +30,11 @@ class Dayjs {
   }
 
   year() {
-    return this.date.getFullYear()
+    return this.mYear
   }
 
   month() {
-    return this.date.getMonth()
+    return this.mMonth
   }
 
   unix() {
@@ -83,45 +90,37 @@ class Dayjs {
 
   format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
     const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const { date } = this
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const week = date.getDay()
-    const hour = date.getHours()
-    const minute = date.getMinutes()
-    const second = date.getSeconds()
 
     return formatStr.replace(/Y{2,4}|M{1,2}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
-          return String(year).slice(-2)
+          return String(this.mYear).slice(-2)
         case 'YYYY':
-          return String(year)
+          return String(this.mYear)
         case 'M':
-          return String(month)
+          return String(this.mMonth + 1)
         case 'MM':
-          return String(month).padStart(2, '0')
+          return String(this.mMonth + 1).padStart(2, '0')
         case 'D':
-          return String(day)
+          return String(this.mDay)
         case 'DD':
-          return String(day).padStart(2, '0')
+          return String(this.mDay).padStart(2, '0')
         case 'd':
-          return String(week)
+          return String(this.mWeek)
         case 'dddd':
-          return weeks[week]
+          return weeks[this.mWeek]
         case 'H':
-          return String(hour)
+          return String(this.mHour)
         case 'HH':
-          return String(hour).padStart(2, '0')
+          return String(this.mHour).padStart(2, '0')
         case 'm':
-          return String(minute)
+          return String(this.mMinute)
         case 'mm':
-          return String(minute).padStart(2, '0')
+          return String(this.mMinute).padStart(2, '0')
         case 's':
-          return String(second)
+          return String(this.mSecond)
         case 'ss':
-          return String(second).padStart(2, '0')
+          return String(this.mSecond).padStart(2, '0')
         case 'Z':
           return this.timeZoneString.replace('00', ':00')
         case 'ZZ':
