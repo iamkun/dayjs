@@ -14,6 +14,7 @@ script:
   - codecov
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      npm run build;
       nvm install v8.10.0 && nvm use v8.10.0;
       npm install -g travis-deploy-once semantic-release;
       travis-deploy-once "semantic-release";
