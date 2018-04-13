@@ -47,9 +47,13 @@ class Dayjs {
   }
 
   unix() {
+    return Math.floor(this.valueOf() / 1000)
+  }
+
+  valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
     const zonePad = !this.utc ? 0 : this.timeZone * 60 * 60 * 1000
-    return Math.floor((this.$date.getTime() + zonePad) / 1000)
+    return this.$date.getTime() + zonePad
   }
 
   toString() {
@@ -138,6 +142,11 @@ class Dayjs {
           return match
       }
     })
+  }
+
+  diff(otherDate) {
+    const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
+    return this.valueOf() - other.valueOf()
   }
 }
 
