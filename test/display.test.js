@@ -1,6 +1,9 @@
 import moment from 'moment'
 import dayjs from '../src'
 
+// result in millisecond might cause little different in millisecond which is acceptable
+const ignoreLastNumber = num => (String(num).slice(0, -1))
+
 test('Format no formatStr', () => {
   expect(dayjs().format()).toBe(moment().format())
 })
@@ -51,8 +54,6 @@ test('Format Complex with other string - : / ', () => {
 })
 
 it('Difference', () => {
-  // result in millisecond might cause little different in millisecond which is acceptable
-  const ignoreLastNumber = num => (String(num).slice(0, -1))
   const dateString = '20110101'
 
   const dayjsA = dayjs()
@@ -64,7 +65,7 @@ it('Difference', () => {
 })
 
 it('Unix Timestamp (milliseconds)', () => {
-  expect(dayjs().valueOf()).toBe(moment().valueOf())
+  expect(ignoreLastNumber(dayjs().valueOf())).toBe(ignoreLastNumber(moment().valueOf()))
 })
 
 it('Unix Timestamp (seconds)', () => {
