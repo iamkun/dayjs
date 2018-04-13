@@ -10,9 +10,6 @@ afterEach(() => {
   MockDate.reset()
 })
 
-// result in millisecond might cause little different in millisecond which is acceptable
-const ignoreLastNumber = num => (String(num).slice(0, -1))
-
 test('Format no formatStr', () => {
   expect(dayjs().format()).toBe(moment().format())
 })
@@ -70,11 +67,11 @@ it('Difference', () => {
 
   const momentA = moment()
   const momentB = moment(dateString)
-  expect(ignoreLastNumber(dayjsA.diff(dayjsB))).toBe(ignoreLastNumber(momentA.diff(momentB)))
+  expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
 })
 
 it('Unix Timestamp (milliseconds)', () => {
-  expect(ignoreLastNumber(dayjs().valueOf())).toBe(ignoreLastNumber(moment().valueOf()))
+  expect(dayjs().valueOf()).toBe(moment().valueOf())
 })
 
 it('Unix Timestamp (seconds)', () => {
