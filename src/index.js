@@ -1,5 +1,5 @@
-import { cloneDeep } from 'lodash'
 import * as Constant from './constant'
+import cloneDeep from './cloneDeep'
 
 const padStart = (string, length, pad) => {
   if (!string || string.length >= length) return string
