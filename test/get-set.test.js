@@ -9,3 +9,7 @@ test('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
+test('Date', () => {
+  expect(dayjs().date()).toBe(moment().date())
+})
+
