@@ -1,5 +1,14 @@
 import moment from 'moment'
+import MockDate from 'mockdate'
 import dayjs from '../src'
+
+beforeEach(() => {
+  MockDate.set(new Date())
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
 
 test('StartOf Year', () => {
   expect(dayjs().startOf('year').unix()).toBe(moment().startOf('year').unix())

@@ -1,5 +1,14 @@
 import moment from 'moment'
+import MockDate from 'mockdate'
 import dayjs from '../src'
+
+beforeEach(() => {
+  MockDate.set(new Date())
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
 
 test('Format no formatStr', () => {
   expect(dayjs().format()).toBe(moment().format())
