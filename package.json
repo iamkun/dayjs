@@ -13,7 +13,11 @@
   ],
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/*",
+      "!src/cloneDeep.js"
+    ]
   },
   "author": "",
   "license": "MIT",
@@ -40,5 +44,6 @@
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0"
-  }
+  },
+  "dependencies": {}
 }

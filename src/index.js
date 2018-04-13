@@ -1,4 +1,5 @@
 import * as Constant from './constant'
+import cloneDeep from './cloneDeep'
 
 const padStart = (string, length, pad) => {
   if (!string || string.length >= length) return string
@@ -82,6 +83,9 @@ class Dayjs {
         break
       case 'month':
         this.$date.setMonth(int)
+        break
+      case 'year':
+        this.$date.setFullYear(int)
         break
       default:
         break
@@ -179,7 +183,7 @@ class Dayjs {
   }
 
   clone() {
-    return Object.assign(Object.create(this), this)
+    return cloneDeep(this)
   }
 }
 
