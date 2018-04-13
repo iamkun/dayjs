@@ -13,7 +13,11 @@
   ],
   "jest": {
     "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/*",
+      "!src/cloneDeep.js"
+    ]
   },
   "author": "",
   "license": "MIT",
