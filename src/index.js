@@ -7,9 +7,13 @@ const padStart = (string, length, pad) => {
 
 class Dayjs {
   constructor(config) {
-    this.utc = false
+    this.$utc = false
     const args = this.parseConfig(config)
     this.$date = new Date(args)
+    this.init()
+  }
+
+  init() {
     this.timeZone = this.$date.getTimezoneOffset() / 60
     this.timeZoneString = padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$year = this.$date.getFullYear()
@@ -25,7 +29,7 @@ class Dayjs {
     if (!config) return new Date()
     if (config instanceof Date) return config
     if (/^(\d){8}$/.test(config)) {
-      this.utc = true
+      this.$utc = true
       const y = config.substr(0, 4)
       const m = config.substr(4, 2)
       const d = config.substr(6, 2)
@@ -52,7 +56,7 @@ class Dayjs {
 
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    const zonePad = !this.utc ? 0 : this.timeZone * 60 * 60 * 1000
+    const zonePad = !this.$utc ? 0 : this.timeZone * 60 * 60 * 1000
     return this.$date.getTime() + zonePad
   }
 
@@ -71,7 +75,28 @@ class Dayjs {
     }
   }
 
+  set(string, int) {
+    switch (string) {
+      case 'date':
+        this.$date.setDate(int)
+        break
+      case 'month':
+        this.$date.setMonth(int)
+        break
+      default:
+        break
+    }
+    this.init()
+  }
+
   add(number, string) {
+    if (['M', 'months'].indexOf(string) > -1) {
+      const date = this.clone()
+      date.set('date', 1)
+      date.set('month', this.month() + number)
+      date.set('date', Math.min(this.date(), date.daysInMonth()))
+      return date
+    }
     let step
     switch (string) {
       case 'm':
@@ -147,6 +172,14 @@ class Dayjs {
   diff(otherDate) {
     const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
     return this.valueOf() - other.valueOf()
+  }
+
+  daysInMonth() {
+    return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
+  }
+
+  clone() {
+    return Object.assign(Object.create(this), this)
   }
 }
 

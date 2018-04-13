@@ -61,11 +61,15 @@ it('Difference', () => {
   expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
 })
 
-it('Unix Timestamp (milliseconds)  ', () => {
+it('Unix Timestamp (milliseconds)', () => {
   expect(dayjs().valueOf()).toBe(moment().valueOf())
 })
 
-it('Unix Timestamp (seconds)  ', () => {
+it('Unix Timestamp (seconds)', () => {
   expect(dayjs().unix()).toBe(moment().unix())
+})
+
+it('Days in Month', () => {
+  expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
 })
 
