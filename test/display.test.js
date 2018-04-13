@@ -50,3 +50,26 @@ test('Format Complex with other string - : / ', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
+it('Difference', () => {
+  const dateString = '20110101'
+
+  const dayjsA = dayjs()
+  const dayjsB = dayjs(dateString)
+
+  const momentA = moment()
+  const momentB = moment(dateString)
+  expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+})
+
+it('Unix Timestamp (milliseconds)', () => {
+  expect(dayjs().valueOf()).toBe(moment().valueOf())
+})
+
+it('Unix Timestamp (seconds)', () => {
+  expect(dayjs().unix()).toBe(moment().unix())
+})
+
+it('Days in Month', () => {
+  expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
+})
+
