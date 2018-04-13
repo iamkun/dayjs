@@ -51,6 +51,8 @@ test('Format Complex with other string - : / ', () => {
 })
 
 it('Difference', () => {
+  // result in millisecond might cause little different in millisecond which is acceptable
+  const ignoreLastNumber = num => (String(num).slice(0, -1))
   const dateString = '20110101'
 
   const dayjsA = dayjs()
@@ -58,7 +60,7 @@ it('Difference', () => {
 
   const momentA = moment()
   const momentB = moment(dateString)
-  expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  expect(ignoreLastNumber(dayjsA.diff(dayjsB))).toBe(ignoreLastNumber(momentA.diff(momentB)))
 })
 
 it('Unix Timestamp (milliseconds)', () => {
