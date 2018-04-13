@@ -1,5 +1,14 @@
 import moment from 'moment'
+import MockDate from 'mockdate'
 import dayjs from '../src'
+
+beforeEach(() => {
+  MockDate.set(new Date())
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
 
 // result in millisecond might cause little different in millisecond which is acceptable
 const ignoreLastNumber = num => (String(num).slice(0, -1))

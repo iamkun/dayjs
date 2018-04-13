@@ -34,6 +34,7 @@
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.15.0",
     "jest": "^22.4.3",
+    "mockdate": "^2.0.2",
     "moment": "^2.22.0",
     "pre-commit": "^1.2.2",
     "rollup": "^0.57.1",
