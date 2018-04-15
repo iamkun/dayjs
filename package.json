@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "echo start lint && ./node_modules/.bin/eslint src/* test/*",
-    "build": "rollup -c"
+    "build": "BABEL_ENV=build rollup -c"
   },
   "pre-commit": [
     "lint"
