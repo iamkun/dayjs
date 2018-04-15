@@ -29,7 +29,7 @@ test('String Other', () => {
 })
 
 it('Clone not affect each other', () => {
-  const base = dayjs()
+  const base = dayjs(20170101)
   const year = base.year()
   const another = base.clone()
   another.set('year', year + 1)
@@ -37,7 +37,9 @@ it('Clone not affect each other', () => {
 })
 
 it('Clone with same value', () => {
-  const base = dayjs('20170101')
+  const base = dayjs()
+  const year = base.year()
+  base.set('year', year + 1)
   const another = base.clone()
   expect(base.toString()).toBe(another.toString())
 })

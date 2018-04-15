@@ -9,10 +9,11 @@ const padStart = (string, length, pad) => {
 const parseConfig = (config) => {
   if (!config) return new Date()
   if (config instanceof Date) return config
-  if (/^(\d){8}$/.test(config)) {
-    const y = config.substr(0, 4)
-    const m = config.substr(4, 2)
-    const d = config.substr(6, 2)
+  const configStr = String(config)
+  if (/^(\d){8}$/.test(configStr)) {
+    const y = configStr.substr(0, 4)
+    const m = configStr.substr(4, 2)
+    const d = configStr.substr(6, 2)
     return new Date(y, m - 1, d)
   }
   return new Date(config) // e.g. timestamp
