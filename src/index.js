@@ -159,10 +159,8 @@ class Dayjs {
           return Utils.padStart(String(this.$second), 2, '0')
         case 'Z':
           return `${this.timeZoneString.slice(0, -2)}:00`
-        case 'ZZ':
+        default: // 'ZZ'
           return this.timeZoneString
-        default:
-          return match
       }
     })
   }

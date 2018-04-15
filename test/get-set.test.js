@@ -10,15 +10,15 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('Year', () => {
+it('Year', () => {
   expect(dayjs().year()).toBe(moment().year())
 })
 
-test('Month', () => {
+it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
-test('Date', () => {
+it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
 })
 
