@@ -10,26 +10,26 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('Now', () => {
+it('Now', () => {
   expect(dayjs().unix()).toBe(moment().unix())
 })
 
-test('String 20130208', () => {
+it('String 20130208', () => {
   expect(dayjs('20130208').unix()).toBe(moment('20130208').unix())
 })
 
-test('String timestamp 1523520536000 ms', () => {
+it('String timestamp 1523520536000 ms', () => {
   const timestamp = 1523520536000
   expect(dayjs(timestamp).unix()).toBe(moment(timestamp).unix())
 })
 
-test('String Other', () => {
+it('String Other', () => {
   global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
   expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
 })
 
 it('Clone not affect each other', () => {
-  const base = dayjs()
+  const base = dayjs(20170101)
   const year = base.year()
   const another = base.clone()
   another.set('year', year + 1)
@@ -37,7 +37,9 @@ it('Clone not affect each other', () => {
 })
 
 it('Clone with same value', () => {
-  const base = dayjs('20170101')
+  const base = dayjs()
+  const year = base.year()
+  base.set('year', year + 1)
   const another = base.clone()
   expect(base.toString()).toBe(another.toString())
 })

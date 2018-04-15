@@ -15,8 +15,7 @@
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/*",
-      "!src/cloneDeep.js"
+      "src/*"
     ]
   },
   "author": "",

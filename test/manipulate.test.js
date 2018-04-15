@@ -10,19 +10,19 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('StartOf Year', () => {
+it('StartOf Year', () => {
   expect(dayjs().startOf('year').unix()).toBe(moment().startOf('year').unix())
 })
 
-test('StartOf Month', () => {
+it('StartOf Month', () => {
   expect(dayjs().startOf('month').unix()).toBe(moment().startOf('month').unix())
 })
 
-test('StartOf Other', () => {
+it('StartOf Other', () => {
   expect(dayjs().startOf('otherString').unix()).toBe(moment().startOf('otherString').unix())
 })
 
-test('Add Time days', () => {
+it('Add Time days', () => {
   expect(dayjs().add(1, 's').unix()).toBe(moment().add(1, 's').unix())
   expect(dayjs().add(1, 'seconds').unix()).toBe(moment().add(1, 'seconds').unix())
   expect(dayjs().add(1, 'm').unix()).toBe(moment().add(1, 'm').unix())
@@ -37,6 +37,6 @@ test('Add Time days', () => {
   expect(dayjs('20111031').add(1, 'months').unix()).toBe(moment('20111031').add(1, 'months').unix())
 })
 
-test('Subtract Time days', () => {
+it('Subtract Time days', () => {
   expect(dayjs().subtract(1, 'days').unix()).toBe(moment().subtract(1, 'days').unix())
 })

@@ -1,22 +1,28 @@
 import * as Constant from './constant'
-import cloneDeep from './cloneDeep'
+import * as Utils from './utils'
 
-const padStart = (string, length, pad) => {
-  if (!string || string.length >= length) return string
-  return `${Array((length + 1) - string.length).join(pad)}${string}`
+const parseConfig = (config) => {
+  if (!config) return new Date()
+  if (config instanceof Date) return config
+  const configStr = String(config)
+  if (/^(\d){8}$/.test(configStr)) {
+    const y = configStr.substr(0, 4)
+    const m = configStr.substr(4, 2)
+    const d = configStr.substr(6, 2)
+    return new Date(y, m - 1, d)
+  }
+  return new Date(config) // e.g. timestamp
 }
 
 class Dayjs {
   constructor(config) {
-    this.$utc = false
-    const args = this.parseConfig(config)
-    this.$date = new Date(args)
+    this.$date = parseConfig(config)
     this.init()
   }
 
   init() {
     this.timeZone = this.$date.getTimezoneOffset() / 60
-    this.timeZoneString = padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$year = this.$date.getFullYear()
     this.$month = this.$date.getMonth()
     this.$day = this.$date.getDate()
@@ -24,19 +30,6 @@ class Dayjs {
     this.$hour = this.$date.getHours()
     this.$minute = this.$date.getMinutes()
     this.$second = this.$date.getSeconds()
-  }
-
-  parseConfig(config) {
-    if (!config) return new Date()
-    if (config instanceof Date) return config
-    if (/^(\d){8}$/.test(config)) {
-      this.$utc = true
-      const y = config.substr(0, 4)
-      const m = config.substr(4, 2)
-      const d = config.substr(6, 2)
-      return `${y}-${m}-${d}`
-    }
-    return config
   }
 
   year() {
@@ -57,8 +50,7 @@ class Dayjs {
 
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    const zonePad = !this.$utc ? 0 : this.timeZone * 60 * 60 * 1000
-    return this.$date.getTime() + zonePad
+    return this.$date.getTime()
   }
 
   toString() {
@@ -77,6 +69,7 @@ class Dayjs {
   }
 
   set(string, int) {
+    if (!Utils.isNumber(int)) return this
     switch (string) {
       case 'date':
         this.$date.setDate(int)
@@ -91,6 +84,7 @@ class Dayjs {
         break
     }
     this.init()
+    return this
   }
 
   add(number, string) {
@@ -142,11 +136,11 @@ class Dayjs {
         case 'M':
           return String(this.$month + 1)
         case 'MM':
-          return padStart(String(this.$month + 1), 2, '0')
+          return Utils.padStart(String(this.$month + 1), 2, '0')
         case 'D':
           return String(this.$day)
         case 'DD':
-          return padStart(String(this.$day), 2, '0')
+          return Utils.padStart(String(this.$day), 2, '0')
         case 'd':
           return String(this.$week)
         case 'dddd':
@@ -154,21 +148,19 @@ class Dayjs {
         case 'H':
           return String(this.$hour)
         case 'HH':
-          return padStart(String(this.$hour), 2, '0')
+          return Utils.padStart(String(this.$hour), 2, '0')
         case 'm':
           return String(this.$minute)
         case 'mm':
-          return padStart(String(this.$minute), 2, '0')
+          return Utils.padStart(String(this.$minute), 2, '0')
         case 's':
           return String(this.$second)
         case 'ss':
-          return padStart(String(this.$second), 2, '0')
+          return Utils.padStart(String(this.$second), 2, '0')
         case 'Z':
           return `${this.timeZoneString.slice(0, -2)}:00`
-        case 'ZZ':
+        default: // 'ZZ'
           return this.timeZoneString
-        default:
-          return match
       }
     })
   }
@@ -181,12 +173,10 @@ class Dayjs {
   daysInMonth() {
     return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
   }
-
-  clone() {
-    return cloneDeep(this)
-  }
 }
 
-export default config => (
-  new Dayjs(config)
-)
+export default (config) => {
+  const d = new Dayjs(config)
+  d.clone = () => new Dayjs(d)
+  return d
+}

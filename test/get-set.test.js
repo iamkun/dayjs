@@ -10,15 +10,25 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('Year', () => {
+it('Year', () => {
   expect(dayjs().year()).toBe(moment().year())
 })
 
-test('Month', () => {
+it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
-test('Date', () => {
+it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
+})
+
+it('Set Unknown String', () => {
+  expect(dayjs().set('Unknown String', 1).unix())
+    .toBe(moment().set('Unknown String', 1).unix())
+})
+
+it('Set Not Int', () => {
+  expect(dayjs().set('year', 'Not Int').unix())
+    .toBe(moment().set('year', 'Not Int').unix())
 })
 
