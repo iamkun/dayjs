@@ -18,6 +18,11 @@ it('String 20130208', () => {
   expect(dayjs('20130208').unix()).toBe(moment('20130208').unix())
 })
 
+it('String ISO 8601 date, time and zone ', () => {
+  const time = '2018-04-04T16:00:00.000Z'
+  expect(dayjs(time).unix()).toBe(moment(time).unix())
+})
+
 it('String timestamp 1523520536000 ms', () => {
   const timestamp = 1523520536000
   expect(dayjs(timestamp).unix()).toBe(moment(timestamp).unix())
