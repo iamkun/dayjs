@@ -177,6 +177,10 @@ class Dayjs {
   clone() {
     return new Dayjs(this)
   }
+
+  toDate() {
+    return new Date(this.$date)
+  }
 }
 
 export default config => (new Dayjs(config))
