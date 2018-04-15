@@ -5,6 +5,8 @@ const padStart = (string, length, pad) => {
   return `${Array((length + 1) - string.length).join(pad)}${string}`
 }
 
+const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))
+
 const parseConfig = (config) => {
   if (!config) return new Date()
   if (config instanceof Date) return config
@@ -73,6 +75,7 @@ class Dayjs {
   }
 
   set(string, int) {
+    if (!isNumber(int)) return this
     switch (string) {
       case 'date':
         this.$date.setDate(int)
@@ -87,6 +90,7 @@ class Dayjs {
         break
     }
     this.init()
+    return this
   }
 
   add(number, string) {
