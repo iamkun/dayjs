@@ -173,10 +173,10 @@ class Dayjs {
   daysInMonth() {
     return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
   }
+
+  clone() {
+    return new Dayjs(this)
+  }
 }
 
-export default (config) => {
-  const d = new Dayjs(config)
-  d.clone = () => new Dayjs(d)
-  return d
-}
+export default config => (new Dayjs(config))
