@@ -6,10 +6,21 @@ const padStart = (string, length, pad) => {
   return `${Array((length + 1) - string.length).join(pad)}${string}`
 }
 
+const parseConfig = (config) => {
+  if (!config) return new Date()
+  if (config instanceof Date) return config
+  if (/^(\d){8}$/.test(config)) {
+    const y = config.substr(0, 4)
+    const m = config.substr(4, 2)
+    const d = config.substr(6, 2)
+    return new Date(y, m - 1, d)
+  }
+  return new Date(config) // e.g. timestamp
+}
+
 class Dayjs {
   constructor(config) {
-    this.$utc = false
-    this.$date = this.parseConfig(config)
+    this.$date = parseConfig(config)
     this.init()
   }
 
@@ -23,20 +34,6 @@ class Dayjs {
     this.$hour = this.$date.getHours()
     this.$minute = this.$date.getMinutes()
     this.$second = this.$date.getSeconds()
-  }
-
-  parseConfig(config) {
-    if (!config) return new Date()
-    if (config instanceof Date) return config
-    let arg = config
-    if (/^(\d){8}$/.test(config)) {
-      this.$utc = true
-      const y = config.substr(0, 4)
-      const m = config.substr(4, 2)
-      const d = config.substr(6, 2)
-      arg = `${y}-${m}-${d}`
-    }
-    return new Date(arg)
   }
 
   year() {
@@ -57,8 +54,7 @@ class Dayjs {
 
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    const zonePad = !this.$utc ? 0 : this.timeZone * 60 * 60 * 1000
-    return this.$date.getTime() + zonePad
+    return this.$date.getTime()
   }
 
   toString() {
