@@ -9,8 +9,7 @@ const padStart = (string, length, pad) => {
 class Dayjs {
   constructor(config) {
     this.$utc = false
-    const args = this.parseConfig(config)
-    this.$date = new Date(args)
+    this.$date = this.parseConfig(config)
     this.init()
   }
 
@@ -29,14 +28,15 @@ class Dayjs {
   parseConfig(config) {
     if (!config) return new Date()
     if (config instanceof Date) return config
+    let arg = config
     if (/^(\d){8}$/.test(config)) {
       this.$utc = true
       const y = config.substr(0, 4)
       const m = config.substr(4, 2)
       const d = config.substr(6, 2)
-      return `${y}-${m}-${d}`
+      arg = `${y}-${m}-${d}`
     }
-    return config
+    return new Date(arg)
   }
 
   year() {
