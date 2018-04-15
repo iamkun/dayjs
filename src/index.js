@@ -1,11 +1,5 @@
 import * as Constant from './constant'
-
-const padStart = (string, length, pad) => {
-  if (!string || string.length >= length) return string
-  return `${Array((length + 1) - string.length).join(pad)}${string}`
-}
-
-const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))
+import * as Utils from './utils'
 
 const parseConfig = (config) => {
   if (!config) return new Date()
@@ -28,7 +22,7 @@ class Dayjs {
 
   init() {
     this.timeZone = this.$date.getTimezoneOffset() / 60
-    this.timeZoneString = padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$year = this.$date.getFullYear()
     this.$month = this.$date.getMonth()
     this.$day = this.$date.getDate()
@@ -75,7 +69,7 @@ class Dayjs {
   }
 
   set(string, int) {
-    if (!isNumber(int)) return this
+    if (!Utils.isNumber(int)) return this
     switch (string) {
       case 'date':
         this.$date.setDate(int)
@@ -142,11 +136,11 @@ class Dayjs {
         case 'M':
           return String(this.$month + 1)
         case 'MM':
-          return padStart(String(this.$month + 1), 2, '0')
+          return Utils.padStart(String(this.$month + 1), 2, '0')
         case 'D':
           return String(this.$day)
         case 'DD':
-          return padStart(String(this.$day), 2, '0')
+          return Utils.padStart(String(this.$day), 2, '0')
         case 'd':
           return String(this.$week)
         case 'dddd':
@@ -154,15 +148,15 @@ class Dayjs {
         case 'H':
           return String(this.$hour)
         case 'HH':
-          return padStart(String(this.$hour), 2, '0')
+          return Utils.padStart(String(this.$hour), 2, '0')
         case 'm':
           return String(this.$minute)
         case 'mm':
-          return padStart(String(this.$minute), 2, '0')
+          return Utils.padStart(String(this.$minute), 2, '0')
         case 's':
           return String(this.$second)
         case 'ss':
-          return padStart(String(this.$second), 2, '0')
+          return Utils.padStart(String(this.$second), 2, '0')
         case 'Z':
           return `${this.timeZoneString.slice(0, -2)}:00`
         case 'ZZ':
