@@ -1,5 +1,4 @@
 import * as Constant from './constant'
-import cloneDeep from './cloneDeep'
 
 const padStart = (string, length, pad) => {
   if (!string || string.length >= length) return string
@@ -178,12 +177,10 @@ class Dayjs {
   daysInMonth() {
     return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
   }
-
-  clone() {
-    return cloneDeep(this)
-  }
 }
 
-export default config => (
-  new Dayjs(config)
-)
+export default (config) => {
+  const d = new Dayjs(config)
+  d.clone = () => new Dayjs(d)
+  return d
+}
