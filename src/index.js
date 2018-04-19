@@ -57,15 +57,30 @@ class Dayjs {
     return this.$date.toUTCString()
   }
 
-  startOf(arg) {
+  startOf(arg, isStartOf = true) {
     switch (arg) {
       case 'year':
-        return new Dayjs(new Date(this.year(), 0, 1))
+        if (isStartOf) {
+          return new Dayjs(new Date(this.year(), 0, 1))
+        }
+        return new Dayjs(new Date(this.year(), 11, 31)).endOf('day')
       case 'month':
-        return new Dayjs(new Date(this.year(), this.month(), 1))
+        if (isStartOf) {
+          return new Dayjs(new Date(this.year(), this.month(), 1))
+        }
+        return new Dayjs(new Date(this.year(), this.month() + 1, 0)).endOf('day')
+      case 'day':
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
+        }
+        return new Dayjs(this.toDate().setHours(23, 59, 59, 999))
       default:
-        return this
+        return this.clone()
     }
+  }
+
+  endOf(arg) {
+    return this.startOf(arg, false)
   }
 
   set(string, int) {
