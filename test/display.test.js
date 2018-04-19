@@ -93,3 +93,7 @@ it('As Javascript Date', () => {
   expect(jsDate.toUTCString()).not.toBe(base.toString())
 })
 
+it('As ISO 8601 String e.g. 2013-02-04T22:44:30.652Z', () => {
+  expect(dayjs().toISOString()).toBe(moment().toISOString())
+})
+

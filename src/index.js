@@ -181,6 +181,10 @@ class Dayjs {
   toDate() {
     return new Date(this.$date)
   }
+
+  toISOString() {
+    return this.toDate().toISOString();
+  }
 }
 
 export default config => (new Dayjs(config))
