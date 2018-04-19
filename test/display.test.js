@@ -59,15 +59,56 @@ it('Format Complex with other string - : / ', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
-it('Difference', () => {
-  const dateString = '20110101'
+describe('Difference', () => {
+  it('empty -> default milliseconds', () => {
+    const dateString = '20110101'
+    const dayjsA = dayjs()
+    const dayjsB = dayjs(dateString)
+    const momentA = moment()
+    const momentB = moment(dateString)
+    expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  })
 
-  const dayjsA = dayjs()
-  const dayjsB = dayjs(dateString)
+  it('diff -> none dayjs object', () => {
+    const dateString = '2013-02-08'
+    const dayjsA = dayjs()
+    const dayjsB = new Date(dateString)
+    const momentA = moment()
+    const momentB = new Date(dateString)
+    expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  })
 
-  const momentA = moment()
-  const momentB = moment(dateString)
-  expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  it('diff -> in seconds, days, weeks, months, quarters, years ', () => {
+    const dayjsA = dayjs()
+    const dayjsB = dayjs().add(1000, 'days')
+    const dayjsC = dayjs().subtract(1000, 'days')
+    const momentA = moment()
+    const momentB = moment().add(1000, 'days')
+    const momentC = moment().subtract(1000, 'days')
+    const units = ['seconds', 'days', 'weeks', 'months', 'quarters', 'years']
+    units.forEach((unit) => {
+      expect(dayjsA.diff(dayjsB, unit)).toBe(momentA.diff(momentB, unit))
+      expect(dayjsA.diff(dayjsB, unit, true)).toBe(momentA.diff(momentB, unit, true))
+      expect(dayjsA.diff(dayjsC, unit)).toBe(momentA.diff(momentC, unit))
+      expect(dayjsA.diff(dayjsC, unit, true)).toBe(momentA.diff(momentC, unit, true))
+    })
+  })
+
+  it('Special diff in month according to moment.js', () => {
+    const dayjsA = dayjs('20160115')
+    const dayjsB = dayjs('20160215')
+    const dayjsC = dayjs('20170115')
+    const momentA = moment('20160115')
+    const momentB = moment('20160215')
+    const momentC = moment('20170115')
+    const units = ['months', 'quarters', 'years']
+    units.forEach((unit) => {
+      expect(dayjsA.diff(dayjsB, unit)).toBe(momentA.diff(momentB, unit))
+      expect(dayjsA.diff(dayjsB, unit, true)).toBe(momentA.diff(momentB, unit, true))
+      expect(dayjsA.diff(dayjsC, unit)).toBe(momentA.diff(momentC, unit))
+      expect(dayjsA.diff(dayjsC, unit, true)).toBe(momentA.diff(momentC, unit, true))
+    })
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
@@ -80,9 +121,10 @@ it('Unix Timestamp (seconds)', () => {
 
 it('Days in Month', () => {
   expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
+  expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
 })
 
-it('As Javascript Date', () => {
+it('As Javascript Date -> toDate', () => {
   const base = dayjs()
   const momentBase = moment()
   const jsDate = base.toDate()
@@ -93,7 +135,18 @@ it('As Javascript Date', () => {
   expect(jsDate.toUTCString()).not.toBe(base.toString())
 })
 
-it('As ISO 8601 String e.g. 2013-02-04T22:44:30.652Z', () => {
+it('As Array -> toArray', () => {
+  expect(dayjs().toArray()).toEqual(moment().toArray())
+})
+
+it('As JSON -> toJSON', () => {
+  expect(dayjs().toJSON()).toBe(moment().toJSON())
+})
+
+it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
 })
 
+it('As Object -> toObject', () => {
+  expect(dayjs().toObject()).toEqual(moment().toObject())
+})

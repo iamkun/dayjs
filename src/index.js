@@ -30,6 +30,7 @@ class Dayjs {
     this.$hour = this.$date.getHours()
     this.$minute = this.$date.getMinutes()
     this.$second = this.$date.getSeconds()
+    this.$milliseconds = this.$date.getMilliseconds()
   }
 
   year() {
@@ -44,6 +45,22 @@ class Dayjs {
     return this.$day
   }
 
+  hour() {
+    return this.$hour
+  }
+
+  minute() {
+    return this.$minute
+  }
+
+  second() {
+    return this.$second
+  }
+
+  millisecond() {
+    return this.$milliseconds
+  }
+
   unix() {
     return Math.floor(this.valueOf() / 1000)
   }
@@ -53,19 +70,30 @@ class Dayjs {
     return this.$date.getTime()
   }
 
-  toString() {
-    return this.$date.toUTCString()
-  }
-
-  startOf(arg) {
+  startOf(arg, isStartOf = true) {
     switch (arg) {
       case 'year':
-        return new Dayjs(new Date(this.year(), 0, 1))
+        if (isStartOf) {
+          return new Dayjs(new Date(this.year(), 0, 1))
+        }
+        return new Dayjs(new Date(this.year(), 11, 31)).endOf('day')
       case 'month':
-        return new Dayjs(new Date(this.year(), this.month(), 1))
+        if (isStartOf) {
+          return new Dayjs(new Date(this.year(), this.month(), 1))
+        }
+        return new Dayjs(new Date(this.year(), this.month() + 1, 0)).endOf('day')
+      case 'day':
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
+        }
+        return new Dayjs(this.toDate().setHours(23, 59, 59, 999))
       default:
-        return this
+        return this.clone()
     }
+  }
+
+  endOf(arg) {
+    return this.startOf(arg, false)
   }
 
   set(string, int) {
@@ -99,25 +127,25 @@ class Dayjs {
     switch (string) {
       case 'm':
       case 'minutes':
-        step = Constant.SECONDS_A_MINUTE
+        step = Constant.MILLISECONDS_A_MINUTE
         break
       case 'h':
       case 'hours':
-        step = Constant.SECONDS_A_HOUR
+        step = Constant.MILLISECONDS_A_HOUR
         break
       case 'd':
       case 'days':
-        step = Constant.SECONDS_A_DAY
+        step = Constant.MILLISECONDS_A_DAY
         break
       case 'w':
       case 'weeks':
-        step = Constant.SECONDS_A_WEEK
+        step = Constant.MILLISECONDS_A_WEEK
         break
       default: // s seconds
-        step = 1
+        step = Constant.MILLISECONDS_A_SECOND
     }
-    const nextTimeStamp = this.unix() + (number * step)
-    return new Dayjs(nextTimeStamp * 1000)
+    const nextTimeStamp = this.valueOf() + (number * step)
+    return new Dayjs(nextTimeStamp)
   }
 
   subtract(number, string) {
@@ -165,13 +193,36 @@ class Dayjs {
     })
   }
 
-  diff(otherDate) {
+  diff(otherDate, unit, float = false) {
     const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    return this.valueOf() - other.valueOf()
+    const diff = this - other
+    let result = Utils.monthDiff(this, other)
+    switch (unit) {
+      case 'years':
+        result /= 12
+        break
+      case 'months':
+        break
+      case 'quarters':
+        result /= 3
+        break
+      case 'weeks':
+        result = diff / Constant.MILLISECONDS_A_WEEK
+        break
+      case 'days':
+        result = diff / Constant.MILLISECONDS_A_DAY
+        break
+      case 'seconds':
+        result = diff / Constant.MILLISECONDS_A_SECOND
+        break
+      default: // milliseconds
+        result = diff
+    }
+    return float ? result : Utils.absFloor(result)
   }
 
   daysInMonth() {
-    return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
+    return this.endOf('month').date()
   }
 
   clone() {
@@ -182,8 +233,40 @@ class Dayjs {
     return new Date(this.$date)
   }
 
+  toArray() {
+    return [
+      this.year(),
+      this.month(),
+      this.date(),
+      this.hour(),
+      this.minute(),
+      this.second(),
+      this.millisecond()
+    ]
+  }
+
+  toJSON() {
+    return this.toISOString()
+  }
+
   toISOString() {
     return this.toDate().toISOString()
+  }
+
+  toObject() {
+    return {
+      years: this.year(),
+      months: this.month(),
+      date: this.date(),
+      hours: this.hour(),
+      minutes: this.minute(),
+      seconds: this.second(),
+      milliseconds: this.millisecond()
+    }
+  }
+
+  toString() {
+    return this.$date.toUTCString()
   }
 }
 
