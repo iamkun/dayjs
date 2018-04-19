@@ -193,9 +193,15 @@ class Dayjs {
     })
   }
 
-  diff(otherDate) {
+  diff(otherDate, unit, float = false) {
     const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    return this.valueOf() - other.valueOf()
+    const returnFloat = result => (float ? result : Math.ceil(result))
+    switch (unit) {
+      case 'days':
+        return returnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_DAY)
+      default:
+        return this.valueOf() - other.valueOf()
+    }
   }
 
   daysInMonth() {

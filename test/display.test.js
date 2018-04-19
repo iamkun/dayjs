@@ -69,13 +69,23 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
 
-  it('diff to none dayjs object', () => {
+  it('diff -> none dayjs object', () => {
     const dateString = '2013-02-08'
     const dayjsA = dayjs()
     const dayjsB = new Date(dateString)
     const momentA = moment()
     const momentB = new Date(dateString)
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  })
+
+  it('diff -> in day', () => {
+    const dateString = '2018-04-21'
+    const dayjsA = dayjs()
+    const dayjsB = new Date(dateString)
+    const momentA = moment()
+    const momentB = new Date(dateString)
+    expect(dayjsA.diff(dayjsB, 'days')).toBe(momentA.diff(momentB, 'days'))
+    expect(dayjsA.diff(dayjsB, 'days', true)).toBe(momentA.diff(momentB, 'days', true))
   })
 })
 
