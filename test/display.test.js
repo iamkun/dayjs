@@ -78,7 +78,7 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
 
-  it('diff -> in day', () => {
+  it('diff -> in days', () => {
     const dayjsA = dayjs()
     const dayjsB = dayjs().add(100, 'days')
     const dayjsC = dayjs().subtract(100, 'days')
@@ -89,6 +89,19 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB, 'days', true)).toBe(momentA.diff(momentB, 'days', true))
     expect(dayjsA.diff(dayjsC, 'days')).toBe(momentA.diff(momentC, 'days'))
     expect(dayjsA.diff(dayjsC, 'days', true)).toBe(momentA.diff(momentC, 'days', true))
+  })
+
+  it('diff -> in weeks', () => {
+    const dayjsA = dayjs()
+    const dayjsB = dayjs().add(100, 'days')
+    const dayjsC = dayjs().subtract(100, 'days')
+    const momentA = moment()
+    const momentB = moment().add(100, 'days')
+    const momentC = moment().subtract(100, 'days')
+    expect(dayjsA.diff(dayjsB, 'weeks')).toBe(momentA.diff(momentB, 'weeks'))
+    expect(dayjsA.diff(dayjsB, 'weeks', true)).toBe(momentA.diff(momentB, 'weeks', true))
+    expect(dayjsA.diff(dayjsC, 'weeks')).toBe(momentA.diff(momentC, 'weeks'))
+    expect(dayjsA.diff(dayjsC, 'weeks', true)).toBe(momentA.diff(momentC, 'weeks', true))
   })
 })
 

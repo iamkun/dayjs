@@ -200,6 +200,8 @@ class Dayjs {
     switch (unit) {
       case 'days':
         return isReturnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_DAY)
+      case 'weeks':
+        return isReturnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_WEEK)
       default:
         return this.valueOf() - other.valueOf()
     }
