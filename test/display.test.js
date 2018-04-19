@@ -59,15 +59,15 @@ it('Format Complex with other string - : / ', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
-it('Difference', () => {
-  const dateString = '20110101'
-
-  const dayjsA = dayjs()
-  const dayjsB = dayjs(dateString)
-
-  const momentA = moment()
-  const momentB = moment(dateString)
-  expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+describe('Difference', () => {
+  it('empty -> default milliseconds', () => {
+    const dateString = '20110101'
+    const dayjsA = dayjs()
+    const dayjsB = dayjs(dateString)
+    const momentA = moment()
+    const momentB = moment(dateString)
+    expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
