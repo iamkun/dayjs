@@ -127,25 +127,25 @@ class Dayjs {
     switch (string) {
       case 'm':
       case 'minutes':
-        step = Constant.SECONDS_A_MINUTE
+        step = Constant.MILLISECONDS_A_MINUTE
         break
       case 'h':
       case 'hours':
-        step = Constant.SECONDS_A_HOUR
+        step = Constant.MILLISECONDS_A_HOUR
         break
       case 'd':
       case 'days':
-        step = Constant.SECONDS_A_DAY
+        step = Constant.MILLISECONDS_A_DAY
         break
       case 'w':
       case 'weeks':
-        step = Constant.SECONDS_A_WEEK
+        step = Constant.MILLISECONDS_A_WEEK
         break
       default: // s seconds
-        step = 1
+        step = Constant.MILLISECONDS_A_SECOND
     }
-    const nextTimeStamp = this.unix() + (number * step)
-    return new Dayjs(nextTimeStamp * 1000)
+    const nextTimeStamp = this.valueOf() + (number * step)
+    return new Dayjs(nextTimeStamp)
   }
 
   subtract(number, string) {
@@ -195,10 +195,11 @@ class Dayjs {
 
   diff(otherDate, unit, float = false) {
     const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    const returnFloat = result => (float ? result : Math.ceil(result))
+    const returnFloat = result => (result > 0 ? Math.floor(result) : Math.ceil(result))
+    const isReturnFloat = result => (float ? result : returnFloat(result))
     switch (unit) {
       case 'days':
-        return returnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_DAY)
+        return isReturnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_DAY)
       default:
         return this.valueOf() - other.valueOf()
     }

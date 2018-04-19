@@ -79,13 +79,16 @@ describe('Difference', () => {
   })
 
   it('diff -> in day', () => {
-    const dateString = '2018-04-21'
     const dayjsA = dayjs()
-    const dayjsB = new Date(dateString)
+    const dayjsB = dayjs().add(100, 'days')
+    const dayjsC = dayjs().subtract(100, 'days')
     const momentA = moment()
-    const momentB = new Date(dateString)
+    const momentB = moment().add(100, 'days')
+    const momentC = moment().subtract(100, 'days')
     expect(dayjsA.diff(dayjsB, 'days')).toBe(momentA.diff(momentB, 'days'))
     expect(dayjsA.diff(dayjsB, 'days', true)).toBe(momentA.diff(momentB, 'days', true))
+    expect(dayjsA.diff(dayjsC, 'days')).toBe(momentA.diff(momentC, 'days'))
+    expect(dayjsA.diff(dayjsC, 'days', true)).toBe(momentA.diff(momentC, 'days', true))
   })
 })
 
