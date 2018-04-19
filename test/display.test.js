@@ -83,7 +83,7 @@ it('Days in Month', () => {
   expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
 })
 
-it('As Javascript Date', () => {
+it('As Javascript Date -> toDate', () => {
   const base = dayjs()
   const momentBase = moment()
   const jsDate = base.toDate()
@@ -94,6 +94,18 @@ it('As Javascript Date', () => {
   expect(jsDate.toUTCString()).not.toBe(base.toString())
 })
 
-it('As ISO 8601 String e.g. 2013-02-04T22:44:30.652Z', () => {
+it('As Array -> toArray', () => {
+  expect(dayjs().toArray()).toEqual(moment().toArray())
+})
+
+it('As JSON -> toJSON', () => {
+  expect(dayjs().toJSON()).toBe(moment().toJSON())
+})
+
+it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
+})
+
+it('As Object -> toObject', () => {
+  expect(dayjs().toObject()).toEqual(moment().toObject())
 })

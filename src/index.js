@@ -30,6 +30,7 @@ class Dayjs {
     this.$hour = this.$date.getHours()
     this.$minute = this.$date.getMinutes()
     this.$second = this.$date.getSeconds()
+    this.$milliseconds = this.$date.getMilliseconds()
   }
 
   year() {
@@ -44,6 +45,22 @@ class Dayjs {
     return this.$day
   }
 
+  hour() {
+    return this.$hour
+  }
+
+  minute() {
+    return this.$minute
+  }
+
+  second() {
+    return this.$second
+  }
+
+  millisecond() {
+    return this.$milliseconds
+  }
+
   unix() {
     return Math.floor(this.valueOf() / 1000)
   }
@@ -51,10 +68,6 @@ class Dayjs {
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
     return this.$date.getTime()
-  }
-
-  toString() {
-    return this.$date.toUTCString()
   }
 
   startOf(arg, isStartOf = true) {
@@ -197,8 +210,40 @@ class Dayjs {
     return new Date(this.$date)
   }
 
+  toArray() {
+    return [
+      this.year(),
+      this.month(),
+      this.date(),
+      this.hour(),
+      this.minute(),
+      this.second(),
+      this.millisecond()
+    ]
+  }
+
+  toJSON() {
+    return this.toISOString()
+  }
+
   toISOString() {
     return this.toDate().toISOString()
+  }
+
+  toObject() {
+    return {
+      years: this.year(),
+      months: this.month(),
+      date: this.date(),
+      hours: this.hour(),
+      minutes: this.minute(),
+      seconds: this.second(),
+      milliseconds: this.millisecond()
+    }
+  }
+
+  toString() {
+    return this.$date.toUTCString()
   }
 }
 
