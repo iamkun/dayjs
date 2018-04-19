@@ -195,16 +195,30 @@ class Dayjs {
 
   diff(otherDate, unit, float = false) {
     const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    const returnFloat = result => (result > 0 ? Math.floor(result) : Math.ceil(result))
-    const isReturnFloat = result => (float ? result : returnFloat(result))
+    const diff = this - other
+    let result = Utils.monthDiff(this, other)
     switch (unit) {
-      case 'days':
-        return isReturnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_DAY)
+      case 'years':
+        result /= 12
+        break
+      case 'months':
+        break
+      case 'quarters':
+        result /= 3
+        break
       case 'weeks':
-        return isReturnFloat((this.valueOf() - other.valueOf()) / Constant.MILLISECONDS_A_WEEK)
-      default:
-        return this.valueOf() - other.valueOf()
+        result = diff / Constant.MILLISECONDS_A_WEEK
+        break
+      case 'days':
+        result = diff / Constant.MILLISECONDS_A_DAY
+        break
+      case 'seconds':
+        result = diff / Constant.MILLISECONDS_A_SECOND
+        break
+      default: // milliseconds
+        result = diff
     }
+    return float ? result : Utils.absFloor(result)
   }
 
   daysInMonth() {
