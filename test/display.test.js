@@ -68,6 +68,15 @@ describe('Difference', () => {
     const momentB = moment(dateString)
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
+
+  it('diff to none dayjs object', () => {
+    const dateString = '2013-02-08'
+    const dayjsA = dayjs()
+    const dayjsB = new Date(dateString)
+    const momentA = moment()
+    const momentB = new Date(dateString)
+    expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
