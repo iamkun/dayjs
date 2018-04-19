@@ -80,6 +80,7 @@ it('Unix Timestamp (seconds)', () => {
 
 it('Days in Month', () => {
   expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
+  expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
 })
 
 it('As Javascript Date', () => {
@@ -96,4 +97,3 @@ it('As Javascript Date', () => {
 it('As ISO 8601 String e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
 })
-

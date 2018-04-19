@@ -186,7 +186,7 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return new Dayjs(new Date(this.year(), this.month() + 1, 0)).date()
+    return this.endOf('month').date()
   }
 
   clone() {
