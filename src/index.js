@@ -183,7 +183,7 @@ class Dayjs {
   }
 
   toISOString() {
-    return this.toDate().toISOString();
+    return this.toDate().toISOString()
   }
 }
 
