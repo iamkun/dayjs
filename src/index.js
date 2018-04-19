@@ -193,10 +193,10 @@ class Dayjs {
     })
   }
 
-  diff(otherDate, unit, float = false) {
-    const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    const diff = this - other
-    let result = Utils.monthDiff(this, other)
+  diff(input, unit, float = false) {
+    const that = input instanceof Dayjs ? input : new Dayjs(input)
+    const diff = this - that
+    let result = Utils.monthDiff(this, that)
     switch (unit) {
       case 'years':
         result /= 12
