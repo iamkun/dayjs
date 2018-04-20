@@ -96,8 +96,7 @@ class Dayjs {
     return this.startOf(arg, false)
   }
 
-  set(string, int) {
-    if (!Utils.isNumber(int)) return this
+  mSet(string, int) {
     switch (string) {
       case 'date':
         this.$date.setDate(int)
@@ -115,12 +114,15 @@ class Dayjs {
     return this
   }
 
+  set(string, int) {
+    if (!Utils.isNumber(int)) return this
+    return this.clone().mSet(string, int)
+  }
+
   add(number, string) {
     if (['M', 'months'].indexOf(string) > -1) {
-      const date = this.clone()
-      date.set('date', 1)
-      date.set('month', this.month() + number)
-      date.set('date', Math.min(this.date(), date.daysInMonth()))
+      let date = this.set('date', 1).set('month', this.month() + number)
+      date = date.set('date', Math.min(this.date(), date.daysInMonth()))
       return date
     }
     let step
