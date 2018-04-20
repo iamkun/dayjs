@@ -41,6 +41,18 @@ class Dayjs {
     return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
   }
 
+  isSame(that) {
+    return this.valueOf() === that.valueOf()
+  }
+
+  isBefore(that) {
+    return this.valueOf() < that.valueOf()
+  }
+
+  isAfter(that) {
+    return this.valueOf() > that.valueOf()
+  }
+
   year() {
     return this.$y
   }
