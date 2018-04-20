@@ -16,21 +16,21 @@ const parseConfig = (config) => {
 
 class Dayjs {
   constructor(config) {
-    this.$date = parseConfig(config)
+    this.$d = parseConfig(config)
     this.init()
   }
 
   init() {
-    this.timeZone = this.$date.getTimezoneOffset() / 60
+    this.timeZone = this.$d.getTimezoneOffset() / 60
     this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
-    this.$y = this.$date.getFullYear()
-    this.$M = this.$date.getMonth()
-    this.$D = this.$date.getDate()
-    this.$W = this.$date.getDay()
-    this.$H = this.$date.getHours()
-    this.$m = this.$date.getMinutes()
-    this.$s = this.$date.getSeconds()
-    this.$ms = this.$date.getMilliseconds()
+    this.$y = this.$d.getFullYear()
+    this.$M = this.$d.getMonth()
+    this.$D = this.$d.getDate()
+    this.$W = this.$d.getDay()
+    this.$H = this.$d.getHours()
+    this.$m = this.$d.getMinutes()
+    this.$s = this.$d.getSeconds()
+    this.$ms = this.$d.getMilliseconds()
   }
 
   year() {
@@ -67,7 +67,7 @@ class Dayjs {
 
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    return this.$date.getTime()
+    return this.$d.getTime()
   }
 
   startOf(arg, isStartOf = true) {
@@ -99,13 +99,13 @@ class Dayjs {
   mSet(string, int) {
     switch (string) {
       case 'date':
-        this.$date.setDate(int)
+        this.$d.setDate(int)
         break
       case 'month':
-        this.$date.setMonth(int)
+        this.$d.setMonth(int)
         break
       case 'year':
-        this.$date.setFullYear(int)
+        this.$d.setFullYear(int)
         break
       default:
         break
@@ -232,7 +232,7 @@ class Dayjs {
   }
 
   toDate() {
-    return new Date(this.$date)
+    return new Date(this.$d)
   }
 
   toArray() {
@@ -268,7 +268,7 @@ class Dayjs {
   }
 
   toString() {
-    return this.$date.toUTCString()
+    return this.$d.toUTCString()
   }
 }
 
