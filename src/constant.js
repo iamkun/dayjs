@@ -8,3 +8,14 @@ export const MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND
 export const MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND
 export const MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND
 export const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND
+
+export const MS = 'millisecond'
+export const S = 'second'
+export const MIN = 'minute'
+export const H = 'hour'
+export const D = 'day'
+export const W = 'week'
+export const M = 'month'
+export const Q = 'quarter'
+export const Y = 'year'
+export const DATE = 'date'

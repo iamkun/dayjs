@@ -10,8 +10,8 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('StartOf EndOf Year', () => {
-  expect(dayjs().startOf('year').unix()).toBe(moment().startOf('year').unix())
+it('StartOf EndOf Year with s and upper case', () => {
+  expect(dayjs().startOf('YearS').unix()).toBe(moment().startOf('year').unix())
   expect(dayjs().endOf('year').unix()).toBe(moment().endOf('year').unix())
 })
 

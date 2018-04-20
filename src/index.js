@@ -1,4 +1,4 @@
-import * as Constant from './constant'
+import * as C from './constant'
 import * as Utils from './utils'
 
 const parseConfig = (config) => {
@@ -70,19 +70,20 @@ class Dayjs {
     return this.$d.getTime()
   }
 
-  startOf(arg, isStartOf = true) {
-    switch (arg) {
-      case 'year':
+  startOf(units, isStartOf = true) {
+    const unit = Utils.prettyUnit(units)
+    switch (unit) {
+      case C.Y:
         if (isStartOf) {
           return new Dayjs(new Date(this.year(), 0, 1))
         }
         return new Dayjs(new Date(this.year(), 11, 31)).endOf('day')
-      case 'month':
+      case C.M:
         if (isStartOf) {
           return new Dayjs(new Date(this.year(), this.month(), 1))
         }
         return new Dayjs(new Date(this.year(), this.month() + 1, 0)).endOf('day')
-      case 'day':
+      case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
         }
@@ -96,15 +97,16 @@ class Dayjs {
     return this.startOf(arg, false)
   }
 
-  mSet(string, int) {
-    switch (string) {
-      case 'date':
+  mSet(units, int) {
+    const unit = Utils.prettyUnit(units)
+    switch (unit) {
+      case C.DATE:
         this.$d.setDate(int)
         break
-      case 'month':
+      case C.M:
         this.$d.setMonth(int)
         break
-      case 'year':
+      case C.Y:
         this.$d.setFullYear(int)
         break
       default:
@@ -119,32 +121,33 @@ class Dayjs {
     return this.clone().mSet(string, int)
   }
 
-  add(number, string) {
-    if (['M', 'months'].indexOf(string) > -1) {
+  add(number, units) {
+    const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
+    if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set('date', 1).set('month', this.month() + number)
       date = date.set('date', Math.min(this.date(), date.daysInMonth()))
       return date
     }
     let step
-    switch (string) {
+    switch (unit) {
       case 'm':
-      case 'minutes':
-        step = Constant.MILLISECONDS_A_MINUTE
+      case C.MIN:
+        step = C.MILLISECONDS_A_MINUTE
         break
       case 'h':
-      case 'hours':
-        step = Constant.MILLISECONDS_A_HOUR
+      case C.H:
+        step = C.MILLISECONDS_A_HOUR
         break
       case 'd':
-      case 'days':
-        step = Constant.MILLISECONDS_A_DAY
+      case C.D:
+        step = C.MILLISECONDS_A_DAY
         break
       case 'w':
-      case 'weeks':
-        step = Constant.MILLISECONDS_A_WEEK
+      case C.W:
+        step = C.MILLISECONDS_A_WEEK
         break
       default: // s seconds
-        step = Constant.MILLISECONDS_A_SECOND
+        step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
     return new Dayjs(nextTimeStamp)
@@ -195,27 +198,28 @@ class Dayjs {
     })
   }
 
-  diff(input, unit, float = false) {
+  diff(input, units, float = false) {
+    const unit = Utils.prettyUnit(units)
     const that = input instanceof Dayjs ? input : new Dayjs(input)
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
-      case 'years':
+      case C.Y:
         result /= 12
         break
-      case 'months':
+      case C.M:
         break
-      case 'quarters':
+      case C.Q:
         result /= 3
         break
-      case 'weeks':
-        result = diff / Constant.MILLISECONDS_A_WEEK
+      case C.W:
+        result = diff / C.MILLISECONDS_A_WEEK
         break
-      case 'days':
-        result = diff / Constant.MILLISECONDS_A_DAY
+      case C.D:
+        result = diff / C.MILLISECONDS_A_DAY
         break
-      case 'seconds':
-        result = diff / Constant.MILLISECONDS_A_SECOND
+      case C.S:
+        result = diff / C.MILLISECONDS_A_SECOND
         break
       default: // milliseconds
         result = diff
