@@ -23,42 +23,42 @@ class Dayjs {
   init() {
     this.timeZone = this.$date.getTimezoneOffset() / 60
     this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
-    this.$year = this.$date.getFullYear()
-    this.$month = this.$date.getMonth()
-    this.$day = this.$date.getDate()
-    this.$week = this.$date.getDay()
-    this.$hour = this.$date.getHours()
-    this.$minute = this.$date.getMinutes()
-    this.$second = this.$date.getSeconds()
-    this.$milliseconds = this.$date.getMilliseconds()
+    this.$y = this.$date.getFullYear()
+    this.$M = this.$date.getMonth()
+    this.$D = this.$date.getDate()
+    this.$W = this.$date.getDay()
+    this.$H = this.$date.getHours()
+    this.$m = this.$date.getMinutes()
+    this.$s = this.$date.getSeconds()
+    this.$ms = this.$date.getMilliseconds()
   }
 
   year() {
-    return this.$year
+    return this.$y
   }
 
   month() {
-    return this.$month
+    return this.$M
   }
 
   date() {
-    return this.$day
+    return this.$D
   }
 
   hour() {
-    return this.$hour
+    return this.$H
   }
 
   minute() {
-    return this.$minute
+    return this.$m
   }
 
   second() {
-    return this.$second
+    return this.$s
   }
 
   millisecond() {
-    return this.$milliseconds
+    return this.$ms
   }
 
   unix() {
@@ -160,33 +160,33 @@ class Dayjs {
     return formatStr.replace(/Y{2,4}|M{1,2}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
-          return String(this.$year).slice(-2)
+          return String(this.$y).slice(-2)
         case 'YYYY':
-          return String(this.$year)
+          return String(this.$y)
         case 'M':
-          return String(this.$month + 1)
+          return String(this.$M + 1)
         case 'MM':
-          return Utils.padStart(String(this.$month + 1), 2, '0')
+          return Utils.padStart(String(this.$M + 1), 2, '0')
         case 'D':
-          return String(this.$day)
+          return String(this.$D)
         case 'DD':
-          return Utils.padStart(String(this.$day), 2, '0')
+          return Utils.padStart(String(this.$D), 2, '0')
         case 'd':
-          return String(this.$week)
+          return String(this.$W)
         case 'dddd':
-          return weeks[this.$week]
+          return weeks[this.$W]
         case 'H':
-          return String(this.$hour)
+          return String(this.$H)
         case 'HH':
-          return Utils.padStart(String(this.$hour), 2, '0')
+          return Utils.padStart(String(this.$H), 2, '0')
         case 'm':
-          return String(this.$minute)
+          return String(this.$m)
         case 'mm':
-          return Utils.padStart(String(this.$minute), 2, '0')
+          return Utils.padStart(String(this.$m), 2, '0')
         case 's':
-          return String(this.$second)
+          return String(this.$s)
         case 'ss':
-          return Utils.padStart(String(this.$second), 2, '0')
+          return Utils.padStart(String(this.$s), 2, '0')
         case 'Z':
           return `${this.timeZoneString.slice(0, -2)}:00`
         default: // 'ZZ'
