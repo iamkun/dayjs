@@ -1,0 +1,24 @@
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+    - node_modules
+node_js:
+  - '6'
+install:
+  - npm install -g codecov
+  - npm install
+script:
+  - npm run lint
+  - npm test
+  - codecov
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      npm run build;
+      nvm install v8.10.0 && nvm use v8.10.0;
+      npm install -g travis-deploy-once semantic-release;
+      travis-deploy-once "semantic-release";
+    fi
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
