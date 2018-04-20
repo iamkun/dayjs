@@ -33,6 +33,10 @@ class Dayjs {
     this.$ms = this.$d.getMilliseconds()
   }
 
+  isValid() {
+    return !(this.$d.toString() === 'Invalid Date')
+  }
+
   year() {
     return this.$y
   }
