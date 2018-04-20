@@ -10,13 +10,15 @@ afterEach(() => {
   MockDate.reset()
 })
 
+const testArr = [dayjs, moment]
+
 it('IsLeapYear', () => {
   expect(dayjs('20000101').isLeapYear()).toBe(true)
   expect(dayjs('21000101').isLeapYear()).toBe(false)
 })
 
 it('Is Before Is After Is Same', () => {
-  [moment, dayjs].forEach((instance) => {
+  testArr.forEach((instance) => {
     const dayA = instance()
     const dayB = dayA.clone().add(1, 'day')
     const dayC = dayA.clone().subtract(1, 'day')
