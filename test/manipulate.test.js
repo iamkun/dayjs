@@ -42,6 +42,7 @@ it('Add Time days', () => {
   expect(dayjs().add(1, 'd').unix()).toBe(moment().add(1, 'd').unix())
   expect(dayjs().add(1, 'days').unix()).toBe(moment().add(1, 'days').unix())
   expect(dayjs().add(1, 'M').unix()).toBe(moment().add(1, 'M').unix())
+  expect(dayjs().add(1, 'y').unix()).toBe(moment().add(1, 'y').unix())
   expect(dayjs('20111031').add(1, 'months').unix()).toBe(moment('20111031').add(1, 'months').unix())
 })
 

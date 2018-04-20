@@ -74,7 +74,7 @@ class Dayjs {
     return this.$d.getTime()
   }
 
-  startOf(units, isStartOf = true) {
+  startOf(units, isStartOf = true) { // isStartOf -> endOf
     const unit = Utils.prettyUnit(units)
     switch (unit) {
       case C.Y:
@@ -128,9 +128,12 @@ class Dayjs {
   add(number, units) {
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
-      let date = this.set('date', 1).set('month', this.month() + number)
-      date = date.set('date', Math.min(this.date(), date.daysInMonth()))
+      let date = this.set(C.DATE, 1).set(C.M, this.month() + number)
+      date = date.set(C.DATE, Math.min(this.date(), date.daysInMonth()))
       return date
+    }
+    if (['y', C.Y].indexOf(unit) > -1) {
+      return this.set(C.Y, this.year() + number)
     }
     let step
     switch (unit) {
