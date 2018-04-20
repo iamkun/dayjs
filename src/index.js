@@ -1,4 +1,4 @@
-import * as Constant from './constant'
+import * as C from './constant'
 import * as Utils from './utils'
 
 const parseConfig = (config) => {
@@ -16,49 +16,69 @@ const parseConfig = (config) => {
 
 class Dayjs {
   constructor(config) {
-    this.$date = parseConfig(config)
+    this.$d = parseConfig(config)
     this.init()
   }
 
   init() {
-    this.timeZone = this.$date.getTimezoneOffset() / 60
+    this.timeZone = this.$d.getTimezoneOffset() / 60
     this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
-    this.$year = this.$date.getFullYear()
-    this.$month = this.$date.getMonth()
-    this.$day = this.$date.getDate()
-    this.$week = this.$date.getDay()
-    this.$hour = this.$date.getHours()
-    this.$minute = this.$date.getMinutes()
-    this.$second = this.$date.getSeconds()
-    this.$milliseconds = this.$date.getMilliseconds()
+    this.$y = this.$d.getFullYear()
+    this.$M = this.$d.getMonth()
+    this.$D = this.$d.getDate()
+    this.$W = this.$d.getDay()
+    this.$H = this.$d.getHours()
+    this.$m = this.$d.getMinutes()
+    this.$s = this.$d.getSeconds()
+    this.$ms = this.$d.getMilliseconds()
+  }
+
+  isValid() {
+    return !(this.$d.toString() === 'Invalid Date')
+  }
+
+  isLeapYear() {
+    return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
+  }
+
+  isSame(that) {
+    return this.valueOf() === that.valueOf()
+  }
+
+  isBefore(that) {
+    return this.valueOf() < that.valueOf()
+  }
+
+  isAfter(that) {
+    return this.valueOf() > that.valueOf()
   }
 
   year() {
-    return this.$year
+    return this.$y
   }
 
   month() {
-    return this.$month
+    return this.$M
   }
 
   date() {
-    return this.$day
+    return this.$D
   }
 
   hour() {
-    return this.$hour
+    return this.$H
   }
 
   minute() {
-    return this.$minute
+    return this.$m
   }
 
   second() {
-    return this.$second
+    return this.$s
   }
 
   millisecond() {
-    return this.$milliseconds
+    return this.$ms
   }
 
   unix() {
@@ -67,22 +87,23 @@ class Dayjs {
 
   valueOf() {
     // timezone(hour) * 60 * 60 * 1000 => ms
-    return this.$date.getTime()
+    return this.$d.getTime()
   }
 
-  startOf(arg, isStartOf = true) {
-    switch (arg) {
-      case 'year':
+  startOf(units, isStartOf = true) { // isStartOf -> endOf
+    const unit = Utils.prettyUnit(units)
+    switch (unit) {
+      case C.Y:
         if (isStartOf) {
-          return new Dayjs(new Date(this.year(), 0, 1))
+          return new Dayjs(new Date(this.$y, 0, 1))
         }
-        return new Dayjs(new Date(this.year(), 11, 31)).endOf('day')
-      case 'month':
+        return new Dayjs(new Date(this.$y, 11, 31)).endOf('day')
+      case C.M:
         if (isStartOf) {
-          return new Dayjs(new Date(this.year(), this.month(), 1))
+          return new Dayjs(new Date(this.$y, this.$M, 1))
         }
-        return new Dayjs(new Date(this.year(), this.month() + 1, 0)).endOf('day')
-      case 'day':
+        return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
+      case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
         }
@@ -96,17 +117,17 @@ class Dayjs {
     return this.startOf(arg, false)
   }
 
-  set(string, int) {
-    if (!Utils.isNumber(int)) return this
-    switch (string) {
-      case 'date':
-        this.$date.setDate(int)
+  mSet(units, int) {
+    const unit = Utils.prettyUnit(units)
+    switch (unit) {
+      case C.DATE:
+        this.$d.setDate(int)
         break
-      case 'month':
-        this.$date.setMonth(int)
+      case C.M:
+        this.$d.setMonth(int)
         break
-      case 'year':
-        this.$date.setFullYear(int)
+      case C.Y:
+        this.$d.setFullYear(int)
         break
       default:
         break
@@ -115,34 +136,41 @@ class Dayjs {
     return this
   }
 
-  add(number, string) {
-    if (['M', 'months'].indexOf(string) > -1) {
-      const date = this.clone()
-      date.set('date', 1)
-      date.set('month', this.month() + number)
-      date.set('date', Math.min(this.date(), date.daysInMonth()))
+  set(string, int) {
+    if (!Utils.isNumber(int)) return this
+    return this.clone().mSet(string, int)
+  }
+
+  add(number, units) {
+    const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
+    if (['M', C.M].indexOf(unit) > -1) {
+      let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
+      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
       return date
     }
+    if (['y', C.Y].indexOf(unit) > -1) {
+      return this.set(C.Y, this.$y + number)
+    }
     let step
-    switch (string) {
+    switch (unit) {
       case 'm':
-      case 'minutes':
-        step = Constant.MILLISECONDS_A_MINUTE
+      case C.MIN:
+        step = C.MILLISECONDS_A_MINUTE
         break
       case 'h':
-      case 'hours':
-        step = Constant.MILLISECONDS_A_HOUR
+      case C.H:
+        step = C.MILLISECONDS_A_HOUR
         break
       case 'd':
-      case 'days':
-        step = Constant.MILLISECONDS_A_DAY
+      case C.D:
+        step = C.MILLISECONDS_A_DAY
         break
       case 'w':
-      case 'weeks':
-        step = Constant.MILLISECONDS_A_WEEK
+      case C.W:
+        step = C.MILLISECONDS_A_WEEK
         break
       default: // s seconds
-        step = Constant.MILLISECONDS_A_SECOND
+        step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
     return new Dayjs(nextTimeStamp)
@@ -158,33 +186,33 @@ class Dayjs {
     return formatStr.replace(/Y{2,4}|M{1,2}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
-          return String(this.$year).slice(-2)
+          return String(this.$y).slice(-2)
         case 'YYYY':
-          return String(this.$year)
+          return String(this.$y)
         case 'M':
-          return String(this.$month + 1)
+          return String(this.$M + 1)
         case 'MM':
-          return Utils.padStart(String(this.$month + 1), 2, '0')
+          return Utils.padStart(String(this.$M + 1), 2, '0')
         case 'D':
-          return String(this.$day)
+          return String(this.$D)
         case 'DD':
-          return Utils.padStart(String(this.$day), 2, '0')
+          return Utils.padStart(String(this.$D), 2, '0')
         case 'd':
-          return String(this.$week)
+          return String(this.$W)
         case 'dddd':
-          return weeks[this.$week]
+          return weeks[this.$W]
         case 'H':
-          return String(this.$hour)
+          return String(this.$H)
         case 'HH':
-          return Utils.padStart(String(this.$hour), 2, '0')
+          return Utils.padStart(String(this.$H), 2, '0')
         case 'm':
-          return String(this.$minute)
+          return String(this.$m)
         case 'mm':
-          return Utils.padStart(String(this.$minute), 2, '0')
+          return Utils.padStart(String(this.$m), 2, '0')
         case 's':
-          return String(this.$second)
+          return String(this.$s)
         case 'ss':
-          return Utils.padStart(String(this.$second), 2, '0')
+          return Utils.padStart(String(this.$s), 2, '0')
         case 'Z':
           return `${this.timeZoneString.slice(0, -2)}:00`
         default: // 'ZZ'
@@ -193,27 +221,28 @@ class Dayjs {
     })
   }
 
-  diff(otherDate, unit, float = false) {
-    const other = otherDate instanceof Dayjs ? otherDate : new Dayjs(otherDate)
-    const diff = this - other
-    let result = Utils.monthDiff(this, other)
+  diff(input, units, float = false) {
+    const unit = Utils.prettyUnit(units)
+    const that = input instanceof Dayjs ? input : new Dayjs(input)
+    const diff = this - that
+    let result = Utils.monthDiff(this, that)
     switch (unit) {
-      case 'years':
+      case C.Y:
         result /= 12
         break
-      case 'months':
+      case C.M:
         break
-      case 'quarters':
+      case C.Q:
         result /= 3
         break
-      case 'weeks':
-        result = diff / Constant.MILLISECONDS_A_WEEK
+      case C.W:
+        result = diff / C.MILLISECONDS_A_WEEK
         break
-      case 'days':
-        result = diff / Constant.MILLISECONDS_A_DAY
+      case C.D:
+        result = diff / C.MILLISECONDS_A_DAY
         break
-      case 'seconds':
-        result = diff / Constant.MILLISECONDS_A_SECOND
+      case C.S:
+        result = diff / C.MILLISECONDS_A_SECOND
         break
       default: // milliseconds
         result = diff
@@ -222,7 +251,7 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf('month').date()
+    return this.endOf(C.M).$D
   }
 
   clone() {
@@ -230,18 +259,18 @@ class Dayjs {
   }
 
   toDate() {
-    return new Date(this.$date)
+    return new Date(this.$d)
   }
 
   toArray() {
     return [
-      this.year(),
-      this.month(),
-      this.date(),
-      this.hour(),
-      this.minute(),
-      this.second(),
-      this.millisecond()
+      this.$y,
+      this.$M,
+      this.$D,
+      this.$H,
+      this.$m,
+      this.$s,
+      this.$ms
     ]
   }
 
@@ -255,18 +284,18 @@ class Dayjs {
 
   toObject() {
     return {
-      years: this.year(),
-      months: this.month(),
-      date: this.date(),
-      hours: this.hour(),
-      minutes: this.minute(),
-      seconds: this.second(),
-      milliseconds: this.millisecond()
+      years: this.$y,
+      months: this.$M,
+      date: this.$D,
+      hours: this.$H,
+      minutes: this.$m,
+      seconds: this.$s,
+      milliseconds: this.$ms
     }
   }
 
   toString() {
-    return this.$date.toUTCString()
+    return this.$d.toUTCString()
   }
 }
 

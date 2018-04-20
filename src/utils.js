@@ -23,3 +23,4 @@ export const monthDiff = (a, b) => {
 
 export const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
 
+export const prettyUnit = u => (u && String(u).toLowerCase().replace(/s$/, ''))
