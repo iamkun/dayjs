@@ -22,6 +22,22 @@ it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
 })
 
+it('Hour', () => {
+  expect(dayjs().hour()).toBe(moment().hour())
+})
+
+it('Minute', () => {
+  expect(dayjs().minute()).toBe(moment().minute())
+})
+
+it('Second', () => {
+  expect(dayjs().second()).toBe(moment().second())
+})
+
+it('Millisecond', () => {
+  expect(dayjs().millisecond()).toBe(moment().millisecond())
+})
+
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.unix())

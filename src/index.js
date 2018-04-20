@@ -37,6 +37,10 @@ class Dayjs {
     return !(this.$d.toString() === 'Invalid Date')
   }
 
+  isLeapYear() {
+    return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
+  }
+
   year() {
     return this.$y
   }
@@ -79,14 +83,14 @@ class Dayjs {
     switch (unit) {
       case C.Y:
         if (isStartOf) {
-          return new Dayjs(new Date(this.year(), 0, 1))
+          return new Dayjs(new Date(this.$y, 0, 1))
         }
-        return new Dayjs(new Date(this.year(), 11, 31)).endOf('day')
+        return new Dayjs(new Date(this.$y, 11, 31)).endOf('day')
       case C.M:
         if (isStartOf) {
-          return new Dayjs(new Date(this.year(), this.month(), 1))
+          return new Dayjs(new Date(this.$y, this.$M, 1))
         }
-        return new Dayjs(new Date(this.year(), this.month() + 1, 0)).endOf('day')
+        return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
       case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
@@ -128,12 +132,12 @@ class Dayjs {
   add(number, units) {
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
-      let date = this.set(C.DATE, 1).set(C.M, this.month() + number)
-      date = date.set(C.DATE, Math.min(this.date(), date.daysInMonth()))
+      let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
+      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
       return date
     }
     if (['y', C.Y].indexOf(unit) > -1) {
-      return this.set(C.Y, this.year() + number)
+      return this.set(C.Y, this.$y + number)
     }
     let step
     switch (unit) {
@@ -235,7 +239,7 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf('month').date()
+    return this.endOf(C.M).$D
   }
 
   clone() {
@@ -248,13 +252,13 @@ class Dayjs {
 
   toArray() {
     return [
-      this.year(),
-      this.month(),
-      this.date(),
-      this.hour(),
-      this.minute(),
-      this.second(),
-      this.millisecond()
+      this.$y,
+      this.$M,
+      this.$D,
+      this.$H,
+      this.$m,
+      this.$s,
+      this.$ms
     ]
   }
 
@@ -268,13 +272,13 @@ class Dayjs {
 
   toObject() {
     return {
-      years: this.year(),
-      months: this.month(),
-      date: this.date(),
-      hours: this.hour(),
-      minutes: this.minute(),
-      seconds: this.second(),
-      milliseconds: this.millisecond()
+      years: this.$y,
+      months: this.$M,
+      date: this.$D,
+      hours: this.$H,
+      minutes: this.$m,
+      seconds: this.$s,
+      milliseconds: this.$ms
     }
   }
 
