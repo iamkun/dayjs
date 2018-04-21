@@ -2,7 +2,7 @@
   "name": "dayjs",
   "version": "0.0.0-development",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/dayjs.min.js",
   "scripts": {
     "test": "jest",
     "lint": "./node_modules/.bin/eslint src/* test/*",
