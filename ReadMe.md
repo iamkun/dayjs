@@ -239,7 +239,7 @@ Once parsing and manipulation are done, you need some way to display the `Dayjs`
 #### Format
 - return String
 
-This is the most robust display option. It takes a string of tokens and replaces them with their corresponding values.
+Takes a string of tokens and replaces them with their corresponding date values.
 ```js
 dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
@@ -248,7 +248,7 @@ dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
 #### Difference
 - return Number
 
-To get the difference of two `Dayjs` object in milliseconds or other unit.
+Get the difference of two `Dayjs` object in milliseconds or other unit.
 ```js
 dayjs().diff(Dayjs, unit);
 dayjs().diff(dayjs(), 'years'); // 0
