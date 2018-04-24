@@ -69,7 +69,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
   * [当前时间](#当前时间)
   * [时间字符串](#时间字符串)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
-  * [Date 对象](#Date 对象)
+  * [Date 对象](#date-对象)
   * [复制](#复制)
   * [验证](#验证)
 * [获取+设置](#获取设置)
