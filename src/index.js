@@ -182,8 +182,9 @@ class Dayjs {
 
   format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
     const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    return formatStr.replace(/Y{2,4}|M{1,2}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+    return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -193,6 +194,10 @@ class Dayjs {
           return String(this.$M + 1)
         case 'MM':
           return Utils.padStart(String(this.$M + 1), 2, '0')
+        case 'MMM':
+          return months[this.$M].slice(0, 3)
+        case 'MMMM':
+          return months[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
