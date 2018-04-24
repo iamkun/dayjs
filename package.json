@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "",
   "main": "dist/dayjs.min.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest",
     "lint": "./node_modules/.bin/eslint src/* test/*",
