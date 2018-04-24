@@ -62,7 +62,7 @@ Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for t
 
 ## API
 
-Api will always return a new `Dayjs` object if not specified. 
+Api will always return a new `Dayjs` object if not specified.
 
 * [Parse](#parse)
   * [Now](#now)
@@ -74,7 +74,7 @@ Api will always return a new `Dayjs` object if not specified.
 * [Get + Set](#get--set)
   * [Year](#year)
   * [Month](#month)
-  * [Date of Month](#date-1)
+  * [Date of Month](#date-of-month)
   * [Hour](#hour)
   * [Minute](#minute)
   * [Second](#second)
@@ -94,7 +94,7 @@ Api will always return a new `Dayjs` object if not specified.
   * [As Javascript Date](#as-javascript-date)
   * [As Array](#as-array)
   * [As JSON](#as-json)
-  * [As ISO 8601 String](#as-ios-8601-string)
+  * [As ISO 8601 String](#as-iso-8601-string)
   * [As Object](#as-object)
   * [As String](#as-string)
 * [Query](#query)
@@ -303,24 +303,24 @@ Formats a string to the ISO8601 standard.
 dayjs().toISOString();
 ```
 #### As Object
-- return Object 
+- return Object
 
 Return an object with year, month ... missisecond.
 ```js
 dayjs().toObject();// { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
 #### As String
-- return String 
+- return String
 
 ```js
-dayjs().toString(); 
+dayjs().toString();
 ```
 ---
 ### Query
 #### Is Before
 - return Boolean
 
-Check if a `Dayjs` object is before another `Dayjs` object. 
+Check if a `Dayjs` object is before another `Dayjs` object.
 ```js
 dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
@@ -328,7 +328,7 @@ dayjs().isBefore(dayjs()); // false
 #### Is Same
 - return Boolean
 
-Check if a `Dayjs` object is same as another `Dayjs` object. 
+Check if a `Dayjs` object is same as another `Dayjs` object.
 ```js
 dayjs().isSame(Dayjs);
 dayjs().isSame(dayjs()); // true
@@ -336,7 +336,7 @@ dayjs().isSame(dayjs()); // true
 #### Is After
 - return Boolean
 
-Check if a `Dayjs` object is after another `Dayjs` object. 
+Check if a `Dayjs` object is after another `Dayjs` object.
 ```js
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
@@ -344,7 +344,7 @@ dayjs().isAfter(dayjs()); // false
 #### Is Leap Year
 - return Boolean
 
-Check if a year is a leap year. 
+Check if a year is a leap year.
 ```js
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(dayjs()); // true
