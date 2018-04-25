@@ -65,44 +65,44 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 ## API
 如果没有特别说明，API 的返回值都是新的 `Dayjs` 对象。
 
-* [解析](#parse)
-  * [当前时间](#now)
-  * [时间字符串](#string)
-  * [Unix 时间戳 (毫秒)](#unix-timestamp-milliseconds)
-  * [Date 对象](#date)
-  * [复制](#clone)
-  * [验证](#validation)
-* [获取+设置](#get--set)
-  * [年](#year)
-  * [月](#month)
-  * [日](#date-1)
-  * [时](#hour)
-  * [分](#minute)
-  * [秒](#second)
-  * [毫秒](#millisecond)
-  * [设置](#set)
-* [操作](#manipulate)
-  * [增加](#add)
-  * [减少](#subtract)
-  * [开头时间](#start-of-time)
-  * [末尾时间](#end-of-time)
-* [显示](#display)
-  * [格式化](#format)
-  * [时间差](#different)
-  * [Unix 时间戳 (毫秒)](#unix-timestamp-milliseconds-1)
-  * [Unix 时间戳 (秒)](#unix-timestamp-seconds)
-  * [天数 (月)](#days-in-month)
-  * [Date 对象](#as-javascript-date)
-  * [数组](#as-array)
+* [解析](#解析)
+  * [当前时间](#当前时间)
+  * [时间字符串](#时间字符串)
+  * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
+  * [Date 对象](#date-对象)
+  * [复制](#复制)
+  * [验证](#验证)
+* [获取+设置](#获取设置)
+  * [年](#年)
+  * [月](#月)
+  * [日](#日)
+  * [时](#时)
+  * [分](#分)
+  * [秒](#秒)
+  * [毫秒](#毫秒)
+  * [设置](#设置)
+* [操作](#操作)
+  * [增加](#增加)
+  * [减少](#减少)
+  * [开头时间](#开头时间)
+  * [末尾时间](#末尾时间)
+* [显示](#显示)
+  * [格式化](#格式化)
+  * [时间差](#时间差)
+  * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒-1)
+  * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  * [天数 (月)](#天数-月)
+  * [Date 对象](#date-对象-1)
+  * [数组](#数组)
   * [JSON](#as-json)
-  * [ISO 8601 字符串](#as-ios-8601-string)
-  * [对象](#as-object)
-  * [字符串](#as-string)
-* [查询](#query)
-  * [是否之前](#is-before)
-  * [是否相同](#is-same)
-  * [是否之后](#is-after)
-  * [是否闰年](#is-leap-year)
+  * [ISO 8601 字符串](#iso-8601-字符串)
+  * [对象](#对象)
+  * [字符串](#字符串)
+* [查询](#查询)
+  * [是否之前](#是否之前)
+  * [是否相同](#是否相同)
+  * [是否之后](#是否之后)
+  * [是否闰年](#是否闰年)
 
 ---
 ### 解析
@@ -304,17 +304,17 @@ dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
 dayjs().toISOString();
 ```
 #### 对象
-- return Object 
+- return Object
 
 返回包含时间数值的对象。
 ```js
 dayjs().toObject();// { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
 #### 字符串
-- return String 
+- return String
 
 ```js
-dayjs().toString(); 
+dayjs().toString();
 ```
 ---
 ### 查询
@@ -345,7 +345,7 @@ dayjs().isAfter(dayjs()); // false
 #### 是否闰年
 - return Boolean
 
-是否闰年。 
+是否闰年。
 ```js
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(dayjs()); // true
