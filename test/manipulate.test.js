@@ -12,10 +12,11 @@ afterEach(() => {
 
 describe('StartOf EndOf', () => {
   it('StartOf EndOf Year ... with s and upper case', () => {
-    const testArr = ['Year', 'year', 'YearS', 'month', 'day', 'week']
+    const testArr = ['Year', 'year', 'YearS', 'month', 'day', 'date',
+      'week', 'hour', 'minute', 'second']
     testArr.forEach((d) => {
-      expect(dayjs().startOf(d).unix()).toBe(moment().startOf(d).unix())
-      expect(dayjs().endOf(d).unix()).toBe(moment().endOf(d).unix())
+      expect(dayjs().startOf(d).valueOf()).toBe(moment().startOf(d).valueOf())
+      expect(dayjs().endOf(d).valueOf()).toBe(moment().endOf(d).valueOf())
     })
   })
 

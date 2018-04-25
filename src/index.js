@@ -106,10 +106,26 @@ class Dayjs {
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
           instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y, true)
       case C.D:
+      case C.DATE:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
         }
         return new Dayjs(this.toDate().setHours(23, 59, 59, 999))
+      case C.H:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setMinutes(0, 0, 0))
+        }
+        return new Dayjs(this.toDate().setMinutes(59, 59, 999))
+      case C.MIN:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setSeconds(0, 0))
+        }
+        return new Dayjs(this.toDate().setSeconds(59, 999))
+      case C.S:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setMilliseconds(0))
+        }
+        return new Dayjs(this.toDate().setMilliseconds(999))
       default:
         return this.clone()
     }
