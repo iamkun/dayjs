@@ -102,6 +102,11 @@ class Dayjs {
           return new Dayjs(new Date(this.$y, this.$M, 1))
         }
         return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
+      case C.W:
+        if (isStartOf) {
+          return new Dayjs(new Date(this.$y, this.$M, this.$D - this.$W))
+        }
+        return new Dayjs(new Date(this.$y, this.$M, this.$D + (6 - this.$W))).endOf('day')
       case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
