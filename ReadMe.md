@@ -130,7 +130,7 @@ dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 ### Clone
-All `Dayjs` are inmmutable. If you want a copy of the object, just call `.clone()`.
+All `Dayjs` are immutable. If you want a copy of the object, just call `.clone()`.
 Calling dayjs() on a `Dayjs` object will also clone it.
 ```js
 dayjs(Dayjs);
