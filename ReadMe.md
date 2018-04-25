@@ -58,7 +58,7 @@ Just download the latest version of Day.js at [https://unpkg.com/dayjs](https://
 
 ## Getting Started
 Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
-`Dayjs` object is inmmutable, that is to say, all api operation will return a new `Dayjs` object.
+`Dayjs` object is immutable, that is to say, all api operation will return a new `Dayjs` object.
 
 ## API
 
