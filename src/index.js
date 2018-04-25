@@ -2,16 +2,15 @@ import * as C from './constant'
 import * as Utils from './utils'
 
 const parseConfig = (config) => {
+  let reg
   if (!config) return new Date()
   if (config instanceof Date) return config
-  const configStr = String(config)
-  if (/^(\d){8}$/.test(configStr)) {
-    const y = configStr.substr(0, 4)
-    const m = configStr.substr(4, 2)
-    const d = configStr.substr(6, 2)
-    return new Date(y, m - 1, d)
+  // eslint-disable-next-line no-cond-assign
+  if (reg = String(config).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
+    // 2018-08-08 or 20180808
+    return new Date(reg[1], reg[2] - 1, reg[3])
   }
-  return new Date(config) // e.g. timestamp
+  return new Date(config) // timestamp
 }
 
 class Dayjs {

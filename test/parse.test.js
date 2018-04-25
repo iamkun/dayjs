@@ -15,7 +15,10 @@ describe('Parse', () => {
   })
 
   it('String 20130208', () => {
-    expect(dayjs('20130208').unix()).toBe(moment('20130208').unix())
+    const timeArr = ['20130108', '2018-04-24']
+    timeArr.forEach((t) => {
+      expect(dayjs(t).unix()).toBe(moment(t).unix())
+    })
   })
 
   it('String ISO 8601 date, time and zone', () => {
