@@ -91,25 +91,37 @@ class Dayjs {
 
   startOf(units, isStartOf = true) { // isStartOf -> endOf
     const unit = Utils.prettyUnit(units)
-    const instanceFactory = (d, m, y = this.$y, isEnd = false) => {
+    const instanceFactory = (d, m, y = this.$y) => {
       const ins = new Dayjs(new Date(y, m, d))
-      return isEnd ? ins.endOf(C.D) : ins
+      return isStartOf ? ins : ins.endOf(C.D)
+    }
+    const instanceFactorySet = (method, slice) => {
+      const argumentStart = [0, 0, 0, 0]
+      const argumentEnd = [23, 59, 59, 999]
+      return new Dayjs(Date()[method].apply(
+        this.toDate(),
+        isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
+      ))
     }
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11, this.$y, true)
+          instanceFactory(31, 11, this.$y)
       case C.M:
         return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1, this.$y, true)
+          instanceFactory(0, this.$M + 1, this.$y)
       case C.W:
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y, true)
+          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y)
       case C.D:
-        if (isStartOf) {
-          return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
-        }
-        return new Dayjs(this.toDate().setHours(23, 59, 59, 999))
+      case C.DATE:
+        return instanceFactorySet('setHours', 0)
+      case C.H:
+        return instanceFactorySet('setMinutes', 1)
+      case C.MIN:
+        return instanceFactorySet('setSeconds', 2)
+      case C.S:
+        return instanceFactorySet('setMilliseconds', 3)
       default:
         return this.clone()
     }
