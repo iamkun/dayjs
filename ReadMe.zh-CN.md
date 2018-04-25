@@ -348,7 +348,7 @@ dayjs().isAfter(dayjs()); // false
 是否闰年。
 ```js
 dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(dayjs()); // true
+dayjs('2000-01-01').isLeapYear(); // true
 ```
 ---
 ## 开源协议
