@@ -305,7 +305,7 @@ dayjs().toISOString();
 #### As Object
 - return Object
 
-Return an object with year, month ... missisecond.
+Return an object with year, month ... millisecond.
 ```js
 dayjs().toObject();// { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
