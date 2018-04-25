@@ -347,7 +347,7 @@ dayjs().isAfter(dayjs()); // false
 Check if a year is a leap year.
 ```js
 dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(dayjs()); // true
+dayjs('2000-01-01').isLeapYear(); // true
 ```
 ---
 ## License
