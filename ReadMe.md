@@ -201,7 +201,7 @@ Units are case insensitive
 ```js
 dayjs().set(unit : String, value : Int);
 dayjs().set('month', 3);  // April
-moment().set('second', 30);
+dayjs().set('second', 30);
 ```
 ---
 ### Manipulate
