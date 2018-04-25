@@ -2,16 +2,15 @@ import * as C from './constant'
 import * as Utils from './utils'
 
 const parseConfig = (config) => {
+  let reg
   if (!config) return new Date()
   if (config instanceof Date) return config
-  const configStr = String(config)
-  if (/^(\d){8}$/.test(configStr)) {
-    const y = configStr.substr(0, 4)
-    const m = configStr.substr(4, 2)
-    const d = configStr.substr(6, 2)
-    return new Date(y, m - 1, d)
+  // eslint-disable-next-line no-cond-assign
+  if (reg = String(config).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
+    // 2018-08-08 or 20180808
+    return new Date(reg[1], reg[2] - 1, reg[3])
   }
-  return new Date(config) // e.g. timestamp
+  return new Date(config) // timestamp
 }
 
 class Dayjs {
@@ -21,8 +20,8 @@ class Dayjs {
   }
 
   init() {
-    this.timeZone = this.$d.getTimezoneOffset() / 60
-    this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.$zone = this.$d.getTimezoneOffset() / 60
+    this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -92,17 +91,20 @@ class Dayjs {
 
   startOf(units, isStartOf = true) { // isStartOf -> endOf
     const unit = Utils.prettyUnit(units)
+    const instanceFactory = (d, m, y = this.$y, isEnd = false) => {
+      const ins = new Dayjs(new Date(y, m, d))
+      return isEnd ? ins.endOf(C.D) : ins
+    }
     switch (unit) {
       case C.Y:
-        if (isStartOf) {
-          return new Dayjs(new Date(this.$y, 0, 1))
-        }
-        return new Dayjs(new Date(this.$y, 11, 31)).endOf('day')
+        return isStartOf ? instanceFactory(1, 0) :
+          instanceFactory(31, 11, this.$y, true)
       case C.M:
-        if (isStartOf) {
-          return new Dayjs(new Date(this.$y, this.$M, 1))
-        }
-        return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
+        return isStartOf ? instanceFactory(1, this.$M) :
+          instanceFactory(0, this.$M + 1, this.$y, true)
+      case C.W:
+        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
+          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y, true)
       case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
@@ -219,9 +221,9 @@ class Dayjs {
         case 'ss':
           return Utils.padStart(String(this.$s), 2, '0')
         case 'Z':
-          return `${this.timeZoneString.slice(0, -2)}:00`
+          return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'
-          return this.timeZoneString
+          return this.$zoneStr
       }
     })
   }
