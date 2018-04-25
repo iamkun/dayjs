@@ -9,6 +9,7 @@ beforeEach(() => {
 afterEach(() => {
   MockDate.reset()
 })
+
 describe('Parse', () => {
   it('Now', () => {
     expect(dayjs().unix()).toBe(moment().unix())

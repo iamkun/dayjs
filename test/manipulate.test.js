@@ -10,25 +10,21 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('StartOf EndOf Year with s and upper case', () => {
-  expect(dayjs().startOf('YearS').unix()).toBe(moment().startOf('year').unix())
-  expect(dayjs().endOf('year').unix()).toBe(moment().endOf('year').unix())
+describe('StartOf EndOf', () => {
+  it('StartOf EndOf Year ... with s and upper case', () => {
+    const testArr = ['Year', 'year', 'YearS', 'month', 'day']
+    testArr.forEach((d) => {
+      expect(dayjs().startOf(d).unix()).toBe(moment().startOf(d).unix())
+      expect(dayjs().endOf(d).unix()).toBe(moment().endOf(d).unix())
+    })
+  })
+
+  it('StartOf EndOf Other -> no change', () => {
+    expect(dayjs().startOf('otherString').unix()).toBe(moment().startOf('otherString').unix())
+    expect(dayjs().endOf('otherString').unix()).toBe(moment().endOf('otherString').unix())
+  })
 })
 
-it('StartOf EndOf Month', () => {
-  expect(dayjs().startOf('month').unix()).toBe(moment().startOf('month').unix())
-  expect(dayjs().endOf('month').unix()).toBe(moment().endOf('month').unix())
-})
-
-it('StartOf EndOf Day', () => {
-  expect(dayjs().startOf('day').unix()).toBe(moment().startOf('day').unix())
-  expect(dayjs().endOf('day').unix()).toBe(moment().endOf('day').unix())
-})
-
-it('StartOf EndOf Other -> no change', () => {
-  expect(dayjs().startOf('otherString').unix()).toBe(moment().startOf('otherString').unix())
-  expect(dayjs().endOf('otherString').unix()).toBe(moment().endOf('otherString').unix())
-})
 
 it('Add Time days', () => {
   expect(dayjs().add(1, 's').unix()).toBe(moment().add(1, 's').unix())
