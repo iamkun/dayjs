@@ -20,8 +20,8 @@ class Dayjs {
   }
 
   init() {
-    this.timeZone = this.$d.getTimezoneOffset() / 60
-    this.timeZoneString = Utils.padStart(String(this.timeZone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.$zone = this.$d.getTimezoneOffset() / 60
+    this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -91,22 +91,20 @@ class Dayjs {
 
   startOf(units, isStartOf = true) { // isStartOf -> endOf
     const unit = Utils.prettyUnit(units)
+    const instanceFactory = (d, m, y = this.$y, isEnd = false) => {
+      const ins = new Dayjs(new Date(y, m, d))
+      return isEnd ? ins.endOf(C.D) : ins
+    }
     switch (unit) {
       case C.Y:
-        if (isStartOf) {
-          return new Dayjs(new Date(this.$y, 0, 1))
-        }
-        return new Dayjs(new Date(this.$y, 11, 31)).endOf('day')
+        return isStartOf ? instanceFactory(1, 0) :
+          instanceFactory(31, 11, this.$y, true)
       case C.M:
-        if (isStartOf) {
-          return new Dayjs(new Date(this.$y, this.$M, 1))
-        }
-        return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
+        return isStartOf ? instanceFactory(1, this.$M) :
+          instanceFactory(0, this.$M + 1, this.$y, true)
       case C.W:
-        if (isStartOf) {
-          return new Dayjs(new Date(this.$y, this.$M, this.$D - this.$W))
-        }
-        return new Dayjs(new Date(this.$y, this.$M, this.$D + (6 - this.$W))).endOf('day')
+        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
+          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y, true)
       case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
@@ -223,9 +221,9 @@ class Dayjs {
         case 'ss':
           return Utils.padStart(String(this.$s), 2, '0')
         case 'Z':
-          return `${this.timeZoneString.slice(0, -2)}:00`
+          return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'
-          return this.timeZoneString
+          return this.$zoneStr
       }
     })
   }
