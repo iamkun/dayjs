@@ -103,11 +103,31 @@ class Dayjs {
           return new Dayjs(new Date(this.$y, this.$M, 1))
         }
         return new Dayjs(new Date(this.$y, this.$M + 1, 0)).endOf('day')
+      case C.W:
+        if (isStartOf) {
+          return new Dayjs(new Date(this.$y, this.$M, this.$D - this.$W))
+        }
+        return new Dayjs(new Date(this.$y, this.$M, this.$D + (6 - this.$W))).endOf('day')
       case C.D:
         if (isStartOf) {
           return new Dayjs(this.toDate().setHours(0, 0, 0, 0))
         }
         return new Dayjs(this.toDate().setHours(23, 59, 59, 999))
+      case C.H:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setMinutes(0, 0, 0))
+        }
+        return new Dayjs(this.toDate().setMinutes(59, 59, 999))
+      case C.MIN:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setSeconds(0, 0))
+        }
+        return new Dayjs(this.toDate().setSeconds(59, 999))
+      case C.S:
+        if (isStartOf) {
+          return new Dayjs(this.toDate().setMilliseconds(0, 0))
+        }
+        return new Dayjs(this.toDate().setMilliseconds(59, 999))
       default:
         return this.clone()
     }
