@@ -12,19 +12,19 @@ afterEach(() => {
 
 describe('Parse', () => {
   it('Now', () => {
-    expect(dayjs().unix()).toBe(moment().unix())
+    expect(dayjs().valueOf()).toBe(moment().valueOf())
   })
 
   it('String 20130208', () => {
     const timeArr = ['20130108', '2018-04-24']
     timeArr.forEach((t) => {
-      expect(dayjs(t).unix()).toBe(moment(t).unix())
+      expect(dayjs(t).valueOf()).toBe(moment(t).valueOf())
     })
   })
 
   it('String ISO 8601 date, time and zone', () => {
     const time = '2018-04-04T16:00:00.000Z'
-    expect(dayjs(time).unix()).toBe(moment(time).unix())
+    expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
   })
 
   it('String Other and isValid', () => {
@@ -37,7 +37,7 @@ describe('Parse', () => {
 
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   const timestamp = 1523520536000
-  expect(dayjs(timestamp).unix()).toBe(moment(timestamp).unix())
+  expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
 })
 
 it('Clone not affect each other', () => {
