@@ -14,7 +14,7 @@ const testArr = [dayjs, moment]
 
 it('IsLeapYear', () => {
   expect(dayjs('20000101').isLeapYear()).toBe(true)
-  expect(dayjs('21000101').isLeapYear()).toBe(false)
+  expect(dayjs('2100-01-01').isLeapYear()).toBe(false)
 })
 
 it('Is Before Is After Is Same', () => {
