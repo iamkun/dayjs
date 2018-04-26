@@ -98,7 +98,7 @@ class Dayjs {
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return new Dayjs(Date()[method].apply(
+      return new Dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ))
@@ -142,6 +142,18 @@ class Dayjs {
         break
       case C.Y:
         this.$d.setFullYear(int)
+        break
+      case C.H:
+        this.$d.setHours(int)
+        break
+      case C.MIN:
+        this.$d.setMinutes(int)
+        break
+      case C.S:
+        this.$d.setSeconds(int)
+        break
+      case C.MS:
+        this.$d.setMilliseconds(int)
         break
       default:
         break
