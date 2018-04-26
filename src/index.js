@@ -153,6 +153,7 @@ class Dayjs {
         this.$d.setSeconds(int)
         break
       default:
+        this.$d.setMilliseconds(int) // ms
         break
     }
     this.init()
