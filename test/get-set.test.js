@@ -39,45 +39,43 @@ it('Millisecond', () => {
 })
 
 it('Set Day', () => {
-  const d = dayjs().set('date', 30)
-  expect(d.date()).toBe(30)
+  expect(dayjs().set('date', 30).valueOf()).toBe(moment().set('date', 30).valueOf())
 })
 
 it('Set Month', () => {
-  const d = dayjs().set('month', 11)
-  expect(d.month()).toBe(11)
+  expect(dayjs().set('month', 11).valueOf()).toBe(moment().set('month', 11).valueOf())
 })
 
 it('Set Year', () => {
-  const d = dayjs().set('year', 2015)
-  expect(d.year()).toBe(2015)
+  expect(dayjs().set('year', 2008).valueOf()).toBe(moment().set('year', 2008).valueOf())
 })
 
 it('Set Hour', () => {
-  const d = dayjs().set('hour', 6)
-  expect(d.hour()).toBe(6)
+  expect(dayjs().set('hour', 6).valueOf()).toBe(moment().set('hour', 6).valueOf())
 })
 
 it('Set Minute', () => {
-  const d = dayjs().set('minute', 50)
-  expect(d.minute()).toBe(50)
+  expect(dayjs().set('minute', 59).valueOf()).toBe(moment().set('minute', 59).valueOf())
 })
 
 it('Set Second', () => {
-  const d = dayjs().set('second', 59)
-  expect(d.second()).toBe(59)
+  expect(dayjs().set('second', 59).valueOf()).toBe(moment().set('second', 59).valueOf())
+})
+
+it('Set Millisecond', () => {
+  expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
 })
 
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
-  expect(newDate.unix())
-    .toBe(moment().set('Unknown String', 1).unix())
+  expect(newDate.valueOf())
+    .toBe(moment().set('Unknown String', 1).valueOf())
 })
 
 it('Set Not Int', () => {
   const newDate = dayjs().set('year', 'Not Int')
-  expect(newDate.unix())
-    .toBe(moment().set('year', 'Not Int').unix())
+  expect(newDate.valueOf())
+    .toBe(moment().set('year', 'Not Int').valueOf())
 })
 
 it('Immutable Set', () => {
@@ -85,7 +83,7 @@ it('Immutable Set', () => {
   const dayjsB = dayjsA.set('year', 2011)
   const momentA = moment()
   const momentB = momentA.set('year', 2011)
-  expect(dayjsA.unix()).not.toBe(dayjsB.unix())
-  expect(momentA.unix()).toBe(momentB.unix())
+  expect(dayjsA.valueOf()).not.toBe(dayjsB.valueOf())
+  expect(momentA.valueOf()).toBe(momentB.valueOf())
 })
 
