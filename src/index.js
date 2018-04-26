@@ -212,7 +212,7 @@ class Dayjs {
     const months = 'January.February.March.April.May.June.July.August.September.October.November.December'.split('.')
     const suffixes = ['th', 'st', 'nd', 'rd']
 
-    return formatStr.replace(/Y{2,4}|Q|M{1,4}|Do|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+    return formatStr.replace(/Y{2,4}|Q|M{1,4}|Do|D{1,2}|d{1,4}|X|x|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -241,6 +241,10 @@ class Dayjs {
           return String(this.$W)
         case 'dddd':
           return weeks[this.$W]
+        case 'X':
+          return Math.floor(this.$d.getTime() / 1000)
+        case 'x':
+          return this.$d.getTime()
         case 'H':
           return String(this.$H)
         case 'HH':

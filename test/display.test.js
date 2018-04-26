@@ -36,6 +36,11 @@ it('Format Day of Month D DD Do 1 - 31', () => {
   expect(dayjs().format('Do')).toBe(moment().format('Do'))
 })
 
+it('Format Timestamp X x', () => {
+  expect(dayjs().format('X')).toBe(moment().format('X'))
+  expect(dayjs().format('x')).toBe(moment().format('x'))
+})
+
 it('Format Day of Week d Sun - Sat', () => {
   expect(dayjs().format('d')).toBe(moment().format('d'))
   expect(dayjs().format('dddd')).toBe(moment().format('dddd'))
