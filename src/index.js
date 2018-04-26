@@ -145,12 +145,13 @@ class Dayjs {
         break
       case C.H:
         this.$d.setHours(int)
-        break;
-    case C.MIN:
+        break
+      case C.MIN:
         this.$d.setMinutes(int)
-        break;
-    case C.S:
+        break
+      case C.S:
         this.$d.setSeconds(int)
+        break
       default:
         break
     }
