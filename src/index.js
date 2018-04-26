@@ -98,7 +98,7 @@ class Dayjs {
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return new Dayjs(Date()[method].apply(
+      return new Dayjs(this.toDate()[method].apply(
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ))
