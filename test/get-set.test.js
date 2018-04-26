@@ -68,8 +68,8 @@ it('Set Millisecond', () => {
 
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
-  expect(newDate.unix())
-    .toBe(moment().set('Unknown String', 1).unix())
+  expect(newDate.valueOf())
+    .toBe(moment().set('Unknown String', 1).valueOf())
 })
 
 it('Set Not Int', () => {

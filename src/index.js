@@ -152,8 +152,10 @@ class Dayjs {
       case C.S:
         this.$d.setSeconds(int)
         break
+      case C.MS:
+        this.$d.setMilliseconds(int)
+        break
       default:
-        this.$d.setMilliseconds(int) // ms
         break
     }
     this.init()
