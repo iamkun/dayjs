@@ -41,6 +41,11 @@ it('Format Hour H HH 24-hour', () => {
   expect(dayjs().format('HH')).toBe(moment().format('HH'))
 })
 
+it('Format Hour h hh 12-hour', () => {
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+})
+
 it('Format Minute m mm', () => {
   expect(dayjs().format('m')).toBe(moment().format('m'))
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
