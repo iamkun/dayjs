@@ -38,6 +38,36 @@ it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
 })
 
+it('Set Day', () => {
+  const d = dayjs().set('date', 30)
+  expect(d.date()).toBe(30)
+})
+
+it('Set Month', () => {
+  const d = dayjs().set('month', 11)
+  expect(d.month()).toBe(11)
+})
+
+it('Set Year', () => {
+  const d = dayjs().set('year', 2015)
+  expect(d.year()).toBe(2015)
+})
+
+it('Set Hour', () => {
+  const d = dayjs().set('hour', 6)
+  expect(d.hour()).toBe(6)
+})
+
+it('Set Minute', () => {
+  const d = dayjs().set('minute', 50)
+  expect(d.minute()).toBe(50)
+})
+
+it('Set Second', () => {
+  const d = dayjs().set('second', 59)
+  expect(d.second()).toBe(59)
+})
+
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.unix())
