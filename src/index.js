@@ -143,6 +143,15 @@ class Dayjs {
       case C.Y:
         this.$d.setFullYear(int)
         break
+      case C.H:
+        this.$d.setHours(int)
+        break
+      case C.MIN:
+        this.$d.setMinutes(int)
+        break
+      case C.S:
+        this.$d.setSeconds(int)
+        break
       default:
         break
     }
