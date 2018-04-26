@@ -30,9 +30,10 @@ it('Format Month M MM MMM MMMM', () => {
   expect(dayjs().format('MMMM')).toBe(moment().format('MMMM'))
 })
 
-it('Format Day of Month D DD 1 - 31', () => {
+it('Format Day of Month D DD Do 1 - 31', () => {
   expect(dayjs().format('D')).toBe(moment().format('D'))
   expect(dayjs().format('DD')).toBe(moment().format('DD'))
+  expect(dayjs().format('Do')).toBe(moment().format('Do'))
 })
 
 it('Format Day of Week d Sun - Sat', () => {
