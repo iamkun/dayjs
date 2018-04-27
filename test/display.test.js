@@ -61,6 +61,11 @@ it('Format Hour k kk 24-hour 1 - 24', () => {
   expect(dayjs().format('kk')).toBe(moment().format('kk'))
 })
 
+it('Format meridiens a A am / pm', () => {
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+})
+
 it('Format Minute m mm', () => {
   expect(dayjs().format('m')).toBe(moment().format('m'))
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
