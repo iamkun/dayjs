@@ -245,6 +245,29 @@ dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
 dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
 ```
+List of all available formats:
+
+| Format | Output | Description |
+| ------ | ------ | ----------- |
+| `YY` | 18 | Two digit year |
+| `YYYY` | 2018 | Four digit year |
+| `M` | 1-12 | The month, beginning at 1 |
+| `MM` | 01-12 | The month, with preceeding 0
+| `MMM` | Jan-Dec | The abbreviated month name |
+| `MMMM` | January-December | The full month name |
+| `D` | 1-31 | The day of the month |
+| `DD` | 01-31 | The day of the month, preceeding 0 |
+| `d` | 0-6 | The day of the week, with Sunday as 0 |
+| `dddd` | Sunday-Saturday | The name of the day of the week |
+| `H` | 0-23 | The hour |
+| `HH` | 00-23 | The hour, with preceeding 0 |
+| `m` | 0-59 | The minute |
+| `mm` | 00-59 | The minute, with preceeding 0 |
+| `s` | 0-59 | The second |
+| `ss` | 00-59 | The second, with preceeding 0 |
+| `Z` | +5:00 | The offset from UTC |
+| `ZZ` | +0500 | The offset from UTC with preceeding 0 |
+
 #### Difference
 - return Number
 
