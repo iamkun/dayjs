@@ -212,7 +212,7 @@ class Dayjs {
     const months = 'January.February.March.April.May.June.July.August.September.October.November.December'.split('.')
     const suffixes = ['th', 'st', 'nd', 'rd']
 
-    return formatStr.replace(/Y{2,4}|Q|M{1,4}|Do|D{1,2}|d{1,4}|X|x|H{1,2}|h{1,2}|k{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+    return formatStr.replace(/Y{2,4}|Q|M{1,4}|Do|D{1,2}|d{1,4}|X|x|H{1,2}|h{1,2}|k{1,2}|a|A|m{1,2}|s{1,2}|S|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -275,6 +275,8 @@ class Dayjs {
           return String(this.$s)
         case 'ss':
           return Utils.padStart(String(this.$s), 2, '0')
+        case 'S':
+          return Utils.padStart(String(this.$ms), 3, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'

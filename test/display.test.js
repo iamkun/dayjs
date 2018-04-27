@@ -71,9 +71,13 @@ it('Format Minute m mm', () => {
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
 })
 
-it('Format Second s sss', () => {
+it('Format Second s ss', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
+})
+
+it('Format Second S SS SSS', () => {
+  expect(dayjs().format('S')).toBe(moment().format('SSS'))
 })
 
 it('Format Time Zone ZZ', () => {
