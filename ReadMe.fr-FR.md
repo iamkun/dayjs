@@ -1,8 +1,8 @@
-English | [简体中文](./ReadMe.zh-CN.md) | [Français](./ReadMe.fr-FR.md)
+[English](./ReadMe.md) | [简体中文](./ReadMe.zh-CN.md) | Français
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">Rapide <b>2kB</b> une alternative à Moment.js avec la même API moderne</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dist/dayjs.min.js"><img
@@ -18,22 +18,22 @@ English | [简体中文](./ReadMe.zh-CN.md) | [Français](./ReadMe.fr-FR.md)
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
 </p>
 
-> Day.js is a minimalist JavaScript library for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js est une libraririe JavaScript minimaliste pour les navigateurs moderne avec une compatibilité de l'API de Moment.js. Si vous utilisez Moment.js, vous savez déja comment utiliser Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-- 🕒 Familiar Moment.js API & patterns
-- 💪 Immutable
-- 🔥 Chainable
-- 📦 2kb mini library
-- 👫 All browsers support
+- 🕒 Familier à Moment.js API & pattern
+- 💪 Immuable
+- 🔥 Chaînable
+- 📦 2kb libraririe
+- 👫 Compatibilité navigateur
 ---
 
 ## Installation
 
-You have multiple ways of getting Day.js:
+Vous avez plusieurs façon d'avoir Day.js:
 
 - Via NPM:
 ```console
@@ -52,9 +52,9 @@ You have multiple ways of getting Day.js:
     </script>
 ```
 
-- Via download and self-hosting:
+- Via téléchargement et auto-hébérgement:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs](https://unpkg.com/dayjs)
+Juste télécharge la derniere version de Day.js ici [https://unpkg.com/dayjs](https://unpkg.com/dayjs)
 
 ## Getting Started
 Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
