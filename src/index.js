@@ -207,8 +207,8 @@ class Dayjs {
   }
 
   format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
-    const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const weeks = 'Sunday.Monday.Tuesday.Wednesday.Thursday.Friday.Saturday'.split('.')
+    const months = 'January.February.March.April.May.June.July.August.September.October.November.December'.split('.')
 
     return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
