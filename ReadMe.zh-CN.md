@@ -326,7 +326,7 @@ dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
 dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
 ```
-List of all available formats:
+详情如下:
 
 | Format | Output | Description |
 | ------ | ------ | ----------- |
