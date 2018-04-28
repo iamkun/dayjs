@@ -9,6 +9,6 @@ export default {
   Q: 'trimestre',
   Y: 'año',
   DATE: 'fecha',
-  WD: ['Domingo', 'Lunes', 'Marter', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+  WD: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
   MONTHS: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 }
