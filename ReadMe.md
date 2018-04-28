@@ -22,11 +22,7 @@ English | [简体中文](./ReadMe.zh-CN.md)
 > Day.js is a minimalist JavaScript library for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
 
 ```js
-dayjs()
-  .startOf('month')
-  .add(1, 'day')
-  .set('year', 2018)
-  .format('YYYY-MM-DD HH:mm:ss');
+dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
 * 🕒 Familiar Moment.js API & patterns
