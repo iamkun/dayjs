@@ -160,7 +160,7 @@ class Dayjs {
       default:
         break
     }
-    this.init()
+    this.init(this.$L)
     return this
   }
 
@@ -285,6 +285,11 @@ class Dayjs {
 
   daysInMonth() {
     return this.endOf(C.M).$D
+  }
+  
+  setLocale (l) {
+    Object.assign(this.$L, l)
+    return this
   }
 
   clone() {
