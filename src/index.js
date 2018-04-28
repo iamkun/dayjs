@@ -95,7 +95,7 @@ class Dayjs {
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = new Dayjs(new Date(y, m, d))
-      return isStartOf ? ins : ins.endOf(this.$C.D)
+      return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
@@ -106,23 +106,23 @@ class Dayjs {
       ))
     }
     switch (unit) {
-      case this.$C.Y:
+      case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
           instanceFactory(31, 11, this.$y)
-      case this.$C.M:
+      case C.M:
         return isStartOf ? instanceFactory(1, this.$M) :
           instanceFactory(0, this.$M + 1, this.$y)
-      case this.$C.W:
+      case C.W:
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
           instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y)
-      case this.$C.D:
-      case this.$C.DATE:
+      case C.D:
+      case C.DATE:
         return instanceFactorySet('setHours', 0)
-      case this.$C.H:
+      case C.H:
         return instanceFactorySet('setMinutes', 1)
-      case this.$C.MIN:
+      case C.MIN:
         return instanceFactorySet('setSeconds', 2)
-      case this.$C.S:
+      case C.S:
         return instanceFactorySet('setMilliseconds', 3)
       default:
         return this.clone()
@@ -136,25 +136,25 @@ class Dayjs {
   mSet(units, int) {
     const unit = Utils.prettyUnit(units)
     switch (unit) {
-      case this.$C.DATE:
+      case C.DATE:
         this.$d.setDate(int)
         break
-      case this.$C.M:
+      case C.M:
         this.$d.setMonth(int)
         break
-      case this.$C.Y:
+      case C.Y:
         this.$d.setFullYear(int)
         break
-      case this.$C.H:
+      case C.H:
         this.$d.setHours(int)
         break
-      case this.$C.MIN:
+      case C.MIN:
         this.$d.setMinutes(int)
         break
-      case this.$C.S:
+      case C.S:
         this.$d.setSeconds(int)
         break
-      case this.$C.MS:
+      case C.MS:
         this.$d.setMilliseconds(int)
         break
       default:
@@ -171,34 +171,34 @@ class Dayjs {
 
   add(number, units) {
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
-    if (['M', this.$C.M].indexOf(unit) > -1) {
-      let date = this.set(this.$C.DATE, 1).set(this.$C.M, this.$M + number)
-      date = date.set(this.$C.DATE, Math.min(this.$D, date.daysInMonth()))
+    if (['M', C.M].indexOf(unit) > -1) {
+      let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
+      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
       return date
     }
-    if (['y', this.$C.Y].indexOf(unit) > -1) {
-      return this.set(this.$C.Y, this.$y + number)
+    if (['y', C.Y].indexOf(unit) > -1) {
+      return this.set(C.Y, this.$y + number)
     }
     let step
     switch (unit) {
       case 'm':
-      case this.$C.MIN:
-        step = this.$C.MILLISECONDS_A_MINUTE
+      case C.MIN:
+        step = C.MILLISECONDS_A_MINUTE
         break
       case 'h':
-      case this.$C.H:
-        step = this.$C.MILLISECONDS_A_HOUR
+      case C.H:
+        step = C.MILLISECONDS_A_HOUR
         break
       case 'd':
-      case this.$C.D:
-        step = this.$C.MILLISECONDS_A_DAY
+      case C.D:
+        step = C.MILLISECONDS_A_DAY
         break
       case 'w':
-      case this.$C.W:
-        step = this.$C.MILLISECONDS_A_WEEK
+      case C.W:
+        step = C.MILLISECONDS_A_WEEK
         break
       default: // s seconds
-        step = this.$C.MILLISECONDS_A_SECOND
+        step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
     return new Dayjs(nextTimeStamp)
@@ -260,22 +260,22 @@ class Dayjs {
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
-      case this.$C.Y:
+      case C.Y:
         result /= 12
         break
-      case this.$C.M:
+      case C.M:
         break
-      case this.$C.Q:
+      case C.Q:
         result /= 3
         break
-      case this.$C.W:
-        result = diff / this.$C.MILLISECONDS_A_WEEK
+      case C.W:
+        result = diff / C.MILLISECONDS_A_WEEK
         break
-      case this.$C.D:
-        result = diff / this.$C.MILLISECONDS_A_DAY
+      case C.D:
+        result = diff / C.MILLISECONDS_A_DAY
         break
-      case this.$C.S:
-        result = diff / this.$C.MILLISECONDS_A_SECOND
+      case C.S:
+        result = diff / C.MILLISECONDS_A_SECOND
         break
       default: // milliseconds
         result = diff
@@ -284,7 +284,7 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf(this.$C.M).$D
+    return this.endOf(C.M).$D
   }
 
   clone() {
