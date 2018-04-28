@@ -319,7 +319,7 @@ dayjs().toString();
 ####格式化
 - return String
 
-Takes a string of tokens and replaces them with their corresponding date values.
+根据所输入的规范，格式化时间字符串
 
 ```js
 dayjs().format(String);
@@ -330,14 +330,14 @@ List of all available formats:
 
 | Format | Output | Description |
 | ------ | ------ | ----------- |
-| `YY` | 18 | Two digit year |
-| `YYYY` | 2018 | Four digit year |
-| `M` | 1-12 | The month, beginning at 1 |
-| `MM` | 01-12 | The month, with preceeding 0
-| `MMM` | Jan-Dec | The abbreviated month name |
-| `MMMM` | January-December | The full month name |
-| `D` | 1-31 | The day of the month |
-| `DD` | 01-31 | The day of the month, preceeding 0 |
+| `YY` | 18 | 两位数的年份 |
+| `YYYY` | 2018 | 四位数的年份 |
+| `M` | 1-12 | 月份，从1开始 |
+| `MM` | 01-12 | 月份，数字前面加上0
+| `MMM` | Jan-Dec | 简写的月份名称 |
+| `MMMM` | January-December | 完整的月份名称 |
+| `D` | 1-31 | 月份里的一天 |
+| `DD` | 01-31 | 月份里的一天，数字前面加上0 |
 | `d` | 0-6 | The day of the week, with Sunday as 0 |
 | `dddd` | Sunday-Saturday | The name of the day of the week |
 | `H` | 0-23 | The hour |
