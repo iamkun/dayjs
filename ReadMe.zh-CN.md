@@ -338,16 +338,16 @@ List of all available formats:
 | `MMMM` | January-December | 完整的月份名称 |
 | `D` | 1-31 | 月份里的一天 |
 | `DD` | 01-31 | 月份里的一天，数字前面加上0 |
-| `d` | 0-6 | The day of the week, with Sunday as 0 |
-| `dddd` | Sunday-Saturday | The name of the day of the week |
-| `H` | 0-23 | The hour |
-| `HH` | 00-23 | The hour, with preceeding 0 |
-| `m` | 0-59 | The minute |
-| `mm` | 00-59 | The minute, with preceeding 0 |
-| `s` | 0-59 | The second |
-| `ss` | 00-59 | The second, with preceeding 0 |
-| `Z` | +5:00 | The offset from UTC |
-| `ZZ` | +0500 | The offset from UTC with preceeding 0 |
+| `d` | 0-6 | 一周中的一天，星期天是0 |
+| `dddd` | Sunday-Saturday | 一周中一天的名称 |
+| `H` | 0-23 | 小时 |
+| `HH` | 00-23 | 小时，数字前面加上0 |
+| `m` | 0-59 | 分钟 |
+| `mm` | 00-59 | 分钟，数字前面加上0 |
+| `s` | 0-59 | 秒 |
+| `ss` | 00-59 | 秒，数字前面加上0 |
+| `Z` | +5:00 | UTC的偏移量 |
+| `ZZ` | +0500 | UTC的偏移量，数字前面加上0 |
 
 ---
 ### 查询
