@@ -42,15 +42,15 @@ class Dayjs {
   }
 
   isSame(that) {
-    return this.valueOf() === that.valueOf()
+    return this.valueOf() === (that instanceof Dayjs ? that : new Dayjs(that)).valueOf()
   }
 
   isBefore(that) {
-    return this.valueOf() < that.valueOf()
+    return this.valueOf() < (that instanceof Dayjs ? that : new Dayjs(that)).valueOf()
   }
 
   isAfter(that) {
-    return this.valueOf() > that.valueOf()
+    return this.valueOf() > (that instanceof Dayjs ? that : new Dayjs(that)).valueOf()
   }
 
   year() {

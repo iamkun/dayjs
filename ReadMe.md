@@ -455,33 +455,36 @@ dayjs().toString();
 
 * returns a Boolean
 
-Check if a `Dayjs` object is before another `Dayjs` object.
+Check if a `Dayjs` is before another `Dayjs`.
 
 ```js
 dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(Date.now()); // false
 ```
 
 #### Is Same
 
 * returns a Boolean
 
-Check if a `Dayjs` object is same as another `Dayjs` object.
+Check if a `Dayjs` is same as another `Dayjs`.
 
 ```js
 dayjs().isSame(Dayjs);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(Date.now()); // true
 ```
 
 #### Is After
 
 * returns a Boolean
 
-Check if a `Dayjs` object is after another `Dayjs` object.
+Check if a `Dayjs` is after another `Dayjs`.
 
 ```js
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(Date.now()); // false
 ```
 
 #### Is Leap Year
