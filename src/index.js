@@ -8,7 +8,7 @@ const dayjs = function dayjs(date, c) {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const get = (date) => {
+const getDate = (date) => {
   let reg
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (!date) return new Date()
@@ -23,7 +23,7 @@ const get = (date) => {
 
 export class Dayjs {
   constructor(cfg) {
-    this.$d = get(cfg.date)
+    this.$d = getDate(cfg.date)
     this.$format = cfg.format || 'YYYY-MM-DDTHH:mm:ssZ'
     this.init(cfg.locale)
   }
