@@ -40,7 +40,7 @@ You have multiple ways of getting Day.js:
 * Via NPM:
 
 ```console
-    npm install dayjs --save
+npm install dayjs --save
 ```
 
 ```js
@@ -51,11 +51,11 @@ dayjs().format();
 * Via CDN:
 
 ```html
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/dayjs"></script>
-    <script>
-      dayjs().format();
-    </script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/dayjs"></script>
+<script>
+  dayjs().format();
+</script>
 ```
 
 * Via download and self-hosting:
