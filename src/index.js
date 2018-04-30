@@ -284,7 +284,7 @@ class Dayjs {
 
   ago(input, units, float = false) {
     const result = this.diff(input, units, float)
-    return `${result} ${result === 1 ? units.slice(0, -1) : units} ago`
+    return result === 0 ? 'just now' : `${result} ${result === 1 ? units.slice(0, -1) : units} ago`
   }
 
   daysInMonth() {
