@@ -11,7 +11,9 @@ afterEach(() => {
 })
 
 it('Uses spanish locale', () => {
-  expect(dayjs('2018-4-28', esES).format('dddd D, MMMM')).toBe('Sábado 28, Abril')
+  expect(dayjs('2018-4-28', { locale: esES })
+    .format('dddd D, MMMM'))
+    .toBe('Sábado 28, Abril')
 })
 
 it('setLocale to spanish', () => {
@@ -22,4 +24,9 @@ it('setLocale to spanish', () => {
   expect(dayjs('2018-4-28')
     .setLocale(esES).format('dddd D, MMMM'))
     .toBe('Sábado 28, Abril')
+})
+
+it('set locale for this line only', () => {
+  expect(dayjs('2018-4-28').format('dddd D, MMMM', { WD: esES.WD }))
+    .toBe('Sábado 28, April')
 })

@@ -1,26 +1,34 @@
 import * as C from './constant'
 import * as Utils from './utils'
+import en from './locales/en'
 
-const parseConfig = (config) => {
+const dayjs = function dayjs(date, c) {
+  const cfg = c || {}
+  cfg.date = date
+  return new Dayjs(cfg) // eslint-disable-line no-use-before-define
+}
+
+const get = (date) => {
   let reg
-  if (config === null) return new Date(NaN) // Treat null as an invalid date
-  if (!config) return new Date()
-  if (config instanceof Date) return config
+  if (date === null) return new Date(NaN) // Treat null as an invalid date
+  if (!date) return new Date()
+  if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
-  if (reg = String(config).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
+  if (reg = String(date).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
     // 2018-08-08 or 20180808
     return new Date(reg[1], reg[2] - 1, reg[3])
   }
-  return new Date(config) // timestamp
+  return new Date(date) // timestamp
 }
 
-class Dayjs {
-  constructor(config, locales) {
-    this.$d = parseConfig(config)
-    this.init(locales)
+export class Dayjs {
+  constructor(cfg) {
+    this.$d = get(cfg.date)
+    this.$format = cfg.format || 'YYYY-MM-DDTHH:mm:ssZ'
+    this.init(cfg.locale)
   }
 
-  init(locales) {
+  init(locale) {
     this.$zone = this.$d.getTimezoneOffset() / 60
     this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$y = this.$d.getFullYear()
@@ -31,7 +39,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = Object.assign({}, C, locales)
+    this.$L = locale || en
   }
 
   isValid() {
@@ -94,13 +102,13 @@ class Dayjs {
   startOf(units, isStartOf = true) { // isStartOf -> endOf
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
-      const ins = new Dayjs(new Date(y, m, d))
+      const ins = dayjs(new Date(y, m, d))
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return new Dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ))
@@ -201,16 +209,16 @@ class Dayjs {
         step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
-    return new Dayjs(nextTimeStamp)
+    return dayjs(nextTimeStamp)
   }
 
   subtract(number, string) {
     return this.add(number * -1, string)
   }
 
-  format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
-    const weeks = this.$L.WD
-    const months = this.$L.MONTHS
+  format(formatStr = this.$format, L = {}) {
+    const weeks = L.WD || this.$L.WD
+    const months = L.MONTHS || this.$L.MONTHS
 
     return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
@@ -256,7 +264,7 @@ class Dayjs {
 
   diff(input, units, float = false) {
     const unit = Utils.prettyUnit(units)
-    const that = input instanceof Dayjs ? input : new Dayjs(input)
+    const that = input instanceof Dayjs ? input : dayjs(input.valueOf())
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
@@ -288,16 +296,20 @@ class Dayjs {
   }
 
   setLocale(locale) {
-    Object.assign(this.$L, locale)
+    this.$L = locale
     return this
   }
 
   clone() {
-    return (new Dayjs(this)).setLocale(this.$L)
+    return new Dayjs({
+      date: this.toDate(),
+      locale: this.$L,
+      format: this.$format
+    })
   }
 
   toDate() {
-    return new Date(this.$d)
+    return new Date(this.valueOf())
   }
 
   toArray() {
@@ -313,7 +325,7 @@ class Dayjs {
   }
 
   toJSON() {
-    return this.toISOString()
+    return this.toISOString() // this.format()
   }
 
   toISOString() {
@@ -337,4 +349,4 @@ class Dayjs {
   }
 }
 
-export default (config, locales) => (new Dayjs(config, locales))
+export default dayjs
