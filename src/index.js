@@ -282,6 +282,11 @@ class Dayjs {
     return float ? result : Utils.absFloor(result)
   }
 
+  ago(input, units, float = false) {
+    const result = this.diff(input, units, float)
+    return `${result} ${result === 1 ? units.slice(0, -1) : units} ago`
+  }
+
   daysInMonth() {
     return this.endOf(C.M).$D
   }

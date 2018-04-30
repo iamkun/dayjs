@@ -96,6 +96,22 @@ describe('Difference', () => {
     })
   })
 
+  it('ago -> in seconds, days, weeks, months, quarters, years ', () => {
+    const dayjsA = dayjs()
+    const dayjsB = dayjs().add(1000, 'days')
+    const dayjsC = dayjs().subtract(1000, 'days')
+    const momentA = moment()
+    const momentB = moment().add(1000, 'days')
+    const momentC = moment().subtract(1000, 'days')
+    const units = ['seconds', 'days', 'weeks', 'months', 'quarters', 'years']
+    units.forEach((unit) => {
+      expect(dayjsA.ago(dayjsB, unit)).toBe(momentA.ago(momentB, unit))
+      expect(dayjsA.ago(dayjsB, unit, true)).toBe(momentA.ago(momentB, unit, true))
+      expect(dayjsA.ago(dayjsC, unit)).toBe(momentA.ago(momentC, unit))
+      expect(dayjsA.ago(dayjsC, unit, true)).toBe(momentA.ago(momentC, unit, true))
+    })
+  })
+
   it('Special diff in month according to moment.js', () => {
     const dayjsA = dayjs('20160115')
     const dayjsB = dayjs('20160215')
