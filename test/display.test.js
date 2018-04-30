@@ -112,7 +112,7 @@ describe('Difference', () => {
       expect(dayjsA.diff(dayjsC, unit, true)).toBe(momentA.diff(momentC, unit, true))
     })
   })
-  it('ago -> in seconds, days, weeks, months, quarters, years ', () => {
+  it('fromNow -> in seconds, days, weeks, months, quarters, years ', () => {
     const dayjsA = dayjs()
     const dayjsB = dayjs().add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days')
@@ -120,13 +120,13 @@ describe('Difference', () => {
     const dayjsE = dayjs().subtract(30, 'seconds')
     const dayjsF = dayjs().subtract(5, 'hours')
 
-    expect(dayjsA.ago(dayjsB)).toBe(timeago(dayjsA.toDate()).format(dayjsB.toDate()))
-    expect(dayjsA.ago(dayjsC)).toBe(timeago(dayjsA.toDate()).format(dayjsC.toDate()))
-    expect(dayjsA.ago(dayjsD)).toBe(timeago(dayjsA.toDate()).format(dayjsD.toDate()))
-    expect(dayjsA.ago(dayjsE)).toBe(timeago(dayjsA.toDate()).format(dayjsE.toDate()))
-    expect(dayjsA.ago(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
-    expect(dayjsB.ago(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
-    expect(dayjsB.ago(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
+    expect(dayjsA.fromNow(dayjsB)).toBe(timeago(dayjsA.toDate()).format(dayjsB.toDate()))
+    expect(dayjsA.fromNow(dayjsC)).toBe(timeago(dayjsA.toDate()).format(dayjsC.toDate()))
+    expect(dayjsA.fromNow(dayjsD)).toBe(timeago(dayjsA.toDate()).format(dayjsD.toDate()))
+    expect(dayjsA.fromNow(dayjsE)).toBe(timeago(dayjsA.toDate()).format(dayjsE.toDate()))
+    expect(dayjsA.fromNow(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
+    expect(dayjsB.fromNow(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
+    expect(dayjsB.fromNow(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
   })
 
   it('Unix Timestamp (milliseconds)', () => {

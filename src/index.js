@@ -282,7 +282,7 @@ class Dayjs {
     return float ? result : Utils.absFloor(result)
   }
 
-  ago(input) {
+  fromNow(input) {
     const points = [{ label: 'seconds', value: C.MILLISECONDS_A_SECOND }, { label: 'minutes', value: C.MILLISECONDS_A_SECOND * 60 }, { label: 'hours', value: C.MILLISECONDS_A_HOUR }, { label: 'days', value: C.MILLISECONDS_A_DAY },
       { label: 'weeks', value: C.MILLISECONDS_A_WEEK }, { label: 'months', value: C.MILLISECONDS_A_WEEK * 4 }, { label: 'quarters', value: C.MILLISECONDS_A_WEEK * 12 },
       { label: 'years', value: C.MILLISECONDS_A_WEEK * 4 * 12 }]
@@ -293,7 +293,7 @@ class Dayjs {
       if (Math.abs(result) > points[i].value) out = `${Utils.absFloor(Math.abs(result) / points[i].value)} ${points[i].label}`
     }
     if (result > 0) return `in ${out}`
-    else if (result < 0) return `${out} ago`
+    else if (result < 0) return `${out} fromNow`
     return 'just now'
   }
 

@@ -359,14 +359,14 @@ dayjs().diff(Dayjs, unit);
 dayjs().diff(dayjs(), 'years'); // 0
 ```
 
-#### Ago
+#### fromNow
 
 * returns a String
 
-Get the time that has passed between two `Dayjs` object. inspired by [timeago.js](http://timeago.org/)
+Get the time that has passed between two `Dayjs` object. inspired by [timeago.js](http://timefromNow.org/)
 
 ```js
-dayjs().ago(Dayjs); //e.g 5 years ago, in 2 hours, just now, 6 minutes ago, in 10 seconds...
+dayjs().fromNow(Dayjs); //e.g 5 years fromNow, in 2 hours, just now, 6 minutes fromNow, in 10 seconds...
 ```
 
 #### Unix Timestamp (milliseconds)
