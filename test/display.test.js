@@ -118,11 +118,13 @@ describe('Difference', () => {
     const dayjsC = dayjs().subtract(1000, 'days')
     const dayjsD = dayjs().add(20, 'days')
     const dayjsE = dayjs().subtract(30, 'seconds')
+    const dayjsF = dayjs().subtract(5, 'hours')
 
     expect(dayjsA.ago(dayjsB)).toBe(timeago(dayjsA.toDate()).format(dayjsB.toDate()))
     expect(dayjsA.ago(dayjsC)).toBe(timeago(dayjsA.toDate()).format(dayjsC.toDate()))
     expect(dayjsA.ago(dayjsD)).toBe(timeago(dayjsA.toDate()).format(dayjsD.toDate()))
     expect(dayjsA.ago(dayjsE)).toBe(timeago(dayjsA.toDate()).format(dayjsE.toDate()))
+    expect(dayjsA.ago(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
     expect(dayjsB.ago(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
     expect(dayjsB.ago(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
   })
