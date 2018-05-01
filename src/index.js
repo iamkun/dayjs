@@ -1,6 +1,6 @@
 import * as C from './constant'
 import * as Utils from './utils'
-import en from './locales/en'
+import eng from './locales/en'
 
 const dayjs = function dayjs(date, c) {
   const cfg = c || {}
@@ -39,7 +39,7 @@ export class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = locale || en
+    this.$L = locale || eng
   }
 
   isValid() {
@@ -172,9 +172,14 @@ export class Dayjs {
     return this
   }
 
-  set(string, int) {
+  set(unitOrDate, int) {
+    if (unitOrDate instanceof Date) {
+        const self = this.clone()
+        self.$d = unitOrDate.$d || unitOrDate
+        return self
+    }
     if (!Utils.isNumber(int)) return this
-    return this.clone().mSet(string, int)
+    return this.clone().mSet(dateUnit, int)
   }
 
   add(number, units) {
@@ -295,8 +300,8 @@ export class Dayjs {
     return this.endOf(C.M).$D
   }
 
-  setLocale(locale) {
-    this.$L = locale
+  setLocale(l = eng) {
+    this.$L = l
     return this
   }
 
