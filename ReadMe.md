@@ -60,7 +60,7 @@ dayjs().format();
 
 * Via download and self-hosting:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs](https://unpkg.com/dayjs)
+Just download the latest version of Day.js at [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/)
 
 ## Getting Started
 
