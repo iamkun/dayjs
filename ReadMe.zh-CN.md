@@ -37,19 +37,19 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 - NPM:
 ```console
-    npm install dayjs --save
+npm install dayjs --save
 ```
 ```js
-    var dayjs = require('dayjs');
-    dayjs().format();
+var dayjs = require('dayjs');
+dayjs().format();
 ```
 - CDN:
 ```html
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/dayjs"></script>
-    <script>
-      dayjs().format();
-    </script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/dayjs"></script>
+<script>
+  dayjs().format();
+</script>
 ```
 
 - 下载到您自己的服务器上:
