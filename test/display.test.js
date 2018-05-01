@@ -119,6 +119,7 @@ describe('Difference', () => {
     const dayjsD = dayjs().add(20, 'days')
     const dayjsE = dayjs().subtract(30, 'seconds')
     const dayjsF = dayjs().subtract(5, 'hours')
+    const dayjsG = dayjs().add(1001, 'days')
 
     expect(dayjsA.fromNow(dayjsB)).toBe(timeago(dayjsA.toDate()).format(dayjsB.toDate()))
     expect(dayjsA.fromNow(dayjsC)).toBe(timeago(dayjsA.toDate()).format(dayjsC.toDate()))
@@ -127,6 +128,7 @@ describe('Difference', () => {
     expect(dayjsA.fromNow(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
     expect(dayjsB.fromNow(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
     expect(dayjsB.fromNow(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
+    expect(dayjsG.fromNow(dayjsB)).toBe(timeago(dayjsG.toDate()).format(dayjsB.toDate()))
   })
 
   it('Unix Timestamp (milliseconds)', () => {

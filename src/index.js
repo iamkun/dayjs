@@ -283,18 +283,19 @@ class Dayjs {
   }
 
   fromNow(input) {
-    const points = [{ label: 'seconds', value: C.MILLISECONDS_A_SECOND }, { label: 'minutes', value: C.MILLISECONDS_A_SECOND * 60 }, { label: 'hours', value: C.MILLISECONDS_A_HOUR }, { label: 'days', value: C.MILLISECONDS_A_DAY },
-      { label: 'weeks', value: C.MILLISECONDS_A_WEEK }, { label: 'months', value: C.MILLISECONDS_A_WEEK * 4 }, { label: 'quarters', value: C.MILLISECONDS_A_WEEK * 12 },
-      { label: 'years', value: C.MILLISECONDS_A_WEEK * 4 * 12 }]
+    const P = [{ l: C.S, v: C.MILLISECONDS_A_SECOND }, { l: C.M, v: C.MILLISECONDS_A_SECOND * 60 },
+      { l: C.H, v: C.MILLISECONDS_A_HOUR }, { l: C.D, v: C.MILLISECONDS_A_DAY },
+      { l: C.W, v: C.MILLISECONDS_A_WEEK }, { l: C.M, v: C.MILLISECONDS_A_WEEK * 4 },
+      { l: C.Q, v: C.MILLISECONDS_A_WEEK * 12 }, { l: C.Y, v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
 
-    const result = input.diff(this, 'milliseconds')
+    const result = input.diff(this, `${C.MS}s`)
+    const resabs = Math.abs(result)
     let out = ''
-    for (let i = 0; i < points.length; i += 1) {
-      if (Math.abs(result) > points[i].value) out = `${Utils.absFloor(Math.abs(result) / points[i].value)} ${points[i].label}`
+    for (let i = 0; i < P.length; i += 1) {
+      if (resabs >= P[i].v) out = `${Utils.absFloor(resabs / P[i].v)} ${P[i].l}${(resabs / P[i].v !== 1) ? 's' : ''}`
     }
-    if (result > 0) return `in ${out}`
-    else if (result < 0) return `${out} ago`
-    return 'just now'
+    if (!result) return 'just now'
+    return result > 0 ? `in ${out}` : `${out} ago`
   }
 
   daysInMonth() {
