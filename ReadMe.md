@@ -94,7 +94,7 @@ API will always return a new `Dayjs` object if not specified.
   * [End of Time](#end-of-time)
 * [Display](#display)
   * [Format](#format)
-  * [Difference](#different)
+  * [Difference](#difference)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
   * [Days in Month](#days-in-month)
