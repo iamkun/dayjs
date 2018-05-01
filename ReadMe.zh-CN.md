@@ -54,7 +54,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs](https://unpkg.com/dayjs) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。

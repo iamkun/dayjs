@@ -54,7 +54,7 @@ You have multiple ways of getting Day.js:
 
 - Via download and self-hosting:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs](https://unpkg.com/dayjs)
+Just download the latest version of Day.js at [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/)
 
 ## Getting Started
 Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
