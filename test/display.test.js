@@ -19,10 +19,6 @@ it('Format Year YY YYYY', () => {
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
 })
 
-it('Format Quarter Q', () => {
-  expect(dayjs().format('Q')).toBe(moment().format('Q'))
-})
-
 it('Format Month M MM MMM MMMM', () => {
   expect(dayjs().format('M')).toBe(moment().format('M'))
   expect(dayjs().format('MM')).toBe(moment().format('MM'))
@@ -30,15 +26,9 @@ it('Format Month M MM MMM MMMM', () => {
   expect(dayjs().format('MMMM')).toBe(moment().format('MMMM'))
 })
 
-it('Format Day of Month D DD Do 1 - 31', () => {
+it('Format Day of Month D DD 1 - 31', () => {
   expect(dayjs().format('D')).toBe(moment().format('D'))
   expect(dayjs().format('DD')).toBe(moment().format('DD'))
-  expect(dayjs().format('Do')).toBe(moment().format('Do'))
-})
-
-it('Format Timestamp X x', () => {
-  expect(dayjs().format('X')).toBe(moment().format('X'))
-  expect(dayjs().format('x')).toBe(moment().format('x'))
 })
 
 it('Format Day of Week d Sun - Sat', () => {
@@ -56,11 +46,6 @@ it('Format Hour h hh 12-hour', () => {
   expect(dayjs().format('hh')).toBe(moment().format('hh'))
 })
 
-it('Format Hour k kk 24-hour 1 - 24', () => {
-  expect(dayjs().format('k')).toBe(moment().format('k'))
-  expect(dayjs().format('kk')).toBe(moment().format('kk'))
-})
-
 it('Format meridiens a A am / pm', () => {
   expect(dayjs().format('a')).toBe(moment().format('a'))
   expect(dayjs().format('A')).toBe(moment().format('A'))
@@ -76,9 +61,6 @@ it('Format Second s ss', () => {
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
 })
 
-it('Format Second S SS SSS', () => {
-  expect(dayjs().format('S')).toBe(moment().format('SSS'))
-})
 
 it('Format Time Zone ZZ', () => {
   expect(dayjs().format('Z')).toBe(moment().format('Z'))
