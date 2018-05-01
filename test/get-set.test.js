@@ -68,10 +68,9 @@ it('Set Millisecond', () => {
 
 it('Set with Date and Dayjs objects', () => {
   const date = new Date(2018, 5, 1)
-  const _dayjs = dayjs(date)
-  
+  const newDayjs = dayjs(date)
   expect(dayjs().set(date).valueOf()).toBe(moment(date).valueOf())
-  expect(dayjs().set(_dayjs).valueOf()).toBe(moment(date).valueOf())
+  expect(dayjs().set(newDayjs).valueOf()).toBe(moment(date).valueOf())
 })
 
 it('Set Unknown String', () => {
