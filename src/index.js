@@ -174,12 +174,12 @@ export class Dayjs {
 
   set(unitOrDate, int) {
     if (unitOrDate instanceof Date) {
-        const self = this.clone()
-        self.$d = unitOrDate.$d || unitOrDate
-        return self
+      const self = this.clone()
+      self.$d = unitOrDate.$d || unitOrDate
+      return self
     }
     if (!Utils.isNumber(int)) return this
-    return this.clone().mSet(dateUnit, int)
+    return this.clone().mSet(unitOrDate, int)
   }
 
   add(number, units) {
