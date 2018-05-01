@@ -3,6 +3,17 @@ export const padStart = (string, length, pad) => {
   return `${Array((length + 1) - string.length).join(pad)}${string}`
 }
 
+export const padZoneStr = (negaHour) => {
+  const hour = negaHour * -1
+  let replacer = ''
+  if (hour < 10) {
+    replacer = '0$200'
+  } else {
+    replacer = '$1$200'
+  }
+  return String(hour).replace(/^(.)?(\d)/, replacer)
+}
+
 export const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))
 
 export const monthDiff = (a, b) => {
