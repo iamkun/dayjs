@@ -9,6 +9,7 @@ export const MILLISECONDS_A_HOUR = SECONDS_A_HOUR * MILLISECONDS_A_SECOND
 export const MILLISECONDS_A_DAY = SECONDS_A_DAY * MILLISECONDS_A_SECOND
 export const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND
 
+// English locales
 export const MS = 'millisecond'
 export const S = 'second'
 export const MIN = 'minute'
@@ -19,3 +20,5 @@ export const M = 'month'
 export const Q = 'quarter'
 export const Y = 'year'
 export const DATE = 'date'
+export const WD = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
