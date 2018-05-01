@@ -173,9 +173,10 @@ export class Dayjs {
   }
 
   set(unitOrDate, int) {
-    if (unitOrDate instanceof Date) {
+    if (typeof unitOrDate === 'object' &&
+      unitOrDate.constructor.name.indexOf(['Date', 'Dayjs'] > -1)) {
       const self = this.clone()
-      self.$d = unitOrDate.$d || unitOrDate
+      self.$d = unitOrDate.toDate ? unitOrDate.toDate() : unitOrDate
       return self
     }
     if (!Utils.isNumber(int)) return this
