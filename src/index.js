@@ -293,7 +293,7 @@ class Dayjs {
       if (Math.abs(result) > points[i].value) out = `${Utils.absFloor(Math.abs(result) / points[i].value)} ${points[i].label}`
     }
     if (result > 0) return `in ${out}`
-    else if (result < 0) return `${out} fromNow`
+    else if (result < 0) return `${out} ago`
     return 'just now'
   }
 
