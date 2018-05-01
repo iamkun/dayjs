@@ -346,26 +346,29 @@ dayjs().toString();
 #### 是否之前
 - return Boolean
 
-检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之前。
+检查一个 `Dayjs` 是否在另一个 `Dayjs` 时间之前。
 ```js
 dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(Date.now()); // false
 ```
 #### 是否相同
 - return Boolean
 
-检查一个 `Dayjs` 对象是否和另一个 `Dayjs` 对象时间相同。
+检查一个 `Dayjs` 是否和另一个 `Dayjs` 时间相同。
 ```js
 dayjs().isSame(Dayjs);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(Date.now()); // true
 ```
 #### 是否之后
 - return Boolean
 
-检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之后。
+检查一个 `Dayjs` 是否在另一个 `Dayjs` 时间之后。
 ```js
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(Date.now()); // false
 ```
 #### 是否闰年
 - return Boolean
