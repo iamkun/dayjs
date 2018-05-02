@@ -16,13 +16,14 @@ const parseConfig = (config) => {
 
 class Dayjs {
   constructor(config) {
+    this.$u = Utils
     this.$d = parseConfig(config)
     this.init()
   }
 
   init() {
     this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.$zoneStr = this.$u.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -31,6 +32,10 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
+  }
+
+  getOld(fn) {
+    return this.$o[fn].bind(this)
   }
 
   isValid() {
@@ -91,7 +96,7 @@ class Dayjs {
   }
 
   startOf(units, isStartOf = true) { // isStartOf -> endOf
-    const unit = Utils.prettyUnit(units)
+    const unit = this.$u.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = new Dayjs(new Date(y, m, d))
       return isStartOf ? ins : ins.endOf(C.D)
@@ -133,7 +138,7 @@ class Dayjs {
   }
 
   mSet(units, int) {
-    const unit = Utils.prettyUnit(units)
+    const unit = this.$u.prettyUnit(units)
     switch (unit) {
       case C.DATE:
         this.$d.setDate(int)
@@ -164,12 +169,12 @@ class Dayjs {
   }
 
   set(string, int) {
-    if (!Utils.isNumber(int)) return this
+    if (!this.$u.isNumber(int)) return this
     return this.clone().mSet(string, int)
   }
 
   add(number, units) {
-    const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
+    const unit = (units && units.length === 1) ? units : this.$u.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
       date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
@@ -210,7 +215,6 @@ class Dayjs {
   format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
     const weeks = 'Sunday.Monday.Tuesday.Wednesday.Thursday.Friday.Saturday'.split('.')
     const months = 'January.February.March.April.May.June.July.August.September.October.November.December'.split('.')
-
     return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
       switch (match) {
         case 'YY':
@@ -220,7 +224,7 @@ class Dayjs {
         case 'M':
           return String(this.$M + 1)
         case 'MM':
-          return Utils.padStart(String(this.$M + 1), 2, '0')
+          return this.$u.padStart(String(this.$M + 1), 2, '0')
         case 'MMM':
           return months[this.$M].slice(0, 3)
         case 'MMMM':
@@ -228,7 +232,7 @@ class Dayjs {
         case 'D':
           return String(this.$D)
         case 'DD':
-          return Utils.padStart(String(this.$D), 2, '0')
+          return this.$u.padStart(String(this.$D), 2, '0')
         case 'd':
           return String(this.$W)
         case 'dddd':
@@ -236,28 +240,30 @@ class Dayjs {
         case 'H':
           return String(this.$H)
         case 'HH':
-          return Utils.padStart(String(this.$H), 2, '0')
+          return this.$u.padStart(String(this.$H), 2, '0')
         case 'm':
           return String(this.$m)
         case 'mm':
-          return Utils.padStart(String(this.$m), 2, '0')
+          return this.$u.padStart(String(this.$m), 2, '0')
         case 's':
           return String(this.$s)
         case 'ss':
-          return Utils.padStart(String(this.$s), 2, '0')
+          return this.$u.padStart(String(this.$s), 2, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
-        default: // 'ZZ'
+        case 'ZZ':
           return this.$zoneStr
+        default:
+          return match
       }
     })
   }
 
   diff(input, units, float = false) {
-    const unit = Utils.prettyUnit(units)
+    const unit = this.$u.prettyUnit(units)
     const that = input instanceof Dayjs ? input : new Dayjs(input)
     const diff = this - that
-    let result = Utils.monthDiff(this, that)
+    let result = this.$u.monthDiff(this, that)
     switch (unit) {
       case C.Y:
         result /= 12
@@ -279,7 +285,7 @@ class Dayjs {
       default: // milliseconds
         result = diff
     }
-    return float ? result : Utils.absFloor(result)
+    return float ? result : this.$u.absFloor(result)
   }
 
   daysInMonth() {
@@ -331,4 +337,14 @@ class Dayjs {
   }
 }
 
-export default config => (new Dayjs(config))
+
+const dayjs = config => new Dayjs(config)
+
+dayjs.extend = (plugin) => {
+  const proto = Dayjs.prototype
+  proto.$o = proto.$o || {}
+  proto.$o[plugin.n] = proto[plugin.n]
+  proto[plugin.n] = plugin.m
+}
+
+export default dayjs
