@@ -12,7 +12,7 @@ export const padZoneStr = (negHour) => {
   } else {
     replacer = '$1$200'
   }
-  return String(hour).replace(/^(.)?(\d)/, replacer)
+  return padStart(String(hour).replace(/^(.)?(\d)/, replacer), 5, '+')
 }
 
 export const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))
