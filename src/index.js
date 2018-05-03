@@ -90,7 +90,8 @@ class Dayjs {
     return this.$d.getTime()
   }
 
-  startOf(units, isStartOf = true) { // isStartOf -> endOf
+  startOf(units, startOf) { // startOf -> endOf
+    const isStartOf = startOf !== undefined ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = new Dayjs(new Date(y, m, d))
