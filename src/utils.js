@@ -4,11 +4,11 @@ export const padStart = (string, length, pad) => {
   return `${Array((length + 1) - s.length).join(pad)}${string}`
 }
 
-export const padZoneStr = (negaHour) => {
-  const hour = negaHour * -1
+export const padZoneStr = (negHour) => {
+  const hour = negHour * -1
   let replacer = ''
-  if (hour < 10) {
-    replacer = '0$200'
+  if (hour > -10 && hour < 10) {
+    replacer = '$10$200'
   } else {
     replacer = '$1$200'
   }
