@@ -42,15 +42,24 @@ it('Format Hour H HH 24-hour', () => {
 })
 
 it('Format Hour h hh 12-hour', () => {
+  MockDate.set(new Date('2018-05-02T00:00:00.000'))
   expect(dayjs().format('h')).toBe(moment().format('h'))
   expect(dayjs().format('hh')).toBe(moment().format('hh'))
 
-  MockDate.set(new Date('2018-05-02T00:00:00.000'))
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
   expect(dayjs().format('h')).toBe(moment().format('h'))
   expect(dayjs().format('hh')).toBe(moment().format('hh'))
 })
 
 it('Format meridiens a A am / pm', () => {
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
   expect(dayjs().format('a')).toBe(moment().format('a'))
   expect(dayjs().format('A')).toBe(moment().format('A'))
 })
