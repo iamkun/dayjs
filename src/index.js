@@ -61,6 +61,10 @@ class Dayjs {
     return this.$M
   }
 
+  day() {
+    return this.$W
+  }
+
   date() {
     return this.$D
   }
