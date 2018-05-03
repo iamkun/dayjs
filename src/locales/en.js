@@ -11,6 +11,6 @@ export default {
   Q: C.Q,
   Y: C.Y,
   DATE: C.DATE,
-  WD: C.WD,
+  WEEKDAYS: C.WEEKDAYS,
   MONTHS: C.MONTHS
 }

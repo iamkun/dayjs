@@ -14,7 +14,7 @@ const getDate = (date) => {
   if (!date) return new Date()
   if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
-  if (reg = String(date).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
+  if (reg = String(date).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
     return new Date(reg[1], reg[2] - 1, reg[3])
   }
@@ -24,7 +24,7 @@ const getDate = (date) => {
 export class Dayjs {
   constructor(cfg) {
     this.$d = getDate(cfg.date)
-    this.$format = cfg.format || 'YYYY-MM-DDTHH:mm:ssZ'
+    this.$format = cfg.format || C.FORMAT_DEFAULT
     this.init(cfg.locale)
   }
 
@@ -223,10 +223,10 @@ export class Dayjs {
   }
 
   format(formatStr = this.$format, L = {}) {
-    const weeks = L.WD || this.$L.WD
+    const weeks = L.WEEKDAYS || this.$L.WEEKDAYS
     const months = L.MONTHS || this.$L.MONTHS
 
-    return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+    return formatStr.replace(C.REGEX_FORMAT, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
