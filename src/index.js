@@ -220,7 +220,7 @@ class Dayjs {
         case 'M':
           return String(this.$M + 1)
         case 'MM':
-          return Utils.padStart(String(this.$M + 1), 2, '0')
+          return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
           return months[this.$M].slice(0, 3)
         case 'MMMM':
@@ -228,7 +228,7 @@ class Dayjs {
         case 'D':
           return String(this.$D)
         case 'DD':
-          return Utils.padStart(String(this.$D), 2, '0')
+          return Utils.padStart(this.$D, 2, '0')
         case 'd':
           return String(this.$W)
         case 'dddd':
@@ -236,17 +236,11 @@ class Dayjs {
         case 'H':
           return String(this.$H)
         case 'HH':
-          return Utils.padStart(String(this.$H), 2, '0')
+          return Utils.padStart(this.$H, 2, '0')
         case 'h':
-          if (this.$H === 0) {
-            return 12
-          }
-          return this.$H < 13 ? this.$H : this.$H - 12
         case 'hh':
-          if (this.$H === 0) {
-            return 12
-          }
-          return Utils.padStart(String(this.$H < 13 ? this.$H : this.$H - 12), 2, '0')
+          if (this.$H === 0) return 12
+          return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
         case 'a':
           return this.$H < 12 ? 'am' : 'pm'
         case 'A':
@@ -254,11 +248,11 @@ class Dayjs {
         case 'm':
           return String(this.$m)
         case 'mm':
-          return Utils.padStart(String(this.$m), 2, '0')
+          return Utils.padStart(this.$m, 2, '0')
         case 's':
           return String(this.$s)
         case 'ss':
-          return Utils.padStart(String(this.$s), 2, '0')
+          return Utils.padStart(this.$s, 2, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'
