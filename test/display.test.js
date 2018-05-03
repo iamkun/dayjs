@@ -56,6 +56,7 @@ it('Format Hour h hh 12-hour', () => {
 })
 
 it('Format meridiens a A am / pm', () => {
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
   expect(dayjs().format('a')).toBe(moment().format('a'))
   expect(dayjs().format('A')).toBe(moment().format('A'))
 

@@ -7,7 +7,7 @@ const parseConfig = (config) => {
   if (!config) return new Date()
   if (config instanceof Date) return config
   // eslint-disable-next-line no-cond-assign
-  if (reg = String(config).match(/^(\d{4})-?(\d{2})-?(\d{1,2})$/)) {
+  if (reg = String(config).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
     return new Date(reg[1], reg[2] - 1, reg[3])
   }
@@ -207,11 +207,9 @@ class Dayjs {
     return this.add(number * -1, string)
   }
 
-  format(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
-    const weeks = 'Sunday.Monday.Tuesday.Wednesday.Thursday.Friday.Saturday'.split('.')
-    const months = 'January.February.March.April.May.June.July.August.September.October.November.December'.split('.')
-
-    return formatStr.replace(/Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}/g, (match) => {
+  format(formatStr) {
+    const str = formatStr || C.FORMAT_DEFAULT
+    return str.replace(C.REGEX_FORMAT, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -222,9 +220,9 @@ class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return months[this.$M].slice(0, 3)
+          return C.MONTHS[this.$M].slice(0, 3)
         case 'MMMM':
-          return months[this.$M]
+          return C.MONTHS[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
@@ -232,7 +230,7 @@ class Dayjs {
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return weeks[this.$W]
+          return C.WEEKS[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
@@ -261,7 +259,7 @@ class Dayjs {
     })
   }
 
-  diff(input, units, float = false) {
+  diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
     const that = input instanceof Dayjs ? input : new Dayjs(input)
     const diff = this - that
