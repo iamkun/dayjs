@@ -1,6 +1,10 @@
 import * as Utils from '../src/utils'
 
-const { prettyUnit, padZoneStr } = Utils
+const {
+  prettyUnit,
+  padZoneStr,
+  padStart
+} = Utils
 
 it('PrettyUnit', () => {
   expect(prettyUnit('Days')).toBe('day')
@@ -15,4 +19,9 @@ it('PadZoneStr', () => {
   expect(padZoneStr('-1')).toBe('+0100')
   expect(padZoneStr('-10')).toBe('+1000')
   expect(padZoneStr('+10')).toBe('-1000')
+})
+
+it('PadStart', () => {
+  expect(padStart(1, 2, '0')).toBe('01')
+  expect(padStart(0, 2, '0')).toBe('00')
 })

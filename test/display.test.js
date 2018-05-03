@@ -76,7 +76,16 @@ it('Format Second s sss', () => {
 })
 
 it('Format Time Zone ZZ', () => {
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8)
   expect(dayjs().format('Z')).toBe(moment().format('Z'))
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8 * -1)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 0)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 10)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 11 * -1)
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
 })
 
