@@ -207,6 +207,16 @@ Get day of the month.
 dayjs().date();
 ```
 
+#### Day of Week
+
+* returns a Number
+
+Get day of the week.
+
+```js
+dayjs().day();
+```
+
 #### Hour
 
 * returns a Number
