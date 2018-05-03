@@ -30,7 +30,7 @@ export class Dayjs {
 
   init(locale) {
     this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.$zoneStr = Utils.padStart(Utils.padZoneStr(this.$zone), 5, '+')
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -99,7 +99,8 @@ export class Dayjs {
     return this.$d.getTime()
   }
 
-  startOf(units, isStartOf = true) { // isStartOf -> endOf
+  startOf(units, startOf) { // startOf -> endOf
+    const isStartOf = startOf !== undefined ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = dayjs(new Date(y, m, d))
@@ -235,31 +236,39 @@ export class Dayjs {
         case 'M':
           return String(this.$M + 1)
         case 'MM':
-          return Utils.padStart(String(this.$M + 1), 2, '0')
+          return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return months[this.$M].slice(0, 3)
+          return C.MONTHS[this.$M].slice(0, 3)
         case 'MMMM':
-          return months[this.$M]
+          return C.MONTHS[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
-          return Utils.padStart(String(this.$D), 2, '0')
+          return Utils.padStart(this.$D, 2, '0')
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return weeks[this.$W]
+          return C.WEEKS[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
-          return Utils.padStart(String(this.$H), 2, '0')
+          return Utils.padStart(this.$H, 2, '0')
+        case 'h':
+        case 'hh':
+          if (this.$H === 0) return 12
+          return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
+        case 'a':
+          return this.$H < 12 ? 'am' : 'pm'
+        case 'A':
+          return this.$H < 12 ? 'AM' : 'PM'
         case 'm':
           return String(this.$m)
         case 'mm':
-          return Utils.padStart(String(this.$m), 2, '0')
+          return Utils.padStart(this.$m, 2, '0')
         case 's':
           return String(this.$s)
         case 'ss':
-          return Utils.padStart(String(this.$s), 2, '0')
+          return Utils.padStart(this.$s, 2, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'
@@ -268,7 +277,7 @@ export class Dayjs {
     })
   }
 
-  diff(input, units, float = false) {
+  diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
     const that = input instanceof Dayjs ? input : dayjs(input.valueOf())
     const diff = this - that

@@ -1,4 +1,4 @@
-[English](./ReadMe.md) | 简体中文
+[English](./README.md) | 简体中文
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
@@ -37,24 +37,24 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 - NPM:
 ```console
-    npm install dayjs --save
+npm install dayjs --save
 ```
 ```js
-    var dayjs = require('dayjs');
-    dayjs().format();
+var dayjs = require('dayjs');
+dayjs().format();
 ```
 - CDN:
 ```html
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/dayjs"></script>
-    <script>
-      dayjs().format();
-    </script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/dayjs"></script>
+<script>
+  dayjs().format();
+</script>
 ```
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs](https://unpkg.com/dayjs) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
@@ -241,11 +241,36 @@ dayjs().endOf('month');
 - return String
 
 接收一系列的时间日期字符串并替换成相应的值。
+
 ```js
 dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
 dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
 ```
+
+详情如下:
+
+| Format | Output | Description |
+| ------ | ------ | ----------- |
+| `YY` | 18 | 两位数的年份 |
+| `YYYY` | 2018 | 四位数的年份 |
+| `M` | 1-12 | 月份，从1开始 |
+| `MM` | 01-12 | 月份，数字前面加上0
+| `MMM` | Jan-Dec | 简写的月份名称 |
+| `MMMM` | January-December | 完整的月份名称 |
+| `D` | 1-31 | 月份里的一天 |
+| `DD` | 01-31 | 月份里的一天，数字前面加上0 |
+| `d` | 0-6 | 一周中的一天，星期天是0 |
+| `dddd` | Sunday-Saturday | 一周中一天的名称 |
+| `H` | 0-23 | 小时 |
+| `HH` | 00-23 | 小时，数字前面加上0 |
+| `m` | 0-59 | 分钟 |
+| `mm` | 00-59 | 分钟，数字前面加上0 |
+| `s` | 0-59 | 秒 |
+| `ss` | 00-59 | 秒，数字前面加上0 |
+| `Z` | +5:00 | UTC的偏移量 |
+| `ZZ` | +0500 | UTC的偏移量，数字前面加上0 |
+
 #### 时间差
 - return Number
 
