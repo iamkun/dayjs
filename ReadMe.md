@@ -1,4 +1,4 @@
-English | [简体中文](./ReadMe.zh-CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
