@@ -499,4 +499,4 @@ dayjs('2000-01-01').isLeapYear(); // true
 
 ## License
 
-MIT
+[MIT](./LICENSE)
