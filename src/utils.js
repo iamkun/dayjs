@@ -1,6 +1,6 @@
 export const padStart = (string, length, pad) => {
   const s = String(string)
-  if (!string || s.length >= length) return string
+  if (!s || s.length >= length) return string
   return `${Array((length + 1) - s.length).join(pad)}${string}`
 }
 
