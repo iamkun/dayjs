@@ -238,9 +238,9 @@ export class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return C.MONTHS[this.$M].slice(0, 3)
+          return months[this.$M].slice(0, 3)
         case 'MMMM':
-          return C.MONTHS[this.$M]
+          return months[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
@@ -248,7 +248,7 @@ export class Dayjs {
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return C.WEEKS[this.$W]
+          return weeks[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
