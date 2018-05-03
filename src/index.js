@@ -22,7 +22,7 @@ class Dayjs {
 
   init() {
     this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padStart(String(this.$zone * -1).replace(/^(.)?(\d)/, '$10$200'), 5, '+')
+    this.$zoneStr = Utils.padStart(Utils.padZoneStr(this.$zone), 5, '+')
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
