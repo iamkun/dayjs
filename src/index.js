@@ -11,7 +11,7 @@ const dayjs = function dayjs(date, c) {
 const getDate = (date) => {
   let reg
   if (date === null) return new Date(NaN) // Treat null as an invalid date
-  if (!date) return new Date()
+  if (Utils.isUndefined(date)) return new Date()
   if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
   if (reg = String(date).match(C.REGEX_PARSE)) {
@@ -30,7 +30,7 @@ export class Dayjs {
 
   init(locale) {
     this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padStart(Utils.padZoneStr(this.$zone), 5, '+')
+    this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -70,6 +70,10 @@ export class Dayjs {
     return this.$M
   }
 
+  day() {
+    return this.$W
+  }
+
   date() {
     return this.$D
   }
@@ -100,7 +104,7 @@ export class Dayjs {
   }
 
   startOf(units, startOf) { // startOf -> endOf
-    const isStartOf = startOf !== undefined ? startOf : true
+    const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = dayjs(new Date(y, m, d))

@@ -18,6 +18,10 @@ it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
+it('Day of Week', () => {
+  expect(dayjs().day()).toBe(moment().day())
+})
+
 it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
 })
