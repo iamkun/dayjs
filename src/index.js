@@ -4,7 +4,7 @@ import * as Utils from './utils'
 const parseConfig = (config) => {
   let reg
   if (config === null) return new Date(NaN) // Treat null as an invalid date
-  if (!config) return new Date()
+  if (Utils.isUndefined(config)) return new Date()
   if (config instanceof Date) return config
   // eslint-disable-next-line no-cond-assign
   if (reg = String(config).match(C.REGEX_PARSE)) {
@@ -22,7 +22,7 @@ class Dayjs {
 
   init() {
     this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padStart(Utils.padZoneStr(this.$zone), 5, '+')
+    this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -95,7 +95,7 @@ class Dayjs {
   }
 
   startOf(units, startOf) { // startOf -> endOf
-    const isStartOf = startOf !== undefined ? startOf : true
+    const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
       const ins = new Dayjs(new Date(y, m, d))
