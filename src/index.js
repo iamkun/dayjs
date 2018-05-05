@@ -339,12 +339,30 @@ class Dayjs {
 
 
 const dayjs = config => new Dayjs(config)
+const applyExtend = (proto, factory) => {
+  factory.extend = (plugin, isNew = false) => { // eslint-disable-line no-param-reassign
+    // Return a new subclass instead of the original
+    if (isNew) {
+      // Extend the class
+      class PluginDayjs extends proto {}
 
-dayjs.extend = (plugin) => {
-  const proto = Dayjs.prototype
-  proto.$o = proto.$o || {}
-  proto.$o[plugin.n] = proto[plugin.n]
-  proto[plugin.n] = plugin.m
+      // Apply the plugin
+      plugin(PluginDayjs)
+
+      // Make a new factory
+      const pluginFactory = config => new PluginDayjs(config)
+
+      // Apply this method, so the subclass can have more plugins
+      applyExtend(PluginDayjs, pluginFactory)
+      return pluginFactory
+    }
+
+    // Apply the plugin
+    plugin(Dayjs)
+    // Return the factory so it can be chained
+    return factory
+  }
 }
+applyExtend(Dayjs, dayjs)
 
 export default dayjs

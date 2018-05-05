@@ -1,9 +1,8 @@
 let advFormat
-export default advFormat = {
-  n : "format",
-  m : function(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
-    let oldFormat = this.getOld('format')
-    let oldResult = oldFormat(formatStr)
+export default advFormat = Dayjs => {
+  const oldFormat = Dayjs.prototype.format
+  Dayjs.prototype.format = function(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
+    let oldResult = oldFormat.bind(this)(formatStr)
 
     const suffixes = ['th', 'st', 'nd', 'rd']
 
