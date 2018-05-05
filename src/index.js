@@ -255,6 +255,8 @@ class Dayjs {
           return String(this.$s)
         case 'ss':
           return Utils.padStart(this.$s, 2, '0')
+        case 'SSS':
+          return Utils.padStart(this.$ms, 3, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
         default: // 'ZZ'
