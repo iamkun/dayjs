@@ -16,8 +16,9 @@ script:
   - codecov
 after_success:
   - if [ "$TRAVIS_BRANCH" == "feature/saucelab" ]; then
-      npm install -g travis-deploy-once;
-      travis-deploy-once && npm run build && npx semantic-release;
+      npx travis-deploy-once;
+      npm run build;
+      npx semantic-release;
     fi
 branches:
   except:
