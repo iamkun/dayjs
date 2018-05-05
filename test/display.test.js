@@ -97,6 +97,11 @@ it('Format Complex with other string - : / ', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
+it('Format Escaping characters', () => {
+  const string = '[Z] Z'
+  expect(dayjs().format(string)).toBe(moment().format(string))
+})
+
 describe('Difference', () => {
   it('empty -> default milliseconds', () => {
     const dateString = '20110101'

@@ -214,6 +214,7 @@ class Dayjs {
   format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
     return str.replace(C.REGEX_FORMAT, (match) => {
+      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
