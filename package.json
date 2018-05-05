@@ -1,6 +1,6 @@
 {
   "name": "dayjs",
-  "version": "0.0.0-development",
+  "version": "1.5.19",
   "description": "",
   "main": "dist/dayjs.min.js",
   "scripts": {
