@@ -169,7 +169,6 @@ class Dayjs {
   }
 
   set(string, int) {
-    if (!Utils.isNumber(int)) return this
     return this.clone().mSet(string, int)
   }
 
