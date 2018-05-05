@@ -83,8 +83,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
 
     sauceLabs: {
-      testName: 'Day.js',
-      "build": "build-0004"
+      testName: 'Day.js'
     },
     captureTimeout: 120000,
     customLaunchers: batch,
