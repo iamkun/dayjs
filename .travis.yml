@@ -21,5 +21,3 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
-addons:
-  sauce_connect: true
