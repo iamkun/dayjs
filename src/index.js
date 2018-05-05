@@ -34,10 +34,6 @@ class Dayjs {
     this.$ms = this.$d.getMilliseconds()
   }
 
-  getOld(fn) {
-    return this.$o[fn].bind(this)
-  }
-
   isValid() {
     return !(this.$d.toString() === 'Invalid Date')
   }
