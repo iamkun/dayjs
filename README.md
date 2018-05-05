@@ -82,6 +82,7 @@ API will always return a new `Dayjs` object if not specified.
   * [Year](#year)
   * [Month](#month)
   * [Date of Month](#date-of-month)
+  * [Day of Week](#day-of-week)
   * [Hour](#hour)
   * [Minute](#minute)
   * [Second](#second)
