@@ -15,7 +15,7 @@ script:
   - npm test
   - codecov
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "feature/saucelab" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
       npx travis-deploy-once && npm run build && npx semantic-release && npm run test:sauce;
     fi
 branches:
