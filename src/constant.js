@@ -26,5 +26,5 @@ export const MONTHS = 'January.February.March.April.May.June.July.August.Septemb
 export const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ'
 
 // regex
-export const REGEX_PARSE = /^(\d{4})-?(\d{2})-?(\d{1,2})$/
+export const REGEX_PARSE = /^(\d{4})-?(\d{2})-?(\d{1,2})(.*(\d{2}):(\d{2}):(\d{2}))?.?(\d{3})?$/
 export const REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g
