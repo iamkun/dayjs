@@ -41,6 +41,30 @@ it('Format Hour H HH 24-hour', () => {
   expect(dayjs().format('HH')).toBe(moment().format('HH'))
 })
 
+it('Format Hour h hh 12-hour', () => {
+  MockDate.set(new Date('2018-05-02T00:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+})
+
+it('Format meridiens a A am / pm', () => {
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+})
+
 it('Format Minute m mm', () => {
   expect(dayjs().format('m')).toBe(moment().format('m'))
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
@@ -53,7 +77,16 @@ it('Format Second s ss', () => {
 
 
 it('Format Time Zone ZZ', () => {
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8)
   expect(dayjs().format('Z')).toBe(moment().format('Z'))
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8 * -1)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 0)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 10)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 11 * -1)
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
 })
 

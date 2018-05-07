@@ -41,6 +41,10 @@ it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
 })
 
+it('Number 0', () => {
+  expect(dayjs(0).valueOf()).toBe(moment(0).valueOf())
+})
+
 it('Clone not affect each other', () => {
   const base = dayjs(20170101)
   const year = base.year()
