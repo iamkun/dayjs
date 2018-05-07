@@ -15,7 +15,7 @@ script:
   - npm test
   - codecov
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
       npx travis-deploy-once && npm run build && npx semantic-release && npm run test:sauce;
     fi
 branches:

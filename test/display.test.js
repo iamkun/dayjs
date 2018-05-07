@@ -90,6 +90,8 @@ it('Format Time Zone ZZ', () => {
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
   MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 11 * -1)
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 5.5 * -1)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
 })
 
 it('Format Complex with other string - : / ', () => {
