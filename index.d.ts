@@ -1,6 +1,3 @@
-// Type definitions for dayjs 1.0
-// Project: https://github.com/xx45/dayjs
-// Definitions by: varHarrie <https://github.com/varHarrie>
 
 type ConfigType = string | number | Date | Dayjs
 
@@ -75,7 +72,7 @@ declare class Dayjs {
 
   isAfter(dayjs: Dayjs)
 
-  isLeapYear(dayjs?: Dayjs): boolean
+  isLeapYear(): boolean
 }
 
 declare function dayjs (config?: ConfigType): Dayjs
