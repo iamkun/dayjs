@@ -9,7 +9,10 @@ const parseConfig = (config) => {
   // eslint-disable-next-line no-cond-assign
   if (reg = String(config).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
-    return new Date(reg[1], reg[2] - 1, reg[3], reg[5], reg[6], reg[7], reg[8] || 0)
+    return new Date(
+      reg[1], reg[2] - 1, reg[3],
+      reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
+    )
   }
   return new Date(config) // timestamp
 }
@@ -171,6 +174,7 @@ class Dayjs {
   }
 
   add(number, units) {
+    number = Number(number) // eslint-disable-line no-param-reassign
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)

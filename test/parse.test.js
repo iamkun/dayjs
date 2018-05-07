@@ -16,7 +16,15 @@ describe('Parse', () => {
   })
 
   it('String 20130208', () => {
-    const timeArr = ['20130108', '2018-04-24', '2018-05-02 11:12:13', '2018-05-02 11:12:13.998']
+    global.console.warn = jest.genMockFunction()// moment.js '2018-4-1 1:1:1:22' will throw warn
+    const timeArr = [
+      '20130108',
+      '2018-04-24',
+      '2018-05-02 11:12:13',
+      '2018-05-02 11:12:13.998',
+      '2018-4-1', // not recommend
+      '2018-4-1 1:1:1:22' // not recommend
+    ]
     timeArr.forEach((t) => {
       expect(dayjs(t).valueOf()).toBe(moment(t).valueOf())
     })

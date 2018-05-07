@@ -1,4 +1,4 @@
-import dayjs from '.'
+import dayjs from '../src'
 
 dayjs()
 
@@ -17,6 +17,8 @@ dayjs().year()
 dayjs().month()
 
 dayjs().date()
+
+dayjs().day()
 
 dayjs().hour()
 
@@ -68,4 +70,4 @@ dayjs().isSame(dayjs())
 
 dayjs().isAfter(dayjs())
 
-dayjs('2000-01-01').isLeapYear(dayjs())
+dayjs('2000-01-01').isLeapYear()
