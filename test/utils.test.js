@@ -14,11 +14,12 @@ it('PrettyUnit', () => {
 })
 
 it('PadZoneStr', () => {
-  expect(padZoneStr('+0')).toBe('+0000')
-  expect(padZoneStr('+1')).toBe('-0100')
-  expect(padZoneStr('-1')).toBe('+0100')
-  expect(padZoneStr('-10')).toBe('+1000')
-  expect(padZoneStr('+10')).toBe('-1000')
+  expect(padZoneStr(0)).toBe('+00:00')
+  expect(padZoneStr(1 * 60)).toBe('-01:00')
+  expect(padZoneStr(-1 * 60)).toBe('+01:00')
+  expect(padZoneStr(-10 * 60)).toBe('+10:00')
+  expect(padZoneStr(10 * 60)).toBe('-10:00')
+  expect(padZoneStr((-5 * 60) - 30)).toBe('+05:30')
 })
 
 it('PadStart', () => {
