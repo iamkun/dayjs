@@ -1,26 +1,34 @@
 import * as C from './constant'
 import * as Utils from './utils'
+import eng from './locales/en'
 
-const parseConfig = (config) => {
+const dayjs = function dayjs(date, c) {
+  const cfg = c || {}
+  cfg.date = date
+  return new Dayjs(cfg) // eslint-disable-line no-use-before-define
+}
+
+const getDate = (date) => {
   let reg
-  if (config === null) return new Date(NaN) // Treat null as an invalid date
-  if (Utils.isUndefined(config)) return new Date()
-  if (config instanceof Date) return config
+  if (date === null) return new Date(NaN) // Treat null as an invalid date
+  if (Utils.isUndefined(date)) return new Date()
+  if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
-  if (reg = String(config).match(C.REGEX_PARSE)) {
+  if (reg = String(date).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
     return new Date(reg[1], reg[2] - 1, reg[3])
   }
-  return new Date(config) // timestamp
+  return new Date(date) // timestamp
 }
 
-class Dayjs {
-  constructor(config) {
-    this.$d = parseConfig(config)
-    this.init()
+export class Dayjs {
+  constructor(cfg) {
+    this.$d = getDate(cfg.date)
+    this.$format = cfg.format || C.FORMAT_DEFAULT
+    this.init(cfg.locale)
   }
 
-  init() {
+  init(locale) {
     this.$zone = this.$d.getTimezoneOffset() / 60
     this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
@@ -31,6 +39,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
+    this.$L = locale || eng
   }
 
   isValid() {
@@ -98,13 +107,13 @@ class Dayjs {
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
-      const ins = new Dayjs(new Date(y, m, d))
+      const ins = dayjs(new Date(y, m, d))
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return new Dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ))
@@ -168,9 +177,15 @@ class Dayjs {
     return this
   }
 
-  set(string, int) {
+  set(unitOrDate, int) {
+    if (typeof unitOrDate === 'object' &&
+      unitOrDate.constructor.name.indexOf(['Date', 'Dayjs'] > -1)) {
+      const self = this.clone()
+      self.$d = unitOrDate.toDate ? unitOrDate.toDate() : unitOrDate
+      return self
+    }
     if (!Utils.isNumber(int)) return this
-    return this.clone().mSet(string, int)
+    return this.clone().mSet(unitOrDate, int)
   }
 
   add(number, units) {
@@ -205,16 +220,18 @@ class Dayjs {
         step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
-    return new Dayjs(nextTimeStamp)
+    return dayjs(nextTimeStamp)
   }
 
   subtract(number, string) {
     return this.add(number * -1, string)
   }
 
-  format(formatStr) {
-    const str = formatStr || C.FORMAT_DEFAULT
-    return str.replace(C.REGEX_FORMAT, (match) => {
+  format(formatStr = this.$format, L = {}) {
+    const weeks = L.WEEKDAYS || this.$L.WEEKDAYS
+    const months = L.MONTHS || this.$L.MONTHS
+
+    return formatStr.replace(C.REGEX_FORMAT, (match) => {
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -225,9 +242,9 @@ class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return C.MONTHS[this.$M].slice(0, 3)
+          return months[this.$M].slice(0, 3)
         case 'MMMM':
-          return C.MONTHS[this.$M]
+          return months[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
@@ -235,7 +252,7 @@ class Dayjs {
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return C.WEEKS[this.$W]
+          return weeks[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
@@ -266,7 +283,7 @@ class Dayjs {
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
-    const that = input instanceof Dayjs ? input : new Dayjs(input)
+    const that = input instanceof Dayjs ? input : dayjs(input.valueOf())
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
@@ -297,12 +314,21 @@ class Dayjs {
     return this.endOf(C.M).$D
   }
 
+  setLocale(l = eng) {
+    this.$L = l
+    return this
+  }
+
   clone() {
-    return new Dayjs(this)
+    return new Dayjs({
+      date: this.toDate(),
+      locale: this.$L,
+      format: this.$format
+    })
   }
 
   toDate() {
-    return new Date(this.$d)
+    return new Date(this.valueOf())
   }
 
   toArray() {
@@ -318,7 +344,7 @@ class Dayjs {
   }
 
   toJSON() {
-    return this.toISOString()
+    return this.toISOString() // this.format()
   }
 
   toISOString() {
@@ -342,4 +368,4 @@ class Dayjs {
   }
 }
 
-export default config => (new Dayjs(config))
+export default dayjs
