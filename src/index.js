@@ -174,6 +174,7 @@ class Dayjs {
   }
 
   add(number, units) {
+    number = Number(number) // eslint-disable-line no-param-reassign
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
