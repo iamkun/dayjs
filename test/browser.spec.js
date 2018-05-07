@@ -21,9 +21,9 @@ describe('Core APIs', function () {
   })
 
   it('Date parse - nonstandard date string with only one digit', function () {
-    expect(dayjs('2018-4-1 1:1:1:22').valueOf())
-      .toBe(1522515661022)
-    expect(dayjs('2018-4-1').valueOf())
-      .toBe(1522512000000)
+    expect(dayjs('2018-4-1 1:1:1:22').isValid())
+      .toBe(true)
+    expect(dayjs('2018-4-1').isValid())
+      .toBe(true)
   })
 })
