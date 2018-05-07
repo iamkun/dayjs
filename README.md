@@ -82,6 +82,7 @@ API will always return a new `Dayjs` object if not specified.
   * [Year](#year)
   * [Month](#month)
   * [Date of Month](#date-of-month)
+  * [Day of Week](#day-of-week)
   * [Hour](#hour)
   * [Minute](#minute)
   * [Second](#second)
@@ -332,8 +333,10 @@ Takes a string of tokens and replaces them with their corresponding date values.
 ```js
 dayjs().format(String);
 dayjs().format(); // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
-dayjs().format('[YYYY] MM-DDTHH:mm:ssZ'); // "[2014] 09-08T08:02:17-05:00"
+dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 ```
+
+* To escape characters in string, wrap the characters in square brackets (e.g. [Z]).
 
 List of all available formats:
 
@@ -357,6 +360,7 @@ List of all available formats:
 | `mm`   | 00-59            | The minute, 2-digits                  |
 | `s`    | 0-59             | The second                            |
 | `ss`   | 00-59            | The second, 2-digits                  |
+| `SSS`  | 000-999          | The millisecond, 3-digits             |
 | `Z`    | +5:00            | The offset from UTC                   |
 | `ZZ`   | +0500            | The offset from UTC, 2-digits         |
 | `A`    | AM PM            |                                       |

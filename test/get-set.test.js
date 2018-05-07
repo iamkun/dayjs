@@ -83,12 +83,6 @@ it('Set Unknown String', () => {
     .toBe(moment().set('Unknown String', 1).valueOf())
 })
 
-it('Set Not Int', () => {
-  const newDate = dayjs().set('year', 'Not Int')
-  expect(newDate.valueOf())
-    .toBe(moment().set('year', 'Not Int').valueOf())
-})
-
 it('Immutable Set', () => {
   const dayjsA = dayjs()
   const dayjsB = dayjsA.set('year', 2011)

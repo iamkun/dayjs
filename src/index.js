@@ -16,7 +16,7 @@ const getDate = (date) => {
   // eslint-disable-next-line no-cond-assign
   if (reg = String(date).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
-    return new Date(reg[1], reg[2] - 1, reg[3])
+    return new Date(reg[1], reg[2] - 1, reg[3], reg[5], reg[6], reg[7], reg[8] || 0)
   }
   return new Date(date) // timestamp
 }
@@ -151,7 +151,7 @@ export class Dayjs {
     return this.startOf(arg, false)
   }
 
-  mSet(units, int) {
+  $set(units, int) { // private set
     const unit = Utils.prettyUnit(units)
     switch (unit) {
       case C.DATE:
@@ -182,6 +182,7 @@ export class Dayjs {
     return this
   }
 
+
   set(unitOrDate, int) {
     if (typeof unitOrDate === 'object' &&
       unitOrDate.constructor.name.indexOf(['Date', 'Dayjs'] > -1)) {
@@ -190,7 +191,7 @@ export class Dayjs {
       return self
     }
     if (!Utils.isNumber(int)) return this
-    return this.clone().mSet(unitOrDate, int)
+    return this.clone().$set(unitOrDate, int)
   }
 
   add(number, units) {
@@ -236,8 +237,10 @@ export class Dayjs {
   format(formatStr = this.$format, L = {}) {
     const weeks = L.WEEKDAYS || this.$L.WEEKDAYS
     const months = L.MONTHS || this.$L.MONTHS
-
+    const str = formatStr || C.FORMAT_DEFAULT
+    const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
     return formatStr.replace(C.REGEX_FORMAT, (match) => {
+      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -279,12 +282,12 @@ export class Dayjs {
           return String(this.$s)
         case 'ss':
           return Utils.padStart(this.$s, 2, '0')
+        case 'SSS':
+          return Utils.padStart(this.$ms, 3, '0')
         case 'Z':
-          return `${this.$zoneStr.slice(0, -2)}:00`
-        case 'ZZ':
-          return this.$zoneStr
-        default:
-          return match
+          return zoneStr
+        default: // 'ZZ'
+          return zoneStr.replace(':', '')
       }
     })
   }
@@ -356,6 +359,9 @@ export class Dayjs {
   }
 
   toISOString() {
+    // ie 8 return
+    // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
+    // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
     return this.toDate().toISOString()
   }
 
