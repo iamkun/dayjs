@@ -1,4 +1,4 @@
-[English](./ReadMe.md) | 简体中文
+[English](./README.md) | 简体中文
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
@@ -37,24 +37,24 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 - NPM:
 ```console
-    npm install dayjs --save
+npm install dayjs --save
 ```
 ```js
-    var dayjs = require('dayjs');
-    dayjs().format();
+var dayjs = require('dayjs');
+dayjs().format();
 ```
 - CDN:
 ```html
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/dayjs"></script>
-    <script>
-      dayjs().format();
-    </script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/dayjs"></script>
+<script>
+  dayjs().format();
+</script>
 ```
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs](https://unpkg.com/dayjs) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
@@ -65,44 +65,44 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 ## API
 如果没有特别说明，API 的返回值都是新的 `Dayjs` 对象。
 
-* [解析](#parse)
-  * [当前时间](#now)
-  * [时间字符串](#string)
-  * [Unix 时间戳 (毫秒)](#unix-timestamp-milliseconds)
-  * [Date 对象](#date)
-  * [复制](#clone)
-  * [验证](#validation)
-* [获取+设置](#get--set)
-  * [年](#year)
-  * [月](#month)
-  * [日](#date-1)
-  * [时](#hour)
-  * [分](#minute)
-  * [秒](#second)
-  * [毫秒](#millisecond)
-  * [设置](#set)
-* [操作](#manipulate)
-  * [增加](#add)
-  * [减少](#subtract)
-  * [开头时间](#start-of-time)
-  * [末尾时间](#end-of-time)
-* [显示](#display)
-  * [格式化](#format)
-  * [时间差](#different)
-  * [Unix 时间戳 (毫秒)](#unix-timestamp-milliseconds-1)
-  * [Unix 时间戳 (秒)](#unix-timestamp-seconds)
-  * [天数 (月)](#days-in-month)
-  * [Date 对象](#as-javascript-date)
-  * [数组](#as-array)
+* [解析](#解析)
+  * [当前时间](#当前时间)
+  * [时间字符串](#时间字符串)
+  * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
+  * [Date 对象](#date-对象)
+  * [复制](#复制)
+  * [验证](#验证)
+* [获取+设置](#获取设置)
+  * [年](#年)
+  * [月](#月)
+  * [日](#日)
+  * [时](#时)
+  * [分](#分)
+  * [秒](#秒)
+  * [毫秒](#毫秒)
+  * [设置](#设置)
+* [操作](#操作)
+  * [增加](#增加)
+  * [减少](#减少)
+  * [开头时间](#开头时间)
+  * [末尾时间](#末尾时间)
+* [显示](#显示)
+  * [格式化](#格式化)
+  * [时间差](#时间差)
+  * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒-1)
+  * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  * [天数 (月)](#天数-月)
+  * [Date 对象](#date-对象-1)
+  * [数组](#数组)
   * [JSON](#as-json)
-  * [ISO 8601 字符串](#as-ios-8601-string)
-  * [对象](#as-object)
-  * [字符串](#as-string)
-* [查询](#query)
-  * [是否之前](#is-before)
-  * [是否相同](#is-same)
-  * [是否之后](#is-after)
-  * [是否闰年](#is-leap-year)
+  * [ISO 8601 字符串](#iso-8601-字符串)
+  * [对象](#对象)
+  * [字符串](#字符串)
+* [查询](#查询)
+  * [是否之前](#是否之前)
+  * [是否相同](#是否相同)
+  * [是否之后](#是否之后)
+  * [是否闰年](#是否闰年)
 
 ---
 ### 解析
@@ -202,7 +202,7 @@ dayjs().millisecond();
 ```js
 dayjs().set(unit : String, value : Int);
 dayjs().set('month', 3);  // April
-moment().set('second', 30);
+dayjs().set('second', 30);
 ```
 ---
 ### 操作
@@ -241,11 +241,36 @@ dayjs().endOf('month');
 - return String
 
 接收一系列的时间日期字符串并替换成相应的值。
+
 ```js
 dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
-dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
+dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 ```
+
+详情如下:
+
+| Format | Output | Description |
+| ------ | ------ | ----------- |
+| `YY` | 18 | 两位数的年份 |
+| `YYYY` | 2018 | 四位数的年份 |
+| `M` | 1-12 | 月份，从1开始 |
+| `MM` | 01-12 | 月份，数字前面加上0
+| `MMM` | Jan-Dec | 简写的月份名称 |
+| `MMMM` | January-December | 完整的月份名称 |
+| `D` | 1-31 | 月份里的一天 |
+| `DD` | 01-31 | 月份里的一天，数字前面加上0 |
+| `d` | 0-6 | 一周中的一天，星期天是0 |
+| `dddd` | Sunday-Saturday | 一周中一天的名称 |
+| `H` | 0-23 | 小时 |
+| `HH` | 00-23 | 小时，数字前面加上0 |
+| `m` | 0-59 | 分钟 |
+| `mm` | 00-59 | 分钟，数字前面加上0 |
+| `s` | 0-59 | 秒 |
+| `ss` | 00-59 | 秒，数字前面加上0 |
+| `Z` | +5:00 | UTC的偏移量 |
+| `ZZ` | +0500 | UTC的偏移量，数字前面加上0 |
+
 #### 时间差
 - return Number
 
@@ -304,17 +329,17 @@ dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
 dayjs().toISOString();
 ```
 #### 对象
-- return Object 
+- return Object
 
 返回包含时间数值的对象。
 ```js
 dayjs().toObject();// { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
 #### 字符串
-- return String 
+- return String
 
 ```js
-dayjs().toString(); 
+dayjs().toString();
 ```
 ---
 ### 查询
@@ -345,10 +370,10 @@ dayjs().isAfter(dayjs()); // false
 #### 是否闰年
 - return Boolean
 
-是否闰年。 
+是否闰年。
 ```js
 dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(dayjs()); // true
+dayjs('2000-01-01').isLeapYear(); // true
 ```
 ---
 ## 开源协议

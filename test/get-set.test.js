@@ -18,6 +18,10 @@ it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
+it('Day of Week', () => {
+  expect(dayjs().day()).toBe(moment().day())
+})
+
 it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
 })
@@ -38,16 +42,38 @@ it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
 })
 
-it('Set Unknown String', () => {
-  const newDate = dayjs().set('Unknown String', 1)
-  expect(newDate.unix())
-    .toBe(moment().set('Unknown String', 1).unix())
+it('Set Day', () => {
+  expect(dayjs().set('date', 30).valueOf()).toBe(moment().set('date', 30).valueOf())
 })
 
-it('Set Not Int', () => {
-  const newDate = dayjs().set('year', 'Not Int')
-  expect(newDate.unix())
-    .toBe(moment().set('year', 'Not Int').unix())
+it('Set Month', () => {
+  expect(dayjs().set('month', 11).valueOf()).toBe(moment().set('month', 11).valueOf())
+})
+
+it('Set Year', () => {
+  expect(dayjs().set('year', 2008).valueOf()).toBe(moment().set('year', 2008).valueOf())
+})
+
+it('Set Hour', () => {
+  expect(dayjs().set('hour', 6).valueOf()).toBe(moment().set('hour', 6).valueOf())
+})
+
+it('Set Minute', () => {
+  expect(dayjs().set('minute', 59).valueOf()).toBe(moment().set('minute', 59).valueOf())
+})
+
+it('Set Second', () => {
+  expect(dayjs().set('second', 59).valueOf()).toBe(moment().set('second', 59).valueOf())
+})
+
+it('Set Millisecond', () => {
+  expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
+})
+
+it('Set Unknown String', () => {
+  const newDate = dayjs().set('Unknown String', 1)
+  expect(newDate.valueOf())
+    .toBe(moment().set('Unknown String', 1).valueOf())
 })
 
 it('Immutable Set', () => {
@@ -55,7 +81,7 @@ it('Immutable Set', () => {
   const dayjsB = dayjsA.set('year', 2011)
   const momentA = moment()
   const momentB = momentA.set('year', 2011)
-  expect(dayjsA.unix()).not.toBe(dayjsB.unix())
-  expect(momentA.unix()).toBe(momentB.unix())
+  expect(dayjsA.valueOf()).not.toBe(dayjsB.valueOf())
+  expect(momentA.valueOf()).toBe(momentB.valueOf())
 })
 
