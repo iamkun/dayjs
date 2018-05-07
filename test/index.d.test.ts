@@ -1,4 +1,4 @@
-import dayjs from '.'
+import dayjs from '../src'
 
 dayjs()
 
@@ -17,6 +17,8 @@ dayjs().year()
 dayjs().month()
 
 dayjs().date()
+
+dayjs().day()
 
 dayjs().hour()
 

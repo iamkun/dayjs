@@ -26,6 +26,8 @@ declare class Dayjs {
 
   date(): number
 
+  day(): number
+
   hour(): number
 
   minute(): number

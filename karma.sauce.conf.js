@@ -59,14 +59,16 @@ module.exports = function (config) {
         browserName: 'iphone',
         version: '9.3'
       },
-      sl_ios_safari: {
-        base: 'SauceLabs',
-        browserName: 'iphone'
-      },
       sl_android_4_4: {
         base: 'SauceLabs',
         browserName: 'android',
         version: '4.4'
+      }
+    },
+    {
+      sl_ios_safari: {
+        base: 'SauceLabs',
+        browserName: 'iphone'
       },
       sl_android: {
         base: 'SauceLabs',
@@ -90,7 +92,7 @@ module.exports = function (config) {
     sauceLabs: {
       testName: 'Day.js'
     },
-    captureTimeout: 120000,
+    captureTimeout: 200000, // try fix ios timeout
     customLaunchers: batch,
     browsers: Object.keys(batch),
     singleRun: true
