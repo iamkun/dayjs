@@ -285,6 +285,12 @@ class Dayjs {
       case C.D:
         result = diff / C.MILLISECONDS_A_DAY
         break
+      case C.H:
+        result = diff / C.MILLISECONDS_A_HOUR
+        break
+      case C.MIN:
+        result = diff / C.MILLISECONDS_A_MINUTE
+        break
       case C.S:
         result = diff / C.MILLISECONDS_A_SECOND
         break
