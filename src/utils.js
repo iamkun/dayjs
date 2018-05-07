@@ -4,15 +4,13 @@ export const padStart = (string, length, pad) => {
   return `${Array((length + 1) - s.length).join(pad)}${string}`
 }
 
-export const padZoneStr = (negHour) => {
-  const hour = negHour * -1
-  let replacer = ''
-  if (hour > -10 && hour < 10) {
-    replacer = '$10$200'
-  } else {
-    replacer = '$1$200'
-  }
-  return padStart(String(hour).replace(/^(.)?(\d)/, replacer), 5, '+')
+export const padZoneStr = (negMinuts) => {
+  const minutes = Math.abs(negMinuts)
+  const sign = negMinuts <= 0 ? '+' : '-'
+  const hourOffset = Math.floor(minutes / 60)
+  const minuteOffset = minutes % 60
+
+  return `${sign}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
 }
 
 export const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))

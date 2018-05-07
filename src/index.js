@@ -21,7 +21,7 @@ class Dayjs {
   }
 
   init() {
-    this.$zone = this.$d.getTimezoneOffset() / 60
+    this.$zone = this.$d.getTimezoneOffset()
     this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
@@ -257,9 +257,9 @@ class Dayjs {
         case 'ss':
           return Utils.padStart(this.$s, 2, '0')
         case 'Z':
-          return `${this.$zoneStr.slice(0, -2)}:00`
-        default: // 'ZZ'
           return this.$zoneStr
+        default: // 'ZZ'
+          return this.$zoneStr.replace(':', '')
       }
     })
   }
