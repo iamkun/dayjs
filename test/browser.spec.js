@@ -19,4 +19,11 @@ describe('Core APIs', function () {
       .subtract(1, 'year')
       .format('{YYYY} MM-DDTHH:mm:ss')).toBe('{2010} 04-25T00:00:00')
   })
+
+  it('Date parse - nonstandard date string with only one digit', function () {
+    expect(dayjs('2018-4-1 1:1:1:22').valueOf())
+      .toBe(1522515661022)
+    expect(dayjs('2018-4-1').valueOf())
+      .toBe(1522512000000)
+  })
 })
