@@ -6,11 +6,9 @@ export const padStart = (string, length, pad) => {
 
 export const padZoneStr = (negMinuts) => {
   const minutes = Math.abs(negMinuts)
-  const sign = negMinuts <= 0 ? '+' : '-'
   const hourOffset = Math.floor(minutes / 60)
   const minuteOffset = minutes % 60
-
-  return `${sign}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
+  return `${negMinuts <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
 }
 
 export const monthDiff = (a, b) => {

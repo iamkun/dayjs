@@ -21,8 +21,6 @@ class Dayjs {
   }
 
   init() {
-    this.$zone = this.$d.getTimezoneOffset()
-    this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -137,7 +135,7 @@ class Dayjs {
     return this.startOf(arg, false)
   }
 
-  mSet(units, int) {
+  $set(units, int) { // private set
     const unit = Utils.prettyUnit(units)
     switch (unit) {
       case C.DATE:
@@ -169,7 +167,7 @@ class Dayjs {
   }
 
   set(string, int) {
-    return this.clone().mSet(string, int)
+    return this.clone().$set(string, int)
   }
 
   add(number, units) {
@@ -213,6 +211,7 @@ class Dayjs {
 
   format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
+    const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -259,9 +258,9 @@ class Dayjs {
         case 'SSS':
           return Utils.padStart(this.$ms, 3, '0')
         case 'Z':
-          return this.$zoneStr
+          return zoneStr
         default: // 'ZZ'
-          return this.$zoneStr.replace(':', '')
+          return zoneStr.replace(':', '')
       }
     })
   }
