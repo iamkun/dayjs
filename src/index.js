@@ -42,6 +42,11 @@ export class Dayjs {
     this.$L = locale || eng
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  Utils() {
+    return Utils
+  }
+
   isValid() {
     return !(this.$d.toString() === 'Invalid Date')
   }
@@ -227,6 +232,7 @@ export class Dayjs {
     return this.add(number * -1, string)
   }
 
+
   format(formatStr = this.$format, L = {}) {
     const weeks = L.WEEKDAYS || this.$L.WEEKDAYS
     const months = L.MONTHS || this.$L.MONTHS
@@ -275,8 +281,10 @@ export class Dayjs {
           return Utils.padStart(this.$s, 2, '0')
         case 'Z':
           return `${this.$zoneStr.slice(0, -2)}:00`
-        default: // 'ZZ'
+        case 'ZZ':
           return this.$zoneStr
+        default:
+          return match
       }
     })
   }
@@ -367,5 +375,35 @@ export class Dayjs {
     return this.$d.toUTCString()
   }
 }
+
+
+
+const dayjs = config => new Dayjs(config)
+const applyExtend = (proto, factory) => {
+  factory.extend = (plugin, isNew = false) => { // eslint-disable-line no-param-reassign
+    // Return a new subclass instead of the original
+    if (isNew) {
+      // Extend the class
+      class PluginDayjs extends proto {}
+
+      // Apply the plugin
+      plugin(PluginDayjs)
+
+      // Make a new factory
+      const pluginFactory = config => new PluginDayjs(config)
+
+      // Apply this method, so the subclass can have more plugins
+      applyExtend(PluginDayjs, pluginFactory)
+      return pluginFactory
+    }
+
+    // Apply the plugin
+    plugin(Dayjs)
+    // Return the factory so it can be chained
+    return factory
+  }
+}
+applyExtend(Dayjs, dayjs)
+
 
 export default dayjs
