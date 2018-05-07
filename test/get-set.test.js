@@ -70,6 +70,13 @@ it('Set Millisecond', () => {
   expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
 })
 
+it('Set with Date and Dayjs objects', () => {
+  const date = new Date(2018, 5, 1)
+  const newDayjs = dayjs(date)
+  expect(dayjs().set(date).valueOf()).toBe(moment(date).valueOf())
+  expect(dayjs().set(newDayjs).valueOf()).toBe(moment(newDayjs.toDate()).valueOf())
+})
+
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.valueOf())
