@@ -13,8 +13,6 @@ export const padZoneStr = (negMinuts) => {
   return `${sign}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
 }
 
-export const isNumber = n => (!Number.isNaN(parseFloat(n)) && Number.isFinite(n))
-
 export const monthDiff = (a, b) => {
   // function from moment.js in order to keep the same result
   const wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month())

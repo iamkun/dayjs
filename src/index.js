@@ -9,7 +9,7 @@ const parseConfig = (config) => {
   // eslint-disable-next-line no-cond-assign
   if (reg = String(config).match(C.REGEX_PARSE)) {
     // 2018-08-08 or 20180808
-    return new Date(reg[1], reg[2] - 1, reg[3])
+    return new Date(reg[1], reg[2] - 1, reg[3], reg[5], reg[6], reg[7], reg[8] || 0)
   }
   return new Date(config) // timestamp
 }
@@ -169,7 +169,6 @@ class Dayjs {
   }
 
   set(string, int) {
-    if (!Utils.isNumber(int)) return this
     return this.clone().mSet(string, int)
   }
 
@@ -215,6 +214,7 @@ class Dayjs {
   format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
     return str.replace(C.REGEX_FORMAT, (match) => {
+      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
         case 'YY':
           return String(this.$y).slice(-2)
@@ -256,6 +256,8 @@ class Dayjs {
           return String(this.$s)
         case 'ss':
           return Utils.padStart(this.$s, 2, '0')
+        case 'SSS':
+          return Utils.padStart(this.$ms, 3, '0')
         case 'Z':
           return this.$zoneStr
         default: // 'ZZ'
@@ -322,6 +324,9 @@ class Dayjs {
   }
 
   toISOString() {
+    // ie 8 return
+    // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
+    // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
     return this.toDate().toISOString()
   }
 

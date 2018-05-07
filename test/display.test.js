@@ -73,6 +73,9 @@ it('Format Minute m mm', () => {
 it('Format Second s sss', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
+  expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
+  const date = '2011-11-05T14:48:01.002Z'
+  expect(dayjs(date).format('s-ss-SSS')).toBe(moment(date).format('s-ss-SSS'))
 })
 
 it('Format Time Zone ZZ', () => {
@@ -91,6 +94,11 @@ it('Format Time Zone ZZ', () => {
 
 it('Format Complex with other string - : / ', () => {
   const string = 'YY-M-D / HH:mm:ss'
+  expect(dayjs().format(string)).toBe(moment().format(string))
+})
+
+it('Format Escaping characters', () => {
+  const string = '[Z] Z'
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 

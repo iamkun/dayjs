@@ -16,7 +16,7 @@ describe('Parse', () => {
   })
 
   it('String 20130208', () => {
-    const timeArr = ['20130108', '2018-04-24']
+    const timeArr = ['20130108', '2018-04-24', '2018-05-02 11:12:13', '2018-05-02 11:12:13.998']
     timeArr.forEach((t) => {
       expect(dayjs(t).valueOf()).toBe(moment(t).valueOf())
     })

@@ -6,6 +6,10 @@
   "env": {
     "jest/globals": true
   },
+  "globals": {
+    "window": true,
+    "dayjs": true
+  },
   "rules": {
     "semi": [
       2,
