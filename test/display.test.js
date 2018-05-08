@@ -124,14 +124,14 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
 
-  it('diff -> in seconds, days, weeks, months, quarters, years ', () => {
+  it('diff -> in seconds, minutes, hours, days, weeks, months, quarters, years ', () => {
     const dayjsA = dayjs()
     const dayjsB = dayjs().add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days')
     const momentA = moment()
     const momentB = moment().add(1000, 'days')
     const momentC = moment().subtract(1000, 'days')
-    const units = ['seconds', 'days', 'weeks', 'months', 'quarters', 'years']
+    const units = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', 'years']
     units.forEach((unit) => {
       expect(dayjsA.diff(dayjsB, unit)).toBe(momentA.diff(momentB, unit))
       expect(dayjsA.diff(dayjsB, unit, true)).toBe(momentA.diff(momentB, unit, true))
