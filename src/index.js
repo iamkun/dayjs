@@ -292,7 +292,7 @@ class Dayjs {
     const resabs = Math.abs(result)
     let out = ''
     for (let i = 0; i < P.length; i += 1) {
-      if (resabs >= P[i].v) out = `${Utils.absFloor(resabs / P[i].v)} ${P[i].l}${(resabs / P[i].v !== 1) ? 's' : ''}`
+      if (resabs >= P[i].v) out = `${Utils.absFloor(resabs / P[i].v)} ${P[i].l}${resabs !== P[i].v ? 's' : ''}`
     }
     if (!result) return 'just now'
     return result > 0 ? `in ${out}` : `${out} ago`
