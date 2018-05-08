@@ -243,7 +243,7 @@ export class Dayjs {
     const months = L.MONTHS || this.$L.MONTHS
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    return formatStr.replace(C.REGEX_FORMAT, (match) => {
+    return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
         case 'YY':
@@ -392,9 +392,7 @@ export class Dayjs {
   }
 }
 
-
-
-const dayjs = config => new Dayjs(config)
+// const dayjs = config => new Dayjs(config)
 const applyExtend = (proto, factory) => {
   factory.extend = (plugin, isNew = false) => { // eslint-disable-line no-param-reassign
     // Return a new subclass instead of the original
@@ -420,6 +418,5 @@ const applyExtend = (proto, factory) => {
   }
 }
 applyExtend(Dayjs, dayjs)
-
 
 export default dayjs
