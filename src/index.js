@@ -7,7 +7,7 @@ const parseConfig = (config) => {
   if (Utils.isUndefined(config)) return new Date()
   if (config instanceof Date) return config
   // eslint-disable-next-line no-cond-assign
-  if (reg = String(config).match(C.REGEX_PARSE)) {
+  if ((typeof config === 'string') && (reg = config.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(
       reg[1], reg[2] - 1, reg[3],
