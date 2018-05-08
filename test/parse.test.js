@@ -17,17 +17,18 @@ describe('Parse', () => {
 
   it('String 20130208', () => {
     global.console.warn = jest.genMockFunction()// moment.js '2018-4-1 1:1:1:22' will throw warn
-    const timeArr = [
-      '20130108',
-      '2018-04-24',
-      '2018-05-02 11:12:13',
-      '2018-05-02 11:12:13.998',
-      '2018-4-1', // not recommend
-      '2018-4-1 1:1:1:22' // not recommend
-    ]
-    timeArr.forEach((t) => {
-      expect(dayjs(t).valueOf()).toBe(moment(t).valueOf())
-    })
+    let d = '20130108'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-04-24'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13.998'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-4-1'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
+    d = '2018-4-1 1:1:1:223'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
   })
 
   it('String ISO 8601 date, time and zone', () => {
