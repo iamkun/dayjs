@@ -193,7 +193,6 @@ export class Dayjs {
       self.$d = unitOrDate.toDate ? unitOrDate.toDate() : unitOrDate
       return self
     }
-    if (!Utils.isNumber(int)) return this
     return this.clone().$set(unitOrDate, int)
   }
 
