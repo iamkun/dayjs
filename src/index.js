@@ -1,6 +1,6 @@
 import * as C from './constant'
 import * as Utils from './utils'
-import eng from './locale/en'
+import en from './locale/en'
 
 const dayjs = (date, c) => {
   const cfg = c || {}
@@ -13,6 +13,7 @@ const getDate = (date) => {
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (Utils.isUndefined(date)) return new Date()
   if (date instanceof Date) return date
+  if (date instanceof Dayjs) return date.clone() // eslint-disable-line no-use-before-define
   // eslint-disable-next-line no-cond-assign
   if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
@@ -26,11 +27,15 @@ const getDate = (date) => {
 
 class Dayjs {
   constructor(cfg) {
-    this.$d = getDate(cfg.date)
-    this.init(cfg.locale)
+    this.parse(cfg) // for plugin
   }
 
-  init(locale) {
+  parse(cfg) {
+    this.$d = getDate(cfg.date)
+    this.init(cfg)
+  }
+
+  init(cfg) {
     this.$zone = this.$d.getTimezoneOffset() / 60
     this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
@@ -41,7 +46,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = locale || eng
+    this.$L = this.$L || cfg.locale || en
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -328,8 +333,8 @@ class Dayjs {
     return this.endOf(C.M).$D
   }
 
-  setLocale(l = eng) {
-    this.$L = l
+  setLocale(locale) {
+    this.$L = locale
     return this
   }
 
