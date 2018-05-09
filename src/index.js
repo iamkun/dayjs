@@ -29,20 +29,23 @@ const getDate = (date) => {
   return new Date(date) // timestamp
 }
 
-const parseLocale = (localeStringOrObject, LocaleObject) => {
+const parseLocale = (localeStringOrObject, LocaleObject, global) => {
+  let l
+  if (!localeStringOrObject) return null
   if (typeof localeStringOrObject === 'string') {
     if (LocaleObject) {
       Ls[localeStringOrObject] = LocaleObject
-      L = localeStringOrObject
+      l = localeStringOrObject
     } else if (Ls[localeStringOrObject]) {
-      L = localeStringOrObject
+      l = localeStringOrObject
     }
   } else {
     const { name } = localeStringOrObject
     Ls[name] = localeStringOrObject
-    L = name
+    l = name
   }
-  return L
+  if (global) L = l
+  return l
 }
 
 class Dayjs {
@@ -66,7 +69,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = this.$L || cfg.locale || L
+    this.$L = this.$L || parseLocale(cfg.locale) || L
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -417,6 +420,8 @@ dayjs.extend = (plugin) => {
   return dayjs
 }
 
-dayjs.locale = parseLocale
+dayjs.locale = (localeStringOrObject, LocaleObject) => {
+  parseLocale(localeStringOrObject, LocaleObject, true)
+}
 
 export default dayjs
