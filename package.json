@@ -16,11 +16,11 @@
     "lint"
   ],
   "jest": {
-    "testRegex": "test/.*test.js$",
+    "testRegex": "test/(.*?/)?.*test.js$",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/*"
+      "src/**/*"
     ]
   },
   "author": "iamkun",
