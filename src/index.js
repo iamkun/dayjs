@@ -31,19 +31,19 @@ const parseDate = (date) => {
   return new Date(date) // timestamp
 }
 
-const parseLocale = (localeStringOrObject, LocaleObject, isLocal) => {
+const parseLocale = (preset, object, isLocal) => {
   let l
-  if (!localeStringOrObject) return null
-  if (typeof localeStringOrObject === 'string') {
-    if (LocaleObject) {
-      Ls[localeStringOrObject] = LocaleObject
-      l = localeStringOrObject
-    } else if (Ls[localeStringOrObject]) {
-      l = localeStringOrObject
+  if (!preset) return null
+  if (typeof preset === 'string') {
+    if (object) {
+      Ls[preset] = object
+      l = preset
+    } else if (Ls[preset]) {
+      l = preset
     }
   } else {
-    const { name } = localeStringOrObject
-    Ls[name] = localeStringOrObject
+    const { name } = preset
+    Ls[name] = preset
     l = name
   }
   if (!isLocal) L = l
@@ -359,8 +359,8 @@ class Dayjs {
     return Ls[this.$L]
   }
 
-  locale(localeStringOrObject, LocaleObject) {
-    this.$L = parseLocale(localeStringOrObject, LocaleObject, true)
+  locale(preset, object) {
+    this.$L = parseLocale(preset, object, true)
     return this
   }
 
