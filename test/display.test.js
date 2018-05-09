@@ -179,7 +179,7 @@ describe('Difference', () => {
 
   it('fromNow -> in seconds, days, weeks, months, quarters, years in Spanish ', () => {
     const dayjsA = dayjs().locale(es)
-    const dayjsB = dayjs().add(1000, 'days').locale(es)
+    const dayjsB = dayjs().locale(es).add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days').locale(es)
     const dayjsD = dayjs().add(20, 'days').locale(es)
     const dayjsE = dayjs().subtract(30, 'seconds').locale(es)
