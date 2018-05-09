@@ -15,7 +15,7 @@ const dayjs = (date, c) => {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const getDate = (date) => {
+const parseDate = (date) => {
   let reg
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (Utils.isUndefined(date)) return new Date()
@@ -31,7 +31,7 @@ const getDate = (date) => {
   return new Date(date) // timestamp
 }
 
-const parseLocale = (localeStringOrObject, LocaleObject, local) => {
+const parseLocale = (localeStringOrObject, LocaleObject, isLocal) => {
   let l
   if (!localeStringOrObject) return null
   if (typeof localeStringOrObject === 'string') {
@@ -46,7 +46,7 @@ const parseLocale = (localeStringOrObject, LocaleObject, local) => {
     Ls[name] = localeStringOrObject
     l = name
   }
-  if (!local) L = l
+  if (!isLocal) L = l
   return l
 }
 
@@ -56,7 +56,7 @@ class Dayjs {
   }
 
   parse(cfg) {
-    this.$d = getDate(cfg.date)
+    this.$d = parseDate(cfg.date)
     this.init(cfg)
   }
 
