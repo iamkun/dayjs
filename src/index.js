@@ -2,7 +2,7 @@ import * as C from './constant'
 import * as Utils from './utils'
 import eng from './locale/en'
 
-const dayjs = function dayjs(date, c) {
+const dayjs = (date, c) => {
   const cfg = c || {}
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
@@ -24,7 +24,7 @@ const getDate = (date) => {
   return new Date(date) // timestamp
 }
 
-export class Dayjs {
+class Dayjs {
   constructor(cfg) {
     this.$d = getDate(cfg.date)
     this.$format = cfg.format || C.FORMAT_DEFAULT
@@ -46,7 +46,7 @@ export class Dayjs {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  Utils() {
+  $utils() {
     return Utils
   }
 
@@ -186,14 +186,8 @@ export class Dayjs {
   }
 
 
-  set(unitOrDate, int) {
-    if (typeof unitOrDate === 'object' &&
-      unitOrDate.constructor.name.indexOf(['Date', 'Dayjs'] > -1)) {
-      const self = this.clone()
-      self.$d = unitOrDate.toDate ? unitOrDate.toDate() : unitOrDate
-      return self
-    }
-    return this.clone().$set(unitOrDate, int)
+  set(string, int) {
+    return this.clone().$set(string, int)
   }
 
   add(number, units) {
@@ -391,7 +385,6 @@ export class Dayjs {
   }
 }
 
-// const dayjs = config => new Dayjs(config)
 dayjs.extend = (plugin) => {
   plugin(Dayjs.prototype, Dayjs)
   return dayjs
