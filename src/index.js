@@ -7,6 +7,9 @@ const Ls = {} // global loaded locale
 Ls[L] = en
 
 const dayjs = (date, c) => {
+  if (date instanceof Dayjs) { // eslint-disable-line no-use-before-define
+    return date.clone()
+  }
   const cfg = c || {}
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
@@ -17,7 +20,6 @@ const getDate = (date) => {
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (Utils.isUndefined(date)) return new Date()
   if (date instanceof Date) return date
-  if (date instanceof Dayjs) return date.clone() // eslint-disable-line no-use-before-define
   // eslint-disable-next-line no-cond-assign
   if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
@@ -29,7 +31,7 @@ const getDate = (date) => {
   return new Date(date) // timestamp
 }
 
-const parseLocale = (localeStringOrObject, LocaleObject, global) => {
+const parseLocale = (localeStringOrObject, LocaleObject, local) => {
   let l
   if (!localeStringOrObject) return null
   if (typeof localeStringOrObject === 'string') {
@@ -44,7 +46,7 @@ const parseLocale = (localeStringOrObject, LocaleObject, global) => {
     Ls[name] = localeStringOrObject
     l = name
   }
-  if (global) L = l
+  if (!local) L = l
   return l
 }
 
@@ -69,7 +71,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = this.$L || parseLocale(cfg.locale) || L
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -360,7 +362,7 @@ class Dayjs {
   }
 
   locale(localeStringOrObject, LocaleObject) {
-    this.$L = parseLocale(localeStringOrObject, LocaleObject)
+    this.$L = parseLocale(localeStringOrObject, LocaleObject, true)
     return this
   }
 
@@ -420,8 +422,6 @@ dayjs.extend = (plugin) => {
   return dayjs
 }
 
-dayjs.locale = (localeStringOrObject, LocaleObject) => {
-  parseLocale(localeStringOrObject, LocaleObject, true)
-}
+dayjs.locale = parseLocale
 
 export default dayjs
