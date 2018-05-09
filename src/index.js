@@ -258,7 +258,7 @@ class Dayjs {
   }
 
 
-  format(formatStr = C.FORMAT_DEFAULT, localeObject) {
+  format(formatStr, localeObject) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
     const locale = localeObject || this.$locale()
