@@ -259,9 +259,8 @@ class Dayjs {
   format(formatStr = C.FORMAT_DEFAULT, localeObject) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    const locale = localeObject || this.$L
-    const weeks = locale.WEEKDAYS
-    const months = locale.MONTHS
+    const locale = localeObject || this.$locale()
+    const { weekdays, months } = locale
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -284,7 +283,7 @@ class Dayjs {
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return weeks[this.$W]
+          return weekdays[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
@@ -352,6 +351,10 @@ class Dayjs {
 
   daysInMonth() {
     return this.endOf(C.M).$D
+  }
+
+  $locale() { // get locale object
+    return Ls[this.$L]
   }
 
   locale(localeStringOrObject, LocaleObject) {
