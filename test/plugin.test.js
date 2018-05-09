@@ -1,10 +1,10 @@
 import MockDate from 'mockdate'
 import dayjs from '../src'
 
-const fakePlugin = (proto) => {
+const testPlugin = (proto) => {
   proto.newApi = () => ('hello world')
 }
-dayjs.extend(fakePlugin)
+dayjs.extend(testPlugin)
 
 beforeEach(() => {
   MockDate.set(new Date())

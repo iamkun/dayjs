@@ -61,8 +61,6 @@ class Dayjs {
   }
 
   init(cfg) {
-    this.$zone = this.$d.getTimezoneOffset() / 60
-    this.$zoneStr = Utils.padZoneStr(this.$zone)
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()

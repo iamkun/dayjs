@@ -70,7 +70,7 @@ it('Format Minute m mm', () => {
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
 })
 
-it('Format Second s ss', () => {
+it('Format Second s ss SSS', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
   expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
