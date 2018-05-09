@@ -1,4 +1,4 @@
-[English](./ReadMe.md) | 简体中文
+[English](./README.md) | 简体中文
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
@@ -37,24 +37,24 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 - NPM:
 ```console
-    npm install dayjs --save
+npm install dayjs --save
 ```
 ```js
-    var dayjs = require('dayjs');
-    dayjs().format();
+var dayjs = require('dayjs');
+dayjs().format();
 ```
 - CDN:
 ```html
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/dayjs"></script>
-    <script>
-      dayjs().format();
-    </script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/dayjs"></script>
+<script>
+  dayjs().format();
+</script>
 ```
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs](https://unpkg.com/dayjs) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
@@ -245,7 +245,7 @@ dayjs().endOf('month');
 ```js
 dayjs().format(String);
 dayjs().format();                       // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
-dayjs().format("[YYYY] MM-DDTHH:mm:ssZ"); // "[2014] 09-08T08:02:17-05:00"
+dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 ```
 
 详情如下:

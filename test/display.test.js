@@ -42,23 +42,67 @@ it('Format Hour H HH 24-hour', () => {
   expect(dayjs().format('HH')).toBe(moment().format('HH'))
 })
 
+it('Format Hour h hh 12-hour', () => {
+  MockDate.set(new Date('2018-05-02T00:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
+  expect(dayjs().format('h')).toBe(moment().format('h'))
+  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+})
+
+it('Format meridiens a A am / pm', () => {
+  MockDate.set(new Date('2018-05-02T01:00:00.000'))
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+
+  MockDate.set(new Date('2018-05-02T23:00:00.000'))
+  expect(dayjs().format('a')).toBe(moment().format('a'))
+  expect(dayjs().format('A')).toBe(moment().format('A'))
+})
+
 it('Format Minute m mm', () => {
   expect(dayjs().format('m')).toBe(moment().format('m'))
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
 })
 
-it('Format Second s sss', () => {
+it('Format Second s ss SSS', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
+  expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
+  const date = '2011-11-05T14:48:01.002Z'
+  expect(dayjs(date).format('s-ss-SSS')).toBe(moment(date).format('s-ss-SSS'))
 })
 
+
 it('Format Time Zone ZZ', () => {
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8)
   expect(dayjs().format('Z')).toBe(moment().format('Z'))
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8 * -1)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 0)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 10)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 11 * -1)
+  expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+  MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 5.5 * -1)
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
 })
 
 it('Format Complex with other string - : / ', () => {
   const string = 'YY-M-D / HH:mm:ss'
+  expect(dayjs().format(string)).toBe(moment().format(string))
+})
+
+it('Format Escaping characters', () => {
+  const string = '[Z] Z'
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
@@ -81,14 +125,14 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
 
-  it('diff -> in seconds, days, weeks, months, quarters, years ', () => {
+  it('diff -> in seconds, minutes, hours, days, weeks, months, quarters, years ', () => {
     const dayjsA = dayjs()
     const dayjsB = dayjs().add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days')
     const momentA = moment()
     const momentB = moment().add(1000, 'days')
     const momentC = moment().subtract(1000, 'days')
-    const units = ['seconds', 'days', 'weeks', 'months', 'quarters', 'years']
+    const units = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', 'years']
     units.forEach((unit) => {
       expect(dayjsA.diff(dayjsB, unit)).toBe(momentA.diff(momentB, unit))
       expect(dayjsA.diff(dayjsB, unit, true)).toBe(momentA.diff(momentB, unit, true))

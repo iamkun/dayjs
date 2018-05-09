@@ -16,10 +16,19 @@ describe('Parse', () => {
   })
 
   it('String 20130208', () => {
-    const timeArr = ['20130108', '2018-04-24']
-    timeArr.forEach((t) => {
-      expect(dayjs(t).valueOf()).toBe(moment(t).valueOf())
-    })
+    global.console.warn = jest.genMockFunction()// moment.js '2018-4-1 1:1:1:22' will throw warn
+    let d = '20130108'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-04-24'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13.998'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-4-1'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
+    d = '2018-4-1 1:1:1:223'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
   })
 
   it('String ISO 8601 date, time and zone', () => {
@@ -39,6 +48,15 @@ describe('Parse', () => {
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   const timestamp = 1523520536000
   expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
+})
+
+it('String and Number 20180101', () => {
+  expect(dayjs(20180101).valueOf()).toBe(moment(20180101).valueOf())
+  expect(dayjs('20180101').valueOf()).toBe(moment('20180101').valueOf())
+})
+
+it('Number 0', () => {
+  expect(dayjs(0).valueOf()).toBe(moment(0).valueOf())
 })
 
 it('Clone not affect each other', () => {

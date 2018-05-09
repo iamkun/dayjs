@@ -1,4 +1,4 @@
-English | [简体中文](./ReadMe.zh-CN.md)
+English | [简体中文](./README.zh-CN.md)
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -60,7 +60,7 @@ dayjs().format();
 
 * Via download and self-hosting:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs](https://unpkg.com/dayjs)
+Just download the latest version of Day.js at [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/)
 
 ## Getting Started
 
@@ -82,6 +82,7 @@ API will always return a new `Dayjs` object if not specified.
   * [Year](#year)
   * [Month](#month)
   * [Date of Month](#date-of-month)
+  * [Day of Week](#day-of-week)
   * [Hour](#hour)
   * [Minute](#minute)
   * [Second](#second)
@@ -94,7 +95,7 @@ API will always return a new `Dayjs` object if not specified.
   * [End of Time](#end-of-time)
 * [Display](#display)
   * [Format](#format)
-  * [Difference](#different)
+  * [Difference](#difference)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
   * [Days in Month](#days-in-month)
@@ -205,6 +206,16 @@ Get day of the month.
 
 ```js
 dayjs().date();
+```
+
+#### Day of Week
+
+* returns a Number
+
+Get day of the week.
+
+```js
+dayjs().day();
 ```
 
 #### Hour
@@ -322,8 +333,10 @@ Takes a string of tokens and replaces them with their corresponding date values.
 ```js
 dayjs().format(String);
 dayjs().format(); // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
-dayjs().format('[YYYY] MM-DDTHH:mm:ssZ'); // "[2014] 09-08T08:02:17-05:00"
+dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 ```
+
+* To escape characters in string, wrap the characters in square brackets (e.g. [Z]).
 
 List of all available formats:
 
@@ -332,21 +345,26 @@ List of all available formats:
 | `YY`   | 18               | Two digit year                        |
 | `YYYY` | 2018             | Four digit year                       |
 | `M`    | 1-12             | The month, beginning at 1             |
-| `MM`   | 01-12            | The month, with preceeding 0          |
+| `MM`   | 01-12            | The month, 2-digits                   |
 | `MMM`  | Jan-Dec          | The abbreviated month name            |
 | `MMMM` | January-December | The full month name                   |
 | `D`    | 1-31             | The day of the month                  |
-| `DD`   | 01-31            | The day of the month, preceeding 0    |
+| `DD`   | 01-31            | The day of the month, 2-digits        |
 | `d`    | 0-6              | The day of the week, with Sunday as 0 |
 | `dddd` | Sunday-Saturday  | The name of the day of the week       |
 | `H`    | 0-23             | The hour                              |
-| `HH`   | 00-23            | The hour, with preceeding 0           |
+| `HH`   | 00-23            | The hour, 2-digits                    |
+| `h`    | 1-12             | The hour, 12-hour clock               |
+| `hh`   | 01-12            | The hour, 12-hour clock, 2-digits     |
 | `m`    | 0-59             | The minute                            |
-| `mm`   | 00-59            | The minute, with preceeding 0         |
+| `mm`   | 00-59            | The minute, 2-digits                  |
 | `s`    | 0-59             | The second                            |
-| `ss`   | 00-59            | The second, with preceeding 0         |
+| `ss`   | 00-59            | The second, 2-digits                  |
+| `SSS`  | 000-999          | The millisecond, 3-digits             |
 | `Z`    | +5:00            | The offset from UTC                   |
-| `ZZ`   | +0500            | The offset from UTC with preceeding 0 |
+| `ZZ`   | +0500            | The offset from UTC, 2-digits         |
+| `A`    | AM PM            |                                       |
+| `a`    | am pm            |                                       |
 
 #### Difference
 
@@ -509,4 +527,4 @@ dayjs('2000-01-01').isLeapYear(); // true
 
 ## License
 
-MIT
+[MIT](./LICENSE)

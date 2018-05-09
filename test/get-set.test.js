@@ -18,6 +18,10 @@ it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
 })
 
+it('Day of Week', () => {
+  expect(dayjs().day()).toBe(moment().day())
+})
+
 it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
 })
@@ -70,12 +74,6 @@ it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.valueOf())
     .toBe(moment().set('Unknown String', 1).valueOf())
-})
-
-it('Set Not Int', () => {
-  const newDate = dayjs().set('year', 'Not Int')
-  expect(newDate.valueOf())
-    .toBe(moment().set('year', 'Not Int').valueOf())
 })
 
 it('Immutable Set', () => {

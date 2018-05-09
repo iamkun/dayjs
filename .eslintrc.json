@@ -6,6 +6,10 @@
   "env": {
     "jest/globals": true
   },
+  "globals": {
+    "window": true,
+    "dayjs": true
+  },
   "rules": {
     "semi": [
       2,
@@ -14,6 +18,12 @@
     "comma-dangle": [
       "error",
       "never"
+    ],
+    "no-param-reassign": [
+      0
+    ],
+    "func-names": [
+      0
     ]
   }
 }

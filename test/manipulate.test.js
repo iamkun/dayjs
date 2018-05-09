@@ -41,6 +41,8 @@ it('Add Time days', () => {
   expect(dayjs().add(1, 'M').valueOf()).toBe(moment().add(1, 'M').valueOf())
   expect(dayjs().add(1, 'y').valueOf()).toBe(moment().add(1, 'y').valueOf())
   expect(dayjs('20111031').add(1, 'months').valueOf()).toBe(moment('20111031').add(1, 'months').valueOf())
+
+  expect(dayjs().add('2', 'years').valueOf()).toBe(moment().add('2', 'years').valueOf())
 })
 
 it('Subtract Time days', () => {
