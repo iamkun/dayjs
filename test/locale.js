@@ -10,23 +10,27 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Uses spanish locale', () => {
-  expect(dayjs('2018-4-28', { locale: esES })
-    .format('dddd D, MMMM'))
-    .toBe('Sábado 28, Abril')
-})
+// it('Uses spanish locale', () => {
+//   expect(dayjs('2018-4-28', { locale: 'es' })
+//     .format('dddd D, MMMM'))
+//     .toBe('Sábado 28, Abril')
+// })
 
-it('setLocale to spanish', () => {
+it('set locale for one instance only', () => {
   expect(dayjs('2018-4-28')
     .format('dddd D, MMMM'))
     .toBe('Saturday 28, April')
 
   expect(dayjs('2018-4-28')
-    .setLocale(esES).format('dddd D, MMMM'))
+    .locale(esES).format('dddd D, MMMM'))
     .toBe('Sábado 28, Abril')
+
+  expect(dayjs('2018-4-28')
+    .format('dddd D, MMMM'))
+    .toBe('Saturday 28, April')
 })
 
 it('set locale for this line only', () => {
   expect(dayjs('2018-4-28').format('dddd D, MMMM', esES))
-    .toBe('Sábado 28, April')
+    .toBe('Sábado 28, Abril')
 })

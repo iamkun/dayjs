@@ -3,9 +3,8 @@ import * as Utils from './utils'
 import en from './locale/en'
 
 let L = 'en' // global locale
-const Ls = { // global loaded locale
-  L: en
-}
+const Ls = {} // global loaded locale
+Ls[L] = en
 
 const dayjs = (date, c) => {
   const cfg = c || {}
@@ -67,7 +66,7 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
-    this.$L = this.$L || cfg.locale || en
+    this.$L = this.$L || cfg.locale || L
   }
 
   // eslint-disable-next-line class-methods-use-this
