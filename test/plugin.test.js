@@ -1,7 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
-import advFormat from '../plugins/advancedFormat'
+import advFormat from '../src/plugin/advancedFormat'
 
 dayjs.extend(advFormat)
 const extendedDayjs = dayjs.extend(advFormat, true)

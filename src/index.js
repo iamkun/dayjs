@@ -1,6 +1,6 @@
 import * as C from './constant'
 import * as Utils from './utils'
-import eng from './locales/en'
+import eng from './locale/en'
 
 const dayjs = function dayjs(date, c) {
   const cfg = c || {}
@@ -197,7 +197,7 @@ export class Dayjs {
   }
 
   add(number, units) {
-    number = Number(number) // eslint-disable-line no-param-reassign
+    number = Number(number)
     const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
@@ -392,30 +392,9 @@ export class Dayjs {
 }
 
 // const dayjs = config => new Dayjs(config)
-const applyExtend = (proto, factory) => {
-  factory.extend = (plugin, isNew = false) => { // eslint-disable-line no-param-reassign
-    // Return a new subclass instead of the original
-    if (isNew) {
-      // Extend the class
-      class PluginDayjs extends proto {}
-
-      // Apply the plugin
-      plugin(PluginDayjs)
-
-      // Make a new factory
-      const pluginFactory = config => new PluginDayjs(config)
-
-      // Apply this method, so the subclass can have more plugins
-      applyExtend(PluginDayjs, pluginFactory)
-      return pluginFactory
-    }
-
-    // Apply the plugin
-    plugin(Dayjs)
-    // Return the factory so it can be chained
-    return factory
-  }
+dayjs.extend = (plugin) => {
+  plugin(Dayjs.prototype, Dayjs)
+  return dayjs
 }
-applyExtend(Dayjs, dayjs)
 
 export default dayjs

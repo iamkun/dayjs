@@ -18,6 +18,12 @@
     "comma-dangle": [
       "error",
       "never"
+    ],
+    "no-param-reassign": [
+      0
+    ],
+    "func-names": [
+      0
     ]
   }
 }

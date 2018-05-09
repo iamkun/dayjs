@@ -1,8 +1,7 @@
-let advFormat
-export default advFormat = Dayjs => {
-  const oldFormat = Dayjs.prototype.format
-  Dayjs.prototype.format = function(formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
-    let oldResult = oldFormat.bind(this)(formatStr)
+export default (proto) => {
+  const oldFormat = proto.format
+  proto.format = function (formatStr = 'YYYY-MM-DDTHH:mm:ssZ') {
+    const oldResult = oldFormat.bind(this)(formatStr)
 
     const suffixes = ['th', 'st', 'nd', 'rd']
 
@@ -23,7 +22,7 @@ export default advFormat = Dayjs => {
           return Math.floor(this.$d.getTime() / 1000)
         case 'x':
           return this.$d.getTime()
-        default: //'S'
+        default: // 'S'
           return this.Utils().padStart(String(this.$ms), 3, '0')
       }
     })

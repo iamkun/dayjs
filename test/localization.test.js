@@ -1,6 +1,6 @@
 import MockDate from 'mockdate'
 import dayjs from '../src'
-import esES from '../src/locales/es'
+import esES from '../src/locale/es'
 
 beforeEach(() => {
   MockDate.set(new Date())
