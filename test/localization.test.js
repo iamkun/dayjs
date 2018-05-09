@@ -27,6 +27,6 @@ it('setLocale to spanish', () => {
 })
 
 it('set locale for this line only', () => {
-  expect(dayjs('2018-4-28').format('dddd D, MMMM', { WEEKDAYS: esES.WEEKDAYS }))
+  expect(dayjs('2018-4-28').format('dddd D, MMMM', esES))
     .toBe('Sábado 28, April')
 })

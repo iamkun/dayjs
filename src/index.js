@@ -2,6 +2,11 @@ import * as C from './constant'
 import * as Utils from './utils'
 import en from './locale/en'
 
+let L = 'en' // global locale
+const Ls = { // global loaded locale
+  L: en
+}
+
 const dayjs = (date, c) => {
   const cfg = c || {}
   cfg.date = date
@@ -23,6 +28,22 @@ const getDate = (date) => {
     )
   }
   return new Date(date) // timestamp
+}
+
+const parseLocale = (localeStringOrObject, LocaleObject) => {
+  if (typeof localeStringOrObject === 'string') {
+    if (LocaleObject) {
+      Ls[localeStringOrObject] = LocaleObject
+      L = localeStringOrObject
+    } else if (Ls[localeStringOrObject]) {
+      L = localeStringOrObject
+    }
+  } else {
+    const { name } = localeStringOrObject
+    Ls[name] = localeStringOrObject
+    L = name
+  }
+  return L
 }
 
 class Dayjs {
@@ -235,10 +256,10 @@ class Dayjs {
   }
 
 
-  format(formatStr = C.FORMAT_DEFAULT, L) {
+  format(formatStr = C.FORMAT_DEFAULT, localeObject) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    const locale = L || this.$L
+    const locale = localeObject || this.$L
     const weeks = locale.WEEKDAYS
     const months = locale.MONTHS
     return str.replace(C.REGEX_FORMAT, (match) => {
@@ -333,8 +354,8 @@ class Dayjs {
     return this.endOf(C.M).$D
   }
 
-  setLocale(locale) {
-    this.$L = locale
+  locale(localeStringOrObject, LocaleObject) {
+    this.$L = parseLocale(localeStringOrObject, LocaleObject)
     return this
   }
 
@@ -393,5 +414,7 @@ dayjs.extend = (plugin) => {
   plugin(Dayjs.prototype, dayjs, Dayjs)
   return dayjs
 }
+
+dayjs.locale = parseLocale
 
 export default dayjs
