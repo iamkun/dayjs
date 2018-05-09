@@ -27,7 +27,6 @@ const getDate = (date) => {
 class Dayjs {
   constructor(cfg) {
     this.$d = getDate(cfg.date)
-    this.$format = cfg.format || C.FORMAT_DEFAULT
     this.init(cfg.locale)
   }
 
@@ -231,11 +230,12 @@ class Dayjs {
   }
 
 
-  format(formatStr = this.$format, L = {}) {
-    const weeks = L.WEEKDAYS || this.$L.WEEKDAYS
-    const months = L.MONTHS || this.$L.MONTHS
+  format(formatStr = C.FORMAT_DEFAULT, L) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
+    const locale = L || this.$L
+    const weeks = locale.WEEKDAYS
+    const months = locale.MONTHS
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -336,13 +336,12 @@ class Dayjs {
   clone() {
     return new Dayjs({
       date: this.toDate(),
-      locale: this.$L,
-      format: this.$format
+      locale: this.$L
     })
   }
 
   toDate() {
-    return new Date(this.valueOf())
+    return new Date(this.$d)
   }
 
   toArray() {
@@ -358,7 +357,7 @@ class Dayjs {
   }
 
   toJSON() {
-    return this.toISOString() // this.format()
+    return this.toISOString()
   }
 
   toISOString() {
@@ -386,7 +385,7 @@ class Dayjs {
 }
 
 dayjs.extend = (plugin) => {
-  plugin(Dayjs.prototype, Dayjs)
+  plugin(Dayjs.prototype, dayjs, Dayjs)
   return dayjs
 }
 
