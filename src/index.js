@@ -358,19 +358,24 @@ class Dayjs {
   }
 
   fromNow(input) {
-    const P = [{ l: C.S, v: C.MILLISECONDS_A_SECOND }, { l: C.M, v: C.MILLISECONDS_A_SECOND * 60 },
-      { l: C.H, v: C.MILLISECONDS_A_HOUR }, { l: C.D, v: C.MILLISECONDS_A_DAY },
-      { l: C.W, v: C.MILLISECONDS_A_WEEK }, { l: C.M, v: C.MILLISECONDS_A_WEEK * 4 },
-      { l: C.Q, v: C.MILLISECONDS_A_WEEK * 12 }, { l: C.Y, v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
+    const loc = this.$locale()
+    const P = [{ l: [loc.s, loc.ss], v: C.MILLISECONDS_A_SECOND },
+      { l: [loc.min, loc.mins], v: C.MILLISECONDS_A_SECOND * 60 },
+      { l: [loc.h, loc.hh], v: C.MILLISECONDS_A_HOUR },
+      { l: [loc.d, loc.dd], v: C.MILLISECONDS_A_DAY },
+      { l: [loc.w, loc.ww], v: C.MILLISECONDS_A_WEEK },
+      { l: [loc.m, loc.mm], v: C.MILLISECONDS_A_WEEK * 4 },
+      { l: [loc.q, loc.qq], v: C.MILLISECONDS_A_WEEK * 12 },
+      { l: [loc.y, loc.yy], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
 
     const result = input.diff(this, `${C.MS}s`)
     const resabs = Math.abs(result)
     let out = ''
     for (let i = 0; i < P.length; i += 1) {
-      if (resabs >= P[i].v) out = `${Utils.absFloor(resabs / P[i].v)} ${P[i].l}${resabs !== P[i].v ? 's' : ''}`
+      if (resabs >= P[i].v) out = `${Utils.absFloor(resabs / P[i].v)} ${resabs !== P[i].v ? P[i].l[1] : P[i].l[0]}`
     }
-    if (!result) return 'just now'
-    return result > 0 ? `in ${out}` : `${out} ago`
+    if (!result) return loc.present
+    return result > 0 ? loc.future.replace('%s', out) : loc.past.replace('%s', out)
   }
 
   daysInMonth() {

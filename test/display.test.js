@@ -2,6 +2,8 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import timeago from 'timeago.js'
 import dayjs from '../src'
+import en from '../src/locale/en'
+import es from '../src/locale/es'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -157,7 +159,7 @@ describe('Difference', () => {
     })
   })
   it('fromNow -> in seconds, days, weeks, months, quarters, years ', () => {
-    const dayjsA = dayjs()
+    const dayjsA = dayjs().locale(en)
     const dayjsB = dayjs().add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days')
     const dayjsD = dayjs().add(20, 'days')
@@ -173,6 +175,25 @@ describe('Difference', () => {
     expect(dayjsB.fromNow(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
     expect(dayjsB.fromNow(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
     expect(dayjsG.fromNow(dayjsB)).toBe(timeago(dayjsG.toDate()).format(dayjsB.toDate()))
+  })
+
+  it('fromNow -> in seconds, days, weeks, months, quarters, years in Spanish ', () => {
+    const dayjsA = dayjs().locale(es)
+    const dayjsB = dayjs().add(1000, 'days').locale(es)
+    const dayjsC = dayjs().subtract(1000, 'days').locale(es)
+    const dayjsD = dayjs().add(20, 'days').locale(es)
+    const dayjsE = dayjs().subtract(30, 'seconds').locale(es)
+    const dayjsF = dayjs().subtract(5, 'hours').locale(es)
+    const dayjsG = dayjs().add(1001, 'days').locale(es)
+
+    expect(dayjsA.fromNow(dayjsB)).toBe('en 2 años')
+    expect(dayjsA.fromNow(dayjsC)).toBe('hace 2 años')
+    expect(dayjsA.fromNow(dayjsD)).toBe('en 2 semanas')
+    expect(dayjsA.fromNow(dayjsE)).toBe('hace 30 segundos')
+    expect(dayjsA.fromNow(dayjsF)).toBe('hace 5 horas')
+    expect(dayjsB.fromNow(dayjsC)).toBe('hace 5 años')
+    expect(dayjsB.fromNow(dayjsB)).toBe('justo ahora')
+    expect(dayjsG.fromNow(dayjsB)).toBe('hace 1 día')
   })
 
   it('Unix Timestamp (milliseconds)', () => {

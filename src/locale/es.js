@@ -1,5 +1,27 @@
 export default {
   name: 'es',
+  ms: 'milisegundo',
+  mss: 'milisegundos',
+  s: 'segundo',
+  ss: 'segundos',
+  min: 'minuto',
+  mins: 'minutos',
+  h: 'hora',
+  hh: 'horas',
+  d: 'día',
+  dd: 'días',
+  w: 'semana',
+  ww: 'semanas',
+  m: 'mes',
+  mm: 'meses',
+  q: 'trimestre',
+  qq: 'trimestres',
+  y: 'año',
+  yy: 'años',
+  data: 'fecha',
   weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-  months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+  past: 'hace %s',
+  present: 'justo ahora',
+  future: 'en %s'
 }
