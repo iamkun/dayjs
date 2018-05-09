@@ -1,13 +1,38 @@
 import * as C from './constant'
-import * as Utils from './utils'
+import * as U from './utils'
 import en from './locale/en'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
 Ls[L] = en
 
+const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
+
+const parseLocale = (preset, object, isLocal) => {
+  let l
+  if (!preset) return null
+  if (typeof preset === 'string') {
+    if (object) {
+      Ls[preset] = object
+      l = preset
+    } else if (Ls[preset]) {
+      l = preset
+    }
+  } else {
+    const { name } = preset
+    Ls[name] = preset
+    l = name
+  }
+  if (!isLocal) L = l
+  return l
+}
+
+const Utils = U // for plugin use
+Utils.parseLocale = parseLocale
+Utils.isDayjs = isDayjs
+
 const dayjs = (date, c) => {
-  if (date instanceof Dayjs) { // eslint-disable-line no-use-before-define
+  if (isDayjs(date)) {
     return date.clone()
   }
   const cfg = c || {}
@@ -29,25 +54,6 @@ const parseDate = (date) => {
     )
   }
   return new Date(date) // timestamp
-}
-
-const parseLocale = (preset, object, isLocal) => {
-  let l
-  if (!preset) return null
-  if (typeof preset === 'string') {
-    if (object) {
-      Ls[preset] = object
-      l = preset
-    } else if (Ls[preset]) {
-      l = preset
-    }
-  } else {
-    const { name } = preset
-    Ls[name] = preset
-    l = name
-  }
-  if (!isLocal) L = l
-  return l
 }
 
 class Dayjs {
@@ -318,7 +324,7 @@ class Dayjs {
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
-    const that = input instanceof Dayjs ? input : dayjs(input.valueOf())
+    const that = isDayjs(input) ? input : dayjs(input.valueOf())
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
