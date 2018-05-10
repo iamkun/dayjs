@@ -12,10 +12,11 @@ const parseLocale = (preset, object, isLocal) => {
   let l
   if (!preset) return null
   if (typeof preset === 'string') {
+    if (Ls[preset]) {
+      l = preset
+    }
     if (object) {
       Ls[preset] = object
-      l = preset
-    } else if (Ls[preset]) {
       l = preset
     }
   } else {
