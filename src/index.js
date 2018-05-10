@@ -374,10 +374,7 @@ class Dayjs {
   }
 
   clone() {
-    return new Dayjs({
-      date: this.toDate(),
-      locale: this.$L
-    })
+    return wrapper(this.toDate(), this)
   }
 
   toDate() {

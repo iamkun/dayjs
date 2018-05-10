@@ -11,40 +11,42 @@ afterEach(() => {
   MockDate.reset()
 })
 
+const format = 'dddd D, MMMM'
+
 it('Uses spanish locale through constructor', () => { // not recommend
   expect(dayjs('2018-4-28', { locale: es })
-    .format('dddd D, MMMM'))
+    .format(format))
     .toBe('Sábado 28, Abril')
 })
 
 it('set locale for one instance only', () => {
   expect(dayjs('2018-4-28')
-    .format('dddd D, MMMM'))
+    .format(format))
     .toBe('Saturday 28, April')
 
   expect(dayjs('2018-4-28')
-    .locale(es).format('dddd D, MMMM'))
+    .locale(es).format(format))
     .toBe('Sábado 28, Abril')
 
   expect(dayjs('2018-4-28')
-    .format('dddd D, MMMM'))
+    .format(format))
     .toBe('Saturday 28, April')
 })
 
 it('set locale for this line only', () => {
-  expect(dayjs('2018-4-28').format('dddd D, MMMM', es))
+  expect(dayjs('2018-4-28').format(format, es))
     .toBe('Sábado 28, Abril')
 })
 
 it('set global locale', () => {
   dayjs.locale(en)
-  expect(dayjs('2018-4-28').format('dddd D, MMMM'))
+  expect(dayjs('2018-4-28').format(format))
     .toBe('Saturday 28, April')
   dayjs.locale(es)
-  expect(dayjs('2018-4-28').format('dddd D, MMMM'))
+  expect(dayjs('2018-4-28').format(format))
     .toBe('Sábado 28, Abril')
   dayjs.locale('en')
-  expect(dayjs('2018-4-28').format('dddd D, MMMM'))
+  expect(dayjs('2018-4-28').format(format))
     .toBe('Saturday 28, April')
 })
 
@@ -54,7 +56,7 @@ it('User custom locale', () => {
       weekdays: Array(7).fill('week'),
       months: Array(12).fill('month')
     })
-    .format('dddd D, MMMM'))
+    .format(format))
     .toBe('week 28, month')
 })
 
@@ -62,16 +64,28 @@ describe('Instance locale inheritance', () => {
   const esDayjs = dayjs('2018-4-28').locale(es)
 
   it('Clone', () => {
-    expect(esDayjs.clone().format('dddd D, MMMM'))
+    expect(esDayjs.clone().format(format))
       .toBe('Sábado 28, Abril')
-    expect(dayjs(esDayjs).format('dddd D, MMMM'))
+    expect(dayjs(esDayjs).format(format))
       .toBe('Sábado 28, Abril')
   })
 
   it('StartOf EndOf', () => {
-    expect(esDayjs.startOf('year').format('dddd D, MMMM'))
+    expect(esDayjs.startOf('year').format(format))
       .toBe('Lunes 1, Enero')
-    expect(esDayjs.endOf('day').format('dddd D, MMMM'))
+    expect(esDayjs.endOf('day').format(format))
       .toBe('Sábado 28, Abril')
+  })
+
+  it('Set', () => {
+    expect(esDayjs.set('year', 2017).format(format))
+      .toBe('Viernes 28, Abril')
+  })
+
+  it('Add', () => {
+    expect(esDayjs.add(1, 'year').format(format))
+      .toBe('Domingo 28, Abril')
+    expect(esDayjs.add(1, 'month').format(format))
+      .toBe('Lunes 28, Mayo')
   })
 })
