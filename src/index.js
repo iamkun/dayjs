@@ -27,10 +27,6 @@ const parseLocale = (preset, object, isLocal) => {
   return l
 }
 
-const Utils = U // for plugin use
-Utils.parseLocale = parseLocale
-Utils.isDayjs = isDayjs
-
 const dayjs = (date, c) => {
   if (isDayjs(date)) {
     return date.clone()
@@ -39,6 +35,13 @@ const dayjs = (date, c) => {
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
+
+const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+
+const Utils = U // for plugin use
+Utils.parseLocale = parseLocale
+Utils.isDayjs = isDayjs
+Utils.wrapper = wrapper
 
 const parseDate = (date) => {
   let reg
@@ -148,16 +151,16 @@ class Dayjs {
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
-      const ins = dayjs(new Date(y, m, d))
+      const ins = wrapper(new Date(y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
-      ))
+      ), this)
     }
     switch (unit) {
       case C.Y:

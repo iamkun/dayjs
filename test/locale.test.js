@@ -36,14 +36,6 @@ it('set locale for this line only', () => {
     .toBe('Sábado 28, Abril')
 })
 
-it('clone with locale', () => {
-  const esDayjs = dayjs('2018-4-28').locale(es)
-  expect(esDayjs.clone().format('dddd D, MMMM'))
-    .toBe('Sábado 28, Abril')
-  expect(dayjs(esDayjs).format('dddd D, MMMM'))
-    .toBe('Sábado 28, Abril')
-})
-
 it('set global locale', () => {
   dayjs.locale(en)
   expect(dayjs('2018-4-28').format('dddd D, MMMM'))
@@ -64,4 +56,22 @@ it('User custom locale', () => {
     })
     .format('dddd D, MMMM'))
     .toBe('week 28, month')
+})
+
+describe('Instance locale inheritance', () => {
+  const esDayjs = dayjs('2018-4-28').locale(es)
+
+  it('Clone', () => {
+    expect(esDayjs.clone().format('dddd D, MMMM'))
+      .toBe('Sábado 28, Abril')
+    expect(dayjs(esDayjs).format('dddd D, MMMM'))
+      .toBe('Sábado 28, Abril')
+  })
+
+  it('StartOf EndOf', () => {
+    expect(esDayjs.startOf('year').format('dddd D, MMMM'))
+      .toBe('Lunes 1, Enero')
+    expect(esDayjs.endOf('day').format('dddd D, MMMM'))
+      .toBe('Sábado 28, Abril')
+  })
 })
