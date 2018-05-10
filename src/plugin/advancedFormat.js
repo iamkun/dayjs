@@ -1,4 +1,4 @@
-export default (proto) => { // locale needed
+export default (proto) => { // locale needed later
   const oldFormat = proto.format
   proto.format = function (formatStr, locale) {
     const utils = this.$utils()
