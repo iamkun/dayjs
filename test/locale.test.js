@@ -87,5 +87,7 @@ describe('Instance locale inheritance', () => {
       .toBe('Domingo 28, Abril')
     expect(esDayjs.add(1, 'month').format(format))
       .toBe('Lunes 28, Mayo')
+    expect(esDayjs.add(1, 'minute').format(format))
+      .toBe('Sábado 28, Abril')
   })
 })

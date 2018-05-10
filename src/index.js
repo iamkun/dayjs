@@ -259,7 +259,7 @@ class Dayjs {
         step = C.MILLISECONDS_A_SECOND
     }
     const nextTimeStamp = this.valueOf() + (number * step)
-    return dayjs(nextTimeStamp)
+    return wrapper(nextTimeStamp, this)
   }
 
   subtract(number, string) {
