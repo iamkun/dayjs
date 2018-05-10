@@ -1,7 +1,7 @@
 {
   "name": "dayjs",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "2KB immutable date library alternative to Moment.js with the same modern API ",
   "main": "dist/dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
@@ -23,6 +23,13 @@
       "src/**/*"
     ]
   },
+  "keywords": [
+    "dayjs",
+    "date",
+    "time",
+    "immutable",
+    "moment"
+  ],
   "author": "iamkun",
   "license": "MIT",
   "repository": {

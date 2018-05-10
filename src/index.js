@@ -227,8 +227,9 @@ class Dayjs {
   }
 
   add(number, units) {
-    number = Number(number)
-    const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
+    number = Number(number) // eslint-disable-line no-param-reassign
+    // units === 'ms' hard code here, will update in next release
+    const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
       date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
@@ -255,8 +256,12 @@ class Dayjs {
       case C.W:
         step = C.MILLISECONDS_A_WEEK
         break
-      default: // s seconds
+      case 's':
+      case C.S:
         step = C.MILLISECONDS_A_SECOND
+        break
+      default: // ms
+        step = 1
     }
     const nextTimeStamp = this.valueOf() + (number * step)
     return wrapper(nextTimeStamp, this)
