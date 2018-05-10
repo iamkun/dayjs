@@ -1,4 +1,5 @@
-export default (proto) => { // locale needed later
+export default (o, c) => { // locale needed later
+  const proto = c.prototype
   const oldFormat = proto.format
   proto.format = function (formatStr, locale) {
     const utils = this.$utils()

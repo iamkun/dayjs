@@ -428,7 +428,7 @@ class Dayjs {
 }
 
 dayjs.extend = (plugin, option) => {
-  plugin(Dayjs.prototype, option, dayjs, Dayjs)
+  plugin(option, Dayjs, dayjs)
   return dayjs
 }
 
