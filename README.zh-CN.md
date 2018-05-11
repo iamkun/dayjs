@@ -69,6 +69,7 @@ dayjs().format();
   * [当前时间](#当前时间)
   * [时间字符串](#时间字符串)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
+  * [Unix 时间戳 (秒)](#unix-时间戳-秒)
   * [Date 对象](#date-对象)
   * [复制](#复制)
   * [验证](#验证)
@@ -123,6 +124,12 @@ dayjs("1995-12-25");
 ```js
 dayjs(Number);
 dayjs(1318781876406);
+```
+### Unix 时间戳 (秒)
+可以解析传入的一个 Unix 时间戳 (10位数字)。
+```js
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 ### Date 对象
 可以解析传入的一个 Javascript Date 对象。

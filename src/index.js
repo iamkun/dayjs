@@ -361,4 +361,13 @@ class Dayjs {
   }
 }
 
-export default config => (new Dayjs(config))
+function DayjsEntry(config) {
+  return new Dayjs(config)
+}
+
+DayjsEntry.unix = (unixTimestamp) => {
+  if (Utils.isUndefined(unixTimestamp)) return new Dayjs()
+  return new Dayjs(unixTimestamp * 1000)
+}
+
+export default DayjsEntry
