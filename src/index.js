@@ -434,4 +434,6 @@ dayjs.extend = (plugin, option) => {
 
 dayjs.locale = parseLocale
 
+dayjs.en = Ls[L]
+
 export default dayjs

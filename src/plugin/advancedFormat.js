@@ -1,18 +1,21 @@
-export default (o, c) => { // locale needed later
+import { FORMAT_DEFAULT } from '../constant'
+
+export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
-  proto.format = function (formatStr, locale) {
+  // eslint-disable-next-line no-nested-ternary
+  d.en.ordinal = number => `${number}[${number === 1 ? 'st' : number === 2 ? 'nd' : number === 3 ? 'rd' : 'th'}]`
+  // extend en locale here
+  proto.format = function (formatStr, localeObject) {
+    const locale = localeObject || this.$locale()
     const utils = this.$utils()
-    const str = formatStr || 'YYYY-MM-DDTHH:mm:ssZ'
-    const suffixes = ['th', 'st', 'nd', 'rd']
+    const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/Q|Do|X|x|k{1,2}|S/g, (match) => {
       switch (match) {
         case 'Q':
           return Math.ceil((this.$M + 1) / 3)
         case 'Do': {
-          const digits = utils.padStart(String(this.$D), 2, '0').slice(-2)
-          const ls = parseInt(digits[1], 10)
-          return `${this.$D}[${suffixes[digits[0] === '1' || ls > 3 ? 0 : ls]}]`
+          return locale.ordinal(this.$D)
         }
         case 'k':
         case 'kk':

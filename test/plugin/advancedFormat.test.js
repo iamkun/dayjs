@@ -28,7 +28,13 @@ it('Format Timestamp X x', () => {
 
 it('Format Day of Month Do 1 - 31', () => {
   expect(dayjs().format('Do')).toBe(moment().format('Do'))
-  const d = '2018-05-02 00:00:00.000'
+  let d = '2018-05-02 00:00:00.000'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-01 00:00:00.000'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-03 00:00:00.000'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-04 00:00:00.000'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
 })
 
