@@ -149,8 +149,8 @@ dayjs(1318781876406);
 Passing an integer value representing the number of seconds since the Unix Epoch (Jan 1 1970 12AM UTC).
 
 ```js
-dayjs(Number);
-dayjs(1318781876);
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 
 ### Date

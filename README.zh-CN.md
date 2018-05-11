@@ -128,8 +128,8 @@ dayjs(1318781876406);
 ### Unix 时间戳 (秒)
 可以解析传入的一个 Unix 时间戳 (10位数字)。
 ```js
-dayjs(Number);
-dayjs(1318781876);
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 ### Date 对象
 可以解析传入的一个 Javascript Date 对象。
