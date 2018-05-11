@@ -361,14 +361,11 @@ class Dayjs {
   }
 }
 
-class DayjsEntry {
-  constructor(config) {
-    return new Dayjs(config)
-  }
-  static unix(unixTimestamp) {
-    if (Utils.isUndefined(unixTimestamp)) return new Dayjs()
-    return new Dayjs(unixTimestamp * 1000)
-  }
+function DayjsEntry(config) {
+  return new Dayjs(config)
 }
-
+DayjsEntry.prototype.unix = (unixTimestamp) => {
+  if (Utils.isUndefined(unixTimestamp)) return new Dayjs()
+  return new Dayjs(unixTimestamp * 1000)
+}
 export default DayjsEntry
