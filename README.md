@@ -75,6 +75,7 @@ API will always return a new `Dayjs` object if not specified.
   * [Now](#now)
   * [String](#string)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+  * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
   * [Date](#date)
   * [Clone](#clone)
   * [Validation](#validation)
@@ -141,6 +142,15 @@ Passing an integer value representing the number of milliseconds since the Unix 
 ```js
 dayjs(Number);
 dayjs(1318781876406);
+```
+
+### Unix Timestamp (seconds)
+
+Passing an integer value representing the number of seconds since the Unix Epoch.
+
+```js
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 
 ### Date
