@@ -13,6 +13,7 @@ afterEach(() => {
 describe('Parse', () => {
   it('Now', () => {
     expect(dayjs().valueOf()).toBe(moment().valueOf())
+    expect(dayjs.unix().valueOf()).toBe(dayjs().valueOf())
   })
 
   it('String 20130208', () => {
@@ -48,6 +49,11 @@ describe('Parse', () => {
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   const timestamp = 1523520536000
   expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
+})
+
+it('Unix Timestamp Number (seconds) 1523520536', () => {
+  const timestamp = 1523520536
+  expect(dayjs.unix(timestamp).valueOf()).toBe(moment.unix(timestamp).valueOf())
 })
 
 it('String and Number 20180101', () => {
