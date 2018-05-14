@@ -12,10 +12,11 @@ const parseLocale = (preset, object, isLocal) => {
   let l
   if (!preset) return null
   if (typeof preset === 'string') {
+    if (Ls[preset]) {
+      l = preset
+    }
     if (object) {
       Ls[preset] = object
-      l = preset
-    } else if (Ls[preset]) {
       l = preset
     }
   } else {
@@ -27,10 +28,6 @@ const parseLocale = (preset, object, isLocal) => {
   return l
 }
 
-const Utils = U // for plugin use
-Utils.parseLocale = parseLocale
-Utils.isDayjs = isDayjs
-
 const dayjs = (date, c) => {
   if (isDayjs(date)) {
     return date.clone()
@@ -39,6 +36,13 @@ const dayjs = (date, c) => {
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
+
+const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+
+const Utils = U // for plugin use
+Utils.parseLocale = parseLocale
+Utils.isDayjs = isDayjs
+Utils.wrapper = wrapper
 
 const parseDate = (date) => {
   let reg
@@ -148,16 +152,16 @@ class Dayjs {
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
-      const ins = dayjs(new Date(y, m, d))
+      const ins = wrapper(new Date(y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
-      ))
+      ), this)
     }
     switch (unit) {
       case C.Y:
@@ -224,8 +228,9 @@ class Dayjs {
   }
 
   add(number, units) {
-    number = Number(number)
-    const unit = (units && units.length === 1) ? units : Utils.prettyUnit(units)
+    number = Number(number) // eslint-disable-line no-param-reassign
+    // units === 'ms' hard code here, will update in next release
+    const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
     if (['M', C.M].indexOf(unit) > -1) {
       let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
       date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
@@ -252,11 +257,15 @@ class Dayjs {
       case C.W:
         step = C.MILLISECONDS_A_WEEK
         break
-      default: // s seconds
+      case 's':
+      case C.S:
         step = C.MILLISECONDS_A_SECOND
+        break
+      default: // ms
+        step = 1
     }
     const nextTimeStamp = this.valueOf() + (number * step)
-    return dayjs(nextTimeStamp).locale(this.$locale())
+    return wrapper(nextTimeStamp, this)
   }
 
   subtract(number, string) {
@@ -392,10 +401,7 @@ class Dayjs {
   }
 
   clone() {
-    return new Dayjs({
-      date: this.toDate(),
-      locale: this.$L
-    })
+    return wrapper(this.toDate(), this)
   }
 
   toDate() {
@@ -442,11 +448,13 @@ class Dayjs {
   }
 }
 
-dayjs.extend = (plugin) => {
-  plugin(Dayjs.prototype, dayjs, Dayjs)
+dayjs.extend = (plugin, option) => {
+  plugin(option, Dayjs, dayjs)
   return dayjs
 }
 
 dayjs.locale = parseLocale
+
+dayjs.en = Ls[L]
 
 export default dayjs

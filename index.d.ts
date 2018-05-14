@@ -70,9 +70,9 @@ declare class Dayjs {
 
   isBefore(dayjs: Dayjs): boolean
 
-  isSame(dayjs: Dayjs)
+  isSame(dayjs: Dayjs): boolean
 
-  isAfter(dayjs: Dayjs)
+  isAfter(dayjs: Dayjs): boolean
 
   isLeapYear(): boolean
 }

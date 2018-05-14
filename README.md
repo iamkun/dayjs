@@ -29,7 +29,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 * 💪 Immutable
 * 🔥 Chainable
 * 📦 2kb mini library
-* 👫 All browsers support
+* 👫 All browsers supported
 
 ---
 
@@ -342,8 +342,8 @@ List of all available formats:
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
-| `YY`   | 18               | Two digit year                        |
-| `YYYY` | 2018             | Four digit year                       |
+| `YY`   | 18               | Two-digit year                        |
+| `YYYY` | 2018             | Four-digit year                       |
 | `M`    | 1-12             | The month, beginning at 1             |
 | `MM`   | 01-12            | The month, 2-digits                   |
 | `MMM`  | Jan-Dec          | The abbreviated month name            |
@@ -370,7 +370,7 @@ List of all available formats:
 
 * returns a Number
 
-Get the difference of two `Dayjs` object in milliseconds or other unit.
+Get the difference of two `Dayjs` objects in milliseconds or another unit.
 
 ```js
 dayjs().diff(Dayjs, unit);
@@ -429,7 +429,7 @@ dayjs().toDate();
 
 #### As Array
 
-* returns a Array
+* returns an Array
 
 Returns an array that mirrors the parameters from new Date().
 
@@ -441,7 +441,7 @@ dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
 
 * returns a JSON String
 
-Serializing an `Dayjs` to JSON, will return an ISO8601 string.
+Serializing a `Dayjs` object to JSON, will return an ISO8601 string.
 
 ```js
 dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
@@ -459,7 +459,7 @@ dayjs().toISOString();
 
 #### As Object
 
-* returns a Object
+* returns an Object
 
 Returns an object with year, month ... millisecond.
 

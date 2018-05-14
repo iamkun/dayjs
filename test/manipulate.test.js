@@ -28,6 +28,8 @@ describe('StartOf EndOf', () => {
 
 
 it('Add Time days', () => {
+  expect(dayjs().add(1, 'ms').valueOf()).toBe(moment().add(1, 'ms').valueOf())
+  expect(dayjs().add(1, 'milliseconds').valueOf()).toBe(moment().add(1, 'milliseconds').valueOf())
   expect(dayjs().add(1, 's').valueOf()).toBe(moment().add(1, 's').valueOf())
   expect(dayjs().add(1, 'seconds').valueOf()).toBe(moment().add(1, 'seconds').valueOf())
   expect(dayjs().add(1, 'm').valueOf()).toBe(moment().add(1, 'm').valueOf())
