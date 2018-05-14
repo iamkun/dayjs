@@ -11,3 +11,8 @@ package-lock.json
 
 # jest
 coverage
+
+# dev
+src
+test
+build
