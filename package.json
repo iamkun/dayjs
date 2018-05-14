@@ -16,6 +16,9 @@
     "lint"
   ],
   "jest": {
+    "roots": [
+      "test"
+    ],
     "testRegex": "test/(.*?/)?.*test.js$",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,

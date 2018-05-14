@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import es from '../../src/locale/es'
 import zh_cn from '../../src/locale/zh-cn'
-import zh_hk from '../../src/locale/zh-hk'
 
-const L = [es, zh_cn, zh_hk]
+jest.mock('dayjs')
+
+const L = [es, zh_cn]
 
 it('Locale keys', () => {
   L.forEach((l) => {
