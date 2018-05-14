@@ -12,8 +12,10 @@ package-lock.json
 # jest
 coverage
 
-# dist
-dist
+# build
+locale
+plugin
+dayjs.min.js
 
 #dev
 demo.js
