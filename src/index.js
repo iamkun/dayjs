@@ -1,29 +1,76 @@
 import * as C from './constant'
-import * as Utils from './utils'
+import * as U from './utils'
+import en from './locale/en'
 
-const parseConfig = (config) => {
+let L = 'en' // global locale
+const Ls = {} // global loaded locale
+Ls[L] = en
+
+const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
+
+const parseLocale = (preset, object, isLocal) => {
+  let l
+  if (!preset) return null
+  if (typeof preset === 'string') {
+    if (Ls[preset]) {
+      l = preset
+    }
+    if (object) {
+      Ls[preset] = object
+      l = preset
+    }
+  } else {
+    const { name } = preset
+    Ls[name] = preset
+    l = name
+  }
+  if (!isLocal) L = l
+  return l
+}
+
+const dayjs = (date, c) => {
+  if (isDayjs(date)) {
+    return date.clone()
+  }
+  const cfg = c || {}
+  cfg.date = date
+  return new Dayjs(cfg) // eslint-disable-line no-use-before-define
+}
+
+const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+
+const Utils = U // for plugin use
+Utils.parseLocale = parseLocale
+Utils.isDayjs = isDayjs
+Utils.wrapper = wrapper
+
+const parseDate = (date) => {
   let reg
-  if (config === null) return new Date(NaN) // Treat null as an invalid date
-  if (Utils.isUndefined(config)) return new Date()
-  if (config instanceof Date) return config
+  if (date === null) return new Date(NaN) // Treat null as an invalid date
+  if (Utils.isUndefined(date)) return new Date()
+  if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
-  if ((typeof config === 'string') && (reg = config.match(C.REGEX_PARSE))) {
+  if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(
       reg[1], reg[2] - 1, reg[3],
       reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
     )
   }
-  return new Date(config) // timestamp
+  return new Date(date) // timestamp
 }
 
 class Dayjs {
-  constructor(config) {
-    this.$d = parseConfig(config)
-    this.init()
+  constructor(cfg) {
+    this.parse(cfg) // for plugin
   }
 
-  init() {
+  parse(cfg) {
+    this.$d = parseDate(cfg.date)
+    this.init(cfg)
+  }
+
+  init(cfg) {
     this.$y = this.$d.getFullYear()
     this.$M = this.$d.getMonth()
     this.$D = this.$d.getDate()
@@ -32,6 +79,12 @@ class Dayjs {
     this.$m = this.$d.getMinutes()
     this.$s = this.$d.getSeconds()
     this.$ms = this.$d.getMilliseconds()
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  $utils() {
+    return Utils
   }
 
   isValid() {
@@ -99,16 +152,16 @@ class Dayjs {
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m, y = this.$y) => {
-      const ins = new Dayjs(new Date(y, m, d))
+      const ins = wrapper(new Date(y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return new Dayjs(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
-      ))
+      ), this)
     }
     switch (unit) {
       case C.Y:
@@ -169,6 +222,7 @@ class Dayjs {
     return this
   }
 
+
   set(string, int) {
     return this.clone().$set(string, int)
   }
@@ -211,16 +265,19 @@ class Dayjs {
         step = 1
     }
     const nextTimeStamp = this.valueOf() + (number * step)
-    return new Dayjs(nextTimeStamp)
+    return wrapper(nextTimeStamp, this)
   }
 
   subtract(number, string) {
     return this.add(number * -1, string)
   }
 
-  format(formatStr) {
+
+  format(formatStr, localeObject) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
+    const locale = localeObject || this.$locale()
+    const { weekdays, months } = locale
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -233,9 +290,9 @@ class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return C.MONTHS[this.$M].slice(0, 3)
+          return months[this.$M].slice(0, 3)
         case 'MMMM':
-          return C.MONTHS[this.$M]
+          return months[this.$M]
         case 'D':
           return String(this.$D)
         case 'DD':
@@ -243,7 +300,7 @@ class Dayjs {
         case 'd':
           return String(this.$W)
         case 'dddd':
-          return C.WEEKS[this.$W]
+          return weekdays[this.$W]
         case 'H':
           return String(this.$H)
         case 'HH':
@@ -276,7 +333,7 @@ class Dayjs {
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
-    const that = input instanceof Dayjs ? input : new Dayjs(input)
+    const that = isDayjs(input) ? input : dayjs(input.valueOf())
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
@@ -313,8 +370,17 @@ class Dayjs {
     return this.endOf(C.M).$D
   }
 
+  $locale() { // get locale object
+    return Ls[this.$L]
+  }
+
+  locale(preset, object) {
+    this.$L = parseLocale(preset, object, true)
+    return this
+  }
+
   clone() {
-    return new Dayjs(this)
+    return wrapper(this.toDate(), this)
   }
 
   toDate() {
@@ -361,4 +427,13 @@ class Dayjs {
   }
 }
 
-export default config => (new Dayjs(config))
+dayjs.extend = (plugin, option) => {
+  plugin(option, Dayjs, dayjs)
+  return dayjs
+}
+
+dayjs.locale = parseLocale
+
+dayjs.en = Ls[L]
+
+export default dayjs

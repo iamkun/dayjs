@@ -70,13 +70,14 @@ it('Format Minute m mm', () => {
   expect(dayjs().format('mm')).toBe(moment().format('mm'))
 })
 
-it('Format Second s sss', () => {
+it('Format Second s ss SSS', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
   expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
   const date = '2011-11-05T14:48:01.002Z'
   expect(dayjs(date).format('s-ss-SSS')).toBe(moment(date).format('s-ss-SSS'))
 })
+
 
 it('Format Time Zone ZZ', () => {
   MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8)
