@@ -1,10 +1,17 @@
-/* eslint-disable camelcase */
-import es from '../../src/locale/es'
-import zh_cn from '../../src/locale/zh-cn'
+import fs from 'fs'
+import path from 'path'
 
 jest.mock('dayjs')
 
-const L = [es, zh_cn]
+const localeDir = '../../src/locale'
+const L = []
+
+// load all locales from locale dir
+fs.readdirSync(path.join(__dirname, localeDir))
+  .forEach((file) => {
+    // eslint-disable-next-line
+    L.push(require(path.join(__dirname, localeDir, file)).default)
+  })
 
 it('Locale keys', () => {
   L.forEach((l) => {
