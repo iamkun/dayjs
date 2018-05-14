@@ -16,7 +16,8 @@ module.exports = (config) => {
     output: {
       file: fileName,
       format: 'umd',
-      name: 'dayjs'
+      name: 'dayjs',
+      globals: ['dayjs']
     }
   }
 }

@@ -1,4 +1,4 @@
-import dayjs from '../index'
+import dayjs from 'dayjs'
 
 const locale = {
   name: 'es',
