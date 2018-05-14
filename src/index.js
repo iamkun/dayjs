@@ -1,5 +1,5 @@
 import * as C from './constant'
-import * as U from './utils'
+import U from './utils'
 import en from './locale/en'
 
 let L = 'en' // global locale

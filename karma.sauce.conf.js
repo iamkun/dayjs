@@ -90,6 +90,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_DEBUG,
     sauceLabs: {
+      // build: 'Manual',
       testName: 'Day.js'
     },
     captureTimeout: 200000, // try fix ios timeout
