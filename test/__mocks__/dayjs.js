@@ -1,5 +1,2 @@
-const dayjs = () => {
-}
-dayjs.locale = () => {
-}
+const dayjs = require('../../src')
 module.exports = dayjs

@@ -5,18 +5,18 @@ module.exports = (config) => {
   const { input, fileName } = config
   return {
     input: {
-      input
+      input,
+      plugins: [
+        babel({
+          exclude: 'node_modules/**'
+        }),
+        uglify()
+      ]
     },
     output: {
       file: fileName,
       format: 'umd',
       name: 'dayjs'
-    },
-    plugins: [
-      babel({
-        exclude: 'node_modules/**'
-      }),
-      uglify()
-    ]
+    }
   }
 }
