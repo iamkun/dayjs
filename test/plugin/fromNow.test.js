@@ -30,7 +30,7 @@ it('fromNow -> in seconds, days, weeks, months, quarters, years ', () => {
   expect(dayjsA.fromNow(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
   expect(dayjsB.fromNow(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
   expect(dayjsB.fromNow(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
-  expect(dayjsG.fromNow(dayjsB)).toBe(timeago(dayjsG.toDate()).format(dayjsB.toDate()))
+  expect(dayjsG.fromNow(dayjsC)).toBe(timeago(dayjsG.toDate()).format(dayjsC.toDate()))
 })
 
 it('fromNow -> in seconds, days, weeks, months, quarters, years in Spanish ', () => {
@@ -49,5 +49,5 @@ it('fromNow -> in seconds, days, weeks, months, quarters, years in Spanish ', ()
   expect(dayjsA.fromNow(dayjsF)).toBe('hace 5 horas')
   expect(dayjsB.fromNow(dayjsC)).toBe('hace 5 años')
   expect(dayjsB.fromNow(dayjsB)).toBe('justo ahora')
-  expect(dayjsG.fromNow(dayjsB)).toBe('hace 1 día')
+  expect(dayjsG.fromNow(dayjsB)).toBe('hace un día')
 })

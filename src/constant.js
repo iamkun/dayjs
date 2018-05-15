@@ -11,23 +11,14 @@ export const MILLISECONDS_A_WEEK = SECONDS_A_WEEK * MILLISECONDS_A_SECOND
 
 // English locales
 export const MS = 'millisecond'
-export const MSS = `${MS}s`
 export const S = 'second'
-export const SS = `${S}s`
 export const MIN = 'minute'
-export const MINS = `${MIN}s`
 export const H = 'hour'
-export const HH = `${H}s`
 export const D = 'day'
-export const DD = `${D}s`
 export const W = 'week'
-export const WW = `${W}s`
 export const M = 'month'
-export const MM = `${M}s`
 export const Q = 'quarter'
-export const QQ = `${Q}s`
 export const Y = 'year'
-export const YY = `${Y}s`
 export const DATE = 'date'
 
 export const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ'
@@ -39,9 +30,6 @@ export const REGEX_FORMAT = /\[.*?\]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a
 export const en = {
   name: 'en',
   weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
-  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
-  past: '%s ago',
-  present: 'just now',
-  future: 'in %s'
+  months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
 }
 
