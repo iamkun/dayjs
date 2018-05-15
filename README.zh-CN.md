@@ -5,8 +5,8 @@
 <p align="center">Moment.js 的 <b>2kB</b> 轻量化方案，拥有同样强大的 API</p>
 <br>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dist/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dist/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
+            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -58,7 +58,7 @@ dayjs().format();
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
