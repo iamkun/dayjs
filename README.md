@@ -6,8 +6,8 @@ English | [简体中文](./README.zh-CN.md)
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
 <br>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dist/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dist/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
+            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -64,7 +64,7 @@ dayjs().format();
 
 * Via download and self-hosting:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/)
+Just download the latest version of Day.js at [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/)
 
 ## Getting Started
 
