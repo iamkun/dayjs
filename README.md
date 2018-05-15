@@ -17,9 +17,11 @@ English | [简体中文](./README.zh-CN.md)
             src="https://img.shields.io/codecov/c/github/xx45/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/xx45/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
-    <br>
-    <a href="https://saucelabs.com/u/dayjs"><img src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status"></a>
+    <a href="https://saucelabs.com/u/dayjs">
+        <img style="width: 80%; margin-top: 10px" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
+    </a>
 </p>
+
 > Day.js is a minimalist JavaScript library that parse, validate, manipulate, and display dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
 
 ```js
