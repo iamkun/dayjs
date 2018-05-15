@@ -24,6 +24,21 @@
     ],
     "func-names": [
       0
+    ],
+    "import/no-extraneous-dependencies": [
+      0
+    ],
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": [
+          "dayjs"
+        ]
+      }
+    ],
+    "import/extensions": [
+      2,
+      "ignorePackages"
     ]
   }
 }
