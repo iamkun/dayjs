@@ -6,6 +6,9 @@ module.exports = (config) => {
   return {
     input: {
       input,
+      external: [
+        'dayjs'
+      ],
       plugins: [
         babel({
           exclude: 'node_modules/**'
@@ -17,7 +20,9 @@ module.exports = (config) => {
       file: fileName,
       format: 'umd',
       name: 'dayjs',
-      globals: ['dayjs']
+      globals: {
+        dayjs: 'dayjs'
+      }
     }
   }
 }
