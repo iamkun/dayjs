@@ -29,3 +29,4 @@ export default (o, c, d) => { // locale needed later
     return oldFormat.bind(this)(result, locale)
   }
 }
+

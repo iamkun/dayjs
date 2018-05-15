@@ -1,18 +1,20 @@
 import * as C from '../constant'
-import * as U from '../utils'
+import * as _U from '../utils'
 
 export default (o, c) => {
   const proto = c.prototype
   proto.fromNow = function (input) {
+    const U = _U.default
     const loc = this.$locale()
-    const P = [{ l: [loc.s, loc.ss], v: C.MILLISECONDS_A_SECOND },
-      { l: [loc.min, loc.mins], v: C.MILLISECONDS_A_SECOND * 60 },
-      { l: [loc.h, loc.hh], v: C.MILLISECONDS_A_HOUR },
-      { l: [loc.d, loc.dd], v: C.MILLISECONDS_A_DAY },
-      { l: [loc.w, loc.ww], v: C.MILLISECONDS_A_WEEK },
-      { l: [loc.m, loc.mm], v: C.MILLISECONDS_A_WEEK * 4 },
-      { l: [loc.q, loc.qq], v: C.MILLISECONDS_A_WEEK * 12 },
-      { l: [loc.y, loc.yy], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
+    const Cs = this.$locale().M ? this.$locale() : C
+    const P = [{ l: [Cs.S, Cs.SS], v: C.MILLISECONDS_A_SECOND },
+      { l: [Cs.MIN, Cs.MINS], v: C.MILLISECONDS_A_SECOND * 60 },
+      { l: [Cs.H, Cs.HH], v: C.MILLISECONDS_A_HOUR },
+      { l: [Cs.D, Cs.DD], v: C.MILLISECONDS_A_DAY },
+      { l: [Cs.W, Cs.WW], v: C.MILLISECONDS_A_WEEK },
+      { l: [Cs.M, Cs.MM], v: C.MILLISECONDS_A_WEEK * 4 },
+      { l: [Cs.Q, Cs.QQ], v: C.MILLISECONDS_A_WEEK * 12 },
+      { l: [Cs.Y, Cs.YY], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
 
     const result = input.diff(this, `${C.MS}s`)
     const resabs = Math.abs(result)

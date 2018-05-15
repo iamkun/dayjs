@@ -1,7 +1,6 @@
 import MockDate from 'mockdate'
 import dayjs from '../src'
 import es from '../src/locale/es'
-import en from '../src/locale/en'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -39,7 +38,7 @@ it('set locale for this line only', () => {
 })
 
 it('set global locale', () => {
-  dayjs.locale(en)
+  dayjs.locale('en')
   expect(dayjs('2018-4-28').format(format))
     .toBe('Saturday 28, April')
   dayjs.locale(es)

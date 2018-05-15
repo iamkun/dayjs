@@ -5,8 +5,8 @@
 <p align="center">Moment.js 的 <b>2kB</b> 轻量化方案，拥有同样强大的 API</p>
 <br>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dist/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dist/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
+            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -16,6 +16,10 @@
             src="https://img.shields.io/codecov/c/github/xx45/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/xx45/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
+    <br>
+    <a href="https://saucelabs.com/u/dayjs">
+        <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
+    </a>
 </p>
 
 > Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用  Day.js
@@ -54,7 +58,7 @@ dayjs().format();
 
 - 下载到您自己的服务器上:
 
-从 [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+从 [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
 
 ## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。

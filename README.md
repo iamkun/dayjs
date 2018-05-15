@@ -6,8 +6,8 @@ English | [简体中文](./README.zh-CN.md)
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
 <br>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dist/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dist/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
+            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -17,9 +17,13 @@ English | [简体中文](./README.zh-CN.md)
             src="https://img.shields.io/codecov/c/github/xx45/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/xx45/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
+    <br>
+    <a href="https://saucelabs.com/u/dayjs">
+        <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
+    </a>
 </p>
 
-> Day.js is a minimalist JavaScript library for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js is a minimalist JavaScript library that parse, validate, manipulate, and display dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
@@ -60,7 +64,7 @@ dayjs().format();
 
 * Via download and self-hosting:
 
-Just download the latest version of Day.js at [https://unpkg.com/dayjs/dist/](https://unpkg.com/dayjs/dist/)
+Just download the latest version of Day.js at [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/)
 
 ## Getting Started
 

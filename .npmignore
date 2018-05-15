@@ -11,3 +11,15 @@ package-lock.json
 
 # jest
 coverage
+
+# dev
+src
+test
+build
+
+#doc
+CONTRIBUTING.md
+
+#other
+.travis.yml
+karma.sauce.conf.js

@@ -1,10 +1,9 @@
 import * as C from './constant'
-import * as U from './utils'
-import en from './locale/en'
+import U from './utils'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
-Ls[L] = en
+Ls[L] = C.en
 
 const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
 

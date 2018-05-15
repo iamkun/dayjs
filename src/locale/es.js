@@ -1,27 +1,34 @@
-export default {
+import dayjs from 'dayjs'
+
+const locale = {
   name: 'es',
-  ms: 'milisegundo',
-  mss: 'milisegundos',
-  s: 'segundo',
-  ss: 'segundos',
-  min: 'minuto',
-  mins: 'minutos',
-  h: 'hora',
-  hh: 'horas',
-  d: 'día',
-  dd: 'días',
-  w: 'semana',
-  ww: 'semanas',
-  m: 'mes',
-  mm: 'meses',
-  q: 'trimestre',
-  qq: 'trimestres',
-  y: 'año',
-  yy: 'años',
-  data: 'fecha',
-  weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-  months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+  MS: 'milisegundo',
+  MSS: 'milisegundos',
+  S: 'segundo',
+  SS: 'segundos',
+  MIN: 'minuto',
+  MINS: 'minutos',
+  H: 'hora',
+  HH: 'horas',
+  D: 'día',
+  DD: 'días',
+  W: 'semana',
+  WW: 'semanas',
+  M: 'mes',
+  MM: 'meses',
+  Q: 'trimestre',
+  QQ: 'trimestres',
+  Y: 'año',
+  YY: 'años',
+  DATE: 'fecha',
+  weekdays: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
+  months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
   past: 'hace %s',
   present: 'justo ahora',
-  future: 'en %s'
+  future: 'en %s',
+  ordinal: n => `${n}º`
 }
+
+dayjs.locale(locale, null, true)
+
+export default locale

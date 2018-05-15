@@ -1,26 +1,37 @@
 {
   "name": "dayjs",
   "version": "0.0.0-development",
-  "description": "2KB immutable date library alternative to Moment.js with the same modern API ",
-  "main": "dist/dayjs.min.js",
+  "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+  "main": "dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint src/* test/*",
-    "build": "BABEL_ENV=build rollup -c",
+    "lint": "./node_modules/.bin/eslint src/* test/* build/* --fix",
+    "build": "BABEL_ENV=build node build",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "gzip-size": "gzip-size ./dist/*.min.js"
+    "gzip-size": "gzip-size dayjs.min.js"
   },
   "pre-commit": [
     "lint"
   ],
   "jest": {
+    "roots": [
+      "test"
+    ],
     "testRegex": "test/(.*?/)?.*test.js$",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*"
+    ]
+  },
+  "release": {
+    "prepare": [
+      {
+        "path": "@semantic-release/changelog"
+      },
+      "@semantic-release/git"
     ]
   },
   "keywords": [
