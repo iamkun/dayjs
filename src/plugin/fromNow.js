@@ -1,10 +1,9 @@
 import * as C from '../constant'
-import * as _U from '../utils'
 
 export default (o, c) => {
   const proto = c.prototype
   proto.fromNow = function (input) {
-    const U = _U.default
+    const U = this.$utils()
     const loc = this.$locale()
     const Cs = this.$locale().M ? this.$locale() : C
     const P = [{ l: [Cs.S, Cs.SS], v: C.MILLISECONDS_A_SECOND },
