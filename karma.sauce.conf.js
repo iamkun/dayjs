@@ -82,7 +82,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'dist/*.js',
+      'dayjs.min.js',
       'test/*spec.js'
     ],
     reporters: ['dots', 'saucelabs'],
@@ -90,6 +90,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_DEBUG,
     sauceLabs: {
+      // build: 'Manual',
       testName: 'Day.js'
     },
     captureTimeout: 200000, // try fix ios timeout
