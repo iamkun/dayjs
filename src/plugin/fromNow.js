@@ -40,7 +40,7 @@ export default (o, c, d) => {
     const resabs = Math.abs(result)
     let out = ''
     for (let i = 0; i < P.length; i += 1) {
-      if (resabs >= P[i].v) out = `${resabs !== P[i].v ? P[i].l[1].replace('%d', U.absFloor(resabs / P[i].v)) : P[i].l[0].replace('%d', U.absFloor(resabs / P[i].v))}`
+      if (resabs >= P[i].v) out = `${P[i].l[resabs !== P[i].v ? 1 : 0].replace('%d', U.absFloor(resabs / P[i].v))}`
     }
     return result > 0 ? loc.future.replace('%s', out) : loc.past.replace('%s', out)
   }
