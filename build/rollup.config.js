@@ -2,7 +2,7 @@ const babel = require('rollup-plugin-babel')
 const uglify = require('rollup-plugin-uglify')
 
 module.exports = (config) => {
-  const { input, fileName } = config
+  const { input, fileName, name } = config
   return {
     input: {
       input,
@@ -19,7 +19,7 @@ module.exports = (config) => {
     output: {
       file: fileName,
       format: 'umd',
-      name: 'dayjs',
+      name: name || 'dayjs',
       globals: {
         dayjs: 'dayjs'
       }

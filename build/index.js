@@ -19,7 +19,8 @@ async function build(option) {
     locales.forEach((l) => {
       build(configFactory({
         input: `./src/locale/${l}`,
-        fileName: `./locale/${l}`
+        fileName: `./locale/${l}`,
+        name: `dayjs-locale-${l}`
       }))
     })
 
@@ -27,7 +28,8 @@ async function build(option) {
     plugins.forEach((l) => {
       build(configFactory({
         input: `./src/plugin/${l}`,
-        fileName: `./plugin/${l}`
+        fileName: `./plugin/${l}`,
+        name: `dayjs-plugin-${l}`
       }))
     })
 
