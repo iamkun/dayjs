@@ -1,7 +1,9 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import '../../src/plugin/advancedFormat'
+import advancedFormat from '../../src/plugin/advancedFormat'
+
+dayjs.extend(advancedFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())

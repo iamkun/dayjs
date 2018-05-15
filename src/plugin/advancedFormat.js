@@ -1,7 +1,6 @@
-import dayjs from 'dayjs'
 import { FORMAT_DEFAULT } from '../constant'
 
-dayjs.extend((o, c, d) => { // locale needed later
+export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   // eslint-disable-next-line no-nested-ternary
@@ -29,5 +28,5 @@ dayjs.extend((o, c, d) => { // locale needed later
     })
     return oldFormat.bind(this)(result, locale)
   }
-})
+}
 

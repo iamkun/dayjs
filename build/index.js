@@ -8,6 +8,8 @@ const { promisify } = util
 
 const promisifyReadDir = promisify(fs.readdir)
 
+const formatName = n => n.replace(/\.js/, '').replace('-', '_')
+
 async function build(option) {
   const bundle = await rollup.rollup(option.input)
   await bundle.write(option.output)
@@ -20,7 +22,7 @@ async function build(option) {
       build(configFactory({
         input: `./src/locale/${l}`,
         fileName: `./locale/${l}`,
-        name: `dayjs-locale-${l}`
+        name: `dayjs_locale_${formatName(l)}`
       }))
     })
 
@@ -29,7 +31,7 @@ async function build(option) {
       build(configFactory({
         input: `./src/plugin/${l}`,
         fileName: `./plugin/${l}`,
-        name: `dayjs-plugin-${l}`
+        name: `dayjs_plugin_${formatName(l)}`
       }))
     })
 
