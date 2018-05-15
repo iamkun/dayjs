@@ -1,8 +1,8 @@
 {
   "name": "dayjs",
   "version": "0.0.0-development",
-  "description": "2KB immutable date library alternative to Moment.js with the same modern API ",
-  "main": "dist/dayjs.min.js",
+  "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+  "main": "dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
@@ -24,6 +24,14 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*"
+    ]
+  },
+  "release": {
+    "prepare": [
+      {
+        "path": "@semantic-release/changelog"
+      },
+      "@semantic-release/git"
     ]
   },
   "keywords": [
