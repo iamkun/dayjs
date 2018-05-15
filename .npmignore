@@ -16,3 +16,10 @@ coverage
 src
 test
 build
+
+#doc
+CONTRIBUTING.md
+
+#other
+.travis.yml
+karma.sauce.conf.js
