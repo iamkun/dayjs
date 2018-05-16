@@ -1,11 +1,13 @@
 export = dayjs;
 
-declare function dayjs (config?: dayjs.ConfigType): dayjs.Dayjs
+declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
 
 declare namespace dayjs {
-  type ConfigType = string | number | Date | Dayjs
+  export type ConfigType = string | number | Date | Dayjs
 
-  type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date'
+  export type OptionType = { locale: string }
+
+  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date'
   
   interface DayjsObject {
     years: number
@@ -79,5 +81,13 @@ declare namespace dayjs {
     isAfter(dayjs: Dayjs): boolean
   
     isLeapYear(): boolean
+
+    locale(arg1: any, arg2?: any): void
   }
+
+  export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
+
+  export function extend(plugin: PluginFunc, option: ConfigType): Dayjs
+
+  export function local(arg1: any, arg2?: any): void
 }
