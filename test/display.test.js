@@ -155,44 +155,44 @@ describe('Difference', () => {
       expect(dayjsA.diff(dayjsC, unit, true)).toBe(momentA.diff(momentC, unit, true))
     })
   })
+})
 
-  it('Unix Timestamp (milliseconds)', () => {
-    expect(dayjs().valueOf()).toBe(moment().valueOf())
-  })
+it('Unix Timestamp (milliseconds)', () => {
+  expect(dayjs().valueOf()).toBe(moment().valueOf())
+})
 
-  it('Unix Timestamp (seconds)', () => {
-    expect(dayjs().unix()).toBe(moment().unix())
-  })
+it('Unix Timestamp (seconds)', () => {
+  expect(dayjs().unix()).toBe(moment().unix())
+})
 
-  it('Days in Month', () => {
-    expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
-    expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
-  })
+it('Days in Month', () => {
+  expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
+  expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
+})
 
-  it('As Javascript Date -> toDate', () => {
-    const base = dayjs()
-    const momentBase = moment()
-    const jsDate = base.toDate()
-    expect(jsDate).toEqual(momentBase.toDate())
-    expect(jsDate).toEqual(new Date())
+it('As Javascript Date -> toDate', () => {
+  const base = dayjs()
+  const momentBase = moment()
+  const jsDate = base.toDate()
+  expect(jsDate).toEqual(momentBase.toDate())
+  expect(jsDate).toEqual(new Date())
 
-    jsDate.setFullYear(1970)
-    expect(jsDate.toUTCString()).not.toBe(base.toString())
-  })
+  jsDate.setFullYear(1970)
+  expect(jsDate.toUTCString()).not.toBe(base.toString())
+})
 
-  it('As Array -> toArray', () => {
-    expect(dayjs().toArray()).toEqual(moment().toArray())
-  })
+it('As Array -> toArray', () => {
+  expect(dayjs().toArray()).toEqual(moment().toArray())
+})
 
-  it('As JSON -> toJSON', () => {
-    expect(dayjs().toJSON()).toBe(moment().toJSON())
-  })
+it('As JSON -> toJSON', () => {
+  expect(dayjs().toJSON()).toBe(moment().toJSON())
+})
 
-  it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
-    expect(dayjs().toISOString()).toBe(moment().toISOString())
-  })
+it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
+  expect(dayjs().toISOString()).toBe(moment().toISOString())
+})
 
-  it('As Object -> toObject', () => {
-    expect(dayjs().toObject()).toEqual(moment().toObject())
-  })
+it('As Object -> toObject', () => {
+  expect(dayjs().toObject()).toEqual(moment().toObject())
 })
