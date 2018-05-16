@@ -19,7 +19,7 @@ English | [简体中文](./README.zh-CN.md)
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
 </p>
 
-> Day.js is a minimalist JavaScript library for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
