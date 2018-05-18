@@ -1,4 +1,5 @@
 [English](./README.md) | 简体中文
+
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
@@ -22,53 +23,76 @@
     </a>
 </p>
 
-> Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用  Day.js
+> Day.js 是一个轻量的处理时间和日期的 JavaScript 库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用  Day.js
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-- 🕒 和 Moment.js 相同的 API 和用法
-- 💪 不可变数据 (Immutable)
-- 🔥 支持链式操作 (Chainable)
-- 📦 仅 2kb 大小的微型库
-- 👫 全浏览器兼容
+* 🕒 和 Moment.js 相同的 API 和用法
+* 💪 不可变数据 (Immutable)
+* 🔥 支持链式操作 (Chainable)
+* 🌐 国际化 I18n
+* 📦 仅 2kb 大小的微型库
+* 👫 全浏览器兼容
 ---
 
-## 安装
+## 快速开始
 
-可以有如下多种方法安装使用 Day.js:
+### 安装
 
-- NPM:
 ```console
 npm install dayjs --save
 ```
-```js
-var dayjs = require('dayjs');
-dayjs().format();
+
+📚[安装指南](./docs/zh-cn/Installation.md)
+
+### API
+
+Day.js 有很多 API 来解析、处理、校验、增减、展示时间和日期
+
+```javascript
+dayjs('2018-08-08') // 解析
+
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // 展示
+
+dayjs().set('month', 3).month() // 获取
+
+dayjs().add(1, 'year') // 处理
+
+dayjs().isBefore(dayjs()) // 查询
 ```
-- CDN:
-```html
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://unpkg.com/dayjs"></script>
-<script>
-  dayjs().format();
-</script>
+
+📚[API 参考](./docs/zh-cn/API-reference.md)
+
+### 国际化 I18n
+
+Day.js 支持国际化
+
+但除非手动加载，多国语言默认是不会被打包到工程里的
+
+```javascript
+import 'dayjs/locale/es' // 按需加载
+
+dayjs.locale('es') // 全局使用西班牙语
+
+dayjs('2018-05-05').locale('zh-cn').format() // 在这个实例上使用简体中文
 ```
+📚[国际化 I18n](./docs/zh-cn/I18n.md)
 
-- 下载到您自己的服务器上:
+### 插件
 
-从 [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
+插件可以给 Day.js 增加新功能和扩展已有功能
 
-## 开始
-`Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
+```javascript
+import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 按需加载插件
 
-`Dayjs` 对象是不可变的, 所有的 API 操作都将返回一个新的 `Dayjs` 对象。
+dayjs.extend(AdvancedFormat) // 使用插件
 
+dayjs().format('Q Do k kk X x') // 使用扩展后的API
+```
+📚[插件列表](./docs/zh-cn/Plugin.md)
 
-## API
-
----
 ## 开源协议
 
-MIT
+Day.js 遵循 [MIT 开源协议](./LICENSE).
