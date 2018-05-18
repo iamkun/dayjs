@@ -68,7 +68,6 @@ dayjs().format();
 
 ## API
 
-[API 文档](./docs/zh-cn/API-reference.md)
 ---
 ## 开源协议
 
