@@ -1,10 +1,10 @@
 # 插件列表
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+插件是一些独立的程序，可以给 Day.js 增加新功能和扩展已有功能
 
-By default, Day.js comes with core code only and no installed plugin.
+默认情况下，Day.js 只包含核心的代码，并没有安装任何插件
 
-You can load multiple plugins based on your need.
+您可以加载多个插件来满足您的需求
 
 ## API
 
