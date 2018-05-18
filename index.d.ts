@@ -87,7 +87,7 @@ declare namespace dayjs {
 
   export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
-  export function extend(plugin: PluginFunc, option: ConfigType): Dayjs
+  export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs
 
   export function local(arg1: any, arg2?: any): void
 }

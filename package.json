@@ -71,6 +71,7 @@
     "pre-commit": "^1.2.2",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
-    "rollup-plugin-uglify": "^3.0.0"
+    "rollup-plugin-uglify": "^3.0.0",
+    "typescript": "^2.8.3"
   }
 }
