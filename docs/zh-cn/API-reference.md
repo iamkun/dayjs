@@ -73,7 +73,7 @@ dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 ### 复制
-`Dayjs` 对象是不可变的，如果你想获得一个对象的拷贝，请执行 `.clone()`。
+`Dayjs` 对象是不可变的，如果您想获得一个对象的拷贝，请执行 `.clone()`。
 向 `dayjs()` 里传入一个 `Dayjs` 对象也能实现同样的效果。
 ```js
 dayjs(Dayjs);
@@ -155,7 +155,7 @@ dayjs().set('second', 30);
 ```
 ---
 ### 操作
-你可以对 `Dayjs` 对象如下增加减少之类的操作：
+您可以对 `Dayjs` 对象如下增加减少之类的操作：
 ```js
 dayjs().startOf('month').add(1, 'day').subtract(1, 'year')
 ```
