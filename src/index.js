@@ -230,15 +230,15 @@ class Dayjs {
     number = Number(number) // eslint-disable-line no-param-reassign
     // units === 'ms' hard code here, will update in next release
     const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
+    const instanceFactory = (u, n) => {
+      const date = this.set(C.DATE, 1).set(u, n + number)
+      return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
+    }
     if (['M', C.M].indexOf(unit) > -1) {
-      let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
-      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
-      return date
+      return instanceFactory(C.M, this.$M)
     }
     if (['y', C.Y].indexOf(unit) > -1) {
-      let date = this.set(C.DATE, 1).set(C.Y, this.$y + number)
-      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
-      return date
+      return instanceFactory(C.Y, this.$y)
     }
     let step
     switch (unit) {
