@@ -43,7 +43,7 @@ test('utcOffset shorthand hours -> minutes', () => {
 
 test('isLocal, isUTC', () => {
   expect(dayjs().isLocal()).toBe(true)
-  expect(!dayjs.utc().isLocal()).toBe(true)
+  expect(!dayjs.utc().isLocal()).toBe(new Date().getTimezoneOffset() !== 0)
   expect(dayjs.utc().local().isLocal()).toBe(true)
   expect(!dayjs().utcOffset(5).isLocal()).toBe(true)
   expect(dayjs().utcOffset(5).local().isLocal()).toBe(true)
