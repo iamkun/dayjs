@@ -19,6 +19,7 @@ build
 
 #doc
 CONTRIBUTING.md
+docs
 
 #other
 .travis.yml
