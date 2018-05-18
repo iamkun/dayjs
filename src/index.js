@@ -52,7 +52,7 @@ const parseDate = (date) => {
   if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(
-      reg[1], (reg[2] - 1) || 0, reg[3] || 1,
+      reg[1], reg[2] - 1, reg[3] || 1,
       reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
     )
   }

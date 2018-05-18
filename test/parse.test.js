@@ -31,6 +31,8 @@ describe('Parse', () => {
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
     d = '2018-01'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
+    d = '2018'
+    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
   })
 
   it('String ISO 8601 date, time and zone', () => {
