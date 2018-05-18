@@ -1,6 +1,8 @@
 ## API Reference
 
-Day.js will always return a new `Dayjs` object if not specified.
+Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
+
+`Dayjs` object is immutable, that is to say, all API operation will return a new `Dayjs` object.
 
 * [Parse](#parse)
   * [Now](#now)
@@ -43,6 +45,7 @@ Day.js will always return a new `Dayjs` object if not specified.
   * [Is Leap Year](#is-leap-year)
 
 ---
+Day.js will always return a new `Dayjs` object if not specified.
 
 ### Parse
 
