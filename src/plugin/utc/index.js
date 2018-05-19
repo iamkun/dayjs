@@ -3,6 +3,8 @@ import { parseTimezoneOffset } from './util'
 
 const $superFun = {}
 
+let RETURN_LOCAL_INSTANCE = false
+
 const dayjsAddon = {
   utc(cfg) {
     const tmpDayjs = this(cfg)
@@ -46,6 +48,7 @@ const DayjsAddon = {
     const { $d } = this
     const tzOffset = typeof cfg.date === 'string' ? parseTimezoneOffset(cfg.date) : null
     this.$d = new UTCDate($d, tzOffset === null ? LOCAL_TIMEZONE_OFFSET : -tzOffset, false)
+    if (RETURN_LOCAL_INSTANCE) this.local()
     this.init()
   }
 };
@@ -57,7 +60,8 @@ const DayjsAddon = {
   }
 })
 
-export default (option, Dayjs, dayjs) => {
+export default (option = {}, Dayjs, dayjs) => {
+  RETURN_LOCAL_INSTANCE = !!option.parseToLocal
   Object.getOwnPropertyNames(Dayjs.prototype).forEach((key) => {
     $superFun[key] = Dayjs.prototype[key]
   })

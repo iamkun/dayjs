@@ -82,3 +82,9 @@ it('Clone with same value', () => {
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
 })
+
+it('new instance is not local', () => {
+  let timeStr = '2018-05-18T03:04:05+08:00'
+  if (new Date().getTimezoneOffset() === -480) timeStr = '2018-05-18T03:04:05+07:00'
+  expect(dayjs(timeStr).isLocal()).toBe(false)
+})
