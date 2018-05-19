@@ -44,8 +44,8 @@ const DayjsAddon = {
   parse(cfg) {
     $superFun.parse.call(this, cfg)
     const { $d } = this
-    const tzOffset = typeof cfg === 'string' ? parseTimezoneOffset(cfg) : null
-    this.$d = new UTCDate($d, tzOffset === null ? LOCAL_TIMEZONE_OFFSET : -tzOffset)
+    const tzOffset = typeof cfg.date === 'string' ? parseTimezoneOffset(cfg.date) : null
+    this.$d = new UTCDate($d, tzOffset === null ? LOCAL_TIMEZONE_OFFSET : -tzOffset, false)
     this.init()
   }
 };

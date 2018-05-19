@@ -35,7 +35,7 @@ it('creating with utc and no arguments', () => {
   expect(momentDefaultUtcTime <= afterMomentCreationTime).toBe(true)
 })
 
-it('creating with utc and a date parameter array', () => {
+it('creating with utc', () => {
   const m = dayjs.utc('2011-02-02T03:04:05+00:00')
   expect(m.date()).toBe(2)
   expect(m.hour()).toBe(3)

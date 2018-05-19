@@ -199,14 +199,14 @@ test('start of / end of', () => {
   expect(a.clone().endOf('hour').minute()).toBe(59)
 })
 
-test('reset offset with moment#utc', () => {
+test('reset offset with dayjs#utc', () => {
   const a = dayjs.utc('2012-1-1').utcOffset(-480)
 
   expect(a.clone().hour()).toBe(16)
   expect(a.clone().utc().hour()).toBe(0)
 })
 
-test('reset offset with moment#local', () => {
+test('reset offset with dayjs#local', () => {
   const a = dayjs('2012-1-1').utcOffset(-480)
 
   expect(a.clone().local().hour()).toBe(0)
