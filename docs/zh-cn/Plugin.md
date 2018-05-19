@@ -76,7 +76,7 @@ dayjs.extend(UTCPlugin)
 
 > **⚠️ 注意⚠️** 
 >
-> 当你**没使用**这个插件的时候，`dayjs()`返回的是给予你环境时区的实例
+> 当你 **没使用** 这个插件的时候，`dayjs()`返回的是基于你环境时区的实例
 > ```javascript
 > dayjs('2018-05-18T03:04:05+06:00').format() // 2018-05-18T05:04:05+08:00
 > ```
@@ -100,7 +100,7 @@ dayjs.extend(UTCPlugin)
 
   #### 解析
 
-    获得一个时区为UTC的实例
+    获得一个时区为UTC的实例
 
     ```javascript
       dayjs.utc() 
@@ -110,8 +110,8 @@ dayjs.extend(UTCPlugin)
 
   #### 取值
 
-    你可以使用`dayjs().utcOffset()`来获取实例与UTC的时间差
-    > 注意: `dayjs().utcOffset()` 返回的是与UTC真实的分钟时差，与`Date.prototype.getTimezoneOffset`返回一个相反值
+    你可以使用`dayjs().utcOffset()`来获取实例与UTC的时间差
+    > 注意: `dayjs().utcOffset()` 返回的是与UTC真实的 _分钟_ 时差，与`Date.prototype.getTimezoneOffset`返回一个相反值不同
 
     你也可以使用`dayjs().isLocal()`或`dayjs().isUTC()`来确认当前实例的时区是否为本地时区或是否为UTC时区
 
