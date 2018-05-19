@@ -10,7 +10,8 @@
     "build": "BABEL_ENV=build node build",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "gzip-size": "gzip-size dayjs.min.js"
+    "gzip-size": "gzip-size dayjs.min.js",
+    "postpublish": "npm run test:sauce"
   },
   "pre-commit": [
     "lint"
@@ -45,7 +46,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xx45/dayjs.git"
+    "url": "https://github.com/iamkun/dayjs.git"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
@@ -70,6 +71,7 @@
     "pre-commit": "^1.2.2",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
-    "rollup-plugin-uglify": "^3.0.0"
+    "rollup-plugin-uglify": "^3.0.0",
+    "typescript": "^2.8.3"
   }
 }
