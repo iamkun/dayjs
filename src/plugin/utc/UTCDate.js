@@ -1,4 +1,4 @@
-import { timezoneOffsetToString } from './util'
+import U from '../../utils'
 
 export const LOCAL_TIMEZONE_OFFSET = new Date().getTimezoneOffset()
 
@@ -38,7 +38,7 @@ Object.assign(
     (r, key) => ({
       ...r,
       [key](...arg) {
-        return this.$d[key](...arg).replace(/GMT(.*)$/, `GMT${timezoneOffsetToString(this.$timezoneOffset)}`)
+        return this.$d[key](...arg).replace(/GMT(.*)$/, `GMT${U.padZoneStr(this.$timezoneOffset)}`)
       }
     }),
     {}
