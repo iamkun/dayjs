@@ -17,24 +17,24 @@
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // with plugin options
+dayjs.extend(plugin, options) // 带参数加载插件
 ```
 
 ## 安装
 
-* Via NPM:
+* 通过 NPM:
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 按需加载
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(AdvancedFormat) // 使用插件
 ```
 
-* Via CDN:
+* 通过 CDN:
 ```html
 <script src="https://unpkg.com/dayjs"></script>
-<!-- Load plugin as window.dayjs_plugin_NAME -->
+<!-- 通过 window.dayjs_plugin_NAME 获取 -->
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat"></script>
 <script>
   dayjs.extend(dayjs_plugin_advancedFormat);
@@ -74,21 +74,21 @@ dayjs().format('Q Do k kk X x')
 Day.js插件模版
 ```javascript
 export default (option, dayjsClass, dayjsFactory) => {
-  // extend dayjs()
-  // e.g. add dayjs().isSameOrBefore()
+  // 扩展 dayjs() 实例
+  // 例：添加 dayjs().isSameOrBefore() 实例方法
   dayjsClass.prototype.isSameOrBefore = function (arguments) {}
 
-  // extend dayjs
-  // e.g. add dayjs.utc()
+  // 扩展 dayjs 类
+  // 例：添加 dayjs.utc() 类方法
   dayjsFactory.utc = (arguments) => {}
 
-  // overriding existing API
-  // e.g. extend dayjs().format()
+  // 覆盖已存在的 API
+  // 例：扩展 dayjs().format() 方法
   const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
-    // original format result
+    // 原始format结果
     const result = oldFormat(arguments)
-    // return modified result
+    // 返回修改后结果
   }
 }
 ```
