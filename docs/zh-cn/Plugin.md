@@ -86,7 +86,7 @@ dayjs.extend(UTCPlugin)
 > dayjs.extend(UTCPlugin)
 > dayjs('2018-05-18T03:04:05+06:00').format() // 2018-05-18T03:04:05+06:00
 > ```
-> 如果你希望新建的实例的时区总是基于你本地时区，或者你使用这个插件之前已经在项目中使用了dayjs
+> 如果你希望新建的实例的时区总是基于你本地时区，或者你使用这个插件之前已经在项目中使用了dayjs
 >
 > 你可以在引入插件时附上这个参数`parseToLocal: true`
 >
@@ -105,7 +105,7 @@ dayjs.extend(UTCPlugin)
     ```javascript
       dayjs.utc() 
       dayjs.utc('2018-05-18T03:04:05+06:00') 
-      /* (string | number | Date | Dayjs) 使用方法与 dayjs() 一致 */
+      /* (string | number | Date | Dayjs) 使用方法与 dayjs() 一致 */
     ```
 
   #### 取值
