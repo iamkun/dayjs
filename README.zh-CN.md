@@ -1,4 +1,4 @@
-[English](./README.md) | 简体中文 | [日本語](./README.ja.md)
+[English](./README.md) | 简体中文 | [日本語](./docs/ja/README-ja.md)
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -95,4 +95,4 @@ dayjs().format('Q Do k kk X x') // 使用扩展后的API
 
 ## 开源协议
 
-Day.js 遵循 [MIT 开源协议](./LICENSE).
+Day.js 遵循 [MIT 开源协议](../../LICENSE).

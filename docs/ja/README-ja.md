@@ -1,4 +1,4 @@
-[English](./README.md) | [简体中文](./README.zh-CN.md) | 日本語
+[English](../../README.md) | [简体中文](../../README.zh-CN.md) | 日本語
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -47,7 +47,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 npm install dayjs --save
 ```
 
-📚[インストールガイド](./docs/en/Installation.md)
+📚[インストールガイド](./Installation.md)
 
 ### API
 
@@ -65,7 +65,7 @@ dayjs().add(1, 'year') // 操作
 dayjs().isBefore(dayjs()) // クエリ
 ```
 
-📚[API リファレンス](./docs/ja/API-reference.md)
+📚[API リファレンス](./API-reference.md)
 
 ### 国際化 (I18n)
 
@@ -81,7 +81,7 @@ dayjs.locale('es') // スペイン語をグローバルロケールとして適�
 dayjs('2018-05-05').locale('zh-cn').format() // 簡体字中国語を特定のインスタンスにのみ適用
 ```
 
-📚[国際化](./docs/ja/I18n.md)
+📚[国際化](./I18n.md)
 
 ### プラグイン
 
@@ -95,7 +95,7 @@ dayjs.extend(AdvancedFormat) // プラグインを使用
 dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 ```
 
-📚[プラグインリスト](./docs/ja/Plugin.md)
+📚[プラグインリスト](./Plugin.md)
 
 ## ライセンス
 
