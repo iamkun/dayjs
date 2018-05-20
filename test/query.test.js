@@ -25,5 +25,8 @@ it('Is Before Is After Is Same', () => {
     expect(dayC.isBefore(dayA)).toBe(true)
     expect(dayA.isSame(instance())).toBe(true)
     expect(dayB.isAfter(dayA)).toBe(true)
+    expect(dayA.isSame()).toBe(true)
+    expect(dayB.isAfter()).toBe(true)
+    expect(dayC.isBefore()).toBe(true)
   })
 })

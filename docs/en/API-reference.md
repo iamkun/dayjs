@@ -408,6 +408,7 @@ dayjs().toString();
 * returns a Boolean
 
 Check if a `Dayjs` object is before another `Dayjs` object.
+If no object is passed, it will be current time.
 
 ```js
 dayjs().isBefore(Dayjs);
@@ -419,6 +420,7 @@ dayjs().isBefore(dayjs()); // false
 * returns a Boolean
 
 Check if a `Dayjs` object is same as another `Dayjs` object.
+If no object is passed, it will be current time.
 
 ```js
 dayjs().isSame(Dayjs);
@@ -430,6 +432,7 @@ dayjs().isSame(dayjs()); // true
 * returns a Boolean
 
 Check if a `Dayjs` object is after another `Dayjs` object.
+If no object is passed, it will be current time.
 
 ```js
 dayjs().isAfter(Dayjs);
