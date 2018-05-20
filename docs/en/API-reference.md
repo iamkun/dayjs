@@ -1,213 +1,178 @@
-## API Reference
+# API Reference
 
 Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
 
-`Dayjs` object is immutable, that is to say, all API operation will return a new `Dayjs` object.
+The `Dayjs` object is immutable, that is, all API operations that change the `Dayjs` object in some way will return a new instance of it.
 
-* [Parse](#parse)
-  * [Now](#now)
-  * [String](#string)
-  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
-  * [Date](#date)
-  * [Clone](#clone)
-  * [Validation](#validation)
-* [Get + Set](#get--set)
-  * [Year](#year)
-  * [Month](#month)
-  * [Date of Month](#date-of-month)
-  * [Day of Week](#day-of-week)
-  * [Hour](#hour)
-  * [Minute](#minute)
-  * [Second](#second)
-  * [Millisecond](#millisecond)
-  * [Set](#set)
-* [Manipulate](#manipulate)
-  * [Add](#add)
-  * [Subtract](#subtract)
-  * [Start of Time](#start-of-time)
-  * [End of Time](#end-of-time)
-* [Display](#display)
-  * [Format](#format)
-  * [Difference](#difference)
-  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
-  * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
-  * [Days in Month](#days-in-month)
-  * [As Javascript Date](#as-javascript-date)
-  * [As Array](#as-array)
-  * [As JSON](#as-json)
-  * [As ISO 8601 String](#as-iso-8601-string)
-  * [As Object](#as-object)
-  * [As String](#as-string)
-* [Query](#query)
-  * [Is Before](#is-before)
-  * [Is Same](#is-same)
-  * [Is After](#is-after)
-  * [Is Leap Year](#is-leap-year)
+- [API Reference](#api-reference)
+  - [Parsing](#parsing)
+    - [Constructor `.dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string-number-date-dayjs)
+      - [ISO 8601 string](#iso-8601httpsenwikipediaorgwikiiso8601-string)
+      - [Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milliseconds-since-the-unix-epoch---jan-1-1970-12am-utc)
+      - [Native Javascript Date object](#native-javascript-date-object)
+    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone-dayjsoriginal-dayjs)
+    - [Validation `.isValid()`](#validation-isvalid)
+  - [Get and Set](#get-and-set)
+    - [Year `.year()`](#year-year)
+    - [Month `.month()`](#month-month)
+    - [Day of the Month `.date()`](#day-of-the-month-date)
+    - [Day of the Week `.day()`](#day-of-the-week-day)
+    - [Hour `.hour()`](#hour-hour)
+    - [Minute `.minute()`](#minute-minute)
+    - [Second `.second()`](#second-second)
+    - [Millisecond `.millisecond()`](#millisecond-millisecond)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+  - [Manipulating](#manipulating)
+    - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
+    - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
+    - [Start of Time `.startOf(unit: string)`](#start-of-time-startofunit-string)
+    - [End of Time `.endOf(unit: string)`](#end-of-time-endofunit-string)
+  - [Displaying](#displaying)
+    - [Format `.format(stringWithTokens: string)`](#format-formatstringwithtokens-string)
+      - [List of all available formats](#list-of-all-available-formats)
+    - [Difference `.diff(unit: string (default: 'milliseconds'))`](#difference-diffunit-string-default-milliseconds)
+    - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
+    - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
+    - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
+    - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
+    - [As Array `.toArray()`](#as-array-toarray)
+    - [As JSON `.toJSON()`](#as-json-tojson)
+    - [As ISO 8601 String `.toISOString()`](#as-iso-8601-string-toisostring)
+    - [As Object `.toObject()`](#as-object-toobject)
+    - [As String `.toString()`](#as-string-tostring)
+  - [Query](#query)
+    - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared-dayjs)
+    - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
+    - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
+    - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
 
----
-Day.js will always return a new `Dayjs` object if not specified.
+## Parsing
 
-### Parse
+### Constructor `.dayjs(existing?: string | number | Date | Dayjs)`
 
-Simply call `dayjs()` with one of the supported input types.
-
-#### Now
-
-To get the current date and time, just call dayjs() with no parameters.
+Calling it without parameters returns a fresh `Dayjs` object with the current date and time, just like `new Date()` or `moment.now()`.
 
 ```js
 dayjs();
 ```
 
-### String
+Day.js also parses other date formats.
 
-Creating from a string matches [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+#### [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string
 
 ```js
 dayjs(String);
 dayjs('1995-12-25');
 ```
 
-### Unix Timestamp (milliseconds)
-
-Passing an integer value representing the number of milliseconds since the Unix Epoch (Jan 1 1970 12AM UTC).
+#### Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)
 
 ```js
 dayjs(Number);
 dayjs(1318781876406);
 ```
 
-### Date
-
-Passing a pre-existing native Javascript Date object.
+#### Native Javascript Date object
 
 ```js
 dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 
-### Clone
+### Clone `.clone() | dayjs(original: Dayjs)`
 
-All `Dayjs` are immutable. If you want a copy of the object, just call `.clone()`.
-Calling dayjs() on a `Dayjs` object will also clone it.
+Returns a cloned `Dayjs` object.
 
 ```js
-dayjs(Dayjs);
 dayjs().clone();
+dayjs(Dayjs); // passing a Dayjs object to a constructor will also clone it
 ```
 
-### Validation
+### Validation `.isValid()`
 
-* returns a Boolean
-
-Check whether the `Dayjs` object considers the date invalid.
+Returns a boolean indicating whether the `Dayjs` object's date is valid.
 
 ```js
 dayjs().isValid();
 ```
 
----
+## Get and Set
 
-### Get + Set
+### Year `.year()`
 
-Get and set date.
-
-#### Year
-
-* returns a Number
-
-Get year.
+Returns a number representing the `Dayjs` object's year.
 
 ```js
 dayjs().year();
 ```
 
-#### Month
+### Month `.month()`
 
-* returns a Number
-
-Get month.
+Returns a number representing the `Dayjs` object's month.
 
 ```js
 dayjs().month();
 ```
 
-#### Date of Month
+### Day of the Month `.date()`
 
-* returns a Number
-
-Get day of the month.
+Returns a number representing the `Dayjs` object's day of the month.
 
 ```js
 dayjs().date();
 ```
 
-#### Day of Week
+### Day of the Week `.day()`
 
-* returns a Number
-
-Get day of the week.
+Returns a number representing the `Dayjs` object's day of the week
 
 ```js
 dayjs().day();
 ```
 
-#### Hour
+### Hour `.hour()`
 
-* returns a Number
-
-Get hour.
+Returns a number representing the `Dayjs` object's hour.
 
 ```js
 dayjs().hour();
 ```
 
-#### Minute
+### Minute `.minute()`
 
-* returns a Number
-
-Get minute.
+Returns a number representing the `Dayjs` object's minute.
 
 ```js
 dayjs().minute();
 ```
 
-#### Second
+### Second `.second()`
 
-* returns a Number
-
-Get second.
+Returns a number representing the `Dayjs` object's second.
 
 ```js
 dayjs().second();
 ```
 
-#### Millisecond
+### Millisecond `.millisecond()`
 
-* returns a Number
-
-Get millisecond.
+Returns a number representing the `Dayjs` object's millisecond.
 
 ```js
 dayjs().millisecond();
 ```
 
-#### Set
+### Set `.set(unit: string, value: number)`
 
-Date setter.
-Units are case insensitive
+Returns a `Dayjs` object with the applied changes.
 
 ```js
-dayjs().set((unit: String), (value: Int));
-dayjs().set('month', 3); // April
-dayjs().set('second', 30);
+dayjs().set('month', 3).set('year', 2020); // April 2020
 ```
 
----
+## Manipulating
 
-### Manipulate
-
-Once you have a `Dayjs` object, you may want to manipulate it in some way like this:
+`Dayjs` objects can be manipulated in many ways.
 
 ```js
 dayjs()
@@ -216,63 +181,55 @@ dayjs()
   .subtract(1, 'year');
 ```
 
-#### Add
+### Add `.add(value: number, unit: string)`
 
-Returns a new `Dayjs` object by adding time.
+Returns a Dayjs object.
 
 ```js
-dayjs().add((value: Number), (unit: String));
 dayjs().add(7, 'day');
 ```
 
-#### Subtract
+### Subtract `.subtract(value: number, unit: string)`
 
-Returns a new `Dayjs` object by subtracting time. exactly the same as `dayjs#add`.
+Returns a Dayjs object.
 
 ```js
-dayjs().subtract((value: Number), (unit: String));
 dayjs().subtract(7, 'year');
 ```
 
-#### Start of Time
+### Start of Time `.startOf(unit: string)`
 
-Returns a new `Dayjs` object by setting it to the start of a unit of time.
+Returns a Dayjs object set to the end of the specified unit of time.
 
 ```js
-dayjs().startOf((unit: String));
-dayjs().startOf('year');
+dayjs().startOf('week');
 ```
 
-#### End of Time
+### End of Time `.endOf(unit: string)`
 
-Returns a new `Dayjs` object by setting it to the end of a unit of time.
+Returns a Dayjs object set to the end of the specified unit of time.
 
 ```js
-dayjs().endOf((unit: String));
 dayjs().endOf('month');
+dayjs().endOf('year');
 ```
 
----
+## Displaying
 
-### Display
+### Format `.format(stringWithTokens: string)`
 
-Once parsing and manipulation are done, you need some way to display the `Dayjs` object.
-
-#### Format
-
-* returns a String
-
-Takes a string of tokens and replaces them with their corresponding date values.
+Returns a formatted string.
+To escape characters, wrap them in square or culy brackets (e.g. `[G] {um}`).
 
 ```js
-dayjs().format(String);
-dayjs().format(); // "2014-09-08T08:02:17-05:00" (ISO 8601, no fractional seconds)
-dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
+dayjs().format(); // "2020-04-02T08:02:17-05:00" (ISO 8601, no fractional seconds)
+
+dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2020} 04-02T08:02:17-05:00Z"
+
+dayjs().format('DD/MM/YYYY'); // "02/04/2020"
 ```
 
-* To escape characters in string, wrap the characters in square brackets (e.g. [Z]).
-
-List of all available formats:
+#### List of all available formats
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
@@ -300,60 +257,48 @@ List of all available formats:
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |
 
-#### Difference
+### Difference `.diff(unit: string (default: 'milliseconds'))`
 
-* returns a Number
-
-Get the difference of two `Dayjs` objects in milliseconds or another unit.
+Returns a number indicating the difference of two `Dayjs` objects in the specified unit
 
 ```js
 dayjs().diff(Dayjs, unit);
 dayjs().diff(dayjs(), 'years'); // 0
 ```
 
-#### Unix Timestamp (milliseconds)
+### Unix Timestamp (milliseconds) `.valueOf()`
 
-* returns a Number
-
-Outputs the number of milliseconds since the Unix Epoch
+Returns the number of milliseconds since the Unix Epoch.
 
 ```js
 dayjs().valueOf();
 ```
 
-#### Unix Timestamp (seconds)
+### Unix Timestamp (seconds) `.unix()`
 
-* returns a Number
-
-Outputs a Unix timestamp (the number of seconds since the Unix Epoch).
+Returns the number of seconds since the Unix Epoch.
 
 ```js
 dayjs().unix();
 ```
 
-#### Days in Month
+### Days in the Month `.daysInMonth()`
 
-* returns a Number
-
-Get the number of days in the current month.
+Returns the number of days in the `Dayjs` object's month.
 
 ```js
 dayjs().daysInMonth();
 ```
 
-#### As Javascript Date
+### As Javascript Date `.toDate()`
 
-* returns a Javascript `Date` object
-
-Get copy of the native `Date` object from `Dayjs` object.
+Returns a copy of the native `Date` object parsed from the `Dayjs` object.
 
 ```js
 dayjs().toDate();
 ```
 
-#### As Array
-
-* returns an Array
+### As Array `.toArray()`
 
 Returns an array that mirrors the parameters from new Date().
 
@@ -361,86 +306,71 @@ Returns an array that mirrors the parameters from new Date().
 dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
 ```
 
-#### As JSON
+### As JSON `.toJSON()`
 
-* returns a JSON String
-
-Serializing a `Dayjs` object to JSON, will return an ISO8601 string.
+Returns an ISO8601 string.
 
 ```js
 dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
 ```
 
-#### As ISO 8601 String
+### As ISO 8601 String `.toISOString()`
 
-* returns a String
-
-Formats a string to the ISO8601 standard.
+Returns an ISO8601 string.
 
 ```js
 dayjs().toISOString();
 ```
 
-#### As Object
+### As Object `.toObject()`
 
-* returns an Object
-
-Returns an object with year, month ... millisecond.
+Returns an object with year, month, `...`, millisecond.
 
 ```js
-dayjs().toObject(); // { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
+dayjs().toObject();
+// { years: 2018, months: 8, date: 18, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }
 ```
 
-#### As String
+### As String `.toString()`
 
-* returns a String
+Returns a string.
 
 ```js
 dayjs().toString();
 ```
 
----
+## Query
 
-### Query
+### Is Before `.isBefore(compared: Dayjs)`
 
-#### Is Before
-
-* returns a Boolean
-
-Check if a `Dayjs` object is before another `Dayjs` object.
+Returns a boolean indicating whether the `Dayjs` object's date is before a supplied `Dayjs` object's.
 
 ```js
 dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
 ```
 
-#### Is Same
+### Is Same `.isSame(compared: Dayjs)`
 
-* returns a Boolean
-
-Check if a `Dayjs` object is same as another `Dayjs` object.
+Returns a boolean indicating whether the `Dayjs` object's date is the same as a supplied `Dayjs` object's.
 
 ```js
 dayjs().isSame(Dayjs);
 dayjs().isSame(dayjs()); // true
 ```
 
-#### Is After
+### Is After `.isAfter(compared: Dayjs)`
 
-* returns a Boolean
-
-Check if a `Dayjs` object is after another `Dayjs` object.
+Returns a boolean indicating whether the `Dayjs` object's date is after a supplied `Dayjs` object's.
 
 ```js
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
 
-#### Is Leap Year
+### Is Leap Year `.isLeapYear()`
 
-* returns a Boolean
-
-Check if a year is a leap year.
+Returns a boolean indicating whether the `Dayjs` object's year is a leap year or not.
 
 ```js
 dayjs().isLeapYear();
