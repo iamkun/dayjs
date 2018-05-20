@@ -236,7 +236,7 @@ dayjs().subtract(7, 'year');
 
 #### Start of Time
 
-Returns a new `Dayjs` object by by setting it to the start of a unit of time.
+Returns a new `Dayjs` object by setting it to the start of a unit of time.
 
 ```js
 dayjs().startOf((unit: String));
@@ -245,7 +245,7 @@ dayjs().startOf('year');
 
 #### End of Time
 
-Returns a new `Dayjs` object by by setting it to the end of a unit of time.
+Returns a new `Dayjs` object by setting it to the end of a unit of time.
 
 ```js
 dayjs().endOf((unit: String));
