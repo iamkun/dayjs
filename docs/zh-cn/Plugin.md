@@ -10,9 +10,9 @@
 
 #### Extend
 
-* Returns dayjs
+* 将返回dayjs类
 
-Use a plugin.
+使用插件
 
 ```js
 import plugin
@@ -20,7 +20,7 @@ dayjs.extend(plugin)
 dayjs.extend(plugin, options) // with plugin options
 ```
 
-## Installation
+## 安装
 
 * Via NPM:
 
@@ -41,10 +41,10 @@ dayjs.extend(AdvancedFormat) // use plugin
 </script>
 ```
 
-## List of official plugins
+## 官方插件列表
 
 ### AdvancedFormat
- - AdvancedFormat extends `dayjs().format` API to supply more format options.
+ - AdvancedFormat 扩展了 `dayjs().format` API 以支持更多模版
 
 ```javascript
 import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
@@ -54,24 +54,24 @@ dayjs.extend(AdvancedFormat)
 dayjs().format('Q Do k kk X x')
 ```
 
-List of added formats:
+扩展的模版列表：
 
-| Format | Output           | Description                           |
+| 模版   | 输出             | 简介                                  |
 | ------ | ---------------- | ------------------------------------- |
-| `Q`    | 1-4              | Quarter                               |
-| `Do`   | 1st 2nd ... 31st | Day of Month with ordinal             |
-| `k`    | 1-23             | The hour, beginning at 1              |
-| `kk`   | 01-23            | The hour, 2-digits, beginning at 1    |
-| `X`    | 1360013296       | Unix Timestamp in second              |
-| `x`    | 1360013296123    | Unix Timestamp in millisecond         |
+| `Q`    | 1-4              | 季度                                  |
+| `Do`   | 1st 2nd ... 31st | 带序号的月份                          |
+| `k`    | 1-23             | 时：由 1 开始                         |
+| `kk`   | 01-23            | 时：由 1 开始，二位数                 |
+| `X`    | 1360013296       | 秒为单位的Unix时间戳                  |
+| `x`    | 1360013296123    | 毫秒单位的Unix时间戳                  |
 
-## Customize
+## 自定义
 
-You could build your own Day.js plugin to meet different needs.
+你可以根据需要自由的编写一个Day.js插件
 
-Feel free to open a pull request to share your plugin.
+欢迎提交PR与大家分享你的插件
 
-Template of a Day.js plugin.
+Day.js插件模版
 ```javascript
 export default (option, dayjsClass, dayjsFactory) => {
   // extend dayjs()
