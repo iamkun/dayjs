@@ -81,7 +81,6 @@ dayjs.extend(UTCPlugin)
 > dayjs('2018-05-18T03:04:05+06:00').format() // 2018-05-18T05:04:05+08:00
 > ```
 > 而在你加载这个插件之后，`dayjs()`返回实例的时区将会与你传入的值有关
-
 > ```javascript
 > dayjs.extend(UTCPlugin)
 > dayjs('2018-05-18T03:04:05+06:00').format() // 2018-05-18T03:04:05+06:00
