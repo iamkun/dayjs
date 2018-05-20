@@ -4,12 +4,12 @@ export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   // eslint-disable-next-line no-nested-ternary
-  d.en.ordinal = number => {
-    let suffix = 'th';
+  d.en.ordinal = (number) => {
+    let suffix = 'th'
     if (![11, 12].includes(number)) {
-      suffix = ['st', 'nd', 'rd'][number % 10 - 1] || suffix;
+      suffix = ['st', 'nd', 'rd'][(number % 10) - 1] || suffix
     }
-    return `${number}[${suffix}]`;
+    return `${number}[${suffix}]`
   }
   // extend en locale here
   proto.format = function (formatStr, localeObject) {
