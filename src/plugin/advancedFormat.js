@@ -4,7 +4,7 @@ export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   // eslint-disable-next-line no-nested-ternary
-  d.en.ordinal = number => `${number}[${number === 1 ? 'st' : number === 2 ? 'nd' : number === 3 ? 'rd' : 'th'}]`
+  d.en.ordinal = number => `${number}[${number % 10 === 1 ? 'st' : number % 10 === 2 ? 'nd' : number % 10 === 3 ? 'rd' : 'th'}]`
   // extend en locale here
   proto.format = function (formatStr, localeObject) {
     const locale = localeObject || this.$locale()
