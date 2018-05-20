@@ -1,9 +1,9 @@
-English | [简体中文](./README.zh-CN.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md)
+[English](../../README.md) | [简体中文](../../README.zh-CN.md) | Português Brasileiro
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">Alternativa veloz ao Moment.js, com <b>2kB</b> e a mesma API moderna</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
@@ -23,77 +23,77 @@ English | [简体中文](./README.zh-CN.md) | [Português Brasileiro](./docs/pt-
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js é uma biblioteca JavaScript minimalista que analisa, valida, manipula e formata datas e horas para navegadores modernos, usando uma API quase completamente compatível com Moment.js. Se você já usou Moment.js, já sabe usar Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+* 🕒 API & padrões familiares como os do Moment.js
+* 💪 Imutável
+* 🔥 Encadeável
+* 🌐 Suporta I18n
+* 📦 Mini biblioteca de 2kb 
+* 👫 Suporta todos os navegadores    
 
 ---
 
-## Getting Started
+## Começando
 
-### Installation
+### Instalação
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](./docs/en/Installation.md)
+📚[Guia de instalação](./Installation.md)
 
 ### API
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
+A API do Day.js facilita muitas operações com datas e horas.
 
 ```javascript
-dayjs('2018-08-08') // parse
+dayjs('2018-08-08') // análise
 
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // formatação
 
 dayjs().set('month', 3).month() // get & set
 
-dayjs().add(1, 'year') // manipulate
+dayjs().add(1, 'year') // manipular
 
-dayjs().isBefore(dayjs()) // query
+dayjs().isBefore(dayjs()) // verificar
 ```
 
-📚[API Reference](./docs/en/API-reference.md)
+📚[Referência da API](./API-reference.md)
 
 ### I18n
 
-Day.js has great support for internationalization.
+Day.js tem suporte para internacionalização.
 
-But none of them will be included in your build unless you use it.
+As traduções só serão incluídas no seu build quando você usá-las.
 
 ```javascript
-import 'dayjs/locale/es' // load on demand
+import 'dayjs/locale/es' // carregar sob demanda
 
-dayjs.locale('es') // use Spanish locale globally
+dayjs.locale('es') // usar locale espanhol globalmente
 
-dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
+dayjs('2018-05-05').locale('pt-br').format() // usar locale em português brasileiro em uma instância específica
 ```
-📚[Internationalization](./docs/en/I18n.md)
+📚[Internacionalização](./I18n.md)
 
 ### Plugin
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+Um plugin é um módulo independente que pode ser adicionado ao Day.js para estendê-lo com mais funcionalidades.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // carregar sob demanda
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(AdvancedFormat) // usar plugin
 
-dayjs().format('Q Do k kk X x') // more available formats
+dayjs().format('Q Do k kk X x') // mais formatos disponíveis pelo plugin
 ```
-📚[Plugin List](./docs/en/Plugin.md)
+📚[Lista de Plugins](./Plugin.md)
 
-## License
+## Licença
 
-Day.js is licensed under a [MIT  License](./LICENSE).
+Day.js é licenciado sob a [MIT License](../../LICENSE).
