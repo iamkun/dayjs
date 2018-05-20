@@ -99,4 +99,4 @@ dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 
 ## ライセンス
 
-Day.js は [MIT  License](./LICENSE) のもとで利用を許諾します。
+Day.js は [MIT  License](../../LICENSE) のもとで利用を許諾します。
