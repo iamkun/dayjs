@@ -61,21 +61,18 @@ Day.js also parses other date formats.
 #### [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string
 
 ```js
-dayjs(String);
 dayjs('1995-12-25');
 ```
 
 #### Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)
 
 ```js
-dayjs(Number);
 dayjs(1318781876406);
 ```
 
 #### Native Javascript Date object
 
 ```js
-dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 
@@ -85,7 +82,7 @@ Returns a cloned `Dayjs` object.
 
 ```js
 dayjs().clone();
-dayjs(Dayjs); // passing a Dayjs object to a constructor will also clone it
+dayjs(dayjs('2019-01-25')); // passing a Dayjs object to a constructor will also clone it
 ```
 
 ### Validation `.isValid()`
@@ -167,7 +164,9 @@ dayjs().millisecond();
 Returns a `Dayjs` object with the applied changes.
 
 ```js
-dayjs().set('month', 3).set('year', 2020); // April 2020
+dayjs('2000-10-25')
+  .set('month', 3)
+  .set('year', 2020); // Sat, 25 Apr 2020 00:00:00 GMT
 ```
 
 ## Manipulating
@@ -175,10 +174,9 @@ dayjs().set('month', 3).set('year', 2020); // April 2020
 `Dayjs` objects can be manipulated in many ways.
 
 ```js
-dayjs()
-  .startOf('month')
+dayjs('2019-01-25')
   .add(1, 'day')
-  .subtract(1, 'year');
+  .subtract(1, 'year').toString(); // Fri, 26 Jan 2018 00:00:00 GMT
 ```
 
 ### Add `.add(value: number, unit: string)`
@@ -210,8 +208,7 @@ dayjs().startOf('week');
 Returns a Dayjs object set to the end of the specified unit of time.
 
 ```js
-dayjs().endOf('month');
-dayjs().endOf('year');
+dayjs().endOf('month')
 ```
 
 ## Displaying
@@ -222,11 +219,11 @@ Returns a formatted string.
 To escape characters, wrap them in square or culy brackets (e.g. `[G] {um}`).
 
 ```js
-dayjs().format(); // "2020-04-02T08:02:17-05:00" (ISO 8601, no fractional seconds)
+dayjs().format(); // current date in ISO6801, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
 
-dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2020} 04-02T08:02:17-05:00Z"
+dayjs('2019-01-25').format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // '{2019} 01-25T00:00:00-02:00Z'
 
-dayjs().format('DD/MM/YYYY'); // "02/04/2020"
+dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 ```
 
 #### List of all available formats
@@ -262,8 +259,11 @@ dayjs().format('DD/MM/YYYY'); // "02/04/2020"
 Returns a number indicating the difference of two `Dayjs` objects in the specified unit
 
 ```js
-dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+const date1 = dayjs('2019-01-25');
+const date2 = dayjs('2018-06-05');
+date1.diff(date2); // 20214000000 milliseconds
+date1.diff(date2, 'months'); // 7
+date1.diff(date2, 'days'); // 233
 ```
 
 ### Unix Timestamp (milliseconds) `.valueOf()`
@@ -271,7 +271,7 @@ dayjs().diff(dayjs(), 'years'); // 0
 Returns the number of milliseconds since the Unix Epoch.
 
 ```js
-dayjs().valueOf();
+dayjs('2019-01-25').valueOf(); // 1548381600000
 ```
 
 ### Unix Timestamp (seconds) `.unix()`
@@ -279,7 +279,7 @@ dayjs().valueOf();
 Returns the number of seconds since the Unix Epoch.
 
 ```js
-dayjs().unix();
+dayjs('2019-01-25').unix(); // 1548381600
 ```
 
 ### Days in the Month `.daysInMonth()`
@@ -287,7 +287,7 @@ dayjs().unix();
 Returns the number of days in the `Dayjs` object's month.
 
 ```js
-dayjs().daysInMonth();
+dayjs('2019-01-25').daysInMonth(); // 31
 ```
 
 ### As Javascript Date `.toDate()`
@@ -295,7 +295,7 @@ dayjs().daysInMonth();
 Returns a copy of the native `Date` object parsed from the `Dayjs` object.
 
 ```js
-dayjs().toDate();
+dayjs('2019-01-25').toDate();
 ```
 
 ### As Array `.toArray()`
@@ -303,7 +303,7 @@ dayjs().toDate();
 Returns an array that mirrors the parameters from new Date().
 
 ```js
-dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
+dayjs('2019-01-25').toArray(); // [ 2019, 0, 25, 0, 0, 0, 0 ]
 ```
 
 ### As JSON `.toJSON()`
@@ -311,7 +311,7 @@ dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
 Returns an ISO8601 string.
 
 ```js
-dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
+dayjs('2019-01-25').toJSON(); // '2019-01-25T02:00:00.000Z'
 ```
 
 ### As ISO 8601 String `.toISOString()`
@@ -319,24 +319,30 @@ dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
 Returns an ISO8601 string.
 
 ```js
-dayjs().toISOString();
+dayjs('2019-01-25').toISOString(); // '2019-01-25T02:00:00.000Z'
 ```
 
 ### As Object `.toObject()`
 
-Returns an object with year, month, `...`, millisecond.
+Returns an object with the date's properties.
 
 ```js
-dayjs().toObject();
-// { years: 2018, months: 8, date: 18, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }
+dayjs('2019-01-25').toObject();
+/* { years: 2019,
+     months: 0,
+     date: 25,
+     hours: 0,
+     minutes: 0,
+     seconds: 0,
+     milliseconds: 0 } */
 ```
 
 ### As String `.toString()`
 
-Returns a string.
+Returns a string representation of the date.
 
 ```js
-dayjs().toString();
+dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 ```
 
 ## Query
@@ -346,7 +352,6 @@ dayjs().toString();
 Returns a boolean indicating whether the `Dayjs` object's date is before a supplied `Dayjs` object's.
 
 ```js
-dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
 ```
 
@@ -355,7 +360,6 @@ dayjs().isBefore(dayjs()); // false
 Returns a boolean indicating whether the `Dayjs` object's date is the same as a supplied `Dayjs` object's.
 
 ```js
-dayjs().isSame(Dayjs);
 dayjs().isSame(dayjs()); // true
 ```
 
@@ -364,7 +368,6 @@ dayjs().isSame(dayjs()); // true
 Returns a boolean indicating whether the `Dayjs` object's date is after a supplied `Dayjs` object's.
 
 ```js
-dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
 
