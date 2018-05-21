@@ -15,15 +15,18 @@ fs.readdirSync(path.join(__dirname, localeDir))
 it('Locale keys', () => {
   L.forEach((l) => {
     const {
-      name, ordinal, weekdays, months
+      name, ordinal, weekdays, months, relativeTime
     } = l
     expect(name).toEqual(expect.any(String))
     expect(weekdays).toEqual(expect.any(Array))
     expect(months).toEqual(expect.any(Array))
-    if (ordinal) {
-      // function pass date return string or number or null
-      expect(ordinal(1)).toEqual(expect.anything())
-    }
+    // function pass date return string or number or null
+    expect(ordinal(1)).toEqual(expect.anything())
     expect(dayjs().locale(name).$locale().name).toBe(name)
+    if (relativeTime) {
+      expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'min', 'mins', 'mm',
+        'past', 'present', 'q', 'qq', 's', 'ss', 'w', 'ww', 'y', 'yy']
+        .sort())
+    }
   })
 })
