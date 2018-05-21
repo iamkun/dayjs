@@ -375,9 +375,13 @@ class Dayjs {
     return Ls[this.$L]
   }
 
-  locale(preset, object) {
+  $setLocale(preset, object) { // private set locale mutate instance
     this.$L = parseLocale(preset, object, true)
     return this
+  }
+
+  locale(preset, object) {
+    return this.clone().$setLocale(preset, object)
   }
 
   clone() {
