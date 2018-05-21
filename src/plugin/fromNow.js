@@ -23,7 +23,7 @@ export default (o, c, d) => {
     y: 'a year',
     yy: '%d years'
   }
-  proto.fromNow = function (input) {
+  proto.from = function (input) {
     const U = this.$utils()
     const loc = this.$locale().relativeTime
     const P = [{ l: [loc.s, loc.ss], v: C.MILLISECONDS_A_SECOND },
@@ -35,12 +35,16 @@ export default (o, c, d) => {
       { l: [loc.q, loc.qq], v: C.MILLISECONDS_A_WEEK * 12 },
       { l: [loc.y, loc.yy], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
 
-    const result = input.diff(this, `${C.MS}s`)
+    const result = this.diff(input, C.MS)
     if (!result) return loc.present
     const resAbs = Math.abs(result)
     let out = ''
+    const monthDiff = Math.abs(U.absFloor(U.monthDiff(this, d(input))))
     for (let i = 0; i < P.length; i += 1) {
-      if (resAbs >= P[i].v) out = `${P[i].l[resAbs !== P[i].v ? 1 : 0].replace('%d', U.absFloor(resAbs / P[i].v))}`
+      if (resAbs >= P[i].v) {
+        out = `${P[i].l[(resAbs === P[i].v)
+      || [1, 3, 4, 5].indexOf(monthDiff) > -1 || (monthDiff >= 12 && monthDiff <= 23) ? 0 : 1].replace('%d', U.absFloor(resAbs / P[i].v))}`
+      }
     }
     return (result > 0 ? loc.future : loc.past).replace('%s', out)
   }
