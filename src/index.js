@@ -52,7 +52,7 @@ const parseDate = (date) => {
   if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(
-      reg[1], reg[2] - 1, reg[3],
+      reg[1], reg[2] - 1, reg[3] || 1,
       reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
     )
   }
@@ -230,13 +230,15 @@ class Dayjs {
     number = Number(number) // eslint-disable-line no-param-reassign
     // units === 'ms' hard code here, will update in next release
     const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
+    const instanceFactory = (u, n) => {
+      const date = this.set(C.DATE, 1).set(u, n + number)
+      return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
+    }
     if (['M', C.M].indexOf(unit) > -1) {
-      let date = this.set(C.DATE, 1).set(C.M, this.$M + number)
-      date = date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
-      return date
+      return instanceFactory(C.M, this.$M)
     }
     if (['y', C.Y].indexOf(unit) > -1) {
-      return this.set(C.Y, this.$y + number)
+      return instanceFactory(C.Y, this.$y)
     }
     let step
     switch (unit) {
@@ -374,8 +376,9 @@ class Dayjs {
   }
 
   locale(preset, object) {
-    this.$L = parseLocale(preset, object, true)
-    return this
+    const that = this.clone()
+    that.$L = parseLocale(preset, object, true)
+    return that
   }
 
   clone() {

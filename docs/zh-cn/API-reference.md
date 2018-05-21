@@ -1,73 +1,8 @@
-[English](./README.md) | 简体中文
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
-                                                                             src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
-                                                                             alt="Day.js"></a></p>
-<p align="center">Moment.js 的 <b>2kB</b> 轻量化方案，拥有同样强大的 API</p>
-<br>
-<p align="center">
-    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
-            alt="Gzip Size"></a>
-    <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
-                                                       alt="NPM Version"></a>
-    <a href="https://travis-ci.org/xx45/dayjs"><img
-            src="https://img.shields.io/travis/xx45/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
-    <a href="https://codecov.io/gh/xx45/dayjs"><img
-            src="https://img.shields.io/codecov/c/github/xx45/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
-    <a href="https://github.com/xx45/dayjs/blob/master/LICENSE"><img
-            src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
-    <br>
-    <a href="https://saucelabs.com/u/dayjs">
-        <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
-    </a>
-</p>
+## API
 
-> Day.js 是一个轻量的 JavaScript 时间日期处理库，和 Moment.js 的 API 设计保持完全一样. 如果你曾经用过 Moment.js, 那么你已经知道如何使用  Day.js
-
-```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
-```
-
-- 🕒 和 Moment.js 相同的 API 和用法
-- 💪 不可变数据 (Immutable)
-- 🔥 支持链式操作 (Chainable)
-- 📦 仅 2kb 大小的微型库
-- 👫 全浏览器兼容
----
-
-## 安装
-
-可以有如下多种方法安装使用 Day.js:
-
-- NPM:
-```console
-npm install dayjs --save
-```
-```js
-var dayjs = require('dayjs');
-dayjs().format();
-```
-- CDN:
-```html
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://unpkg.com/dayjs"></script>
-<script>
-  dayjs().format();
-</script>
-```
-
-- 下载到您自己的服务器上:
-
-从 [https://unpkg.com/dayjs/](https://unpkg.com/dayjs/) 下载最新的 Dayjs 源文件，并自行部署到您的服务器上。
-
-## 开始
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
 
 `Dayjs` 对象是不可变的, 所有的 API 操作都将返回一个新的 `Dayjs` 对象。
-
-
-## API
-如果没有特别说明，API 的返回值都是新的 `Dayjs` 对象。
 
 * [解析](#解析)
   * [当前时间](#当前时间)
@@ -80,6 +15,7 @@ dayjs().format();
   * [年](#年)
   * [月](#月)
   * [日](#日)
+  * [星期](#星期)
   * [时](#时)
   * [分](#分)
   * [秒](#秒)
@@ -109,6 +45,8 @@ dayjs().format();
   * [是否闰年](#是否闰年)
 
 ---
+如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
+
 ### 解析
 在 `dayjs()` 中传入支持的格式
 #### 当前时间
@@ -135,7 +73,7 @@ dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 ### 复制
-`Dayjs` 对象是不可变的，如果你想获得一个对象的拷贝，请执行 `.clone()`。
+`Dayjs` 对象是不可变的，如果您想获得一个对象的拷贝，请执行 `.clone()`。
 向 `dayjs()` 里传入一个 `Dayjs` 对象也能实现同样的效果。
 ```js
 dayjs(Dayjs);
@@ -171,6 +109,13 @@ dayjs().month();
 获取日期。
 ```js
 dayjs().date();
+```
+#### 星期
+- return Number
+
+获取星期。
+```js
+dayjs().day();
 ```
 #### 时
 - return Number
@@ -210,7 +155,7 @@ dayjs().set('second', 30);
 ```
 ---
 ### 操作
-你可以对 `Dayjs` 对象如下增加减少之类的操作：
+您可以对 `Dayjs` 对象如下增加减少之类的操作：
 ```js
 dayjs().startOf('month').add(1, 'day').subtract(1, 'year')
 ```
@@ -379,7 +324,3 @@ dayjs().isAfter(dayjs()); // false
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(); // true
 ```
----
-## 开源协议
-
-MIT
