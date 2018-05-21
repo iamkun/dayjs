@@ -92,6 +92,7 @@ dayjs.extend(AdvancedFormat) // use plugin
 
 dayjs().format('Q Do k kk X x') // more available formats
 ```
+
 📚[Plugin List](./docs/en/Plugin.md)
 
 ## License
