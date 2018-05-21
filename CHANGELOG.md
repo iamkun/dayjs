@@ -1,3 +1,12 @@
+<a name="1.6.3"></a>
+## [1.6.3](https://github.com/iamkun/dayjs/compare/v1.6.2...v1.6.3) (2018-05-21)
+
+
+### Bug Fixes
+
+* Changing locales locally is immutable from this release ([2cce729](https://github.com/iamkun/dayjs/commit/2cce729)), closes [#182](https://github.com/iamkun/dayjs/issues/182)
+* instance locale change should be immutable ([84597c9](https://github.com/iamkun/dayjs/commit/84597c9))
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/iamkun/dayjs/compare/v1.6.1...v1.6.2) (2018-05-18)
 
