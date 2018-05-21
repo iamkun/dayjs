@@ -37,11 +37,11 @@ export default (o, c, d) => {
 
     const result = input.diff(this, `${C.MS}s`)
     if (!result) return loc.present
-    const resabs = Math.abs(result)
+    const resAbs = Math.abs(result)
     let out = ''
     for (let i = 0; i < P.length; i += 1) {
-      if (resabs >= P[i].v) out = `${P[i].l[resabs !== P[i].v ? 1 : 0].replace('%d', U.absFloor(resabs / P[i].v))}`
+      if (resAbs >= P[i].v) out = `${P[i].l[resAbs !== P[i].v ? 1 : 0].replace('%d', U.absFloor(resAbs / P[i].v))}`
     }
-    return result > 0 ? loc.future.replace('%s', out) : loc.past.replace('%s', out)
+    return (result > 0 ? loc.future : loc.past).replace('%s', out)
   }
 }

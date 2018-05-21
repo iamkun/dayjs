@@ -2,16 +2,6 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'es',
-  MS: 'milisegundo',
-  S: 'segundo',
-  MIN: 'minuto',
-  H: 'hora',
-  D: 'día',
-  W: 'semana',
-  M: 'mes',
-  Q: 'trimestre',
-  Y: 'año',
-  DATE: 'fecha',
   weekdays: 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
   months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
   relativeTime: {
