@@ -1,5 +1,3 @@
-[English](./README.md) | 简体中文 | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md)
-
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
@@ -45,7 +43,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 npm install dayjs --save
 ```
 
-📚[安装指南](./docs/zh-cn/Installation.md)
+📚[安装指南](./Installation.md)
 
 ### API
 
@@ -63,7 +61,7 @@ dayjs().add(1, 'year') // 处理
 dayjs().isBefore(dayjs()) // 查询
 ```
 
-📚[API 参考](./docs/zh-cn/API-reference.md)
+📚[API 参考](./API-reference.md)
 
 ### 国际化 I18n
 
@@ -78,7 +76,7 @@ dayjs.locale('es') // 全局使用西班牙语
 
 dayjs('2018-05-05').locale('zh-cn').format() // 在这个实例上使用简体中文
 ```
-📚[国际化 I18n](./docs/zh-cn/I18n.md)
+📚[国际化 I18n](./I18n.md)
 
 ### 插件
 
@@ -91,7 +89,7 @@ dayjs.extend(AdvancedFormat) // 使用插件
 
 dayjs().format('Q Do k kk X x') // 使用扩展后的API
 ```
-📚[插件列表](./docs/zh-cn/Plugin.md)
+📚[插件列表](./Plugin.md)
 
 ## 开源协议
 

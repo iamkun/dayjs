@@ -3,13 +3,10 @@ import { FORMAT_DEFAULT } from '../constant'
 export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
-  // eslint-disable-next-line no-nested-ternary
   d.en.ordinal = (number) => {
-    let suffix = 'th'
-    if (![11, 12].includes(number)) {
-      suffix = ['st', 'nd', 'rd'][(number % 10) - 1] || suffix
-    }
-    return `${number}[${suffix}]`
+    const s = ['th', 'st', 'nd', 'rd']
+    const v = number % 100
+    return `[${number}${(s[(v - 20) % 10] || s[v] || s[0])}]`
   }
   // extend en locale here
   proto.format = function (formatStr, localeObject) {
