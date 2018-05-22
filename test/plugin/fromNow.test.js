@@ -52,3 +52,17 @@ it('Time from now', () => {
   expect(dayjs(d).fromNow()).toBe(moment(d).fromNow())
   expect(dayjs(d).fromNow(true)).toBe(moment(d).fromNow(true))
 })
+
+
+it('Time to now', () => {
+  const d = '2018-05-02T00:00:00.000'
+  expect(dayjs(d).toNow()).toBe(moment(d).toNow())
+  expect(dayjs(d).toNow(true)).toBe(moment(d).toNow(true))
+})
+
+it('Time to X', () => {
+  // withoutSuffix
+  expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
+  // past date
+  expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
+})

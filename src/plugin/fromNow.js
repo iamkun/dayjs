@@ -17,11 +17,8 @@ export default (o, c, d) => {
     y: 'a year',
     yy: '%d years'
   }
-  proto.fromNow = function (withoutSuffix) {
-    return this.from(d(), withoutSuffix)
-  }
-  proto.from = function (input, withoutSuffix) {
-    const loc = this.$locale().relativeTime
+  const fromTo = (input, withoutSuffix, instance, isFrom) => {
+    const loc = instance.$locale().relativeTime
     const T = [
       { l: 's', r: 44, d: C.S },
       { l: 'min', r: 89 },
@@ -41,7 +38,11 @@ export default (o, c, d) => {
 
     for (let i = 0; i < Tl; i += 1) {
       const t = T[i]
-      if (t.d) result = this.diff(input, t.d, true)
+      if (t.d) {
+        result = isFrom
+          ? d(input).diff(instance, t.d, true)
+          : instance.diff(input, t.d, true)
+      }
       const abs = Math.ceil(Math.abs(result))
       if (abs <= t.r || !t.r) {
         out = loc[t.l].replace('%d', abs)
@@ -49,6 +50,18 @@ export default (o, c, d) => {
       }
     }
     if (withoutSuffix) return out
-    return (result > 0 ? loc.future : loc.past).replace('%s', out)
+    return ((result > 0) ? loc.future : loc.past).replace('%s', out)
+  }
+  proto.to = function (input, withoutSuffix) {
+    return fromTo(input, withoutSuffix, this, true)
+  }
+  proto.from = function (input, withoutSuffix) {
+    return fromTo(input, withoutSuffix, this)
+  }
+  proto.toNow = function (withoutSuffix) {
+    return this.to(d(), withoutSuffix)
+  }
+  proto.fromNow = function (withoutSuffix) {
+    return this.from(d(), withoutSuffix)
   }
 }
