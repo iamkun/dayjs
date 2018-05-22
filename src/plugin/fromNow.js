@@ -17,6 +17,9 @@ export default (o, c, d) => {
     y: 'a year',
     yy: '%d years'
   }
+  proto.fromNow = function (withoutSuffix) {
+    return this.from(d(), withoutSuffix)
+  }
   proto.from = function (input, withoutSuffix) {
     const loc = this.$locale().relativeTime
     const T = [

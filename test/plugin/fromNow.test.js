@@ -13,7 +13,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Time from X ', () => {
+it('Time from X', () => {
   const T = [
     [0, 'second'], // a few seconds
     [44, 'second'], // a few seconds
@@ -45,4 +45,10 @@ it('Time from X ', () => {
   expect(dayjs().from(dayjs().add(3, 'year'), true)).toBe(moment().from(moment().add(3, 'year'), true))
   // past date
   expect(dayjs().from(dayjs().subtract(3, 'year'))).toBe(moment().from(moment().subtract(3, 'year')))
+})
+
+it('Time from now', () => {
+  const d = '2018-05-02T00:00:00.000'
+  expect(dayjs(d).fromNow()).toBe(moment(d).fromNow())
+  expect(dayjs(d).fromNow(true)).toBe(moment(d).fromNow(true))
 })
