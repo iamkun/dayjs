@@ -6,7 +6,7 @@ import fromNow from '../../src/plugin/fromNow'
 dayjs.extend(fromNow)
 
 beforeEach(() => {
-  MockDate.set(new Date())
+  MockDate.set(new Date('2018-05-02T12:00:00.000'))
 })
 
 afterEach(() => {
@@ -48,16 +48,14 @@ it('Time from X', () => {
 })
 
 it('Time from now', () => {
-  const d = '2018-05-02T00:00:00.000'
-  expect(dayjs(d).fromNow()).toBe(moment(d).fromNow())
-  expect(dayjs(d).fromNow(true)).toBe(moment(d).fromNow(true))
+  expect(dayjs().fromNow()).toBe(moment().fromNow())
+  expect(dayjs().fromNow(true)).toBe(moment().fromNow(true))
 })
 
 
 it('Time to now', () => {
-  const d = '2018-05-02T00:00:00.000'
-  expect(dayjs(d).toNow()).toBe(moment(d).toNow())
-  expect(dayjs(d).toNow(true)).toBe(moment(d).toNow(true))
+  expect(dayjs().toNow()).toBe(moment().toNow())
+  expect(dayjs().toNow(true)).toBe(moment().toNow(true))
 })
 
 it('Time to X', () => {
