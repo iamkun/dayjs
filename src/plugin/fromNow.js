@@ -6,8 +6,8 @@ export default (o, c, d) => {
     future: 'in %s',
     past: '%s ago',
     s: 'a few seconds',
-    min: 'a minute',
-    mins: '%d minutes',
+    m: 'a minute',
+    mm: '%d minutes',
     h: 'an hour',
     hh: '%d hours',
     d: 'a day',
@@ -21,8 +21,8 @@ export default (o, c, d) => {
     const loc = instance.$locale().relativeTime
     const T = [
       { l: 's', r: 44, d: C.S },
-      { l: 'min', r: 89 },
-      { l: 'mins', r: 44, d: C.MIN },
+      { l: 'm', r: 89 },
+      { l: 'mm', r: 44, d: C.MIN },
       { l: 'h', r: 89 },
       { l: 'hh', r: 21, d: C.H },
       { l: 'd', r: 35 },
