@@ -27,7 +27,7 @@ export default (o, c, d) => {
       { l: 'hh', r: 21, d: C.H },
       { l: 'd', r: 35 },
       { l: 'dd', r: 25, d: C.D },
-      { l: 'M', r: 46 },
+      { l: 'M', r: 45 },
       { l: 'MM', r: 10, d: C.M },
       { l: 'y', r: 17 },
       { l: 'yy', d: C.Y }

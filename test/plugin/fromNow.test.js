@@ -6,7 +6,7 @@ import fromNow from '../../src/plugin/fromNow'
 dayjs.extend(fromNow)
 
 beforeEach(() => {
-  MockDate.set(new Date('2018-05-02T12:00:00.000'))
+  MockDate.set(new Date('2018-04-04T16:00:00.000Z'))
 })
 
 afterEach(() => {
@@ -30,7 +30,7 @@ it('Time from X', () => {
     [36, 'hour'], // 2 days
     [25, 'day'], // 25 days
     [26, 'day'], // a month
-    [46, 'day'], // a month
+    [45, 'day'], // a month
     [47, 'day'], // 2 month
     [10, 'month'], // 2 month
     [11, 'month'], // a year
