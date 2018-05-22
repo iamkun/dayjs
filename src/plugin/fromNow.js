@@ -5,47 +5,47 @@ export default (o, c, d) => {
   d.en.relativeTime = {
     future: 'in %s',
     past: '%s ago',
-    present: 'just now',
-    s: 'a second',
-    ss: '%d seconds',
+    s: 'a few seconds',
     min: 'a minute',
     mins: '%d minutes',
     h: 'an hour',
     hh: '%d hours',
     d: 'a day',
     dd: '%d days',
-    w: 'a week',
-    ww: '%d weeks',
-    m: 'a month',
-    mm: '%d months',
-    q: 'a quarter',
-    qq: '%d quarters',
+    M: 'a month',
+    MM: '%d months',
     y: 'a year',
     yy: '%d years'
   }
-  proto.from = function (input) {
-    const U = this.$utils()
+  proto.from = function (input, withoutSuffix) {
     const loc = this.$locale().relativeTime
-    const P = [{ l: [loc.s, loc.ss], v: C.MILLISECONDS_A_SECOND },
-      { l: [loc.min, loc.mins], v: C.MILLISECONDS_A_SECOND * 60 },
-      { l: [loc.h, loc.hh], v: C.MILLISECONDS_A_HOUR },
-      { l: [loc.d, loc.dd], v: C.MILLISECONDS_A_DAY },
-      { l: [loc.w, loc.ww], v: C.MILLISECONDS_A_WEEK },
-      { l: [loc.m, loc.mm], v: C.MILLISECONDS_A_WEEK * 4 },
-      { l: [loc.q, loc.qq], v: C.MILLISECONDS_A_WEEK * 12 },
-      { l: [loc.y, loc.yy], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
+    const T = [
+      { l: 's', r: 44, d: C.S },
+      { l: 'min', r: 89 },
+      { l: 'mins', r: 44, d: C.MIN },
+      { l: 'h', r: 89 },
+      { l: 'hh', r: 21, d: C.H },
+      { l: 'd', r: 35 },
+      { l: 'dd', r: 25, d: C.D },
+      { l: 'M', r: 46 },
+      { l: 'MM', r: 10, d: C.M },
+      { l: 'y', r: 17 },
+      { l: 'yy', d: C.Y }
+    ]
+    const Tl = T.length
+    let result
+    let out
 
-    const result = this.diff(input, C.MS)
-    if (!result) return loc.present
-    const resAbs = Math.abs(result)
-    let out = ''
-    const monthDiff = Math.abs(U.absFloor(U.monthDiff(this, d(input))))
-    for (let i = 0; i < P.length; i += 1) {
-      if (resAbs >= P[i].v) {
-        out = `${P[i].l[(resAbs === P[i].v)
-      || [1, 3, 4, 5].indexOf(monthDiff) > -1 || (monthDiff >= 12 && monthDiff <= 23) ? 0 : 1].replace('%d', U.absFloor(resAbs / P[i].v))}`
+    for (let i = 0; i < Tl; i += 1) {
+      const t = T[i]
+      if (t.d) result = this.diff(input, t.d, true)
+      const abs = Math.ceil(Math.abs(result))
+      if (abs <= t.r || !t.r) {
+        out = loc[t.l].replace('%d', abs)
+        break
       }
     }
+    if (withoutSuffix) return out
     return (result > 0 ? loc.future : loc.past).replace('%s', out)
   }
 }
