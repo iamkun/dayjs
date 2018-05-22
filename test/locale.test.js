@@ -49,6 +49,20 @@ it('set global locale', () => {
     .toBe('Saturday 28, April')
 })
 
+it('immutable instance locale', () => {
+  dayjs.locale('en')
+  const origin = dayjs('2018-4-28')
+  expect(origin.format(format))
+    .toBe('Saturday 28, April')
+  expect(origin.locale('es').format(format))
+    .toBe('Sábado 28, Abril')
+  const changed = origin.locale('es')
+  expect(changed.format(format))
+    .toBe('Sábado 28, Abril')
+  expect(origin.format(format))
+    .toBe('Saturday 28, April')
+})
+
 it('User custom locale', () => {
   expect(dayjs('2018-4-28')
     .locale('xx', {
