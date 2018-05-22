@@ -5,6 +5,13 @@ const $superFun = {}
 
 let RETURN_LOCAL_INSTANCE = false
 
+function assign(to, from) {
+  // eslint-disable-next-line
+  for (const key in from) { 
+    to[key] = from[key]
+  }
+}
+
 const dayjsAddon = {
   utc(cfg) {
     const tmpDayjs = this(cfg)
@@ -54,9 +61,10 @@ const DayjsAddon = {
 };
 
 ['clone', 'add', 'subtract'].forEach((key) => {
-  DayjsAddon[key] = function _(...arg) {
+  DayjsAddon[key] = function () {
     const $utcOffset = this.utcOffset()
-    return $superFun[key].call(this, ...arg).utcOffset($utcOffset)
+    // eslint-disable-next-line prefer-rest-params
+    return $superFun[key].apply(this, arguments).utcOffset($utcOffset)
   }
 })
 
@@ -65,6 +73,6 @@ export default (option = {}, Dayjs, dayjs) => {
   Object.getOwnPropertyNames(Dayjs.prototype).forEach((key) => {
     $superFun[key] = Dayjs.prototype[key]
   })
-  Object.assign(dayjs, dayjsAddon)
-  Object.assign(Dayjs.prototype, DayjsAddon)
+  assign(dayjs, dayjsAddon)
+  assign(Dayjs.prototype, DayjsAddon)
 }
