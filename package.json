@@ -16,10 +16,12 @@
   "pre-commit": [
     "lint"
   ],
-  "size-limit": [{
-    "limit": "2.5 KB",
-    "path": "dayjs.min.js"
-  }],
+  "size-limit": [
+    {
+      "limit": "2.99 KB",
+      "path": "dayjs.min.js"
+    }
+  ],
   "jest": {
     "roots": [
       "test"
