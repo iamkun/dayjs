@@ -6,7 +6,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 - [API Reference](#api-reference)
   - [Parsing](#parsing)
-    - [Constructor `.dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
+    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
       - [ISO 8601 string](#iso-8601-string)
       - [Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milliseconds-since-the-unix-epoch---jan-1-1970-12am-utc)
       - [Native Javascript Date object](#native-javascript-date-object)
@@ -48,7 +48,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 ## Parsing
 
-### Constructor `.dayjs(existing?: string | number | Date | Dayjs)`
+### Constructor `dayjs(existing?: string | number | Date | Dayjs)`
 
 Calling it without parameters returns a fresh `Dayjs` object with the current date and time, just like `new Date()` or `moment.now()`.
 
