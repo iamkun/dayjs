@@ -13,9 +13,8 @@ package-lock.json
 coverage
 
 # build
-locale/
-!src/locale/
-plugin/
+/locale
+/plugin
 dayjs.min.js
 
 #dev
