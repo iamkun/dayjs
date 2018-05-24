@@ -14,6 +14,7 @@ coverage
 
 # build
 locale/
+!src/locale/
 plugin/
 dayjs.min.js
 
