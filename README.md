@@ -17,6 +17,8 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
+            <a href="#backers" alt="sponsors on Open Collective"><img src="https://opencollective.com/dayjs/backers/badge.svg" /></a> 
+            <a href="#sponsors" alt="Sponsors on Open Collective"><img src="https://opencollective.com/dayjs/sponsors/badge.svg" /></a> 
     <br>
     <a href="https://saucelabs.com/u/dayjs">
         <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
@@ -94,6 +96,36 @@ dayjs().format('Q Do k kk X x') // more available formats
 ```
 
 📚[Plugin List](./docs/en/Plugin.md)
+
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/dayjs/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/dayjs#backer)]
+
+<a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
+
+<a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/3/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/4/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/5/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/6/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/7/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/8/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/9/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/9/avatar.svg"></a>
+
+
 
 ## License
 
