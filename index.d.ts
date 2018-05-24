@@ -70,7 +70,7 @@ declare namespace dayjs {
   
     toISOString(): string
   
-    toObject(): Object
+    toObject(): DayjsObject
   
     toString(): string
   
