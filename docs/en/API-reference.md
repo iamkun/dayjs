@@ -50,7 +50,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 ### Constructor `dayjs(existing?: string | number | Date | Dayjs)`
 
-Calling it without parameters returns a fresh `Dayjs` object with the current date and time, just like `new Date()` or `moment.now()`.
+Calling it without parameters returns a fresh `Dayjs` object with the current date and time.
 
 ```js
 dayjs();
@@ -61,7 +61,7 @@ Day.js also parses other date formats.
 #### [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string
 
 ```js
-dayjs('1995-12-25');
+dayjs('2018-04-04T16:00:00.000Z');
 ```
 
 #### Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)
