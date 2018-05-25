@@ -1,7 +1,7 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import distanceInWords from '../../src/plugin/distanceInWords'
+import distanceInWords from '../../src/plugin/relativeTime'
 
 dayjs.extend(distanceInWords)
 
