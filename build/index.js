@@ -30,7 +30,7 @@ async function build(option) {
     plugins.forEach((l) => {
       build(configFactory({
         input: `./src/plugin/${l}/index`,
-        fileName: `./plugin/${l}`,
+        fileName: `./plugin/${l}.js`,
         name: `dayjs_plugin_${formatName(l)}`
       }))
     })
