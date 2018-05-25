@@ -43,6 +43,8 @@ Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão 
   * [Igual](#igual)
   * [Depois](#depois)
   * [Ano Bissexto](#ano-bissexto)
+* [Plugin APIs](#plugin-apis)
+  * [RelativeTime](#relativetime)
 
 ---
 O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.
@@ -284,7 +286,7 @@ Lista de todos os formatos disponíveis:
 | `A`     | AM PM            |                                               |
 | `a`     | am pm            |                                               |
 
-* More available formats `Q Do k kk X x ...` in plugin [`advancedFormat`](./Plugin.md#advancedformat)
+* More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 
 #### Diferença
 
@@ -432,3 +434,11 @@ Se um ano é bissexto.
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(); // true
 ```
+
+## Plugin APIs
+
+### RelativeTime
+
+`.from`, `.to`, `.fromNow`, `.toNow` to get relative time
+
+plugin [`RelativeTime`](./Plugin.md#relativeTime)

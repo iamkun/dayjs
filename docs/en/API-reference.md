@@ -45,6 +45,8 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
     - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
+  - [Plugin APIs](#plugin-apis)
+    - [RelativeTime](#relativetime)
 
 ## Parsing
 
@@ -254,7 +256,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |
 
-* More available formats `Q Do k kk X x ...` in plugin [`advancedFormat`](./Plugin.md#advancedformat)
+* More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 
 ### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
 
@@ -381,3 +383,11 @@ Returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
 ```js
 dayjs('2000-01-01').isLeapYear(); // true
 ```
+
+## Plugin APIs
+
+### RelativeTime
+
+`.from`, `.to`, `.fromNow`, `.toNow` to get relative time
+
+plugin [`RelativeTime`](./Plugin.md#relativeTime)

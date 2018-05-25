@@ -43,6 +43,8 @@
   * [是否相同](#是否相同)
   * [是否之后](#是否之后)
   * [是否闰年](#是否闰年)
+* [插件 APIs](#plugin-apis)
+  * [相对时间](#relativetime)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -223,7 +225,7 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
 
-* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`advancedFormat`](./Plugin.md#advancedformat)
+* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
 
 #### 时间差
 - return Number
@@ -329,3 +331,11 @@ dayjs().isAfter(dayjs()); // false
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(); // true
 ```
+
+## 插件 APIs
+
+### 相对时间
+
+`.from`, `.to`, `.fromNow`, `.toNow` 获得相对时间
+
+插件 [`RelativeTime`](./Plugin.md#relativeTime)
