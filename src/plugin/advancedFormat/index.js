@@ -1,4 +1,4 @@
-import { FORMAT_DEFAULT } from '../constant'
+import { FORMAT_DEFAULT } from '../../constant'
 
 export default (o, c, d) => { // locale needed later
   const proto = c.prototype
