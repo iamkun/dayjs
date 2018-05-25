@@ -5,43 +5,63 @@ export default (o, c, d) => {
   d.en.relativeTime = {
     future: 'in %s',
     past: '%s ago',
-    present: 'just now',
-    s: 'a second',
-    ss: '%d seconds',
-    min: 'a minute',
-    mins: '%d minutes',
+    s: 'a few seconds',
+    m: 'a minute',
+    mm: '%d minutes',
     h: 'an hour',
     hh: '%d hours',
     d: 'a day',
     dd: '%d days',
-    w: 'a week',
-    ww: '%d weeks',
-    m: 'a month',
-    mm: '%d months',
-    q: 'a quarter',
-    qq: '%d quarters',
+    M: 'a month',
+    MM: '%d months',
     y: 'a year',
     yy: '%d years'
   }
-  proto.fromNow = function (input) {
-    const U = this.$utils()
-    const loc = this.$locale().relativeTime
-    const P = [{ l: [loc.s, loc.ss], v: C.MILLISECONDS_A_SECOND },
-      { l: [loc.min, loc.mins], v: C.MILLISECONDS_A_SECOND * 60 },
-      { l: [loc.h, loc.hh], v: C.MILLISECONDS_A_HOUR },
-      { l: [loc.d, loc.dd], v: C.MILLISECONDS_A_DAY },
-      { l: [loc.w, loc.ww], v: C.MILLISECONDS_A_WEEK },
-      { l: [loc.m, loc.mm], v: C.MILLISECONDS_A_WEEK * 4 },
-      { l: [loc.q, loc.qq], v: C.MILLISECONDS_A_WEEK * 12 },
-      { l: [loc.y, loc.yy], v: C.MILLISECONDS_A_WEEK * 4 * 12 }]
+  const fromTo = (input, withoutSuffix, instance, isFrom) => {
+    const loc = instance.$locale().relativeTime
+    const T = [
+      { l: 's', r: 44, d: C.S },
+      { l: 'm', r: 89 },
+      { l: 'mm', r: 44, d: C.MIN },
+      { l: 'h', r: 89 },
+      { l: 'hh', r: 21, d: C.H },
+      { l: 'd', r: 35 },
+      { l: 'dd', r: 25, d: C.D },
+      { l: 'M', r: 45 },
+      { l: 'MM', r: 10, d: C.M },
+      { l: 'y', r: 17 },
+      { l: 'yy', d: C.Y }
+    ]
+    const Tl = T.length
+    let result
+    let out
 
-    const result = input.diff(this, `${C.MS}s`)
-    if (!result) return loc.present
-    const resabs = Math.abs(result)
-    let out = ''
-    for (let i = 0; i < P.length; i += 1) {
-      if (resabs >= P[i].v) out = `${P[i].l[resabs !== P[i].v ? 1 : 0].replace('%d', U.absFloor(resabs / P[i].v))}`
+    for (let i = 0; i < Tl; i += 1) {
+      const t = T[i]
+      if (t.d) {
+        result = isFrom
+          ? d(input).diff(instance, t.d, true)
+          : instance.diff(input, t.d, true)
+      }
+      const abs = Math.ceil(Math.abs(result))
+      if (abs <= t.r || !t.r) {
+        out = loc[t.l].replace('%d', abs)
+        break
+      }
     }
-    return result > 0 ? loc.future.replace('%s', out) : loc.past.replace('%s', out)
+    if (withoutSuffix) return out
+    return ((result > 0) ? loc.future : loc.past).replace('%s', out)
+  }
+  proto.to = function (input, withoutSuffix) {
+    return fromTo(input, withoutSuffix, this, true)
+  }
+  proto.from = function (input, withoutSuffix) {
+    return fromTo(input, withoutSuffix, this)
+  }
+  proto.toNow = function (withoutSuffix) {
+    return this.to(d(), withoutSuffix)
+  }
+  proto.fromNow = function (withoutSuffix) {
+    return this.from(d(), withoutSuffix)
   }
 }
