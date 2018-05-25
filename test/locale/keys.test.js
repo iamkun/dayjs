@@ -25,7 +25,7 @@ it('Locale keys', () => {
     expect(dayjs().locale(name).$locale().name).toBe(name)
     if (relativeTime) {
       expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
-        'past', 'present', 's', 'y', 'yy']
+        'past', 's', 'y', 'yy']
         .sort())
     }
   })

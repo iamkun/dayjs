@@ -7,7 +7,6 @@ const locale = {
   relativeTime: {
     future: 'en %s',
     past: 'hace %s',
-    present: 'justo ahora',
     s: 'unos segundos',
     m: 'un minuto',
     mm: '%d minutos',
