@@ -1,4 +1,4 @@
-import * as C from '../constant'
+import * as C from '../../constant'
 
 export default (o, c, d) => {
   const proto = c.prototype
