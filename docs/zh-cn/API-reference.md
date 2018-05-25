@@ -336,6 +336,6 @@ dayjs('2000-01-01').isLeapYear(); // true
 
 ### 相对时间
 
-`.from`, `.to`, `.fromNow`, `.toNow` 获得相对时间
+`.from` `.to` `.fromNow` `.toNow` 获得相对时间
 
-插件 [`RelativeTime`](./Plugin.md#relativeTime)
+插件 [`RelativeTime`](./Plugin.md#relativetime)

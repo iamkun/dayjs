@@ -66,7 +66,7 @@ dayjs().format('Q Do k kk X x')
 | `x`    | 1360013296123    | 毫秒单位的Unix时间戳                  |
 
 ### RelativeTime
- - RelativeTime 增加了 `.from`, `.to`, `.fromNow`, `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
+ - RelativeTime 增加了 `.from` `.to` `.fromNow` `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
 
 ```javascript
 import relativeTime from 'dayjs/plugin/relativeTime'

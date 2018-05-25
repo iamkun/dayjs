@@ -461,6 +461,6 @@ dayjs('2000-01-01').isLeapYear(); // true
 
 ### RelativeTime
 
-`.from`, `.to`, `.fromNow`, `.toNow` to get relative time
+`.from` `.to` `.fromNow` `.toNow` to get relative time
 
-plugin [`RelativeTime`](./Plugin.md#relativeTime)
+plugin [`RelativeTime`](./Plugin.md#relativetime)
