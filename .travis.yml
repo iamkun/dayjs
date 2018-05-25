@@ -14,10 +14,9 @@ script:
   - npm run lint
   - npm test
   - codecov
-  - npm run build
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
-      npx travis-deploy-once && npm install -g @semantic-release/changelog @semantic-release/git  semantic-release && semantic-release && npm run test:sauce;
+      npx travis-deploy-once && npm run build && npm install -g @semantic-release/changelog @semantic-release/git  semantic-release && semantic-release && npm run test:sauce;
     fi
 branches:
   except:
