@@ -26,9 +26,9 @@ dayjs.extend(plugin, options) // プラグインのオプションを指定
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 必要に応じて読み込み
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 必要に応じて読み込み
 
-dayjs.extend(AdvancedFormat) // プラグインを使用
+dayjs.extend(advancedFormat) // プラグインを使用
 ```
 
 * CDN を使う場合:

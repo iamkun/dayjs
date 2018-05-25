@@ -26,9 +26,9 @@ dayjs.extend(plugin, options) // com opções do plugin
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // carregar sob demanda
+import advancedFormat from 'dayjs/plugin/advancedFormat' // carregar sob demanda
 
-dayjs.extend(AdvancedFormat) // usar plugin
+dayjs.extend(advancedFormat) // usar plugin
 ```
 
 * Via CDN:

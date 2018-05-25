@@ -26,9 +26,9 @@ dayjs.extend(plugin, options) // 带参数加载插件
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 按需加载
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 按需加载
 
-dayjs.extend(AdvancedFormat) // 使用插件
+dayjs.extend(advancedFormat) // 使用插件
 ```
 
 * 通过 CDN:
