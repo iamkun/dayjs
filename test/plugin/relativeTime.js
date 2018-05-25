@@ -1,9 +1,9 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import distanceInWords from '../../src/plugin/relativeTime'
+import relativeTime from '../../src/plugin/relativeTime'
 
-dayjs.extend(distanceInWords)
+dayjs.extend(relativeTime)
 
 beforeEach(() => {
   MockDate.set(new Date('2018-04-04T16:00:00.000Z'))
