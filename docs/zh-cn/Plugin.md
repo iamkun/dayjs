@@ -65,6 +65,54 @@ dayjs().format('Q Do k kk X x')
 | `X`    | 1360013296       | 秒为单位的Unix时间戳                  |
 | `x`    | 1360013296123    | 毫秒单位的Unix时间戳                  |
 
+### RelativeTime
+ - RelativeTime 增加了 `.from`, `.to`, `.fromNow`, `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
+
+```javascript
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
+
+dayjs().from(dayjs('1990')) // 2 年以前
+dayjs().from(dayjs(), true) // 2 年
+
+dayjs().fromNow()
+
+dayjs().to(dayjs())
+
+dayjs().toNow()
+```
+
+#### 距离现在的相对时间 `.fromNow(withoutSuffix?: boolean)`
+
+返回 `string` 距离现在的相对时间
+
+#### 距离 X 的相对时间  `.from(compared: Dayjs, withoutSuffix?: boolean)`
+
+返回 `string` 距离 X 的相对时间
+
+#### 到现在的相对时间 `.toNow(withoutSuffix?: boolean)`
+
+返回 `string` 到现在的相对时间
+
+#### 到 X 的相对时间  `.to(compared: Dayjs, withoutSuffix?: boolean)`
+
+返回 `string` 到 X 的相对时间
+
+| Range                    | Key  | Sample Output                    |
+| ------------------------ | ---- | -------------------------------- |
+| 0 到 44 秒                | s    | 几秒前                |
+| 45 到 89 秒               | m    | 1 分钟前                     |
+| 90 秒 到 44 分            | mm   | 2 分钟前 ... 44 分钟前 |
+| 45 到 89 分               | h    | 1 小时前                      |
+| 90 分 到 21 小时          | hh   | 2 小时前 ... 21 小时前     |
+| 22 到 35 小时             | d    | 1 天前                        |
+| 36 小时 到 25 天          | dd   | 2 天前 ... 25 天前       |
+| 26 到 45 天               | M    | 1 个月前                      |
+| 46 天 到 10 月           | MM   | 2 个月前 ... 10 个月前   |
+| 11 月 到 17月            | y    | 1 年前                       |
+| 18 月以上               | yy   | 2 年前 ... 20 年前     |
+
 ## 自定义
 
 你可以根据需要自由的编写一个Day.js插件

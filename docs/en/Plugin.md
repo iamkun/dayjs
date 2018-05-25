@@ -89,7 +89,7 @@ Returns the `string` of relative time from now.
 
 #### Time from X  `.from(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time from the `Dayjs`.
+Returns the `string` of relative time from X.
 
 #### Time to now `.toNow(withoutSuffix?: boolean)`
 
@@ -97,12 +97,11 @@ Returns the `string` of relative time to now.
 
 #### Time to X  `.to(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time to the `Dayjs`.
+Returns the `string` of relative time to X.
 
 | Range                    | Key  | Sample Output                    |
 | ------------------------ | ---- | -------------------------------- |
 | 0 to 44 seconds          | s    | a few seconds ago                |
-| 44 to 44 seconds         | ss   | 44 seconds ago                   |
 | 45 to 89 seconds         | m    | a minute ago                     |
 | 90 seconds to 44 minutes | mm   | 2 minutes ago ... 44 minutes ago |
 | 45 to 89 minutes         | h    | an hour ago                      |
