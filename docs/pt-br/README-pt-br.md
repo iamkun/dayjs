@@ -84,9 +84,9 @@ dayjs('2018-05-05').locale('pt-br').format() // usar locale em português brasil
 Um plugin é um módulo independente que pode ser adicionado ao Day.js para estendê-lo com mais funcionalidades.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // carregar sob demanda
+import advancedFormat from 'dayjs/plugin/advancedFormat' // carregar sob demanda
 
-dayjs.extend(AdvancedFormat) // usar plugin
+dayjs.extend(advancedFormat) // usar plugin
 
 dayjs().format('Q Do k kk X x') // mais formatos disponíveis pelo plugin
 ```
