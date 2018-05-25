@@ -1,53 +1,66 @@
 import MockDate from 'mockdate'
-import timeago from 'timeago.js'
+import moment from 'moment'
 import dayjs from '../../src'
 import fromNow from '../../src/plugin/fromNow'
-import es from '../../src/locale/es'
 
 dayjs.extend(fromNow)
 
 beforeEach(() => {
-  MockDate.set(new Date())
+  MockDate.set(new Date('2018-04-04T16:00:00.000Z'))
 })
 
 afterEach(() => {
   MockDate.reset()
 })
 
-it('fromNow -> in seconds, days, weeks, months, quarters, years ', () => {
-  const dayjsA = dayjs()
-  const dayjsB = dayjs().add(1000, 'days')
-  const dayjsC = dayjs().subtract(1000, 'days')
-  const dayjsD = dayjs().add(20, 'days')
-  const dayjsE = dayjs().subtract(30, 'seconds')
-  const dayjsF = dayjs().subtract(5, 'hours')
-  const dayjsG = dayjs().add(1001, 'days')
+it('Time from X', () => {
+  const T = [
+    [0, 'second'], // a few seconds
+    [44, 'second'], // a few seconds
+    [45, 'second'], // a minute
+    [89, 'second'], // a minute
+    [90, 'second'], // 2 minutes
+    [44, 'minute'], // 44 minutes
+    [45, 'minute'], // an hour
+    [89, 'minute'], // an hour
+    [90, 'minute'], // 2 hours
+    [21, 'hour'], // 21 hours
+    [22, 'hour'], // a day
+    [35, 'hour'], // a day
+    [36, 'hour'], // 2 days
+    [25, 'day'], // 25 days
+    [26, 'day'], // a month
+    [45, 'day'], // a month
+    [47, 'day'], // 2 month
+    [10, 'month'], // 2 month
+    [11, 'month'], // a year
+    [17, 'month'], // a year
+    [18, 'month'] // 2 years
+  ]
 
-  expect(dayjsA.fromNow(dayjsB)).toBe(timeago(dayjsA.toDate()).format(dayjsB.toDate()))
-  expect(dayjsA.fromNow(dayjsC)).toBe(timeago(dayjsA.toDate()).format(dayjsC.toDate()))
-  expect(dayjsA.fromNow(dayjsD)).toBe(timeago(dayjsA.toDate()).format(dayjsD.toDate()))
-  expect(dayjsA.fromNow(dayjsE)).toBe(timeago(dayjsA.toDate()).format(dayjsE.toDate()))
-  expect(dayjsA.fromNow(dayjsF)).toBe(timeago(dayjsA.toDate()).format(dayjsF.toDate()))
-  expect(dayjsB.fromNow(dayjsC)).toBe(timeago(dayjsB.toDate()).format(dayjsC.toDate()))
-  expect(dayjsB.fromNow(dayjsB)).toBe(timeago(dayjsB.toDate()).format(dayjsB.toDate()))
-  expect(dayjsG.fromNow(dayjsC)).toBe(timeago(dayjsG.toDate()).format(dayjsC.toDate()))
+  T.forEach((t) => {
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(moment().from(moment().add(t[0], t[1])))
+  })
+  // withoutSuffix
+  expect(dayjs().from(dayjs().add(3, 'year'), true)).toBe(moment().from(moment().add(3, 'year'), true))
+  // past date
+  expect(dayjs().from(dayjs().subtract(3, 'year'))).toBe(moment().from(moment().subtract(3, 'year')))
 })
 
-it('fromNow -> in seconds, days, weeks, months, quarters, years in Spanish ', () => {
-  const dayjsA = dayjs().locale(es)
-  const dayjsB = dayjs().locale(es).add(1000, 'days')
-  const dayjsC = dayjs().subtract(1000, 'days').locale(es)
-  const dayjsD = dayjs().add(20, 'days').locale(es)
-  const dayjsE = dayjs().subtract(30, 'seconds').locale(es)
-  const dayjsF = dayjs().subtract(5, 'hours').locale(es)
-  const dayjsG = dayjs().add(1001, 'days').locale(es)
+it('Time from now', () => {
+  expect(dayjs().fromNow()).toBe(moment().fromNow())
+  expect(dayjs().fromNow(true)).toBe(moment().fromNow(true))
+})
 
-  expect(dayjsA.fromNow(dayjsB)).toBe('en 2 años')
-  expect(dayjsA.fromNow(dayjsC)).toBe('hace 2 años')
-  expect(dayjsA.fromNow(dayjsD)).toBe('en 2 semanas')
-  expect(dayjsA.fromNow(dayjsE)).toBe('hace 30 segundos')
-  expect(dayjsA.fromNow(dayjsF)).toBe('hace 5 horas')
-  expect(dayjsB.fromNow(dayjsC)).toBe('hace 5 años')
-  expect(dayjsB.fromNow(dayjsB)).toBe('justo ahora')
-  expect(dayjsG.fromNow(dayjsB)).toBe('hace un día')
+
+it('Time to now', () => {
+  expect(dayjs().toNow()).toBe(moment().toNow())
+  expect(dayjs().toNow(true)).toBe(moment().toNow(true))
+})
+
+it('Time to X', () => {
+  // withoutSuffix
+  expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
+  // past date
+  expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
 })
