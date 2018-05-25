@@ -303,6 +303,8 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            | 午前と午後 (大文字)                                      |
 | `a`    | am pm            | 午前と午後 (小文字)                                      |
 
+* More available formats `Q Do k kk X x ...` in plugin [`advancedFormat`](./Plugin.md#advancedformat)
+
 #### Difference
 
 * Number を返します

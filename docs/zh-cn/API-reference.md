@@ -223,6 +223,7 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
 
+* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`advancedFormat`](./Plugin.md#advancedformat)
 
 #### 时间差
 - return Number

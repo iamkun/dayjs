@@ -284,6 +284,8 @@ Lista de todos os formatos disponíveis:
 | `A`     | AM PM            |                                               |
 | `a`     | am pm            |                                               |
 
+* More available formats `Q Do k kk X x ...` in plugin [`advancedFormat`](./Plugin.md#advancedformat)
+
 #### Diferença
 
 * retorna um Number
