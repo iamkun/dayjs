@@ -43,6 +43,8 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Is Same](#is-same)
   * [Is After](#is-after)
   * [Is Leap Year](#is-leap-year)
+* [Plugin APIs](#plugin-apis)
+  * [RelativeTime](#relativetime)
 
 ---
 
@@ -303,6 +305,8 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            | 午前と午後 (大文字)                                      |
 | `a`    | am pm            | 午前と午後 (小文字)                                      |
 
+* More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+
 #### Difference
 
 * Number を返します
@@ -452,3 +456,11 @@ dayjs().isAfter(dayjs()); // false
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(); // true
 ```
+
+## Plugin APIs
+
+### RelativeTime
+
+`.from` `.to` `.fromNow` `.toNow` to get relative time
+
+plugin [`RelativeTime`](./Plugin.md#relativetime)
