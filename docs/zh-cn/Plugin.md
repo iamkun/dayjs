@@ -133,7 +133,7 @@ dayjs.extend(UTCPlugin)
 
       day.utcOffset(240).format()  // 2018-05-18T01:04:05+04:00
     ```
-=======
+
 ### RelativeTime
  - RelativeTime 增加了 `.from` `.to` `.fromNow` `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
 
