@@ -1,9 +1,7 @@
-English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md)
-
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">Moment.js와 호환되는 API를 가진 경량 라이브러리 (<b>2kB</b>)</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
@@ -23,34 +21,34 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js는 Moment.js와 호환되는 대부분의 API를 사용하며, 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력하는 경량 JavaScript 라이브러리입니다. Moment.js를 사용하고 있다면, Day.js는 껌입니다.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+* 🕒 친숙한 Moment.js API와 패턴
+* 💪 불변 오브젝트(Immutable)
+* 🔥 메소드 체인(Chainable)
+* 🌐 I18n 지원
+* 📦 2kb 미니 라이브러리
+* 👫 모든 브라우저 지원
 
 ---
 
-## Getting Started
+## 시작해볼까요!
 
-### Installation
+### 설치
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](./docs/en/Installation.md)
+📚[설치 가이드](./Installation.md)
 
 ### API
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
+Day.js API를 사용해서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력을 쉽게 할 수 있습니다.
 
 ```javascript
 dayjs('2018-08-08') // parse
@@ -64,13 +62,13 @@ dayjs().add(1, 'year') // manipulate
 dayjs().isBefore(dayjs()) // query
 ```
 
-📚[API Reference](./docs/en/API-reference.md)
+📚[API 참고](./API-reference.md)
 
 ### I18n
 
-Day.js has great support for internationalization.
+Day.js는 국제화에 대해 많은 지원을 합니다.
 
-But none of them will be included in your build unless you use it.
+그러나 그것을 사용하지 않는다면, 그 누구도 당신의 빌드에 포함되지 않습니다.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -79,11 +77,12 @@ dayjs.locale('es') // use Spanish locale globally
 
 dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
 ```
-📚[Internationalization](./docs/en/I18n.md)
+
+📚[I18n](./docs/en/I18n.md)
 
 ### Plugin
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+플러그인은 기능을 확장하거나 새로운 기능을 추가하기 위해 Day.js에 추가할 수 있는 독립적인 모듈입니다.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
@@ -93,8 +92,8 @@ dayjs.extend(advancedFormat) // use plugin
 dayjs().format('Q Do k kk X x') // more available formats
 ```
 
-📚[Plugin List](./docs/en/Plugin.md)
+📚[플러그인 목록](./Plugin.md)
 
 ## License
 
-Day.js is licensed under a [MIT  License](./LICENSE).
+Day.js는 [MIT  License](./LICENSE)를 사용합니다.
