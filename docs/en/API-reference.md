@@ -199,7 +199,7 @@ dayjs().subtract(7, 'year');
 
 ### Start of Time `.startOf(unit: string)`
 
-Returns a cloned `Dayjs` set to the end of the specified unit of time.
+Returns a cloned `Dayjs` set to the start of the specified unit of time.
 
 ```js
 dayjs().startOf('week');
