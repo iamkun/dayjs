@@ -9,7 +9,6 @@ const locale = {
     future: 'em %s',
     past: 'há %s',
     s: 'poucos segundos',
-    ss: '%d segundos',
     m: 'um minuto',
     mm: '%d minutos',
     h: 'uma hora',
