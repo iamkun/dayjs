@@ -7,6 +7,9 @@
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
+    <a href="https://packagephobia.now.sh/result?p=dayjs"><img
+            src="https://packagephobia.now.sh/badge?p=dayjs"
+            alt="Install Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
     <a href="https://travis-ci.org/iamkun/dayjs"><img
