@@ -86,9 +86,9 @@ dayjs('2018-05-05').locale('zh-cn').format() // 簡体字中国語を特定の�
 プラグインとは、 Day.js の機能を拡張したり、新たな機能を追加するための独立したモジュールのことです。
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 必要に応じて読み込み
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 必要に応じて読み込み
 
-dayjs.extend(AdvancedFormat) // プラグインを使用
+dayjs.extend(advancedFormat) // プラグインを使用
 
 dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 ```

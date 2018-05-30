@@ -7,12 +7,10 @@
   "scripts": {
     "test": "jest",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
-    "build": "BABEL_ENV=build node build && npm run size",
+    "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit",
-    "postpublish": "npm run test:sauce",
-    "postinstall": "opencollective postinstall"
+    "size": "size-limit"
   },
   "pre-commit": [
     "lint"
@@ -63,6 +61,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
+    "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
@@ -79,14 +78,7 @@
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
     "size-limit": "^0.18.0",
-    "timeago.js": "^3.0.2",
     "typescript": "^2.8.3"
   },
-  "dependencies": {
-    "opencollective": "^1.0.3"
-  },
-  "collective": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/dayjs"
-  }
+  "dependencies": {}
 }

@@ -29,8 +29,8 @@ async function build(option) {
     const plugins = await promisifyReadDir(path.join(__dirname, '../src/plugin'))
     plugins.forEach((l) => {
       build(configFactory({
-        input: `./src/plugin/${l}`,
-        fileName: `./plugin/${l}`,
+        input: `./src/plugin/${l}/index`,
+        fileName: `./plugin/${l}.js`,
         name: `dayjs_plugin_${formatName(l)}`
       }))
     })

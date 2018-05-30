@@ -88,9 +88,9 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(advancedFormat) // use plugin
 
 dayjs().format('Q Do k kk X x') // more available formats
 ```

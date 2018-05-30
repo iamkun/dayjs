@@ -83,9 +83,9 @@ dayjs('2018-05-05').locale('zh-cn').format() // 在这个实例上使用简体�
 插件是一些独立的程序，可以给 Day.js 增加新功能和扩展已有功能
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 按需加载插件
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 按需加载插件
 
-dayjs.extend(AdvancedFormat) // 使用插件
+dayjs.extend(advancedFormat) // 使用插件
 
 dayjs().format('Q Do k kk X x') // 使用扩展后的API
 ```
