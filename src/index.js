@@ -95,14 +95,17 @@ class Dayjs {
   }
 
   isSame(that) {
+    that = that || wrapper(new Date(), this)
     return this.valueOf() === that.valueOf()
   }
 
   isBefore(that) {
+    that = that || wrapper(new Date(), this)
     return this.valueOf() < that.valueOf()
   }
 
   isAfter(that) {
+    that = that || wrapper(new Date(), this)
     return this.valueOf() > that.valueOf()
   }
 
