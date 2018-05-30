@@ -1,69 +1,69 @@
-# Plugin List
+# Lista de Plugins
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+Um plugin é um módulo independente que pode ser adicionado ao Day.js para estendê-lo com mais funcionalidades.
 
-By default, Day.js comes with core code only and no installed plugin.
+Por padrão, o Day.js vêm apenas com seu código central, sem plugins instalados.
 
-You can load multiple plugins based on your need.
+Você pode adicionar vários plugins de acordo com sua necessidade.
 
 ## API
 
 #### Extend
 
-* Returns dayjs
+* Retorna objeto Dayjs
 
-Use a plugin.
+Usar um plugin.
 
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // with plugin options
+dayjs.extend(plugin, options) // com opções do plugin
 ```
 
-## Installation
+## Instalação
 
 * Via NPM:
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // carregar sob demanda
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(advancedFormat) // usar plugin
 ```
 
 * Via CDN:
 ```html
 <script src="https://unpkg.com/dayjs"></script>
-<!-- Load plugin as window.dayjs_plugin_NAME -->
+<!-- carregar plugin como window.dayjs_plugin_NOME -->
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat"></script>
 <script>
   dayjs.extend(dayjs_plugin_advancedFormat);
 </script>
 ```
 
-## List of official plugins
+## Lista de plugins oficiais
 
 ### AdvancedFormat
- - AdvancedFormat extends `dayjs().format` API to supply more format options.
+ - O AdvancedFormat modifica a API de `dayjs().format` para adicionar mais opções de formatação.
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat'
+import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
 
-dayjs.extend(advancedFormat)
+dayjs.extend(AdvancedFormat)
 
 dayjs().format('Q Do k kk X x')
 ```
 
-List of added formats:
+Lista de formatos adicionados:
 
-| Format | Output           | Description                           |
-| ------ | ---------------- | ------------------------------------- |
-| `Q`    | 1-4              | Quarter                               |
-| `Do`   | 1st 2nd ... 31st | Day of Month with ordinal             |
-| `k`    | 1-23             | The hour, beginning at 1              |
-| `kk`   | 01-23            | The hour, 2-digits, beginning at 1    |
-| `X`    | 1360013296       | Unix Timestamp in second              |
-| `x`    | 1360013296123    | Unix Timestamp in millisecond         |
+| Formato | Saída            | Descrição                             |
+| ------- | ---------------- | ------------------------------------- |
+| `Q`     | 1-4              | Quarter                               |
+| `Do`    | 1st 2nd ... 31st | Dia do mês com ordinal                |
+| `k`     | 1-23             | Hora (começando do 1)                 |
+| `kk`    | 01-23            | Hora, com 2 dígitos (começando do 1)  |
+| `X`     | 1360013296       | Unix Timestamp em segundos            |
+| `x`     | 1360013296123    | Unix Timestamp em milissegundos       |
 
 ### RelativeTime
  - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
@@ -114,30 +114,28 @@ Returns the `string` of relative time to X.
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
 
-## Customize
+## Customizar
 
-You could build your own Day.js plugin to meet different needs.
+Você também pode construir seu próprio plugin Day.js para diferentes necessidades. Sinta-se à vontade para abrir um pull request e compartilhar seu plugin com a comunidade.
 
-Feel free to open a pull request to share your plugin.
-
-Template of a Day.js plugin.
+Template de um plugin Day.js.
 ```javascript
 export default (option, dayjsClass, dayjsFactory) => {
-  // extend dayjs()
-  // e.g. add dayjs().isSameOrBefore()
+  // estender dayjs()
+  // ex: adicionar dayjs().isSameOrBefore()
   dayjsClass.prototype.isSameOrBefore = function (arguments) {}
 
-  // extend dayjs
-  // e.g. add dayjs.utc()
+  // estender dayjs
+  // ex: adicionar dayjs.utc()
   dayjsFactory.utc = (arguments) => {}
 
-  // overriding existing API
-  // e.g. extend dayjs().format()
-  const oldFormat = dayjsClass.prototype.format
+  // sobrescrever API existente
+  // ex: estender dayjs().format()
+  const formatoAntigo = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
-    // original format result
-    const result = oldFormat(arguments)
-    // return modified result
+    // original
+    const result = formatoAntigo(arguments)
+    // retornar modificado
   }
 }
 ```

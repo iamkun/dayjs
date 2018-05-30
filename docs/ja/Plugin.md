@@ -1,69 +1,70 @@
-# Plugin List
+# プラグインリスト
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+プラグインとは、 Day.js の機能を拡張したり、新たな機能を追加するための独立したモジュールのことです。
 
-By default, Day.js comes with core code only and no installed plugin.
+デフォルトでは Day.js にはコアコードのみがあり、プラグインはインストールされていません。
 
-You can load multiple plugins based on your need.
+必要に応じて複数のプラグインを読み込むことができます。
 
 ## API
 
-#### Extend
+#### 拡張
 
-* Returns dayjs
+* dayjs オブジェクトを返します
 
-Use a plugin.
+プラグインの使用例です。
 
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // with plugin options
+dayjs.extend(plugin, options) // プラグインのオプションを指定
 ```
 
-## Installation
+## インストール
 
-* Via NPM:
+* NPM を使う場合:
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 必要に応じて読み込み
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(advancedFormat) // プラグインを使用
 ```
 
-* Via CDN:
+* CDN を使う場合:
+
 ```html
 <script src="https://unpkg.com/dayjs"></script>
-<!-- Load plugin as window.dayjs_plugin_NAME -->
+<!-- プラグインを window.dayjs_plugin_NAME として読み込み -->
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat"></script>
 <script>
   dayjs.extend(dayjs_plugin_advancedFormat);
 </script>
 ```
 
-## List of official plugins
+## 公式プラグイン
 
 ### AdvancedFormat
- - AdvancedFormat extends `dayjs().format` API to supply more format options.
+ - AdvancedFormat はより多様なフォーマットを表現するために `dayjs().format` API を拡張するプラグインです。
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat'
+import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
 
-dayjs.extend(advancedFormat)
+dayjs.extend(AdvancedFormat)
 
 dayjs().format('Q Do k kk X x')
 ```
 
-List of added formats:
+追加されるフォーマットの一覧:
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
-| `Q`    | 1-4              | Quarter                               |
-| `Do`   | 1st 2nd ... 31st | Day of Month with ordinal             |
-| `k`    | 1-23             | The hour, beginning at 1              |
-| `kk`   | 01-23            | The hour, 2-digits, beginning at 1    |
-| `X`    | 1360013296       | Unix Timestamp in second              |
-| `x`    | 1360013296123    | Unix Timestamp in millisecond         |
+| `Q`    | 1-4              | 四半期                               |
+| `Do`   | 1st 2nd ... 31st | 序数付きの日             |
+| `k`    | 1-23             | 1始まりの時間              |
+| `kk`   | 01-23            | 1始まりで2桁の時間    |
+| `X`    | 1360013296       | Unix タイムスタンプ (秒)              |
+| `x`    | 1360013296123    | Unix タイムスタンプ (ミリ秒)         |
 
 ### RelativeTime
  - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
@@ -114,30 +115,31 @@ Returns the `string` of relative time to X.
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
 
-## Customize
+## カスタマイズ
 
-You could build your own Day.js plugin to meet different needs.
+さまざまなニーズに合わせて独自の Day.js プラグインを構築することができます。
 
-Feel free to open a pull request to share your plugin.
+あなたのプラグインを共有する pull request を是非送ってみてください。
 
-Template of a Day.js plugin.
+以下は Day.js プラグインのテンプレートです。
+
 ```javascript
 export default (option, dayjsClass, dayjsFactory) => {
-  // extend dayjs()
-  // e.g. add dayjs().isSameOrBefore()
+  // dayjs() を拡張する
+  // 例) dayjs().isSameOrBefore() を追加
   dayjsClass.prototype.isSameOrBefore = function (arguments) {}
 
-  // extend dayjs
-  // e.g. add dayjs.utc()
+  // dayjs() を拡張する
+  // 例) dayjs().utc() を追加
   dayjsFactory.utc = (arguments) => {}
 
-  // overriding existing API
-  // e.g. extend dayjs().format()
+  // 既存 API の上書き
+  // 例) dayjs().format() を拡張
   const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
-    // original format result
+    // 既存のフォーマット
     const result = oldFormat(arguments)
-    // return modified result
+    // 変更後のフォーマット
   }
 }
 ```

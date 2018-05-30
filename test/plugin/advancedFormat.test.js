@@ -36,6 +36,14 @@ it('Format Day of Month Do 1 - 31', () => {
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
   d = '2018-05-04 00:00:00.000'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-11'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-12'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-13'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
+  d = '2018-05-22'
+  expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
 })
 
 it('Format Hour k kk 24-hour 1 - 24', () => {

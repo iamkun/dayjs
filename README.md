@@ -1,4 +1,4 @@
-English | [简体中文](./README.zh-CN.md)
+English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md)
 
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -86,13 +86,32 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(advancedFormat) // use plugin
 
 dayjs().format('Q Do k kk X x') // more available formats
 ```
+
 📚[Plugin List](./docs/en/Plugin.md)
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
+
+<a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/2/avatar.svg"></a>
+
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+Please give us a 💖 star 💖 to support us. Thank you.
+
+And thank you to all our backers! 🙏
+<a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
+
 
 ## License
 

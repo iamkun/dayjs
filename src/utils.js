@@ -24,7 +24,7 @@ const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
 
 const prettyUnit = u => (u && String(u).toLowerCase().replace(/s$/, ''))
 
-const isUndefined = s => s === undefined
+const isUndefined = s => s === void 0 // eslint-disable-line no-void
 
 export default {
   padStart,
