@@ -16,9 +16,12 @@ coverage
 src
 test
 build
+.babelrc
+.eslintrc.json
 
 #doc
 CONTRIBUTING.md
+docs
 
 #other
 .travis.yml
