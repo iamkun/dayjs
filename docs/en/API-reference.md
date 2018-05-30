@@ -168,7 +168,7 @@ Returns a `Dayjs` with the applied changes.
 ```js
 dayjs('2000-10-25')
   .set('month', 3)
-  .set('year', 2020).toString(); // Sat, 25 Apr 2020 00:00:00 GMT
+  .set('year', 2020).toString(); // Sat, 25 Mar 2020 00:00:00 GMT
 ```
 
 ## Manipulating
