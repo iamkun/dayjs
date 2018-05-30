@@ -105,8 +105,11 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. And thank you to all our backers! 🙏
+This project exists thanks to all the people who contribute.
+
 Give us a 💖star💖 to support us. Thank you.
+
+And thank you to all our backers! 🙏
 <a href="/graphs/contributors"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 
