@@ -110,7 +110,7 @@ This project exists thanks to all the people who contribute.
 Give us a 💖star💖 to support us. Thank you.
 
 And thank you to all our backers! 🙏
-<a href="/graphs/contributors"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
+<a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 
 ## License
