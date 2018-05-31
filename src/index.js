@@ -156,8 +156,8 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
-    const instanceFactory = (d, m, y = this.$y) => {
-      const ins = wrapper(new Date(y, m, d), this)
+    const instanceFactory = (d, m) => {
+      const ins = wrapper(new Date(this.$y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
@@ -171,13 +171,13 @@ class Dayjs {
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11, this.$y)
+          instanceFactory(31, 11)
       case C.M:
         return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1, this.$y)
+          instanceFactory(0, this.$M + 1)
       case C.W:
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y)
+          instanceFactory(this.$D + (6 - this.$W), this.$M)
       case C.D:
       case C.DATE:
         return instanceFactorySet('setHours', 0)
