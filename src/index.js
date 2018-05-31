@@ -156,8 +156,8 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
-    const instanceFactory = (d, m, y = this.$y) => {
-      const ins = wrapper(new Date(y, m, d), this)
+    const instanceFactory = (d, m) => {
+      const ins = wrapper(new Date(this.$y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
@@ -171,13 +171,13 @@ class Dayjs {
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11, this.$y)
+          instanceFactory(31, 11)
       case C.M:
         return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1, this.$y)
+          instanceFactory(0, this.$M + 1)
       case C.W:
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y)
+          instanceFactory(this.$D + (6 - this.$W), this.$M)
       case C.D:
       case C.DATE:
         return instanceFactorySet('setHours', 0)
@@ -234,37 +234,31 @@ class Dayjs {
 
   add(number, units) {
     number = Number(number) // eslint-disable-line no-param-reassign
-    // units === 'ms' hard code here, will update in next release
-    const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
+    const unit = Utils.prettyUnit(units)
     const instanceFactory = (u, n) => {
       const date = this.set(C.DATE, 1).set(u, n + number)
       return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
     }
-    if (['M', C.M].indexOf(unit) > -1) {
+    if (unit === C.M) {
       return instanceFactory(C.M, this.$M)
     }
-    if (['y', C.Y].indexOf(unit) > -1) {
+    if (unit === C.Y) {
       return instanceFactory(C.Y, this.$y)
     }
     let step
     switch (unit) {
-      case 'm':
       case C.MIN:
         step = C.MILLISECONDS_A_MINUTE
         break
-      case 'h':
       case C.H:
         step = C.MILLISECONDS_A_HOUR
         break
-      case 'd':
       case C.D:
         step = C.MILLISECONDS_A_DAY
         break
-      case 'w':
       case C.W:
         step = C.MILLISECONDS_A_WEEK
         break
-      case 's':
       case C.S:
         step = C.MILLISECONDS_A_SECOND
         break
