@@ -36,14 +36,11 @@ const dayjs = (date, c) => {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const toDayjs = input => (isDayjs(input) ? input : dayjs(input.valueOf()))
-
 const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
 
 const Utils = U // for plugin use
 Utils.parseLocale = parseLocale
 Utils.isDayjs = isDayjs
-Utils.toDayjs = toDayjs
 Utils.wrapper = wrapper
 
 const parseDate = (date) => {
@@ -99,16 +96,20 @@ class Dayjs {
     return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
   }
 
-  isSame(input) {
-    return this.valueOf() === toDayjs(input).valueOf()
+  $compare(that) {
+    return this.valueOf() - dayjs(that).valueOf()
   }
 
-  isBefore(input) {
-    return this.valueOf() < toDayjs(input).valueOf()
+  isSame(that) {
+    return this.$compare(that) === 0
   }
 
-  isAfter(input) {
-    return this.valueOf() > toDayjs(input).valueOf()
+  isBefore(that) {
+    return this.$compare(that) < 0
+  }
+
+  isAfter(that) {
+    return this.$compare(that) > 0
   }
 
   year() {
@@ -339,7 +340,7 @@ class Dayjs {
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
-    const that = toDayjs(input)
+    const that = dayjs(input)
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
