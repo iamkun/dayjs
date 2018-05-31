@@ -10,7 +10,7 @@ it('PrettyUnit', () => {
   expect(prettyUnit('Days')).toBe('day')
   expect(prettyUnit('days')).toBe('day')
   expect(prettyUnit('day')).toBe('day')
-  expect(prettyUnit()).toBe(undefined)
+  expect(prettyUnit()).toBe('')
 })
 
 it('PadZoneStr', () => {
