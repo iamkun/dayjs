@@ -52,7 +52,9 @@ const parseDate = (date) => {
   if (Utils.isUndefined(date)) return new Date()
   if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
-  if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
+  if ((typeof date === 'string')
+    && (/.*[^Z]$/i.test(date)) // looking for a better way
+    && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(
       reg[1], reg[2] - 1, reg[3] || 1,
