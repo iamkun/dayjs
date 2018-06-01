@@ -5,7 +5,7 @@ const locale = {
   weekdays: 'Zondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrijdag_Zaterdag'.split('_'),
   months: 'Januari_Februari_Maart_April_Mei_Juni_Juli_Augustus_September_Oktober_November_December'.split('_'),
   ordinal: n => `${n}.`,
-  relativeTime = {
+  relativeTime: {
     future: 'over %s',
     past: '%s geleden',
     s: 'een paar seconden',
