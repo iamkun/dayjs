@@ -1,3 +1,5 @@
+import * as C from './constant'
+
 const padStart = (string, length, pad) => {
   const s = String(string)
   if (!s || s.length >= length) return string
@@ -22,9 +24,21 @@ const monthDiff = (a, b) => {
 
 const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
 
-const prettyUnit = u => (u && String(u).toLowerCase().replace(/s$/, ''))
+const prettyUnit = (u) => {
+  const special = {
+    M: C.M,
+    y: C.Y,
+    w: C.W,
+    d: C.D,
+    h: C.H,
+    m: C.MIN,
+    s: C.S,
+    ms: C.MS
+  }
+  return special[u] || String(u || '').toLowerCase().replace(/s$/, '')
+}
 
-const isUndefined = s => s === void 0 // eslint-disable-line no-void
+const isUndefined = s => s === undefined
 
 export default {
   padStart,

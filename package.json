@@ -10,7 +10,7 @@
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit"
+    "size": "size-limit && gzip-size dayjs.min.js"
   },
   "pre-commit": [
     "lint"
@@ -66,6 +66,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.15.0",
+    "gzip-size-cli": "^2.1.0",
     "jasmine-core": "^2.99.1",
     "jest": "^22.4.3",
     "karma": "^2.0.2",

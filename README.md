@@ -95,6 +95,24 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[Plugin List](./docs/en/Plugin.md)
 
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
+
+<a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/dayjs/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/2/avatar.svg"></a>
+
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+Please give us a 💖 star 💖 to support us. Thank you.
+
+And thank you to all our backers! 🙏
+<a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
+
+
 ## License
 
 Day.js is licensed under a [MIT  License](./LICENSE).
