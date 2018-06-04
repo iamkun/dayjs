@@ -168,7 +168,7 @@ Returns a `Dayjs` with the applied changes.
 ```js
 dayjs('2000-10-25')
   .set('month', 3)
-  .set('year', 2020).toString(); // Sat, 25 Apr 2020 00:00:00 GMT
+  .set('year', 2020).toString(); // Sat, 25 Mar 2020 00:00:00 GMT
 ```
 
 ## Manipulating
@@ -199,7 +199,7 @@ dayjs().subtract(7, 'year');
 
 ### Start of Time `.startOf(unit: string)`
 
-Returns a cloned `Dayjs` set to the end of the specified unit of time.
+Returns a cloned `Dayjs` set to the start of the specified unit of time.
 
 ```js
 dayjs().startOf('week');

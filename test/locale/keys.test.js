@@ -22,6 +22,7 @@ it('Locale keys', () => {
     expect(months).toEqual(expect.any(Array))
     // function pass date return string or number or null
     expect(ordinal(1)).toEqual(expect.anything())
+    expect(ordinal(3)).toEqual(expect.anything())
     expect(dayjs().locale(name).$locale().name).toBe(name)
     if (relativeTime) {
       expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
