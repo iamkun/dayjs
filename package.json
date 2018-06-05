@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
+    "lint": "./node_modules/.bin/eslint --fix src/* test/* build/*",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
