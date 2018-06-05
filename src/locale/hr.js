@@ -8,6 +8,7 @@ const locale = {
     future: 'za %s',
     past: 'prije %s',
     s: 'sekunda',
+    ss: '%d sekundi',
     m: 'minuta',
     mm: '%d minuta',
     h: 'sat',
