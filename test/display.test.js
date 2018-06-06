@@ -34,6 +34,7 @@ it('Format Day of Month D DD 1 - 31', () => {
 
 it('Format Day of Week d Sun - Sat', () => {
   expect(dayjs().format('d')).toBe(moment().format('d'))
+  expect(dayjs().format('dd')).toBe(moment().format('dd'))
   expect(dayjs().format('ddd')).toBe(moment().format('ddd'))
   expect(dayjs().format('dddd')).toBe(moment().format('dddd'))
 })
@@ -97,7 +98,8 @@ it('Format Time Zone ZZ', () => {
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
 })
 
-it('Format ddd MMM with short locale', () => {
+it('Format ddd dd MMM with short locale', () => {
+  expect(dayjs().locale(th).format('dd')).toBe(moment().locale('th').format('dd'))
   expect(dayjs().locale(th).format('ddd')).toBe(moment().locale('th').format('ddd'))
   expect(dayjs().locale(th).format('MMM')).toBe(moment().locale('th').format('MMM'))
 })
