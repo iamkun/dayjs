@@ -241,6 +241,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `D`    | 1-31             | The day of the month                  |
 | `DD`   | 01-31            | The day of the month, 2-digits        |
 | `d`    | 0-6              | The day of the week, with Sunday as 0 |
+| `ddd`  | Sun-Sat          | The short name of the day of the week |
 | `dddd` | Sunday-Saturday  | The name of the day of the week       |
 | `H`    | 0-23             | The hour                              |
 | `HH`   | 00-23            | The hour, 2-digits                    |

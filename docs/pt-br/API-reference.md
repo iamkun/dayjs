@@ -271,6 +271,7 @@ Lista de todos os formatos disponíveis:
 | `D`     | 1-31             | Dia do mês                                    |
 | `DD`    | 01-31            | Dia do mês, com 2 dígitos                     |
 | `d`     | 0-6              | Dia da semana (Domingo = 0)                   |
+| `ddd`   | Sun-Sat          | The short name of the day of the week |
 | `dddd`  | Sunday-Saturday  | Nome do dia da semana                         |
 | `H`     | 0-23             | Hora                                          |
 | `HH`    | 00-23            | Hora, com 2 dígitos                           |
