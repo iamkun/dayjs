@@ -212,6 +212,8 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 | `D`    | 1-31             | 月份里的一天                 |
 | `DD`   | 01-31            | 月份里的一天，两位数         |
 | `d`    | 0-6              | 一周中的一天，星期天是 0     |
+| `dd`   | Su-Sa            | 最简写的一周中一天的名称  |
+| `ddd`  | Sun-Sat          | 简写的一周中一天的名称      |
 | `dddd` | Sunday-Saturday  | 一周中一天的名称             |
 | `H`    | 0-23             | 小时                         |
 | `HH`   | 00-23            | 小时，两位数                 |
@@ -324,6 +326,9 @@ dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
 #### 是否闰年
+
+**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
+
 - return Boolean
 
 是否闰年。
@@ -339,3 +344,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` 获得相对时间
 
 插件 [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` 获得是否闰年
+
+插件 [`IsLeapYear`](./Plugin.md#isleapyear)

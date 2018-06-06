@@ -271,6 +271,8 @@ Lista de todos os formatos disponíveis:
 | `D`     | 1-31             | Dia do mês                                    |
 | `DD`    | 01-31            | Dia do mês, com 2 dígitos                     |
 | `d`     | 0-6              | Dia da semana (Domingo = 0)                   |
+| `dd`    | Su-Sa            | The min name of the day of the week   |
+| `ddd`   | Sun-Sat          | The short name of the day of the week |
 | `dddd`  | Sunday-Saturday  | Nome do dia da semana                         |
 | `H`     | 0-23             | Hora                                          |
 | `HH`    | 00-23            | Hora, com 2 dígitos                           |
@@ -426,6 +428,8 @@ dayjs().isAfter(dayjs()); // false
 
 #### Ano Bissexto
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 * retorna um Boolean
 
 Se um ano é bissexto.
@@ -442,3 +446,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` to get relative time
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

@@ -113,6 +113,17 @@ dayjs().toNow()
 | 11 月 到 17月            | y    | 1 年前                       |
 | 18 月以上               | yy   | 2 年前 ... 20 年前     |
 
+## IsLeapYear
+ - IsLeapYear 增加了 `.isLeapYear` API 返回一个 `boolean` 来展示一个 `Dayjs`'s 的年份是不是闰年.
+
+```javascript
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear(); // true
+```
+
 ## 自定义
 
 你可以根据需要自由的编写一个Day.js插件

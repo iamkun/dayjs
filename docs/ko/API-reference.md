@@ -241,6 +241,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `D`    | 1-31             | 일                                    |
 | `DD`   | 01-31            | 일, 두 자리로 표현                     |
 | `d`    | 0-6              | 요일, 일요일은 0                       |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
+| `ddd`  | Sun-Sat          | The short name of the day of the week |
 | `dddd` | Sunday-Saturday  | 요일 이름                              |
 | `H`    | 0-23             | 시간                                  |
 | `HH`   | 00-23            | 시간, 두 자리로 표현                   |
@@ -378,6 +380,8 @@ dayjs().isAfter(dayjs()); // false
 
 ### Is Leap Year `.isLeapYear()`
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 `Dayjs` 값이 윤년인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
 ```js
@@ -391,3 +395,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow`에 대한 상대 시간을 가져옵니다.
 
 플러그인 [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

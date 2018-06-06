@@ -290,6 +290,8 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `D`    | 1-31             | 日                  |
 | `DD`   | 01-31            | 2桁の日        |
 | `d`    | 0-6              | 曜日 (日曜は0) |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
+| `ddd`  | Sun-Sat          | 曜日の略称 |
 | `dddd` | Sunday-Saturday  | 曜日名       |
 | `H`    | 0-23             | 時間                              |
 | `HH`   | 00-23            | 2桁の時間                    |
@@ -448,6 +450,8 @@ dayjs().isAfter(dayjs()); // false
 
 #### Is Leap Year
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 * Boolean を返します
 
 その年がうるう年かどうかをチェックします。
@@ -464,3 +468,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` to get relative time
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

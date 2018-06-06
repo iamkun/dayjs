@@ -274,13 +274,16 @@ class Dayjs {
   }
 
 
-  format(formatStr, localeObject) {
+  format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    const locale = localeObject || this.$locale()
+    const locale = this.$locale()
     const {
-      weekdays, months, weekdaysShort, monthsShort
+      weekdays, months
     } = locale
+    const getShort = (arr, index, full, length) => (
+      (arr && arr[index]) || full[index].substr(0, length)
+    )
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -293,7 +296,7 @@ class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return (monthsShort && monthsShort[this.$M]) || months[this.$M].slice(0, 3)
+          return getShort(locale.monthsShort, this.$M, months, 3)
         case 'MMMM':
           return months[this.$M]
         case 'D':
@@ -302,8 +305,10 @@ class Dayjs {
           return Utils.padStart(this.$D, 2, '0')
         case 'd':
           return String(this.$W)
+        case 'dd':
+          return getShort(locale.weekdaysMin, this.$W, weekdays, 2)
         case 'ddd':
-          return (weekdaysShort && weekdaysShort[this.$W]) || weekdays[this.$M].substr(0, 3)
+          return getShort(locale.weekdaysShort, this.$W, weekdays, 3)
         case 'dddd':
           return weekdays[this.$W]
         case 'H':

@@ -113,6 +113,16 @@ Returns the `string` of relative time to X.
 | 11 months to 17months    | y    | a year ago                       |
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
+### IsLeapYear
+ - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+
+```javascript
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear(); // true
+```
 
 ## Customizar
 
