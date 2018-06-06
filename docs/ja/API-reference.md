@@ -450,6 +450,8 @@ dayjs().isAfter(dayjs()); // false
 
 #### Is Leap Year
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 * Boolean を返します
 
 その年がうるう年かどうかをチェックします。

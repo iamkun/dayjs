@@ -380,6 +380,8 @@ dayjs().isAfter(dayjs()); // false
 
 ### Is Leap Year `.isLeapYear()`
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 `Dayjs` 값이 윤년인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
 ```js

@@ -326,6 +326,9 @@ dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
 #### 是否闰年
+
+**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
+
 - return Boolean
 
 是否闰年。

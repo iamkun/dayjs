@@ -380,6 +380,8 @@ dayjs().isAfter(dayjs()); // false
 
 ### Is Leap Year `.isLeapYear()`
 
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
+
 Returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
 
 ```js
