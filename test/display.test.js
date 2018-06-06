@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import th from '../src/locale/th'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -33,6 +34,7 @@ it('Format Day of Month D DD 1 - 31', () => {
 
 it('Format Day of Week d Sun - Sat', () => {
   expect(dayjs().format('d')).toBe(moment().format('d'))
+  expect(dayjs().format('ddd')).toBe(moment().format('ddd'))
   expect(dayjs().format('dddd')).toBe(moment().format('dddd'))
 })
 
@@ -93,6 +95,11 @@ it('Format Time Zone ZZ', () => {
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
   MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 5.5 * -1)
   expect(dayjs().format('ZZ')).toBe(moment().format('ZZ'))
+})
+
+it('Format ddd MMM with short locale', () => {
+  expect(dayjs().locale(th).format('ddd')).toBe(moment().locale('th').format('ddd'))
+  expect(dayjs().locale(th).format('MMM')).toBe(moment().locale('th').format('MMM'))
 })
 
 it('Format Complex with other string - : / ', () => {

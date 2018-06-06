@@ -303,7 +303,7 @@ class Dayjs {
         case 'd':
           return String(this.$W)
         case 'ddd':
-          return (weekdaysShort && weekdaysShort[this.$W]) || weekdays[this.$M].substr(0, 3)
+          return (weekdaysShort && weekdaysShort[this.$W]) || weekdays[this.$W].substr(0, 3)
         case 'dddd':
           return weekdays[this.$W]
         case 'H':
