@@ -113,6 +113,16 @@ X 시간부터 상대시간을 `string`으로 반환합니다.
 | 11 달 ~ 17 달     | y    | 일년 전                |
 | 18 달 이상        | yy   | 2 년 전 ~ 20 년 전     |
 
+### IsLeapYear
+ - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+
+```javascript
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear(); // true
+```
 
 ## Customize
 
