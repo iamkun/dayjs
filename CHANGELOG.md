@@ -1,3 +1,11 @@
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/iamkun/dayjs/compare/v1.6.5...v1.6.6) (2018-06-06)
+
+
+### Bug Fixes
+
+*  format API update and locale file update ([5ca48f0](https://github.com/iamkun/dayjs/commit/5ca48f0)), closes [#228](https://github.com/iamkun/dayjs/issues/228)
+
 <a name="1.6.5"></a>
 ## [1.6.5](https://github.com/iamkun/dayjs/compare/v1.6.4...v1.6.5) (2018-05-31)
 
