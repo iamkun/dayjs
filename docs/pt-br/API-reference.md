@@ -444,3 +444,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` to get relative time
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

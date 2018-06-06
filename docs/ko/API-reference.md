@@ -393,3 +393,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow`에 대한 상대 시간을 가져옵니다.
 
 플러그인 [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

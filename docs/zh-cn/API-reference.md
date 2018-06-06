@@ -341,3 +341,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` 获得相对时间
 
 插件 [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` 获得是否闰年
+
+插件 [`IsLeapYear`](./Plugin.md#isleapyear)
