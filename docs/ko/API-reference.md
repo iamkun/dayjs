@@ -241,6 +241,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `D`    | 1-31             | 일                                    |
 | `DD`   | 01-31            | 일, 두 자리로 표현                     |
 | `d`    | 0-6              | 요일, 일요일은 0                       |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
 | `ddd`  | Sun-Sat          | The short name of the day of the week |
 | `dddd` | Sunday-Saturday  | 요일 이름                              |
 | `H`    | 0-23             | 시간                                  |

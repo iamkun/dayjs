@@ -290,6 +290,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `D`    | 1-31             | 日                  |
 | `DD`   | 01-31            | 2桁の日        |
 | `d`    | 0-6              | 曜日 (日曜は0) |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
 | `ddd`  | Sun-Sat          | 曜日の略称 |
 | `dddd` | Sunday-Saturday  | 曜日名       |
 | `H`    | 0-23             | 時間                              |
