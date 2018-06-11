@@ -4,10 +4,9 @@ export default (o, c) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   // extend en locale here
-  proto.format = function (formatStr, localeObject) {
+  proto.format = function (formatStr) {
     const yearBias = 543
     const utils = this.$utils()
-    const locale = localeObject || this.$locale()
     const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/BBBB|BB/g, (match) => {
       switch (match) {
@@ -17,6 +16,6 @@ export default (o, c) => { // locale needed later
           return utils.padStart(String(this.$y + yearBias), 4, '0')
       }
     })
-    return oldFormat.bind(this)(result, locale)
+    return oldFormat.bind(this)(result)
   }
 }
