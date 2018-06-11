@@ -29,7 +29,7 @@ export default (o, c, d) => { // locale needed later
           return this.$d.getTime()
       }
     })
-    return oldFormat.bind(this)(result, locale)
+    return oldFormat.bind(this)(result)
   }
 }
 
