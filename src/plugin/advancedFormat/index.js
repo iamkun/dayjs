@@ -9,8 +9,8 @@ export default (o, c, d) => { // locale needed later
     return `[${number}${(s[(v - 20) % 10] || s[v] || s[0])}]`
   }
   // extend en locale here
-  proto.format = function (formatStr, localeObject) {
-    const locale = localeObject || this.$locale()
+  proto.format = function (formatStr) {
+    const locale = this.$locale()
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/Q|Do|X|x|k{1,2}|S/g, (match) => {
