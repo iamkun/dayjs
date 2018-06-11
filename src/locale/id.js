@@ -6,17 +6,17 @@ const locale = {
   months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split('_'),
   relativeTime: {
     future: 'dalam %s',
-    past: 'yang lalu %s',
+    past: '%s yang lalu',
     s: 'beberapa detik',
-    m: 'satu menit',
+    m: 'semenit',
     mm: '%d menit',
-    h: 'satu jam',
+    h: 'sejam',
     hh: '%d jam',
-    d: 'satu hari',
+    d: 'sehari',
     dd: '%d hari',
-    M: 'satu bulan',
+    M: 'sebulan',
     MM: '%d bulan',
-    y: 'satu tahun',
+    y: 'setahun',
     yy: '%d tahun'
   },
   ordinal: n => `${n}.`
