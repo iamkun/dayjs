@@ -12,7 +12,7 @@ export default (o, c) => { // locale needed later
     const result = str.replace(/BBBB|BB/g, (match) => {
       switch (match) {
         case 'BB':
-          return utils.padStart(String((this.$y + yearBias) % 100), 2, '0')
+          return utils.padStart(String(this.$y + yearBias).slice(-2), 2, '0')
         default: // BBBB
           return utils.padStart(String(this.$y + yearBias), 4, '0')
       }
