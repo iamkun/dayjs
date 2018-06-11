@@ -6,14 +6,15 @@ export default (o, c) => { // locale needed later
   // extend en locale here
   proto.format = function (formatStr, localeObject) {
     const yearBias = 543
+    const utils = this.$utils()
     const locale = localeObject || this.$locale()
     const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/BBBB|BB/g, (match) => {
       switch (match) {
         case 'BB':
-          return (this.$y + yearBias) % 100
+          return utils.padStart(String((this.$y + yearBias) % 100), 2, '0')
         default: // BBBB
-          return this.$y + yearBias
+          return utils.padStart(String(this.$y + yearBias), 4, '0')
       }
     })
     return oldFormat.bind(this)(result, locale)
