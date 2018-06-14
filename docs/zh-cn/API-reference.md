@@ -42,9 +42,10 @@
   * [是否之前](#是否之前)
   * [是否相同](#是否相同)
   * [是否之后](#是否之后)
-  * [是否闰年](#是否闰年)
+  * [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
 * [插件 APIs](#plugin-apis)
   * [相对时间](#relativetime)
+  * [是否是闰年](#是否是闰年)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -355,7 +356,7 @@ dayjs('2000-01-01').isLeapYear(); // true
 
 插件 [`RelativeTime`](./Plugin.md#relativetime)
 
-### IsLeapYear
+### 是否是闰年
 
 `.isLeapYear` 获得是否闰年
 

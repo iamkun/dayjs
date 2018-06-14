@@ -42,9 +42,10 @@ Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão 
   * [Antes](#antes)
   * [Igual](#igual)
   * [Depois](#depois)
-  * [Ano Bissexto](#ano-bissexto)
+  * [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
+  * [IsLeapYear](#isleapyear)
 
 ---
 O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.

@@ -44,9 +44,10 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared--dayjs)
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared--dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared--dayjs)
-    - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
+    - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
+    - [IsLeapYear](#isleapyear)
 
 ## Parsing
 
