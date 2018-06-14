@@ -42,9 +42,10 @@ Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão 
   * [Antes](#antes)
   * [Igual](#igual)
   * [Depois](#depois)
-  * [Ano Bissexto](#ano-bissexto)
+  * [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
+  * [IsLeapYear](#isleapyear)
 
 ---
 O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.
@@ -424,6 +425,15 @@ Se a data de um objeto `Dayjs` é posterior à de outro objeto `Dayjs`.
 ```js
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
+```
+
+### Is a Dayjs `.isDayjs(compared: any)`
+
+Returns a `boolean` indicating whether a variable is a dayjs object or not.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
 ```
 
 #### Ano Bissexto

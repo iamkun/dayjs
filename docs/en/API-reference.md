@@ -44,9 +44,10 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared-dayjs)
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
-    - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
+    - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
+    - [IsLeapYear](#isleapyear)
 
 ## Parsing
 
@@ -376,6 +377,15 @@ Returns a `boolean` indicating whether the `Dayjs`'s date is after the other sup
 
 ```js
 dayjs().isAfter(dayjs()); // false
+```
+
+### Is a Dayjs `.isDayjs(compared: any)`
+
+Returns a `boolean` indicating whether a variable is a dayjs object or not.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
 ```
 
 ### Is Leap Year `.isLeapYear()`

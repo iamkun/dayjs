@@ -90,4 +90,6 @@ declare namespace dayjs {
   export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs
 
   export function locale(arg1: any, arg2?: any): void
+
+  export function isDayjs(d: any): d is Dayjs
 }
