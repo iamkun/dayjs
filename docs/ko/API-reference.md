@@ -378,6 +378,15 @@ dayjs().isSame(dayjs()); // true
 dayjs().isAfter(dayjs()); // false
 ```
 
+### Is a Dayjs `.isDayjs(compared: any)`
+
+Returns a `boolean` indicating whether a variable is a dayjs object or not.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
+```
+
 ### Is Leap Year `.isLeapYear()`
 
 **[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**

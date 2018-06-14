@@ -325,6 +325,16 @@ dayjs().isSame(dayjs()); // true
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
+
+### 是否是 Dayjs `.isDayjs(compared: any)`
+
+返回一个 `boolean` 验证传入值是否是一个 Dayjs 对象.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
+```
+
 #### 是否闰年
 
 **[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
