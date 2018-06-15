@@ -153,7 +153,8 @@ dayjs().millisecond();
 传入的单位 (unit) 对大小写不敏感。
 ```js
 dayjs().set(unit : String, value : Int);
-dayjs().set('month', 3);  // April
+dayjs().set('date', 1);
+dayjs().set('month', 3); // 四月
 dayjs().set('second', 30);
 ```
 ---

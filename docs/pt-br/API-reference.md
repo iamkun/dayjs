@@ -186,7 +186,8 @@ As unidades não fazem distinção entre maiúsculas e minúsculas.
 
 ```js
 dayjs().set((unit: String), (value: Int));
-dayjs().set('month', 3); // Abril
+dayjs().set('date', 1);
+dayjs().set('month', 3); // April
 dayjs().set('second', 30);
 ```
 
