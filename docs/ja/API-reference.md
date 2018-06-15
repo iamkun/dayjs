@@ -203,6 +203,7 @@ dayjs().millisecond();
 
 ```js
 dayjs().set((unit: String), (value: Int));
+dayjs().set('date', 1);
 dayjs().set('month', 3); // 4月
 dayjs().set('second', 30);
 ```
