@@ -50,11 +50,10 @@ const parseDate = (date) => {
   if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
   if ((typeof date === 'string') && (reg = date.match(C.REGEX_PARSE))) {
-    // 2018-08-08 or 20180808
-    return new Date(
-      reg[1], reg[2] - 1, reg[3] || 1,
-      reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
-    )
+    return new Date(`${[reg[1], reg[2] || 1, reg[3] || 1].join('-')} ${[reg[5] || 0, reg[6] || 0, reg[7] || 0].join(':')}.${reg[8] || 0}${reg[9] || ''}`)
+    /*     new Date(`2018-01-02 03:04:05.123Z`)
+     *     reg index:   1  2  3  5  6  7   89
+     */
   }
   return new Date(date) // timestamp
 }

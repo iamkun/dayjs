@@ -23,8 +23,26 @@ describe('Parse', () => {
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13.998'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13.998Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 1:2'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 1:2Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 1'
+    expect(dayjs(d).valueOf()).toBe(new Date('2018-05-02 01:00:00').getTime()) // moment(d).getTime() is NaN
     d = '2018-4-1'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
     d = '2018-4-1 1:1:1:223'
@@ -32,7 +50,7 @@ describe('Parse', () => {
     d = '2018-01'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
     d = '2018'
-    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
+    expect(dayjs(d).valueOf()).toBe(new Date('2018-01-01 00:00:00').getTime()) // moment(d) is 2018-01-01T08:00:00+08:00
   })
 
   it('String ISO 8601 date, time and zone', () => {
