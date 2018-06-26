@@ -16,6 +16,8 @@ dayjs().year()
 
 dayjs().month()
 
+dayjs().week()
+
 dayjs().date()
 
 dayjs().day()
