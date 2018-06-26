@@ -10,41 +10,41 @@
 
 #### Extend
 
-* Returns dayjs
+* 将返回dayjs类
 
-Use a plugin.
+使用插件
 
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // with plugin options
+dayjs.extend(plugin, options) // 带参数加载插件
 ```
 
-## Installation
+## 安装
 
-* Via NPM:
+* 通过 NPM:
 
 ```javascript
 import dayjs from 'dayjs'
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // 按需加载
 
-dayjs.extend(AdvancedFormat) // use plugin
+dayjs.extend(advancedFormat) // 使用插件
 ```
 
-* Via CDN:
+* 通过 CDN:
 ```html
 <script src="https://unpkg.com/dayjs"></script>
-<!-- Load plugin as window.dayjs_plugin_NAME -->
+<!-- 通过 window.dayjs_plugin_NAME 获取 -->
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat"></script>
 <script>
   dayjs.extend(dayjs_plugin_advancedFormat);
 </script>
 ```
 
-## List of official plugins
+## 官方插件列表
 
 ### AdvancedFormat
- - AdvancedFormat extends `dayjs().format` API to supply more format options.
+ - AdvancedFormat 扩展了 `dayjs().format` API 以支持更多模版
 
 ```javascript
 import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
@@ -54,41 +54,120 @@ dayjs.extend(AdvancedFormat)
 dayjs().format('Q Do k kk X x')
 ```
 
+扩展的模版列表：
+
+| 模版   | 输出             | 简介                                  |
+| ------ | ---------------- | ------------------------------------- |
+| `Q`    | 1-4              | 季度                                  |
+| `Do`   | 1st 2nd ... 31st | 带序号的月份                          |
+| `k`    | 1-23             | 时：由 1 开始                         |
+| `kk`   | 01-23            | 时：由 1 开始，二位数                 |
+| `X`    | 1360013296       | 秒为单位的Unix时间戳                  |
+| `x`    | 1360013296123    | 毫秒单位的Unix时间戳                  |
+
+### RelativeTime
+ - RelativeTime 增加了 `.from` `.to` `.fromNow` `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
+
+```javascript
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
+
+dayjs().from(dayjs('1990')) // 2 年以前
+dayjs().from(dayjs(), true) // 2 年
+
+dayjs().fromNow()
+
+dayjs().to(dayjs())
+
+dayjs().toNow()
+```
+
+#### 距离现在的相对时间 `.fromNow(withoutSuffix?: boolean)`
+
+返回 `string` 距离现在的相对时间
+
+#### 距离 X 的相对时间  `.from(compared: Dayjs, withoutSuffix?: boolean)`
+
+返回 `string` 距离 X 的相对时间
+
+#### 到现在的相对时间 `.toNow(withoutSuffix?: boolean)`
+
+返回 `string` 到现在的相对时间
+
+#### 到 X 的相对时间  `.to(compared: Dayjs, withoutSuffix?: boolean)`
+
+返回 `string` 到 X 的相对时间
+
+| Range                    | Key  | Sample Output                    |
+| ------------------------ | ---- | -------------------------------- |
+| 0 到 44 秒                | s    | 几秒前                |
+| 45 到 89 秒               | m    | 1 分钟前                     |
+| 90 秒 到 44 分            | mm   | 2 分钟前 ... 44 分钟前 |
+| 45 到 89 分               | h    | 1 小时前                      |
+| 90 分 到 21 小时          | hh   | 2 小时前 ... 21 小时前     |
+| 22 到 35 小时             | d    | 1 天前                        |
+| 36 小时 到 25 天          | dd   | 2 天前 ... 25 天前       |
+| 26 到 45 天               | M    | 1 个月前                      |
+| 46 天 到 10 月           | MM   | 2 个月前 ... 10 个月前   |
+| 11 月 到 17月            | y    | 1 年前                       |
+| 18 月以上               | yy   | 2 年前 ... 20 年前     |
+
+## IsLeapYear
+ - IsLeapYear 增加了 `.isLeapYear` API 返回一个 `boolean` 来展示一个 `Dayjs`'s 的年份是不是闰年.
+
+```javascript
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear(); // true
+```
+
+### 佛历
+- BuddhistEra 扩展了 `dayjs().format` API 以支持佛历格式化.
+- 佛教时代是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合（[Wikipedia]（https：//en.wikipedia.org/wiki/Buddhist_calendar））
+- 要计算BE年，只需在年份中添加543。 例如，1977年5月26日AD / CE应显示为2520年5月26日BE（1977 + 543）
+
+```javascript
+import buddhistEra from 'dayjs/plugin/buddhistEra'
+
+dayjs.extend(buddhistEra)
+
+dayjs().format('BBBB BB')
+```
+
 List of added formats:
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
-| `Q`    | 1-4              | Quarter                               |
-| `Do`   | 1st 2nd ... 31st | Day of Month with ordinal             |
-| `k`    | 1-23             | The hour, beginning at 1              |
-| `kk`   | 01-23            | The hour, 2-digits, beginning at 1    |
-| `X`    | 1360013296       | Unix Timestamp in second              |
-| `x`    | 1360013296123    | Unix Timestamp in millisecond         |
+| `BBBB` | 2561             | Full BE Year (Year + 543)             |
+| `BB`   | 61               | 2-digit of BE Year                    |
 
-## Customize
+## 自定义
 
-You could build your own Day.js plugin to meet different needs.
+你可以根据需要自由的编写一个Day.js插件
 
-Feel free to open a pull request to share your plugin.
+欢迎提交PR与大家分享你的插件
 
-Template of a Day.js plugin.
+Day.js插件模版
 ```javascript
 export default (option, dayjsClass, dayjsFactory) => {
-  // extend dayjs()
-  // e.g. add dayjs().isSameOrBefore()
+  // 扩展 dayjs() 实例
+  // 例：添加 dayjs().isSameOrBefore() 实例方法
   dayjsClass.prototype.isSameOrBefore = function (arguments) {}
 
-  // extend dayjs
-  // e.g. add dayjs.utc()
+  // 扩展 dayjs 类
+  // 例：添加 dayjs.utc() 类方法
   dayjsFactory.utc = (arguments) => {}
 
-  // overriding existing API
-  // e.g. extend dayjs().format()
+  // 覆盖已存在的 API
+  // 例：扩展 dayjs().format() 方法
   const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
-    // original format result
+    // 原始format结果
     const result = oldFormat(arguments)
-    // return modified result
+    // 返回修改后结果
   }
 }
 ```

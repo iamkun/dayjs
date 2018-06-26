@@ -93,16 +93,20 @@ class Dayjs {
     return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
   }
 
+  $compare(that) {
+    return this.valueOf() - dayjs(that).valueOf()
+  }
+
   isSame(that) {
-    return this.valueOf() === that.valueOf()
+    return this.$compare(that) === 0
   }
 
   isBefore(that) {
-    return this.valueOf() < that.valueOf()
+    return this.$compare(that) < 0
   }
 
   isAfter(that) {
-    return this.valueOf() > that.valueOf()
+    return this.$compare(that) > 0
   }
 
   year() {
@@ -149,8 +153,8 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
-    const instanceFactory = (d, m, y = this.$y) => {
-      const ins = wrapper(new Date(y, m, d), this)
+    const instanceFactory = (d, m) => {
+      const ins = wrapper(new Date(this.$y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
@@ -164,13 +168,13 @@ class Dayjs {
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11, this.$y)
+          instanceFactory(31, 11)
       case C.M:
         return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1, this.$y)
+          instanceFactory(0, this.$M + 1)
       case C.W:
         return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M, this.$y)
+          instanceFactory(this.$D + (6 - this.$W), this.$M)
       case C.D:
       case C.DATE:
         return instanceFactorySet('setHours', 0)
@@ -227,37 +231,31 @@ class Dayjs {
 
   add(number, units) {
     number = Number(number) // eslint-disable-line no-param-reassign
-    // units === 'ms' hard code here, will update in next release
-    const unit = (units && (units.length === 1 || units === 'ms')) ? units : Utils.prettyUnit(units)
+    const unit = Utils.prettyUnit(units)
     const instanceFactory = (u, n) => {
       const date = this.set(C.DATE, 1).set(u, n + number)
       return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
     }
-    if (['M', C.M].indexOf(unit) > -1) {
+    if (unit === C.M) {
       return instanceFactory(C.M, this.$M)
     }
-    if (['y', C.Y].indexOf(unit) > -1) {
+    if (unit === C.Y) {
       return instanceFactory(C.Y, this.$y)
     }
     let step
     switch (unit) {
-      case 'm':
       case C.MIN:
         step = C.MILLISECONDS_A_MINUTE
         break
-      case 'h':
       case C.H:
         step = C.MILLISECONDS_A_HOUR
         break
-      case 'd':
       case C.D:
         step = C.MILLISECONDS_A_DAY
         break
-      case 'w':
       case C.W:
         step = C.MILLISECONDS_A_WEEK
         break
-      case 's':
       case C.S:
         step = C.MILLISECONDS_A_SECOND
         break
@@ -273,11 +271,16 @@ class Dayjs {
   }
 
 
-  format(formatStr, localeObject) {
+  format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
-    const locale = localeObject || this.$locale()
-    const { weekdays, months } = locale
+    const locale = this.$locale()
+    const {
+      weekdays, months
+    } = locale
+    const getShort = (arr, index, full, length) => (
+      (arr && arr[index]) || full[index].substr(0, length)
+    )
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
       switch (match) {
@@ -290,7 +293,7 @@ class Dayjs {
         case 'MM':
           return Utils.padStart(this.$M + 1, 2, '0')
         case 'MMM':
-          return months[this.$M].slice(0, 3)
+          return getShort(locale.monthsShort, this.$M, months, 3)
         case 'MMMM':
           return months[this.$M]
         case 'D':
@@ -299,6 +302,10 @@ class Dayjs {
           return Utils.padStart(this.$D, 2, '0')
         case 'd':
           return String(this.$W)
+        case 'dd':
+          return getShort(locale.weekdaysMin, this.$W, weekdays, 2)
+        case 'ddd':
+          return getShort(locale.weekdaysShort, this.$W, weekdays, 3)
         case 'dddd':
           return weekdays[this.$W]
         case 'H':
@@ -333,7 +340,7 @@ class Dayjs {
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
-    const that = isDayjs(input) ? input : dayjs(input.valueOf())
+    const that = dayjs(input)
     const diff = this - that
     let result = Utils.monthDiff(this, that)
     switch (unit) {
@@ -375,8 +382,9 @@ class Dayjs {
   }
 
   locale(preset, object) {
-    this.$L = parseLocale(preset, object, true)
-    return this
+    const that = this.clone()
+    that.$L = parseLocale(preset, object, true)
+    return that
   }
 
   clone() {
@@ -433,6 +441,8 @@ dayjs.extend = (plugin, option) => {
 }
 
 dayjs.locale = parseLocale
+
+dayjs.isDayjs = isDayjs
 
 dayjs.en = Ls[L]
 

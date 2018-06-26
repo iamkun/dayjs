@@ -1,9 +1,7 @@
-[English](./README.md) | 简体中文
-
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Moment.js 的 <b>2kB</b> 轻量化方案，拥有同样强大的 API</p>
+<p align="center">Alternativa veloz ao Moment.js, com <b>2kB</b> e a mesma API moderna</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
@@ -23,76 +21,77 @@
     </a>
 </p>
 
-> Day.js 是一个轻量的处理时间和日期的 JavaScript 库，和 Moment.js 的 API 设计保持完全一样. 如果您曾经用过 Moment.js, 那么您已经知道如何使用 Day.js
+> Day.js é uma biblioteca JavaScript minimalista que analisa, valida, manipula e formata datas e horas para navegadores modernos, usando uma API quase completamente compatível com Moment.js. Se você já usou Moment.js, já sabe usar Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 和 Moment.js 相同的 API 和用法
-* 💪 不可变数据 (Immutable)
-* 🔥 支持链式操作 (Chainable)
-* 🌐 国际化 I18n
-* 📦 仅 2kb 大小的微型库
-* 👫 全浏览器兼容
+* 🕒 API & padrões familiares como os do Moment.js
+* 💪 Imutável
+* 🔥 Encadeável
+* 🌐 Suporta I18n
+* 📦 Mini biblioteca de 2kb 
+* 👫 Suporta todos os navegadores    
+
 ---
 
-## 快速开始
+## Começando
 
-### 安装
+### Instalação
 
 ```console
 npm install dayjs --save
 ```
 
-📚[安装指南](./docs/zh-cn/Installation.md)
+📚[Guia de instalação](./Installation.md)
 
 ### API
 
-Day.js 有很多 API 来解析、处理、校验、增减、展示时间和日期
+A API do Day.js facilita muitas operações com datas e horas.
 
 ```javascript
-dayjs('2018-08-08') // 解析
+dayjs('2018-08-08') // análise
 
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // 展示
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // formatação
 
-dayjs().set('month', 3).month() // 获取
+dayjs().set('month', 3).month() // get & set
 
-dayjs().add(1, 'year') // 处理
+dayjs().add(1, 'year') // manipular
 
-dayjs().isBefore(dayjs()) // 查询
+dayjs().isBefore(dayjs()) // verificar
 ```
 
-📚[API 参考](./docs/zh-cn/API-reference.md)
+📚[Referência da API](./API-reference.md)
 
-### 国际化 I18n
+### I18n
 
-Day.js 支持国际化
+Day.js tem suporte para internacionalização.
 
-但除非手动加载，多国语言默认是不会被打包到工程里的
+As traduções só serão incluídas no seu build quando você usá-las.
 
 ```javascript
-import 'dayjs/locale/es' // 按需加载
+import 'dayjs/locale/es' // carregar sob demanda
 
-dayjs.locale('es') // 全局使用西班牙语
+dayjs.locale('es') // usar locale espanhol globalmente
 
-dayjs('2018-05-05').locale('zh-cn').format() // 在这个实例上使用简体中文
+dayjs('2018-05-05').locale('pt-br').format() // usar locale em português brasileiro em uma instância específica
 ```
-📚[国际化 I18n](./docs/zh-cn/I18n.md)
+📚[Internacionalização](./I18n.md)
 
-### 插件
+### Plugin
 
-插件是一些独立的程序，可以给 Day.js 增加新功能和扩展已有功能
+Um plugin é um módulo independente que pode ser adicionado ao Day.js para estendê-lo com mais funcionalidades.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat' // 按需加载插件
+import advancedFormat from 'dayjs/plugin/advancedFormat' // carregar sob demanda
 
-dayjs.extend(AdvancedFormat) // 使用插件
+dayjs.extend(advancedFormat) // usar plugin
 
-dayjs().format('Q Do k kk X x') // 使用扩展后的API
+dayjs().format('Q Do k kk X x') // mais formatos disponíveis pelo plugin
 ```
-📚[插件列表](./docs/zh-cn/Plugin.md)
+📚[Lista de Plugins](./Plugin.md)
 
-## 开源协议
+## Licença
 
-Day.js 遵循 [MIT 开源协议](./LICENSE).
+Day.js é licenciado sob a [MIT License](../../LICENSE).

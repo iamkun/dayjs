@@ -42,7 +42,10 @@
   * [是否之前](#是否之前)
   * [是否相同](#是否相同)
   * [是否之后](#是否之后)
-  * [是否闰年](#是否闰年)
+  * [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
+* [插件 APIs](#plugin-apis)
+  * [相对时间](#relativetime)
+  * [是否是闰年](#是否是闰年)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -150,7 +153,8 @@ dayjs().millisecond();
 传入的单位 (unit) 对大小写不敏感。
 ```js
 dayjs().set(unit : String, value : Int);
-dayjs().set('month', 3);  // April
+dayjs().set('date', 1);
+dayjs().set('month', 3); // 四月
 dayjs().set('second', 30);
 ```
 ---
@@ -199,26 +203,33 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 
 详情如下:
 
-| Format | Output | Description |
-| ------ | ------ | ----------- |
-| `YY` | 18 | 两位数的年份 |
-| `YYYY` | 2018 | 四位数的年份 |
-| `M` | 1-12 | 月份，从1开始 |
-| `MM` | 01-12 | 月份，数字前面加上0
-| `MMM` | Jan-Dec | 简写的月份名称 |
-| `MMMM` | January-December | 完整的月份名称 |
-| `D` | 1-31 | 月份里的一天 |
-| `DD` | 01-31 | 月份里的一天，数字前面加上0 |
-| `d` | 0-6 | 一周中的一天，星期天是0 |
-| `dddd` | Sunday-Saturday | 一周中一天的名称 |
-| `H` | 0-23 | 小时 |
-| `HH` | 00-23 | 小时，数字前面加上0 |
-| `m` | 0-59 | 分钟 |
-| `mm` | 00-59 | 分钟，数字前面加上0 |
-| `s` | 0-59 | 秒 |
-| `ss` | 00-59 | 秒，数字前面加上0 |
-| `Z` | +5:00 | UTC的偏移量 |
-| `ZZ` | +0500 | UTC的偏移量，数字前面加上0 |
+| Format | Output           | Description                  |
+| ------ | ---------------- | ---------------------------- |
+| `YY`   | 18               | 两位数的年份                 |
+| `YYYY` | 2018             | 四位数的年份                 |
+| `M`    | 1-12             | 月份，从 1 开始              |
+| `MM`   | 01-12            | 月份，两位数                 |
+| `MMM`  | Jan-Dec          | 简写的月份名称               |
+| `MMMM` | January-December | 完整的月份名称               |
+| `D`    | 1-31             | 月份里的一天                 |
+| `DD`   | 01-31            | 月份里的一天，两位数         |
+| `d`    | 0-6              | 一周中的一天，星期天是 0     |
+| `dd`   | Su-Sa            | 最简写的一周中一天的名称  |
+| `ddd`  | Sun-Sat          | 简写的一周中一天的名称      |
+| `dddd` | Sunday-Saturday  | 一周中一天的名称             |
+| `H`    | 0-23             | 小时                         |
+| `HH`   | 00-23            | 小时，两位数                 |
+| `m`    | 0-59             | 分钟                        |
+| `mm`   | 00-59            | 分钟，两位数                  |
+| `s`    | 0-59             | 秒                          |
+| `ss`   | 00-59            | 秒 两位数                    |
+| `SSS`  | 000-999          | 秒 三位数                    |
+| `Z`    | +5:00            | UTC 的偏移量                 |
+| `ZZ`   | +0500            | UTC 的偏移量，数字前面加上 0 |
+| `A`    | AM PM            |                              |
+| `a`    | am pm            |                              |
+
+* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
 
 #### 时间差
 - return Number
@@ -316,7 +327,20 @@ dayjs().isSame(dayjs()); // true
 dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
+
+### 是否是 Dayjs `.isDayjs(compared: any)`
+
+返回一个 `boolean` 验证传入值是否是一个 Dayjs 对象.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
+```
+
 #### 是否闰年
+
+**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
+
 - return Boolean
 
 是否闰年。
@@ -324,3 +348,17 @@ dayjs().isAfter(dayjs()); // false
 dayjs().isLeapYear();
 dayjs('2000-01-01').isLeapYear(); // true
 ```
+
+## 插件 APIs
+
+### 相对时间
+
+`.from` `.to` `.fromNow` `.toNow` 获得相对时间
+
+插件 [`RelativeTime`](./Plugin.md#relativetime)
+
+### 是否是闰年
+
+`.isLeapYear` 获得是否闰年
+
+插件 [`IsLeapYear`](./Plugin.md#isleapyear)
