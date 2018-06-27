@@ -120,14 +120,6 @@ class Dayjs {
     return this.$M
   }
 
-  week() {
-    const day = this.$W || 7 // Return sunday as 7
-    // Create date at nearest thursday
-    const ins = new Date(this.$y, this.$M, (this.$D - day) + 4)
-    const yearStart = new Date(Date.UTC(this.$y, 0, 1)) // Get first day of year
-    return Math.ceil((((ins - yearStart) / 86400000) + 1) / 7) // Calculate weeks
-  }
-
   day() {
     return this.$W
   }
