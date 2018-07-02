@@ -32,11 +32,6 @@ it('set locale for one instance only', () => {
     .toBe('Saturday 28, April')
 })
 
-it('set locale for this line only', () => {
-  expect(dayjs('2018-4-28').format(format, es))
-    .toBe('Sábado 28, Abril')
-})
-
 it('set global locale', () => {
   dayjs.locale('en')
   expect(dayjs('2018-4-28').format(format))

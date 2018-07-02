@@ -182,6 +182,37 @@ dayjs().toNow()
 | 11 月 到 17月            | y    | 1 年前                       |
 | 18 月以上               | yy   | 2 年前 ... 20 年前     |
 
+## IsLeapYear
+ - IsLeapYear 增加了 `.isLeapYear` API 返回一个 `boolean` 来展示一个 `Dayjs`'s 的年份是不是闰年.
+
+```javascript
+import isLeapYear from 'dayjs/plugin/isLeapYear'
+
+dayjs.extend(isLeapYear)
+
+dayjs('2000-01-01').isLeapYear(); // true
+```
+
+### 佛历
+- BuddhistEra 扩展了 `dayjs().format` API 以支持佛历格式化.
+- 佛教时代是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合（[Wikipedia]（https：//en.wikipedia.org/wiki/Buddhist_calendar））
+- 要计算BE年，只需在年份中添加543。 例如，1977年5月26日AD / CE应显示为2520年5月26日BE（1977 + 543）
+
+```javascript
+import buddhistEra from 'dayjs/plugin/buddhistEra'
+
+dayjs.extend(buddhistEra)
+
+dayjs().format('BBBB BB')
+```
+
+List of added formats:
+
+| Format | Output           | Description                           |
+| ------ | ---------------- | ------------------------------------- |
+| `BBBB` | 2561             | Full BE Year (Year + 543)             |
+| `BB`   | 61               | 2-digit of BE Year                    |
+
 ## 自定义
 
 你可以根据需要自由的编写一个Day.js插件

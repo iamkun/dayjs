@@ -44,9 +44,10 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared-dayjs)
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
-    - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
+    - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
+    - [IsLeapYear](#isleapyear)
 
 ## Parsing
 
@@ -166,9 +167,9 @@ dayjs().millisecond();
 Returns a `Dayjs` with the applied changes.
 
 ```js
-dayjs('2000-10-25')
-  .set('month', 3)
-  .set('year', 2020).toString(); // Sat, 25 Mar 2020 00:00:00 GMT
+dayjs().set('date', 1);
+dayjs().set('month', 3); // April
+dayjs().set('second', 30);
 ```
 
 ## Manipulating
@@ -241,6 +242,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `D`    | 1-31             | The day of the month                  |
 | `DD`   | 01-31            | The day of the month, 2-digits        |
 | `d`    | 0-6              | The day of the week, with Sunday as 0 |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
+| `ddd`  | Sun-Sat          | The short name of the day of the week |
 | `dddd` | Sunday-Saturday  | The name of the day of the week       |
 | `H`    | 0-23             | The hour                              |
 | `HH`   | 00-23            | The hour, 2-digits                    |
@@ -376,7 +379,18 @@ Returns a `boolean` indicating whether the `Dayjs`'s date is after the other sup
 dayjs().isAfter(dayjs()); // false
 ```
 
+### Is a Dayjs `.isDayjs(compared: any)`
+
+Returns a `boolean` indicating whether a variable is a dayjs object or not.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
+```
+
 ### Is Leap Year `.isLeapYear()`
+
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
 
 Returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
 
@@ -391,3 +405,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow` to get relative time
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)

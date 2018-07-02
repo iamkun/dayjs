@@ -44,9 +44,10 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared--dayjs)
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared--dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared--dayjs)
-    - [Is Leap Year `.isLeapYear()`](#is-leap-year-isleapyear)
+    - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
+    - [IsLeapYear](#isleapyear)
 
 ## Parsing
 
@@ -166,9 +167,9 @@ dayjs().millisecond();
 변경 사항이 적용된 `Dayjs`를 반환합니다.
 
 ```js
-dayjs('2000-10-25')
-  .set('month', 3)
-  .set('year', 2020).toString(); // Sat, 25 Apr 2020 00:00:00 GMT
+dayjs().set('date', 1);
+dayjs().set('month', 3); // April
+dayjs().set('second', 30);
 ```
 
 ## Manipulating
@@ -241,6 +242,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `D`    | 1-31             | 일                                    |
 | `DD`   | 01-31            | 일, 두 자리로 표현                     |
 | `d`    | 0-6              | 요일, 일요일은 0                       |
+| `dd`   | Su-Sa            | The min name of the day of the week   |
+| `ddd`  | Sun-Sat          | The short name of the day of the week |
 | `dddd` | Sunday-Saturday  | 요일 이름                              |
 | `H`    | 0-23             | 시간                                  |
 | `HH`   | 00-23            | 시간, 두 자리로 표현                   |
@@ -376,7 +379,18 @@ dayjs().isSame(dayjs()); // true
 dayjs().isAfter(dayjs()); // false
 ```
 
+### Is a Dayjs `.isDayjs(compared: any)`
+
+Returns a `boolean` indicating whether a variable is a dayjs object or not.
+
+```js
+dayjs.isDayjs(dayjs()); // true
+dayjs.isDayjs(new Date()); // false
+```
+
 ### Is Leap Year `.isLeapYear()`
+
+**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
 
 `Dayjs` 값이 윤년인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
@@ -391,3 +405,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.from` `.to` `.fromNow` `.toNow`에 대한 상대 시간을 가져옵니다.
 
 플러그인 [`RelativeTime`](./Plugin.md#relativetime)
+
+### IsLeapYear
+
+`.isLeapYear` to get is a leap year or not
+
+plugin [`IsLeapYear`](./Plugin.md#isleapyear)
