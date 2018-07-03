@@ -46,6 +46,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
+  * [WeekOfYear](#weekofyear)
 
 ---
 
@@ -485,3 +486,9 @@ plugin [`RelativeTime`](./Plugin.md#relativetime)
 `.isLeapYear` to get is a leap year or not
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### WeekOfYear
+
+`.week` to get week of the year
+
+plugin [`WeekOfYear`](./Plugin.md#weekofyear)
