@@ -48,6 +48,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
+    - [WeekOfYear](#weekofyear)
 
 ## Parsing
 
@@ -411,3 +412,9 @@ plugin [`RelativeTime`](./Plugin.md#relativetime)
 `.isLeapYear` to get is a leap year or not
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### WeekOfYear
+
+`.week` to get week of the year
+
+plugin [`WeekOfYear`](./Plugin.md#weekofyear)
