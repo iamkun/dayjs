@@ -438,19 +438,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### Ano Bissexto
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-* retorna um Boolean
-
-Se um ano é bissexto.
-
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime

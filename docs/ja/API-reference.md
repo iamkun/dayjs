@@ -460,19 +460,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### Is Leap Year
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-* Boolean を返します
-
-その年がうるう年かどうかをチェックします。
-
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime
