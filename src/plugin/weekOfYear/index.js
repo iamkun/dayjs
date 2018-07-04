@@ -1,12 +1,15 @@
-import { MILLISECONDS_A_DAY } from '../../constant'
+import { MS, Y, D, W } from '../../constant'
 
-export default (o, c) => {
+export default (o, c, d) => {
   const proto = c.prototype
   proto.week = function () {
-    const day = this.$W || 7 // Return sunday as 7
-    // Create date at nearest thursday
-    const ins = new Date(this.$y, this.$M, (this.$D - day) + 4)
-    const yearStart = new Date(Date.UTC(this.$y, 0, 1)) // Get first day of year
-    return Math.ceil((((ins - yearStart) / MILLISECONDS_A_DAY) + 1) / 7) // Calculate weeks
+    const endOfYear = this.endOf(Y)
+    if (endOfYear.day() !== 6 && this.month() === 11 && (31 - this.date()) <= endOfYear.day()) {
+      return 1
+    }
+    const startOfYear = d(this.$d).startOf(Y)
+    const compareDay = startOfYear.subtract(startOfYear.day(), D).subtract(1, MS)
+    const diffInWeek = this.diff(compareDay, W, true)
+    return Math.ceil(diffInWeek)
   }
 }

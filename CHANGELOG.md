@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/iamkun/dayjs/compare/v1.7.0...v1.7.1) (2018-07-03)
+
+
+### Bug Fixes
+
+* fix week() error near the end of the year ([fa03689](https://github.com/iamkun/dayjs/commit/fa03689))
+
 # [1.7.0](https://github.com/iamkun/dayjs/compare/v1.6.10...v1.7.0) (2018-07-02)
 
 

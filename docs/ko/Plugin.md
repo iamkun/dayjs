@@ -144,6 +144,17 @@ List of added formats:
 | `BBBB` | 2561             | Full BE Year (Year + 543)             |
 | `BB`   | 61               | 2-digit of BE Year                    |
 
+### WeekOfYear
+ - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
+
+```javascript
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
+
+dayjs('06/27/2018').week() // 26
+```
+
 ## Customize
 
 다양한 요구를 충족하기위해 자신만의 Day.js 플러그인을 만들 수 있습니다.

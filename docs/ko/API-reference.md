@@ -48,6 +48,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
+    - [WeekOfYear](#weekofyear)
 
 ## Parsing
 
@@ -411,3 +412,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.isLeapYear` to get is a leap year or not
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### WeekOfYear
+
+`.week` to get week of the year
+
+plugin [`WeekOfYear`](./Plugin.md#weekofyear)
