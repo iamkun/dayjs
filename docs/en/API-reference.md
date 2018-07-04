@@ -389,16 +389,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-### Is Leap Year `.isLeapYear()`
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-Returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
-
-```js
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime

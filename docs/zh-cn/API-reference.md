@@ -338,18 +338,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### 是否闰年
-
-**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
-
-- return Boolean
-
-是否闰年。
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## 插件 APIs
 
 ### 相对时间
