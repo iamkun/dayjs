@@ -48,6 +48,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
+    - [WeekOfYear](#weekofyear)
 
 ## Parsing
 
@@ -388,16 +389,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-### Is Leap Year `.isLeapYear()`
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-Returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
-
-```js
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime
@@ -411,3 +402,9 @@ plugin [`RelativeTime`](./Plugin.md#relativetime)
 `.isLeapYear` to get is a leap year or not
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### WeekOfYear
+
+`.week` to get week of the year
+
+plugin [`WeekOfYear`](./Plugin.md#weekofyear)

@@ -1,3 +1,25 @@
+## [1.7.2](https://github.com/iamkun/dayjs/compare/v1.7.1...v1.7.2) (2018-07-04)
+
+
+### Bug Fixes
+
+* DEPRECATED isLeapYear, use IsLeapYear plugin instead ([e2e5116](https://github.com/iamkun/dayjs/commit/e2e5116))
+
+## [1.7.1](https://github.com/iamkun/dayjs/compare/v1.7.0...v1.7.1) (2018-07-03)
+
+
+### Bug Fixes
+
+* fix week() error near the end of the year ([fa03689](https://github.com/iamkun/dayjs/commit/fa03689))
+
+# [1.7.0](https://github.com/iamkun/dayjs/compare/v1.6.10...v1.7.0) (2018-07-02)
+
+
+### Features
+
+* Added method `.week()` to retrieve week of the year ([e1c1b1c](https://github.com/iamkun/dayjs/commit/e1c1b1c))
+* Updated Japanese locae
+
 ## [1.6.10](https://github.com/iamkun/dayjs/compare/v1.6.9...v1.6.10) (2018-06-25)
 
 

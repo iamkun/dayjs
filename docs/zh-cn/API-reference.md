@@ -46,6 +46,7 @@
 * [插件 APIs](#plugin-apis)
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
+  * [年中的第几周](#年中的第几周)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -337,18 +338,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### 是否闰年
-
-**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
-
-- return Boolean
-
-是否闰年。
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## 插件 APIs
 
 ### 相对时间
@@ -362,3 +351,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.isLeapYear` 获得是否闰年
 
 插件 [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### 年中的第几周
+
+`.week` 获取是第几个周
+
+插件 [`WeekOfYear`](./Plugin.md#weekofyear)

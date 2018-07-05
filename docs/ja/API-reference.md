@@ -46,6 +46,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
+  * [WeekOfYear](#weekofyear)
 
 ---
 
@@ -459,19 +460,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### Is Leap Year
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-* Boolean を返します
-
-その年がうるう年かどうかをチェックします。
-
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime
@@ -485,3 +473,9 @@ plugin [`RelativeTime`](./Plugin.md#relativetime)
 `.isLeapYear` to get is a leap year or not
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+
+### WeekOfYear
+
+`.week` to get week of the year
+
+plugin [`WeekOfYear`](./Plugin.md#weekofyear)
