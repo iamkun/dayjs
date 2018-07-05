@@ -25,6 +25,14 @@ describe('Parse', () => {
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13Z'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12:13+08:00'
+    expect(dayjs(d).valueOf()).toBe(new Date('2018-05-02 11:12:13+08:00').getTime())
+    d = '2018-05-02 11:12+07:00'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11:12+0600'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-05-02 11+0500'
+    expect(dayjs(d).valueOf()).toBe(new Date('2018-05-02 11:00:00+0500').getTime())
     d = '2018-05-02 11:12:13.998'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13.998Z'
