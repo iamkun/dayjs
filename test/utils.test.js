@@ -26,3 +26,9 @@ it('PadStart', () => {
   expect(padStart(1, 2, '0')).toBe('01')
   expect(padStart(0, 2, '0')).toBe('00')
 })
+
+it('SetDate', () => {
+  const day = Math.floor((Math.random() * 7) % 6)
+
+  expect(Utils.setDay((new Date()), day).getDay()).toBe(day)
+})
