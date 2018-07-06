@@ -7,6 +7,8 @@
     "jest/globals": true
   },
   "globals": {
+    "gen": true,
+    "check": true,
     "window": true,
     "dayjs": true
   },

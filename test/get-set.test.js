@@ -1,9 +1,15 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
+import { gen } from 'testcheck'
+import jasmineCheck from 'jasmine-check'
 import dayjs from '../src'
 
+jasmineCheck.install()
+
+const seed = Number(process.env.TEST_SEED)
+
 beforeEach(() => {
-  MockDate.set(new Date())
+  MockDate.set(seed)
 })
 
 afterEach(() => {
@@ -42,36 +48,25 @@ it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
 })
 
-it('Set Day', () => {
-  expect(dayjs().set('date', 30).valueOf()).toBe(moment().set('date', 30).valueOf())
-})
+const unitsAndQuantities = [
+  ['Date', gen.intWithin(0, 31)],
+  ['Day', gen.intWithin(0, 6)],
+  ['Month', gen.intWithin(0, 12)],
+  ['Year', gen.intWithin(-5000, 5000)],
+  ['Hour', gen.intWithin(0, 24)],
+  ['Minute', gen.intWithin(0, 59)],
+  ['Second', gen.intWithin(0, 59)],
+  ['Millisecond', gen.intWithin(0, 999)]
+]
 
-it('Set Day of Week', () => {
-  expect(dayjs().set('day', 0).valueOf()).toBe(moment().set('day', 0).valueOf())
-})
+unitsAndQuantities.forEach(([unit, genInt]) => {
+  check.it(`Set ${unit}`, { seed }, genInt, (quantity) => {
+    const dayjsDate = dayjs().set(unit, quantity)
+    const momentDate = moment().set(unit, quantity)
 
-it('Set Month', () => {
-  expect(dayjs().set('month', 11).valueOf()).toBe(moment().set('month', 11).valueOf())
-})
-
-it('Set Year', () => {
-  expect(dayjs().set('year', 2008).valueOf()).toBe(moment().set('year', 2008).valueOf())
-})
-
-it('Set Hour', () => {
-  expect(dayjs().set('hour', 6).valueOf()).toBe(moment().set('hour', 6).valueOf())
-})
-
-it('Set Minute', () => {
-  expect(dayjs().set('minute', 59).valueOf()).toBe(moment().set('minute', 59).valueOf())
-})
-
-it('Set Second', () => {
-  expect(dayjs().set('second', 59).valueOf()).toBe(moment().set('second', 59).valueOf())
-})
-
-it('Set Millisecond', () => {
-  expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
+    expect(dayjsDate.isValid()).toBe(true)
+    expect(dayjsDate.valueOf()).toBe(momentDate.valueOf())
+  })
 })
 
 it('Set Unknown String', () => {

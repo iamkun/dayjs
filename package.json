@@ -21,17 +21,6 @@
       "path": "dayjs.min.js"
     }
   ],
-  "jest": {
-    "roots": [
-      "test"
-    ],
-    "testRegex": "test/(.*?/)?.*test.js$",
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*"
-    ]
-  },
   "release": {
     "prepare": [
       {
@@ -67,6 +56,7 @@
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.15.0",
     "gzip-size-cli": "^2.1.0",
+    "jasmine-check": "^1.0.0-rc.0",
     "jasmine-core": "^2.99.1",
     "jest": "^22.4.3",
     "karma": "^2.0.2",
