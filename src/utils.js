@@ -40,7 +40,17 @@ const prettyUnit = (u) => {
 
 const isUndefined = s => s === undefined
 
+const setDay = (date, day) => {
+  const currentDay = date.getDay()
+  const distance = day - currentDay
+
+  date.setDate(date.getDate() + distance)
+
+  return date
+}
+
 export default {
+  setDay,
   padStart,
   padZoneStr,
   monthDiff,

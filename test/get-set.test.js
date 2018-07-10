@@ -46,6 +46,10 @@ it('Set Day', () => {
   expect(dayjs().set('date', 30).valueOf()).toBe(moment().set('date', 30).valueOf())
 })
 
+it('Set Day of Week', () => {
+  expect(dayjs().set('day', 0).valueOf()).toBe(moment().set('day', 0).valueOf())
+})
+
 it('Set Month', () => {
   expect(dayjs().set('month', 11).valueOf()).toBe(moment().set('month', 11).valueOf())
 })
