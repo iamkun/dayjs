@@ -196,7 +196,7 @@ class Dayjs {
     const unit = Utils.prettyUnit(units)
     switch (unit) {
       case C.D:
-        Utils.setDay(this.$d, int)
+        this.$d.setDate(this.$D + (int - this.$W))
         break
       case C.DATE:
         this.$d.setDate(int)

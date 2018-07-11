@@ -209,6 +209,19 @@ dayjs().set('month', 3); // 4月
 dayjs().set('second', 30);
 ```
 
+#### List of all available units
+
+| Unit          | Shorthand | Description                              |
+| ------------- | --------- | ---------------------------------------- |
+| `date`        |           | Date of Month                            |
+| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
+| `month`       | `M`       | Month                                    |
+| `year`        | `y`       | Year                                     |
+| `hour`        | `h`       | Hour                                     |
+| `minute`      | `m`       | Minute                                   |
+| `second`      | `s`       | Second                                   |
+| `millisecond` | `ms`      | Millisecond                              |
+
 ---
 
 ### Manipulate
