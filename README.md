@@ -16,7 +16,7 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
-            src="https://img.shields.io/npm/l/dayjs.svg?style=flat-square" alt="License"></a>
+            src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="License"></a>
     <br>
     <a href="https://saucelabs.com/u/dayjs">
         <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
