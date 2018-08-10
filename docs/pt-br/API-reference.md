@@ -47,6 +47,7 @@ Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão 
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
   * [WeekOfYear](#weekofyear)
+  * [IsBetween](#isbetween)
 
 ---
 O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.
@@ -470,3 +471,9 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsBetween
+
+`.isBetween` to check if a date is between two other dates
+
+plugin [`IsBetween`](./Plugin.md#isbetween)

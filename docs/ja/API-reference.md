@@ -47,6 +47,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
   * [WeekOfYear](#weekofyear)
+  * [IsBetween](#isbetween)
 
 ---
 
@@ -492,3 +493,9 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsBetween
+
+`.isBetween` to check if a date is between two other dates
+
+plugin [`IsBetween`](./Plugin.md#isbetween)

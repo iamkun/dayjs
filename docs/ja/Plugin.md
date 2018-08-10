@@ -156,6 +156,17 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 
+### IsBetween
+ - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
+
+```javascript
+import isBetween from 'dayjs/plugin/isBetween'
+
+dayjs.extend(isBetween)
+
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+```
+
 ## カスタマイズ
 
 さまざまなニーズに合わせて独自の Day.js プラグインを構築することができます。
