@@ -26,6 +26,7 @@
       "test"
     ],
     "testRegex": "test/(.*?/)?.*test.js$",
+    "testURL": "http://localhost",
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
     "collectCoverageFrom": [
