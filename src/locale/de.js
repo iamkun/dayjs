@@ -8,17 +8,17 @@ const locale = {
   relativeTime: {
     future: 'in %s',
     past: 'vor %s',
-    s: 'wenige Sekunden',
-    m: 'eine Minute',
+    s: 'wenigen Sekunden',
+    m: 'einer Minute',
     mm: '%d Minuten',
-    h: 'eine Stunde',
+    h: 'einer Stunde',
     hh: '%d Stunden',
-    d: 'einen Tag',
-    dd: '%d Tage',
-    M: 'ein Monat',
-    MM: '%d Monate',
-    y: 'ein Jahr',
-    yy: '%d Jahre'
+    d: 'einem Tag',
+    dd: '%d Tagen',
+    M: 'einem Monat',
+    MM: '%d Monaten',
+    y: 'einem Jahr',
+    yy: '%d Jahren'
   }
 }
 
