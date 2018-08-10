@@ -49,6 +49,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsBetween](#isbetween)
 
 ## Parsing
 
@@ -421,3 +422,9 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsBetween
+
+`.isBetween` to check if a date is between two other dates
+
+plugin [`IsBetween`](./Plugin.md#isbetween)

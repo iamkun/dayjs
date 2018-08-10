@@ -47,6 +47,7 @@
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
+  * [是否之间](#isbetween)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -371,3 +372,9 @@ dayjs.isDayjs(new Date()); // false
 `.week` 获取是第几个周
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### 是否之间
+
+`.isBetween` 返回一个时间是否介于两个时间之间
+
+plugin [`IsBetween`](./Plugin.md#isbetween)
