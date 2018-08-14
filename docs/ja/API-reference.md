@@ -334,7 +334,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 
 ```js
 dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+dayjs().diff(dayjs(), 'year'); // 0
 ```
 
 #### Unix Timestamp (milliseconds)

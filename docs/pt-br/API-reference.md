@@ -315,7 +315,7 @@ Diferença de dois objetos `Dayjs` em milissegundos ou outra unidade de tempo es
 
 ```js
 dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+dayjs().diff(dayjs(), 'year'); // 0
 ```
 
 #### Unix Timestamp (milissegundos)
