@@ -9,6 +9,14 @@ const locale = {
     const o = (b === 1) || (b === 2) ? 'a' : 'e'
     return `${n}${o}`
   },
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'YYYY-MM-DD',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY [kl.] HH:mm',
+    LLLL: 'dddd D MMMM YYYY [kl.] HH:mm'
+  },
   relativeTime: {
     future: 'om %s',
     past: 'för %s sedan',
