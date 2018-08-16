@@ -13,6 +13,20 @@ afterEach(() => {
   MockDate.reset()
 })
 
+it('Upgrades old locale objects', () => {
+  // English is the default locale used for tests;
+  // initially it is defined by the old locale structure
+  expect(dayjs.en).toBeDefined()
+  expect(dayjs.en.relativeTime).toBeDefined()
+  expect(dayjs.en.relativeTime.s).toBeDefined()
+  expect(dayjs.en.relativeTime.duration).toBeUndefined()
+  // Call the plugin to upgrade the locale structure on the fly
+  dayjs().from(dayjs())
+  // English locale has been upgraded to the new locale structure
+  expect(dayjs.en.relativeTime.s).toBeUndefined()
+  expect(dayjs.en.relativeTime.duration).toBeDefined()
+})
+
 it('Time from X', () => {
   const T = [
     [0, 'second'], // a few seconds

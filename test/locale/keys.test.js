@@ -37,9 +37,18 @@ it('Locale keys', () => {
     expect(ordinal(3)).toEqual(expect.anything())
     expect(dayjs().locale(name).$locale().name).toBe(name)
     if (relativeTime) {
-      expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
-        'past', 's', 'y', 'yy']
-        .sort())
+      // Old locale object structure
+      if (relativeTime.s) {
+        expect(Object.keys(relativeTime).sort())
+          .toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM', 'past', 's', 'y', 'yy'].sort())
+      } else {
+        // New locale object structure
+        expect(Object.keys(relativeTime).sort()).toEqual(['duration', 'future', 'past'].sort());
+        ['duration', 'future', 'past'].forEach(key =>
+          expect(Object.keys(relativeTime[key]).sort())
+            .toEqual(['d', 'dd', 'ddd', 'h', 'hh', 'hhh', 'm', 'mm', 'mmm',
+              'M', 'MM', 'MMM', 's', 'y', 'yy', 'yyy'].sort()))
+      }
     }
   })
 })
