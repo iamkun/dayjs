@@ -65,6 +65,28 @@ List of added formats:
 | `X`    | 1360013296       | Unix Timestamp in second              |
 | `x`    | 1360013296123    | Unix Timestamp in millisecond         |
 
+### LocalisableFormat
+ - LocalisableFormat extends `dayjs().format` API to supply localisable format options known from Moment.js.
+
+```javascript
+import localisableFormat from 'dayjs/plugin/localisableFormat'
+
+dayjs.extend(localisableFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | Sample Output                     |
+| ------ | --------------------------------- |
+| `LT`   | 8:02 PM                           |
+| `LTS`  | 8:02:18 PM                        |
+| `L`    | 08/16/2018                        |
+| `LL`   | August 16, 2018                   |
+| `LLL`  | August 16, 2018 8:02 PM           |
+| `LLLL` | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
 
