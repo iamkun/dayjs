@@ -47,7 +47,7 @@ const locale = {
       m: 'před minutou',
       mm: 'před %d minutami',
       mmm: 'před %d minutami',
-      h: 'před hodinu',
+      h: 'před hodinou',
       hh: 'před %d hodinami',
       hhh: 'před %d hodinami',
       d: 'včera',
@@ -56,7 +56,7 @@ const locale = {
       M: 'před měsícem',
       MM: 'před %d měsíci',
       MMM: 'před %d měsíci',
-      y: 'před rokem',
+      y: 'vloni',
       yy: 'před %d roky',
       yyy: 'před %d lety'
     }
