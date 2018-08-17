@@ -50,7 +50,7 @@ const parseDate = (date) => {
   if (date instanceof Date) return date
   // eslint-disable-next-line no-cond-assign
   if ((typeof date === 'string')
-    && (/.*[^Z]$/i.test(date)) // looking for a better way
+    && (date.charCodeAt(date.length - 1) <= 57) // Must end with number, not Z
     && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
     return new Date(

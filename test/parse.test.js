@@ -37,8 +37,13 @@ describe('Parse', () => {
     expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
   })
 
-  it('String ISO 8601 date, time and zone', () => {
+  it('String ISO 8601 date, time and UTC', () => {
     const time = '2018-04-04T16:00:00.000Z'
+    expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
+  })
+
+  it('String ISO 8601 date, time and time zone', () => {
+    const time = '2018-04-04T16:00:00.000+04:30'
     expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
   })
 
