@@ -6,18 +6,18 @@ const locale = {
   months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
   ordinal: n => n,
   relativeTime: {
-    future: '%s 이내',
+    future: '%s 후',
     past: '%s 전',
     s: '몇 초',
     m: '1분',
     mm: '%d분',
-    h: '1시간',
+    h: '한 시간',
     hh: '%d시간',
-    d: '1일',
+    d: '하루',
     dd: '%d일',
-    M: '1개월',
-    MM: '%d개월',
-    y: '1년',
+    M: '한 달',
+    MM: '%d달',
+    y: '일 년',
     yy: '%d년'
   }
 }
