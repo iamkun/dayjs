@@ -66,7 +66,7 @@ Lista de formatos adicionados:
 | `x`     | 1360013296123    | Unix Timestamp em milissegundos       |
 
 ### RelativeTime
- - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
+ - RelativeTime adiciona `.from` `.to` `.fromNow` `.toNow` APIs formatar data para sequências de tempo relativas (e.g. 3 Horas atrás).
 
 ```javascript
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -85,19 +85,19 @@ dayjs().toNow()
 
 #### Time from now `.fromNow(withoutSuffix?: boolean)`
 
-Returns the `string` of relative time from now.
+Retorna uma `string` relativo ao tempo atual.
 
 #### Time from X  `.from(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time from X.
+Retorna uma `string` relativo ao tempo aparti de X.
 
 #### Time to now `.toNow(withoutSuffix?: boolean)`
 
-Returns the `string` of relative time to now.
+Retorna uma `string` para o tempo relativo atual.
 
 #### Time to X  `.to(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time to X.
+Retorna uma `string` relativo ao tempo para de X.
 
 | Range                    | Key  | Sample Output                    |
 | ------------------------ | ---- | -------------------------------- |
@@ -114,7 +114,7 @@ Returns the `string` of relative time to X.
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
 ### IsLeapYear
- - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+ - IsLeapYear adiciona `.isLeapYear` API para retornar um `boolean` indicando se `Dayjs` é um ano bissexto ou não.
 
 ```javascript
 import isLeapYear from 'dayjs/plugin/isLeapYear'
@@ -125,9 +125,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 ```
 
 ### BuddhistEra
-- BuddhistEra extends `dayjs().format` API to supply Buddhist Era (B.E.) format options.
-- Buddhist Era is a year numbering system that primarily used in  mainland Southeast Asian countries of Cambodia, Laos, Myanmar and Thailand as well as in Sri Lanka and Chinese populations of Malaysia and Singapore for religious or official occasions ([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
-- To calculate BE year manually, just add 543 to year. For example 26 May 1977 AD/CE should display as 26 May 2520 BE (1977 + 543)
+- BuddhistEra extende `dayjs().format` API fornecer a era budista (B.E.) opções de formatação.
+- Era budista é um sistema de numeração de ano que usado principalmente em países do Sudeste Asiático do Camboja, Laos, Myanmar e Tailândia, bem como no Sri Lanka e populações chinesas da Malásia e Cingapura para ocasiões religiosas ou oficiais ([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
+- Para calcular o ano BE manualmente, basta adicionar 543 ao ano. Por exemplo 26 Maio 1977 AD/CE deve ser exibido como 26 Maio 2520 BE (1977 + 543)
 
 ```javascript
 import buddhistEra from 'dayjs/plugin/buddhistEra'
@@ -137,7 +137,7 @@ dayjs.extend(buddhistEra)
 dayjs().format('BBBB BB')
 ```
 
-List of added formats:
+Lista de formatos adicionados:
 
 | Format | Output           | Description                           |
 | ------ | ---------------- | ------------------------------------- |
@@ -145,7 +145,7 @@ List of added formats:
 | `BB`   | 61               | 2-digit of BE Year                    |
 
 ### WeekOfYear
- - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
+ - WeekOfYear adiciona `.week()` API para retornar um `number` indicando que `Dayjs` é uma semana do ano.
 
 ```javascript
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -156,7 +156,7 @@ dayjs('06/27/2018').week() // 26
 ```
 
 ### IsBetween
- - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
+ - IsBetween adiciona `.isBetween()` API para retornar um `boolean` indicando que uma data está entre duas outras datas.
 
 ```javascript
 import isBetween from 'dayjs/plugin/isBetween'
