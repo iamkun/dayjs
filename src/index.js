@@ -280,6 +280,19 @@ class Dayjs {
     const {
       weekdays, months
     } = locale
+
+    let { longDateFormat } = locale
+    if (longDateFormat === undefined) {
+      longDateFormat = {
+        LTS: 'h:mm:ss A',
+        LT: 'h:mm A',
+        L: 'MM/DD/YYYY',
+        LL: 'MMMM D, YYYY',
+        LLL: 'MMMM D, YYYY h:mm A',
+        LLLL: 'dddd, MMMM D, YYYY h:mm A'
+      }
+    }
+
     const getShort = (arr, index, full, length) => (
       (arr && arr[index]) || full[index].substr(0, length)
     )
@@ -334,6 +347,25 @@ class Dayjs {
           return Utils.padStart(this.$ms, 3, '0')
         case 'Z':
           return zoneStr
+
+        case 'LT':
+        case 'lt':
+          return this.format(longDateFormat.LT)
+        case 'LTS':
+        case 'lts':
+          return this.format(longDateFormat.LTS)
+        case 'L':
+        case 'l':
+          return this.format(longDateFormat.L)
+        case 'LL':
+        case 'll':
+          return this.format(longDateFormat.LL)
+        case 'LLL':
+        case 'lll':
+          return this.format(longDateFormat.LLL)
+        case 'LLLL':
+        case 'llll':
+          return this.format(longDateFormat.LLLL)
         default: // 'ZZ'
           return zoneStr.replace(':', '')
       }

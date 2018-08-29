@@ -114,6 +114,15 @@ it('Format Escaping characters', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
+it('Format Month LTS LT L LL LLL LLLL', () => {
+  expect(dayjs().format('LTS')).toBe(moment().format('LTS'))
+  expect(dayjs().format('LT')).toBe(moment().format('LT'))
+  expect(dayjs().format('L')).toBe(moment().format('L'))
+  expect(dayjs().format('LL')).toBe(moment().format('LL'))
+  expect(dayjs().format('LLL')).toBe(moment().format('LLL'))
+  expect(dayjs().format('LLLL')).toBe(moment().format('LLLL'))
+})
+
 describe('Difference', () => {
   it('empty -> default milliseconds', () => {
     const dateString = '20110101'
