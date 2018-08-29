@@ -47,6 +47,7 @@ Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão 
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
   * [WeekOfYear](#weekofyear)
+  * [IsBetween](#isbetween)
 
 ---
 O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.
@@ -191,6 +192,19 @@ dayjs().set('date', 1);
 dayjs().set('month', 3); // April
 dayjs().set('second', 30);
 ```
+
+#### List of all available units
+
+| Unit          | Shorthand | Description                              |
+| ------------- | --------- | ---------------------------------------- |
+| `date`        |           | Date of Month                            |
+| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
+| `month`       | `M`       | Month                                    |
+| `year`        | `y`       | Year                                     |
+| `hour`        | `h`       | Hour                                     |
+| `minute`      | `m`       | Minute                                   |
+| `second`      | `s`       | Second                                   |
+| `millisecond` | `ms`      | Millisecond                              |
 
 ---
 
@@ -438,19 +452,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### Ano Bissexto
-
-**[DEPRECATED] in 1.7.0, use [`IsLeapYear plugin`](./Plugin.md#isleapyear) instead**
-
-* retorna um Boolean
-
-Se um ano é bissexto.
-
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## Plugin APIs
 
 ### RelativeTime
@@ -470,3 +471,9 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsBetween
+
+`.isBetween` to check if a date is between two other dates
+
+plugin [`IsBetween`](./Plugin.md#isbetween)

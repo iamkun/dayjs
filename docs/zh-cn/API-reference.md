@@ -47,6 +47,7 @@
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
+  * [是否之间](#isbetween)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -158,6 +159,20 @@ dayjs().set('date', 1);
 dayjs().set('month', 3); // 四月
 dayjs().set('second', 30);
 ```
+
+#### 可用单位
+
+| 单位          | 缩写 | 描述                        |
+| ------------- | ---- | --------------------------- |
+| `date`        |      | 日期                        |
+| `day`         | `d`  | 星期几 (星期天 0, 星期六 6) |
+| `month`       | `M`  | 月                          |
+| `year`        | `y`  | 年                          |
+| `hour`        | `h`  | 时                          |
+| `minute`      | `m`  | 分                          |
+| `second`      | `s`  | 秒                          |
+| `millisecond` | `ms` | 毫秒                        |
+
 ---
 ### 操作
 您可以对 `Dayjs` 对象如下增加减少之类的操作：
@@ -338,18 +353,6 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-#### 是否闰年
-
-**[已废弃] 将在 1.7.0 废弃, 使用 [`IsLeapYear 插件`](./Plugin.md#isleapyear) 代替**
-
-- return Boolean
-
-是否闰年。
-```js
-dayjs().isLeapYear();
-dayjs('2000-01-01').isLeapYear(); // true
-```
-
 ## 插件 APIs
 
 ### 相对时间
@@ -369,3 +372,9 @@ dayjs('2000-01-01').isLeapYear(); // true
 `.week` 获取是第几个周
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### 是否之间
+
+`.isBetween` 返回一个时间是否介于两个时间之间
+
+plugin [`IsBetween`](./Plugin.md#isbetween)

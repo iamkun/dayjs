@@ -92,10 +92,6 @@ class Dayjs {
     return !(this.$d.toString() === 'Invalid Date')
   }
 
-  isLeapYear() {
-    return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
-  }
-
   $compare(that) {
     return this.valueOf() - dayjs(that).valueOf()
   }
@@ -199,6 +195,9 @@ class Dayjs {
   $set(units, int) { // private set
     const unit = Utils.prettyUnit(units)
     switch (unit) {
+      case C.D:
+        this.$d.setDate(this.$D + (int - this.$W))
+        break
       case C.DATE:
         this.$d.setDate(int)
         break
