@@ -19,7 +19,15 @@ const locale = {
     y: 'un año',
     yy: '%d años'
   },
-  ordinal: n => `${n}º`
+  ordinal: n => `${n}º`,
+  longDateFormat: {
+    LT: 'H:mm',
+    LTS: 'H:mm:ss',
+    L: 'DD/MM/YYYY',
+    LL: 'D [de] MMMM [de] YYYY',
+    LLL: 'D [de] MMMM [de] YYYY H:mm',
+    LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm'
+  }
 }
 
 dayjs.locale(locale, null, true)

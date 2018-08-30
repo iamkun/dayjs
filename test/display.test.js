@@ -2,6 +2,8 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
 import th from '../src/locale/th'
+import fr from '../src/locale/fr'
+import es from '../src/locale/es'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -114,13 +116,31 @@ it('Format Escaping characters', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
-it('Format Month LTS LT L LL LLL LLLL', () => {
+it('Format LTS LT L LL LLL LLLL', () => {
   expect(dayjs().format('LTS')).toBe(moment().format('LTS'))
   expect(dayjs().format('LT')).toBe(moment().format('LT'))
   expect(dayjs().format('L')).toBe(moment().format('L'))
   expect(dayjs().format('LL')).toBe(moment().format('LL'))
   expect(dayjs().format('LLL')).toBe(moment().format('LLL'))
   expect(dayjs().format('LLLL')).toBe(moment().format('LLLL'))
+})
+
+it('French LTS, LT, L, LL, LLL, LLLL', () => {
+  expect(dayjs().locale('fr').format('LTS')).toBe(moment().locale('fr').format('LTS'))
+  expect(dayjs().locale('fr').format('LT')).toBe(moment().locale('fr').format('LT'))
+  expect(dayjs().locale('fr').format('L').toLowerCase()).toBe(moment().locale('fr').format('L'))
+  expect(dayjs().locale('fr').format('LL').toLowerCase()).toBe(moment().locale('fr').format('LL'))
+  expect(dayjs().locale('fr').format('LLL').toLowerCase()).toBe(moment().locale('fr').format('LLL'))
+  expect(dayjs().locale('fr').format('LLLL').toLowerCase()).toBe(moment().locale('fr').format('LLLL'))
+})
+
+it('Spanish LTS, LT, L, LL, LLL, LLLL', () => {
+  expect(dayjs().locale('es').format('LTS')).toBe(moment().locale('es').format('LTS'))
+  expect(dayjs().locale('es').format('LT')).toBe(moment().locale('es').format('LT'))
+  expect(dayjs().locale('es').format('L')).toBe(moment().locale('es').format('L'))
+  expect(dayjs().locale('es').format('LL').toLowerCase()).toBe(moment().locale('es').format('LL').toLowerCase())
+  expect(dayjs().locale('es').format('LLL').toLowerCase()).toBe(moment().locale('es').format('LLL').toLowerCase())
+  expect(dayjs().locale('es').format('LLLL').toLowerCase()).toBe(moment().locale('es').format('LLLL').toLowerCase())
 })
 
 describe('Difference', () => {
