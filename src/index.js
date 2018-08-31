@@ -240,7 +240,7 @@ class Dayjs {
     }
     const instanceFactorySet = (n) => {
       const date = new Date(this.$d)
-      date.setDate(date.getDate() + n * number)
+      date.setDate(date.getDate() + (n * number))
       return wrapper(date, this)
     }
     if (unit === C.M) {
