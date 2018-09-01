@@ -1,36 +1,23 @@
 import UTCDate, { LOCAL_TIMEZONE_OFFSET } from './UTCDate'
 import { parseTimezoneOffset } from './util'
 
-const $superFun = {}
-
 let RETURN_LOCAL_INSTANCE = false
 
-function assign(to, from) {
-  // eslint-disable-next-line
-  for (const key in from) { 
-    to[key] = from[key]
-  }
-}
-
-const dayjsAddon = {
-  utc(cfg) {
-    const tmpDayjs = this(cfg)
-    if (typeof cfg === 'string' && parseTimezoneOffset(cfg) === null) {
-      // cfg exclude UTC offset
-      tmpDayjs.$d.$timezoneOffset = 0
+const injectDayjsClass = function (pluginPrototype, $super) {
+  ['clone', 'add', 'subtract'].forEach((key) => {
+    pluginPrototype[key] = function () {
+      const $utcOffset = this.utcOffset()
+      // eslint-disable-next-line prefer-rest-params
+      return $super[key].apply(this, arguments).utcOffset($utcOffset)
     }
-    return tmpDayjs.utc()
-  }
-}
-
-const DayjsAddon = {
-  utc() {
+  })
+  pluginPrototype.utc = function () {
     return this.utcOffset(0)
-  },
-  local() {
+  }
+  pluginPrototype.local = function () {
     return this.utcOffset(-LOCAL_TIMEZONE_OFFSET)
-  },
-  utcOffset(arg) {
+  }
+  pluginPrototype.utcOffset = function (arg) {
     if (arg === undefined) {
       const rTZ = this.$d.getTimezoneOffset()
       return rTZ === 0 ? 0 : -rTZ
@@ -40,39 +27,44 @@ const DayjsAddon = {
       this.init()
     }
     return this
-  },
-  toDate() {
+  }
+  pluginPrototype.toDate = function () {
     return new Date(this.$d.getTime())
-  },
-  isLocal() {
+  }
+  pluginPrototype.isLocal = function () {
     return this.$d.getTimezoneOffset() === LOCAL_TIMEZONE_OFFSET
-  },
-  isUTC() {
+  }
+  pluginPrototype.isUTC = function () {
     return this.$d.getTimezoneOffset() === 0
-  },
-  parse(cfg) {
-    $superFun.parse.call(this, cfg)
+  }
+  pluginPrototype.parse = function (cfg) {
+    $super.parse.call(this, cfg)
     const { $d } = this
     const tzOffset = typeof cfg.date === 'string' ? parseTimezoneOffset(cfg.date) : null
     this.$d = new UTCDate($d, tzOffset === null ? LOCAL_TIMEZONE_OFFSET : -tzOffset, false)
     if (RETURN_LOCAL_INSTANCE) this.local()
     this.init()
   }
-};
-
-['clone', 'add', 'subtract'].forEach((key) => {
-  DayjsAddon[key] = function () {
-    const $utcOffset = this.utcOffset()
-    // eslint-disable-next-line prefer-rest-params
-    return $superFun[key].apply(this, arguments).utcOffset($utcOffset)
-  }
-})
-
+}
 export default (option = {}, Dayjs, dayjs) => {
   RETURN_LOCAL_INSTANCE = !!option.parseToLocal
-  Object.getOwnPropertyNames(Dayjs.prototype).forEach((key) => {
-    $superFun[key] = Dayjs.prototype[key]
-  })
-  assign(dayjs, dayjsAddon)
-  assign(Dayjs.prototype, DayjsAddon)
+  const $super = Dayjs.prototype
+
+  const PluginClass = function () { }
+  PluginClass.prototype = $super
+  const classPrototype = new PluginClass()
+
+  injectDayjsClass(classPrototype, $super)
+
+  classPrototype.constructor = Dayjs.constructor
+  Dayjs.prototype = classPrototype
+
+  dayjs.utc = function (cfg) {
+    const tmpDayjs = this(cfg)
+    if (typeof cfg === 'string' && parseTimezoneOffset(cfg) === null) {
+      // cfg exclude UTC offset
+      tmpDayjs.$d.$timezoneOffset = 0
+    }
+    return tmpDayjs.utc()
+  }
 }
