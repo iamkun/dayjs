@@ -166,6 +166,41 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
 ```
 
+### TimeZone
+ - TimeZone extends `dayjs()` and `dayjs().format` APIs to support the most important usage scenatrios - parsing from a specific time zone and formatting in other time zone.
+
+```javascript
+import timeZone from 'dayjs/plugin/timeZone'
+
+dayjs.extend(timeZone)
+
+const timeZone = 'Europe/Berlin' // Canonical time zone name
+
+// String without a time zone from the date picker
+const enteredDate = '2018-09-02 23:41:22'
+const storedDate = dayjs(enteredDate, { timeZone }).toISOString()
+// Will contain "2018-09-02T21:41:22Z"
+
+// String in UTC or anything that Day.js accepts
+const storedDate = '2018-09-02T21:41:22Z'
+const userFormat = 'D.M.YYYY H:mm:ss [GMT]Z (z)' // Standard Day.js format
+const displayedDate = dayjs(storedDate).format(userFormat, { timeZone })
+// Will contain "2.9.2018 23:41:22 GMT+02:00 (CEST)"
+```
+
+List of added formats:
+
+| Format | Output | Description             |
+| ------ | ------ | ----------------------- |
+| `z`    | CEST   | Time zone abbreviation  |
+| `Z`    | +02:00 | Offset from UTC         |
+| `ZZ`   | +0200  | Compact offset from UTC |
+
+Day.js uses an embedded `Date` object. This object supports only local time zone and UTC. It does not work in other time zones. This plugin leverages this principle and does not replace the internal `Date` object.
+
+* The time zone parameter in the constructor is meant only for converting the parsed input string correctly to UTC. The embedded `Date` object will be initialised with UTC and offer the local time zone representation as usual. The original time zone offset will not be remembered. It is usually not important, because dates should be rendered consistently in user's time zone; not in various time zones, which their string sources referred to.
+* The time zone parameter in the `format` method will extract the date parts (year, month, ...) from the embedded `Date` object in UTC and convert them to the specified time zone, before producing the output string.
+
 ## Customize
 
 You could build your own Day.js plugin to meet different needs.

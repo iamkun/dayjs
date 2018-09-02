@@ -80,6 +80,7 @@
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
     "size-limit": "^0.18.0",
+    "timezone-support": "^1.1.2",
     "typescript": "^2.8.3"
   },
   "dependencies": {}
