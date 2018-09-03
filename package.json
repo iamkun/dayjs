@@ -10,16 +10,10 @@
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit && gzip-size dayjs.min.js"
+    "size": "bundlesize -f dayjs.min.js -s 2.99kB"
   },
   "pre-commit": [
     "lint"
-  ],
-  "size-limit": [
-    {
-      "limit": "2.99 KB",
-      "path": "dayjs.min.js"
-    }
   ],
   "jest": {
     "roots": [
@@ -62,6 +56,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
+    "bundlesize": "^0.17.0",
     "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -79,7 +74,6 @@
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
-    "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
   },
   "dependencies": {}
