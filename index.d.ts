@@ -5,7 +5,7 @@ declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): d
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
 
-  export type OptionType = { locale: string }
+  export type OptionType = { locale: string, utc: boolean }
 
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date'
   
@@ -83,6 +83,14 @@ declare namespace dayjs {
     isLeapYear(): boolean
 
     locale(arg1: any, arg2?: any): Dayjs
+
+    utc(): Dayjs
+
+    local(): Dayjs
+
+    isUTC(): boolean
+
+    utcOffset(): number
   }
 
   export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void

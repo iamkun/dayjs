@@ -65,6 +65,20 @@ it('Number 0', () => {
   expect(dayjs(0).valueOf()).toBe(moment(0).valueOf())
 })
 
+it('Recognizes the UTC flag in constructor options', () => {
+  const instance = dayjs('2018-09-06', { utc: true })
+  expect(instance.$u).toBeTruthy()
+  expect(instance.hour()).toEqual(0)
+  expect(instance.minute()).toEqual(0)
+})
+
+it('Does not apply the UTC mode by default', () => {
+  const instance = dayjs('2018-09-06 19:34:28.657', {})
+  expect(instance.$u).toBeFalsy()
+  expect(instance.hour()).toEqual(19)
+  expect(instance.minute()).toEqual(34)
+})
+
 it('Clone not affect each other', () => {
   const base = dayjs(20170101)
   const year = base.year()

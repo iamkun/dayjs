@@ -114,6 +114,11 @@ it('Format Escaping characters', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 
+it('Formats an UTC instance to UTC time zone', () => {
+  const instance = dayjs('2018-09-06T19:34:28Z', { utc: true })
+  expect(instance.format()).toEqual('2018-09-06T19:34:28+00:00')
+})
+
 describe('Difference', () => {
   it('empty -> default milliseconds', () => {
     const dateString = '20110101'

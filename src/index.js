@@ -36,14 +36,15 @@ const dayjs = (date, c) => {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+const wrapper = (date, instance) => dayjs(date, { locale: instance.$L, utc: instance.$u })
 
 const Utils = U // for plugin use
 Utils.parseLocale = parseLocale
 Utils.isDayjs = isDayjs
 Utils.wrapper = wrapper
 
-const parseDate = (date) => {
+const parseDate = (cfg) => {
+  const { date } = cfg
   let reg
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (Utils.isUndefined(date)) return new Date()
@@ -53,10 +54,16 @@ const parseDate = (date) => {
     && (/.*[^Z]$/i.test(date)) // looking for a better way
     && (reg = date.match(C.REGEX_PARSE))) {
     // 2018-08-08 or 20180808
-    return new Date(
-      reg[1], reg[2] - 1, reg[3] || 1,
-      reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
-    )
+    const year = reg[1]
+    const month = reg[2] - 1
+    const day = reg[3] || 1
+    const hours = reg[5] || 0
+    const minutes = reg[6] || 0
+    const seconds = reg[7] || 0
+    const milliseconds = reg[8] || 0
+    return cfg && cfg.utc
+      ? new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds))
+      : new Date(year, month, day, hours, minutes, seconds, milliseconds)
   }
   return new Date(date) // timestamp
 }
@@ -67,19 +74,33 @@ class Dayjs {
   }
 
   parse(cfg) {
-    this.$d = parseDate(cfg.date)
+    this.$d = parseDate(cfg)
     this.init(cfg)
   }
 
   init(cfg) {
-    this.$y = this.$d.getFullYear()
-    this.$M = this.$d.getMonth()
-    this.$D = this.$d.getDate()
-    this.$W = this.$d.getDay()
-    this.$H = this.$d.getHours()
-    this.$m = this.$d.getMinutes()
-    this.$s = this.$d.getSeconds()
-    this.$ms = this.$d.getMilliseconds()
+    const utc = cfg && !!cfg.utc
+    const date = this.$d
+    this.$u = utc
+    if (utc) {
+      this.$y = date.getUTCFullYear()
+      this.$M = date.getUTCMonth()
+      this.$D = date.getUTCDate()
+      this.$W = date.getUTCDay()
+      this.$H = date.getUTCHours()
+      this.$m = date.getUTCMinutes()
+      this.$s = date.getUTCSeconds()
+      this.$ms = date.getUTCMilliseconds()
+    } else {
+      this.$y = date.getFullYear()
+      this.$M = date.getMonth()
+      this.$D = date.getDate()
+      this.$W = date.getDay()
+      this.$H = date.getHours()
+      this.$m = date.getMinutes()
+      this.$s = date.getSeconds()
+      this.$ms = date.getMilliseconds()
+    }
     this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
   }
 
@@ -152,14 +173,20 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
+    const setMethods = this.$u
+      ? ['setUTCHours', 'setUTCMinutes', 'setUTCSeconds', 'setUTCMilliseconds']
+      : ['setHours', 'setMinutes', 'setSeconds', 'setMilliseconds']
     const instanceFactory = (d, m) => {
-      const ins = wrapper(new Date(this.$y, m, d), this)
+      const date = this.$u
+        ? new Date(Date.UTC(this.$y, m, d))
+        : new Date(this.$y, m, d)
+      const ins = wrapper(date, this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
-    const instanceFactorySet = (method, slice) => {
+    const instanceFactorySet = (slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+      return wrapper(this.toDate()[setMethods[slice]].apply( // eslint-disable-line prefer-spread
         this.toDate(),
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ), this)
@@ -176,13 +203,13 @@ class Dayjs {
           instanceFactory(this.$D + (6 - this.$W), this.$M)
       case C.D:
       case C.DATE:
-        return instanceFactorySet('setHours', 0)
+        return instanceFactorySet(0)
       case C.H:
-        return instanceFactorySet('setMinutes', 1)
+        return instanceFactorySet(1)
       case C.MIN:
-        return instanceFactorySet('setSeconds', 2)
+        return instanceFactorySet(2)
       case C.S:
-        return instanceFactorySet('setMilliseconds', 3)
+        return instanceFactorySet(3)
       default:
         return this.clone()
     }
@@ -194,30 +221,49 @@ class Dayjs {
 
   $set(units, int) { // private set
     const unit = Utils.prettyUnit(units)
+    const setMethods = this.$u
+      ? {
+        year: 'setUTCFullYear',
+        month: 'setUTCMonth',
+        date: 'setUTCDate',
+        hours: 'setUTCHours',
+        minutes: 'setUTCMinutes',
+        seconds: 'setUTCSeconds',
+        milliseconds: 'setUTCMilliseconds'
+      }
+      : {
+        year: 'setFullYear',
+        month: 'setMonth',
+        date: 'setDate',
+        hours: 'setHours',
+        minutes: 'setMinutes',
+        seconds: 'setSeconds',
+        milliseconds: 'setMilliseconds'
+      }
     switch (unit) {
       case C.D:
-        this.$d.setDate(this.$D + (int - this.$W))
+        this.$d[setMethods.date](this.$D + (int - this.$W))
         break
       case C.DATE:
-        this.$d.setDate(int)
+        this.$d[setMethods.date](int)
         break
       case C.M:
-        this.$d.setMonth(int)
+        this.$d[setMethods.month](int)
         break
       case C.Y:
-        this.$d.setFullYear(int)
+        this.$d[setMethods.year](int)
         break
       case C.H:
-        this.$d.setHours(int)
+        this.$d[setMethods.hours](int)
         break
       case C.MIN:
-        this.$d.setMinutes(int)
+        this.$d[setMethods.minutes](int)
         break
       case C.S:
-        this.$d.setSeconds(int)
+        this.$d[setMethods.seconds](int)
         break
       case C.MS:
-        this.$d.setMilliseconds(int)
+        this.$d[setMethods.milliseconds](int)
         break
       default:
         break
@@ -225,7 +271,6 @@ class Dayjs {
     this.init()
     return this
   }
-
 
   set(string, int) {
     return this.clone().$set(string, int)
@@ -272,10 +317,9 @@ class Dayjs {
     return this.add(number * -1, string)
   }
 
-
   format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
-    const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
+    const zoneStr = this.$u ? '+00:00' : Utils.padZoneStr(this.$d.getTimezoneOffset())
     const locale = this.$locale()
     const {
       weekdays, months
@@ -434,6 +478,22 @@ class Dayjs {
 
   toString() {
     return this.$d.toUTCString()
+  }
+
+  isUTC() {
+    return this.$u
+  }
+
+  utc() {
+    return dayjs(this.$d.valueOf(), { locale: this.$L, utc: true })
+  }
+
+  local() {
+    return dayjs(this.$d.valueOf(), { locale: this.$L, utc: false })
+  }
+
+  utcOffset() {
+    return this.$u ? 0 : this.$d.getTimezoneOffset()
   }
 }
 

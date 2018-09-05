@@ -45,6 +45,12 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  - [UTC Mode](#utc-mode)
+    - [Date-Only Mode`](#date-only-mode)
+    - [Is UTC `.isUTC()`](#is-utc-isutc)
+    - [To UTC `.utc() | dayjs(original: Dayjs, { utc: true })`](#to-utc-utcdayjsoriginal-dayjs-utc-true)
+    - [To Local `.local() | dayjs(original: Dayjs, { utc: false })`](#to-local-localdayjsoriginal-dayjs-utc-true)
+    - [UTC Offset `.utcOffset()`](#utc-offset-utcoffset)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
@@ -401,6 +407,91 @@ Returns a `boolean` indicating whether a variable is a dayjs object or not.
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+## UTC
+
+`Day.js` instances can be initialized using a string with any time zone offset. However, the native JavaScript `Date` object used internally works only in the local time zone with the support of accessing the object value in UTC too. If no time zone is specified, the local time zone is assumed. `Day.js` follows the same principle.
+
+`Day.js` instances can be initialized in the *UTC mode*, which makes getters, setters and formatting methods use the UTC properties of the `Date` object. It can be useful to:
+
+* Initialize and use `Day.js` instances always in UTC, without specifying the time zone explicitly.
+* Initialize and use `Day.js` instances in a *date-only mode*.
+
+### Date-only Mode
+
+Sometimes only the day is important; not the time. If a `Day.js` instance or a `Date` object itself is initialized with the date part only, the constructor assumes a full UTC date and automatically adds the time part:
+
+```js
+const date = dayjs('2018-09-07')
+new Date('2018-09-07')
+// Both assume an input "2018-09-07T00:00:00Z".
+// Both initialize the date to "2018-09-07 02:00:00 +02:00" in Central Europe.
+const day = date.date() // Returns 7, OK.
+const day = date.hour() // Returns 2, but well, we do not use the time part.
+```
+
+Because the input is assumed in UTC, when converting to the local time zone, which is used by default in both `Day.js` instances and `Date` objects, a time zone conversion will be performed. It can change the value of the day, if the time zone offset from UTC is negative, which may be a problem:
+
+```js
+const date = dayjs('2018-09-07')
+new Date('2018-09-07')
+// Both assume an input "2018-09-07T00:00:00Z".
+// Both initialize the date to "2018-09-06 18:00:00 -06:00" in North-East America.
+const day = date.date() // Returns 6, a bad surprise.
+const day = date.hour() // Returns 18, but well, we do not use the time part.
+```
+
+Switching the `Day.js` instance to the UTC mode will not change the initialization or value of the internal `Date` object, so that any date computations and comparisons with other `Day.js` instances will be correct. However, getters, setters and formatting methods will use date parts in UTC, making at appear, that no conversion to the local time zone took place.
+
+```js
+const date = dayjs('2018-09-07', { utc: true })
+const date = dayjs('2018-09-07').utc()
+// Both assume an input "2018-09-07T00:00:00Z".
+// Both initialize the date to "2018-09-06 18:00:00 -06:00" in North-East America.
+// Both remember to use UTC date parts on the interface of Day.js.
+const day = date.date() // Returns 7, OK.
+const day = date.hour() // Returns 0, OK; well, we do not use the time part.
+```
+
+### Is UTC `.isUTC()`
+
+Returns a `boolean` indicating whether the `Dayjs` instance works in the UTC mode or not.
+
+```js
+dayjs().isUTC(); // Returns false
+dayjs().utc().isUTC(); // Returns true
+```
+
+### To UTC `.utc() | dayjs(original: Dayjs, { utc: true })`
+
+Returns a cloned `Dayjs` instance in the UTC mode. The UTC mode will be retained, when cloning the `Day.js` instance further, unless `utc: false` is specified.
+
+```js
+dayjs().utc();
+dayjs('2019-01-25', { utc: true });
+dayjs().utc().clone(); // continues in the UTC mode
+dayjs(dayjs('2019-01-25', { utc: true })); // continues in the UTC mode
+```
+
+### To Local `.local() | dayjs(original: Dayjs, { utc: false })`
+
+Returns a cloned `Dayjs` instance in the local time zone mode. The local time zone mode will be retained, when cloning the `Day.js` instance further, unless `utc: true` is specified. It is also the default mode of constructing a new `Day.js` instance.
+
+```js
+dayjs('2019-01-25', { utc: true }).local();
+dayjs('2019-01-25 15:43', { utc: false }); // default, not necessary
+dayjs('2019-01-25', { utc: true }).local().clone(); // continues in the local mode
+dayjs(dayjs().utc().local()); // continues in the local mode
+```
+
+### UTC Offset `.utcOffset()`
+
+Returns an offset of the `Dayjs`'s instance to UTC in minutes. It is a negative offset like `Date.prototype.getTimezoneOffset` returns it. If it is *added* to a zoned time, a time in UTC will be obtained.
+
+```js
+const date = dayjs('2019-01-25 15:43');
+const offset = date.utcOffset() // Returns -60 in Central Europe
 ```
 
 ## Plugin APIs

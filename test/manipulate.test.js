@@ -20,6 +20,14 @@ describe('StartOf EndOf', () => {
     })
   })
 
+  it('StartOf EndOf Year ... in UTC mode', () => {
+    const testArr = ['year', 'month', 'day', 'date', 'week', 'hour', 'minute', 'second']
+    testArr.forEach((d) => {
+      expect(dayjs().utc().startOf(d).valueOf()).toBe(moment().utc().startOf(d).valueOf())
+      expect(dayjs().utc().endOf(d).valueOf()).toBe(moment().utc().endOf(d).valueOf())
+    })
+  })
+
   it('StartOf EndOf Other -> no change', () => {
     expect(dayjs().startOf('otherString').valueOf()).toBe(moment().startOf('otherString').valueOf())
     expect(dayjs().endOf('otherString').valueOf()).toBe(moment().endOf('otherString').valueOf())
