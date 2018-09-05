@@ -6,7 +6,6 @@ cache:
 node_js:
   - '10'
   - '8'
-  - '6'
 install:
   - npm install -g codecov
   - npm install
