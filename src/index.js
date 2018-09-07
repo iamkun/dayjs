@@ -100,6 +100,14 @@ class Dayjs {
     return this.$compare(that) === 0
   }
 
+  isSameOrBefore(that) {
+    return this.$compare(that) === 0 || this.$compare(that) < 0
+  }
+
+  isSameOrAfter(that) {
+    return this.$compare(that) === 0 || this.$compare(that) > 0
+  }
+
   isBefore(that) {
     return this.$compare(that) < 0
   }

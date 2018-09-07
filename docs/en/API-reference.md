@@ -43,6 +43,8 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Query](#query)
     - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared-dayjs)
     - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
+    - [Is Same or Before `.isSameOrBefore(compared: Dayjs)`](#is-same-issameorbeforecompared-dayjs)
+    - [Is Same or After `.isSameOrAfter(compared: Dayjs)`](#is-same-issameoraftercompared-dayjs)
     - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
@@ -384,6 +386,24 @@ Returns a `boolean` indicating whether the `Dayjs`'s date is the same as the oth
 
 ```js
 dayjs().isSame(dayjs()); // true
+```
+
+### Is Same or Before `.isSameOrBefore(compared: Dayjs)`
+
+Returns a `boolean` indicating whether the `Dayjs`'s date is the same or before as the other supplied `Dayjs`'s.
+
+```js
+dayjs().isSameOrBefore(dayjs()); // true
+dayjs().isSameOrBefore(dayjs().add(1, "day")); // true
+```
+
+### Is Same or After `.isSameOrAfter(compared: Dayjs)`
+
+Returns a `boolean` indicating whether the `Dayjs`'s date is the same or after as the other supplied `Dayjs`'s.
+
+```js
+dayjs().isSameOrAfter(dayjs()); // true
+dayjs().isSameOrAfter(dayjs().subtract(1, "day")); // true
 ```
 
 ### Is After `.isAfter(compared: Dayjs)`
