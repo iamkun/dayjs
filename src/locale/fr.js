@@ -22,7 +22,7 @@ const locale = {
   ordinal: (n) => {
     const o = n === 1 ? 'er' : ''
     return `${n}${o}`
-  } 
+  }
 }
 
 dayjs.locale(locale, null, true)
