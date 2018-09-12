@@ -65,13 +65,13 @@ List of added formats:
 | `X`    | 1360013296       | Unix Timestamp in second              |
 | `x`    | 1360013296123    | Unix Timestamp in millisecond         |
 
-### LocalisableFormat
- - LocalisableFormat extends `dayjs().format` API to supply localisable format options known from Moment.js.
+### LocalizableFormat
+ - LocalizableFormat extends `dayjs().format` API to supply localizable format options known from Moment.js.
 
 ```javascript
-import localisableFormat from 'dayjs/plugin/localisableFormat'
+import localizableFormat from 'dayjs/plugin/localizableFormat'
 
-dayjs.extend(localisableFormat)
+dayjs.extend(localizableFormat)
 
 dayjs().format('L LT')
 ```
