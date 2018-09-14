@@ -47,7 +47,7 @@ dayjs.extend(advancedFormat) // usar plugin
  - O AdvancedFormat modifica a API de `dayjs().format` para adicionar mais opções de formatação.
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 
 dayjs.extend(AdvancedFormat)
 

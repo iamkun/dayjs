@@ -48,7 +48,7 @@ dayjs.extend(advancedFormat) // プラグインを使用
  - AdvancedFormat はより多様なフォーマットを表現するために `dayjs().format` API を拡張するプラグインです。
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 
 dayjs.extend(AdvancedFormat)
 
