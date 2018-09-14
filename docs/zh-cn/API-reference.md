@@ -253,7 +253,7 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 获取两个 `Dayjs` 对象的时间差，默认毫秒。
 ```js
 dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+dayjs().diff(dayjs(), 'year'); // 0
 ```
 #### Unix 时间戳 (毫秒)
 - return Number
