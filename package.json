@@ -6,8 +6,9 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
-    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
+    "lint": "./node_modules/.bin/eslint src/* test/* build/* bench/*",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
+    "benchmark": "cross-env BABEL_ENV=build node bench",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
     "size": "size-limit && gzip-size dayjs.min.js"
@@ -62,6 +63,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
+    "benchmark": "^2.1.4",
     "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
