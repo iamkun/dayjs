@@ -18,7 +18,7 @@ it('Construct from string in a specified time zone', () => {
   const timeZone = 'Europe/Berlin'
   const output = '2018-09-02T21:01:22.000Z'
   expect(dayjs(input, { timeZone }).toISOString()).toEqual(output)
-  expect(moment(input).tz(timeZone).toISOString()).toEqual(output)
+  expect(moment.tz(input, timeZone).toISOString()).toEqual(output)
 })
 
 it('Fail constructing with an invalid time zone', () => {
