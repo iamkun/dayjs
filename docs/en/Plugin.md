@@ -201,6 +201,22 @@ Day.js uses an embedded `Date` object. This object supports only local time zone
 * The time zone parameter in the constructor is meant only for converting the parsed input string correctly to UTC. The embedded `Date` object will be initialised with UTC and offer the local time zone representation as usual. The original time zone offset will not be remembered. It is usually not important, because dates should be rendered consistently in user's time zone; not in various time zones, which their string sources referred to.
 * The time zone parameter in the `format` method will extract the date parts (year, month, ...) from the embedded `Date` object in UTC and convert them to the specified time zone, before producing the output string.
 
+#### Installation
+
+This plugin has a peer dependency on the `timezone-support` NPM module. If you are going to use it in your project, add it to your dependencies too, along the dependency on `Day.js`:
+
+```sh
+npm i --save dayjs timezone-support
+```
+
+If you use `Day.js` and this plugin on a web page, include the time-zone module too:
+
+```html
+<script arc="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script arc="https://unpkg.com/dayjs/plugin/timeZone.js"></script>
+<script arc="https://unpkg.com/timezone-support/dist/index.umd.js"></script>
+```
+
 ## Customize
 
 You could build your own Day.js plugin to meet different needs.

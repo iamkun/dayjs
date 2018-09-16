@@ -1,9 +1,5 @@
+import { findTimeZone, setTimeZone, getZonedTime } from 'timezone-support'
 import { FORMAT_DEFAULT } from '../../constant'
-// Import the output CJS module; not the ES6 source here. Jest does
-// not transpile modules from node_modules to CJS. Either unit tests
-// would have to load this plugin transpiled, or this plugin has to
-// load the timezone-support transpiled.
-const { findTimeZone, setTimeZone, getZonedTime } = require('../../../node_modules/timezone-support/dist/index')
 
 function updateTime(instance, {
   year, month, day, hours, minutes, epoch, zone
