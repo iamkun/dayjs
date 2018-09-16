@@ -1,4 +1,5 @@
 import MockDate from 'mockdate'
+import moment from 'moment-timezone'
 import dayjs from '../../src'
 import timeZonePlugin from '../../src/plugin/timeZone'
 
@@ -17,6 +18,7 @@ it('Construct from string in a specified time zone', () => {
   const timeZone = 'Europe/Berlin'
   const output = '2018-09-02T21:01:22.000Z'
   expect(dayjs(input, { timeZone }).toISOString()).toEqual(output)
+  expect(moment(input).tz(timeZone).toISOString()).toEqual(output)
 })
 
 it('Fail constructing with an invalid time zone', () => {
@@ -31,9 +33,10 @@ it('Format date converted to other time zone', () => {
   const timeZone = 'Europe/Berlin'
   const output = '2.9 2018 23:01:22 GMT+0200 (CEST)'
   expect(dayjs(input).format(format, { timeZone })).toEqual(output)
+  expect(moment(input).tz(timeZone).format(format)).toEqual(output)
 })
 
-it('Format date in the locaL time zone to THE default format', () => {
+it('Format date in the local time zone to the default format', () => {
   const input = '2018-09-02 21:01:22'
   expect(dayjs(input).format().startsWith('2018-09-02T')).toBeTruthy()
 })
@@ -43,4 +46,5 @@ it('Format date converted to a time zone to a default format', () => {
   const timeZone = 'Pacific/Honolulu'
   const output = '2018-09-02T11:01:22-10:00'
   expect(dayjs(input).format({ timeZone })).toEqual(output)
+  expect(moment(input).tz(timeZone).format()).toEqual(output)
 })

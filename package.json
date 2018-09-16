@@ -75,6 +75,7 @@
     "karma-sauce-launcher": "^1.1.0",
     "mockdate": "^2.0.2",
     "moment": "^2.22.0",
+    "moment-timezone": "^0.5.21",
     "pre-commit": "^1.2.2",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
