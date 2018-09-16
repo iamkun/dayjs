@@ -65,6 +65,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "benchmark": "^2.1.4",
     "cross-env": "^5.1.6",
+    "date-fns": "^1.29.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",

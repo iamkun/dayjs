@@ -1,6 +1,7 @@
 const { createSuite, runSuites } = require('./benchmark')
 
 const moment = require('moment')
+const datefnsFormat = require('date-fns/format')
 const dayjs = require('..')
 
 const momentDate = moment('2018-09-15T12:58:07.123Z')
@@ -16,6 +17,7 @@ const formatToISOString = createSuite('format to ISO 8601')
 
 const customFormat = createSuite('use custom format')
   .add('Moment.js', () => momentDate.format(format))
+  .add('date-nfs', () => datefnsFormat(date, format))
   .add('Day.js', () => dayjsDate.format(format))
 
 runSuites([formatToISOString, customFormat])
