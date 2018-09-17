@@ -47,7 +47,7 @@ dayjs.extend(advancedFormat) // 使用插件
  - AdvancedFormat 扩展了 `dayjs().format` API 以支持更多模版
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 
 dayjs.extend(AdvancedFormat)
 
