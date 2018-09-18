@@ -1,7 +1,7 @@
 const { createSuite, runSuites } = require('./benchmark')
 
 const moment = require('moment')
-const datefnsDiference = require('date-fns/difference_in_milliseconds')
+const datefnsDifferenceInMilliseconds = require('date-fns/difference_in_milliseconds')
 const dayjs = require('..')
 
 const momentDate = moment('2013-05-25')
@@ -20,7 +20,7 @@ const suites = scenarios.map(({ input, label }) => {
   const dateInput = new Date(input)
   const suite = createSuite(`diff with ${label} date`)
     .add('Moment.js', () => momentDate.diff(momentInput))
-    .add('date-fns', () => datefnsDiference(date, dateInput))
+    .add('date-fns', () => datefnsDifferenceInMilliseconds(date, dateInput))
     .add('Day.js', () => dayjsDate.diff(dayjsInput))
   return suite
 })

@@ -15,9 +15,14 @@ const formatToISOString = createSuite('format to ISO 8601')
   .add('Day.js', () => dayjsDate.toISOString())
   .add('Date', () => date.toISOString())
 
+function formatDate(input) {
+  return input.toLocaleString()
+}
+
 const customFormat = createSuite('use custom format')
   .add('Moment.js', () => momentDate.format(format))
-  .add('date-nfs', () => datefnsFormat(date, format))
+  .add('date-fns', () => datefnsFormat(date, format))
   .add('Day.js', () => dayjsDate.format(format))
+  .add('Date', () => formatDate(input, format))
 
 runSuites([formatToISOString, customFormat])

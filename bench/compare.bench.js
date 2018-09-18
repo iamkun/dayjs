@@ -19,7 +19,7 @@ const scenarios = [
 
 const datefnsCompare = {
   isSame: datefnsIsSameSecond,
-  isafter: datefnsIsAfter,
+  isAfter: datefnsIsAfter,
   isBefore: datefnsIsBefore
 }
 

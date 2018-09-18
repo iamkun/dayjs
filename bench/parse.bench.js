@@ -1,6 +1,7 @@
 const { createSuite, runSuites } = require('./benchmark')
 
 const moment = require('moment')
+const datefnsParse = require('date-fns/parse')
 const dayjs = require('..')
 
 const scenarios = [
@@ -17,6 +18,7 @@ function parseDate(input) {
 const suites = scenarios.map(({ input, label }) =>
   createSuite(`create from ${label}`)
     .add('Moment.js', () => moment(input))
+    .add('date-fns', () => datefnsParse(input))
     .add('Day.js', () => dayjs(input))
     .add('Date', () => parseDate(input)))
 
