@@ -54,6 +54,9 @@
     "type": "git",
     "url": "https://github.com/iamkun/dayjs.git"
   },
+  "dependencies": {
+    "timezone-support": "^1.3.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
@@ -81,8 +84,6 @@
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
     "size-limit": "^0.18.0",
-    "timezone-support": "^1.3.0",
     "typescript": "^2.8.3"
-  },
-  "dependencies": {}
+  }
 }
