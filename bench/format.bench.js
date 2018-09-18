@@ -23,6 +23,6 @@ const customFormat = createSuite('use custom format')
   .add('Moment.js', () => momentDate.format(format))
   .add('date-fns', () => datefnsFormat(date, format))
   .add('Day.js', () => dayjsDate.format(format))
-  .add('Date', () => formatDate(input, format))
+  .add('Date', () => formatDate(date, format))
 
 runSuites([formatToISOString, customFormat])
