@@ -378,3 +378,12 @@ dayjs.isDayjs(new Date()); // false
 `.isBetween` 返回一个时间是否介于两个时间之间
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### 指定某天的开始/结束时间戳
+
+`.monthStart` 设置当前日期为当月第一天
+`.monthEnd` 设置当前日期为当月最后一天
+`.dayStart` 设置当前时间为当天第一毫秒
+`.dayEnd` 设置当前时间为当天最后一毫秒
+
+plugin [`timeStartOrEnd`](./Plugin.md#timeStartOrEnd)
