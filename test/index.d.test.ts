@@ -71,3 +71,11 @@ dayjs().isSame(dayjs())
 dayjs().isAfter(dayjs())
 
 dayjs('2000-01-01').isLeapYear()
+
+dayjs().monthStart()
+
+dayjs().monthEnd()
+
+dayjs().dayStart()
+
+dayjs().dayEnd()

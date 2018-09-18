@@ -83,6 +83,14 @@ declare namespace dayjs {
     isLeapYear(): boolean
 
     locale(arg1: any, arg2?: any): Dayjs
+
+    dayStart(): Dayjs
+
+    dayEnd(): Dayjs
+
+    monthStart(): Dayjs
+
+    monthEnd(): Dayjs
   }
 
   export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void

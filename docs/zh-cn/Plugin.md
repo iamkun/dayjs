@@ -166,6 +166,26 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
 ```
 
+### timeStartOrEnd
+ - timeStartOrEnd 增加了四个方法,具体如下:
+|      方法名      |   参数  | 说明                        |
+| --------------- | --------| --------------------------- |
+| `.monthStart()` | false   | 设置当前日期为当月第一天      |
+| `.monthEnd()`   | false   | 设置当前日期为当月最后一天    |
+| `.dayStart()`   | false   | 设置当前时间为当天第一毫秒    |
+| `.dayEnd()`     | false   | 设置当前时间为当天最后一毫秒  |
+
+```javascript
+import timeStartOrEnd from 'dayjs/plugin/timeStartOrEnd'
+
+dayjs.extend(timeStartOrEnd)
+
+dayjs('2018-09-18').monthStart(); // '2018-09-01'
+dayjs('2018-09-18').monthEnd(); // '2018-09-30'
+dayjs('2018-09-18 12:00:00').dayStart(); // '2018-09-30 00:00:00'
+dayjs('2018-09-18 12:00:00').dayEnd(); // '2018-09-30 23:59:59:999'
+```
+
 ## 自定义
 
 你可以根据需要自由的编写一个Day.js插件
