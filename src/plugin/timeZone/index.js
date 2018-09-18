@@ -2,7 +2,7 @@ import { findTimeZone, setTimeZone, getZonedTime } from 'timezone-support'
 import { FORMAT_DEFAULT } from '../../constant'
 
 function updateTime(instance, {
-  year, month, day, hours, minutes, epoch, zone
+  year, month, day, dayOfWeek, hours, minutes, epoch, zone
 }, convertTimeZone) {
   const date = instance.$d
   // Update the Date object with the epoch time from the date
@@ -14,6 +14,7 @@ function updateTime(instance, {
     instance.$Y = year
     instance.$M = month - 1
     instance.$D = day
+    instance.$W = dayOfWeek
     instance.$H = hours
     instance.$m = minutes
     const { abbreviation, offset } = zone
@@ -25,6 +26,7 @@ function updateTime(instance, {
     instance.$Y = date.getFullYear()
     instance.$M = date.getMonth()
     instance.$D = date.getDate()
+    instance.$W = date.getDay()
     instance.$H = date.getHours()
     instance.$m = date.getMinutes()
   }

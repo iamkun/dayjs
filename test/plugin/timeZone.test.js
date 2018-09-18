@@ -29,9 +29,9 @@ it('Fail constructing with an invalid time zone', () => {
 
 it('Format date converted to other time zone', () => {
   const input = '2018-09-02T21:01:22Z'
-  const format = 'D.M YYYY H:mm:ss [GMT]ZZ (z)'
+  const format = 'd, D.M YYYY H:mm:ss [GMT]ZZ (z)'
   const timeZone = 'Europe/Berlin'
-  const output = '2.9 2018 23:01:22 GMT+0200 (CEST)'
+  const output = '0, 2.9 2018 23:01:22 GMT+0200 (CEST)'
   expect(dayjs(input).format(format, { timeZone })).toEqual(output)
   expect(moment(input).tz(timeZone).format(format)).toEqual(output)
 })
