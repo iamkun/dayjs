@@ -22,6 +22,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Second `.second()`](#second-second)
     - [Millisecond `.millisecond()`](#millisecond-millisecond)
     - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+      - [List of all available units](#list-of-all-available-units)
   - [Manipulating](#manipulating)
     - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
     - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
