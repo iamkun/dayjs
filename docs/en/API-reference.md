@@ -10,7 +10,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
       - [ISO 8601 string](#iso-8601-string)
       - [Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milliseconds-since-the-unix-epoch---jan-1-1970-12am-utc)
       - [Native Javascript Date object](#native-javascript-date-object)
-    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone-dayjsoriginal-dayjs)
+    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
     - [Validation `.isValid()`](#validation-isvalid)
   - [Get and Set](#get-and-set)
     - [Year `.year()`](#year-year)
