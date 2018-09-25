@@ -8,8 +8,9 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
   - [Conversões](#conversões)
     - [Construtor `dayjs(existing?: string | number | Date | Dayjs)`](#construtor-dayjsexisting-string--number--date--dayjs)
       - [string ISO 8601](#string-iso-8601)
-      - [Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milissegundos-desde-a-unix-epoch---jan-1-1970-12am-utc)
       - [Objeto `Date` nativo](#objeto-date-nativo)
+      - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+    - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validação `.isValid()`](#validação-isvalid)
   - [Get and Set](#get-and-set)
@@ -70,16 +71,25 @@ Day.js também converte outros formatos de data.
 dayjs('2018-04-04T16:00:00.000Z');
 ```
 
-#### Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)
+#### Objeto `Date` nativo
+
+```js
+dayjs(new Date(2018, 8, 18));
+```
+
+#### Unix Timestamp (milliseconds)
 
 ```js
 dayjs(1318781876406);
 ```
 
-#### Objeto `Date` nativo
+### Unix Timestamp (seconds) `.unix(value: number)`
+
+Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 
 ```js
-dayjs(new Date(2018, 8, 18));
+dayjs.unix(1318781876);
+dayjs.unix(1318781876.721);
 ```
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
