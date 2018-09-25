@@ -1,281 +1,251 @@
 ## Referência da API
 
-Ao invés de modificar o 'Date.prototype' nativo, o Day.js empacota o objeto nativo Date em um objeto `Dayjs`.
+Ao invés de modificar o `Date.prototype` nativo, o Day.js empacota o objeto nativo `Date` em um objeto `Dayjs`.
 
-Este objeto `Dayjs` é imutável, ou seja, todas as operações desta API irão retornar um novo objeto `Dayjs`.
+O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram o objeto `Dayjs` irão retornar uma nova instancia deste objeto.
 
-* [Criação](#criação)
-  * [Data e Hora Atual](#data-e-hora-atual)
-  * [String](#string)
-  * [Unix Timestamp (millisegundos)](#unix-timestamp-millisegundos)
-  * [Date](#date)
-  * [Clonar](#clonar)
-  * [Validação](#validação)
-* [Get e Set](#get-e-set)
-  * [Ano](#ano)
-  * [Mês](#mês)
-  * [Dia do Mês](#dia-do-mês)
-  * [Dia da Semana](#dia-da-semana)
-  * [Hora](#hora)
-  * [Minuto](#minuto)
-  * [Segundo](#segundo)
-  * [Milisegundo](#milisegundo)
-  * [Set](#set)
-* [Manipulação](#manipulação)
-  * [Adicionar Tempo](#adicionar-tempo)
-  * [Subtrair Tempo](#subtrair-tempo)
-  * [Começo do Tempo](#começo-do-tempo)
-  * [Fim do Tempo](#fim-do-tempo)
-* [Visualização](#visualização)
-  * [Formatar](#formatar)
-  * [Diferença](#diferença)
-  * [Unix Timestamp (milliseconds)](#unix-timestamp-milissegundos-1)
-  * [Unix Timestamp (seconds)](#unix-timestamp-segundos)
-  * [Dias no Mês](#days-in-month)
-  * [Como Date do Javascript](#como-date-do-javascript)
-  * [Como Array](#como-array)
-  * [Como JSON](#como-json)
-  * [Como String ISO 8601](#como-string-iso-8601)
-  * [Como Object](#como-object)
-  * [Como String](#como-string)
-* [Verificação](#verificação)
-  * [Antes](#antes)
-  * [Igual](#igual)
-  * [Depois](#depois)
-  * [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
-* [Plugin APIs](#plugin-apis)
-  * [RelativeTime](#relativetime)
-  * [IsLeapYear](#isleapyear)
-  * [WeekOfYear](#weekofyear)
-  * [IsBetween](#isbetween)
+- [Referência da API](#referência-da-api)
+  - [Conversões](#conversões)
+    - [Construtor `dayjs(existing?: string | number | Date | Dayjs)`](#construtor-dayjsexisting-string--number--date--dayjs)
+      - [string ISO 8601](#string-iso-8601)
+      - [Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milissegundos-desde-a-unix-epoch---jan-1-1970-12am-utc)
+      - [Objeto `Date` nativo](#objeto-date-nativo)
+    - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
+    - [Validação `.isValid()`](#validação-isvalid)
+  - [Get and Set](#get-and-set)
+    - [Ano `.year()`](#ano-year)
+    - [Mês `.month()`](#mês-month)
+    - [Dia do Mês `.date()`](#dia-do-mês-date)
+    - [Dia da Semana `.day()`](#dia-da-semana-day)
+    - [Hora `.hour()`](#hora-hour)
+    - [Minuto `.minute()`](#minuto-minute)
+    - [Segundo `.second()`](#segundo-second)
+    - [Milissegundo `.millisecond()`](#milissegundo-millisecond)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+      - [Lista de todas as unidades disponíveis](#lista-de-todas-as-unidades-disponíveis)
+  - [Manipulando](#manipulando)
+    - [Adicionar `.add(value: number, unit: string)`](#adicionar-addvalue-number-unit-string)
+    - [Subtrair `.subtract(value: number, unit: string)`](#subtrair-subtractvalue-number-unit-string)
+    - [Início do Tempo `.startOf(unit: string)`](#início-do-tempo-startofunit-string)
+    - [Fim do Tempo `.endOf(unit: string)`](#fim-do-tempo-endofunit-string)
+  - [Exibindo](#exibindo)
+    - [Formatação `.format(stringWithTokens: string)`](#formatação-formatstringwithtokens-string)
+      - [Lista com todos os formatos disponíveis](#lista-com-todos-os-formatos-disponíveis)
+    - [Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`](#diferença-diffcompared-dayjs-unit-string-padrão-milliseconds-float-boolean)
+    - [Unix Timestamp (milissegundos) `.valueOf()`](#unix-timestamp-milissegundos-valueof)
+    - [Unix Timestamp (segundos) `.unix()`](#unix-timestamp-segundos-unix)
+    - [Dias no Mês `.daysInMonth()`](#dias-no-mês-daysinmonth)
+    - [Como objeto `Date` do Javascript `.toDate()`](#como-objeto-date-do-javascript-todate)
+    - [Como Array `.toArray()`](#como-array-toarray)
+    - [Como JSON `.toJSON()`](#como-json-tojson)
+    - [Como uma string ISO 8601 `.toISOString()`](#como-uma-string-iso-8601-toisostring)
+    - [Como Objeto `.toObject()`](#como-objeto-toobject)
+    - [Como String `.toString()`](#como-string-tostring)
+  - [Consulta](#consulta)
+    - [Antes `.isBefore(compared: Dayjs)`](#antes-isbeforecompared-dayjs)
+    - [Igual `.isSame(compared: Dayjs)`](#igual-issamecompared-dayjs)
+    - [Depois `.isAfter(compared: Dayjs)`](#depois-isaftercompared-dayjs)
+    - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
+  - [Plugin APIs](#plugin-apis)
+    - [RelativeTime](#relativetime)
+    - [IsLeapYear](#isleapyear)
+    - [WeekOfYear](#weekofyear)
+    - [IsBetween](#isbetween)
 
----
-O Day.js sempre irá retornar um novo objeto `Dayjs` se nada for especificado.
+## Conversões
 
-### Criação
+### Construtor `dayjs(existing?: string | number | Date | Dayjs)`
 
-Pode-se criar objetos Dayjs chamando `dayjs()`, passando um dos vários tipos de parâmetro disponíveis.
-
-#### Data e hora atual
-
-Se não passar nenhum parâmetro, o objeto `Dayjs` usará a data e hora atual.
+Chamando este construtor sem parâmetros, será retornado um objeto `Dayjs` contendo a data e hora atual.
 
 ```js
 dayjs();
 ```
 
-### String
+Day.js também converte outros formatos de data.
 
-String que atende ao formato [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+#### string [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
 
 ```js
-dayjs(String);
-dayjs('1995-12-25');
+dayjs('2018-04-04T16:00:00.000Z');
 ```
 
-### Unix Timestamp (millisegundos)
-
-Valor inteiro representando o número de milissegundos desde o Unix Epoch (meio-dia de 1º de janeiro de 1970, no fuso horário UTC).
+#### Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)
 
 ```js
-dayjs(Number);
 dayjs(1318781876406);
 ```
 
-### Date
-
-Objeto Date nativo do Javascript.
+#### Objeto `Date` nativo
 
 ```js
-dayjs(Date);
 dayjs(new Date(2018, 8, 18));
 ```
 
-### Clonar
+### Clonar `.clone() | dayjs(original: Dayjs)`
 
-Todos os objetos `Dayjs` são imutáveis. Se quiser uma cópia, simplesmente chame `.clone()`.
-Chamar `dayjs()` passando um objeto `Dayjs` também irá cloná-lo.
+Retorna um objeto `Dayjs` clonado.
 
 ```js
-dayjs(Dayjs);
 dayjs().clone();
+dayjs(dayjs('2019-01-25')); // passando um objeto Dayjs para o construtor também irá cloná-lo
 ```
 
-### Validação
+### Validação `.isValid()`
 
-* retorna um Boolean
-
-Se a data do objeto `Dayjs` é considerada válida.
+Retorna um `boolean` indicando se a data do objeto `Dayjs` é válida.
 
 ```js
 dayjs().isValid();
 ```
 
----
+## Get and Set
 
-### Get e Set
+### Ano `.year()`
 
-Obter (get) e modificar (set) datas.
-
-#### Ano
-
-* retorna um Number.
+Retorna um `number` representando o ano do objeto `Dayjs`.
 
 ```js
 dayjs().year();
 ```
 
-#### Mês
+### Mês `.month()`
 
-* retorna um Number
+Retorna um `number` representando o mês do objeto `Dayjs`.
 
 ```js
 dayjs().month();
 ```
 
-#### Dia do Mês
+### Dia do Mês `.date()`
 
-* retorna um Number
+Retorna um `number` representando o dia do mês do objeto `Dayjs`.
 
 ```js
 dayjs().date();
 ```
 
-#### Dia da Semana
+### Dia da Semana `.day()`
 
-* retorna um Number
+Retorna um `number` representando o dia da semana do objeto `Dayjs`.
 
 ```js
 dayjs().day();
 ```
 
-#### Hora
+### Hora `.hour()`
 
-* retorna um Number
+Retorna um `number` representando a hora do objeto `Dayjs`.
 
 ```js
 dayjs().hour();
 ```
 
-#### Minuto
+### Minuto `.minute()`
 
-* retorna um Number
+Retorna um `number` representando os minutos do objeto `Dayjs`.
 
 ```js
 dayjs().minute();
 ```
 
-#### Segundo
+### Segundo `.second()`
 
-* retorna um Number
+Retorna um `number` representando os segundos do objeto `Dayjs`.
 
 ```js
 dayjs().second();
 ```
 
-#### Milisegundo
+### Milissegundo `.millisecond()`
 
-* retorna um Number
+Retorna um `number` representando os milissegundos do objeto `Dayjs`.
 
 ```js
 dayjs().millisecond();
 ```
 
-#### Set
+### Set `.set(unit: string, value: number)`
 
-Modificar a data.
-As unidades não fazem distinção entre maiúsculas e minúsculas.
+Retorna um `Dayjs` com as mudanças aplicadas.
 
 ```js
-dayjs().set((unit: String), (value: Int));
 dayjs().set('date', 1);
 dayjs().set('month', 3); // April
 dayjs().set('second', 30);
 ```
 
-#### List of all available units
+#### Lista de todas as unidades disponíveis
 
-| Unit          | Shorthand | Description                              |
-| ------------- | --------- | ---------------------------------------- |
-| `date`        |           | Date of Month                            |
-| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
-| `month`       | `M`       | Month                                    |
-| `year`        | `y`       | Year                                     |
-| `hour`        | `h`       | Hour                                     |
-| `minute`      | `m`       | Minute                                   |
-| `second`      | `s`       | Second                                   |
-| `millisecond` | `ms`      | Millisecond                              |
+| Unidade       | Shorthand | Descrição                                     |
+| ------------- | --------- | --------------------------------------------- |
+| `date`        |           | Data do Mês                                   |
+| `day`         | `d`       | Dia da Semana (Domingo como 0, Sábado como 6) |
+| `month`       | `M`       | Mês                                           |
+| `year`        | `y`       | Ano                                           |
+| `hour`        | `h`       | Hora                                          |
+| `minute`      | `m`       | Minuto                                        |
+| `second`      | `s`       | Segundo                                       |
+| `millisecond` | `ms`      | Milissegundo                                  |
 
----
+## Manipulando
 
-### Manipulação
-
-É possível manipular um objeto `Dayjs` de várias formas. Por exemplo:
+Um objeto `Dayjs` pode ser manipulado de várias maneiras.
 
 ```js
-dayjs()
-  .startOf('month')
+dayjs('2019-01-25')
   .add(1, 'day')
-  .subtract(1, 'year');
+  .subtract(1, 'year').toString(); // Fri, 26 Jan 2018 00:00:00 GMT
 ```
 
-#### Adicionar Tempo
+### Adicionar `.add(value: number, unit: string)`
 
-Novo objeto `Dayjs` com tempo adicionado.
+Retorna um objeto `Dayjs` clonado com a quantidade especificada de dias adicionados.
 
 ```js
-dayjs().add((value: Number), (unit: String));
 dayjs().add(7, 'day');
 ```
 
-#### Subtrair Tempo
+### Subtrair `.subtract(value: number, unit: string)`
 
-Novo objeto `Dayjs`com tempo subtraído.
+Retorna um objeto `Dayjs` clonado com a quantidade especificada de dias subtraídos.
 
 ```js
-dayjs().subtract((value: Number), (unit: String));
 dayjs().subtract(7, 'year');
 ```
 
-#### Começo do Tempo
+### Início do Tempo `.startOf(unit: string)`
 
-Novo objeto `Dayjs`com tempo voltado para o começo da unidade de tempo passada.
+Retorna um objeto `Dayjs` clonado definido com o começo da unidade de tempo especificada.
 
 ```js
-dayjs().startOf((unit: String));
-dayjs().startOf('year');
+dayjs().startOf('week');
 ```
 
-#### Fim do Tempo
+### Fim do Tempo `.endOf(unit: string)`
 
-Novo objeto `Dayjs`com tempo adiantado para o fim da unidade de tempo passada.
+Retorna um objeto `Dayjs` clonado definido com o fim da unidade de tempo especificada.
 
 ```js
-dayjs().endOf((unit: String));
 dayjs().endOf('month');
 ```
 
----
+## Exibindo
 
-### Visualização
+### Formatação `.format(stringWithTokens: string)`
 
-Existem várias maneiras de mostrar o objeto `Dayjs` para o usuário.
-
-#### Formatar
-
-* retorna uma string
-
-Recebe uma string com símbolos que serão substituídos por seus valores correspondentes.
+Retorna uma `string` com um objeto `Dayjs` contendo a data formatada.
+Para escapar caracteres, envolva-os entre colchetes ou chaves (por exemplo: `[G] {um}`).
 
 ```js
-dayjs().format(String);
-dayjs().format(); // "2014-09-08T08:02:17-05:00" (ISO 8601, sem fração de segundo)
-dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
+dayjs().format(); // current date in ISO6801, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
+
+dayjs('2019-01-25').format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // '{2019} 01-25T00:00:00-02:00Z'
+
+dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 ```
 
-* Para não processar caracteres na string passada como parâmetro, coloque-os entre chaves (ex: [Z]).
-
-Lista de todos os formatos disponíveis:
+#### Lista com todos os formatos disponíveis
 
 | Formato | Saída            | Descrição                                     |
 | ------  | ---------------- | --------------------------------------------- |
@@ -305,147 +275,129 @@ Lista de todos os formatos disponíveis:
 | `A`     | AM PM            |                                               |
 | `a`     | am pm            |                                               |
 
-* More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+* Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 
-#### Diferença
+### Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`
 
-* retorna um Number
-
-Diferença de dois objetos `Dayjs` em milissegundos ou outra unidade de tempo especificada.
+Retorna um `number` indicando a diferença entre dois objetos `Dayjs` na unidade especificada.
 
 ```js
-dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+const date1 = dayjs('2019-01-25');
+const date2 = dayjs('2018-06-05');
+date1.diff(date2); // 20214000000
+date1.diff(date2, 'months'); // 7
+date1.diff(date2, 'months', true); // 7.645161290322581
+date1.diff(date2, 'days'); // 233
 ```
 
-#### Unix Timestamp (milissegundos)
+### Unix Timestamp (milissegundos) `.valueOf()`
 
-* retorna um Number
-
-Número de milissegundos desde o Unix Epoch.
+Retorna um `number` em milissegundos desde a Unix Epoch para o objeto `Dayjs`.
 
 ```js
-dayjs().valueOf();
+dayjs('2019-01-25').valueOf(); // 1548381600000
 ```
 
-#### Unix Timestamp (segundos)
+### Unix Timestamp (segundos) `.unix()`
 
-* retorna um Number
-
-Número de segundos desde o Unix Epoch.
+Retorna um `number` em segundos desde a Unix Epoch para o objeto `Dayjs`.
 
 ```js
-dayjs().unix();
+dayjs('2019-01-25').unix(); // 1548381600
 ```
 
-#### Dias no Mês
+### Dias no Mês `.daysInMonth()`
 
-* retorna um Number
-
-Número de dias no mês atual.
+Retorna um `number` em contendo o número de dias no mês do objeto `Dayjs`.
 
 ```js
-dayjs().daysInMonth();
+dayjs('2019-01-25').daysInMonth(); // 31
 ```
 
-#### Como Date do Javascript
+### Como objeto `Date` do Javascript `.toDate()`
 
-* retorna um objeto `Date` do Javascript
-
-Obter cópia de um objeto `Date` nativo a partir do objeto `Dayjs`.
+Retorna uma cópia do objeto nativo `Date` convertido de um objeto `Dayjs`.
 
 ```js
-dayjs().toDate();
+dayjs('2019-01-25').toDate();
 ```
 
-#### Como Array
+### Como Array `.toArray()`
 
-* retorna um Array
-
-Retorna um array no formato dos parâmetros de `new Date()`.
+Retorna um `array` que espelha os parâmetros de um new Date().
 
 ```js
-dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
+dayjs('2019-01-25').toArray(); // [ 2019, 0, 25, 0, 0, 0, 0 ]
 ```
 
-#### Como JSON
+### Como JSON `.toJSON()`
 
-* retorna uma string
-
-Ao serializar um objeto `Dayjs` para JSON, retornará uma string no padrão ISO 8601.
+Retorna o objeto `Dayjs` formatado em uma `string` ISO8601.
 
 ```js
-dayjs().toJSON(); //"2018-08-08T00:00:00.000Z"
+dayjs('2019-01-25').toJSON(); // '2019-01-25T02:00:00.000Z'
 ```
 
-#### Como String ISO 8601
+### Como uma string ISO 8601 `.toISOString()`
 
-* retorna uma string
-
-Retorna uma string no padrão ISO 8601.
+Retorna o objeto `Dayjs` formatado em uma `string` ISO8601.
 
 ```js
-dayjs().toISOString();
+dayjs('2019-01-25').toISOString(); // '2019-01-25T02:00:00.000Z'
 ```
 
-#### Como Object
+### Como Objeto `.toObject()`
 
-* retorna um Object
-
-Retorna um Object contendo de ano a milisegundo.
+Retorna um `object` com as propriedades da data.
 
 ```js
-dayjs().toObject(); // { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
+dayjs('2019-01-25').toObject();
+/* { years: 2019,
+     months: 0,
+     date: 25,
+     hours: 0,
+     minutes: 0,
+     seconds: 0,
+     milliseconds: 0 } */
 ```
 
-#### Como String
+### Como String `.toString()`
 
-* retorna uma string
+Retorna uma representação em  `string` da data.
 
 ```js
-dayjs().toString();
+dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 ```
 
----
+## Consulta
 
-### Verificação
+### Antes `.isBefore(compared: Dayjs)`
 
-#### Antes
-
-* retorna um Boolean
-
-Se a data de um objeto `Dayjs` é anterior à de outro objeto `Dayjs`.
+Retorna um `boolean` indicando se a data do objeto `Dayjs` é antes da data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isBefore(Dayjs);
 dayjs().isBefore(dayjs()); // false
 ```
 
-#### Igual
+### Igual `.isSame(compared: Dayjs)`
 
-* retorna um Boolean
-
-Se a data de um objeto `Dayjs` é igual à de outro objeto `Dayjs`.
+Retorna um `boolean` indicando se a data do objeto `Dayjs` é a mesma data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isSame(Dayjs);
-dayjs().isSame(dayjs()); // true
+dayjs().isBefore(dayjs()); // false
 ```
 
-#### Depois
+### Depois `.isAfter(compared: Dayjs)`
 
-* retorna um Boolean
-
-Se a data de um objeto `Dayjs` é posterior à de outro objeto `Dayjs`.
+Retorna um `boolean` indicando se a data do objeto `Dayjs` é depois da data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isAfter(Dayjs);
 dayjs().isAfter(dayjs()); // false
 ```
 
-### Is a Dayjs `.isDayjs(compared: any)`
+### É um objeto `Dayjs` `.isDayjs()`
 
-Returns a `boolean` indicating whether a variable is a dayjs object or not.
+Retorna um `boolean` indicando se a variável é um objeto `Dayjs` ou não.
 
 ```js
 dayjs.isDayjs(dayjs()); // true
@@ -456,24 +408,24 @@ dayjs.isDayjs(new Date()); // false
 
 ### RelativeTime
 
-`.from` `.to` `.fromNow` `.toNow` to get relative time
+`.from` `.to` `.fromNow` `.toNow` para obter o tempo relativo
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
 
 ### IsLeapYear
 
-`.isLeapYear` to get is a leap year or not
+`.isLeapYear` para obter um ano bissexto ou não
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 ### WeekOfYear
 
-`.week` to get week of the year
+`.week` para obter a semana do ano
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
 ### IsBetween
 
-`.isBetween` to check if a date is between two other dates
+`.isBetween` para verificar se uma data está entre duas outras datas
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
