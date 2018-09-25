@@ -7,8 +7,9 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 * [Parse](#parse)
   * [Now](#now)
   * [String](#string)
-  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   * [Date](#date)
+  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+  * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
   * [Clone](#clone)
   * [Validation](#validation)
 * [Get + Set](#get--set)
@@ -74,6 +75,15 @@ dayjs(String);
 dayjs('1995-12-25');
 ```
 
+### Date
+
+JavaScript の組み込みの Date オブジェクトを渡します。
+
+```js
+dayjs(Date);
+dayjs(new Date(2018, 8, 18));
+```
+
 ### Unix Timestamp (milliseconds)
 
 Unix エポック (1970年1月1日 12:00AM UTC) 以降のミリ秒数を表す整数値を渡します。
@@ -83,13 +93,11 @@ dayjs(Number);
 dayjs(1318781876406);
 ```
 
-### Date
-
-JavaScript の組み込みの Date オブジェクトを渡します。
+### Unix Timestamp (seconds)
 
 ```js
-dayjs(Date);
-dayjs(new Date(2018, 8, 18));
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 
 ### Clone

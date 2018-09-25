@@ -10,7 +10,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
       - [ISO 8601 string](#iso-8601-string)
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
-    - [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+    - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
     - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
     - [Validation `.isValid()`](#validation-isvalid)
   - [Get and Set](#get-and-set)
@@ -78,6 +78,8 @@ dayjs(new Date(2018, 8, 18));
 ```
 
 #### Unix Timestamp (milliseconds)
+
+Returns a `Dayjs` from a Unix timestamp (milliseconds since the Unix Epoch)
 
 ```js
 dayjs(1318781876406);
