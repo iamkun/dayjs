@@ -156,7 +156,7 @@ dayjs('06/27/2018').week() // 26
 ```
 
 ### IsBetween
- - IsBetween 增加了 `.isBetween()` API 返回一个 `boolean` 来展示一个时间是否介于两个时间之间.
+ - IsBetween 增加了 `.isBetween()` API 返回一个 `boolean` 来展示一个日期是否介于两个日期之间.
 
 ```javascript
 import isBetween from 'dayjs/plugin/isBetween'

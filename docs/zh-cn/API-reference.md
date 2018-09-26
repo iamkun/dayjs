@@ -385,6 +385,6 @@ dayjs.isDayjs(new Date()); // false
 
 ### 是否之间
 
-`.isBetween` 返回一个时间是否介于两个时间之间
+`.isBetween` 返回一个日期是否介于两个日期之间
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
