@@ -451,6 +451,10 @@ dayjs.locale = parseLocale
 
 dayjs.isDayjs = isDayjs
 
+dayjs.unix = timestamp => (
+  dayjs(timestamp * 1e3)
+)
+
 dayjs.en = Ls[L]
 
 export default dayjs
