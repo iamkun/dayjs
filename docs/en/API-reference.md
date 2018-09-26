@@ -8,9 +8,10 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Parsing](#parsing)
     - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
       - [ISO 8601 string](#iso-8601-string)
-      - [Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milliseconds-since-the-unix-epoch---jan-1-1970-12am-utc)
       - [Native Javascript Date object](#native-javascript-date-object)
-    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone-dayjsoriginal-dayjs)
+      - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+    - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
     - [Validation `.isValid()`](#validation-isvalid)
   - [Get and Set](#get-and-set)
     - [Year `.year()`](#year-year)
@@ -22,6 +23,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Second `.second()`](#second-second)
     - [Millisecond `.millisecond()`](#millisecond-millisecond)
     - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+      - [List of all available units](#list-of-all-available-units)
   - [Manipulating](#manipulating)
     - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
     - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
@@ -69,16 +71,27 @@ Day.js also parses other date formats.
 dayjs('2018-04-04T16:00:00.000Z');
 ```
 
-#### Unix Timestamp (milliseconds since the Unix Epoch - Jan 1 1970, 12AM UTC)
+#### Native Javascript Date object
+
+```js
+dayjs(new Date(2018, 8, 18));
+```
+
+#### Unix Timestamp (milliseconds)
+
+Returns a `Dayjs` from a Unix timestamp (milliseconds since the Unix Epoch)
 
 ```js
 dayjs(1318781876406);
 ```
 
-#### Native Javascript Date object
+### Unix Timestamp (seconds) `.unix(value: number)`
+
+Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 
 ```js
-dayjs(new Date(2018, 8, 18));
+dayjs.unix(1318781876);
+dayjs.unix(1318781876.721);
 ```
 
 ### Clone `.clone() | dayjs(original: Dayjs)`

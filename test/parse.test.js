@@ -56,6 +56,13 @@ it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
 })
 
+it('Unix Timestamp Number (seconds) 1318781876', () => {
+  const timestamp1 = 1318781876
+  const timestamp2 = 1318781876.721
+  expect(dayjs.unix(timestamp1).valueOf()).toBe(moment.unix(timestamp1).valueOf())
+  expect(dayjs.unix(timestamp2).valueOf()).toBe(moment.unix(timestamp2).valueOf())
+})
+
 it('String and Number 20180101', () => {
   expect(dayjs(20180101).valueOf()).toBe(moment(20180101).valueOf())
   expect(dayjs('20180101').valueOf()).toBe(moment('20180101').valueOf())
