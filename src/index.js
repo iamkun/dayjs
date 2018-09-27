@@ -501,6 +501,11 @@ class Dayjs {
   }
 }
 
+dayjs.utc = (date, c) => {
+  const cfg = { ...c, utc: true }
+  return dayjs(date, cfg)
+}
+
 dayjs.extend = (plugin, option) => {
   plugin(option, Dayjs, dayjs)
   return dayjs

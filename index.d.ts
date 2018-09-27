@@ -93,6 +93,8 @@ declare namespace dayjs {
     utcOffset(): number
   }
 
+  export function utc(config?: ConfigType, option?: OptionType): Dayjs
+
   export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
   export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs

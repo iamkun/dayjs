@@ -21,3 +21,10 @@ it('Returns an UTC instance', () => {
   expect(instance.hour()).toEqual(19)
   expect(instance.minute()).toEqual(34)
 })
+
+it('Static method creates an UTC instance', () => {
+  const instance = dayjs.utc('2018-09-06T19:34:28.657Z')
+  expect(instance.$u).toBeTruthy()
+  expect(instance.hour()).toEqual(19)
+  expect(instance.minute()).toEqual(34)
+})
