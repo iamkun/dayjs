@@ -29,7 +29,11 @@ const parseLocale = (preset, object, isLocal) => {
 
 const dayjs = (date, c) => {
   if (isDayjs(date)) {
-    return date.clone()
+    if (c) {
+      date = date.toDate()
+    } else {
+      return date.clone()
+    }
   }
   const cfg = c || {}
   cfg.date = date

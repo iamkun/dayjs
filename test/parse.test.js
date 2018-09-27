@@ -79,6 +79,22 @@ it('Does not apply the UTC mode by default', () => {
   expect(instance.minute()).toEqual(34)
 })
 
+it('Creates an UTC instance from another instance', () => {
+  const source = dayjs('2018-09-06')
+  const instance = dayjs(source, { utc: true })
+  expect(instance.$u).toBeTruthy()
+  expect(instance.hour()).toEqual(source.toDate().getUTCHours())
+  expect(instance.minute()).toEqual(source.toDate().getUTCMinutes())
+})
+
+it('Creating a new instance from another instance retains the UTC mode', () => {
+  const source = dayjs('2018-09-06', { utc: true })
+  const instance = dayjs(source)
+  expect(instance.$u).toBeTruthy()
+  expect(instance.hour()).toEqual(source.hour())
+  expect(instance.minute()).toEqual(source.minute())
+})
+
 it('Clone not affect each other', () => {
   const base = dayjs(20170101)
   const year = base.year()
@@ -92,4 +108,10 @@ it('Clone with same value', () => {
   const newBase = base.set('year', year + 1)
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
+})
+
+it('Clone retains the UTC mode', () => {
+  const instance = dayjs('2018-09-06', { utc: true })
+  const another = instance.clone()
+  expect(another.$u).toBeTruthy()
 })
