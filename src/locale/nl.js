@@ -18,7 +18,7 @@ const locale = {
     M: 'een maand',
     MM: '%d maanden',
     y: 'een jaar',
-    yy: '%d jaren'
+    yy: '%d jaar'
   }
 }
 
