@@ -12,7 +12,7 @@ const locale = {
     m: 'een minuut',
     mm: '%d minuten',
     h: 'een uur',
-    hh: '%d uren',
+    hh: '%d uur',
     d: 'een dag',
     dd: '%d dagen',
     M: 'een maand',
