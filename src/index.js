@@ -32,11 +32,14 @@ const dayjs = (date, c) => {
     return date.clone()
   }
   const cfg = c || {}
+  if (date instanceof Date && cfg.cloneDate !== false) {
+    date = new Date(date)
+  }
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L })
+const wrapper = (date, instance, cloneDate) => dayjs(date, { locale: instance.$L, cloneDate })
 
 const Utils = U // for plugin use
 Utils.parseLocale = parseLocale
@@ -153,16 +156,17 @@ class Dayjs {
     const isStartOf = !Utils.isUndefined(startOf) ? startOf : true
     const unit = Utils.prettyUnit(units)
     const instanceFactory = (d, m) => {
-      const ins = wrapper(new Date(this.$y, m, d), this)
+      const ins = wrapper(new Date(this.$y, m, d), this, false)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate(),
+      const date = this.toDate()
+      return wrapper(date[method].apply( // eslint-disable-line prefer-spread
+        date,
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
-      ), this)
+      ), this, false)
     }
     switch (unit) {
       case C.Y:
@@ -390,7 +394,7 @@ class Dayjs {
   }
 
   clone() {
-    return wrapper(this.toDate(), this)
+    return wrapper(this.toDate(), this, false)
   }
 
   toDate() {

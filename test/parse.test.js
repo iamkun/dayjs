@@ -65,6 +65,14 @@ it('Number 0', () => {
   expect(dayjs(0).valueOf()).toBe(moment(0).valueOf())
 })
 
+it('Original Date object does not affect the dayjs instance', () => {
+  const original = new Date()
+  const instance = dayjs(original)
+  const internal = instance.toDate()
+  original.setTime(original.getTime() - 3600000)
+  expect(instance.toDate()).toEqual(internal)
+})
+
 it('Clone not affect each other', () => {
   const base = dayjs(20170101)
   const year = base.year()
