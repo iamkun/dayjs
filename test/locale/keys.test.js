@@ -8,7 +8,7 @@ const L = []
 // load all locales from locale dir
 fs.readdirSync(path.join(__dirname, localeDir))
   .forEach((file) => {
-    if (!file === 'en.js') {
+    if (file !== 'en.js') {
       // eslint-disable-next-line
       L.push(require(path.join(__dirname, localeDir, file)).default)
     }
