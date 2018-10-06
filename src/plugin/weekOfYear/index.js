@@ -12,4 +12,7 @@ export default (o, c, d) => {
     const diffInWeek = this.diff(compareDay, W, true)
     return Math.ceil(diffInWeek)
   }
+  proto.setWeek = function (week) {
+    return this.add((week - this.week())*7, 'day');
+  }
 }
