@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow-callback */
+
 const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
@@ -15,7 +17,28 @@ const parseTokenExpressions = {}
 const parseTokenFunctions = {}
 const parsers = {}
 
-function correctDayPeriod(time) {
+const daysInMonths = [
+  31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+]
+
+function isLeapYear(year) {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+}
+
+function checkDay(time) {
+  const { day, month } = time
+  let days
+  if (month === 2) {
+    days = isLeapYear(time.year) ? 29 : 28
+  } else {
+    days = daysInMonths[month - 1]
+  }
+  if (!(day >= 1 && day <= days)) {
+    throw new Error(`Invalid day: "${day}".`)
+  }
+}
+
+function correctHours(time) {
   const { afternoon } = time
   if (afternoon !== undefined) {
     const { hours } = time
@@ -68,7 +91,8 @@ function makeParser(format) {
         start += value.length
       }
     }
-    correctDayPeriod(time)
+    checkDay(time)
+    correctHours(time)
     return time
   }
 }
@@ -77,13 +101,28 @@ function addExpressionToken(token, regex) {
   parseTokenExpressions[token] = regex
 }
 
-function addParseToken(tokens, property) {
+function addParseToken(tokens, property, check) {
   if (typeof tokens === 'string') {
     tokens = [tokens]
   }
-  const callback = typeof property === 'string' ? function (input) {
-    this[property] = +input
-  } : property
+  let callback
+  if (typeof property === 'string') {
+    if (check) {
+      callback = function (input) {
+        const value = +input
+        if (!check(value)) {
+          throw new Error(`Invalid ${property}: "${input}".`)
+        }
+        this[property] = value
+      }
+    } else {
+      callback = function (input) {
+        this[property] = +input
+      }
+    }
+  } else {
+    callback = property
+  }
   for (let i = 0, { length } = tokens; i < length; i += 1) {
     parseTokenFunctions[tokens[i]] = callback
   }
@@ -92,7 +131,11 @@ function addParseToken(tokens, property) {
 function offsetFromString(string) {
   const parts = string.match(/([+-]|\d\d)/g)
   const minutes = +(parts[1] * 60) + +parts[2]
-  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
+  const offset = minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
+  if (!(offset % 15 === 0 && Math.abs(offset) <= 765)) { // 00:00 - 12:45
+    throw new Error(`Invalid time zone offset: "${string}".`)
+  }
+  return offset
 }
 
 addExpressionToken('A', matchUpperCaseAMPM)
@@ -115,17 +158,26 @@ for (let token = 'S', factor = 100; factor >= 1; token += 'S', factor /= 10) {
 
 addExpressionToken('s', match1to2)
 addExpressionToken('ss', match2)
-addParseToken(['s', 'ss'], 'seconds')
+addParseToken(['s', 'ss'], 'seconds', function (seconds) {
+  return seconds <= 59
+})
 
 addExpressionToken('m', match1to2)
 addExpressionToken('mm', match2)
-addParseToken(['m', 'mm'], 'minutes')
+addParseToken(['m', 'mm'], 'minutes', function (minutes) {
+  return minutes <= 59
+})
 
 addExpressionToken('H', match1to2)
 addExpressionToken('h', match1to2)
 addExpressionToken('HH', match2)
 addExpressionToken('hh', match2)
-addParseToken(['H', 'HH', 'h', 'hh'], 'hours')
+addParseToken(['H', 'HH'], 'hours', function (hours) {
+  return hours <= 23
+})
+addParseToken(['h', 'hh'], 'hours', function (hours) {
+  return hours >= 1 && hours <= 12
+})
 
 addExpressionToken('D', match1to2)
 addExpressionToken('DD', match2)
@@ -133,7 +185,9 @@ addParseToken(['D', 'DD'], 'day')
 
 addExpressionToken('M', match1to2)
 addExpressionToken('MM', match2)
-addParseToken(['M', 'MM'], 'month')
+addParseToken(['M', 'MM'], 'month', function (month) {
+  return month >= 1 && month <= 12
+})
 
 addExpressionToken('Y', matchSigned)
 addExpressionToken('YY', match2)
