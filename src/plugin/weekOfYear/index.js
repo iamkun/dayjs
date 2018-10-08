@@ -13,6 +13,6 @@ export default (o, c, d) => {
     return Math.ceil(diffInWeek)
   }
   proto.setWeek = function (week) {
-    return this.add((week - this.week())*7, 'day');
+    return this.add((week - this.week()) * 7, 'day')
   }
 }
