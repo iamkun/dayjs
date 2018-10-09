@@ -10,7 +10,7 @@ const locale = {
     s: 'niekoľko sekúnd',
     m: 'minúta',
     mm: '%d minút',
-    h: 'un\' hodina',
+    h: 'hodina',
     hh: '%d hodín',
     d: 'deň',
     dd: '%d dní',
