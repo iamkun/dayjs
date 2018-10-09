@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'sk',
-  weekdays: 'Pondelok_Utorok_Streda_Štvrtok_Piatok_Sobota_Nedeľa'.split('_'),
+  weekdays: 'Nedeľa_Pondelok_Utorok_Streda_Štvrtok_Piatok_Sobota'.split('_'),
   months: 'Január_Február_Marec_Apríl_Máj_Jún_Júl_August_September_Október_November_December'.split('_'),
   relativeTime: {
     future: 'o %s',
