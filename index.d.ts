@@ -2,6 +2,12 @@ export = dayjs;
 
 declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
 
+declare module 'dayjs' {
+    interface Dayjs {
+        fromNow();
+    }
+}
+
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
 
