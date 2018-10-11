@@ -166,6 +166,17 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
 ```
 
+### Days
+ - Days adds `.days()` API Returns a ` array ` to get all the days of between two time (including the first day and last day).
+
+```javascript
+import days from 'dayjs/plugin/days'
+
+dayjs.extend(days)
+
+dayjs('2010-10-1').days('2010-10-7'); // [dayjs('2010-10-1'), ..., dayjs('2010-10-7')]
+```
+
 ## Customize
 
 다양한 요구를 충족하기위해 자신만의 Day.js 플러그인을 만들 수 있습니다.

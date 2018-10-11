@@ -51,6 +51,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
     - [IsBetween](#isbetween)
+    - [Days](#days)
 
 ## Parsing
 
@@ -327,7 +328,7 @@ dayjs('2019-01-25').daysInMonth(); // 31
 
 ### As Javascript Date `.toDate()`
 
-`Dayjs` 오브젝트에서 파싱된 네이티브 `Date` 오브젝트 복사본을 반환합니다.  
+`Dayjs` 오브젝트에서 파싱된 네이티브 `Date` 오브젝트 복사본을 반환합니다.
 
 ```js
 dayjs('2019-01-25').toDate();
@@ -440,3 +441,9 @@ plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 `.isBetween` to check if a date is between two other dates
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### Days
+
+`.days` returns all days between two times
+
+plugin [`IsBetween`](./Plugin.md#days)
