@@ -47,7 +47,7 @@ const fromString = (s) => {
   // Treat this condition as an invalid date
   if (!reg[2] || reg[2] > 12 || reg[2] < 1) return new Date(NaN)
   let daysPerMonth = C.DAYS_PER_MONTH[reg[2] - 1]
-  if (reg[2] === 2 // If is february
+  if (reg[2] == 2 // If is february
     && (((reg[1] % 4 === 0) && (reg[1] % 100 !== 0)) || (reg[1] % 400 === 0))) daysPerMonth += 1
   // Treat this condition as an invalid date
   if ((!!reg[3] && (reg[3] > daysPerMonth || reg[3] < 1))
