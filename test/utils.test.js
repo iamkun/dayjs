@@ -28,7 +28,7 @@ it('PadStart', () => {
   expect(padStart(0, 2, '0')).toBe('00')
 })
 
-it('FromString', ()  => {
+it('FromString', () => {
   expect(fromString()).toBe(null)
   expect(fromString(undefined)).toBe(null)
   expect(fromString(null)).toBe(null)
