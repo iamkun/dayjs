@@ -45,7 +45,7 @@ const fromString = (s) => {
   const reg = s.match(C.REGEX_PARSE)
   if (!(/.*[^Z]$/i.test(s)) || !reg) return null
   // Treat this condition as an invalid date
-  if (!reg[2] || reg[2] - 1 > 11 || reg[2] - 1 < 0) return new Date(NaN)
+  if (!reg[2] || reg[2] > 12 || reg[2] < 1) return new Date(NaN)
   let daysPerMonth = C.DAYS_PER_MONTH[reg[2] - 1]
   if (reg[2] === 2 // If is february
     && (((reg[1] % 4 === 0) && (reg[1] % 100 !== 0)) || (reg[1] % 400 === 0))) daysPerMonth += 1
