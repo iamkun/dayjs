@@ -167,15 +167,15 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
 ```
 
-### Days
- - Days adds `.days()` API Returns a ` array ` to get all the days of between two time (including the first day and last day).
+### Members
+ - Members adds `.members()` API Returns a ` array ` to get all the days of between two time (including the first day and last day).
 
 ```javascript
-import days from 'dayjs/plugin/days'
+import members from 'dayjs/plugin/members'
 
-dayjs.extend(days)
+dayjs.extend(members)
 
-dayjs('2010-10-1').days('2010-10-7'); // [dayjs('2010-10-1'), ..., dayjs('2010-10-7')]
+dayjs('2010-10-1').members('2010-10-7'); // [dayjs('2010-10-1'), ..., dayjs('2010-10-7')]
 ```
 
 ## カスタマイズ

@@ -509,8 +509,8 @@ plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
 
-### Days
+### Members
 
-`.days` returns all days between two times
+`.members` returns all days between two times
 
-plugin [`IsBetween`](./Plugin.md#days)
+plugin [`Members`](./Plugin.md#members)

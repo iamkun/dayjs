@@ -392,6 +392,6 @@ plugin [`IsBetween`](./Plugin.md#isbetween)
 
 ### 之间的天数
 
-`.days` 返回两个时间之间的所有天数
+`.members` 返回两个时间之间的所有天数
 
-plugin [`Days`](./Plugin.md#days)
+plugin [`Members`](./Plugin.md#members)

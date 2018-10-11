@@ -1,7 +1,7 @@
 export default (option, dayjsClass, dayjsFactory) => {
   const proto = dayjsClass.prototype
 
-  proto.days = function (lastDateStr) {
+  proto.members = function (lastDateStr) {
     let current = this
     const lastDate = dayjsFactory(lastDateStr)
     const days = []

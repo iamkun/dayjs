@@ -51,7 +51,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
     - [IsBetween](#isbetween)
-    - [Days](#days)
+    - [Members](#members)
 
 ## Parsing
 
@@ -442,8 +442,8 @@ plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
 
-### Days
+### Members
 
-`.days` returns all days between two times
+`.members` returns all days between two times
 
-plugin [`IsBetween`](./Plugin.md#days)
+plugin [`Members`](./Plugin.md#members)

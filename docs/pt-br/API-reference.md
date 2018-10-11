@@ -52,7 +52,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
     - [IsBetween](#isbetween)
-    - [Days](#days)
+    - [Members](#members)
 
 ## Conversões
 
@@ -441,8 +441,8 @@ plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
 
-### Days
+### Members
 
-`.days` returns all days between two times
+`.members` returns all days between two times
 
-plugin [`IsBetween`](./Plugin.md#days)
+plugin [`Members`](./Plugin.md#members)

@@ -166,15 +166,15 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
 ```
 
-### Days
- - Days 增加了 `.days()` API 返回一个 `array` 来获取两个时间之间的所有天(包含第一天和最后一天).
+### Members
+ - Days 增加了 `.members()` API 返回一个 `array` 来获取两个时间之间的所有天(包含第一天和最后一天).
 
 ```javascript
-import days from 'dayjs/plugin/days'
+import members from 'dayjs/plugin/members'
 
-dayjs.extend(days)
+dayjs.extend(members)
 
-dayjs('2010-10-1').days('2010-10-7'); // [dayjs('2010-10-1'), ..., dayjs('2010-10-7')]
+dayjs('2010-10-1').members('2010-10-7'); // [dayjs('2010-10-1'), ..., dayjs('2010-10-7')]
 ```
 
 ## 自定义
