@@ -45,10 +45,11 @@
   * [是否之后](#是否之后)
   * [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
 * [插件 APIs](#plugin-apis)
-  * [相对时间](#relativetime)
+  * [相对时间](#相对时间)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
-  * [是否之间](#isbetween)
+  * [是否之间](#是否之间)
+  * [之间的天数](#之间的天数)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -388,3 +389,9 @@ dayjs.isDayjs(new Date()); // false
 `.isBetween` 返回一个时间是否介于两个时间之间
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### 之间的天数
+
+`.days` 返回两个时间之间的所有天数
+
+plugin [`Days`](./Plugin.md#days)
