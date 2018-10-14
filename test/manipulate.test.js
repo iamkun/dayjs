@@ -20,6 +20,10 @@ describe('StartOf EndOf', () => {
     })
   })
 
+  it('StartOf EndOf Week with week start setting', () => {
+    expect(dayjs().locale({ name: 'test', weekStart: 1 }).startOf('week').valueOf()).toBe(moment().startOf('week').add(1, 'day').valueOf())
+  })
+
   it('StartOf EndOf Other -> no change', () => {
     expect(dayjs().startOf('otherString').valueOf()).toBe(moment().startOf('otherString').valueOf())
     expect(dayjs().endOf('otherString').valueOf()).toBe(moment().endOf('otherString').valueOf())
