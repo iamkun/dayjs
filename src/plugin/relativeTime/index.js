@@ -6,6 +6,7 @@ import pluralRules from './pluralRules'
 const simplePluralRule = () => 0
 // Returns 0 for plural for 2 <= value <= 4 and 1 for plural
 // for value >= 5, which is sufficient for some languages like Czech
+/* istanbul ignore next line */
 const improvedPluralRule = n => n >= 2 && n <= 4 ? 0 : 1 // eslint-disable-line no-confusing-arrow
 
 export default (o, c, d) => {

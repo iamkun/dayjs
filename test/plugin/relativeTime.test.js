@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
+import '../../src/locale/cs'
 
 dayjs.extend(relativeTime)
 
@@ -155,7 +156,6 @@ it('Time from now', () => {
   expect(dayjs().fromNow(true)).toBe(moment().fromNow(true))
 })
 
-
 it('Time to now', () => {
   expect(dayjs().toNow()).toBe(moment().toNow())
   expect(dayjs().toNow(true)).toBe(moment().toNow(true))
@@ -166,4 +166,16 @@ it('Time to X', () => {
   expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
   // past date
   expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
+})
+
+it('Makes use of a singular rule', () => {
+  expect(dayjs(undefined).from(dayjs().subtract(1, 'minutes'))).toBe('in a minute')
+})
+
+it('Makes use of a numbered plural rule', () => {
+  expect(dayjs(undefined, { locale: 'cs' }).from(dayjs().subtract(30, 'minutes'))).toBe('za 30 minut')
+})
+
+it('Makes use of a plural rule provided as a custom function', () => {
+  expect(dayjs().from(dayjs().subtract(30, 'minutes'))).toBe('in 30 minutes')
 })
