@@ -14,17 +14,104 @@ afterEach(() => {
 })
 
 it('Upgrades old locale objects', () => {
-  // English is the default locale used for tests;
-  // initially it is defined by the old locale structure
-  expect(dayjs.en).toBeDefined()
-  expect(dayjs.en.relativeTime).toBeDefined()
-  expect(dayjs.en.relativeTime.s).toBeDefined()
-  expect(dayjs.en.relativeTime.duration).toBeUndefined()
+  const old = {
+    name: 'old-relativeTime',
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years'
+    }
+  }
+  dayjs.locale(old, null, true)
+  const locale = dayjs(undefined, { locale: 'old-relativeTime' }).$locale()
   // Call the plugin to upgrade the locale structure on the fly
-  dayjs().from(dayjs())
-  // English locale has been upgraded to the new locale structure
-  expect(dayjs.en.relativeTime.s).toBeUndefined()
-  expect(dayjs.en.relativeTime.duration).toBeDefined()
+  dayjs(undefined, { locale: 'old-relativeTime' }).fromNow()
+  // The locale has been upgraded to the new locale structure
+  expect(locale.relativeTime.s).toBeUndefined()
+  expect(typeof locale.relativeTime.duration).toEqual('object')
+  expect(Array.isArray([locale.relativeTime.duration.s])).toBeTruthy()
+  expect(typeof locale.relativeTime.duration.s[0]).toEqual('string')
+  expect(typeof locale.relativeTime.pluralRule).toEqual('number')
+})
+
+it('Upgrades improved locale objects', () => {
+  const improved = {
+    name: 'improved-relativeTime',
+    relativeTime: {
+      duration: {
+        s: 'několik sekund',
+        m: 'minuta',
+        mm: '%d minuty',
+        mmm: '%d minut',
+        h: 'hodina',
+        hh: '%d hodiny',
+        hhh: '%d hodin',
+        d: 'den',
+        dd: '%d dny',
+        ddd: '%d dní',
+        M: 'měsíc',
+        MM: '%d měsíce',
+        MMM: '%d měsícú',
+        y: 'rok',
+        yy: '%d roky',
+        yyy: '%d let'
+      },
+      future: {
+        s: 'za několik sekund',
+        m: 'za minutu',
+        mm: 'za %d minuty',
+        mmm: 'za %d minut',
+        h: 'za hodinu',
+        hh: 'za %d hodiny',
+        hhh: 'za %d hodin',
+        d: 'zítra',
+        dd: 'za %d dny',
+        ddd: 'za %d dní',
+        M: 'za měsíc',
+        MM: 'za %d měsíce',
+        MMM: 'za %d měsícú',
+        y: 'za rok',
+        yy: 'za %d roky',
+        yyy: 'za %d let'
+      },
+      past: {
+        s: 'před několika sekundami',
+        m: 'před minutou',
+        mm: 'před %d minutami',
+        mmm: 'před %d minutami',
+        h: 'před hodinou',
+        hh: 'před %d hodinami',
+        hhh: 'před %d hodinami',
+        d: 'včera',
+        dd: 'před %d dny',
+        ddd: 'před %d dny',
+        M: 'před měsícem',
+        MM: 'před %d měsíci',
+        MMM: 'před %d měsíci',
+        y: 'vloni',
+        yy: 'před %d roky',
+        yyy: 'před %d lety'
+      }
+    }
+  }
+  dayjs.locale(improved, null, true)
+  const locale = dayjs(undefined, { locale: 'improved-relativeTime' }).$locale()
+  // Call the plugin to upgrade the locale structure on the fly
+  dayjs(undefined, { locale: 'improved-relativeTime' }).fromNow()
+  // The locale has been upgraded to the new locale structure
+  expect(Array.isArray([locale.relativeTime.duration.s])).toBeTruthy()
+  expect(typeof locale.relativeTime.duration.s[0]).toEqual('string')
+  expect(typeof locale.relativeTime.pluralRule).toEqual('number')
 })
 
 it('Time from X', () => {

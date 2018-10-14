@@ -2,6 +2,7 @@
 // See the expressions to identify the plural form at http://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html#pluralforms-list
 
 /* eslint-disable no-confusing-arrow, no-nested-ternary */
+/* istanbul ignore file */
 
 export default [
   // Plural rule #0 (1 form)

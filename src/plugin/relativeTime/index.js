@@ -2,10 +2,10 @@ import * as C from '../../constant'
 import pluralRules from './pluralRules'
 
 // Returns 0 for singular and 1 for plural for languages with a single plural
-const simplePluralRule = pluralRules[1]
+const simplePluralRule = 1
 // Returns 0 for singular, 1 for plural for 2 <= value <= 4 and 2 for plural
 // for value >= 5, which is sufficient for some languages like Czech
-const improvedPluralRule = pluralRules[8]
+const improvedPluralRule = 8
 
 export default (o, c, d) => {
   const proto = c.prototype
@@ -81,7 +81,7 @@ export default (o, c, d) => {
         const pluralForms = result[unit] || (result[unit] = [])
         // Make sure, that singular comes before plurals and plurals come in
         // the right order
-        pluralForms[kl - 1] = loc[key]
+        pluralForms[kl - 1] = object[key]
         return result
       }, {})
     }
@@ -160,7 +160,7 @@ export default (o, c, d) => {
           }
           pluralFormIndex = pluralRule(abs)
         } else {
-          // Singluar is alway sthe first item in the array
+          // Singular is always the first item in the array
           pluralFormIndex = 0
         }
         out = pluralForms[pluralFormIndex].replace('%d', abs)

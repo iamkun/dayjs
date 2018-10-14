@@ -37,15 +37,26 @@ it('Locale keys', () => {
     expect(ordinal(3)).toEqual(expect.anything())
     expect(dayjs().locale(name).$locale().name).toBe(name)
     if (relativeTime) {
-      // Old locale object structure
       if (relativeTime.s) {
+        // Old locale object structure
         expect(Object.keys(relativeTime).sort())
           .toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM', 'past', 's', 'y', 'yy'].sort())
         expect(Object.keys(relativeTime).every(key =>
           // eslint-disable-next-line implicit-arrow-linebreak
           typeof relativeTime[key] === 'string')).toBeTruthy()
+      } else if (!relativeTime.pluralRule) {
+        // Improved locale object structure
+        expect(Object.keys(relativeTime).sort()).toEqual(['duration', 'future', 'past'].sort());
+        ['duration', 'future', 'past'].forEach(key =>
+          expect(Object.keys(relativeTime[key]).sort())
+            .toEqual(['d', 'dd', 'ddd', 'h', 'hh', 'hhh', 'm', 'mm', 'mmm',
+              'M', 'MM', 'MMM', 's', 'y', 'yy', 'yyy'].sort()));
+        ['duration', 'future', 'past'].forEach(key =>
+          Object.keys(relativeTime[key]).forEach(key2 =>
+            // eslint-disable-next-line implicit-arrow-linebreak
+            expect(typeof relativeTime[key][key2]).toEqual('string')))
       } else {
-        // New locale object structure
+        // Ultimate locale object structure
         expect(Object.keys(relativeTime).sort()).toEqual(['duration', 'future', 'past', 'pluralRule'].sort());
         ['duration', 'future', 'past'].forEach(key =>
           // eslint-disable-next-line implicit-arrow-linebreak
