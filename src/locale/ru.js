@@ -3,6 +3,8 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ru',
   weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
+  weekdaysShort: 'пнд_втр_срд_чтв_птн_сбт_вск'.split('_'),
+  weekdaysMin: 'пн_вт_ср_чт_пт_сб_вс'.split('_'),
   months: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
   relativeTime: {
     future: 'через %s',
