@@ -9,28 +9,43 @@ const locale = {
     // 3 plural forms for 1, 2-4, 5-
     pluralRule: 8,
     duration: {
-      s: ['několik sekund'],
-      m: ['minuta', '%d minuty', '%d minut'],
-      h: ['hodina', '%d hodiny', '%d hodin'],
-      d: ['den', '%d dny', '%d dní'],
-      M: ['měsíc', '%d měsíce', '%d měsícú'],
-      y: ['rok', '%d roky', '%d let']
+      s: 'několik sekund',
+      m: 'minuta',
+      mm: ['%d minuta', '%d minuty', '%d minut'],
+      h: 'hodina',
+      hh: ['%d hodina', '%d hodiny', '%d hodin'],
+      d: 'den',
+      dd: ['%d den', '%d dny', '%d dní'],
+      M: 'měsíc',
+      MM: ['%d měsíc', '%d měsíce', '%d měsícú'],
+      y: 'rok',
+      yy: ['%d rok', '%d roky', '%d let']
     },
     future: {
-      s: ['za několik sekund'],
-      m: ['za minutu', 'za %d minuty', 'za %d minut'],
-      h: ['za hodinu', 'za %d hodiny', 'za %d hodin'],
-      d: ['zítra', 'za %d dny', 'za %d dní'],
-      M: ['za měsíc', 'za %d měsíce', 'za %d měsícú'],
-      y: ['za rok', 'za %d roky', 'za %d let']
+      s: 'za několik sekund',
+      m: 'za minutu',
+      mm: ['za %d minutu', 'za %d minuty', 'za %d minut'],
+      h: 'za hodinu',
+      hh: ['za %d hodinu', 'za %d hodiny', 'za %d hodin'],
+      d: 'zítra',
+      dd: ['za %d den', 'za %d dny', 'za %d dní'],
+      M: 'za měsíc',
+      MM: ['za %d měsíc', 'za %d měsíce', 'za %d měsícú'],
+      y: 'za rok',
+      yy: ['za %d rok', 'za %d roky', 'za %d let']
     },
     past: {
-      s: ['před několika sekundami'],
-      m: ['před minutou', 'před %d minutami', 'před %d minutami'],
-      h: ['před hodinou', 'před %d hodinami', 'před %d hodinami'],
-      d: ['včera', 'před %d dny', 'před %d dny'],
-      M: ['před měsícem', 'před %d měsíci', 'před %d měsíci'],
-      y: ['vloni', 'před %d roky', 'před %d lety']
+      s: 'před několika sekundami',
+      m: 'před minutou',
+      mm: ['před %d minutou', 'před %d minutami', 'před %d minutami'],
+      h: 'před hodinou',
+      hh: ['před %d hodinou', 'před %d hodinami', 'před %d hodinami'],
+      d: 'včera',
+      dd: ['před %d dnem', 'před %d dny', 'před %d dny'],
+      M: 'před měsícem',
+      MM: ['před %d měsícem', 'před %d měsíci', 'před %d měsíci'],
+      y: 'vloni',
+      yy: ['před %d rokem', 'před %d roky', 'před %d lety']
     }
   }
 }

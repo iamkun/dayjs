@@ -39,9 +39,10 @@ it('Upgrades old locale objects', () => {
   // The locale has been upgraded to the new locale structure
   expect(locale.relativeTime.s).toBeUndefined()
   expect(typeof locale.relativeTime.duration).toEqual('object')
-  expect(Array.isArray([locale.relativeTime.duration.s])).toBeTruthy()
-  expect(typeof locale.relativeTime.duration.s[0]).toEqual('string')
-  expect(typeof locale.relativeTime.pluralRule).toEqual('number')
+  expect(typeof locale.relativeTime.duration.m).toEqual('string')
+  expect(Array.isArray([locale.relativeTime.duration.mm])).toBeTruthy()
+  expect(typeof locale.relativeTime.duration.mm[0]).toEqual('string')
+  expect(typeof locale.relativeTime.pluralRule).toEqual('function')
 })
 
 it('Upgrades improved locale objects', () => {
@@ -109,9 +110,10 @@ it('Upgrades improved locale objects', () => {
   // Call the plugin to upgrade the locale structure on the fly
   dayjs(undefined, { locale: 'improved-relativeTime' }).fromNow()
   // The locale has been upgraded to the new locale structure
-  expect(Array.isArray([locale.relativeTime.duration.s])).toBeTruthy()
-  expect(typeof locale.relativeTime.duration.s[0]).toEqual('string')
-  expect(typeof locale.relativeTime.pluralRule).toEqual('number')
+  expect(typeof locale.relativeTime.duration.m).toEqual('string')
+  expect(Array.isArray([locale.relativeTime.duration.mm])).toBeTruthy()
+  expect(typeof locale.relativeTime.duration.mm[0]).toEqual('string')
+  expect(typeof locale.relativeTime.pluralRule).toEqual('function')
 })
 
 it('Time from X', () => {

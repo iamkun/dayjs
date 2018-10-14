@@ -48,10 +48,12 @@ it('Locale keys', () => {
         // Improved locale object structure
         expect(Object.keys(relativeTime).sort()).toEqual(['duration', 'future', 'past'].sort());
         ['duration', 'future', 'past'].forEach(key =>
+          // eslint-disable-next-line implicit-arrow-linebreak
           expect(Object.keys(relativeTime[key]).sort())
             .toEqual(['d', 'dd', 'ddd', 'h', 'hh', 'hhh', 'm', 'mm', 'mmm',
               'M', 'MM', 'MMM', 's', 'y', 'yy', 'yyy'].sort()));
         ['duration', 'future', 'past'].forEach(key =>
+          // eslint-disable-next-line implicit-arrow-linebreak
           Object.keys(relativeTime[key]).forEach(key2 =>
             // eslint-disable-next-line implicit-arrow-linebreak
             expect(typeof relativeTime[key][key2]).toEqual('string')))
@@ -61,12 +63,16 @@ it('Locale keys', () => {
         ['duration', 'future', 'past'].forEach(key =>
           // eslint-disable-next-line implicit-arrow-linebreak
           expect(Object.keys(relativeTime[key]).sort())
-            .toEqual(['d', 'h', 'm', 'M', 's', 'y'].sort()));
+            .toEqual(['M', 'MM', 'd', 'dd', 'h', 'hh', 'm', 'mm', 's', 'y', 'yy'].sort()));
         ['duration', 'future', 'past'].forEach(key =>
           // eslint-disable-next-line implicit-arrow-linebreak
-          expect(Object.keys(relativeTime[key]).every(key2 =>
-            // eslint-disable-next-line implicit-arrow-linebreak
-            Array.isArray(relativeTime[key][key2]))).toBeTruthy())
+          Object.keys(relativeTime[key]).forEach((key2) => {
+            if (key2.length === 1) {
+              expect(typeof relativeTime[key][key2]).toEqual('string')
+            } else {
+              expect(Array.isArray(relativeTime[key][key2])).toBeTruthy()
+            }
+          }))
         expect(typeof relativeTime.pluralRule === 'number'
           || typeof relativeTime.pluralRule === 'function').toBeTruthy()
       }
