@@ -8,6 +8,12 @@ You have multiple ways of getting Day.js:
 npm install dayjs --save
 ```
 
+* Via Yarn:
+
+```console
+yarn add dayjs
+```
+
 ```js
 import dayjs from 'dayjs'
 // Or CommonJS
