@@ -42,8 +42,13 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 ### Installation
 
+Install dayjs using `npm`:
 ```console
 npm install dayjs --save
+```
+Or via `yarn`:
+```console
+yarn add dayjs
 ```
 
 📚[Installation Guide](./docs/en/Installation.md)
