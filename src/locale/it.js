@@ -4,6 +4,7 @@ const locale = {
   name: 'it',
   weekdays: 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato'.split('_'),
   months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
+  monthsShort: 'genn_febbr_mar_apr_magg_giugno_luglio_ag_sett_ott_nov_dic'.split('_'),
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',

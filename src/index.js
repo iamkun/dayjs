@@ -238,11 +238,22 @@ class Dayjs {
       const date = this.set(C.DATE, 1).set(u, n + number)
       return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
     }
+    const instanceFactorySet = (n) => {
+      const date = new Date(this.$d)
+      date.setDate(date.getDate() + (n * number))
+      return wrapper(date, this)
+    }
     if (unit === C.M) {
       return instanceFactory(C.M, this.$M)
     }
     if (unit === C.Y) {
       return instanceFactory(C.Y, this.$y)
+    }
+    if (unit === C.D) {
+      return instanceFactorySet(1)
+    }
+    if (unit === C.W) {
+      return instanceFactorySet(7)
     }
     let step
     switch (unit) {
@@ -251,12 +262,6 @@ class Dayjs {
         break
       case C.H:
         step = C.MILLISECONDS_A_HOUR
-        break
-      case C.D:
-        step = C.MILLISECONDS_A_DAY
-        break
-      case C.W:
-        step = C.MILLISECONDS_A_WEEK
         break
       case C.S:
         step = C.MILLISECONDS_A_SECOND
@@ -417,7 +422,7 @@ class Dayjs {
     // ie 8 return
     // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
     // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
-    return this.toDate().toISOString()
+    return this.$d.toISOString()
   }
 
   toObject() {
@@ -445,6 +450,10 @@ dayjs.extend = (plugin, option) => {
 dayjs.locale = parseLocale
 
 dayjs.isDayjs = isDayjs
+
+dayjs.unix = timestamp => (
+  dayjs(timestamp * 1e3)
+)
 
 dayjs.en = Ls[L]
 

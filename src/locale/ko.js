@@ -14,19 +14,19 @@ const locale = {
     LLLL: 'YYYY년 MMMM D일 dddd A h:mm'
   },
   relativeTime: {
-    future: '%s 이내',
+    future: '%s 후',
     past: '%s 전',
     s: '몇 초',
-    m: '1 분',
-    mm: '%d 분',
-    h: '1 시간',
-    hh: '%d 시간',
-    d: '1 일',
-    dd: '%d 일',
-    M: '1 개월',
-    MM: '%d 개월',
-    y: '1 년',
-    yy: '%d 년'
+    m: '1분',
+    mm: '%d분',
+    h: '한 시간',
+    hh: '%d시간',
+    d: '하루',
+    dd: '%d일',
+    M: '한 달',
+    MM: '%d달',
+    y: '일 년',
+    yy: '%d년'
   }
 }
 
