@@ -113,6 +113,16 @@ Returns the `string` of relative time to X.
 | 11 months to 17months    | y    | a year ago                       |
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
+#### Installation
+
+This plugin has a dependency on the [`fast-plural-rules`](https://www.npmjs.com/package/fast-plural-rules) NPM module. If you are going to use it on a web page directly, add its script to your section of `<script>`s too, along with the `Day.js`, for example:
+
+```html
+<script arc="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script arc="https://unpkg.com/dayjs/plugin/relativeTime.js"></script>
+<script arc="https://unpkg.com/fast-plural-rules/dist/index.umd.js"></script>
+```
+
 ### IsLeapYear
  - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
 

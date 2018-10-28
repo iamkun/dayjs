@@ -7,7 +7,7 @@ module.exports = (config) => {
     input: {
       input,
       external: [
-        'dayjs'
+        'dayjs', 'fast-plural-rules'
       ],
       plugins: [
         babel({
@@ -21,7 +21,8 @@ module.exports = (config) => {
       format: 'umd',
       name: name || 'dayjs',
       globals: {
-        dayjs: 'dayjs'
+        dayjs: 'dayjs',
+        'fast-plural-rules': 'fastPluralRules'
       }
     }
   }

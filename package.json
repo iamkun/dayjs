@@ -82,5 +82,7 @@
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "fast-plural-rules": "^0.0.1"
+  }
 }

@@ -1,13 +1,6 @@
-import * as C from '../../constant'
-import pluralRules from './pluralRules'
+import { getPluralFormForCardinalByLocale } from 'fast-plural-rules'
 
-// Special plural rules for upgraded locales, which are not complete
-// Returns 0 for plural for languages with a single plural
-const simplePluralRule = () => 0
-// Returns 0 for plural for 2 <= value <= 4 and 1 for plural
-// for value >= 5, which is sufficient for some languages like Czech
-/* istanbul ignore next line */
-const improvedPluralRule = n => n >= 2 && n <= 4 ? 0 : 1 // eslint-disable-line no-confusing-arrow
+import * as C from '../../constant'
 
 export default (o, c, d) => {
   const proto = c.prototype
@@ -42,7 +35,23 @@ export default (o, c, d) => {
         // Save the special singular without any number with the single-letter key and the
         // single plural to be used with any number greater then 1 with the two-letter key
         const text = loc[key]
-        result[key] = kl === 1 ? text : [text]
+        if (kl === 1) {
+          result[key] = text
+          // Insert singular for objects with plurals declared before singulars
+          const key2 = key + key
+          let plurals = result[key2]
+          if (!plurals) {
+            plurals = result[key2] = [] // eslint-disable-line no-multi-assign
+          }
+          plurals.unshift(text)
+        } else {
+          // Append plural for objects with plurals declared after singulars
+          let plurals = result[key]
+          if (!plurals) {
+            plurals = result[key] = [] // eslint-disable-line no-multi-assign
+          }
+          plurals.push(text)
+        }
       }
       // Remove the original locale entry; the original locale object needs
       // to be retained to prevent upgrading on every formatting call
@@ -68,8 +77,6 @@ export default (o, c, d) => {
     loc.duration = durations
     loc.future = futures
     loc.past = pasts
-    // Recognize only one plural like in English
-    loc.pluralRule = simplePluralRule
   }
   // Upgrade the improved, but not the final version of the localization,
   // which supports two plurals by keys with two and three letters
@@ -102,14 +109,12 @@ export default (o, c, d) => {
     loc.duration = convertPlurals(loc.duration)
     loc.future = convertPlurals(loc.future)
     loc.past = convertPlurals(loc.past)
-    // Recognize two plurals like in the Czech language
-    loc.pluralRule = improvedPluralRule
   }
   // Upgrades old locale format to provide compatibility with older
   // localizations; the grammar may not be correct for fusional languages
   // {
   //   duration: { s: '...', m: '...', mm: ['...', '...', ...] },
-  //   future: { ... }, past: { ... }, pluralRule: N
+  //   future: { ... }, past: { ... }
   // }
   function upgradeLocale(loc) {
     // Do not upgrade already upgraded locales
@@ -120,7 +125,8 @@ export default (o, c, d) => {
     }
   }
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const locs = instance.$locale().relativeTime
+    const locale = instance.$locale()
+    const locs = locale.relativeTime
     const T = [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
@@ -167,13 +173,9 @@ export default (o, c, d) => {
           out = loc[key]
         } else {
           // Choose the plural form using the index decided by the plural rule
-          let { pluralRule } = locs
-          if (typeof pluralRule === 'number') {
-            pluralRule = pluralRules[pluralRule]
-          }
           const pluralForms = loc[key]
-          const pluralFormIndex = pluralRule(abs)
-          out = pluralForms[pluralFormIndex].replace('%d', abs)
+          const pluralForm = getPluralFormForCardinalByLocale(locale.name, abs)
+          out = pluralForms[pluralForm].replace('%d', abs)
         }
         break
       }

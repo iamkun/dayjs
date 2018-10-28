@@ -6,8 +6,7 @@ const locale = {
   months: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_'),
   ordinal: n => `${n}.`,
   relativeTime: {
-    // 3 plural forms for 1, 2-4, 5-
-    pluralRule: 8,
+    // Using 3 plural forms for 1, 2-4, 5-
     duration: {
       s: 'několik sekund',
       m: 'minuta',

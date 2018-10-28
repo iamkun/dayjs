@@ -42,8 +42,9 @@ it('Upgrades old locale objects', () => {
   expect(typeof locale.relativeTime.duration).toEqual('object')
   expect(typeof locale.relativeTime.duration.m).toEqual('string')
   expect(Array.isArray([locale.relativeTime.duration.mm])).toBeTruthy()
+  expect(locale.relativeTime.duration.mm.length).toEqual(2)
   expect(typeof locale.relativeTime.duration.mm[0]).toEqual('string')
-  expect(typeof locale.relativeTime.pluralRule).toEqual('function')
+  expect(typeof locale.relativeTime.duration.mm[1]).toEqual('string')
 })
 
 it('Upgrades improved locale objects', () => {
@@ -114,7 +115,6 @@ it('Upgrades improved locale objects', () => {
   expect(typeof locale.relativeTime.duration.m).toEqual('string')
   expect(Array.isArray([locale.relativeTime.duration.mm])).toBeTruthy()
   expect(typeof locale.relativeTime.duration.mm[0]).toEqual('string')
-  expect(typeof locale.relativeTime.pluralRule).toEqual('function')
 })
 
 it('Time from X', () => {

@@ -5,8 +5,7 @@ const locale = {
   weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
   months: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
   relativeTime: {
-    // 3 plural forms for 1 and x1, 2-4 and x2-4, 5-
-    pluralRule: 7,
+    // Using 3 plural forms for 1 and x1, 2-4 and x2-4, 5-
     duration: {
       s: 'несколько секунд',
       m: 'минута',
