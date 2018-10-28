@@ -203,13 +203,7 @@ Day.js uses an embedded `Date` object. This object supports only local time zone
 
 #### Installation
 
-This plugin has a peer dependency on the `timezone-support` NPM module. If you are going to use it in your project, add it to your dependencies too, along the dependency on `Day.js`:
-
-```sh
-npm i --save dayjs timezone-support
-```
-
-If you use `Day.js` and this plugin on a web page, include the time-zone module too:
+This plugin has a dependency on the [`timezone-support`](https://www.npmjs.com/package/timezone-support) NPM module. If you are going to use it on a web page directly, add its script to your section of `<script>`s too, along with the `Day.js`, for example:
 
 ```html
 <script arc="https://unpkg.com/dayjs/dayjs.min.js"></script>
