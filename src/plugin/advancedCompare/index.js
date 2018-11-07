@@ -5,38 +5,39 @@ export default (option, dayjsClass) => {
   const oldSame = proto.isSame
   const oldIsAfter = proto.isAfter
   const oldIsBefore = proto.isBefore
+  const pretty = proto.$utils().prettyUnit
 
   const v = (l, r) => l.isValid() && r.isValid()
 
-  dayjsClass.prototype.isSame = function (o, u) {
+  proto.isSame = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && this.$utils().prettyUnit(u) === C.MS)
+    return pretty(u) === C.MS
       ? oldSame.bind(this)(o)
       : this.startOf(u).valueOf() <= o && o <= this.endOf(u).valueOf()
   }
 
-  dayjsClass.prototype.isAfter = function (o, u) {
+  proto.isAfter = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && this.$utils().prettyUnit(u) === C.MS)
+    return pretty(u) === C.MS
       ? oldIsAfter.bind(this)(o)
       : o.valueOf() < this.startOf(u).valueOf()
   }
 
-  dayjsClass.prototype.isBefore = function (o, u) {
+  proto.isBefore = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && this.$utils().prettyUnit(u) === C.MS)
+    return pretty(u) === C.MS
       ? oldIsBefore.bind(this)(o)
       : this.endOf(u).valueOf() < o.valueOf()
   }
 
-  dayjsClass.prototype.isSameOrAfter = function (other, units) {
+  proto.isSameOrAfter = function (other, units) {
     return this.isSame(other, units) || this.isAfter(other, units)
   }
 
-  dayjsClass.prototype.isSameOrBefore = function (other, units) {
+  proto.isSameOrBefore = function (other, units) {
     return this.isSame(other, units) || this.isBefore(other, units)
   }
 }
