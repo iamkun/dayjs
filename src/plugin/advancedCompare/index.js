@@ -1,3 +1,5 @@
+import * as C from '../../constant'
+
 export default (option, dayjsClass) => {
   const proto = dayjsClass.prototype
   const oldSame = proto.isSame
@@ -9,7 +11,7 @@ export default (option, dayjsClass) => {
   dayjsClass.prototype.isSame = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && u === 'millisecond')
+    return (u && this.$utils().prettyUnit(u) === C.MS)
       ? oldSame.bind(this)(o)
       : this.startOf(u).valueOf() <= o && o <= this.endOf(u).valueOf()
   }
@@ -17,7 +19,7 @@ export default (option, dayjsClass) => {
   dayjsClass.prototype.isAfter = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && u === 'millisecond')
+    return (u && this.$utils().prettyUnit(u) === C.MS)
       ? oldIsAfter.bind(this)(o)
       : o.valueOf() < this.startOf(u).valueOf()
   }
@@ -25,7 +27,7 @@ export default (option, dayjsClass) => {
   dayjsClass.prototype.isBefore = function (o, u) {
     if (!v(this, o)) return false
 
-    return (u && u === 'millisecond')
+    return (u && this.$utils().prettyUnit(u) === C.MS)
       ? oldIsBefore.bind(this)(o)
       : this.endOf(u).valueOf() < o.valueOf()
   }
