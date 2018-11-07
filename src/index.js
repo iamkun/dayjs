@@ -92,20 +92,17 @@ class Dayjs {
     return !(this.$d.toString() === 'Invalid Date')
   }
 
-  $compare(that) {
-    return this.valueOf() - dayjs(that).valueOf()
+  isSame(that, units) {
+    const other = dayjs(that)
+    return this.startOf(units).valueOf() <= other && other <= this.endOf(units).valueOf()
   }
 
-  isSame(that) {
-    return this.$compare(that) === 0
+  isAfter(that, units) {
+    return dayjs(that).valueOf() < this.startOf(units).valueOf()
   }
 
-  isBefore(that) {
-    return this.$compare(that) < 0
-  }
-
-  isAfter(that) {
-    return this.$compare(that) > 0
+  isBefore(that, units) {
+    return this.endOf(units).valueOf() < dayjs(that).valueOf()
   }
 
   year() {
