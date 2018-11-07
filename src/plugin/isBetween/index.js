@@ -7,4 +7,3 @@ export default (o, c, d) => {
         || (this.isBefore(dA, u) && this.isAfter(dB, u))
   }
 }
-

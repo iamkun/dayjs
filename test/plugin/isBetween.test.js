@@ -12,6 +12,11 @@ afterEach(() => {
   MockDate.reset()
 })
 
+test('bounds can be swapped', () => {
+  expect(dayjs('2018-01-01').isBetween(dayjs('2017-12-31'), dayjs('2018-01-02'))).toBeTruthy()
+  expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-02'), dayjs('2017-12-31'))).toBeTruthy()
+})
+
 test('is between without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
