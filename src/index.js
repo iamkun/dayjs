@@ -94,15 +94,15 @@ class Dayjs {
 
   isSame(that, units) {
     const other = dayjs(that)
-    return this.startOf(units).valueOf() <= other && other <= this.endOf(units).valueOf()
+    return this.startOf(units) <= other && other <= this.endOf(units)
   }
 
   isAfter(that, units) {
-    return dayjs(that).valueOf() < this.startOf(units).valueOf()
+    return dayjs(that) < this.startOf(units)
   }
 
   isBefore(that, units) {
-    return this.endOf(units).valueOf() < dayjs(that).valueOf()
+    return this.endOf(units) < dayjs(that)
   }
 
   year() {
