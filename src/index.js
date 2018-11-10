@@ -164,28 +164,20 @@ class Dayjs {
         isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
       ), this)
     }
-    switch (unit) {
-      case C.Y:
-        return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11)
-      case C.M:
-        return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1)
-      case C.W:
-        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M)
-      case C.D:
-      case C.DATE:
-        return instanceFactorySet('setHours', 0)
-      case C.H:
-        return instanceFactorySet('setMinutes', 1)
-      case C.MIN:
-        return instanceFactorySet('setSeconds', 2)
-      case C.S:
-        return instanceFactorySet('setMilliseconds', 3)
-      default:
-        return this.clone()
+
+    const methods = {
+      [C.Y]: () => (isStartOf ? instanceFactory(1, 0) : instanceFactory(31, 11)),
+      [C.M]: () => (isStartOf ? instanceFactory(1, this.$M) : instanceFactory(0, this.$M + 1)),
+      [C.W]: () => (isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
+        instanceFactory(this.$D + (6 - this.$W), this.$M)),
+      [C.D]: () => instanceFactorySet('setHours', 0),
+      [C.DATE]: () => methods[C.D](),
+      [C.H]: () => instanceFactorySet('setMinutes', 1),
+      [C.MIN]: () => instanceFactorySet('setSeconds', 2),
+      [C.S]: () => instanceFactorySet('setMilliseconds', 3)
     }
+    const getMethod = methods[unit]
+    return typeof getMethod === 'function' ? getMethod() : this.clone()
   }
 
   endOf(arg) {
@@ -193,35 +185,18 @@ class Dayjs {
   }
 
   $set(units, int) { // private set
-    const unit = Utils.prettyUnit(units)
-    switch (unit) {
-      case C.D:
-        this.$d.setDate(this.$D + (int - this.$W))
-        break
-      case C.DATE:
-        this.$d.setDate(int)
-        break
-      case C.M:
-        this.$d.setMonth(int)
-        break
-      case C.Y:
-        this.$d.setFullYear(int)
-        break
-      case C.H:
-        this.$d.setHours(int)
-        break
-      case C.MIN:
-        this.$d.setMinutes(int)
-        break
-      case C.S:
-        this.$d.setSeconds(int)
-        break
-      case C.MS:
-        this.$d.setMilliseconds(int)
-        break
-      default:
-        break
+    const unitSet = {
+      [C.D]: () => this.$d.setDate(this.$D + (int - this.$W)),
+      [C.DATE]: () => this.$d.setDate(int),
+      [C.M]: () => this.$d.setMonth(int),
+      [C.Y]: () => this.$d.setFullYear(int),
+      [C.H]: () => this.$d.setHours(int),
+      [C.MIN]: () => this.$d.setMinutes(int),
+      [C.S]: () => this.$d.setSeconds(int),
+      [C.MS]: () => this.$d.setMilliseconds(int)
     }
+    const setMethod = unitSet[Utils.prettyUnit(units)]
+    typeof setMethod === 'function' && setMethod()
     this.init()
     return this
   }

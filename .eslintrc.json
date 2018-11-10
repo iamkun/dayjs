@@ -39,6 +39,9 @@
     "import/extensions": [
       2,
       "ignorePackages"
+    ],
+    "no-unused-expressions": [
+      0
     ]
   }
 }
