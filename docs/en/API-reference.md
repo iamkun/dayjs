@@ -123,7 +123,7 @@ dayjs().year();
 
 ### Month `.month()`
 
-Returns a `number` representing the `Dayjs`'s month.
+Returns a `number` representing the `Dayjs`'s month. Starts at 0
 
 ```js
 dayjs().month();
@@ -131,7 +131,7 @@ dayjs().month();
 
 ### Day of the Month `.date()`
 
-Returns a `number` representing the `Dayjs`'s day of the month.
+Returns a `number` representing the `Dayjs`'s day of the month. Starts at 1
 
 ```js
 dayjs().date();
@@ -139,7 +139,7 @@ dayjs().date();
 
 ### Day of the Week `.day()`
 
-Returns a `number` representing the `Dayjs`'s day of the week
+Returns a `number` representing the `Dayjs`'s day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day();
@@ -297,9 +297,9 @@ Returns a `number` indicating the difference of two `Dayjs`s in the specified un
 const date1 = dayjs('2019-01-25');
 const date2 = dayjs('2018-06-05');
 date1.diff(date2); // 20214000000
-date1.diff(date2, 'months'); // 7
-date1.diff(date2, 'months', true); // 7.645161290322581
-date1.diff(date2, 'days'); // 233
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 ### Unix Timestamp (milliseconds) `.valueOf()`
