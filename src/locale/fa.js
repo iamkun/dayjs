@@ -6,7 +6,6 @@ const locale = {
   months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split('_'),
   ordinal: n => n,
   relativeTime: {
-    // relative time format strings, keep %s %d as the same
     future: '%s در',
     past: 'پیش %s',
     s: 'چند ثانیه',
@@ -19,8 +18,8 @@ const locale = {
     M: 'یک ماه',
     MM: 'ماه %d',
     y: 'یک سال',
-    yy: 'سال %d',
-  },
+    yy: 'سال %d'
+  }
 }
 
 dayjs.locale(locale, null, true)
