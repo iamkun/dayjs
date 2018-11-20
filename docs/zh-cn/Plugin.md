@@ -17,7 +17,7 @@
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // 带参数加载插件
+dayjs.extend(plugin, options) // 带参数加载插件
 ```
 
 ## 安装
