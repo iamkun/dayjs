@@ -17,7 +17,7 @@
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // 带参数加载插件
+dayjs.extend(plugin, options) // 带参数加载插件
 ```
 
 ## 安装
@@ -184,7 +184,7 @@ export default (option, dayjsClass, dayjsFactory) => {
   dayjsFactory.utc = (arguments) => {}
 
   // 覆盖已存在的 API
-  // 例：扩展 dayjs().format() 方法
+  // 例：扩展 dayjs().format() 方法
   const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
     // 原始format结果
