@@ -77,3 +77,9 @@ dayjs().isSame(dayjs(), 'hours')
 dayjs().isAfter(dayjs(), 'year')
 
 dayjs('2000-01-01').isLeapYear()
+
+dayjs.extend((o, c, d) => {
+  o.locale.trim()
+  new c().unix() // eslint-disable-line new-cap
+  d().unix()
+})
