@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "lib": [
+      // TODO: Unfortunately, rollup brings @types/node and etc. with "dependencies", not "devDependencies".
+      // It references Symbol type.
+      "es5",
+      "es2015.symbol"
+    ],
+    "baseUrl": "./types",
+    "paths": {
+      "dayjs": [ "." ],
+      "dayjs/*": [ "*" ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

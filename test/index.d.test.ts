@@ -1,4 +1,4 @@
-import dayjs from '../src'
+import * as dayjs from 'dayjs'
 
 dayjs()
 
