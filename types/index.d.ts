@@ -95,6 +95,6 @@ declare namespace dayjs {
   export function locale(arg1: any, arg2?: any): string
 
   export function isDayjs(d: any): d is Dayjs
-  
+
   export function unix(t: number): Dayjs
 }
