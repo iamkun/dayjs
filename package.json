@@ -88,7 +88,7 @@
     "moment": "^2.22.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.16.1",
-    "rollup": "^0.57.1",
+    "rollup": "^0.67.3",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
     "size-limit": "^0.18.0",
