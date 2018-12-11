@@ -72,14 +72,15 @@ class Dayjs {
   }
 
   init(cfg) {
-    this.$y = this.$d.getFullYear()
-    this.$M = this.$d.getMonth()
-    this.$D = this.$d.getDate()
-    this.$W = this.$d.getDay()
-    this.$H = this.$d.getHours()
-    this.$m = this.$d.getMinutes()
-    this.$s = this.$d.getSeconds()
-    this.$ms = this.$d.getMilliseconds()
+    const { $d } = this
+    this.$y = $d.getFullYear()
+    this.$M = $d.getMonth()
+    this.$D = $d.getDate()
+    this.$W = $d.getDay()
+    this.$H = $d.getHours()
+    this.$m = $d.getMinutes()
+    this.$s = $d.getSeconds()
+    this.$ms = $d.getMilliseconds()
     this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
   }
 
@@ -158,9 +159,10 @@ class Dayjs {
       const argumentEnd = [23, 59, 59, 999]
       return wrapper(this.toDate()[method].apply( // eslint-disable-line prefer-spread
         this.toDate(),
-        isStartOf ? argumentStart.slice(slice) : argumentEnd.slice(slice)
+        (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }
+
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
@@ -191,34 +193,20 @@ class Dayjs {
 
   $set(units, int) { // private set
     const unit = Utils.prettyUnit(units)
-    switch (unit) {
-      case C.D:
-        this.$d.setDate(this.$D + (int - this.$W))
-        break
-      case C.DATE:
-        this.$d.setDate(int)
-        break
-      case C.M:
-        this.$d.setMonth(int)
-        break
-      case C.Y:
-        this.$d.setFullYear(int)
-        break
-      case C.H:
-        this.$d.setHours(int)
-        break
-      case C.MIN:
-        this.$d.setMinutes(int)
-        break
-      case C.S:
-        this.$d.setSeconds(int)
-        break
-      case C.MS:
-        this.$d.setMilliseconds(int)
-        break
-      default:
-        break
-    }
+    const name = {
+      [C.D]: 'setDate',
+      [C.DATE]: 'setDate',
+      [C.M]: 'setMonth',
+      [C.Y]: 'setFullYear',
+      [C.H]: 'setHours',
+      [C.MIN]: 'setMinutes',
+      [C.S]: 'setSeconds',
+      [C.MS]: 'setMilliseconds'
+    }[unit]
+    const arg = unit === C.D ? this.$D + (int - this.$W) : int
+
+    if (this.$d[name]) this.$d[name](arg)
+
     this.init()
     return this
   }
@@ -252,20 +240,12 @@ class Dayjs {
     if (unit === C.W) {
       return instanceFactorySet(7)
     }
-    let step
-    switch (unit) {
-      case C.MIN:
-        step = C.MILLISECONDS_A_MINUTE
-        break
-      case C.H:
-        step = C.MILLISECONDS_A_HOUR
-        break
-      case C.S:
-        step = C.MILLISECONDS_A_SECOND
-        break
-      default: // ms
-        step = 1
-    }
+    const step = {
+      [C.MIN]: C.MILLISECONDS_A_MINUTE,
+      [C.H]: C.MILLISECONDS_A_HOUR,
+      [C.S]: C.MILLISECONDS_A_SECOND
+    }[unit] || 1
+
     const nextTimeStamp = this.valueOf() + (number * step)
     return wrapper(nextTimeStamp, this)
   }
@@ -273,7 +253,6 @@ class Dayjs {
   subtract(number, string) {
     return this.add(number * -1, string)
   }
-
 
   format(formatStr) {
     const str = formatStr || C.FORMAT_DEFAULT
@@ -285,60 +264,39 @@ class Dayjs {
     const getShort = (arr, index, full, length) => (
       (arr && arr[index]) || full[index].substr(0, length)
     )
+    const get$H = (match) => {
+      if (this.$H === 0) return 12
+      return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
+    }
+
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
-      switch (match) {
-        case 'YY':
-          return String(this.$y).slice(-2)
-        case 'YYYY':
-          return String(this.$y)
-        case 'M':
-          return String(this.$M + 1)
-        case 'MM':
-          return Utils.padStart(this.$M + 1, 2, '0')
-        case 'MMM':
-          return getShort(locale.monthsShort, this.$M, months, 3)
-        case 'MMMM':
-          return months[this.$M]
-        case 'D':
-          return String(this.$D)
-        case 'DD':
-          return Utils.padStart(this.$D, 2, '0')
-        case 'd':
-          return String(this.$W)
-        case 'dd':
-          return getShort(locale.weekdaysMin, this.$W, weekdays, 2)
-        case 'ddd':
-          return getShort(locale.weekdaysShort, this.$W, weekdays, 3)
-        case 'dddd':
-          return weekdays[this.$W]
-        case 'H':
-          return String(this.$H)
-        case 'HH':
-          return Utils.padStart(this.$H, 2, '0')
-        case 'h':
-        case 'hh':
-          if (this.$H === 0) return 12
-          return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
-        case 'a':
-          return this.$H < 12 ? 'am' : 'pm'
-        case 'A':
-          return this.$H < 12 ? 'AM' : 'PM'
-        case 'm':
-          return String(this.$m)
-        case 'mm':
-          return Utils.padStart(this.$m, 2, '0')
-        case 's':
-          return String(this.$s)
-        case 'ss':
-          return Utils.padStart(this.$s, 2, '0')
-        case 'SSS':
-          return Utils.padStart(this.$ms, 3, '0')
-        case 'Z':
-          return zoneStr
-        default: // 'ZZ'
-          return zoneStr.replace(':', '')
-      }
+      return {
+        YY: String(this.$y).slice(-2),
+        YYYY: String(this.$y),
+        M: String(this.$M + 1),
+        MM: Utils.padStart(this.$M + 1, 2, '0'),
+        MMM: getShort(locale.monthsShort, this.$M, months, 3),
+        MMMM: months[this.$M],
+        D: String(this.$D),
+        DD: Utils.padStart(this.$D, 2, '0'),
+        d: String(this.$W),
+        dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
+        ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
+        dddd: weekdays[this.$W],
+        H: String(this.$H),
+        HH: Utils.padStart(this.$H, 2, '0'),
+        h: get$H(match),
+        hh: get$H(match),
+        a: this.$H < 12 ? 'am' : 'pm',
+        A: this.$H < 12 ? 'AM' : 'PM',
+        m: String(this.$m),
+        mm: Utils.padStart(this.$m, 2, '0'),
+        s: String(this.$s),
+        ss: Utils.padStart(this.$s, 2, '0'),
+        SSS: Utils.padStart(this.$ms, 3, '0'),
+        Z: zoneStr
+      }[match] || zoneStr.replace(':', '')
     })
   }
 
@@ -347,33 +305,18 @@ class Dayjs {
     const that = dayjs(input)
     const diff = this - that
     let result = Utils.monthDiff(this, that)
-    switch (unit) {
-      case C.Y:
-        result /= 12
-        break
-      case C.M:
-        break
-      case C.Q:
-        result /= 3
-        break
-      case C.W:
-        result = diff / C.MILLISECONDS_A_WEEK
-        break
-      case C.D:
-        result = diff / C.MILLISECONDS_A_DAY
-        break
-      case C.H:
-        result = diff / C.MILLISECONDS_A_HOUR
-        break
-      case C.MIN:
-        result = diff / C.MILLISECONDS_A_MINUTE
-        break
-      case C.S:
-        result = diff / C.MILLISECONDS_A_SECOND
-        break
-      default: // milliseconds
-        result = diff
-    }
+
+    result = {
+      [C.Y]: result / 12,
+      [C.M]: result,
+      [C.Q]: result / 3,
+      [C.W]: diff / C.MILLISECONDS_A_WEEK,
+      [C.D]: diff / C.MILLISECONDS_A_DAY,
+      [C.H]: diff / C.MILLISECONDS_A_HOUR,
+      [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
+      [C.S]: diff / C.MILLISECONDS_A_SECOND
+    }[unit] || diff
+
     return float ? result : Utils.absFloor(result)
   }
 
