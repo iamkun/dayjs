@@ -244,7 +244,7 @@ class Dayjs {
       [C.MIN]: C.MILLISECONDS_A_MINUTE,
       [C.H]: C.MILLISECONDS_A_HOUR,
       [C.S]: C.MILLISECONDS_A_SECOND
-    }[unit] || 1
+    }[unit] || 1 // ms
 
     const nextTimeStamp = this.valueOf() + (number * step)
     return wrapper(nextTimeStamp, this)
@@ -296,7 +296,7 @@ class Dayjs {
         ss: Utils.padStart(this.$s, 2, '0'),
         SSS: Utils.padStart(this.$ms, 3, '0'),
         Z: zoneStr
-      }[match] || zoneStr.replace(':', '')
+      }[match] || zoneStr.replace(':', '') // 'ZZ'
     })
   }
 
@@ -315,7 +315,7 @@ class Dayjs {
       [C.H]: diff / C.MILLISECONDS_A_HOUR,
       [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
       [C.S]: diff / C.MILLISECONDS_A_SECOND
-    }[unit] || diff
+    }[unit] || diff // milliseconds
 
     return float ? result : Utils.absFloor(result)
   }
