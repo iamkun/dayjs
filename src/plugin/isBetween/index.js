@@ -1,10 +1,9 @@
 export default (o, c, d) => {
-  const proto = c.prototype
-  proto.isBetween = function (a, b) {
+  c.prototype.isBetween = function (a, b, u) {
     const dA = d(a)
     const dB = d(b)
 
-    return (this.isAfter(dA) && this.isBefore(dB)) || (this.isBefore(dA) && this.isAfter(dB))
+    return (this.isAfter(dA, u) && this.isBefore(dB, u))
+        || (this.isBefore(dA, u) && this.isAfter(dB, u))
   }
 }
-
