@@ -451,8 +451,9 @@ dayjs().toString();
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以前の値かどうかを判定します。
 
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
 #### Is Same
@@ -462,8 +463,9 @@ dayjs().isBefore(dayjs()); // false
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクトの値と等しいかどうかを判定します。
 
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
 #### Is After
@@ -473,8 +475,9 @@ dayjs().isSame(dayjs()); // true
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以降の値かどうかを判定します。
 
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Is a Dayjs `.isDayjs(compared: any)`

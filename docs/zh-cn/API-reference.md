@@ -338,24 +338,27 @@ dayjs().toString();
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之前。
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 #### 是否相同
 - return Boolean
 
 检查一个 `Dayjs` 对象是否和另一个 `Dayjs` 对象时间相同。
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 #### 是否之后
 - return Boolean
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之后。
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### 是否是 Dayjs `.isDayjs(compared: any)`

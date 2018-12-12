@@ -43,9 +43,9 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Como Objeto `.toObject()`](#como-objeto-toobject)
     - [Como String `.toString()`](#como-string-tostring)
   - [Consulta](#consulta)
-    - [Antes `.isBefore(compared: Dayjs)`](#antes-isbeforecompared-dayjs)
-    - [Igual `.isSame(compared: Dayjs)`](#igual-issamecompared-dayjs)
-    - [Depois `.isAfter(compared: Dayjs)`](#depois-isaftercompared-dayjs)
+    - [Antes `.isBefore(compared: Dayjs, unit?: string)`](#antes-isbeforecompared-dayjs-unit-string)
+    - [Igual `.isSame(compared: Dayjs, unit?: string)`](#igual-issamecompared-dayjs-unit-string)
+    - [Depois `.isAfter(compared: Dayjs, unit?: string)`](#depois-isaftercompared-dayjs-unit-string)
     - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
@@ -381,28 +381,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Antes `.isBefore(compared: Dayjs)`
+### Antes `.isBefore(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é antes da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual `.isSame(compared: Dayjs)`
+### Igual `.isSame(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é a mesma data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isBefore(dayjs()); // false
+dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Depois `.isAfter(compared: Dayjs)`
+### Depois `.isAfter(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é depois da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### É um objeto `Dayjs` `.isDayjs()`
