@@ -43,14 +43,16 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Como objeto `.toObject()`](#como-objecto-toobject)
     - [Como cadena `.toString()`](#como-cadena-tostring)
   - [Consulta](#consulta)
-    - [Anterior a `.isBefore(compared: Dayjs)`](#anterior-a-isbeforecompared-dayjs)
-    - [Igual que `.isSame(compared: Dayjs)`](#igual-que-issamecompared-dayjs)
-    - [Posterior a `.isAfter(compared: Dayjs)`](#posterior-a-isaftercompared-dayjs)
+    - [Anterior a `.isBefore(compared: Dayjs, unit?: string)`](#anterior-a-isbeforecompared-dayjs-unit-string)
+    - [Igual que `.isSame(compared: Dayjs, unit?: string)`](#igual-que-issamecompared-dayjs-unit-string)
+    - [Posterior a `.isAfter(compared: Dayjs, unit?: string)`](#posterior-a-isaftercompared-dayjs-unit-string)
     - [Es Dayjs `.isDayjs()`](#es-dayjs-isdayjscompared-any)
   - [API de complementos](#api-de-complementos)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Análisis
@@ -383,28 +385,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Anterior a `.isBefore(compared: Dayjs)`
+### Anterior a `.isBefore(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es anterior o no a la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual que `.isSame(compared: Dayjs)`
+### Igual que `.isSame(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es igual o no que la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Posterior a `.isAfter(compared: Dayjs)`
+### Posterior a `.isAfter(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es posterior o no a la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Es Dayjs `.isDayjs(compared: any)`
@@ -435,6 +440,18 @@ complemento [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` para obtener la semana del año
 
 complemento [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 

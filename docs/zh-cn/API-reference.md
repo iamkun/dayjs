@@ -48,7 +48,9 @@
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
-  * [是否之间](#isbetween)
+  * [是否相同或之后](#是否相同或之后)
+  * [是否相同或之前](#是否相同或之前)
+  * [是否之间](#是否之间)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -338,24 +340,27 @@ dayjs().toString();
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之前。
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 #### 是否相同
 - return Boolean
 
 检查一个 `Dayjs` 对象是否和另一个 `Dayjs` 对象时间相同。
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 #### 是否之后
 - return Boolean
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之后。
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### 是否是 Dayjs `.isDayjs(compared: any)`
@@ -386,6 +391,18 @@ dayjs.isDayjs(new Date()); // false
 `.week` 获取是第几个周
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### 是否相同或之后
+
+`.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### 是否相同或之前
+
+`.isSameOrBefore` 返回一个时间是否和一个时间相同或在一个时间之前
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### 是否之间
 
