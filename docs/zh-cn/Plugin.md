@@ -144,7 +144,7 @@ List of added formats:
 | `BBBB` | 2561             | Full BE Year (Year + 543)             |
 | `BB`   | 61               | 2-digit of BE Year                    |
 
-### 年中的第几周
+### WeekOfYear
  - WeekOfYear 增加了 `.week()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几周.
 
 ```javascript

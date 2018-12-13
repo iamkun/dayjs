@@ -51,6 +51,8 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Conversões
@@ -436,6 +438,18 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` para obter a semana do ano
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 

@@ -48,6 +48,8 @@
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
+  * [IsSameOrAfter](#issameorafter)
+  * [IsSameOrBefore](#issameorbefore)
   * [是否之间](#isbetween)
 
 ---
@@ -389,6 +391,18 @@ dayjs.isDayjs(new Date()); // false
 `.week` 获取是第几个周
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### 是否相同或之后
+
+`.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### 是否相同或之前
+
+`.isSameOrBefore` 返回一个时间是否和一个时间相同或在一个时间之前
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### 是否之间
 

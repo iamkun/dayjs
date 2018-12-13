@@ -51,6 +51,8 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Análisis
@@ -438,6 +440,18 @@ complemento [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` para obtener la semana del año
 
 complemento [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 

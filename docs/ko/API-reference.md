@@ -50,6 +50,8 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Parsing
@@ -437,6 +439,18 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 
