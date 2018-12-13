@@ -155,6 +155,28 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 
+### IsSameOrAfter
+ - IsSameOrAfter 增加了 `.isSameOrAfter()` API 返回一个 `boolean` 来展示一个时间是否和一个时间相同或在一个时间之后.
+
+```javascript
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
+```
+
+### IsSameOrBefore
+ - IsSameOrBefore 增加了 `.isSameOrBefore()` API 返回一个 `boolean` 来展示一个时间是否和一个时间相同或在一个时间之前.
+
+```javascript
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
+```
+
 ### IsBetween
  - IsBetween 增加了 `.isBetween()` API 返回一个 `boolean` 来展示一个时间是否介于两个时间之间.
 
@@ -163,7 +185,7 @@ import isBetween from 'dayjs/plugin/isBetween'
 
 dayjs.extend(isBetween)
 
-dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
 
 ## 自定义
