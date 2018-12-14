@@ -5,7 +5,7 @@
 
 * update isSame isBefore isAfter supports units ([fd65464](https://github.com/iamkun/dayjs/commit/fd65464))
 
-* add locales 
+* add greek lithuanian locales 
 
 ## [1.7.7](https://github.com/iamkun/dayjs/compare/v1.7.6...v1.7.7) (2018-09-26)
 
