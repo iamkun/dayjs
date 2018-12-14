@@ -195,6 +195,20 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
 
+### QuarterOfYear
+- QuarterOfYear añade a la API `.quarter()` para devolver a que cuarto del año pertenece una fecha
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-01-01').quarter(); // 1
+dayjs('2010-04-01').quarter(); // 2
+dayjs('2010-07-01').quarter(); // 3
+dayjs('2010-10-01').quarter(); // 4
+```
+
 ## Personalización
 
 Puedes construir tu propio complemento de Day.js para cubrir tus necesidades.
