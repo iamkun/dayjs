@@ -8,8 +8,9 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
   - [Conversões](#conversões)
     - [Construtor `dayjs(existing?: string | number | Date | Dayjs)`](#construtor-dayjsexisting-string--number--date--dayjs)
       - [string ISO 8601](#string-iso-8601)
-      - [Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)](#unix-timestamp-milissegundos-desde-a-unix-epoch---jan-1-1970-12am-utc)
       - [Objeto `Date` nativo](#objeto-date-nativo)
+      - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+    - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validação `.isValid()`](#validação-isvalid)
   - [Get and Set](#get-and-set)
@@ -42,14 +43,16 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Como Objeto `.toObject()`](#como-objeto-toobject)
     - [Como String `.toString()`](#como-string-tostring)
   - [Consulta](#consulta)
-    - [Antes `.isBefore(compared: Dayjs)`](#antes-isbeforecompared-dayjs)
-    - [Igual `.isSame(compared: Dayjs)`](#igual-issamecompared-dayjs)
-    - [Depois `.isAfter(compared: Dayjs)`](#depois-isaftercompared-dayjs)
+    - [Antes `.isBefore(compared: Dayjs, unit?: string)`](#antes-isbeforecompared-dayjs-unit-string)
+    - [Igual `.isSame(compared: Dayjs, unit?: string)`](#igual-issamecompared-dayjs-unit-string)
+    - [Depois `.isAfter(compared: Dayjs, unit?: string)`](#depois-isaftercompared-dayjs-unit-string)
     - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Conversões
@@ -70,16 +73,25 @@ Day.js também converte outros formatos de data.
 dayjs('2018-04-04T16:00:00.000Z');
 ```
 
-#### Unix Timestamp (milissegundos desde a Unix Epoch - Jan 1 1970, 12AM UTC)
+#### Objeto `Date` nativo
+
+```js
+dayjs(new Date(2018, 8, 18));
+```
+
+#### Unix Timestamp (milliseconds)
 
 ```js
 dayjs(1318781876406);
 ```
 
-#### Objeto `Date` nativo
+### Unix Timestamp (seconds) `.unix(value: number)`
+
+Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 
 ```js
-dayjs(new Date(2018, 8, 18));
+dayjs.unix(1318781876);
+dayjs.unix(1318781876.721);
 ```
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
@@ -285,9 +297,9 @@ Retorna um `number` indicando a diferença entre dois objetos `Dayjs` na unidade
 const date1 = dayjs('2019-01-25');
 const date2 = dayjs('2018-06-05');
 date1.diff(date2); // 20214000000
-date1.diff(date2, 'months'); // 7
-date1.diff(date2, 'months', true); // 7.645161290322581
-date1.diff(date2, 'days'); // 233
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 ### Unix Timestamp (milissegundos) `.valueOf()`
@@ -371,28 +383,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Antes `.isBefore(compared: Dayjs)`
+### Antes `.isBefore(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é antes da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual `.isSame(compared: Dayjs)`
+### Igual `.isSame(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é a mesma data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isBefore(dayjs()); // false
+dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Depois `.isAfter(compared: Dayjs)`
+### Depois `.isAfter(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é depois da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### É um objeto `Dayjs` `.isDayjs()`
@@ -423,6 +438,18 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` para obter a semana do ano
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 

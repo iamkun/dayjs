@@ -7,8 +7,9 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 * [Parse](#parse)
   * [Now](#now)
   * [String](#string)
-  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   * [Date](#date)
+  * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+  * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
   * [Clone](#clone)
   * [Validation](#validation)
 * [Get + Set](#get--set)
@@ -47,6 +48,8 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
   * [WeekOfYear](#weekofyear)
+  * [IsSameOrAfter](#issameorafter)
+  * [IsSameOrBefore](#issameorbefore)
   * [IsBetween](#isbetween)
 
 ---
@@ -74,6 +77,15 @@ dayjs(String);
 dayjs('1995-12-25');
 ```
 
+### Date
+
+JavaScript の組み込みの Date オブジェクトを渡します。
+
+```js
+dayjs(Date);
+dayjs(new Date(2018, 8, 18));
+```
+
 ### Unix Timestamp (milliseconds)
 
 Unix エポック (1970年1月1日 12:00AM UTC) 以降のミリ秒数を表す整数値を渡します。
@@ -83,13 +95,11 @@ dayjs(Number);
 dayjs(1318781876406);
 ```
 
-### Date
-
-JavaScript の組み込みの Date オブジェクトを渡します。
+### Unix Timestamp (seconds)
 
 ```js
-dayjs(Date);
-dayjs(new Date(2018, 8, 18));
+dayjs.unix(Number);
+dayjs.unix(1318781876);
 ```
 
 ### Clone
@@ -333,8 +343,12 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 2つの `Dayjs` オブジェクトの差をミリ秒単位で取得します。
 
 ```js
-dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+const date1 = dayjs('2019-01-25');
+const date2 = dayjs('2018-06-05');
+date1.diff(date2); // 20214000000
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 #### Unix Timestamp (milliseconds)
@@ -439,8 +453,9 @@ dayjs().toString();
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以前の値かどうかを判定します。
 
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
 #### Is Same
@@ -450,8 +465,9 @@ dayjs().isBefore(dayjs()); // false
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクトの値と等しいかどうかを判定します。
 
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
 #### Is After
@@ -461,8 +477,9 @@ dayjs().isSame(dayjs()); // true
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以降の値かどうかを判定します。
 
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Is a Dayjs `.isDayjs(compared: any)`
@@ -493,6 +510,18 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 
