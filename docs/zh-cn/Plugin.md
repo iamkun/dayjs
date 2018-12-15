@@ -17,7 +17,7 @@
 ```js
 import plugin
 dayjs.extend(plugin)
-dayjs.extend(plugin, options) // 带参数加载插件
+dayjs.extend(plugin, options) // 带参数加载插件
 ```
 
 ## 安装
@@ -47,7 +47,7 @@ dayjs.extend(advancedFormat) // 使用插件
  - AdvancedFormat 扩展了 `dayjs().format` API 以支持更多模版
 
 ```javascript
-import AdvancedFormat from 'dayjs/plugin/AdvancedFormat'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 
 dayjs.extend(AdvancedFormat)
 
@@ -144,7 +144,7 @@ List of added formats:
 | `BBBB` | 2561             | Full BE Year (Year + 543)             |
 | `BB`   | 61               | 2-digit of BE Year                    |
 
-### 年中的第几周
+### WeekOfYear
  - WeekOfYear 增加了 `.week()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几周.
 
 ```javascript
@@ -155,6 +155,28 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 
+### IsSameOrAfter
+ - IsSameOrAfter 增加了 `.isSameOrAfter()` API 返回一个 `boolean` 来展示一个时间是否和一个时间相同或在一个时间之后.
+
+```javascript
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
+```
+
+### IsSameOrBefore
+ - IsSameOrBefore 增加了 `.isSameOrBefore()` API 返回一个 `boolean` 来展示一个时间是否和一个时间相同或在一个时间之前.
+
+```javascript
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
+```
+
 ### IsBetween
  - IsBetween 增加了 `.isBetween()` API 返回一个 `boolean` 来展示一个时间是否介于两个时间之间.
 
@@ -163,7 +185,7 @@ import isBetween from 'dayjs/plugin/isBetween'
 
 dayjs.extend(isBetween)
 
-dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
 
 ## 自定义
@@ -184,7 +206,7 @@ export default (option, dayjsClass, dayjsFactory) => {
   dayjsFactory.utc = (arguments) => {}
 
   // 覆盖已存在的 API
-  // 例：扩展 dayjs().format() 方法
+  // 例：扩展 dayjs().format() 方法
   const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function (arguments) {
     // 原始format结果
