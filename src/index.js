@@ -255,6 +255,7 @@ class Dayjs {
   }
 
   format(formatStr) {
+    if (!this.isValid()) return 'Invalid date'
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
     const locale = this.$locale()
