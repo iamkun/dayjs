@@ -66,7 +66,7 @@ dayjs().format('Q Do k kk X x')
 | `x`    | 1360013296123    | 유닉스 타임스탬프, 밀리 초             |
 
 ### RelativeTime
- - RelativeTime은 `.from`, `.to`, `.fromNow`, `.toNow` API를 추가하여 날짜를 상대 시간 문자열(에: 3 시간전) 으로 표시합니다.
+ - RelativeTime은 `.from`, `.to`, `.fromNow`, `.toNow` API를 추가하여 날짜를 상대 시간 문자열(예: 3 시간전) 으로 표시합니다.
 
 ```javascript
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -114,7 +114,7 @@ X 시간부터 상대시간을 `string`으로 반환합니다.
 | 18 달 이상        | yy   | 2 년 전 ~ 20 년 전     |
 
 ### IsLeapYear
- - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+ - IsLeapYear은 `.isLeapYear` API를 추가하여 `Dayjs`의 년이 윤년인 경우 `boolean`으로 값을 반환합니다.
 
 ```javascript
 import isLeapYear from 'dayjs/plugin/isLeapYear'
@@ -125,9 +125,10 @@ dayjs('2000-01-01').isLeapYear(); // true
 ```
 
 ### BuddhistEra
-- BuddhistEra extends `dayjs().format` API to supply Buddhist Era (B.E.) format options.
-- Buddhist Era is a year numbering system that primarily used in  mainland Southeast Asian countries of Cambodia, Laos, Myanmar and Thailand as well as in Sri Lanka and Chinese populations of Malaysia and Singapore for religious or official occasions ([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
+- BuddhistEra는 Buddhist Era (B.E.) 형식 옵션을 제공하기 위해 `dayjs().format` API를 확장합니다.
+- Buddhist Era 는 캄보디아, 라오스, 미얀마, 태국 그리고 스리랑카, 말레이시아 및 싱가포르의 중국인들에게 종교적 또는 공식적인 행사로 주로 사용하는 1년 단위 번호 체계입니다.([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
 - To calculate BE year manually, just add 543 to year. For example 26 May 1977 AD/CE should display as 26 May 2520 BE (1977 + 543)
+- BE 년도를 수동으로 계산 시, 연도에 543년 더합니다. 예를 들어, 1977년 5월 26일 AD/CE는 2520년 5월 26일 BE(1977 + 543) 입니다.
 
 ```javascript
 import buddhistEra from 'dayjs/plugin/buddhistEra'
@@ -145,7 +146,7 @@ List of added formats:
 | `BB`   | 61               | 2-digit of BE Year                    |
 
 ### WeekOfYear
- - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
+ - WeekOfYear은 `.week()` API를 추가하여 `Dayjs`의 년의 주를 `number`로 반환 합니다.
 
 ```javascript
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -156,7 +157,7 @@ dayjs('06/27/2018').week() // 26
 ```
 
 ### IsSameOrAfter
- - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
+ - IsSameOrAfter는 `.isSameOrAfter()` API를 추가하여 날짜가 다른 날짜와 같거나 나중일 경우 `boolean`으로 값을 반환합니다.
 
 ```javascript
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
@@ -167,8 +168,8 @@ dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
 ```
 
 ### IsSameOrBefore
- - IsSameOrBefore adds `.isSameOrBefore()` API to returns a `boolean` indicating if a date is same of before another date.
-
+ - IsSameOrBefore는 `.isSameOrBefore()` API를 추가하여 날짜가 다른 날짜와 같거나 전일 경우 `boolean`으로 값을 반환합니다.
+ 
 ```javascript
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 
@@ -178,7 +179,7 @@ dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
 ```
 
 ### IsBetween
- - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
+ - IsBetween은 `.isBetween()` API를 추가하여 두 날짜가 같을 경우 `boolean`으로 값을 반환합니다.
 
 ```javascript
 import isBetween from 'dayjs/plugin/isBetween'
