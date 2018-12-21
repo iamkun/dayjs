@@ -70,4 +70,10 @@ dayjs().isSame(dayjs())
 
 dayjs().isAfter(dayjs())
 
+dayjs().isBefore(dayjs(), 'minutes')
+
+dayjs().isSame(dayjs(), 'hours')
+
+dayjs().isAfter(dayjs(), 'year')
+
 dayjs('2000-01-01').isLeapYear()
