@@ -90,7 +90,7 @@ class Dayjs {
   }
 
   isValid() {
-    return !(this.$d.toString() === 'Invalid Date')
+    return !(this.$d.toString() === C.INVALID_DATE_STRING)
   }
 
   isSame(that, units) {
@@ -255,7 +255,8 @@ class Dayjs {
   }
 
   format(formatStr) {
-    if (!this.isValid()) return 'Invalid date'
+    if (!this.isValid()) return C.INVALID_DATE_STRING
+
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.padZoneStr(this.$d.getTimezoneOffset())
     const locale = this.$locale()
