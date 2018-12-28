@@ -15,6 +15,11 @@ it('Format no formatStr', () => {
   expect(dayjs().format()).toBe(moment().format())
 })
 
+it('Format invalid date', () => {
+  expect(dayjs('').format()).toBe(new Date('').toString())
+  expect(dayjs('otherString').format()).toBe(new Date('otherString').toString())
+})
+
 it('Format Year YY YYYY', () => {
   expect(dayjs().format('YY')).toBe(moment().format('YY'))
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
