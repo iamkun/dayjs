@@ -20,11 +20,7 @@ const monthDiff = (a, b) => {
   const c = b - anchor < 0
   const anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'months')
   // eslint-disable-next-line
-  const diff = Number(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) : (anchor2 - anchor)))))
-  if (Math.abs(diff) === 0) {
-    return 0
-  }
-  return diff
+  return Number(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) : (anchor2 - anchor)))) || 0);
 }
 
 const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
