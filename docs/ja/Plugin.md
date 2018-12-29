@@ -155,6 +155,27 @@ dayjs.extend(weekOfYear)
 
 dayjs('06/27/2018').week() // 26
 ```
+### IsSameOrAfter
+ - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
+
+```javascript
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
+```
+
+### IsSameOrBefore
+ - IsSameOrBefore adds `.isSameOrBefore()` API to returns a `boolean` indicating if a date is same of before another date.
+
+```javascript
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
+```
 
 ### IsBetween
  - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
@@ -164,7 +185,7 @@ import isBetween from 'dayjs/plugin/isBetween'
 
 dayjs.extend(isBetween)
 
-dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
 
 ## カスタマイズ

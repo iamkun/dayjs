@@ -43,14 +43,16 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [As Object `.toObject()`](#as-object-toobject)
     - [As String `.toString()`](#as-string-tostring)
   - [Query](#query)
-    - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared-dayjs)
-    - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared-dayjs)
-    - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared-dayjs)
+    - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared-dayjs-unit-string)
+    - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared-dayjs-unit-string)
+    - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared-dayjs-unit-string)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
 
 ## Parsing
@@ -247,7 +249,7 @@ dayjs().endOf('month');
 ### Format `.format(stringWithTokens: string)`
 
 Returns a `string` with the `Dayjs`'s formatted date.
-To escape characters, wrap them in square or culy brackets (e.g. `[G] {um}`).
+To escape characters, wrap them in square or curly brackets (e.g. `[G] {um}`).
 
 ```js
 dayjs().format(); // current date in ISO6801, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
@@ -297,9 +299,9 @@ Returns a `number` indicating the difference of two `Dayjs`s in the specified un
 const date1 = dayjs('2019-01-25');
 const date2 = dayjs('2018-06-05');
 date1.diff(date2); // 20214000000
-date1.diff(date2, 'months'); // 7
-date1.diff(date2, 'months', true); // 7.645161290322581
-date1.diff(date2, 'days'); // 233
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 ### Unix Timestamp (milliseconds) `.valueOf()`
@@ -383,28 +385,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Query
 
-### Is Before `.isBefore(compared: Dayjs)`
+### Is Before `.isBefore(compared: Dayjs, unit?: string)`
 
 Returns a `boolean` indicating whether the `Dayjs`'s date is before the other supplied `Dayjs`'s.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Is Same `.isSame(compared: Dayjs)`
+### Is Same `.isSame(compared: Dayjs, unit?: string)`
 
 Returns a `boolean` indicating whether the `Dayjs`'s date is the same as the other supplied `Dayjs`'s.
 
 ```js
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Is After `.isAfter(compared: Dayjs)`
+### Is After `.isAfter(compared: Dayjs, unit?: string)`
 
 Returns a `boolean` indicating whether the `Dayjs`'s date is after the other supplied `Dayjs`'s.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Is a Dayjs `.isDayjs(compared: any)`
@@ -435,6 +440,18 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` to get week of the year
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### IsBetween
 
