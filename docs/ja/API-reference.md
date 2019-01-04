@@ -43,7 +43,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Is Before](#is-before)
   * [Is Same](#is-same)
   * [Is After](#is-after)
-  * [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  * [Is a Dayjs](#is-a-dayjs)
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
