@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'kz',
+  name: 'kk',
   weekdays: 'жексенбі_дүйсенбі_сейсенбі_сәрсенбі_бейсенбі_жұма_сенбі'.split('_'),
   weekdaysShort: 'жек_дүй_сей_сәр_бей_жұм_сен'.split('_'),
   weekdaysMin: 'жк_дй_сй_ср_бй_жм_сн'.split('_'),
