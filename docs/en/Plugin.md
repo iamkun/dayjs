@@ -196,10 +196,7 @@ import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 
 dayjs.extend(quarterOfYear)
 
-dayjs('2010-01-01').quarter(); // 1
 dayjs('2010-04-01').quarter(); // 2
-dayjs('2010-07-01').quarter(); // 3
-dayjs('2010-10-01').quarter(); // 4
 ```
 
 ### CustomParseFormat
@@ -207,12 +204,12 @@ dayjs('2010-10-01').quarter(); // 4
 
 To escape characters, wrap them in square brackets (e.g. `[G]`). Punctuation symbols (-:/.()) do not need to be wrapped.
 
-```customParseFormat
+```javascript
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 dayjs.extend(customParseFormat)
 
-dayjs('05/02/69 1:02:03 PM -05:00', { format: 'MM/DD/YY H:mm:ss A Z' })
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
 // Returns an instance containing '1969-05-02T18:02:03.000Z'
 ```
 

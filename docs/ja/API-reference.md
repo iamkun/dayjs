@@ -10,6 +10,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Date](#date)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+  * [Custom Parse Format](#custom-parse-format)
   * [Clone](#clone)
   * [Validation](#validation)
 * [Get + Set](#get--set)
@@ -51,6 +52,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [IsSameOrAfter](#issameorafter)
   * [IsSameOrBefore](#issameorbefore)
   * [IsBetween](#isbetween)
+  * [QuarterOfYear](#quarterofyear)
 
 ---
 
@@ -101,6 +103,9 @@ dayjs(1318781876406);
 dayjs.unix(Number);
 dayjs.unix(1318781876);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clone
 
@@ -492,6 +497,12 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
+```
+
 ### Plugin APIs
 
 #### RelativeTime
@@ -529,3 +540,9 @@ plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 `.isBetween` はある日付が別の2つの日付の間にあるかどうかを判定します。
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
