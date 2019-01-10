@@ -1,7 +1,4 @@
 import parseFormattedInput from './parseFormattedInput'
-import Utils from '../../utils'
-
-Utils.parseFormattedInput = parseFormattedInput
 
 export default (o, C) => {
   const proto = C.prototype
