@@ -11,6 +11,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
     - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
     - [Validation `.isValid()`](#validation-isvalid)
   - [Get and Set](#get-and-set)
@@ -96,6 +97,9 @@ Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clone `.clone() | dayjs(original: Dayjs)`
 

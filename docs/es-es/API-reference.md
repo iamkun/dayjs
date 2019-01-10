@@ -11,6 +11,7 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
       - [Objeto `Date` nativo](#objeto-date-nativo)
       - [Tiempo Unix (milisegundos)](#tiempo-unix-milisegundos)
     - [Tiempo Unix (segundos)](#tiempo-unix-segundos-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validación `.isValid()`](#validación-isvalid)
   - [Get y Set](#get-y-set)
@@ -96,6 +97,9 @@ Devuelve un objeto `Dayjs` a partir de un tiempo Unix (segundos desde la época 
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
 

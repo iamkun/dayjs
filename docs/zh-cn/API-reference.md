@@ -10,6 +10,7 @@
   * [Date 对象](#date-对象)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
   * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  * [自定义时间格式](#自定义时间格式)
   * [复制](#复制)
   * [验证](#验证)
 * [获取+设置](#获取设置)
@@ -89,6 +90,9 @@ dayjs(1318781876406);
 dayjs.unix(Number);
 dayjs.unix(1318781876);
 ```
+
+### 自定义时间格式
+* 解析自定义时间格式如 `dayjs("12-25-1995", "MM-DD-YYYY")` 可以使用插件 [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### 复制
 `Dayjs` 对象是不可变的，如果您想获得一个对象的拷贝，请执行 `.clone()`。

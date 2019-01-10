@@ -10,6 +10,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Date](#date)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+  * [Custom Parse Format](#custom-parse-format)
   * [Clone](#clone)
   * [Validation](#validation)
 * [Get + Set](#get--set)
@@ -102,6 +103,9 @@ dayjs(1318781876406);
 dayjs.unix(Number);
 dayjs.unix(1318781876);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clone
 
