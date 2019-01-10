@@ -188,6 +188,20 @@ dayjs.extend(isBetween)
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
 
+### QuarterOfYear
+- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-01-01').quarter(); // 1
+dayjs('2010-04-01').quarter(); // 2
+dayjs('2010-07-01').quarter(); // 3
+dayjs('2010-10-01').quarter(); // 4
+```
+
 ### CustomParseFormat
  - CustomParseFormat extends `dayjs()` constructor to support custom formats of input strings.
 
