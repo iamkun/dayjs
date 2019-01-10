@@ -57,7 +57,7 @@ dayjs().format('Q Do k kk X x')
 
 追加されるフォーマットの一覧:
 
-| Format | Output           | Description                           |
+| フォーマット | 出力           | 説明                           |
 | ------ | ---------------- | ------------------------------------- |
 | `Q`    | 1-4              | 四半期                               |
 | `Do`   | 1st 2nd ... 31st | 序数付きの日             |
@@ -67,7 +67,7 @@ dayjs().format('Q Do k kk X x')
 | `x`    | 1360013296123    | Unix タイムスタンプ (ミリ秒)         |
 
 ### RelativeTime
- - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
+ - RelativeTime は日付を文字列で表現された相対的な時刻(例： 3 hours ago)にフォーマットする `.from` `.to` `.fromNow` `.toNow` APIを追加します。
 
 ```javascript
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -86,19 +86,27 @@ dayjs().toNow()
 
 #### Time from now `.fromNow(withoutSuffix?: boolean)`
 
-Returns the `string` of relative time from now.
+* String を返します
+
+ある日付から現在を見た時の相対的な時刻を返します。
 
 #### Time from X  `.from(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time from X.
+* String を返します
+
+ある日付から引数として渡した日付を見た時の相対的な時刻を返します。
 
 #### Time to now `.toNow(withoutSuffix?: boolean)`
 
-Returns the `string` of relative time to now.
+* String を返します
+
+現在からある日付を見た時の相対的な時刻を返します。
 
 #### Time to X  `.to(compared: Dayjs, withoutSuffix?: boolean)`
 
-Returns the `string` of relative time to X.
+* String を返します
+
+引数として渡した日付からある日付を見た時の相対的な時刻を返します。
 
 | Range                    | Key  | Sample Output                    |
 | ------------------------ | ---- | -------------------------------- |
@@ -115,7 +123,7 @@ Returns the `string` of relative time to X.
 | 18 months+               | yy   | 2 years ago ... 20 years ago     |
 
 ### IsLeapYear
- - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+ - IsLeapYear はある `Dayjs` オブジェクトがうるう年かどうかを Boolean で返す `.isLeapYear` APIを追加します。
 
 ```javascript
 import isLeapYear from 'dayjs/plugin/isLeapYear'
@@ -126,9 +134,10 @@ dayjs('2000-01-01').isLeapYear(); // true
 ```
 
 ### BuddhistEra
-- BuddhistEra extends `dayjs().format` API to supply Buddhist Era (B.E.) format options.
-- Buddhist Era is a year numbering system that primarily used in  mainland Southeast Asian countries of Cambodia, Laos, Myanmar and Thailand as well as in Sri Lanka and Chinese populations of Malaysia and Singapore for religious or official occasions ([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
-- To calculate BE year manually, just add 543 to year. For example 26 May 1977 AD/CE should display as 26 May 2520 BE (1977 + 543)
+- BuddhistEra は仏滅紀元 (仏暦、B.E.) を表現するフォーマットを提供するために `dayjs().format` API を拡張します。
+- 仏滅紀元（ぶつめつきげん、英：Buddhist calendar）とは、釈迦が入滅したとされる年、またはその翌年を元年とする紀年法である。
+仏暦（ぶつれき）ともいう。東南アジアの仏教徒の多い国などで用いられている。([Wikipedia](https://ja.wikipedia.org/wiki/%E4%BB%8F%E6%BB%85%E7%B4%80%E5%85%83))
+- 手動で仏暦を計算するには、ちょうど543を年に足します。例として西暦1977年5月26日は仏暦2520年5月26日と表示されます。(1977 + 543)
 
 ```javascript
 import buddhistEra from 'dayjs/plugin/buddhistEra'
@@ -138,15 +147,15 @@ dayjs.extend(buddhistEra)
 dayjs().format('BBBB BB')
 ```
 
-List of added formats:
+追加されるフォーマットの一覧:
 
-| Format | Output           | Description                           |
-| ------ | ---------------- | ------------------------------------- |
-| `BBBB` | 2561             | Full BE Year (Year + 543)             |
-| `BB`   | 61               | 2-digit of BE Year                    |
+| フォーマット | 出力  | 説明                |
+| --------- | ---- | ------------------ |
+| `BBBB`    | 2561 | 完全な仏暦 (年 + 543) |
+| `BB`      | 61   | 2桁の仏暦            |
 
 ### WeekOfYear
- - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
+ - WeekOfYear はある `Dayjs` オブジェクトがその年の何週目であるかを `Number` で返す `.week()` APIを追加します。
 
 ```javascript
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -156,7 +165,7 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 ### IsSameOrAfter
- - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
+ - IsSameOrAfter はある日付が別の日付と同じまたはそれ以降であるかどうかを `Boolean` で返す `.isSameOrAfter()` APIを追加します。
 
 ```javascript
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
@@ -167,7 +176,7 @@ dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
 ```
 
 ### IsSameOrBefore
- - IsSameOrBefore adds `.isSameOrBefore()` API to returns a `boolean` indicating if a date is same of before another date.
+ - IsSameOrBefore はある日付が別の日付と同じまたはそれ以前であるかどうかを `boolean` で返す `.isSameOrBefore()` APIを追加します。
 
 ```javascript
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
@@ -178,7 +187,7 @@ dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
 ```
 
 ### IsBetween
- - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
+ - IsBetween はある日付が別の2つの日付の間にあるかどうかを `Boolean` で返す `.isBetween()` APIを追加します。
 
 ```javascript
 import isBetween from 'dayjs/plugin/isBetween'
