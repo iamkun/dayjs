@@ -1,11 +1,9 @@
 import Utils from '../src/utils'
-import dayjs from '../src'
 
 const {
   prettyUnit,
   padZoneStr,
-  padStart,
-  monthDiff
+  padStart
 } = Utils
 
 it('PrettyUnit', () => {
@@ -27,19 +25,4 @@ it('PadZoneStr', () => {
 it('PadStart', () => {
   expect(padStart(1, 2, '0')).toBe('01')
   expect(padStart(0, 2, '0')).toBe('00')
-})
-
-
-it('MonthDiff', () => {
-  let dateOne = dayjs('2018-08-08')
-  let dateTwo = dayjs('2018-08-08')
-  expect(monthDiff(dateOne, dateTwo)).toEqual(0)
-
-  dateOne = dayjs('2018-09-08')
-  dateTwo = dayjs('2018-08-08')
-  expect(monthDiff(dateOne, dateTwo)).toEqual(1)
-
-  dateOne = dayjs('2018-08-08')
-  dateTwo = dayjs('2018-09-08')
-  expect(monthDiff(dateOne, dateTwo)).toEqual(-1)
 })
