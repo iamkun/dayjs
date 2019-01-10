@@ -54,6 +54,7 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [IsSameOrAfter](#issameorafter)
     - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Análisis
 
@@ -421,6 +422,12 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
+```
+
 ## API de complementos
 
 ### RelativeTime
@@ -458,3 +465,9 @@ plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 `.isBetween` para comprobar si una fecha se encuentra entre otras dos fechas dadas
 
 complemento [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)

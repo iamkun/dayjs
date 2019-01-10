@@ -51,6 +51,7 @@
   * [是否相同或之后](#是否相同或之后)
   * [是否相同或之前](#是否相同或之前)
   * [是否之间](#是否之间)
+  * [年中第几季度](#年中第几季度)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -372,6 +373,12 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
+也可以使用 `instanceof` 
+
+```js
+dayjs() instanceof dayjs // true
+```
+
 ## 插件 APIs
 
 ### 相对时间
@@ -409,3 +416,9 @@ plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 `.isBetween` 返回一个时间是否介于两个时间之间
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### 年中第几季度
+
+`.quarter` 返回年中第几季度
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)

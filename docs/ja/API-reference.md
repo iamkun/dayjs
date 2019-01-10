@@ -51,6 +51,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [IsSameOrAfter](#issameorafter)
   * [IsSameOrBefore](#issameorbefore)
   * [IsBetween](#isbetween)
+  * [QuarterOfYear](#quarterofyear)
 
 ---
 
@@ -492,6 +493,12 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
+```
+
 ### Plugin APIs
 
 #### RelativeTime
@@ -529,3 +536,9 @@ plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 `.isBetween` はある日付が別の2つの日付の間にあるかどうかを判定します。
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
