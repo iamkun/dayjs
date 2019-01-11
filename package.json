@@ -6,6 +6,8 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "jest",
+    "test-dst": "TZ=Pacific/Auckland npm run dst-test && TZ=Europe/London npm run dst-test && npm run dst-test",
+    "dst-test": "jest test/dst.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",

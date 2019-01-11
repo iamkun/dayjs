@@ -218,7 +218,19 @@ function parseFormattedInput(input, format) {
     parser = makeParser(format)
     parsers[format] = parser
   }
-  return parser(input)
+  const {
+    year, month, day, hours, minutes, seconds, milliseconds, zone
+  } = parser(input)
+  if (zone) {
+    return new Date(Date.UTC(
+      year, month - 1, day,
+      hours || 0, minutes || 0, seconds || 0, milliseconds || 0
+    ) + (zone.offset * 60 * 1000))
+  }
+  return new Date(
+    year, month - 1, day,
+    hours || 0, minutes || 0, seconds || 0, milliseconds || 0
+  )
 }
 
 export default parseFormattedInput
