@@ -93,6 +93,6 @@ it('fails with invalid number', () => {
   expect(dayjs('2018-05-02 12:00:60.000 +0200', format).isValid()).toBeFalsy()
   expect(dayjs('2018-05-02 12:00:00.000 +1300', format).isValid()).toBeFalsy()
   expect(dayjs('2018-05-02 12:00:00.000 +0001', format).isValid()).toBeFalsy()
-  expect(dayjs('18-05-02 13:00', { format: 'YY-MM-DD h:mm' }).isValid()).toBeFalsy()
-  expect(dayjs('18-05-02 +0200', { format: 'YY-MM-DD ZZ' }).isValid()).toBeTruthy()
+  expect(dayjs('18-05-02 13:00', 'YY-MM-DD h:mm').isValid()).toBeFalsy()
+  expect(dayjs('18-05-02 +0200', 'YY-MM-DD ZZ').isValid()).toBeTruthy()
 })
