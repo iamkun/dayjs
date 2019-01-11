@@ -11,8 +11,32 @@ const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
-const parseTokenExpressions = {}
 const parseTokenFunctions = {}
+const parseTokenExpressions = {
+  A: matchUpperCaseAMPM,
+  a: matchLowerCaseAMPM,
+  S: match1,
+  SS: match2,
+  SSS: match3,
+  s: match1to2,
+  ss: match2,
+  m: match1to2,
+  mm: match2,
+  H: match1to2,
+  h: match1to2,
+  HH: match2,
+  hh: match2,
+  D: match1to2,
+  DD: match2,
+  M: match1to2,
+  MM: match2,
+  Y: matchSigned,
+  YY: match2,
+  YYYY: match4,
+  z: matchAbbreviation,
+  Z: matchOffset,
+  ZZ: matchOffset
+}
 
 function correctHours(time) {
   const { afternoon } = time
@@ -63,10 +87,6 @@ function makeParser(format) {
   }
 }
 
-function addExpressionToken(token, regex) {
-  parseTokenExpressions[token] = regex
-}
-
 function addParseToken(tokens, property) {
   if (typeof tokens === 'string') {
     tokens = [tokens]
@@ -85,64 +105,33 @@ function offsetFromString(string) {
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
-addExpressionToken('A', matchUpperCaseAMPM)
 addParseToken(['A'], function (input) {
   this.afternoon = input === 'PM'
 })
-addExpressionToken('a', matchLowerCaseAMPM)
 addParseToken(['a'], function (input) {
   this.afternoon = input === 'pm'
 })
 
-addExpressionToken('S', match1)
-addExpressionToken('SS', match2)
-addExpressionToken('SSS', match3)
 for (let token = 'S', factor = 100; factor >= 1; token += 'S', factor /= 10) {
   addParseToken(token, function (input) {
     this.milliseconds = +input * factor
   })
 }
-
-addExpressionToken('s', match1to2)
-addExpressionToken('ss', match2)
 addParseToken(['s', 'ss'], 'seconds')
-
-addExpressionToken('m', match1to2)
-addExpressionToken('mm', match2)
 addParseToken(['m', 'mm'], 'minutes')
-
-addExpressionToken('H', match1to2)
-addExpressionToken('h', match1to2)
-addExpressionToken('HH', match2)
-addExpressionToken('hh', match2)
 addParseToken(['H', 'HH', 'h', 'hh'], 'hours')
-
-addExpressionToken('D', match1to2)
-addExpressionToken('DD', match2)
 addParseToken(['D', 'DD'], 'day')
-
-addExpressionToken('M', match1to2)
-addExpressionToken('MM', match2)
 addParseToken(['M', 'MM'], 'month')
-
-addExpressionToken('Y', matchSigned)
-addExpressionToken('YY', match2)
-addExpressionToken('YYYY', match4)
 addParseToken(['Y', 'YYYY'], 'year')
 addParseToken('YY', function (input) {
   input = +input
   this.year = input + (input > 68 ? 1900 : 2000)
 })
-
-addExpressionToken('z', matchAbbreviation)
 addParseToken('z', function (input) {
   // istanbul ignore next
   const zone = this.zone || (this.zone = {})
   zone.abbreviation = input
 })
-
-addExpressionToken('Z', matchOffset)
-addExpressionToken('ZZ', matchOffset)
 addParseToken(['Z', 'ZZ'], function (input) {
   const zone = this.zone || (this.zone = {})
   zone.offset = offsetFromString(input)
