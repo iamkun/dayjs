@@ -32,6 +32,7 @@ function correctHours(time) {
 
 function makeParser(format) {
   const array = format.match(formattingTokens)
+  if (!array) return false
   const { length } = array
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
@@ -154,20 +155,24 @@ function parseFormattedInput(input, format) {
     parser = makeParser(format)
     parsers[format] = parser
   }
-  const {
-    year, month, day, hours, minutes, seconds, milliseconds, zone
-  } = parser(input)
-  if (zone) {
-    return new Date(Date.UTC(
+
+  if (parser) {
+    const {
+      year, month, day, hours, minutes, seconds, milliseconds, zone
+    } = parser(input)
+    if (zone) {
+      return new Date(Date.UTC(
+        year, month - 1, day,
+        hours || 0,
+        minutes || 0, seconds || 0, milliseconds || 0
+      ) + (zone.offset * 60 * 1000))
+    }
+    return new Date(
       year, month - 1, day,
-      hours || 0,
-      minutes || 0, seconds || 0, milliseconds || 0
-    ) + (zone.offset * 60 * 1000))
+      hours || 0, minutes || 0, seconds || 0, milliseconds || 0
+    )
   }
-  return new Date(
-    year, month - 1, day,
-    hours || 0, minutes || 0, seconds || 0, milliseconds || 0
-  )
+  return new Date(Number.NaN)
 }
 
 export default parseFormattedInput
