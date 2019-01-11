@@ -54,6 +54,12 @@ it('leaves non-token parts of the format intact', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('timezone with no hour', () => {
+  const input = '2018-05-02 +0000'
+  const format = 'YYYY-MM-DD ZZ'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('fails with an invalid format', () => {
   const input = '2018-05-02 12:00 PM'
   const format = 'C'
@@ -76,23 +82,4 @@ it('fails with invalid time zone offset', () => {
   const input = '2018-05-02 12:00 D'
   const format = 'YYYY-MM-DD HH:mm ZZ'
   expect(dayjs(input, format).isValid()).toBeFalsy()
-})
-
-it('fails with invalid number', () => {
-  const format = 'YYYY-MM-DD HH:mm:ss.SSS ZZ'
-  expect(dayjs('2018-00-02 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-13-02 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-00 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-32 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-02-29 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('1900-02-29 12:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2016-02-29 12:00:00.000 +0200', format).isValid()).toBeTruthy()
-  expect(dayjs('2000-02-29 12:00:00.000 +0200', format).isValid()).toBeTruthy()
-  expect(dayjs('2018-05-02 24:00:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-02 12:60:00.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-02 12:00:60.000 +0200', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-02 12:00:00.000 +1300', format).isValid()).toBeFalsy()
-  expect(dayjs('2018-05-02 12:00:00.000 +0001', format).isValid()).toBeFalsy()
-  expect(dayjs('18-05-02 13:00', 'YY-MM-DD h:mm').isValid()).toBeFalsy()
-  expect(dayjs('18-05-02 +0200', 'YY-MM-DD ZZ').isValid()).toBeTruthy()
 })
