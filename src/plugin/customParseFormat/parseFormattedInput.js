@@ -13,7 +13,6 @@ const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
 const parseTokenExpressions = {}
 const parseTokenFunctions = {}
-const parsers = {}
 
 function correctHours(time) {
   const { afternoon } = time
@@ -149,13 +148,8 @@ addParseToken(['Z', 'ZZ'], function (input) {
   zone.offset = offsetFromString(input)
 })
 
-function parseFormattedInput(input, format) {
-  let parser = parsers[format]
-  if (!parser) {
-    parser = makeParser(format)
-    parsers[format] = parser
-  }
-
+export default (input, format) => {
+  const parser = makeParser(format)
   if (parser) {
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
@@ -174,5 +168,3 @@ function parseFormattedInput(input, format) {
   }
   return new Date(Number.NaN)
 }
-
-export default parseFormattedInput
