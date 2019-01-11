@@ -31,7 +31,7 @@ const dayjs = (date, c) => {
   if (isDayjs(date)) {
     return date.clone()
   }
-  // eslint-disable-next-line
+  // eslint-disable-next-line no-nested-ternary
   const cfg = c ? (typeof c === 'string' ? { format: c } : c) : {}
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
