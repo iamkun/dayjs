@@ -63,23 +63,6 @@ it('timezone with no hour', () => {
 it('fails with an invalid format', () => {
   const input = '2018-05-02 12:00 PM'
   const format = 'C'
-  expect(dayjs(input, format).isValid()).toBeFalsy()
-})
-
-it('fails with an unmatched token part', () => {
-  const input = '2018-05-02 12:00 BM'
-  const format = 'YYYY-MM-DD HH:mm A'
-  expect(dayjs(input, format).isValid()).toBeFalsy()
-})
-
-it('fails with an unmatched non-token part', () => {
-  const input = '2018-05-02 12:00 B'
-  const format = 'YYYY-MM-DD HH:mm [C]'
-  expect(dayjs(input, format).isValid()).toBeFalsy()
-})
-
-it('fails with invalid time zone offset', () => {
-  const input = '2018-05-02 12:00 D'
-  const format = 'YYYY-MM-DD HH:mm ZZ'
-  expect(dayjs(input, format).isValid()).toBeFalsy()
+  expect(dayjs(input, format).format().toLowerCase())
+    .toBe(moment(input, format).format().toLowerCase())
 })

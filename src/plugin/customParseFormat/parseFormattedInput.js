@@ -32,9 +32,6 @@ function correctHours(time) {
 
 function makeParser(format) {
   const array = format.match(formattingTokens)
-  if (!array) {
-    throw new Error(`Invalid format: "${format}".`)
-  }
   const { length } = array
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
@@ -51,18 +48,11 @@ function makeParser(format) {
     for (let i = 0, start = 0; i < length; i += 1) {
       const token = array[i]
       if (typeof token === 'string') {
-        if (input.indexOf(token, start) !== start) {
-          const part = input.substr(start, token.length)
-          throw new Error(`Expected "${token}" at character ${start}, found "${part}".`)
-        }
         start += token.length
       } else {
         const { regex, parser } = token
         const part = input.substr(start)
         const match = regex.exec(part)
-        if (!match || match.index !== 0) {
-          throw new Error(`Matching "${regex}" at character ${start} failed with "${part}".`)
-        }
         const value = match[0]
         parser.call(time, value)
         start += value.length
