@@ -9,7 +9,6 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
-const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
 function offsetFromString(string) {
   const parts = string.match(/([+-]|\d\d)/g)
@@ -57,10 +56,6 @@ const expressions = {
     this.year = input + (input > 68 ? 1900 : 2000)
   }],
   YYYY: [match4, addInput('year')],
-  z: [matchAbbreviation, function (input) {
-    const zone = this.zone || (this.zone = {})
-    zone.abbreviation = input
-  }],
   Z: [matchOffset, function (input) {
     const zone = this.zone || (this.zone = {})
     zone.offset = offsetFromString(input)

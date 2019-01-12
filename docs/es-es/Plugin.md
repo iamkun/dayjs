@@ -238,7 +238,6 @@ dayjs('2010-04-01').quarter(); // 2
 | `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
 | `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
 | `SSS`  | 000-999          | Milliseconds, 3-digits            |
-| `z`    | EST              | Time zone abbreviation            |
 | `Z`    | -5:00            | Offset from UTC                   |
 | `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
