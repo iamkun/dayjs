@@ -6,11 +6,7 @@ export default (o, C) => {
   proto.parse = function (cfg) {
     const { date: input, format } = cfg
     if (format) {
-      try {
-        this.$d = parseFormattedInput(input, format)
-      } catch (error) {
-        this.$d = new Date(Number.NaN)
-      }
+      this.$d = parseFormattedInput(input, format)
       this.init(cfg)
     } else {
       oldParse.call(this, cfg)

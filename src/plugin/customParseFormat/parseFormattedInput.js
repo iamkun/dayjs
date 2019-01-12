@@ -1,5 +1,3 @@
-/* eslint-disable prefer-arrow-callback */
-
 const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
@@ -13,29 +11,64 @@ const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
-const parseTokenExpressions = {}
-const parseTokenFunctions = {}
-const parsers = {}
-
-const daysInMonths = [
-  31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-]
-
-function isLeapYear(year) {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+function offsetFromString(string) {
+  const parts = string.match(/([+-]|\d\d)/g)
+  const minutes = +(parts[1] * 60) + +parts[2]
+  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
-function checkDay(time) {
-  const { day, month } = time
-  let days
-  if (month === 2) {
-    days = isLeapYear(time.year) ? 29 : 28
-  } else {
-    days = daysInMonths[month - 1]
+const addInput = function (property) {
+  return function (input) {
+    this[property] = +input
   }
-  if (!(day >= 1 && day <= days)) {
-    throw new Error(`Invalid day: "${day}".`)
-  }
+}
+
+const expressions = {
+  A: [matchUpperCaseAMPM, function (input) {
+    this.afternoon = input === 'PM'
+  }],
+  a: [matchLowerCaseAMPM, function (input) {
+    this.afternoon = input === 'pm'
+  }],
+  S: [match1, function (input) {
+    this.milliseconds = +input * 100
+  }],
+  SS: [match2, function (input) {
+    this.milliseconds = +input * 10
+  }],
+  SSS: [match3, function (input) {
+    this.milliseconds = +input
+  }],
+  s: [match1to2, addInput('seconds')],
+  ss: [match2, addInput('seconds')],
+  m: [match1to2, addInput('minutes')],
+  mm: [match2, addInput('minutes')],
+  H: [match1to2, addInput('hours')],
+  h: [match1to2, addInput('hours')],
+  HH: [match2, addInput('hours')],
+  hh: [match2, addInput('hours')],
+  D: [match1to2, addInput('day')],
+  DD: [match2, addInput('day')],
+  M: [match1to2, addInput('month')],
+  MM: [match2, addInput('month')],
+  Y: [matchSigned, addInput('year')],
+  YY: [match2, function (input) {
+    input = +input
+    this.year = input + (input > 68 ? 1900 : 2000)
+  }],
+  YYYY: [match4, addInput('year')],
+  z: [matchAbbreviation, function (input) {
+    const zone = this.zone || (this.zone = {})
+    zone.abbreviation = input
+  }],
+  Z: [matchOffset, function (input) {
+    const zone = this.zone || (this.zone = {})
+    zone.offset = offsetFromString(input)
+  }],
+  ZZ: [matchOffset, function (input) {
+    const zone = this.zone || (this.zone = {})
+    zone.offset = offsetFromString(input)
+  }]
 }
 
 function correctHours(time) {
@@ -55,14 +88,12 @@ function correctHours(time) {
 
 function makeParser(format) {
   const array = format.match(formattingTokens)
-  if (!array) {
-    throw new Error(`Invalid format: "${format}".`)
-  }
   const { length } = array
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
-    const regex = parseTokenExpressions[token]
-    const parser = parseTokenFunctions[token]
+    const parseTo = expressions[token]
+    const regex = parseTo && parseTo[0]
+    const parser = parseTo && parseTo[1]
     if (parser) {
       array[i] = { regex, parser }
     } else {
@@ -74,163 +105,39 @@ function makeParser(format) {
     for (let i = 0, start = 0; i < length; i += 1) {
       const token = array[i]
       if (typeof token === 'string') {
-        if (input.indexOf(token, start) !== start) {
-          const part = input.substr(start, token.length)
-          throw new Error(`Expected "${token}" at character ${start}, found "${part}".`)
-        }
         start += token.length
       } else {
         const { regex, parser } = token
         const part = input.substr(start)
         const match = regex.exec(part)
-        if (!match || match.index !== 0) {
-          throw new Error(`Matching "${regex}" at character ${start} failed with "${part}".`)
-        }
         const value = match[0]
         parser.call(time, value)
         start += value.length
       }
     }
-    checkDay(time)
     correctHours(time)
     return time
   }
 }
 
-function addExpressionToken(token, regex) {
-  parseTokenExpressions[token] = regex
-}
-
-function addParseToken(tokens, property, check) {
-  if (typeof tokens === 'string') {
-    tokens = [tokens]
-  }
-  let callback
-  if (typeof property === 'string') {
-    if (check) {
-      callback = function (input) {
-        const value = +input
-        if (!check(value)) {
-          throw new Error(`Invalid ${property}: "${input}".`)
-        }
-        this[property] = value
-      }
-    } else {
-      callback = function (input) {
-        this[property] = +input
-      }
+export default (input, format) => {
+  try {
+    const parser = makeParser(format)
+    const {
+      year, month, day, hours, minutes, seconds, milliseconds, zone
+    } = parser(input)
+    if (zone) {
+      return new Date(Date.UTC(
+        year, month - 1, day,
+        hours || 0,
+        minutes || 0, seconds || 0, milliseconds || 0
+      ) + (zone.offset * 60 * 1000))
     }
-  } else {
-    callback = property
-  }
-  for (let i = 0, { length } = tokens; i < length; i += 1) {
-    parseTokenFunctions[tokens[i]] = callback
-  }
-}
-
-function offsetFromString(string) {
-  const parts = string.match(/([+-]|\d\d)/g)
-  const minutes = +(parts[1] * 60) + +parts[2]
-  const offset = minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
-  if (!(offset % 15 === 0 && Math.abs(offset) <= 765)) { // 00:00 - 12:45
-    throw new Error(`Invalid time zone offset: "${string}".`)
-  }
-  return offset
-}
-
-addExpressionToken('A', matchUpperCaseAMPM)
-addParseToken(['A'], function (input) {
-  this.afternoon = input === 'PM'
-})
-addExpressionToken('a', matchLowerCaseAMPM)
-addParseToken(['a'], function (input) {
-  this.afternoon = input === 'pm'
-})
-
-addExpressionToken('S', match1)
-addExpressionToken('SS', match2)
-addExpressionToken('SSS', match3)
-for (let token = 'S', factor = 100; factor >= 1; token += 'S', factor /= 10) {
-  addParseToken(token, function (input) {
-    this.milliseconds = +input * factor
-  })
-}
-
-addExpressionToken('s', match1to2)
-addExpressionToken('ss', match2)
-addParseToken(['s', 'ss'], 'seconds', function (seconds) {
-  return seconds <= 59
-})
-
-addExpressionToken('m', match1to2)
-addExpressionToken('mm', match2)
-addParseToken(['m', 'mm'], 'minutes', function (minutes) {
-  return minutes <= 59
-})
-
-addExpressionToken('H', match1to2)
-addExpressionToken('h', match1to2)
-addExpressionToken('HH', match2)
-addExpressionToken('hh', match2)
-addParseToken(['H', 'HH'], 'hours', function (hours) {
-  return hours <= 23
-})
-addParseToken(['h', 'hh'], 'hours', function (hours) {
-  return hours >= 1 && hours <= 12
-})
-
-addExpressionToken('D', match1to2)
-addExpressionToken('DD', match2)
-addParseToken(['D', 'DD'], 'day')
-
-addExpressionToken('M', match1to2)
-addExpressionToken('MM', match2)
-addParseToken(['M', 'MM'], 'month', function (month) {
-  return month >= 1 && month <= 12
-})
-
-addExpressionToken('Y', matchSigned)
-addExpressionToken('YY', match2)
-addExpressionToken('YYYY', match4)
-addParseToken(['Y', 'YYYY'], 'year')
-addParseToken('YY', function (input) {
-  input = +input
-  this.year = input + (input > 68 ? 1900 : 2000)
-})
-
-addExpressionToken('z', matchAbbreviation)
-addParseToken('z', function (input) {
-  // istanbul ignore next
-  const zone = this.zone || (this.zone = {})
-  zone.abbreviation = input
-})
-
-addExpressionToken('Z', matchOffset)
-addExpressionToken('ZZ', matchOffset)
-addParseToken(['Z', 'ZZ'], function (input) {
-  const zone = this.zone || (this.zone = {})
-  zone.offset = offsetFromString(input)
-})
-
-function parseFormattedInput(input, format) {
-  let parser = parsers[format]
-  if (!parser) {
-    parser = makeParser(format)
-    parsers[format] = parser
-  }
-  const {
-    year, month, day, hours, minutes, seconds, milliseconds, zone
-  } = parser(input)
-  if (zone) {
-    return new Date(Date.UTC(
+    return new Date(
       year, month - 1, day,
       hours || 0, minutes || 0, seconds || 0, milliseconds || 0
-    ) + (zone.offset * 60 * 1000))
+    )
+  } catch (e) {
+    return new Date('') // Invalid Date
   }
-  return new Date(
-    year, month - 1, day,
-    hours || 0, minutes || 0, seconds || 0, milliseconds || 0
-  )
 }
-
-export default parseFormattedInput
