@@ -36,6 +36,12 @@ it('parse time zone abbreviation', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse time zone abbreviation2', () => {
+  const input = '05/02/69 1:02:03.04 AM +01:00 (CET)'
+  const format = 'MM/DD/YY h:mm:ss.SS A Z (z)'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('recognizes midnight in small letters', () => {
   const input = '2018-05-02 12:00 am'
   const format = 'YYYY-MM-DD hh:mm a'

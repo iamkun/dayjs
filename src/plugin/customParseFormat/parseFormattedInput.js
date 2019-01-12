@@ -11,7 +11,12 @@ const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchAbbreviation = /[A-Z]{3,4}/ // CET
 
-const parseTokenFunctions = {}
+function offsetFromString(string) {
+  const parts = string.match(/([+-]|\d\d)/g)
+  const minutes = +(parts[1] * 60) + +parts[2]
+  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
+}
+
 const parseTokenExpressions = {
   A: matchUpperCaseAMPM,
   a: matchLowerCaseAMPM,
@@ -38,6 +43,63 @@ const parseTokenExpressions = {
   ZZ: matchOffset
 }
 
+const addInput = function (property) {
+  return function (input) {
+    this[property] = +input
+  }
+}
+
+/* eslint-disable object-shorthand */
+const parseTokenFunctions = {
+  A: function (input) {
+    this.afternoon = input === 'PM'
+  },
+  a: function (input) {
+    this.afternoon = input === 'pm'
+  },
+  s: addInput('seconds'),
+  ss: addInput('seconds'),
+  m: addInput('minutes'),
+  mm: addInput('minutes'),
+  H: addInput('hours'),
+  HH: addInput('hours'),
+  h: addInput('hours'),
+  hh: addInput('hours'),
+  D: addInput('day'),
+  DD: addInput('day'),
+  M: addInput('month'),
+  MM: addInput('month'),
+  Y: addInput('year'),
+  YYYY: addInput('year'),
+  YY: function (input) {
+    input = +input
+    this.year = input + (input > 68 ? 1900 : 2000)
+  },
+  z: function (input) {
+    // istanbul ignore next
+    const zone = this.zone || (this.zone = {})
+    zone.abbreviation = input
+  },
+  Z: function (input) {
+    const zone = this.zone || (this.zone = {})
+    zone.offset = offsetFromString(input)
+  },
+  S: function (input) {
+    this.milliseconds = +input * 100
+  },
+  SS: function (input) {
+    this.milliseconds = +input * 10
+  },
+  SSS: function (input) {
+    this.milliseconds = +input
+  }
+}
+
+parseTokenFunctions.ZZ = parseTokenFunctions.Z
+
+/* eslint-enable */
+
+
 function correctHours(time) {
   const { afternoon } = time
   if (afternoon !== undefined) {
@@ -55,7 +117,6 @@ function correctHours(time) {
 
 function makeParser(format) {
   const array = format.match(formattingTokens)
-  if (!array) return false
   const { length } = array
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
@@ -87,59 +148,9 @@ function makeParser(format) {
   }
 }
 
-function addParseToken(tokens, property) {
-  if (typeof tokens === 'string') {
-    tokens = [tokens]
-  }
-  const callback = typeof property === 'string' ? function (input) {
-    this[property] = +input
-  } : property
-  for (let i = 0, { length } = tokens; i < length; i += 1) {
-    parseTokenFunctions[tokens[i]] = callback
-  }
-}
-
-function offsetFromString(string) {
-  const parts = string.match(/([+-]|\d\d)/g)
-  const minutes = +(parts[1] * 60) + +parts[2]
-  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
-}
-
-addParseToken(['A'], function (input) {
-  this.afternoon = input === 'PM'
-})
-addParseToken(['a'], function (input) {
-  this.afternoon = input === 'pm'
-})
-
-for (let token = 'S', factor = 100; factor >= 1; token += 'S', factor /= 10) {
-  addParseToken(token, function (input) {
-    this.milliseconds = +input * factor
-  })
-}
-addParseToken(['s', 'ss'], 'seconds')
-addParseToken(['m', 'mm'], 'minutes')
-addParseToken(['H', 'HH', 'h', 'hh'], 'hours')
-addParseToken(['D', 'DD'], 'day')
-addParseToken(['M', 'MM'], 'month')
-addParseToken(['Y', 'YYYY'], 'year')
-addParseToken('YY', function (input) {
-  input = +input
-  this.year = input + (input > 68 ? 1900 : 2000)
-})
-addParseToken('z', function (input) {
-  // istanbul ignore next
-  const zone = this.zone || (this.zone = {})
-  zone.abbreviation = input
-})
-addParseToken(['Z', 'ZZ'], function (input) {
-  const zone = this.zone || (this.zone = {})
-  zone.offset = offsetFromString(input)
-})
-
 export default (input, format) => {
-  const parser = makeParser(format)
-  if (parser) {
+  try {
+    const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
     } = parser(input)
@@ -154,6 +165,7 @@ export default (input, format) => {
       year, month - 1, day,
       hours || 0, minutes || 0, seconds || 0, milliseconds || 0
     )
+  } catch (e) {
+    return new Date('') // Invalid Date
   }
-  return new Date(Number.NaN)
 }
