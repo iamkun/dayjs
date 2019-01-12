@@ -17,88 +17,59 @@ function offsetFromString(string) {
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
-const parseTokenExpressions = {
-  A: matchUpperCaseAMPM,
-  a: matchLowerCaseAMPM,
-  S: match1,
-  SS: match2,
-  SSS: match3,
-  s: match1to2,
-  ss: match2,
-  m: match1to2,
-  mm: match2,
-  H: match1to2,
-  h: match1to2,
-  HH: match2,
-  hh: match2,
-  D: match1to2,
-  DD: match2,
-  M: match1to2,
-  MM: match2,
-  Y: matchSigned,
-  YY: match2,
-  YYYY: match4,
-  z: matchAbbreviation,
-  Z: matchOffset,
-  ZZ: matchOffset
-}
-
 const addInput = function (property) {
   return function (input) {
     this[property] = +input
   }
 }
 
-/* eslint-disable object-shorthand */
-const parseTokenFunctions = {
-  A: function (input) {
+const expressions = {
+  A: [matchUpperCaseAMPM, function (input) {
     this.afternoon = input === 'PM'
-  },
-  a: function (input) {
+  }],
+  a: [matchLowerCaseAMPM, function (input) {
     this.afternoon = input === 'pm'
-  },
-  s: addInput('seconds'),
-  ss: addInput('seconds'),
-  m: addInput('minutes'),
-  mm: addInput('minutes'),
-  H: addInput('hours'),
-  HH: addInput('hours'),
-  h: addInput('hours'),
-  hh: addInput('hours'),
-  D: addInput('day'),
-  DD: addInput('day'),
-  M: addInput('month'),
-  MM: addInput('month'),
-  Y: addInput('year'),
-  YYYY: addInput('year'),
-  YY: function (input) {
+  }],
+  S: [match1, function (input) {
+    this.milliseconds = +input * 100
+  }],
+  SS: [match2, function (input) {
+    this.milliseconds = +input * 10
+  }],
+  SSS: [match3, function (input) {
+    this.milliseconds = +input
+  }],
+  s: [match1to2, addInput('seconds')],
+  ss: [match2, addInput('seconds')],
+  m: [match1to2, addInput('minutes')],
+  mm: [match2, addInput('minutes')],
+  H: [match1to2, addInput('hours')],
+  h: [match1to2, addInput('hours')],
+  HH: [match2, addInput('hours')],
+  hh: [match2, addInput('hours')],
+  D: [match1to2, addInput('day')],
+  DD: [match2, addInput('day')],
+  M: [match1to2, addInput('month')],
+  MM: [match2, addInput('month')],
+  Y: [matchSigned, addInput('year')],
+  YY: [match2, function (input) {
     input = +input
     this.year = input + (input > 68 ? 1900 : 2000)
-  },
-  z: function (input) {
-    // istanbul ignore next
+  }],
+  YYYY: [match4, addInput('year')],
+  z: [matchAbbreviation, function (input) {
     const zone = this.zone || (this.zone = {})
     zone.abbreviation = input
-  },
-  Z: function (input) {
+  }],
+  Z: [matchOffset, function (input) {
     const zone = this.zone || (this.zone = {})
     zone.offset = offsetFromString(input)
-  },
-  S: function (input) {
-    this.milliseconds = +input * 100
-  },
-  SS: function (input) {
-    this.milliseconds = +input * 10
-  },
-  SSS: function (input) {
-    this.milliseconds = +input
-  }
+  }],
+  ZZ: [matchOffset, function (input) {
+    const zone = this.zone || (this.zone = {})
+    zone.offset = offsetFromString(input)
+  }]
 }
-
-parseTokenFunctions.ZZ = parseTokenFunctions.Z
-
-/* eslint-enable */
-
 
 function correctHours(time) {
   const { afternoon } = time
@@ -120,8 +91,9 @@ function makeParser(format) {
   const { length } = array
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
-    const regex = parseTokenExpressions[token]
-    const parser = parseTokenFunctions[token]
+    const parseTo = expressions[token]
+    const regex = parseTo && parseTo[0]
+    const parser = parseTo && parseTo[1]
     if (parser) {
       array[i] = { regex, parser }
     } else {
