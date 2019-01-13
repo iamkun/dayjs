@@ -1,3 +1,33 @@
+## [1.7.8](https://github.com/iamkun/dayjs/compare/v1.7.7...v1.7.8) (2018-12-13)
+
+
+### Feature
+
+* update isSame isBefore isAfter supports units ([fd65464](https://github.com/iamkun/dayjs/commit/fd65464))
+
+* add greek lithuanian locales 
+
+## [1.7.7](https://github.com/iamkun/dayjs/compare/v1.7.6...v1.7.7) (2018-09-26)
+
+
+### Bug Fixes
+
+* **DST:** fix daylight saving time DST bug && add test ([#354](https://github.com/iamkun/dayjs/issues/354)) ([6fca6d5](https://github.com/iamkun/dayjs/commit/6fca6d5))
+
+## [1.7.6](https://github.com/iamkun/dayjs/compare/v1.7.5...v1.7.6) (2018-09-25)
+
+
+### Bug Fixes
+
+* **add dayjs.unix:** add dayjs.unix to parse timestamp in seconds && locale update ([5711c5e](https://github.com/iamkun/dayjs/commit/5711c5e))
+
+## [1.7.5](https://github.com/iamkun/dayjs/compare/v1.7.4...v1.7.5) (2018-08-10)
+
+
+### Bug Fixes
+
+* add isBetween API & update ([b5fc3d1](https://github.com/iamkun/dayjs/commit/b5fc3d1))
+
 ## [1.7.4](https://github.com/iamkun/dayjs/compare/v1.7.3...v1.7.4) (2018-07-11)
 
 
