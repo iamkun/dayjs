@@ -22,6 +22,11 @@ const addInput = function (property) {
   }
 }
 
+const zoneExpressions = [matchOffset, function (input) {
+  const zone = this.zone || (this.zone = {})
+  zone.offset = offsetFromString(input)
+}]
+
 const expressions = {
   A: [matchUpperCaseAMPM, function (input) {
     this.afternoon = input === 'PM'
@@ -56,14 +61,8 @@ const expressions = {
     this.year = input + (input > 68 ? 1900 : 2000)
   }],
   YYYY: [match4, addInput('year')],
-  Z: [matchOffset, function (input) {
-    const zone = this.zone || (this.zone = {})
-    zone.offset = offsetFromString(input)
-  }],
-  ZZ: [matchOffset, function (input) {
-    const zone = this.zone || (this.zone = {})
-    zone.offset = offsetFromString(input)
-  }]
+  Z: zoneExpressions,
+  ZZ: zoneExpressions
 }
 
 function correctHours(time) {
