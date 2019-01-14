@@ -4,6 +4,7 @@
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
   "types": "index.d.ts",
+  "module": "./src/index.js",
   "scripts": {
     "test": "jest",
     "test-dst": "TZ=Pacific/Auckland npm run dst-test && TZ=Europe/London npm run dst-test && npm run dst-test",
