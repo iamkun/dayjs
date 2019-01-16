@@ -303,6 +303,8 @@ class Dayjs {
   }
 
   utcOffset() {
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
     return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
   }
 
