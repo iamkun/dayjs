@@ -72,3 +72,15 @@ it('fails with an invalid format', () => {
   expect(dayjs(input, format).format().toLowerCase())
     .toBe(moment(input, format).format().toLowerCase())
 })
+
+it('parse month from string', () => {
+  const input = '2018 February 03'
+  const format = 'YYYY MMMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse month from short string', () => {
+  const input = '2018 Feb 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
