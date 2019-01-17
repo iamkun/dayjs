@@ -18,5 +18,6 @@ it('Week of year', () => {
   const week = 27
   expect(dayjs(day).week()).toBe(moment(day).week())
   expect(dayjs().week()).toBe(moment().week())
-  expect(dayjs().setWeek(week).week()).toBe(moment().week(week).week())
+  expect(dayjs().week(week).week()).toBe(moment().week(week).week())
+  expect(dayjs().weeks(week).week()).toBe(moment().weeks(week).week())
 })
