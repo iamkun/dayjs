@@ -5,7 +5,7 @@ export default (o, c, d) => {
   proto.week = function (week = 0) {
     if (week > 0) {
       // eslint-disable-next-line prefer-template
-      if (week <= 52) throw new Error('In one year 52 weeks, the resulting value: ' + week)
+      if (week > 52) throw new Error('In one year 52 weeks, the resulting value: ' + week)
       return this.add((week - this.week()) * 7, 'day')
     }
     const endOfYear = this.endOf(Y)
