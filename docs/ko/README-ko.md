@@ -78,7 +78,7 @@ dayjs.locale('es') // use Spanish locale globally
 dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
 ```
 
-📚[I18n](./docs/en/I18n.md)
+📚[I18n](./I18n.md)
 
 ### Plugin
 

@@ -1,3 +1,19 @@
+# [1.8.0](https://github.com/iamkun/dayjs/compare/v1.7.8...v1.8.0) (2019-01-14)
+
+
+### Features
+
+* add CustomParseFormat plugin  and QuarterOfYear plugin ([#450](https://github.com/iamkun/dayjs/issues/450)) ([8f6f63c](https://github.com/iamkun/dayjs/commit/8f6f63c))
+
+## [1.7.8](https://github.com/iamkun/dayjs/compare/v1.7.7...v1.7.8) (2018-12-13)
+
+
+### Feature
+
+* update isSame isBefore isAfter supports units ([fd65464](https://github.com/iamkun/dayjs/commit/fd65464))
+
+* add greek lithuanian locales 
+
 ## [1.7.7](https://github.com/iamkun/dayjs/compare/v1.7.6...v1.7.7) (2018-09-26)
 
 
