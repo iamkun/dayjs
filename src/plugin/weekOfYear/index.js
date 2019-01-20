@@ -2,11 +2,12 @@ import { MS, Y, D, W } from '../../constant'
 
 export default (o, c, d) => {
   const proto = c.prototype
-  proto.week = function (week = 0) {
-    if (week > 0) {
-      // eslint-disable-next-line prefer-template
-      if (week > 52) throw new Error('In one year 52 weeks, the resulting value: ' + week)
+  proto.week = function (week = null) {
+    if (week <= 52 && week >= -52) {
       return this.add((week - this.week()) * 7, 'day')
+    } else if (week !== null) {
+      // eslint-disable-next-line prefer-template
+      throw new Error('In one year 52 weeks, the resulting value: ' + week)
     }
     const endOfYear = this.endOf(Y)
     if (endOfYear.day() !== 6 && this.month() === 11 && (31 - this.date()) <= endOfYear.day()) {
