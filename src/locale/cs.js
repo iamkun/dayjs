@@ -17,16 +17,16 @@ const locale = {
     future: 'za %s',
     past: 'před %s',
     s: 'několik sekund',
-    m: 'minutu',
+    m: 'minuta',
     mm: '%d minut',
-    h: 'hodinu',
+    h: 'hodina',
     hh: '%d hodin',
     d: 'den',
-    dd: '%d dní',
+    dd: '%d dnů',
     M: 'měsíc',
-    MM: '%d měsícú',
+    MM: '%d měsíců',
     y: 'rok',
-    yy: '%d let'
+    yy: '%d roků'
   }
 }
 
