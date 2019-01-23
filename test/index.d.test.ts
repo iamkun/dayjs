@@ -1,6 +1,7 @@
 import dayjs from '../src'
 import relativeTime from '../src/plugin/relativeTime'
 import advancedFormat from '../src/plugin/advancedFormat'
+import buddhistEra from '../src/plugin/buddhistEra'
 
 dayjs()
 
@@ -82,3 +83,4 @@ dayjs('2000-01-01').isLeapYear()
 
 dayjs.extend(relativeTime).toNow()
 dayjs.extend(advancedFormat).format()
+dayjs.extend(buddhistEra).format()
