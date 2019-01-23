@@ -3,6 +3,7 @@ import relativeTime from '../src/plugin/relativeTime'
 import advancedFormat from '../src/plugin/advancedFormat'
 import buddhistEra from '../src/plugin/buddhistEra'
 import isLeapYear from '../src/plugin/isLeapYear'
+import isBetween from '../src/plugin/isBetween'
 
 dayjs()
 
@@ -85,3 +86,4 @@ dayjs.extend(relativeTime)().toNow()
 dayjs.extend(advancedFormat)().format()
 dayjs.extend(buddhistEra)().format()
 dayjs.extend(isLeapYear)('2000-01-01').isLeapYear();
+dayjs.extend(isBetween)('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
