@@ -1,4 +1,5 @@
 import dayjs from '../src'
+import relativeTime from '../src/plugin/relativeTime/index'
 
 dayjs()
 
@@ -77,3 +78,5 @@ dayjs().isSame(dayjs(), 'hours')
 dayjs().isAfter(dayjs(), 'year')
 
 dayjs('2000-01-01').isLeapYear()
+
+dayjs.extend(relativeTime).toNow()
