@@ -66,7 +66,7 @@ dayjs().format('Q Do k kk X x')
 | `x`    | 1360013296123    | 유닉스 타임스탬프, 밀리 초             |
 
 ### RelativeTime
- - RelativeTime은 `.from`, `.to`, `.fromNow`, `.toNow` API를 추가하여 날짜를 상대 시간 문자열(에: 3 시간전) 으로 표시합니다.
+ - RelativeTime은 `.from`, `.to`, `.fromNow`, `.toNow` API를 추가하여 날짜를 상대 시간 문자열(예: 3 시간전) 으로 표시합니다.
 
 ```javascript
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -114,7 +114,7 @@ X 시간부터 상대시간을 `string`으로 반환합니다.
 | 18 달 이상        | yy   | 2 년 전 ~ 20 년 전     |
 
 ### IsLeapYear
- - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
+ - IsLeapYear은 `.isLeapYear` API를 추가하여 `Dayjs`의 년이 윤년인 경우 `boolean`으로 값을 반환합니다.
 
 ```javascript
 import isLeapYear from 'dayjs/plugin/isLeapYear'
@@ -125,9 +125,10 @@ dayjs('2000-01-01').isLeapYear(); // true
 ```
 
 ### BuddhistEra
-- BuddhistEra extends `dayjs().format` API to supply Buddhist Era (B.E.) format options.
-- Buddhist Era is a year numbering system that primarily used in  mainland Southeast Asian countries of Cambodia, Laos, Myanmar and Thailand as well as in Sri Lanka and Chinese populations of Malaysia and Singapore for religious or official occasions ([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
+- BuddhistEra는 Buddhist Era (B.E.) 형식 옵션을 제공하기 위해 `dayjs().format` API를 확장합니다.
+- Buddhist Era 는 캄보디아, 라오스, 미얀마, 태국 그리고 스리랑카, 말레이시아 및 싱가포르의 중국인들에게 종교적 또는 공식적인 행사로 주로 사용하는 1년 단위 번호 체계입니다.([Wikipedia](https://en.wikipedia.org/wiki/Buddhist_calendar))
 - To calculate BE year manually, just add 543 to year. For example 26 May 1977 AD/CE should display as 26 May 2520 BE (1977 + 543)
+- BE 년도를 수동으로 계산 시, 연도에 543년 더합니다. 예를 들어, 1977년 5월 26일 AD/CE는 2520년 5월 26일 BE(1977 + 543) 입니다.
 
 ```javascript
 import buddhistEra from 'dayjs/plugin/buddhistEra'
@@ -145,7 +146,7 @@ List of added formats:
 | `BB`   | 61               | 2-digit of BE Year                    |
 
 ### WeekOfYear
- - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
+ - WeekOfYear은 `.week()` API를 추가하여 `Dayjs`의 년의 주를 `number`로 반환 합니다.
 
 ```javascript
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -155,16 +156,89 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 
+### IsSameOrAfter
+ - IsSameOrAfter는 `.isSameOrAfter()` API를 추가하여 날짜가 다른 날짜와 같거나 나중일 경우 `boolean`으로 값을 반환합니다.
+
+```javascript
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
+```
+
+### IsSameOrBefore
+ - IsSameOrBefore는 `.isSameOrBefore()` API를 추가하여 날짜가 다른 날짜와 같거나 전일 경우 `boolean`으로 값을 반환합니다.
+ 
+```javascript
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
+```
+
 ### IsBetween
- - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
+ - IsBetween은 `.isBetween()` API를 추가하여 두 날짜가 같을 경우 `boolean`으로 값을 반환합니다.
 
 ```javascript
 import isBetween from 'dayjs/plugin/isBetween'
 
 dayjs.extend(isBetween)
 
-dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
+
+### QuarterOfYear
+- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-04-01').quarter(); // 2
+```
+
+### CustomParseFormat
+ - CustomParseFormat extends `dayjs()` constructor to support custom formats of input strings.
+
+To escape characters, wrap them in square brackets (e.g. `[G]`). Punctuation symbols (-:/.()) do not need to be wrapped.
+
+```javascript
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
+
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
+// Returns an instance containing '1969-05-02T18:02:03.000Z'
+```
+
+#### List of all available format tokens
+
+| Format | Output           | Description                       |
+| ------ | ---------------- | --------------------------------- |
+| `YY`   | 18               | Two-digit year                    |
+| `YYYY` | 2018             | Four-digit year                   |
+| `M`    | 1-12             | Month, beginning at 1             |
+| `MM`   | 01-12            | Month, 2-digits                   |
+| `D`    | 1-31             | Day of month                      |
+| `DD`   | 01-31            | Day of month, 2-digits            |
+| `H`    | 0-23             | Hours                             |
+| `HH`   | 00-23            | Hours, 2-digits                   |
+| `h`    | 1-12             | Hours, 12-hour clock              |
+| `hh`   | 01-12            | Hours, 12-hour clock, 2-digits    |
+| `m`    | 0-59             | Minutes                           |
+| `mm`   | 00-59            | Minutes, 2-digits                 |
+| `s`    | 0-59             | Seconds                           |
+| `ss`   | 00-59            | Seconds, 2-digits                 |
+| `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
+| `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
+| `SSS`  | 000-999          | Milliseconds, 3-digits            |
+| `Z`    | -5:00            | Offset from UTC                   |
+| `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
+| `A`    | AM PM            | Post or ante meridiem, upper-case |
+| `a`    | am pm            | Post or ante meridiem, lower-case |
 
 ## Customize
 

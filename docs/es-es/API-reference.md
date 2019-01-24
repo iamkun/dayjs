@@ -11,6 +11,7 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
       - [Objeto `Date` nativo](#objeto-date-nativo)
       - [Tiempo Unix (milisegundos)](#tiempo-unix-milisegundos)
     - [Tiempo Unix (segundos)](#tiempo-unix-segundos-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validación `.isValid()`](#validación-isvalid)
   - [Get y Set](#get-y-set)
@@ -43,15 +44,18 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Como objeto `.toObject()`](#como-objecto-toobject)
     - [Como cadena `.toString()`](#como-cadena-tostring)
   - [Consulta](#consulta)
-    - [Anterior a `.isBefore(compared: Dayjs)`](#anterior-a-isbeforecompared-dayjs)
-    - [Igual que `.isSame(compared: Dayjs)`](#igual-que-issamecompared-dayjs)
-    - [Posterior a `.isAfter(compared: Dayjs)`](#posterior-a-isaftercompared-dayjs)
+    - [Anterior a `.isBefore(compared: Dayjs, unit?: string)`](#anterior-a-isbeforecompared-dayjs-unit-string)
+    - [Igual que `.isSame(compared: Dayjs, unit?: string)`](#igual-que-issamecompared-dayjs-unit-string)
+    - [Posterior a `.isAfter(compared: Dayjs, unit?: string)`](#posterior-a-isaftercompared-dayjs-unit-string)
     - [Es Dayjs `.isDayjs()`](#es-dayjs-isdayjscompared-any)
   - [API de complementos](#api-de-complementos)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Análisis
 
@@ -93,6 +97,9 @@ Devuelve un objeto `Dayjs` a partir de un tiempo Unix (segundos desde la época 
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
 
@@ -383,28 +390,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Anterior a `.isBefore(compared: Dayjs)`
+### Anterior a `.isBefore(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es anterior o no a la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual que `.isSame(compared: Dayjs)`
+### Igual que `.isSame(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es igual o no que la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Posterior a `.isAfter(compared: Dayjs)`
+### Posterior a `.isAfter(compared: Dayjs, unit?: string)`
 
 Devuelve un dato de tipo `boolean`, que indica si la fecha del objeto `Dayjs` inicial es posterior o no a la fecha del objeto `Dayjs` a comparar.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Es Dayjs `.isDayjs(compared: any)`
@@ -414,6 +424,12 @@ Devuelve un dato de tipo `boolean`, que indica si la variable proporcionada es u
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
 ```
 
 ## API de complementos
@@ -436,8 +452,26 @@ complemento [`IsLeapYear`](./Plugin.md#isleapyear)
 
 complemento [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
 ### IsBetween
 
 `.isBetween` para comprobar si una fecha se encuentra entre otras dos fechas dadas
 
 complemento [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)

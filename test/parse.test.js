@@ -46,6 +46,7 @@ describe('Parse', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
     expect(dayjs().isValid()).toBe(true)
+    expect(dayjs('').isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs('2018-2-28 12:34:56:789').isValid()).toBe(true)
     expect(dayjs('2018-2-28').isValid()).toBe(true)

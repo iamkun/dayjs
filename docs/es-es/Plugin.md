@@ -161,6 +161,28 @@ dayjs.extend(weekOfYear)
 dayjs('06/27/2018').week() // 26
 ```
 
+### IsSameOrAfter
+ - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
+
+```javascript
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+
+dayjs.extend(isSameOrAfter)
+
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year');
+```
+
+### IsSameOrBefore
+ - IsSameOrBefore adds `.isSameOrBefore()` API to returns a `boolean` indicating if a date is same of before another date.
+
+```javascript
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
+
+dayjs.extend(isSameOrBefore)
+
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year');
+```
+
 ### IsBetween
 
 * IsBetween añade la API `.isBetween()`, que devuelve un dato de tipo `boolean` indicando si una fecha se encuentra o no entre otras dos dadas.
@@ -170,8 +192,56 @@ import isBetween from 'dayjs/plugin/isBetween'
 
 dayjs.extend(isBetween)
 
-dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25')); // true
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
+
+### QuarterOfYear
+- QuarterOfYear añade a la API `.quarter()` para devolver a que cuarto del año pertenece una fecha
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-04-01').quarter(); // 2
+```
+
+### QuarterOfYear
+- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-04-01').quarter(); // 2
+```
+
+#### List of all available format tokens
+
+| Format | Output           | Description                       |
+| ------ | ---------------- | --------------------------------- |
+| `YY`   | 18               | Two-digit year                    |
+| `YYYY` | 2018             | Four-digit year                   |
+| `M`    | 1-12             | Month, beginning at 1             |
+| `MM`   | 01-12            | Month, 2-digits                   |
+| `D`    | 1-31             | Day of month                      |
+| `DD`   | 01-31            | Day of month, 2-digits            |
+| `H`    | 0-23             | Hours                             |
+| `HH`   | 00-23            | Hours, 2-digits                   |
+| `h`    | 1-12             | Hours, 12-hour clock              |
+| `hh`   | 01-12            | Hours, 12-hour clock, 2-digits    |
+| `m`    | 0-59             | Minutes                           |
+| `mm`   | 00-59            | Minutes, 2-digits                 |
+| `s`    | 0-59             | Seconds                           |
+| `ss`   | 00-59            | Seconds, 2-digits                 |
+| `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
+| `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
+| `SSS`  | 000-999          | Milliseconds, 3-digits            |
+| `Z`    | -5:00            | Offset from UTC                   |
+| `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
+| `A`    | AM PM            | Post or ante meridiem, upper-case |
+| `a`    | am pm            | Post or ante meridiem, lower-case |
 
 ## Personalización
 

@@ -11,6 +11,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
       - [Objeto `Date` nativo](#objeto-date-nativo)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
     - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validação `.isValid()`](#validação-isvalid)
   - [Get and Set](#get-and-set)
@@ -43,15 +44,18 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Como Objeto `.toObject()`](#como-objeto-toobject)
     - [Como String `.toString()`](#como-string-tostring)
   - [Consulta](#consulta)
-    - [Antes `.isBefore(compared: Dayjs)`](#antes-isbeforecompared-dayjs)
-    - [Igual `.isSame(compared: Dayjs)`](#igual-issamecompared-dayjs)
-    - [Depois `.isAfter(compared: Dayjs)`](#depois-isaftercompared-dayjs)
+    - [Antes `.isBefore(compared: Dayjs, unit?: string)`](#antes-isbeforecompared-dayjs-unit-string)
+    - [Igual `.isSame(compared: Dayjs, unit?: string)`](#igual-issamecompared-dayjs-unit-string)
+    - [Depois `.isAfter(compared: Dayjs, unit?: string)`](#depois-isaftercompared-dayjs-unit-string)
     - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Conversões
 
@@ -91,6 +95,9 @@ Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
 
@@ -381,28 +388,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Antes `.isBefore(compared: Dayjs)`
+### Antes `.isBefore(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é antes da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual `.isSame(compared: Dayjs)`
+### Igual `.isSame(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é a mesma data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isBefore(dayjs()); // false
+dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Depois `.isAfter(compared: Dayjs)`
+### Depois `.isAfter(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é depois da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### É um objeto `Dayjs` `.isDayjs()`
@@ -412,6 +422,12 @@ Retorna um `boolean` indicando se a variável é um objeto `Dayjs` ou não.
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
 ```
 
 ## Plugin APIs
@@ -434,8 +450,26 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
 ### IsBetween
 
 `.isBetween` para verificar se uma data está entre duas outras datas
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
