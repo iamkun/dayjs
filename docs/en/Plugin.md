@@ -239,6 +239,24 @@ dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
 | `a`    | am pm            | Post or ante meridiem, lower-case |
 
+
+### DynamicLocale
+ - DynamicLocale dynamically loads the appropriate locale, without having to load it manually before using it.
+
+```javascript
+import dynamicLocale from 'dayjs/plugin/dynamicLocale'
+
+dayjs.extend(dynamicLocale)
+
+// globally
+dayjs.locale('de')
+dayjs('2019-1-27').format('dddd, D MMMM YYYY') // Sonntag, 27 Januar 2019
+
+// for an instance
+dayjs('2019-1-27').locale('it').format('dddd, D MMMM YYYY') // Domenica, 27 Gennaio 2019
+```
+
+
 ## Customize
 
 You could build your own Day.js plugin to meet different needs.
