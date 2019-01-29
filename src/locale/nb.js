@@ -17,7 +17,7 @@ const locale = {
     future: 'om %s',
     past: 'for %s siden',
     s: 'noen sekunder',
-    m: 'ett minuttt',
+    m: 'ett minutt',
     mm: '%d minutter',
     h: 'en time',
     hh: '%d timer',

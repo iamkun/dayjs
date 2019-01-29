@@ -1,4 +1,3 @@
-
 import dayjs from 'dayjs'
 
 const locale = {
@@ -13,6 +12,21 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
+  },
+  relativeTime: {
+    future: '%s در',
+    past: 'پیش %s',
+    s: 'چند ثانیه',
+    m: 'یک دقیقه',
+    mm: 'دقیقه %d',
+    h: 'یک ساعت',
+    hh: 'ساعت %d',
+    d: 'یک روز',
+    dd: 'روز %d',
+    M: 'یک ماه',
+    MM: 'ماه %d',
+    y: 'یک سال',
+    yy: 'سال %d'
   }
 }
 

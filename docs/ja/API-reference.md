@@ -10,6 +10,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Date](#date)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+  * [Custom Parse Format](#custom-parse-format)
   * [Clone](#clone)
   * [Validation](#validation)
 * [Get + Set](#get--set)
@@ -43,12 +44,15 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Is Before](#is-before)
   * [Is Same](#is-same)
   * [Is After](#is-after)
-  * [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  * [Is a Dayjs](#is-a-dayjs)
 * [Plugin APIs](#plugin-apis)
   * [RelativeTime](#relativetime)
   * [IsLeapYear](#isleapyear)
   * [WeekOfYear](#weekofyear)
+  * [IsSameOrAfter](#issameorafter)
+  * [IsSameOrBefore](#issameorbefore)
   * [IsBetween](#isbetween)
+  * [QuarterOfYear](#quarterofyear)
 
 ---
 
@@ -99,6 +103,9 @@ dayjs(1318781876406);
 dayjs.unix(Number);
 dayjs.unix(1318781876);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clone
 
@@ -315,7 +322,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `D`    | 1-31             | 日                  |
 | `DD`   | 01-31            | 2桁の日        |
 | `d`    | 0-6              | 曜日 (日曜は0) |
-| `dd`   | Su-Sa            | The min name of the day of the week   |
+| `dd`   | Su-Sa            | 最も短い曜日の略称   |
 | `ddd`  | Sun-Sat          | 曜日の略称 |
 | `dddd` | Sunday-Saturday  | 曜日名       |
 | `H`    | 0-23             | 時間                              |
@@ -332,7 +339,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            | 午前と午後 (大文字)                                      |
 | `a`    | am pm            | 午前と午後 (小文字)                                      |
 
-* More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+* plugin [`AdvancedFormat`](./Plugin.md#advancedformat) にはより多くのフォーマット（例： `Q Do k kk X x ...` ）が存在します。
 
 #### Difference
 
@@ -341,8 +348,12 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 2つの `Dayjs` オブジェクトの差をミリ秒単位で取得します。
 
 ```js
-dayjs().diff(Dayjs, unit);
-dayjs().diff(dayjs(), 'years'); // 0
+const date1 = dayjs('2019-01-25');
+const date2 = dayjs('2018-06-05');
+date1.diff(date2); // 20214000000
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 #### Unix Timestamp (milliseconds)
@@ -399,8 +410,6 @@ dayjs().toArray(); //[2018, 8, 18, 00, 00, 00, 000];
 
 * JSON String を返します
 
-Serializing a `Dayjs` object to JSON, will return an ISO8601 string.
-
 `Dayjs` オブジェクトを JSON シリアライズし、ISO8601 形式の日付文字列を返します。
 
 ```js
@@ -447,8 +456,9 @@ dayjs().toString();
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以前の値かどうかを判定します。
 
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
 #### Is Same
@@ -458,8 +468,9 @@ dayjs().isBefore(dayjs()); // false
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクトの値と等しいかどうかを判定します。
 
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
 #### Is After
@@ -469,41 +480,69 @@ dayjs().isSame(dayjs()); // true
 `Dayjs` オブジェクトが別の `Dayjs` オブジェクト以降の値かどうかを判定します。
 
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
-### Is a Dayjs `.isDayjs(compared: any)`
+#### Is a Dayjs
 
-Returns a `boolean` indicating whether a variable is a dayjs object or not.
+* Boolean を返します
+
+与えられた値が `Dayjs` オブジェクトであるかどうかを判定します。
 
 ```js
+dayjs.isDayjs(compared: any);
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
-## Plugin APIs
+The operator `instanceof` works equally well:
 
-### RelativeTime
+```js
+dayjs() instanceof dayjs // true
+```
 
-`.from` `.to` `.fromNow` `.toNow` to get relative time
+### Plugin APIs
+
+#### RelativeTime
+
+`.from` `.to` `.fromNow` `.toNow` は相対的な時刻を返します。
 
 plugin [`RelativeTime`](./Plugin.md#relativetime)
 
-### IsLeapYear
+#### IsLeapYear
 
-`.isLeapYear` to get is a leap year or not
+`.isLeapYear` はうるう年かどうかを返します。
 
 plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
-### WeekOfYear
+#### WeekOfYear
 
-`.week` to get week of the year
+`.week` はその年の何週目かを返します。
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
-### IsBetween
+#### IsSameOrAfter
 
-`.isBetween` to check if a date is between two other dates
+`.isSameOrAfter` はある日付が別の日付と同じまたは以降かどうかを判定します。
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+#### IsSameOrBefore
+
+`.isSameOrBefore` はある日付が別の日付と同じまたは以前かどうか判定します。
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
+#### IsBetween
+
+`.isBetween` はある日付が別の2つの日付の間にあるかどうかを判定します。
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
