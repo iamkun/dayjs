@@ -7,7 +7,7 @@ declare namespace dayjs {
 
   export type OptionType = { locale: string }
 
-  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date'
+  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | 'd' | 'M' | 'y' | 'w' | 'h' | 'm' | 's' | 'ms'
 
   interface DayjsObject {
     years: number
