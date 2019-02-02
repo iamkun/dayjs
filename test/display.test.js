@@ -86,7 +86,6 @@ it('Format Second s ss SSS', () => {
   expect(dayjs(date).format('s-ss-SSS')).toBe(moment(date).format('s-ss-SSS'))
 })
 
-
 it('Format Time Zone ZZ', () => {
   MockDate.set(new Date('2018-05-02T23:00:00.000'), 60 * 8)
   expect(dayjs().format('Z')).toBe(moment().format('Z'))
@@ -104,9 +103,21 @@ it('Format Time Zone ZZ', () => {
 })
 
 it('Format ddd dd MMM with short locale', () => {
-  expect(dayjs().locale(th).format('dd')).toBe(moment().locale('th').format('dd'))
-  expect(dayjs().locale(th).format('ddd')).toBe(moment().locale('th').format('ddd'))
-  expect(dayjs().locale(th).format('MMM')).toBe(moment().locale('th').format('MMM'))
+  expect(dayjs()
+    .locale(th)
+    .format('dd')).toBe(moment()
+    .locale('th')
+    .format('dd'))
+  expect(dayjs()
+    .locale(th)
+    .format('ddd')).toBe(moment()
+    .locale('th')
+    .format('ddd'))
+  expect(dayjs()
+    .locale(th)
+    .format('MMM')).toBe(moment()
+    .locale('th')
+    .format('MMM'))
 })
 
 it('Format Complex with other string - : / ', () => {
@@ -170,7 +181,6 @@ describe('Difference', () => {
     })
   })
 
-
   it('MonthDiff', () => {
     expect(dayjs('2018-08-08').diff(dayjs('2018-08-08'), 'month')).toEqual(0)
     expect(dayjs('2018-09-08').diff(dayjs('2018-08-08'), 'month')).toEqual(1)
@@ -190,6 +200,11 @@ it('Unix Timestamp (seconds)', () => {
 it('Days in Month', () => {
   expect(dayjs().daysInMonth()).toBe(moment().daysInMonth())
   expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
+})
+
+it('Utc Offset', () => {
+  expect(dayjs('2013-01-01T00:00:00.000').utcOffset()).toBe(moment('2013-01-01T00:00:00.000').utcOffset())
+  expect(dayjs('2013-01-01T05:00:00.000').utcOffset()).toBe(moment('2013-01-01T05:00:00.000').utcOffset())
 })
 
 it('As Javascript Date -> toDate', () => {
