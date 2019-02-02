@@ -209,7 +209,7 @@ dayjs("2010-10-20").isBetween("2010-10-19", dayjs("2010-10-25"), "year");
 
 ### DayOfYear
 
-- DayOfYear añade a la API `.dayOfYear()`, que devuelve un dato de tipo `number` indicando el día del año correspondiente a la fecha del objeto `Dayjs`.
+- DayOfYear añade a la API `.dayOfYear()`, que devuelve un dato de tipo `number` indicando el día del año correspondiente a la fecha del objeto `Dayjs`, or to set the day of the year.
 
 ```javascript
 import dayOfYear from "dayjs/plugin/dayOfYear";
@@ -217,6 +217,7 @@ import dayOfYear from "dayjs/plugin/dayOfYear";
 dayjs.extend(dayOfYear);
 
 dayjs("2018-01-01").week(); // 1
+dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
 ```
 
 ### WeekOfYear

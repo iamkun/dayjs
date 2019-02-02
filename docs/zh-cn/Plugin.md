@@ -201,7 +201,7 @@ dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 
 ### DayOfYear
 
-- DayOfYear 增加了 `.dayOfYear()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几天。
+- DayOfYear 增加了 `.dayOfYear()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几天，或设置成是年中第几天。
 
 ```javascript
 import dayOfYear from "dayjs/plugin/dayOfYear";
@@ -209,6 +209,7 @@ import dayOfYear from "dayjs/plugin/dayOfYear";
 dayjs.extend(dayOfYear);
 
 dayjs("2010-01-01").dayOfYear(); // 1
+dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
 ```
 
 ### WeekOfYear
