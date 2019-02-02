@@ -2,9 +2,11 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'it',
-  weekdays: 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato'.split('_'),
-  months: 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'.split('_'),
-  monthsShort: 'genn_febbr_mar_apr_magg_giugno_luglio_ag_sett_ott_nov_dic'.split('_'),
+  weekdays: 'domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato'.split('_'),
+  weekdaysShort: 'dom_lun_mar_mer_gio_ven_sab'.split('_'),
+  weekdaysMin: 'do_lu_ma_me_gi_ve_sa'.split('_'),
+  months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split('_'),
+  monthsShort: 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
