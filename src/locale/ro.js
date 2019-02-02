@@ -4,6 +4,14 @@ const locale = {
   name: 'ro',
   weekdays: 'Duminică_Luni_Marți_Miercuri_Joi_Vineri_Sâmbătă'.split('_'),
   months: 'Ianuarie_Februarie_Martie_Aprilie_Mai_Iunie_Iulie_August_Septembrie_Octombrie_Noiembrie_Decembrie'.split('_'),
+  formats: {
+    LT: 'H:mm',
+    LTS: 'H:mm:ss',
+    L: 'DD.MM.YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY H:mm',
+    LLLL: 'dddd, D MMMM YYYY H:mm'
+  },
   relativeTime: {
     future: 'peste %s',
     past: 'acum %s',
