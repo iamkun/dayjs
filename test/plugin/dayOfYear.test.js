@@ -1,4 +1,5 @@
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../../src'
 import dayOfYear from '../../src/plugin/dayOfYear'
 
@@ -13,6 +14,7 @@ afterEach(() => {
 })
 
 it('DayOfYear get', () => {
+  expect(dayjs().dayOfYear()).toBe(moment().dayOfYear())
   expect(dayjs('2015-01-01T00:00:00.000').dayOfYear()).toBe(1)
   expect(dayjs('2015-01-31T00:00:00.000').dayOfYear()).toBe(31)
   expect(dayjs('2015-02-01T00:00:00.000').dayOfYear()).toBe(32)
@@ -21,6 +23,7 @@ it('DayOfYear get', () => {
 })
 
 it('DayOfYear set', () => {
+  expect(dayjs().dayOfYear(4).dayOfYear()).toBe(moment().dayOfYear(4).dayOfYear())
   expect(dayjs('2015-01-01T00:00:00.000Z')
     .dayOfYear(4)
     .dayOfYear()).toBe(4)
