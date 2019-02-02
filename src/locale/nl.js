@@ -2,9 +2,17 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'nl',
-  weekdays: 'Zondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrijdag_Zaterdag'.split('_'),
-  months: 'Januari_Februari_Maart_April_Mei_Juni_Juli_Augustus_September_Oktober_November_December'.split('_'),
+  weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
+  months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
   ordinal: n => `${n}.`,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'DD-MM-YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd D MMMM YYYY HH:mm'
+  },
   relativeTime: {
     future: 'over %s',
     past: '%s geleden',
@@ -12,13 +20,13 @@ const locale = {
     m: 'een minuut',
     mm: '%d minuten',
     h: 'een uur',
-    hh: '%d uren',
+    hh: '%d uur',
     d: 'een dag',
     dd: '%d dagen',
     M: 'een maand',
     MM: '%d maanden',
     y: 'een jaar',
-    yy: '%d jaren'
+    yy: '%d jaar'
   }
 }
 

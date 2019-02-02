@@ -72,6 +72,7 @@ describe('Parse', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
     expect(dayjs().isValid()).toBe(true)
+    expect(dayjs('').isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
@@ -80,6 +81,13 @@ describe('Parse', () => {
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
   const timestamp = 1523520536000
   expect(dayjs(timestamp).valueOf()).toBe(moment(timestamp).valueOf())
+})
+
+it('Unix Timestamp Number (seconds) 1318781876', () => {
+  const timestamp1 = 1318781876
+  const timestamp2 = 1318781876.721
+  expect(dayjs.unix(timestamp1).valueOf()).toBe(moment.unix(timestamp1).valueOf())
+  expect(dayjs.unix(timestamp2).valueOf()).toBe(moment.unix(timestamp2).valueOf())
 })
 
 it('String and Number 20180101', () => {
