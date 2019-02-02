@@ -11,6 +11,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
       - [Objeto `Date` nativo](#objeto-date-nativo)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
     - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validação `.isValid()`](#validação-isvalid)
   - [Get and Set](#get-and-set)
@@ -54,6 +55,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [IsSameOrAfter](#issameorafter)
     - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Conversões
 
@@ -93,6 +95,9 @@ Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
 
@@ -419,6 +424,12 @@ dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
 ```
 
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
+```
+
 ## Plugin APIs
 
 ### RelativeTime
@@ -456,3 +467,9 @@ plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 `.isBetween` para verificar se uma data está entre duas outras datas
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)

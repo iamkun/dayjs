@@ -5,6 +5,14 @@ const locale = {
   weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
   months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
   ordinal: n => `${n}.`,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'DD-MM-YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd D MMMM YYYY HH:mm'
+  },
   relativeTime: {
     future: 'over %s',
     past: '%s geleden',

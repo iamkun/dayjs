@@ -65,6 +65,28 @@ List of added formats:
 | `X`    | 1360013296       | Unix Timestamp in second              |
 | `x`    | 1360013296123    | Unix Timestamp in millisecond         |
 
+### LocalizedFormat
+ - LocalizedFormat extends `dayjs().format` API to supply localized format options known from Moment.js.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | English Locale            | Sample Output                     |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
 
@@ -187,6 +209,57 @@ dayjs.extend(isBetween)
 
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
 ```
+
+### QuarterOfYear
+- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date
+
+```javascript
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+
+dayjs.extend(quarterOfYear)
+
+dayjs('2010-04-01').quarter(); // 2
+```
+
+### CustomParseFormat
+ - CustomParseFormat extends `dayjs()` constructor to support custom formats of input strings.
+
+To escape characters, wrap them in square brackets (e.g. `[G]`). Punctuation symbols (-:/.()) do not need to be wrapped.
+
+```javascript
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
+
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
+// Returns an instance containing '1969-05-02T18:02:03.000Z'
+```
+
+#### List of all available format tokens
+
+| Format | Output           | Description                       |
+| ------ | ---------------- | --------------------------------- |
+| `YY`   | 18               | Two-digit year                    |
+| `YYYY` | 2018             | Four-digit year                   |
+| `M`    | 1-12             | Month, beginning at 1             |
+| `MM`   | 01-12            | Month, 2-digits                   |
+| `D`    | 1-31             | Day of month                      |
+| `DD`   | 01-31            | Day of month, 2-digits            |
+| `H`    | 0-23             | Hours                             |
+| `HH`   | 00-23            | Hours, 2-digits                   |
+| `h`    | 1-12             | Hours, 12-hour clock              |
+| `hh`   | 01-12            | Hours, 12-hour clock, 2-digits    |
+| `m`    | 0-59             | Minutes                           |
+| `mm`   | 00-59            | Minutes, 2-digits                 |
+| `s`    | 0-59             | Seconds                           |
+| `ss`   | 00-59            | Seconds, 2-digits                 |
+| `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
+| `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
+| `SSS`  | 000-999          | Milliseconds, 3-digits            |
+| `Z`    | -5:00            | Offset from UTC                   |
+| `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
+| `A`    | AM PM            | Post or ante meridiem, upper-case |
+| `a`    | am pm            | Post or ante meridiem, lower-case |
 
 ## Customize
 

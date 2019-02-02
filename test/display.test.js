@@ -169,6 +169,14 @@ describe('Difference', () => {
       expect(dayjsA.diff(dayjsC, unit, true)).toBe(momentA.diff(momentC, unit, true))
     })
   })
+
+
+  it('MonthDiff', () => {
+    expect(dayjs('2018-08-08').diff(dayjs('2018-08-08'), 'month')).toEqual(0)
+    expect(dayjs('2018-09-08').diff(dayjs('2018-08-08'), 'month')).toEqual(1)
+    expect(dayjs('2018-08-08').diff(dayjs('2018-09-08'), 'month')).toEqual(-1)
+    expect(dayjs('2018-01-01').diff(dayjs('2018-01-01'), 'month')).toEqual(0)
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
