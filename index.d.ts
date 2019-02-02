@@ -7,7 +7,11 @@ declare namespace dayjs {
 
   export type OptionType = { locale: string }
 
-  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date'
+  type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
+  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+
+  type OpUnitTypeShort = 'w'
+  export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
   interface DayjsObject {
     years: number
@@ -44,17 +48,17 @@ declare namespace dayjs {
 
     set(unit: UnitType, value: number): Dayjs
 
-    add(value: number, unit: UnitType): Dayjs
+    add(value: number, unit: OpUnitType): Dayjs
 
-    subtract(value: number, unit: UnitType): Dayjs
+    subtract(value: number, unit: OpUnitType): Dayjs
 
-    startOf(unit: UnitType): Dayjs
+    startOf(unit: OpUnitType): Dayjs
 
-    endOf(unit: UnitType): Dayjs
+    endOf(unit: OpUnitType): Dayjs
 
     format(template?: string): string
 
-    diff(dayjs: Dayjs, unit: UnitType, float?: boolean): number
+    diff(dayjs: Dayjs, unit: OpUnitType, float?: boolean): number
 
     valueOf(): number
 
@@ -74,11 +78,11 @@ declare namespace dayjs {
 
     toString(): string
 
-    isBefore(dayjs: Dayjs, unit?: UnitType): boolean
+    isBefore(dayjs: Dayjs, unit?: OpUnitType): boolean
 
-    isSame(dayjs: Dayjs, unit?: UnitType): boolean
+    isSame(dayjs: Dayjs, unit?: OpUnitType): boolean
 
-    isAfter(dayjs: Dayjs, unit?: UnitType): boolean
+    isAfter(dayjs: Dayjs, unit?: OpUnitType): boolean
 
     isLeapYear(): boolean
 

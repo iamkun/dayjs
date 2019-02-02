@@ -212,7 +212,6 @@ class Dayjs {
     return this
   }
 
-
   set(string, int) {
     return this.clone().$set(string, int)
   }
@@ -305,9 +304,16 @@ class Dayjs {
     })
   }
 
+  utcOffset() {
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
+    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
+  }
+
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
     const that = dayjs(input)
+    const zoneDelta = (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
     const diff = this - that
     let result = Utils.monthDiff(this, that)
 
@@ -315,8 +321,8 @@ class Dayjs {
       [C.Y]: result / 12,
       [C.M]: result,
       [C.Q]: result / 3,
-      [C.W]: diff / C.MILLISECONDS_A_WEEK,
-      [C.D]: diff / C.MILLISECONDS_A_DAY,
+      [C.W]: (diff - zoneDelta) / C.MILLISECONDS_A_WEEK,
+      [C.D]: (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
       [C.H]: diff / C.MILLISECONDS_A_HOUR,
       [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
       [C.S]: diff / C.MILLISECONDS_A_SECOND

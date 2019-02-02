@@ -6,9 +6,8 @@
   "types": "index.d.ts",
   "module": "./src/index.js",
   "scripts": {
-    "test": "jest",
-    "test-dst": "TZ=Pacific/Auckland npm run dst-test && TZ=Europe/London npm run dst-test && npm run dst-test",
-    "dst-test": "jest test/dst.test --coverage=false",
+    "test": "jest && TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && npm run test-tz",
+    "test-tz": "jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
