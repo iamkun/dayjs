@@ -12,7 +12,6 @@ install:
   - npm install
 script:
   - npm run lint
-  - npm run test-dst
   - npm test
   - codecov
 after_success:
