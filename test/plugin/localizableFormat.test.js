@@ -3,9 +3,9 @@ import moment from 'moment'
 import dayjs from '../../src'
 import es from '../../src/locale/es'
 import ar from '../../src/locale/ar'
-import localizableFormat from '../../src/plugin/localizableFormat'
+import localizedFormat from '../../src/plugin/localizedFormat'
 
-dayjs.extend(localizableFormat)
+dayjs.extend(localizedFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -15,14 +15,14 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Declares English localizable formats', () => {
+it('Declares English localized formats', () => {
   expect(dayjs.en).toBeDefined()
   expect(dayjs.en.formats).toBeDefined();
   ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
     expect(dayjs.en.formats[option]).toBeDefined())
 })
 
-it('Recognizes localizable format options', () => {
+it('Recognizes localized format options', () => {
   const { formats } = dayjs.en
   const date = dayjs();
   ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
