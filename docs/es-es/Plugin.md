@@ -67,6 +67,28 @@ Lista de formatos añadidos:
 | `X`     | 1360013296    | Tiempo Unix en segundos               |
 | `x`     | 1360013296123 | Tiempo Unix en milisegundos           |
 
+### LocalizedFormat
+ - LocalizedFormat extends `dayjs().format` API to supply localized format options.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | English Locale            | Sample Output                     |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
 
 - RelativeTime añade las API `.from` `.to` `.fromNow` `.toNow` para dar formato de tiempo relativo a fechas (p.ej.: hace 3 horas).

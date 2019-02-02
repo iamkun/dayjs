@@ -65,6 +65,28 @@ dayjs().format('Q Do k kk X x')
 | `X`    | 1360013296       | 秒为单位的Unix时间戳                  |
 | `x`    | 1360013296123    | 毫秒单位的Unix时间戳                  |
 
+### LocalizedFormat
+ - LocalizedFormat 扩展了 `dayjs().format` API 以支持更多本地化的长日期格式.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+扩展的模版列表:
+
+| 模版    | 格式                      | 输出                             |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime 增加了 `.from` `.to` `.fromNow` `.toNow` 4个 API 来展示相对的时间 (e.g. 3 小时以前).
 
@@ -124,9 +146,9 @@ dayjs.extend(isLeapYear)
 dayjs('2000-01-01').isLeapYear(); // true
 ```
 
-### 佛历
+### BuddhistEra
 - BuddhistEra 扩展了 `dayjs().format` API 以支持佛历格式化.
-- 佛教时代是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合（[Wikipedia]（https：//en.wikipedia.org/wiki/Buddhist_calendar））
+- 佛历是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合（[Wikipedia]（https：//en.wikipedia.org/wiki/Buddhist_calendar））
 - 要计算BE年，只需在年份中添加543。 例如，1977年5月26日AD / CE应显示为2520年5月26日BE（1977 + 543）
 
 ```javascript
@@ -143,17 +165,6 @@ List of added formats:
 | ------ | ---------------- | ------------------------------------- |
 | `BBBB` | 2561             | Full BE Year (Year + 543)             |
 | `BB`   | 61               | 2-digit of BE Year                    |
-
-### WeekOfYear
- - WeekOfYear 增加了 `.week()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几周.
-
-```javascript
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-
-dayjs.extend(weekOfYear)
-
-dayjs('06/27/2018').week() // 26
-```
 
 ### IsSameOrAfter
  - IsSameOrAfter 增加了 `.isSameOrAfter()` API 返回一个 `boolean` 来展示一个时间是否和一个时间相同或在一个时间之后.
@@ -186,6 +197,29 @@ import isBetween from 'dayjs/plugin/isBetween'
 dayjs.extend(isBetween)
 
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
+```
+
+### DayOfYear
+
+- DayOfYear 增加了 `.dayOfYear()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几天。
+
+```javascript
+import dayOfYear from "dayjs/plugin/dayOfYear";
+
+dayjs.extend(dayOfYear);
+
+dayjs("2010-01-01").dayOfYear(); // 1
+```
+
+### WeekOfYear
+ - WeekOfYear 增加了 `.week()` API 返回一个 `number` 来表示 `Dayjs` 的日期是年中第几周.
+
+```javascript
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
+
+dayjs('06/27/2018').week() // 26
 ```
 
 ### QuarterOfYear
