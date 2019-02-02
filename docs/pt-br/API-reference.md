@@ -36,6 +36,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`](#diferença-diffcompared-dayjs-unit-string-padrão-milliseconds-float-boolean)
     - [Unix Timestamp (milissegundos) `.valueOf()`](#unix-timestamp-milissegundos-valueof)
     - [Unix Timestamp (segundos) `.unix()`](#unix-timestamp-segundos-unix)
+    - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Dias no Mês `.daysInMonth()`](#dias-no-mês-daysinmonth)
     - [Como objeto `Date` do Javascript `.toDate()`](#como-objeto-date-do-javascript-todate)
     - [Como Array `.toArray()`](#como-array-toarray)
@@ -292,7 +293,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `A`     | AM PM            |                                               |
 | `a`     | am pm            |                                               |
 
-* Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`
 
@@ -321,6 +323,14 @@ Retorna um `number` em segundos desde a Unix Epoch para o objeto `Dayjs`.
 
 ```js
 dayjs('2019-01-25').unix(); // 1548381600
+```
+
+### UTC Offset (minutes) `.utcOffset()`
+
+Returns the UTC offset in minutes for the `Dayjs`.
+
+```js
+dayjs().utcOffset();
 ```
 
 ### Dias no Mês `.daysInMonth()`

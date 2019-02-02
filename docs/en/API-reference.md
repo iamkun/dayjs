@@ -334,7 +334,7 @@ dayjs("2019-01-25").unix(); // 1548381600
 Returns the UTC offset in minutes for the `Dayjs`.
 
 ```js
-dayjs("2013-03-07T07:00:00+08:00").utcOffset(); // 60
+dayjs().utcOffset();
 ```
 
 ### Days in the Month `.daysInMonth()`

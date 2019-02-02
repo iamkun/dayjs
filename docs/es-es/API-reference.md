@@ -297,7 +297,8 @@ dayjs("2019-01-25").format("DD/MM/YYYY"); // '25/01/2019'
 | `A`     | AM PM            |                                          |
 | `a`     | am pm            |                                          |
 
-\* Más formatos disponibles `Q Do k kk X x ...` con el complemento [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Más formatos disponibles `Q Do k kk X x ...` con el complemento [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### Diferencia `.diff(compared: Dayjs, unit: string (predeterminada: 'milliseconds'), float?: boolean)`
 
@@ -333,7 +334,7 @@ dayjs("2019-01-25").unix(); // 1548381600
 Devuelve el UTC offset en minutos del `Dayjs`.
 
 ```js
-dayjs("2013-03-07T07:00:00+08:00").utcOffset(); // 60
+dayjs().utcOffset();
 ```
 
 ### Días en el mes `.daysInMonth()`
