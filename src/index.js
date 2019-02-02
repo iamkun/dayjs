@@ -272,34 +272,36 @@ class Dayjs {
       return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
     }
 
+    const matches = {
+      YY: String(this.$y).slice(-2),
+      YYYY: String(this.$y),
+      M: String(this.$M + 1),
+      MM: Utils.padStart(this.$M + 1, 2, '0'),
+      MMM: getShort(locale.monthsShort, this.$M, months, 3),
+      MMMM: months[this.$M],
+      D: String(this.$D),
+      DD: Utils.padStart(this.$D, 2, '0'),
+      d: String(this.$W),
+      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
+      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
+      dddd: weekdays[this.$W],
+      H: String(this.$H),
+      HH: Utils.padStart(this.$H, 2, '0'),
+      h: get$H('h'),
+      hh: get$H('hh'),
+      a: this.$H < 12 ? 'am' : 'pm',
+      A: this.$H < 12 ? 'AM' : 'PM',
+      m: String(this.$m),
+      mm: Utils.padStart(this.$m, 2, '0'),
+      s: String(this.$s),
+      ss: Utils.padStart(this.$s, 2, '0'),
+      SSS: Utils.padStart(this.$ms, 3, '0'),
+      Z: zoneStr
+    }
+
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
-      return {
-        YY: String(this.$y).slice(-2),
-        YYYY: String(this.$y),
-        M: String(this.$M + 1),
-        MM: Utils.padStart(this.$M + 1, 2, '0'),
-        MMM: getShort(locale.monthsShort, this.$M, months, 3),
-        MMMM: months[this.$M],
-        D: String(this.$D),
-        DD: Utils.padStart(this.$D, 2, '0'),
-        d: String(this.$W),
-        dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
-        ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
-        dddd: weekdays[this.$W],
-        H: String(this.$H),
-        HH: Utils.padStart(this.$H, 2, '0'),
-        h: get$H(match),
-        hh: get$H(match),
-        a: this.$H < 12 ? 'am' : 'pm',
-        A: this.$H < 12 ? 'AM' : 'PM',
-        m: String(this.$m),
-        mm: Utils.padStart(this.$m, 2, '0'),
-        s: String(this.$s),
-        ss: Utils.padStart(this.$s, 2, '0'),
-        SSS: Utils.padStart(this.$ms, 3, '0'),
-        Z: zoneStr
-      }[match] || zoneStr.replace(':', '') // 'ZZ'
+      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
     })
   }
 
