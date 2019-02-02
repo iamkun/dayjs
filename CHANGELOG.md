@@ -3,12 +3,18 @@
 
 ### Bug Fixes
 
-*  Add missing czech language locale ([#461](https://github.com/iamkun/dayjs/issues/461)) ([7e04004](https://github.com/iamkun/dayjs/commit/7e04004))
-* add deltaZone in the equation when calculating diff and added utcOffset api method ([#453](https://github.com/iamkun/dayjs/issues/453)) ([ce2e30e](https://github.com/iamkun/dayjs/commit/ce2e30e))
-* fix it locale error ([#458](https://github.com/iamkun/dayjs/issues/458)) ([f6d9a64](https://github.com/iamkun/dayjs/commit/f6d9a64))
+* Add missing czech language locale ([#461](https://github.com/iamkun/dayjs/issues/461)) ([7e04004](https://github.com/iamkun/dayjs/commit/7e04004))
+* Add utcOffset api method and fix calculating diff error in DST ([#453](https://github.com/iamkun/dayjs/issues/453)) ([ce2e30e](https://github.com/iamkun/dayjs/commit/ce2e30e))
+* Fix it locale error ([#458](https://github.com/iamkun/dayjs/issues/458)) ([f6d9a64](https://github.com/iamkun/dayjs/commit/f6d9a64))
+* Add DayOfYear plugin (#454)
+* Fix es locale monthsShort error
 
 ## [1.8.1](https://github.com/iamkun/dayjs/compare/v1.8.0...v1.8.1) (2019-02-02)
 
+* Add LocalizedFormat plugin supplying format like LTS, LT, LLLL 
+* update declaration File with default export (#278)
+> From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`
+* add ES2015 module support (#451)
 
 ### Performance Improvements
 
