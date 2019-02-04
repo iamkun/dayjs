@@ -11,6 +11,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
     - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone-dayjsoriginal--dayjs)
     - [Validation `.isValid()`](#validation-isvalid)
   - [Get and Set](#get-and-set)
@@ -34,6 +35,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`](#difference-diffcompared--dayjs--unit--string-default--milliseconds--float--boolean)
     - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
     - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
+    - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
     - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
     - [As Array `.toArray()`](#as-array-toarray)
@@ -42,15 +44,18 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [As Object `.toObject()`](#as-object-toobject)
     - [As String `.toString()`](#as-string-tostring)
   - [Query](#query)
-    - [Is Before `.isBefore(compared: Dayjs)`](#is-before-isbeforecompared--dayjs)
-    - [Is Same `.isSame(compared: Dayjs)`](#is-same-issamecompared--dayjs)
-    - [Is After `.isAfter(compared: Dayjs)`](#is-after-isaftercompared--dayjs)
+    - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared--dayjs-unit-string)
+    - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared--dayjs-unit-string)
+    - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared--dayjs-unit-string)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Parsing
 
@@ -92,6 +97,9 @@ Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clone `.clone() | dayjs(original: Dayjs)`
 
@@ -286,7 +294,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |
 
-* 플러그인 [`AdvancedFormat`](./Plugin.md#advancedformat) 을 사용하면 더 많은 형식(`Q Do k kk X x ...`)을 사용할 수 있습니다.
+- 플러그인 [`AdvancedFormat`](./Plugin.md#advancedformat) 을 사용하면 더 많은 형식(`Q Do k kk X x ...`)을 사용할 수 있습니다.
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
 
@@ -315,6 +324,14 @@ dayjs('2019-01-25').valueOf(); // 1548381600000
 
 ```js
 dayjs('2019-01-25').unix(); // 1548381600
+```
+
+### UTC Offset (minutes) `.utcOffset()`
+
+Returns the UTC offset in minutes for the `Dayjs`.
+
+```js
+dayjs().utcOffset();
 ```
 
 ### Days in the Month `.daysInMonth()`
@@ -382,28 +399,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Query
 
-### Is Before `.isBefore(compared: Dayjs)`
+### Is Before `.isBefore(compared: Dayjs, unit?: string)`
 
 `Dayjs`가 다른 `Dayjs`보다 앞선 시점인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Is Same `.isSame(compared: Dayjs)`
+### Is Same `.isSame(compared: Dayjs, unit?: string)`
 
 `Dayjs`가 다른 `Dayjs`과 동일한 시점인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
 ```js
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Is After `.isAfter(compared: Dayjs)`
+### Is After `.isAfter(compared: Dayjs, unit?: string)`
 
 `Dayjs`가 다른 `Dayjs`보다 뒷선 시점인지를 확인합니다. 반환 타입은 `boolean` 입니다.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### Is a Dayjs `.isDayjs(compared: any)`
@@ -413,6 +433,12 @@ Returns a `boolean` indicating whether a variable is a dayjs object or not.
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
 ```
 
 ## Plugin APIs
@@ -435,8 +461,27 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
 ### IsBetween
 
 `.isBetween` to check if a date is between two other dates
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+

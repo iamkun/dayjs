@@ -10,6 +10,7 @@
   * [Date 对象](#date-对象)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒)
   * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  * [自定义时间格式](#自定义时间格式)
   * [复制](#复制)
   * [验证](#验证)
 * [获取+设置](#获取设置)
@@ -32,6 +33,7 @@
   * [时间差](#时间差)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒-1)
   * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  - [UTC 偏移量 (分)](#utc-偏移量-分)
   * [天数 (月)](#天数-月)
   * [Date 对象](#date-对象-1)
   * [数组](#数组)
@@ -48,7 +50,10 @@
   * [相对时间](#relativetime)
   * [是否是闰年](#是否是闰年)
   * [年中的第几周](#年中的第几周)
-  * [是否之间](#isbetween)
+  * [是否相同或之后](#是否相同或之后)
+  * [是否相同或之前](#是否相同或之前)
+  * [是否之间](#是否之间)
+  * [年中第几季度](#年中第几季度)
 
 ---
 如果没有特别说明，Day.js 的返回值都是新的 `Dayjs` 对象。
@@ -86,6 +91,9 @@ dayjs(1318781876406);
 dayjs.unix(Number);
 dayjs.unix(1318781876);
 ```
+
+### 自定义时间格式
+* 解析自定义时间格式如 `dayjs("12-25-1995", "MM-DD-YYYY")` 可以使用插件 [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### 复制
 `Dayjs` 对象是不可变的，如果您想获得一个对象的拷贝，请执行 `.clone()`。
@@ -255,7 +263,8 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
 
-* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
+- 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
+- 本地化的长日期格式 `L LT LTS ...` 可以使用插件 [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 #### 时间差
 - return Number
@@ -283,6 +292,15 @@ dayjs().valueOf();
 ```js
 dayjs().unix();
 ```
+
+### UTC 偏移量 (分)
+
+返回 UTC 偏移量 (分)
+
+```js
+dayjs().utcOffset();
+```
+
 #### 天数 (月)
 - return Number
 
@@ -338,24 +356,27 @@ dayjs().toString();
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之前。
 ```js
-dayjs().isBefore(Dayjs);
+dayjs().isBefore(Dayjs, unit? : String);
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 #### 是否相同
 - return Boolean
 
 检查一个 `Dayjs` 对象是否和另一个 `Dayjs` 对象时间相同。
 ```js
-dayjs().isSame(Dayjs);
+dayjs().isSame(Dayjs, unit? : String);
 dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 #### 是否之后
 - return Boolean
 
 检查一个 `Dayjs` 对象是否在另一个 `Dayjs` 对象时间之后。
 ```js
-dayjs().isAfter(Dayjs);
+dayjs().isAfter(Dayjs, unit? : String);
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### 是否是 Dayjs `.isDayjs(compared: any)`
@@ -365,6 +386,12 @@ dayjs().isAfter(dayjs()); // false
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+也可以使用 `instanceof` 
+
+```js
+dayjs() instanceof dayjs // true
 ```
 
 ## 插件 APIs
@@ -387,8 +414,26 @@ dayjs.isDayjs(new Date()); // false
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### 是否相同或之后
+
+`.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### 是否相同或之前
+
+`.isSameOrBefore` 返回一个时间是否和一个时间相同或在一个时间之前
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
 ### 是否之间
 
 `.isBetween` 返回一个时间是否介于两个时间之间
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### 年中第几季度
+
+`.quarter` 返回年中第几季度
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
