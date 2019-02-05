@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import '../src/locale/zh-cn'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -27,6 +28,10 @@ describe('StartOf EndOf', () => {
   it('StartOf EndOf Other -> no change', () => {
     expect(dayjs().startOf('otherString').valueOf()).toBe(moment().startOf('otherString').valueOf())
     expect(dayjs().endOf('otherString').valueOf()).toBe(moment().endOf('otherString').valueOf())
+  })
+
+  it('StartOf week with locale', () => {
+    expect(dayjs().locale('zh-cn').startOf('week').format()).toBe(moment().locale('zh-cn').startOf('week').format())
   })
 })
 

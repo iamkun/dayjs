@@ -172,8 +172,7 @@ class Dayjs {
         return isStartOf ? instanceFactory(1, this.$M) :
           instanceFactory(0, this.$M + 1)
       case C.W: {
-        const l = this.$locale()
-        const weekStart = l && l.weekStart === 1 ? 1 : 0
+        const weekStart = this.$locale().weekStart || 0
         return isStartOf ? instanceFactory(this.$D - (this.$W - weekStart), this.$M) :
           instanceFactory(this.$D + (6 - (this.$W - weekStart)), this.$M)
       }
