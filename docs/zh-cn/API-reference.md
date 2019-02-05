@@ -213,7 +213,7 @@ dayjs().subtract(7, 'year');
 返回当前时间的开头时间的 `Dayjs()` 对象，如月份的第一天。
 ```js
 dayjs().startOf(unit : String);
-dayjs().startOf('year');
+dayjs().startOf('week'); // 取决于 locale 文件里 `weekStart` 的值
 ```
 #### 末尾时间
 返回当前时间的末尾时间的 `Dayjs()` 对象，如月份的最后一天。
