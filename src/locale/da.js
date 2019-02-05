@@ -4,6 +4,7 @@ const locale = {
   name: 'da',
   weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
   months: 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'.split('_'),
+  weekStart: 1,
   ordinal: n => `${n}.`,
   formats: {
     LT: 'HH:mm',

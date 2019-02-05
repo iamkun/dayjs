@@ -8,6 +8,7 @@ const locale = {
   months: 'jaanuar_veebruar_märts_aprill_mai_juuni_juuli_august_september_oktoober_november_detsember'.split('_'), // Note month names are not capitalized in Estonian
   monthsShort: 'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split('_'),
   ordinal: n => `${n}.`,
+  weekStart: 1,
   /*
    * This relativeTime is currently configured for having proper past
    * tense forms since Estonian needs a separate version for future tense

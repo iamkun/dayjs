@@ -4,6 +4,7 @@ const locale = {
   name: 'sv',
   weekdays: 'söndag_måndag_tisdag_onsdag_torsdag_fredag_lördag'.split('_'),
   months: 'januari_februari_mars_april_maj_juni_juli_augusti_september_oktober_november_december'.split('_'),
+  weekStart: 1,
   ordinal: (n) => {
     const b = n % 10
     const o = (b === 1) || (b === 2) ? 'a' : 'e'

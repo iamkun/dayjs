@@ -4,6 +4,7 @@ const locale = {
   name: 'ro',
   weekdays: 'Duminică_Luni_Marți_Miercuri_Joi_Vineri_Sâmbătă'.split('_'),
   months: 'Ianuarie_Februarie_Martie_Aprilie_Mai_Iunie_Iulie_August_Septembrie_Octombrie_Noiembrie_Decembrie'.split('_'),
+  weekStart: 1,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',

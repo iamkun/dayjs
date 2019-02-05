@@ -6,6 +6,7 @@ const locale = {
   weekdaysShort: 'dom_lun_mar_mer_gio_ven_sab'.split('_'),
   weekdaysMin: 'do_lu_ma_me_gi_ve_sa'.split('_'),
   months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split('_'),
+  weekStart: 1,
   monthsShort: 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
   formats: {
     LT: 'HH:mm',
