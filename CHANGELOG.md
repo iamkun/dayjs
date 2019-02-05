@@ -1,12 +1,10 @@
 ## [1.8.4](https://github.com/iamkun/dayjs/compare/v1.8.3...v1.8.4) (2019-02-05)
 
-
-### Bug Fixes
-
 * Allow set start day of week in locale && Allow set week in weekOfYear plugin ([1295591](https://github.com/iamkun/dayjs/commit/1295591))
-* Revert default export ([b00da1b](https://github.com/iamkun/dayjs/commit/b00da1b))
+### Bug Fixes
 * update all locale files with correct week start ([5b03412](https://github.com/iamkun/dayjs/commit/5b03412))
 * update es es-do locale adding weekStart && update weekStart test ([66e42ec](https://github.com/iamkun/dayjs/commit/66e42ec))
+* Revert default export ([b00da1b](https://github.com/iamkun/dayjs/commit/b00da1b))
 
 ## [1.8.3](https://github.com/iamkun/dayjs/compare/v1.8.2...v1.8.3) (2019-02-04)
 
@@ -29,8 +27,9 @@
 ## [1.8.1](https://github.com/iamkun/dayjs/compare/v1.8.0...v1.8.1) (2019-02-02)
 
 * Add LocalizedFormat plugin supplying format like LTS, LT, LLLL 
-* update declaration File with default export (#278)
-> From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`
+
+* <del>update declaration File with default export (#278)</del>
+> <del>From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`</del>
 * add ES2015 module support (#451)
 
 ### Performance Improvements
