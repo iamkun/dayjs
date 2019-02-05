@@ -21,12 +21,16 @@ describe('Parse', () => {
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-04-24'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-04-24 11:12'
+    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
     d = '2018-05-02 11:12:13'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13.998'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-4-1'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
+    d = '2018-4-1 11:12'
+    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
     d = '2018-4-1 1:1:1:223'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
     d = '2018-01'
@@ -46,6 +50,7 @@ describe('Parse', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
     expect(dayjs().isValid()).toBe(true)
+    expect(dayjs('').isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })

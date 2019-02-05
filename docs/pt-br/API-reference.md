@@ -11,6 +11,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
       - [Objeto `Date` nativo](#objeto-date-nativo)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
     - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
     - [Clonar `.clone() | dayjs(original: Dayjs)`](#clonar-clone--dayjsoriginal-dayjs)
     - [Validação `.isValid()`](#validação-isvalid)
   - [Get and Set](#get-and-set)
@@ -35,6 +36,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`](#diferença-diffcompared-dayjs-unit-string-padrão-milliseconds-float-boolean)
     - [Unix Timestamp (milissegundos) `.valueOf()`](#unix-timestamp-milissegundos-valueof)
     - [Unix Timestamp (segundos) `.unix()`](#unix-timestamp-segundos-unix)
+    - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Dias no Mês `.daysInMonth()`](#dias-no-mês-daysinmonth)
     - [Como objeto `Date` do Javascript `.toDate()`](#como-objeto-date-do-javascript-todate)
     - [Como Array `.toArray()`](#como-array-toarray)
@@ -43,15 +45,18 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Como Objeto `.toObject()`](#como-objeto-toobject)
     - [Como String `.toString()`](#como-string-tostring)
   - [Consulta](#consulta)
-    - [Antes `.isBefore(compared: Dayjs)`](#antes-isbeforecompared-dayjs)
-    - [Igual `.isSame(compared: Dayjs)`](#igual-issamecompared-dayjs)
-    - [Depois `.isAfter(compared: Dayjs)`](#depois-isaftercompared-dayjs)
+    - [Antes `.isBefore(compared: Dayjs, unit?: string)`](#antes-isbeforecompared-dayjs-unit-string)
+    - [Igual `.isSame(compared: Dayjs, unit?: string)`](#igual-issamecompared-dayjs-unit-string)
+    - [Depois `.isAfter(compared: Dayjs, unit?: string)`](#depois-isaftercompared-dayjs-unit-string)
     - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
     - [WeekOfYear](#weekofyear)
+    - [IsSameOrAfter](#issameorafter)
+    - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
+    - [QuarterOfYear](#quarterofyear)
 
 ## Conversões
 
@@ -91,6 +96,9 @@ Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 dayjs.unix(1318781876);
 dayjs.unix(1318781876.721);
 ```
+
+### Custom Parse Format
+* parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
 
 ### Clonar `.clone() | dayjs(original: Dayjs)`
 
@@ -285,7 +293,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `A`     | AM PM            |                                               |
 | `a`     | am pm            |                                               |
 
-* Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`
 
@@ -295,9 +304,9 @@ Retorna um `number` indicando a diferença entre dois objetos `Dayjs` na unidade
 const date1 = dayjs('2019-01-25');
 const date2 = dayjs('2018-06-05');
 date1.diff(date2); // 20214000000
-date1.diff(date2, 'months'); // 7
-date1.diff(date2, 'months', true); // 7.645161290322581
-date1.diff(date2, 'days'); // 233
+date1.diff(date2, 'month'); // 7
+date1.diff(date2, 'month', true); // 7.645161290322581
+date1.diff(date2, 'day'); // 233
 ```
 
 ### Unix Timestamp (milissegundos) `.valueOf()`
@@ -314,6 +323,14 @@ Retorna um `number` em segundos desde a Unix Epoch para o objeto `Dayjs`.
 
 ```js
 dayjs('2019-01-25').unix(); // 1548381600
+```
+
+### UTC Offset (minutes) `.utcOffset()`
+
+Returns the UTC offset in minutes for the `Dayjs`.
+
+```js
+dayjs().utcOffset();
 ```
 
 ### Dias no Mês `.daysInMonth()`
@@ -381,28 +398,31 @@ dayjs('2019-01-25').toString(); // 'Fri, 25 Jan 2019 02:00:00 GMT'
 
 ## Consulta
 
-### Antes `.isBefore(compared: Dayjs)`
+### Antes `.isBefore(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é antes da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isBefore(dayjs()); // false
+dayjs().isBefore(dayjs(), 'year'); // false
 ```
 
-### Igual `.isSame(compared: Dayjs)`
+### Igual `.isSame(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é a mesma data fornecida de em outro objeto `Dayjs`.
 
 ```js
-dayjs().isBefore(dayjs()); // false
+dayjs().isSame(dayjs()); // true
+dayjs().isSame(dayjs(), 'year'); // true
 ```
 
-### Depois `.isAfter(compared: Dayjs)`
+### Depois `.isAfter(compared: Dayjs, unit?: string)`]
 
 Retorna um `boolean` indicando se a data do objeto `Dayjs` é depois da data fornecida de em outro objeto `Dayjs`.
 
 ```js
 dayjs().isAfter(dayjs()); // false
+dayjs().isAfter(dayjs(), 'year'); // false
 ```
 
 ### É um objeto `Dayjs` `.isDayjs()`
@@ -412,6 +432,12 @@ Retorna um `boolean` indicando se a variável é um objeto `Dayjs` ou não.
 ```js
 dayjs.isDayjs(dayjs()); // true
 dayjs.isDayjs(new Date()); // false
+```
+
+The operator `instanceof` works equally well:
+
+```js
+dayjs() instanceof dayjs // true
 ```
 
 ## Plugin APIs
@@ -434,8 +460,26 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsSameOrAfter
+
+`.isSameOrAfter` to check if a date is same of after another date
+
+plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+
+### IsSameOrBefore
+
+`.isSameOrBefore` to check if a date is same of before another date.
+
+plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
 ### IsBetween
 
 `.isBetween` para verificar se uma data está entre duas outras datas
 
 plugin [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter` to get quarter of the year
+
+plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
