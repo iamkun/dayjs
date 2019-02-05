@@ -4,6 +4,7 @@ const locale = {
   name: 'sk',
   weekdays: 'Nedeľa_Pondelok_Utorok_Streda_Štvrtok_Piatok_Sobota'.split('_'),
   months: 'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split('_'),
+  weekStart: 1,
   relativeTime: {
     future: 'o %s',
     past: 'pred %s',

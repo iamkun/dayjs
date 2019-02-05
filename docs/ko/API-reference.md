@@ -238,7 +238,7 @@ dayjs().subtract(7, 'year');
 특정 시간 단위의 시작 시점에 대한 시간을 `Dayjs` 오브젝트 복제본으로 반환합니다.
 
 ```js
-dayjs().startOf('week');
+dayjs().startOf('week'); // Depends on `weekStart` in locale
 ```
 
 ### End of Time `.endOf(unit: string)`

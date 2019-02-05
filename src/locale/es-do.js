@@ -7,6 +7,7 @@ const locale = {
   weekdaysMin: 'do_lu_ma_mi_ju_vi_sá'.split('_'),
   months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
   monthsShort: 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
+  weekStart: 1,
   relativeTime: {
     future: 'en %s',
     past: 'hace %s',

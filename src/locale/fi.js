@@ -8,6 +8,7 @@ const locale = {
   months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'), // Note month names are not capitalized in Finnish
   monthsShort: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'), // There is no short form of months in Finnish so just use the regular long form always
   ordinal: n => `${n}.`,
+  weekStart: 1,
   /*
    * This relativeTime is currently configured for having proper past
    * tense forms since Finnish needs a separate version for future tense
