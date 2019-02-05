@@ -40,14 +40,9 @@
       {
         "path": "@semantic-release/changelog"
       },
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "CHANGELOG.md"
-          ]
-        }
-      ]
+      ["@semantic-release/git", {
+        "assets": ["CHANGELOG.md"]
+      }]
     ]
   },
   "keywords": [
