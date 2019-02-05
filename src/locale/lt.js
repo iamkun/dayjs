@@ -5,6 +5,7 @@ const locale = {
   weekdays: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_'),
   months: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_'),
   ordinal: n => `${n}.`,
+  weekStart: 1,
   relativeTime: {
     future: 'už %s',
     past: 'prieš %s',
