@@ -1,6 +1,5 @@
-
+export = dayjs;
 declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
-export default dayjs
 
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
