@@ -23,7 +23,8 @@ it('Locale keys', () => {
       relativeTime,
       weekdaysShort,
       monthsShort,
-      weekdaysMin
+      weekdaysMin,
+      weekStart
     } = l
     expect(name).toEqual(expect.any(String))
     expect(weekdays).toEqual(expect.any(Array))
@@ -31,6 +32,7 @@ it('Locale keys', () => {
     if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
     if (monthsShort) expect(monthsShort).toEqual(expect.any(Array))
     if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array))
+    if (weekStart) expect(weekStart).toEqual(expect.any(Number))
 
     expect(months).toEqual(expect.any(Array))
     // function pass date return string or number or null
