@@ -7,6 +7,14 @@ const locale = {
   weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
   months: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
   monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
+  formats: {
+    LT: 'H:mm',
+    LTS: 'H:mm:ss',
+    L: 'DD.MM.YYYY',
+    LL: 'D MMMM YYYY г.',
+    LLL: 'D MMMM YYYY г., H:mm',
+    LLLL: 'dddd, D MMMM YYYY г., H:mm'
+  },
   relativeTime: {
     future: 'через %s',
     past: '%s назад',

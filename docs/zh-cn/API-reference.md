@@ -33,6 +33,7 @@
   * [时间差](#时间差)
   * [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒-1)
   * [Unix 时间戳 (秒)](#unix-时间戳-秒)
+  - [UTC 偏移量 (分)](#utc-偏移量-分)
   * [天数 (月)](#天数-月)
   * [Date 对象](#date-对象-1)
   * [数组](#数组)
@@ -262,7 +263,8 @@ dayjs().format("{YYYY} MM-DDTHH:mm:ssZ[Z]"); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
 
-* 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
+- 更多格式化的选项 `Q Do k kk X x ...` 可以使用插件 [`AdvancedFormat`](./Plugin.md#advancedformat)
+- 本地化的长日期格式 `L LT LTS ...` 可以使用插件 [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 #### 时间差
 - return Number
@@ -290,6 +292,15 @@ dayjs().valueOf();
 ```js
 dayjs().unix();
 ```
+
+### UTC 偏移量 (分)
+
+返回 UTC 偏移量 (分)
+
+```js
+dayjs().utcOffset();
+```
+
 #### 天数 (月)
 - return Number
 

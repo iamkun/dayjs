@@ -33,6 +33,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   * [Difference](#difference)
   * [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
   * [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+  * [UTC offset (minutes)](#utc-offset-minutes-utcoffset)
   * [Days in Month](#days-in-month)
   * [As Javascript Date](#as-javascript-date)
   * [As Array](#as-array)
@@ -339,7 +340,8 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]'); // "{2014} 09-08T08:02:17-05:00Z"
 | `A`    | AM PM            | 午前と午後 (大文字)                                      |
 | `a`    | am pm            | 午前と午後 (小文字)                                      |
 
-* plugin [`AdvancedFormat`](./Plugin.md#advancedformat) にはより多くのフォーマット（例： `Q Do k kk X x ...` ）が存在します。
+- plugin [`AdvancedFormat`](./Plugin.md#advancedformat) にはより多くのフォーマット（例： `Q Do k kk X x ...` ）が存在します。
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 #### Difference
 
@@ -374,6 +376,14 @@ Unix タイムスタンプ (Unix エポックからの秒数) を出力します
 
 ```js
 dayjs().unix();
+```
+
+### UTC Offset (minutes)
+
+Returns the UTC offset in minutes for the `Dayjs`.
+
+```js
+dayjs().utcOffset();
 ```
 
 #### Days in Month

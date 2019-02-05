@@ -66,6 +66,28 @@ dayjs().format('Q Do k kk X x')
 | `X`    | 1360013296       | Unix タイムスタンプ (秒)              |
 | `x`    | 1360013296123    | Unix タイムスタンプ (ミリ秒)         |
 
+### LocalizedFormat
+ - LocalizedFormat extends `dayjs().format` API to supply localized format options.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | English Locale            | Sample Output                     |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime は日付を文字列で表現された相対的な時刻(例： 3 hours ago)にフォーマットする `.from` `.to` `.fromNow` `.toNow` APIを追加します。
 
@@ -154,16 +176,6 @@ dayjs().format('BBBB BB')
 | `BBBB`    | 2561 | 完全な仏暦 (年 + 543) |
 | `BB`      | 61   | 2桁の仏暦            |
 
-### WeekOfYear
- - WeekOfYear はある `Dayjs` オブジェクトがその年の何週目であるかを `Number` で返す `.week()` APIを追加します。
-
-```javascript
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-
-dayjs.extend(weekOfYear)
-
-dayjs('06/27/2018').week() // 26
-```
 ### IsSameOrAfter
  - IsSameOrAfter はある日付が別の日付と同じまたはそれ以降であるかどうかを `Boolean` で返す `.isSameOrAfter()` APIを追加します。
 
@@ -195,6 +207,29 @@ import isBetween from 'dayjs/plugin/isBetween'
 dayjs.extend(isBetween)
 
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
+```
+### DayOfYear
+
+- DayOfYear adds `.dayOfYear()` API to returns a `number` indicating the `Dayjs`'s day of the year, or to set the day of the year.
+
+```javascript
+import dayOfYear from "dayjs/plugin/dayOfYear";
+
+dayjs.extend(dayOfYear);
+
+dayjs("2010-01-01").dayOfYear(); // 1
+dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
+```
+
+### WeekOfYear
+ - WeekOfYear はある `Dayjs` オブジェクトがその年の何週目であるかを `Number` で返す `.week()` APIを追加します。
+
+```javascript
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
+
+dayjs('06/27/2018').week() // 26
 ```
 
 ### QuarterOfYear

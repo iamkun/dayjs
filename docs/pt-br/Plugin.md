@@ -65,6 +65,28 @@ Lista de formatos adicionados:
 | `X`     | 1360013296       | Unix Timestamp em segundos            |
 | `x`     | 1360013296123    | Unix Timestamp em milissegundos       |
 
+### LocalizedFormat
+ - LocalizedFormat extends `dayjs().format` API to supply localized format options.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | English Locale            | Sample Output                     |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
 
@@ -144,17 +166,6 @@ Lista de formatos adicionados:
 | `BBBB`  | 2561             | Full BE Year (Year + 543)             |
 | `BB`    | 61               | 2-digit of BE Year                    |
 
-### WeekOfYear
- - WeekOfYear adiciona `.week()` à API para retornar um `number` indicando um objeto `Dayjs` com a semana do ano..
-
-```javascript
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-
-dayjs.extend(weekOfYear)
-
-dayjs('06/27/2018').week() // 26
-```
-
 ### IsSameOrAfter
  - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
 
@@ -186,6 +197,29 @@ import isBetween from 'dayjs/plugin/isBetween'
 dayjs.extend(isBetween)
 
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
+```
+### DayOfYear
+
+- DayOfYear adds `.dayOfYear()` API to returns a `number` indicating the `Dayjs`'s day of the year, or to set the day of the year.
+
+```javascript
+import dayOfYear from "dayjs/plugin/dayOfYear";
+
+dayjs.extend(dayOfYear);
+
+dayjs("2010-01-01").dayOfYear(); // 1
+dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
+```
+
+### WeekOfYear
+ - WeekOfYear adiciona `.week()` à API para retornar um `number` indicando um objeto `Dayjs` com a semana do ano..
+
+```javascript
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
+
+dayjs('06/27/2018').week() // 26
 ```
 
 ### QuarterOfYear

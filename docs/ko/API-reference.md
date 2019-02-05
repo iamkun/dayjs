@@ -35,6 +35,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`](#difference-diffcompared--dayjs--unit--string-default--milliseconds--float--boolean)
     - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
     - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
+    - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
     - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
     - [As Array `.toArray()`](#as-array-toarray)
@@ -293,7 +294,8 @@ dayjs('2019-01-25').format('DD/MM/YYYY'); // '25/01/2019'
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |
 
-* 플러그인 [`AdvancedFormat`](./Plugin.md#advancedformat) 을 사용하면 더 많은 형식(`Q Do k kk X x ...`)을 사용할 수 있습니다.
+- 플러그인 [`AdvancedFormat`](./Plugin.md#advancedformat) 을 사용하면 더 많은 형식(`Q Do k kk X x ...`)을 사용할 수 있습니다.
+- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
 
@@ -322,6 +324,14 @@ dayjs('2019-01-25').valueOf(); // 1548381600000
 
 ```js
 dayjs('2019-01-25').unix(); // 1548381600
+```
+
+### UTC Offset (minutes) `.utcOffset()`
+
+Returns the UTC offset in minutes for the `Dayjs`.
+
+```js
+dayjs().utcOffset();
 ```
 
 ### Days in the Month `.daysInMonth()`

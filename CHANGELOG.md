@@ -1,3 +1,32 @@
+## [1.8.3](https://github.com/iamkun/dayjs/compare/v1.8.2...v1.8.3) (2019-02-04)
+
+
+### Bug Fixes
+
+* fix ios safari YYYY-MM-DD HH:mm parse BUG ([e02ae82](https://github.com/iamkun/dayjs/commit/e02ae82)), closes [#254](https://github.com/iamkun/dayjs/issues/254)
+
+## [1.8.2](https://github.com/iamkun/dayjs/compare/v1.8.1...v1.8.2) (2019-02-02)
+
+
+### Bug Fixes
+
+* Add missing czech language locale ([#461](https://github.com/iamkun/dayjs/issues/461)) ([7e04004](https://github.com/iamkun/dayjs/commit/7e04004))
+* Add utcOffset api method and fix calculating diff error in DST ([#453](https://github.com/iamkun/dayjs/issues/453)) ([ce2e30e](https://github.com/iamkun/dayjs/commit/ce2e30e))
+* Fix it locale error ([#458](https://github.com/iamkun/dayjs/issues/458)) ([f6d9a64](https://github.com/iamkun/dayjs/commit/f6d9a64))
+* Add DayOfYear plugin (#454)
+* Fix es locale monthsShort error
+
+## [1.8.1](https://github.com/iamkun/dayjs/compare/v1.8.0...v1.8.1) (2019-02-02)
+
+* Add LocalizedFormat plugin supplying format like LTS, LT, LLLL 
+* update declaration File with default export (#278)
+> From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`
+* add ES2015 module support (#451)
+
+### Performance Improvements
+
+* **format:** reuse matches instead of created when replacing ([#441](https://github.com/iamkun/dayjs/issues/441)) ([10b79d8](https://github.com/iamkun/dayjs/commit/10b79d8))
+
 # [1.8.0](https://github.com/iamkun/dayjs/compare/v1.7.8...v1.8.0) (2019-01-14)
 
 

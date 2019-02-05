@@ -65,6 +65,28 @@ dayjs().format('Q Do k kk X x')
 | `X`    | 1360013296       | 유닉스 타임스템프, 초                  |
 | `x`    | 1360013296123    | 유닉스 타임스탬프, 밀리 초             |
 
+### LocalizedFormat
+ - LocalizedFormat extends `dayjs().format` API to supply localized format options.
+
+```javascript
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+
+dayjs.extend(LocalizedFormat)
+
+dayjs().format('L LT')
+```
+
+List of added formats:
+
+| Format | English Locale            | Sample Output                     |
+| ------ | ------------------------- | --------------------------------- |
+| `LT`   | h:mm A                    | 8:02 PM                           |
+| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
+| `L`    | MM/DD/YYYY                | 08/16/2018                        |
+| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
+| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
+| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+
 ### RelativeTime
  - RelativeTime은 `.from`, `.to`, `.fromNow`, `.toNow` API를 추가하여 날짜를 상대 시간 문자열(예: 3 시간전) 으로 표시합니다.
 
@@ -145,17 +167,6 @@ List of added formats:
 | `BBBB` | 2561             | Full BE Year (Year + 543)             |
 | `BB`   | 61               | 2-digit of BE Year                    |
 
-### WeekOfYear
- - WeekOfYear은 `.week()` API를 추가하여 `Dayjs`의 년의 주를 `number`로 반환 합니다.
-
-```javascript
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-
-dayjs.extend(weekOfYear)
-
-dayjs('06/27/2018').week() // 26
-```
-
 ### IsSameOrAfter
  - IsSameOrAfter는 `.isSameOrAfter()` API를 추가하여 날짜가 다른 날짜와 같거나 나중일 경우 `boolean`으로 값을 반환합니다.
 
@@ -187,6 +198,30 @@ import isBetween from 'dayjs/plugin/isBetween'
 dayjs.extend(isBetween)
 
 dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
+```
+
+### DayOfYear
+
+- DayOfYear adds `.dayOfYear()` API to returns a `number` indicating the `Dayjs`'s day of the year, or to set the day of the year.
+
+```javascript
+import dayOfYear from "dayjs/plugin/dayOfYear";
+
+dayjs.extend(dayOfYear);
+
+dayjs("2010-01-01").dayOfYear(); // 1
+dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
+```
+
+### WeekOfYear
+ - WeekOfYear은 `.week()` API를 추가하여 `Dayjs`의 년의 주를 `number`로 반환 합니다.
+
+```javascript
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
+
+dayjs('06/27/2018').week() // 26
 ```
 
 ### QuarterOfYear
