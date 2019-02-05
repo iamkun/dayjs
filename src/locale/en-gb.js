@@ -30,17 +30,10 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
-  ordinal(number) {
-    const b = number % 10
-    let output = 'th'
-    if (b === 1) {
-      output = 'st'
-    } else if (b === 2) {
-      output = 'nd'
-    } else if (b === 3) {
-      output = 'rd'
-    }
-    return number + output
+  ordinal = (number) => {
+    const s = ['th', 'st', 'nd', 'rd']
+    const v = number % 100
+    return `[${number}${(s[(v - 20) % 10] || s[v] || s[0])}]`
   }
 }
 
