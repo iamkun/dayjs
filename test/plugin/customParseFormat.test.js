@@ -66,6 +66,12 @@ it('timezone with no hour', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse just hh:mm)', () => {
+  const input = '12:00'
+  const format = 'hh:mm'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('fails with an invalid format', () => {
   const input = '2018-05-02 12:00 PM'
   const format = 'C'
