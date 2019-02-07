@@ -16,6 +16,7 @@ coverage
 /locale
 /plugin
 dayjs.min.js
+/lib
 
 #dev
 demo.js
