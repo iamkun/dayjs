@@ -1,55 +1,64 @@
-export = dayjs;
-type WithReturnType<TFunction, TExtendedReturnType> = TFunction extends (...args: infer U) => infer R ? (...args: U) => R & TExtendedReturnType : TFunction;
 
-declare function dayjs(config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
+declare const dayjs: dayjs
+export default dayjs
 
-declare namespace dayjs {
-  export type ConfigType = string | number | Date | Dayjs
+export type ConfigType = string | number | Date | Dayjs
 
-  export type OptionType = { locale: string }
+export type OptionType = { locale: string }
 
   export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
-  export type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
-  export type UnitType = UnitTypeSingular | UnitTypePlural
+export type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
+export type UnitType = UnitTypeSingular | UnitTypePlural
 
   type OpUnitTypeShort = 'w'
   export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
-  interface DayjsObject {
-    years: number
-    months: number
-    date: number
-    hours: number
-    minutes: number
-    seconds: number
-    milliseconds: number
-  }
+export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
-  class Dayjs {
-    constructor (config?: ConfigType)
+export interface dayjs<TPlugin = {}> {
+  (config?: ConfigType, option?: OptionType): {} extends TPlugin ? Dayjs : Dayjs & TPlugin
 
-    clone(): Dayjs
+  extend<UPlugin extends object>(plugin: PluginFunc<UPlugin>, option?: ConfigType): dayjs<TPlugin & UPlugin>
+  locale(arg1: any, arg2?: any): string
+  isDayjs(d: any): d is Dayjs
+  unix(t: number): Dayjs
+}
 
-    isValid(): boolean
+ export interface DayjsObject {
+  years: number
+  months: number
+  date: number
+  hours: number
+  minutes: number
+  seconds: number
+  milliseconds: number
+}
 
-    year(): number
+ export class Dayjs {
+  constructor(config?: ConfigType)
 
-    month(): number
+  clone(): Dayjs
 
-    date(): number
+  isValid(): boolean
 
-    day(): number
+  year(): number
 
-    hour(): number
+  month(): number
 
-    minute(): number
+  date(): number
 
-    second(): number
+  day(): number
 
-    millisecond(): number
+  hour(): number
 
-    set(unit: UnitType, value: number): Dayjs
+  minute(): number
+
+  second(): number
+
+  millisecond(): number
+
+  set(unit: UnitType, value: number): Dayjs
 
     add(value: number, unit: OpUnitType): Dayjs
 
@@ -59,27 +68,27 @@ declare namespace dayjs {
 
     endOf(unit: OpUnitType): Dayjs
 
-    format(template?: string): string
+  format(template?: string): string
 
     diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
 
-    valueOf(): number
+  valueOf(): number
 
-    unix(): number
+  unix(): number
 
-    daysInMonth(): number
+  daysInMonth(): number
 
-    toDate(): Date
+  toDate(): Date
 
-    toArray(): number[]
+  toArray(): number[]
 
-    toJSON(): string
+  toJSON(): string
 
-    toISOString(): string
+  toISOString(): string
 
-    toObject(): DayjsObject
+  toObject(): DayjsObject
 
-    toString(): string
+  toString(): string
 
     isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
 
@@ -87,18 +96,5 @@ declare namespace dayjs {
 
     isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    locale(arg1: any, arg2?: any): Dayjs
-  }
-
-  export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
-
-  export type dayjsWithPlugin<TPlugin extends object> = WithReturnType<typeof dayjs, TPlugin>;
-
-  export function extend<TPlugin extends object>(plugin: PluginFunc<TPlugin>, option?: ConfigType): dayjsWithPlugin<TPlugin>;
-
-  export function locale(arg1: any, arg2?: any): string
-
-  export function isDayjs(d: any): d is Dayjs
-
-  export function unix(t: number): Dayjs
+  locale(arg1: any, arg2?: any): Dayjs
 }

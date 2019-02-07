@@ -81,9 +81,12 @@ dayjs().isSame(dayjs(), 'hours')
 
 dayjs().isAfter(dayjs(), 'year')
 
-
 dayjs.extend(relativeTime)().toNow()
 dayjs.extend(advancedFormat)().format()
 dayjs.extend(buddhistEra)().format()
-dayjs.extend(isLeapYear)('2000-01-01').isLeapYear();
-dayjs.extend(isBetween)('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year');
+dayjs.extend(isLeapYear)('2000-01-01').isLeapYear()
+dayjs.extend(isBetween)('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year')
+
+const multiplePluginsDayjs = dayjs.extend(relativeTime).extend(isLeapYear)()
+multiplePluginsDayjs.toNow()
+multiplePluginsDayjs.isLeapYear()
