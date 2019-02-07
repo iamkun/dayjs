@@ -127,8 +127,9 @@ const parseFormattedInput = (input, format) => {
         minutes || 0, seconds || 0, milliseconds || 0
       ) + (zone.offset * 60 * 1000))
     }
+    const now = new Date()
     return new Date(
-      year, month - 1, day,
+      year || now.getFullYear(), month - 1 || now.getMonth(), day || now.getDate(),
       hours || 0, minutes || 0, seconds || 0, milliseconds || 0
     )
   } catch (e) {

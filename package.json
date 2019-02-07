@@ -4,11 +4,12 @@
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
   "types": "index.d.ts",
-  "module": "./src/index.js",
+  "module": "./esm/index.js",
   "scripts": {
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && npm run test-tz && jest",
     "test-tz": "jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
+    "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
@@ -40,9 +41,14 @@
       {
         "path": "@semantic-release/changelog"
       },
-      ["@semantic-release/git", {
-        "assets": ["CHANGELOG.md"]
-      }]
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md"
+          ]
+        }
+      ]
     ]
   },
   "keywords": [
