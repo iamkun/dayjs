@@ -1,5 +1,7 @@
 export = dayjs;
-declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
+type WithReturnType<TFunction, TExtendedReturnType> = TFunction extends (...args: infer U) => infer R ? (...args: U) => R & TExtendedReturnType : TFunction;
+
+declare function dayjs(config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
 
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
@@ -85,14 +87,14 @@ declare namespace dayjs {
 
     isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    isLeapYear(): boolean
-
     locale(arg1: any, arg2?: any): Dayjs
   }
 
   export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
-  export function extend<TPlugin>(plugin: PluginFunc<TPlugin>, option?: ConfigType): Dayjs & TPlugin
+  export type dayjsWithPlugin<TPlugin extends object> = WithReturnType<typeof dayjs, TPlugin>;
+
+  export function extend<TPlugin extends object>(plugin: PluginFunc<TPlugin>, option?: ConfigType): dayjsWithPlugin<TPlugin>;
 
   export function locale(arg1: any, arg2?: any): string
 

@@ -2,6 +2,7 @@ import dayjs from '../src'
 import relativeTime from '../src/plugin/relativeTime'
 import advancedFormat from '../src/plugin/advancedFormat'
 import buddhistEra from '../src/plugin/buddhistEra'
+import isLeapYear from '../src/plugin/isLeapYear'
 
 dayjs()
 
@@ -79,8 +80,8 @@ dayjs().isSame(dayjs(), 'hours')
 
 dayjs().isAfter(dayjs(), 'year')
 
-dayjs('2000-01-01').isLeapYear()
 
-dayjs.extend(relativeTime).toNow()
-dayjs.extend(advancedFormat).format()
-dayjs.extend(buddhistEra).format()
+dayjs.extend(relativeTime)().toNow()
+dayjs.extend(advancedFormat)().format()
+dayjs.extend(buddhistEra)().format()
+dayjs.extend(isLeapYear)('2000-01-01').isLeapYear();
