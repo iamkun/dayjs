@@ -13,6 +13,7 @@ package-lock.json
 coverage
 
 # dev
+src
 test
 build
 .babelrc
