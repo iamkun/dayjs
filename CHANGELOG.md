@@ -1,3 +1,28 @@
+## [1.8.5](https://github.com/iamkun/dayjs/compare/v1.8.4...v1.8.5) (2019-02-07)
+
+
+### Bug Fixes
+
+* Add en-gb locale ([#478](https://github.com/iamkun/dayjs/issues/478)) ([508c3a7](https://github.com/iamkun/dayjs/commit/508c3a7))
+* **module:** transpile everything except ES6 modules in the 'module' entrypoint ([#477](https://github.com/iamkun/dayjs/issues/477)) ([#480](https://github.com/iamkun/dayjs/issues/480)) ([#482](https://github.com/iamkun/dayjs/issues/482)) ([767017d](https://github.com/iamkun/dayjs/commit/767017d))
+* update customParseFormat plugin support hh:mm ([54947cc](https://github.com/iamkun/dayjs/commit/54947cc)), closes [#484](https://github.com/iamkun/dayjs/issues/484)
+* Update module in package.json ([5c5a7a0](https://github.com/iamkun/dayjs/commit/5c5a7a0))
+
+## [1.8.4](https://github.com/iamkun/dayjs/compare/v1.8.3...v1.8.4) (2019-02-05)
+
+* Allow set start day of week in locale && Allow set week in weekOfYear plugin ([1295591](https://github.com/iamkun/dayjs/commit/1295591))
+### Bug Fixes
+* update all locale files with correct week start ([5b03412](https://github.com/iamkun/dayjs/commit/5b03412))
+* update es es-do locale adding weekStart && update weekStart test ([66e42ec](https://github.com/iamkun/dayjs/commit/66e42ec))
+* Revert default export ([b00da1b](https://github.com/iamkun/dayjs/commit/b00da1b))
+
+## [1.8.3](https://github.com/iamkun/dayjs/compare/v1.8.2...v1.8.3) (2019-02-04)
+
+
+### Bug Fixes
+
+* fix ios safari YYYY-MM-DD HH:mm parse BUG ([e02ae82](https://github.com/iamkun/dayjs/commit/e02ae82)), closes [#254](https://github.com/iamkun/dayjs/issues/254)
+
 ## [1.8.2](https://github.com/iamkun/dayjs/compare/v1.8.1...v1.8.2) (2019-02-02)
 
 
@@ -12,8 +37,9 @@
 ## [1.8.1](https://github.com/iamkun/dayjs/compare/v1.8.0...v1.8.1) (2019-02-02)
 
 * Add LocalizedFormat plugin supplying format like LTS, LT, LLLL 
-* update declaration File with default export (#278)
-> From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`
+
+* <del>update declaration File with default export (#278)</del>
+> <del>From v1.8.1, in TypeScript Project, just `import from dayjs from 'dayjs'`</del>
 * add ES2015 module support (#451)
 
 ### Performance Improvements

@@ -241,7 +241,7 @@ dayjs().subtract(7, "year");
 Devuelve un nuevo objeto `Dayjs`, resultante de ajustar el actual al principio de la unidad de tiempo indicada.
 
 ```js
-dayjs().startOf("week");
+dayjs().startOf("week"); // Depends on `weekStart` in locale
 ```
 
 ### Fin de `.endOf(unit: string)`

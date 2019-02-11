@@ -1,9 +1,10 @@
 import * as C from './constant'
 import U from './utils'
+import en from './locale/en'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
-Ls[L] = C.en
+Ls[L] = en
 
 const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
 
@@ -56,7 +57,7 @@ const parseDate = (date) => {
     // 2018-08-08 or 20180808
     return new Date(
       reg[1], reg[2] - 1, reg[3] || 1,
-      reg[5] || 0, reg[6] || 0, reg[7] || 0, reg[8] || 0
+      reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0
     )
   }
   return new Date(date) // timestamp
@@ -163,17 +164,19 @@ class Dayjs {
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }
-
+    const { $W, $M, $D } = this
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
           instanceFactory(31, 11)
       case C.M:
-        return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1)
-      case C.W:
-        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M)
+        return isStartOf ? instanceFactory(1, $M) :
+          instanceFactory(0, $M + 1)
+      case C.W: {
+        const weekStart = this.$locale().weekStart || 0
+        const gap = ($W < weekStart ? $W + 7 : $W) - weekStart
+        return instanceFactory(isStartOf ? $D - gap : $D + (6 - gap), $M)
+      }
       case C.D:
       case C.DATE:
         return instanceFactorySet('setHours', 0)

@@ -278,7 +278,7 @@ Returns a new `Dayjs` object by by setting it to the start of a unit of time.
 
 ```js
 dayjs().startOf((unit: String));
-dayjs().startOf('year');
+dayjs().startOf('week'); // Depends on `weekStart` in locale
 ```
 
 #### End of Time

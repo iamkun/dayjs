@@ -241,7 +241,7 @@ dayjs().subtract(7, "year");
 Returns a cloned `Dayjs` set to the start of the specified unit of time.
 
 ```js
-dayjs().startOf("week");
+dayjs().startOf("week"); // Depends on `weekStart` in locale
 ```
 
 ### End of Time `.endOf(unit: string)`
