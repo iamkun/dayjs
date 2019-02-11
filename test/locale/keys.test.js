@@ -36,9 +36,12 @@ it('Locale keys', () => {
 
     expect(months).toEqual(expect.any(Array))
     // function pass date return string or number or null
-    for (let i = 1; i <= 31; i += 1) {
-      expect(ordinal(i)).toEqual(expect.anything())
+    if (name !== 'en') { // en ordinal set in advancedFormat
+      for (let i = 1; i <= 31; i += 1) {
+        expect(ordinal(i)).toEqual(expect.anything())
+      }
     }
+
     expect(dayjs().locale(name).$locale().name).toBe(name)
     if (formats) {
       expect(Object.keys(formats).sort()).toEqual(['L', 'LL', 'LLL', 'LLLL', 'LT', 'LTS'].sort())
