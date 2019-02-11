@@ -32,10 +32,15 @@ describe('StartOf EndOf', () => {
   })
 
   it('StartOf week with locale', () => {
-    const testArr = ['zh-cn']
-    testArr.forEach((l) => {
-      expect(dayjs().locale(l).startOf('week').date()).toBe(moment().locale(l).startOf('week').date())
-      expect(dayjs().locale(l).endOf('week').date()).toBe(moment().locale(l).endOf('week').date())
+    const testDate = [undefined, '2019-02-10', '2019-02-11', '2019-02-12', '2019-02-13', '2019-02-14', '2019-02-15', '2019-02-16']
+    const testLocale = ['zh-cn', 'ar', 'en']
+    testDate.forEach((d) => {
+      testLocale.forEach((l) => {
+        expect(dayjs(d).locale(l).startOf('week').date())
+          .toBe(moment(d).locale(l).startOf('week').date())
+        expect(dayjs(d).locale(l).endOf('week').date())
+          .toBe(moment(d).locale(l).endOf('week').date())
+      })
     })
   })
 })
