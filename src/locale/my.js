@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'my',
+  name: 'ms',
   weekdays: 'Ahad_Isnin_Selasa_Rabu_Khamis_Jumaat_Sabtu'.split('_'),
   months: 'Januari_Februari_Mac_April_Mei_Jun_Julai_Ogos_September_Oktober_November_Disember'.split('_'),
   weekStart: 1,
