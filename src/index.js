@@ -51,7 +51,7 @@ const parseDate = (date) => {
   if (typeof date === 'string') {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, 0, 0, 0, 0)
     }
   }
 
