@@ -48,7 +48,7 @@ const parseDate = (date) => {
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.isUndefined(date)) return new Date() // today
   if (date instanceof Date) return date
-  if (typeof date === 'string' && !date.toLowerCase().endsWith('z')) {
+  if (typeof date === 'string') {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
       return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
