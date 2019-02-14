@@ -129,7 +129,7 @@ const parseFormattedInput = (input, format) => {
     }
     const now = new Date()
     return new Date(
-      year || now.getFullYear(), month - 1 || now.getMonth(), day || now.getDate(),
+      year || now.getFullYear(), month > 0 ? month - 1 : now.getMonth(), day || now.getDate(),
       hours || 0, minutes || 0, seconds || 0, milliseconds || 0
     )
   } catch (e) {
