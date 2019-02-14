@@ -14,19 +14,19 @@ const locale = {
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
   relativeTime: {
-    future: '%s در',
-    past: 'پیش %s',
+    future: 'در %s',
+    past: '%s پیش',
     s: 'چند ثانیه',
     m: 'یک دقیقه',
-    mm: 'دقیقه %d',
+    mm: '%d دقیقه',
     h: 'یک ساعت',
-    hh: 'ساعت %d',
+    hh: '%d ساعت',
     d: 'یک روز',
-    dd: 'روز %d',
+    dd: '%d روز',
     M: 'یک ماه',
-    MM: 'ماه %d',
+    MM: '%d ماه',
     y: 'یک سال',
-    yy: 'سال %d'
+    yy: '%d سال'
   }
 }
 
