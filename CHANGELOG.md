@@ -1,3 +1,16 @@
+## [1.8.6](https://github.com/iamkun/dayjs/compare/v1.8.5...v1.8.6) (2019-02-14)
+
+
+### Bug Fixes
+
+* Add Bahasa Melayu (Malaysia) locale ([#485](https://github.com/iamkun/dayjs/issues/485)) ([cb208b0](https://github.com/iamkun/dayjs/commit/cb208b0))
+* Copy & export built-in en locale to /locale folder as a separate file ([a7e05e0](https://github.com/iamkun/dayjs/commit/a7e05e0))
+* Fix bug in customParseFormat plugin while month(MM) is '01' ([9884ca5](https://github.com/iamkun/dayjs/commit/9884ca5)), closes [#494](https://github.com/iamkun/dayjs/issues/494)
+* Fix commonJS require ES Module bug in webpack4 ([23f9f3d](https://github.com/iamkun/dayjs/commit/23f9f3d))
+* Fix startOf week bug while week start is not Sunday ([5eaf77b](https://github.com/iamkun/dayjs/commit/5eaf77b))
+* Implemented isBetween inclusivity ([#464](https://github.com/iamkun/dayjs/issues/464)) ([af2f4f1](https://github.com/iamkun/dayjs/commit/af2f4f1))
+* Update Swedish and Finnish locales ([#488](https://github.com/iamkun/dayjs/issues/488)) ([f142082](https://github.com/iamkun/dayjs/commit/f142082))
+
 ## [1.8.5](https://github.com/iamkun/dayjs/compare/v1.8.4...v1.8.5) (2019-02-07)
 
 
