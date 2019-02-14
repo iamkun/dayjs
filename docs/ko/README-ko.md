@@ -24,15 +24,19 @@
 > Day.js는 Moment.js와 호환되는 대부분의 API를 사용하며, 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력하는 경량 JavaScript 라이브러리입니다. Moment.js를 사용하고 있다면, Day.js는 껌입니다.
 
 ```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+dayjs()
+  .startOf('month')
+  .add(1, 'day')
+  .set('year', 2018)
+  .format('YYYY-MM-DD HH:mm:ss')
 ```
 
-* 🕒 친숙한 Moment.js API와 패턴
-* 💪 불변 오브젝트(Immutable)
-* 🔥 메소드 체인(Chainable)
-* 🌐 I18n 지원
-* 📦 2kb 미니 라이브러리
-* 👫 모든 브라우저 지원
+- 🕒 친숙한 Moment.js API와 패턴
+- 💪 불변 오브젝트(Immutable)
+- 🔥 메소드 체인(Chainable)
+- 🌐 I18n 지원
+- 📦 2kb 미니 라이브러리
+- 👫 모든 브라우저 지원
 
 ---
 
@@ -55,7 +59,9 @@ dayjs('2018-08-08') // parse
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
 
-dayjs().set('month', 3).month() // get & set
+dayjs()
+  .set('month', 3)
+  .month() // get & set
 
 dayjs().add(1, 'year') // manipulate
 
@@ -75,7 +81,9 @@ import 'dayjs/locale/es' // load on demand
 
 dayjs.locale('es') // use Spanish locale globally
 
-dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
+dayjs('2018-05-05')
+  .locale('zh-cn')
+  .format() // use Chinese Simplified locale in a specific instance
 ```
 
 📚[I18n](./I18n.md)
@@ -96,4 +104,4 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 ## License
 
-Day.js는 [MIT  License](./LICENSE)를 사용합니다.
+Day.js는 [MIT License](./LICENSE)를 사용합니다.

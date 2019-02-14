@@ -24,15 +24,19 @@
 > Day.js é uma biblioteca JavaScript minimalista que analisa, valida, manipula e formata datas e horas para navegadores modernos, usando uma API quase completamente compatível com Moment.js. Se você já usou Moment.js, já sabe usar Day.js.
 
 ```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+dayjs()
+  .startOf('month')
+  .add(1, 'day')
+  .set('year', 2018)
+  .format('YYYY-MM-DD HH:mm:ss')
 ```
 
-* 🕒 API & padrões familiares aos do Moment.js
-* 💪 Imutável
-* 🔥 Encadeável
-* 🌐 Suporta I18n
-* 📦 Mini biblioteca de 2kb
-* 👫 Suporta todos os navegadores
+- 🕒 API & padrões familiares aos do Moment.js
+- 💪 Imutável
+- 🔥 Encadeável
+- 🌐 Suporta I18n
+- 📦 Mini biblioteca de 2kb
+- 👫 Suporta todos os navegadores
 
 ---
 
@@ -55,7 +59,9 @@ dayjs('2018-08-08') // converte
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // formata
 
-dayjs().set('month', 3).month() // get & set
+dayjs()
+  .set('month', 3)
+  .month() // get & set
 
 dayjs().add(1, 'year') // manipula
 
@@ -68,15 +74,18 @@ dayjs().isBefore(dayjs()) // verifica
 
 Day.js tem suporte para internacionalização.
 
-Porém nenhuma estará inclusa no seu *build* a menos que você utilize-a.
+Porém nenhuma estará inclusa no seu _build_ a menos que você utilize-a.
 
 ```javascript
 import 'dayjs/locale/es' // carregar sob demanda
 
 dayjs.locale('es') // usar locale espanhol globalmente
 
-dayjs('2018-05-05').locale('pt-br').format() // usar locale em português brasileiro em uma instância específica
+dayjs('2018-05-05')
+  .locale('pt-br')
+  .format() // usar locale em português brasileiro em uma instância específica
 ```
+
 📚[Internacionalização](./I18n.md)
 
 ### Plugin
@@ -107,7 +116,7 @@ Este projeto existe graças a todas as pessoas que contribuem.
 
 Por favor, nos dê uma 💖 estrela 💖 para suportar-nos. Obrigado.
 
-E obrigado a todos os nossos apoiadores!  🙏
+E obrigado a todos os nossos apoiadores! 🙏
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 ## Licença
