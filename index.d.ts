@@ -57,7 +57,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(dayjs: Dayjs, unit: OpUnitType, float?: boolean): number
+    diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
 
     valueOf(): number
 
@@ -77,11 +77,11 @@ declare namespace dayjs {
 
     toString(): string
 
-    isBefore(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    isSame(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isSame(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    isAfter(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
 
     isLeapYear(): boolean
 
