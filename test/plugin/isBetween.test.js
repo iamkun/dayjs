@@ -17,6 +17,11 @@ test('bounds can be swapped', () => {
   expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-02'), dayjs('2017-12-31'))).toBeTruthy()
 })
 
+test('bounds can be swapped with inclusivity', () => {
+  expect(dayjs('2018-01-01').isBetween(dayjs('2017-12-31'), dayjs('2018-01-01'), null, '[]')).toBeTruthy()
+  expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-01'), dayjs('2017-12-31'), null, '[]')).toBeTruthy()
+})
+
 test('is between without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
@@ -380,4 +385,304 @@ test('is between millisecond', () => {
 
   expect(m.isBetween(m, 'millisecond')).toBe(false, 'same moments are not between the same millisecond')
   expect(+m).toEqual(+mCopy, 'isBetween millisecond should not change moment')
+})
+
+test('is between without units inclusivity', () => {
+  const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
+  const mCopy = dayjs(m)
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(false, 'start and end are excluded, start is equal to dayjs')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(false, 'start and end are excluded, end is equal to dayjs')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(true, 'start and end are excluded, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(false, 'start and end are excluded, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(false, 'start and end are excluded, should fail on same start/end date.')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '(]'
+  )).toBe(false, 'start is excluded and end is included should fail on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '(]'
+  )).toBe(true, 'start is excluded and end is included should succeed on end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '(]'
+  )).toBe(true, 'start is excluded and end is included, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    '(]'
+  )).toBe(false, 'start is excluded and end is included, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '(]'
+  )).toBe(false, 'start is excluded and end is included, should fail on same start/end date.')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[)'
+  )).toBe(true, 'start is included and end is excluded should succeed on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[)'
+  )).toBe(false, 'start is included and end is excluded should fail on same end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[)'
+  )).toBe(true, 'start is included and end is excluded, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[)'
+  )).toBe(false, 'start is included and end is excluded, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[)'
+  )).toBe(false, 'start is included and end is excluded, should fail on same end and start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(true, 'start and end inclusive should succeed on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(true, 'start and end inclusive should succeed on same end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(true, 'start and end inclusive, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(false, 'start and end inclusive, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(true, 'start and end inclusive, should handle same end and start date')
+
+  expect(+m).toEqual(+mCopy, 'isBetween millisecond should not change moment')
+})
+
+test('is between milliseconds inclusivity', () => {
+  const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
+  const mCopy = dayjs(m)
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds'
+  )).toBe(true, 'options, no inclusive')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '()'
+  )).toBe(false, 'start and end are excluded, start is equal to dayjs')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '()'
+  )).toBe(false, 'start and end are excluded, end is equal to dayjs')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '()'
+  )).toBe(true, 'start and end are excluded, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '()'
+  )).toBe(false, 'start and end are excluded, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '()'
+  )).toBe(false, 'start and end are excluded, should fail on same start/end date.')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '(]'
+  )).toBe(false, 'start is excluded and end is included should fail on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '(]'
+  )).toBe(true, 'start is excluded and end is included should succeed on end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '(]'
+  )).toBe(true, 'start is excluded and end is included, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '(]'
+  )).toBe(false, 'start is excluded and end is included, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '(]'
+  )).toBe(false, 'start is excluded and end is included, should fail on same start/end date.')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[)'
+  )).toBe(true, 'start is included and end is excluded should succeed on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[)'
+  )).toBe(false, 'start is included and end is excluded should fail on same end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[)'
+  )).toBe(true, 'start is included and end is excluded, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[)'
+  )).toBe(false, 'start is included and end is excluded, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[)'
+  )).toBe(false, 'start is included and end is excluded, should fail on same end and start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[]'
+  )).toBe(true, 'start and end inclusive should succeed on same start date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[]'
+  )).toBe(true, 'start and end inclusive should succeed on same end date')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[]'
+  )).toBe(true, 'start and end inclusive, is between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2009, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[]'
+  )).toBe(false, 'start and end inclusive, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)),
+    'milliseconds',
+    '[]'
+  )).toBe(true, 'start and end inclusive, should handle same end and start date')
+
+  expect(+m).toEqual(+mCopy, 'isBetween second should not change moment')
 })

@@ -24,6 +24,12 @@ it('parse padded string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse string January (getMonth() = 0)', () => {
+  const input = '01/01/2019'
+  const format = 'DD/MM/YYYY'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('parse unpadded string', () => {
   const input = '2.5.18 1:2:3.4 PM -0100'
   const format = 'D.M.YY H:m:s.S A ZZ'
@@ -63,6 +69,12 @@ it('leaves non-token parts of the format intact', () => {
 it('timezone with no hour', () => {
   const input = '2018-05-02 +0000'
   const format = 'YYYY-MM-DD ZZ'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse just hh:mm)', () => {
+  const input = '12:00'
+  const format = 'hh:mm'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 

@@ -1,9 +1,10 @@
 import * as C from './constant'
 import U from './utils'
+import en from './locale/en'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
-Ls[L] = C.en
+Ls[L] = en
 
 const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
 
@@ -48,12 +49,15 @@ const parseDate = (date) => {
   if (date === null) return new Date(NaN) // Treat null as an invalid date
   if (Utils.isUndefined(date)) return new Date()
   if (date instanceof Date) return date
-  if ((typeof date === 'string')) {
-    let dateFromString
-    // eslint-disable-next-line no-cond-assign
-    if (dateFromString = Utils.fromString(date)) {
-      return dateFromString
-    }
+  // eslint-disable-next-line no-cond-assign
+  if ((typeof date === 'string')
+    && (/.*[^Z]$/i.test(date)) // looking for a better way
+    && (reg = date.match(C.REGEX_PARSE))) {
+    // 2018-08-08 or 20180808
+    return new Date(
+      reg[1], reg[2] - 1, reg[3] || 1,
+      reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0
+    )
   }
   return new Date(date) // timestamp
 }
@@ -159,17 +163,19 @@ class Dayjs {
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }
-
+    const { $W, $M, $D } = this
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
           instanceFactory(31, 11)
       case C.M:
-        return isStartOf ? instanceFactory(1, this.$M) :
-          instanceFactory(0, this.$M + 1)
-      case C.W:
-        return isStartOf ? instanceFactory(this.$D - this.$W, this.$M) :
-          instanceFactory(this.$D + (6 - this.$W), this.$M)
+        return isStartOf ? instanceFactory(1, $M) :
+          instanceFactory(0, $M + 1)
+      case C.W: {
+        const weekStart = this.$locale().weekStart || 0
+        const gap = ($W < weekStart ? $W + 7 : $W) - weekStart
+        return instanceFactory(isStartOf ? $D - gap : $D + (6 - gap), $M)
+      }
       case C.D:
       case C.DATE:
         return instanceFactorySet('setHours', 0)
@@ -207,7 +213,6 @@ class Dayjs {
     this.init()
     return this
   }
-
 
   set(string, int) {
     return this.clone().$set(string, int)
@@ -268,40 +273,49 @@ class Dayjs {
       return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
     }
 
+    const matches = {
+      YY: String(this.$y).slice(-2),
+      YYYY: String(this.$y),
+      M: String(this.$M + 1),
+      MM: Utils.padStart(this.$M + 1, 2, '0'),
+      MMM: getShort(locale.monthsShort, this.$M, months, 3),
+      MMMM: months[this.$M],
+      D: String(this.$D),
+      DD: Utils.padStart(this.$D, 2, '0'),
+      d: String(this.$W),
+      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
+      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
+      dddd: weekdays[this.$W],
+      H: String(this.$H),
+      HH: Utils.padStart(this.$H, 2, '0'),
+      h: get$H('h'),
+      hh: get$H('hh'),
+      a: this.$H < 12 ? 'am' : 'pm',
+      A: this.$H < 12 ? 'AM' : 'PM',
+      m: String(this.$m),
+      mm: Utils.padStart(this.$m, 2, '0'),
+      s: String(this.$s),
+      ss: Utils.padStart(this.$s, 2, '0'),
+      SSS: Utils.padStart(this.$ms, 3, '0'),
+      Z: zoneStr
+    }
+
     return str.replace(C.REGEX_FORMAT, (match) => {
       if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
-      return {
-        YY: String(this.$y).slice(-2),
-        YYYY: String(this.$y),
-        M: String(this.$M + 1),
-        MM: Utils.padStart(this.$M + 1, 2, '0'),
-        MMM: getShort(locale.monthsShort, this.$M, months, 3),
-        MMMM: months[this.$M],
-        D: String(this.$D),
-        DD: Utils.padStart(this.$D, 2, '0'),
-        d: String(this.$W),
-        dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
-        ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
-        dddd: weekdays[this.$W],
-        H: String(this.$H),
-        HH: Utils.padStart(this.$H, 2, '0'),
-        h: get$H(match),
-        hh: get$H(match),
-        a: this.$H < 12 ? 'am' : 'pm',
-        A: this.$H < 12 ? 'AM' : 'PM',
-        m: String(this.$m),
-        mm: Utils.padStart(this.$m, 2, '0'),
-        s: String(this.$s),
-        ss: Utils.padStart(this.$s, 2, '0'),
-        SSS: Utils.padStart(this.$ms, 3, '0'),
-        Z: zoneStr
-      }[match] || zoneStr.replace(':', '') // 'ZZ'
+      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
     })
+  }
+
+  utcOffset() {
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
+    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
   }
 
   diff(input, units, float) {
     const unit = Utils.prettyUnit(units)
     const that = dayjs(input)
+    const zoneDelta = (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
     const diff = this - that
     let result = Utils.monthDiff(this, that)
 
@@ -309,8 +323,8 @@ class Dayjs {
       [C.Y]: result / 12,
       [C.M]: result,
       [C.Q]: result / 3,
-      [C.W]: diff / C.MILLISECONDS_A_WEEK,
-      [C.D]: diff / C.MILLISECONDS_A_DAY,
+      [C.W]: (diff - zoneDelta) / C.MILLISECONDS_A_WEEK,
+      [C.D]: (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
       [C.H]: diff / C.MILLISECONDS_A_HOUR,
       [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
       [C.S]: diff / C.MILLISECONDS_A_SECOND

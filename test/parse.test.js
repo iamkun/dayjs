@@ -21,12 +21,16 @@ describe('Parse', () => {
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-04-24'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '2018-04-24 11:12'
+    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
     d = '2018-05-02 11:12:13'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-05-02 11:12:13.998'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-4-1'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
+    d = '2018-4-1 11:12'
+    expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
     d = '2018-4-1 1:1:1:223'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf()) // not recommend
     d = '2018-01'
