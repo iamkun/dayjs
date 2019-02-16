@@ -141,7 +141,7 @@ class Dayjs {
   }
 
   unix() {
-    return Math.floor(this.valueOf() / 1000)
+    return Math.floor(new Date(this.$d.toUTCString()) / 1000)
   }
 
   valueOf() {
