@@ -86,8 +86,10 @@ function makeParser(format, instance) {
     ...baseExpressions,
     MMM: [matchWord, function (input) {
       const locale = instance.$locale()
-      const { months } = locale
-      const matchIndex = months.findIndex(month => month.substr(0, 3) === input)
+      const { months, monthsShort } = locale
+      const matchIndex = monthsShort
+        ? monthsShort.findIndex(month => month === input)
+        : months.findIndex(month => month.substr(0, 3) === input)
       if (matchIndex < 0) {
         throw new Error(`Failed to parse "${input}" as MMM`)
       }

@@ -2,7 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
-import ru from '../../src/locale/ru'
+import uk from '../../src/locale/uk'
 
 dayjs.extend(customParseFormat)
 const oldLocale = dayjs().$locale()
@@ -88,6 +88,14 @@ it('parse month from short string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse month from short string in other locales', () => {
+  const input = '2018 May 03'
+  const inputUk = '2018 трав 03'
+  const format = 'YYYY MMM DD'
+  dayjs.locale(uk)
+  expect(dayjs(inputUk, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('return Invalid Date when parse corrupt string', () => {
   const input = '2018 Februaru 03'
   const format = 'YYYY MMMM DD'
@@ -96,11 +104,11 @@ it('return Invalid Date when parse corrupt string', () => {
 
 it('correctly parse month from string after changing locale', () => {
   const input = '2018 February 03'
-  const inputRu = '2018 февраль 03'
+  const inputUk = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
 
-  dayjs.locale(ru)
-  expect(dayjs(inputRu, format).valueOf()).toBe(moment(input, format).valueOf())
+  dayjs.locale(uk)
+  expect(dayjs(inputUk, format).valueOf()).toBe(moment(input, format).valueOf())
 
   dayjs.locale(oldLocale)
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
