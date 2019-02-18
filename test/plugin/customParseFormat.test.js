@@ -5,6 +5,7 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import ru from '../../src/locale/ru'
 
 dayjs.extend(customParseFormat)
+const oldLocale = dayjs().$locale()
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -12,6 +13,7 @@ beforeEach(() => {
 
 afterEach(() => {
   MockDate.reset()
+  dayjs.locale(oldLocale)
 })
 
 it('does not break the built-in parsing', () => {
@@ -96,7 +98,6 @@ it('correctly parse month from string after changing locale', () => {
   const input = '2018 February 03'
   const inputRu = '2018 февраль 03'
   const format = 'YYYY MMMM DD'
-  const oldLocale = dayjs().$locale()
 
   dayjs.locale(ru)
   expect(dayjs(inputRu, format).valueOf()).toBe(moment(input, format).valueOf())
