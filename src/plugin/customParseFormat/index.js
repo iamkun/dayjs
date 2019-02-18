@@ -90,17 +90,13 @@ function makeParser(format, instance) {
       const matchIndex = monthsShort
         ? monthsShort.findIndex(month => month === input)
         : months.findIndex(month => month.substr(0, 3) === input)
-      if (matchIndex >= 0) {
-        this.month = matchIndex + 1
-      }
+      this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
     }],
     MMMM: [matchWord, function (input) {
       const locale = instance.$locale()
       const { months } = locale
       const matchIndex = months.indexOf(input)
-      if (matchIndex >= 0) {
-        this.month = matchIndex + 1
-      }
+      this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
     }]
   }
 
