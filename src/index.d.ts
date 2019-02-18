@@ -1,94 +1,100 @@
+declare const dayjs: dayjs;
+export = dayjs;
 
-declare const dayjs: dayjs
-export default dayjs
+declare namespace dayjs {
+  type ConfigType = string | number | Date | Dayjs
 
-export type ConfigType = string | number | Date | Dayjs
+  type OptionType = { locale: string }
 
-export type OptionType = { locale: string }
+  type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
+  type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+  type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
+  type UnitType = UnitTypeSingular | UnitTypePlural
 
-export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
-export type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
-export type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
-export type UnitType = UnitTypeSingular | UnitTypePlural
+  type OpUnitTypeShort = 'w'
+  type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
-export type OpUnitTypeShort = 'w'
-export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
-
-export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
-
-export interface dayjs<TPlugin = {}> {
-  (config?: ConfigType, option?: OptionType): {} extends TPlugin ? Dayjs : Dayjs & TPlugin
-
-  extend<UPlugin extends object>(plugin: PluginFunc<UPlugin>, option?: ConfigType): dayjs<TPlugin & UPlugin>
-  locale(arg1: any, arg2?: any): string
-  isDayjs(d: any): d is Dayjs
-  unix(t: number): Dayjs
+  type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 }
 
- export interface DayjsObject {
-  years: number
-  months: number
-  date: number
-  hours: number
-  minutes: number
-  seconds: number
-  milliseconds: number
+interface dayjs<TPlugin = {}> {
+  (config?: dayjs.ConfigType, option?: dayjs.OptionType): {} extends TPlugin
+    ? Dayjs
+    : Dayjs & TPlugin;
+
+  extend<UPlugin extends object>(
+    plugin: dayjs.PluginFunc<UPlugin>,
+    option?: dayjs.ConfigType
+  ): dayjs<TPlugin & UPlugin>;
+  locale(arg1: any, arg2?: any): string;
+  isDayjs(d: any): d is Dayjs;
+  unix(t: number): Dayjs;
 }
 
- export class Dayjs {
-  constructor(config?: ConfigType)
+declare interface DayjsObject {
+  years: number;
+  months: number;
+  date: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
+}
 
-  clone(): Dayjs
+declare class Dayjs {
+  constructor(config?: dayjs.ConfigType);
 
-  isValid(): boolean
+  clone(): Dayjs;
 
-  year(): number
+  isValid(): boolean;
 
-  month(): number
+  year(): number;
 
-  date(): number
+  month(): number;
 
-  day(): number
+  date(): number;
 
-  hour(): number
+  day(): number;
 
-  minute(): number
+  hour(): number;
 
-  second(): number
+  minute(): number;
 
-  millisecond(): number
+  second(): number;
 
-  set(unit: UnitType, value: number): Dayjs
+  millisecond(): number;
 
-  add(value: number, unit: OpUnitType): Dayjs
+  set(unit: dayjs.UnitType, value: number): Dayjs;
 
-  subtract(value: number, unit: OpUnitType): Dayjs
+  add(value: number, unit: dayjs.OpUnitType): Dayjs;
 
-  startOf(unit: OpUnitType): Dayjs
+  subtract(value: number, unit: dayjs.OpUnitType): Dayjs;
 
-  endOf(unit: OpUnitType): Dayjs
+  startOf(unit: dayjs.OpUnitType): Dayjs;
 
-  format(template?: string): string
+  endOf(unit: dayjs.OpUnitType): Dayjs;
+
+  format(template?: string): string;
 
     diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
 
-  valueOf(): number
+  valueOf(): number;
 
-  unix(): number
+  unix(): number;
 
-  daysInMonth(): number
+  daysInMonth(): number;
 
-  toDate(): Date
+  toDate(): Date;
 
-  toArray(): number[]
+  toArray(): number[];
 
-  toJSON(): string
+  toJSON(): string;
 
-  toISOString(): string
+  toISOString(): string;
 
-  toObject(): DayjsObject
+  toObject(): DayjsObject;
 
-  toString(): string
+  toString(): string;
 
     isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
 
@@ -96,5 +102,5 @@ export interface dayjs<TPlugin = {}> {
 
     isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-  locale(arg1: any, arg2?: any): Dayjs
+  locale(arg1: any, arg2?: any): Dayjs;
 }
