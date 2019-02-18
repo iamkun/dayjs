@@ -6,13 +6,13 @@ export type ConfigType = string | number | Date | Dayjs
 
 export type OptionType = { locale: string }
 
-  export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
-  export type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
+export type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
 export type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
 export type UnitType = UnitTypeSingular | UnitTypePlural
 
-  type OpUnitTypeShort = 'w'
-  export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
+export type OpUnitTypeShort = 'w'
+export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
 export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
@@ -60,13 +60,13 @@ export interface dayjs<TPlugin = {}> {
 
   set(unit: UnitType, value: number): Dayjs
 
-    add(value: number, unit: OpUnitType): Dayjs
+  add(value: number, unit: OpUnitType): Dayjs
 
-    subtract(value: number, unit: OpUnitType): Dayjs
+  subtract(value: number, unit: OpUnitType): Dayjs
 
-    startOf(unit: OpUnitType): Dayjs
+  startOf(unit: OpUnitType): Dayjs
 
-    endOf(unit: OpUnitType): Dayjs
+  endOf(unit: OpUnitType): Dayjs
 
   format(template?: string): string
 
