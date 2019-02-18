@@ -11,6 +11,8 @@ const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchWord = /[^\d\s]+/ // Word
 
+let locale
+
 function offsetFromString(string) {
   const parts = string.match(/([+-]|\d\d)/g)
   const minutes = +(parts[1] * 60) + +parts[2]
@@ -28,7 +30,7 @@ const zoneExpressions = [matchOffset, function (input) {
   zone.offset = offsetFromString(input)
 }]
 
-const baseExpressions = {
+const expressions = {
   A: [matchUpperCaseAMPM, function (input) {
     this.afternoon = input === 'PM'
   }],
@@ -56,6 +58,18 @@ const baseExpressions = {
   DD: [match2, addInput('day')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
+  MMM: [matchWord, function (input) {
+    const { months, monthsShort } = locale
+    const matchIndex = monthsShort
+      ? monthsShort.findIndex(month => month === input)
+      : months.findIndex(month => month.substr(0, 3) === input)
+    this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
+  }],
+  MMMM: [matchWord, function (input) {
+    const { months } = locale
+    const matchIndex = months.indexOf(input)
+    this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
+  }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
     input = +input
@@ -81,25 +95,7 @@ function correctHours(time) {
   }
 }
 
-function makeParser(format, instance) {
-  const expressions = {
-    ...baseExpressions,
-    MMM: [matchWord, function (input) {
-      const locale = instance.$locale()
-      const { months, monthsShort } = locale
-      const matchIndex = monthsShort
-        ? monthsShort.findIndex(month => month === input)
-        : months.findIndex(month => month.substr(0, 3) === input)
-      this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
-    }],
-    MMMM: [matchWord, function (input) {
-      const locale = instance.$locale()
-      const { months } = locale
-      const matchIndex = months.indexOf(input)
-      this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
-    }]
-  }
-
+function makeParser(format) {
   const array = format.match(formattingTokens)
   const { length } = array
   for (let i = 0; i < length; i += 1) {
@@ -133,9 +129,9 @@ function makeParser(format, instance) {
   }
 }
 
-const parseFormattedInput = (input, format, instance) => {
+const parseFormattedInput = (input, format) => {
   try {
-    const parser = makeParser(format, instance)
+    const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
     } = parser(input)
@@ -162,7 +158,8 @@ export default (o, C) => {
   proto.parse = function (cfg) {
     const { date: input, format } = cfg
     if (format) {
-      this.$d = parseFormattedInput(input, format, this)
+      locale = this.$locale()
+      this.$d = parseFormattedInput(input, format)
       this.init(cfg)
     } else {
       oldParse.call(this, cfg)
