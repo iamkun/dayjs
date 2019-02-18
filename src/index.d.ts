@@ -6,8 +6,10 @@ declare namespace dayjs {
 
   export type OptionType = { locale: string }
 
-  type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
-  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+  export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
+  export type UnitTypeSingular = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+  export type UnitTypePlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'months' | 'quarters' | 'years' | 'dates'
+  export type UnitType = UnitTypeSingular | UnitTypePlural
 
   type OpUnitTypeShort = 'w'
   export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
@@ -88,13 +90,13 @@ declare namespace dayjs {
     locale(arg1: any, arg2?: any): Dayjs
   }
 
-  export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
+  export type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
 
-  export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs
+  export function extend<TPlugin>(plugin: PluginFunc<TPlugin>, option?: ConfigType): Dayjs & TPlugin
 
   export function locale(arg1: any, arg2?: any): string
 
   export function isDayjs(d: any): d is Dayjs
-  
+
   export function unix(t: number): Dayjs
 }
