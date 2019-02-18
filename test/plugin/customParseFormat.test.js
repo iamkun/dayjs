@@ -86,6 +86,12 @@ it('parse month from short string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('return Invalid Date when parse corrupt string', () => {
+  const input = '2018 Februaru 03'
+  const format = 'YYYY MMMM DD'
+  expect(dayjs(input, format).format()).toBe('Invalid Date')
+})
+
 it('correctly parse month from string after changing locale', () => {
   const input = '2018 February 03'
   const inputRu = '2018 февраль 03'
