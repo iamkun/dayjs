@@ -4,6 +4,7 @@ import advancedFormat from '../src/plugin/advancedFormat'
 import buddhistEra from '../src/plugin/buddhistEra'
 import isLeapYear from '../src/plugin/isLeapYear'
 import isBetween from '../src/plugin/isBetween'
+import customParseFormat from '../src/plugin/customParseFormat'
 
 dayjs()
 
@@ -90,3 +91,6 @@ dayjs.extend(isBetween)('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'
 const multiplePluginsDayjs = dayjs.extend(relativeTime).extend(isLeapYear)()
 multiplePluginsDayjs.toNow()
 multiplePluginsDayjs.isLeapYear()
+
+const dayjsWithCustomParseFormat = dayjs.extend(customParseFormat);
+dayjsWithCustomParseFormat('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z');

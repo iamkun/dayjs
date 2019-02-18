@@ -14,7 +14,15 @@ declare namespace dayjs {
   type OpUnitTypeShort = 'w'
   type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
-  type PluginFunc<TPlugin> = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
+  type PluginFunc<TPlugin> = (option: ConfigType, dayjsClass: InstanceType<Dayjs>, dayjsFactory: dayjs) => void;
+
+  /**
+   * Branding for static plugins, to enable better type inference.
+   * `extend` from this to make the plugin static
+   */
+  interface StaticPlugin {
+    __staticPlugin: never;
+  }
 }
 
 interface dayjs<TPlugin = {}> {
@@ -25,7 +33,7 @@ interface dayjs<TPlugin = {}> {
   extend<UPlugin extends object>(
     plugin: dayjs.PluginFunc<UPlugin>,
     option?: dayjs.ConfigType
-  ): dayjs<TPlugin & UPlugin>;
+  ): UPlugin extends dayjs.StaticPlugin ? (dayjs<TPlugin> & UPlugin) : dayjs<TPlugin & UPlugin>;
   locale(arg1: any, arg2?: any): string;
   isDayjs(d: any): d is Dayjs;
   unix(t: number): Dayjs;
@@ -76,7 +84,7 @@ declare class Dayjs {
 
   format(template?: string): string;
 
-    diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
+  diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
 
   valueOf(): number;
 
@@ -96,11 +104,11 @@ declare class Dayjs {
 
   toString(): string;
 
-    isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
+  isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    isSame(dayjs: ConfigType, unit?: OpUnitType): boolean
+  isSame(dayjs: ConfigType, unit?: OpUnitType): boolean
 
-    isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
+  isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
 
   locale(arg1: any, arg2?: any): Dayjs;
 }
