@@ -90,19 +90,17 @@ function makeParser(format, instance) {
       const matchIndex = monthsShort
         ? monthsShort.findIndex(month => month === input)
         : months.findIndex(month => month.substr(0, 3) === input)
-      if (matchIndex < 0) {
-        throw new Error(`Failed to parse "${input}" as MMM`)
+      if (matchIndex >= 0) {
+        this.month = matchIndex + 1
       }
-      this.month = matchIndex + 1
     }],
     MMMM: [matchWord, function (input) {
       const locale = instance.$locale()
       const { months } = locale
       const matchIndex = months.indexOf(input)
-      if (matchIndex < 0) {
-        throw new Error(`Failed to parse "${input}" as MMMM`)
+      if (matchIndex >= 0) {
+        this.month = matchIndex + 1
       }
-      this.month = matchIndex + 1
     }]
   }
 
