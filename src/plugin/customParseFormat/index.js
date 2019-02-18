@@ -63,12 +63,18 @@ const expressions = {
     const matchIndex = monthsShort
       ? monthsShort.findIndex(month => month === input)
       : months.findIndex(month => month.substr(0, 3) === input)
-    this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
+    if (matchIndex < 0) {
+      throw new Error()
+    }
+    this.month = matchIndex + 1
   }],
   MMMM: [matchWord, function (input) {
     const { months } = locale
     const matchIndex = months.indexOf(input)
-    this.month = matchIndex >= 0 ? matchIndex + 1 : NaN
+    if (matchIndex < 0) {
+      throw new Error()
+    }
+    this.month = matchIndex + 1
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
