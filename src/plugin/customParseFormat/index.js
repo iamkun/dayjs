@@ -28,6 +28,44 @@ const zoneExpressions = [matchOffset, function (input) {
   zone.offset = offsetFromString(input)
 }]
 
+const baseExpressions = {
+  A: [matchUpperCaseAMPM, function (input) {
+    this.afternoon = input === 'PM'
+  }],
+  a: [matchLowerCaseAMPM, function (input) {
+    this.afternoon = input === 'pm'
+  }],
+  S: [match1, function (input) {
+    this.milliseconds = +input * 100
+  }],
+  SS: [match2, function (input) {
+    this.milliseconds = +input * 10
+  }],
+  SSS: [match3, function (input) {
+    this.milliseconds = +input
+  }],
+  s: [match1to2, addInput('seconds')],
+  ss: [match2, addInput('seconds')],
+  m: [match1to2, addInput('minutes')],
+  mm: [match2, addInput('minutes')],
+  H: [match1to2, addInput('hours')],
+  h: [match1to2, addInput('hours')],
+  HH: [match2, addInput('hours')],
+  hh: [match2, addInput('hours')],
+  D: [match1to2, addInput('day')],
+  DD: [match2, addInput('day')],
+  M: [match1to2, addInput('month')],
+  MM: [match2, addInput('month')],
+  Y: [matchSigned, addInput('year')],
+  YY: [match2, function (input) {
+    input = +input
+    this.year = input + (input > 68 ? 1900 : 2000)
+  }],
+  YYYY: [match4, addInput('year')],
+  Z: zoneExpressions,
+  ZZ: zoneExpressions
+}
+
 function correctHours(time) {
   const { afternoon } = time
   if (afternoon !== undefined) {
@@ -45,51 +83,25 @@ function correctHours(time) {
 
 function makeParser(format, instance) {
   const expressions = {
-    A: [matchUpperCaseAMPM, function (input) {
-      this.afternoon = input === 'PM'
-    }],
-    a: [matchLowerCaseAMPM, function (input) {
-      this.afternoon = input === 'pm'
-    }],
-    S: [match1, function (input) {
-      this.milliseconds = +input * 100
-    }],
-    SS: [match2, function (input) {
-      this.milliseconds = +input * 10
-    }],
-    SSS: [match3, function (input) {
-      this.milliseconds = +input
-    }],
-    s: [match1to2, addInput('seconds')],
-    ss: [match2, addInput('seconds')],
-    m: [match1to2, addInput('minutes')],
-    mm: [match2, addInput('minutes')],
-    H: [match1to2, addInput('hours')],
-    h: [match1to2, addInput('hours')],
-    HH: [match2, addInput('hours')],
-    hh: [match2, addInput('hours')],
-    D: [match1to2, addInput('day')],
-    DD: [match2, addInput('day')],
-    M: [match1to2, addInput('month')],
-    MM: [match2, addInput('month')],
+    ...baseExpressions,
     MMM: [matchWord, function (input) {
       const locale = instance.$locale()
       const { months } = locale
-      this.month = months.findIndex(month => month.substr(0, 3) === input) + 1
+      const matchIndex = months.findIndex(month => month.substr(0, 3) === input)
+      if (matchIndex < 0) {
+        throw new Error(`Failed to parse "${input}" as MMM`)
+      }
+      this.month = matchIndex + 1
     }],
     MMMM: [matchWord, function (input) {
       const locale = instance.$locale()
       const { months } = locale
-      this.month = months.indexOf(input) + 1
-    }],
-    Y: [matchSigned, addInput('year')],
-    YY: [match2, function (input) {
-      input = +input
-      this.year = input + (input > 68 ? 1900 : 2000)
-    }],
-    YYYY: [match4, addInput('year')],
-    Z: zoneExpressions,
-    ZZ: zoneExpressions
+      const matchIndex = months.indexOf(input)
+      if (matchIndex < 0) {
+        throw new Error(`Failed to parse "${input}" as MMMM`)
+      }
+      this.month = matchIndex + 1
+    }]
   }
 
   const array = format.match(formattingTokens)
