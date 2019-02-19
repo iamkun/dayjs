@@ -5,7 +5,6 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import uk from '../../src/locale/uk'
 
 dayjs.extend(customParseFormat)
-const oldLocale = dayjs().$locale()
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -13,7 +12,6 @@ beforeEach(() => {
 
 afterEach(() => {
   MockDate.reset()
-  dayjs.locale(oldLocale)
 })
 
 it('does not break the built-in parsing', () => {
@@ -88,12 +86,17 @@ it('parse month from short string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
-it('parse month from short string in other locales', () => {
-  const input = '2018 May 03'
-  const inputUk = '2018 трав 03'
+it('parse month from string with locale in config', () => {
+  const input = '2018 лютий 03'
+  const format = 'YYYY MMMM DD'
+
+  expect(dayjs(input, { format, locale: uk }).valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
+it('parse month from short string with locale in config', () => {
+  const input = '2018 трав 03'
   const format = 'YYYY MMM DD'
-  dayjs.locale(uk)
-  expect(dayjs(inputUk, format).valueOf()).toBe(moment(input, format).valueOf())
+  expect(dayjs(input, { format, locale: uk }).valueOf()).toBe(moment(input, format, 'uk').valueOf())
 })
 
 it('return Invalid Date when parse corrupt string', () => {
@@ -108,14 +111,18 @@ it('return Invalid Date when parse corrupt short string', () => {
   expect(dayjs(input, format).format()).toBe('Invalid Date')
 })
 
-it('correctly parse month from string after changing locale', () => {
-  const input = '2018 February 03'
-  const inputUk = '2018 лютий 03'
+it('correctly parse month from string after changing locale globally', () => {
+  const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
 
-  dayjs.locale(uk)
-  expect(dayjs(inputUk, format).valueOf()).toBe(moment(input, format).valueOf())
-
-  dayjs.locale(oldLocale)
-  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const dayjsLocale = dayjs().$locale()
+  const momentLocale = moment.locale()
+  try {
+    dayjs.locale(uk)
+    moment.locale('uk')
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  } finally {
+    dayjs.locale(dayjsLocale)
+    moment.locale(momentLocale)
+  }
 })
