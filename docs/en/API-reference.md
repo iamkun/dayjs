@@ -257,7 +257,7 @@ dayjs().endOf('month')
 ### Format `.format(stringWithTokens: string)`
 
 Returns a `string` with the `Dayjs`'s formatted date.
-To escape characters, wrap them in square brackets (e.g. `[G] [um]`).
+To escape characters, wrap them in square brackets (e.g. `[A] [MM]`).
 
 ```js
 dayjs().format() // current date in ISO6801, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'

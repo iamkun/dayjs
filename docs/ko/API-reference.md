@@ -256,12 +256,12 @@ dayjs().endOf('month')
 ### Format `.format(stringWithTokens: string)`
 
 `Dayjs` 오브젝트 시간을 기본 형식으로 출력합니다. 반환 형식은 `string` 입니다.
-예외하고 싶은 문자일 경우, 대괄호나 중괄호를 사용하여 묶으면됩니다. (예, `[G] {um}`)
+예외하고 싶은 문자일 경우, 대괄호나 중괄호를 사용하여 묶으면됩니다. (예, `[A] [MM]`)
 
 ```js
 dayjs().format() // 분과 초가 없는 ISO5801 형식의 현재 시간을 나타냅니다. 예: '2020-04-02T08:02:17-05:00'
 
-dayjs('2019-01-25').format('{YYYY} MM-DDTHH:mm:ssZ[Z]') // '{2019} 01-25T00:00:00-02:00Z'
+dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
 
 dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 ```

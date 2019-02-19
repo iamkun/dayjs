@@ -306,7 +306,7 @@ dayjs().endOf('month')
 ```js
 dayjs().format(String)
 dayjs().format() // "2014-09-08T08:02:17-05:00" (ISO 8601 形式、小数部は含まない)
-dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]') // "{2014} 09-08T08:02:17-05:00Z"
+dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
 ```
 
 - 文字列内の文字をエスケープするには、文字を角括弧で囲みます (例: [Z]) 。

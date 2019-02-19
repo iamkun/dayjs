@@ -257,12 +257,12 @@ dayjs().endOf('month')
 ### Dar formato `.format(stringWithTokens: string)`
 
 Devuelve un dato de tipo `string` con la fecha del objeto `Dayjs` formateada.
-Para escapar caracteres, estos se han de encerrar entre corchetes o llaves (p.ej.: `[G] {um}`).
+Para escapar caracteres, estos se han de encerrar entre corchetes (p.ej.: `[A] [MM]`).
 
 ```js
 dayjs().format() // fecha actual en ISO6801, sin fracciones de segundo p.ej. '2020-04-02T08:02:17-05:00'
 
-dayjs('2019-01-25').format('{YYYY} MM-DDTHH:mm:ssZ[Z]') // '{2019} 01-25T00:00:00-02:00Z'
+dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
 
 dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 ```
