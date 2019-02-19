@@ -100,13 +100,13 @@ it('parse month from short string with locale in config', () => {
 })
 
 it('return Invalid Date when parse corrupt string', () => {
-  const input = '2018 Februaru 03'
+  const input = '2018 Turnip 03'
   const format = 'YYYY MMMM DD'
   expect(dayjs(input, format).format()).toBe('Invalid Date')
 })
 
 it('return Invalid Date when parse corrupt short string', () => {
-  const input = '2018 Fev 03'
+  const input = '2018 Dog 03'
   const format = 'YYYY MMM DD'
   expect(dayjs(input, format).format()).toBe('Invalid Date')
 })
