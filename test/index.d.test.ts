@@ -70,9 +70,9 @@ dayjs().isSame(dayjs())
 
 dayjs().isAfter(dayjs())
 
-dayjs().isBefore(dayjs(), 'minutes')
+dayjs().isBefore(dayjs(), 'minute')
 
-dayjs().isSame(dayjs(), 'hours')
+dayjs().isSame(dayjs(), 'hour')
 
 dayjs().isAfter(dayjs(), 'year')
 
