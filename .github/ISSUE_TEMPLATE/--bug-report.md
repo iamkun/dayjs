@@ -7,11 +7,13 @@ assignees: ''
 
 ---
 
-### Day.js version
+**Describe the bug**
+A clear and concise description of what the bug is.
 
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-
-### OS/Browsers version
-
-
-### Steps to reproduce
+**Information**
+ - Day.js Version [e.g. v1.0.0]
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome 62]
