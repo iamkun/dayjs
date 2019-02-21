@@ -102,7 +102,7 @@ dayjs().format('Q Do k kk X x') // mais formatos disponíveis pelo plugin
 
 📚[Lista de Plugins](./Plugin.md)
 
-## Patricionadores
+## Patrocinadores
 
 Ajude este projeto se tornando um patrocinador. O seu logo será exibido aqui, com um link para o seu site. [[Tornar-se um Patrocinador](https://opencollective.com/dayjs#sponsor)].
 
