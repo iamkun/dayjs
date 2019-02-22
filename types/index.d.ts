@@ -7,7 +7,7 @@ declare namespace dayjs {
   /** @deprecated Renamed to DateType. */
   export type ConfigType = DateType
 
-  export type OptionType = { locale: string }
+  export type OptionType = { locale?: string, format?: string } | string
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;

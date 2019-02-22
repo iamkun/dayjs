@@ -8,6 +8,12 @@ dayjs(730944000000)
 
 dayjs(new Date(1993, 3, 1))
 
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
+
+dayjs('05/02/69 1:02:03 PM -05:00', { format: 'MM/DD/YY H:mm:ss A Z' })
+
+dayjs('1993-03-1', { locale: 'ja' })
+
 dayjs().clone()
 
 dayjs().isValid()
