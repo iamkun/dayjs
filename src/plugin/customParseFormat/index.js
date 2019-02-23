@@ -159,13 +159,13 @@ const parseFormattedInput = (input, format) => {
 }
 
 
-export default (o, C) => {
+export default (o, C, d) => {
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {
-    const { date: input, format } = cfg
+    const { date: input, format, pl } = cfg
     if (format) {
-      locale = this.$locale()
+      locale = pl ? d.Ls[pl] : this.$locale()
       this.$d = parseFormattedInput(input, format)
       this.init(cfg)
     } else {

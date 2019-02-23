@@ -28,12 +28,12 @@ const parseLocale = (preset, object, isLocal) => {
   return l
 }
 
-const dayjs = (date, c) => {
+const dayjs = (date, c, pl) => {
   if (isDayjs(date)) {
     return date.clone()
   }
   // eslint-disable-next-line no-nested-ternary
-  const cfg = c ? (typeof c === 'string' ? { format: c } : c) : {}
+  const cfg = c ? (typeof c === 'string' ? { format: c, pl } : c) : {}
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
@@ -408,5 +408,6 @@ dayjs.unix = timestamp => (
 )
 
 dayjs.en = Ls[L]
+dayjs.Ls = Ls
 
 export default dayjs

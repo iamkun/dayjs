@@ -111,6 +111,19 @@ it('parse month from short string with locale in config', () => {
   expect(dayjs(input, { format, locale: uk }).valueOf()).toBe(moment(input, format, 'uk').valueOf())
 })
 
+it('parse month from short string with locale in argument', () => {
+  const input = '2018 трав 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
+it('parse month from string with locale in argument', () => {
+  const input = '2018 лютий 03'
+  const format = 'YYYY MMMM DD'
+
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
 it('return Invalid Date when parse corrupt string', () => {
   const input = '2018 Turnip 03'
   const format = 'YYYY MMMM DD'
