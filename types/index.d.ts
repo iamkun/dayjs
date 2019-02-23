@@ -1,11 +1,8 @@
 export = dayjs;
-declare function dayjs (date?: dayjs.DateType, option?: dayjs.OptionType): dayjs.Dayjs
+declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
 
 declare namespace dayjs {
-  export type DateType = string | number | Date | Dayjs
-
-  /** @deprecated Renamed to DateType. */
-  export type ConfigType = DateType
+  export type ConfigType = string | number | Date | Dayjs
 
   export type OptionType = { locale?: string, format?: string } | string
 
@@ -26,7 +23,7 @@ declare namespace dayjs {
   }
 
   class Dayjs {
-    constructor (date?: DateType)
+    constructor (config?: ConfigType)
 
     clone(): Dayjs
 
@@ -60,7 +57,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(date: DateType, unit: OpUnitType, float?: boolean): number
+    diff(date: ConfigType, unit: OpUnitType, float?: boolean): number
 
     valueOf(): number
 
@@ -80,11 +77,11 @@ declare namespace dayjs {
 
     toString(): string
 
-    isBefore(date: DateType, unit?: OpUnitType): boolean
+    isBefore(date: ConfigType, unit?: OpUnitType): boolean
 
-    isSame(date: DateType, unit?: OpUnitType): boolean
+    isSame(date: ConfigType, unit?: OpUnitType): boolean
 
-    isAfter(date: DateType, unit?: OpUnitType): boolean
+    isAfter(date: ConfigType, unit?: OpUnitType): boolean
 
     isLeapYear(): boolean
 
