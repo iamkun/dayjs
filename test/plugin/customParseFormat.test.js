@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import uk from '../../src/locale/uk'
 
 dayjs.extend(customParseFormat)
 
@@ -83,4 +84,57 @@ it('fails with an invalid format', () => {
   const format = 'C'
   expect(dayjs(input, format).format().toLowerCase())
     .toBe(moment(input, format).format().toLowerCase())
+})
+
+it('parse month from string', () => {
+  const input = '2018 February 03'
+  const format = 'YYYY MMMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse month from short string', () => {
+  const input = '2018 Feb 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse month from string with locale in config', () => {
+  const input = '2018 лютий 03'
+  const format = 'YYYY MMMM DD'
+
+  expect(dayjs(input, { format, locale: uk }).valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
+it('parse month from short string with locale in config', () => {
+  const input = '2018 трав 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, { format, locale: uk }).valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
+it('return Invalid Date when parse corrupt string', () => {
+  const input = '2018 Turnip 03'
+  const format = 'YYYY MMMM DD'
+  expect(dayjs(input, format).format()).toBe('Invalid Date')
+})
+
+it('return Invalid Date when parse corrupt short string', () => {
+  const input = '2018 Dog 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format).format()).toBe('Invalid Date')
+})
+
+it('correctly parse month from string after changing locale globally', () => {
+  const input = '2018 лютий 03'
+  const format = 'YYYY MMMM DD'
+
+  const dayjsLocale = dayjs().$locale()
+  const momentLocale = moment.locale()
+  try {
+    dayjs.locale(uk)
+    moment.locale('uk')
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  } finally {
+    dayjs.locale(dayjsLocale)
+    moment.locale(momentLocale)
+  }
 })

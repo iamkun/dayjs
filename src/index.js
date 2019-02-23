@@ -61,15 +61,16 @@ const parseDate = (date) => {
 
 class Dayjs {
   constructor(cfg) {
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
     this.parse(cfg) // for plugin
   }
 
   parse(cfg) {
     this.$d = parseDate(cfg.date)
-    this.init(cfg)
+    this.init()
   }
 
-  init(cfg) {
+  init() {
     const { $d } = this
     this.$y = $d.getFullYear()
     this.$M = $d.getMonth()
@@ -79,7 +80,6 @@ class Dayjs {
     this.$m = $d.getMinutes()
     this.$s = $d.getSeconds()
     this.$ms = $d.getMilliseconds()
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
   }
 
   // eslint-disable-next-line class-methods-use-this

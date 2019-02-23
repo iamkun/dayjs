@@ -247,6 +247,23 @@ dayjs.extend(quarterOfYear)
 dayjs('2010-04-01').quarter() // 2
 ```
 
+### CustomParseFormat
+ - CustomParseFormat extends `dayjs()` constructor to support custom formats of input strings.
+
+To escape characters, wrap them in square brackets (e.g. `[G]`). Punctuation symbols (-:/.()) do not need to be wrapped.
+
+```javascript
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+
+dayjs.extend(customParseFormat)
+
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
+// Returns an instance containing '1969-05-02T18:02:03.000Z'
+
+dayjs('2018 Enero 15', { format: 'YYYY MMMM DD', locale: es })
+// Returns an instance containing '2018-01-15T00:00:00.000Z'
+```
+
 #### List of all available format tokens
 
 | Format | Output  | Description                       |

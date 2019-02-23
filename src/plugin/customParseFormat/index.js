@@ -1,4 +1,4 @@
-const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -9,6 +9,9 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchWord = /\d*[^\s\d]+/ // Word
+
+let locale
 
 function offsetFromString(string) {
   const parts = string.match(/([+-]|\d\d)/g)
@@ -55,6 +58,24 @@ const expressions = {
   DD: [match2, addInput('day')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
+  MMM: [matchWord, function (input) {
+    const { months, monthsShort } = locale
+    const matchIndex = monthsShort
+      ? monthsShort.findIndex(month => month === input)
+      : months.findIndex(month => month.substr(0, 3) === input)
+    if (matchIndex < 0) {
+      throw new Error()
+    }
+    this.month = matchIndex + 1
+  }],
+  MMMM: [matchWord, function (input) {
+    const { months } = locale
+    const matchIndex = months.indexOf(input)
+    if (matchIndex < 0) {
+      throw new Error()
+    }
+    this.month = matchIndex + 1
+  }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
     input = +input
@@ -144,6 +165,7 @@ export default (o, C) => {
   proto.parse = function (cfg) {
     const { date: input, format } = cfg
     if (format) {
+      locale = this.$locale()
       this.$d = parseFormattedInput(input, format)
       this.init(cfg)
     } else {
