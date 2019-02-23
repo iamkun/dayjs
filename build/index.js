@@ -3,6 +3,7 @@ const configFactory = require('./rollup.config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
+const mergedirs = require('merge-dirs').default
 
 const { promisify } = util
 
@@ -39,6 +40,8 @@ async function build(option) {
       input: './src/index.js',
       fileName: './dayjs.min.js'
     }))
+
+    mergedirs('./types/', './', 'overwrite')
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
   }

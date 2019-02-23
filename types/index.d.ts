@@ -1,10 +1,13 @@
 export = dayjs;
-declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
+declare function dayjs (date?: dayjs.DateType, option?: dayjs.OptionType): dayjs.Dayjs
 
 declare namespace dayjs {
-  export type ConfigType = string | number | Date | Dayjs
+  export type DateType = string | number | Date | Dayjs
 
-  export type OptionType = { locale: string }
+  /** @deprecated Renamed to DateType. */
+  export type ConfigType = DateType
+
+  export type OptionType = { locale?: string, format?: string } | string
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
@@ -23,7 +26,7 @@ declare namespace dayjs {
   }
 
   class Dayjs {
-    constructor (config?: ConfigType)
+    constructor (date?: DateType)
 
     clone(): Dayjs
 
@@ -57,7 +60,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(dayjs: ConfigType, unit: OpUnitType, float?: boolean): number
+    diff(date: DateType, unit: OpUnitType, float?: boolean): number
 
     valueOf(): number
 
@@ -77,24 +80,24 @@ declare namespace dayjs {
 
     toString(): string
 
-    isBefore(dayjs: ConfigType, unit?: OpUnitType): boolean
+    isBefore(date: DateType, unit?: OpUnitType): boolean
 
-    isSame(dayjs: ConfigType, unit?: OpUnitType): boolean
+    isSame(date: DateType, unit?: OpUnitType): boolean
 
-    isAfter(dayjs: ConfigType, unit?: OpUnitType): boolean
+    isAfter(date: DateType, unit?: OpUnitType): boolean
 
     isLeapYear(): boolean
 
-    locale(arg1: any, arg2?: any): Dayjs
+    locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }): Dayjs
   }
 
-  export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
+  export type PluginFunc = (option: any, c: typeof Dayjs, d: typeof dayjs) => void
 
-  export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs
+  export function extend(plugin: PluginFunc, option?: any): Dayjs
 
-  export function locale(arg1: any, arg2?: any): string
+  export function locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }, isLocal?: boolean): string
 
   export function isDayjs(d: any): d is Dayjs
-  
+
   export function unix(t: number): Dayjs
 }

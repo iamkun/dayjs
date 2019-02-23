@@ -15,6 +15,7 @@ coverage
 # dev
 src
 test
+types
 build
 .babelrc
 .eslintrc.json
