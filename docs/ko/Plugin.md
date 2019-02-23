@@ -262,7 +262,7 @@ dayjs.extend(customParseFormat)
 dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
 // Returns an instance containing '1969-05-02T18:02:03.000Z'
 
-dayjs('2018 5월 15', { format: 'YYYY MMMM DD', locale: 'ko' })
+dayjs('2018 5월 15', 'YYYY MMMM DD', 'ko')
 // Returns an instance containing '2018-05-15T00:00:00.000Z'
 ```
 
