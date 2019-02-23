@@ -83,8 +83,6 @@ declare namespace dayjs {
 
     isAfter(date: ConfigType, unit?: OpUnitType): boolean
 
-    isLeapYear(): boolean
-
     locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }): Dayjs
   }
 

@@ -1,10 +1,10 @@
-import { PluginFunc, DateType } from 'dayjs'
+import { PluginFunc, ConfigType } from 'dayjs'
 
 declare const plugin: PluginFunc
 export = plugin
 
 declare module 'dayjs' {
   interface Dayjs {
-    isBetween(a: DateType, b: DateType): boolean
+    isBetween(a: ConfigType, b: ConfigType): boolean
   }
 }
