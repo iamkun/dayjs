@@ -8,6 +8,7 @@ const locale = {
   months: 'Januari_Februari_Machi_Aprili_Mei_Juni_Julai_Agosti_Septemba_Oktoba_Novemba_Desemba'.split('_'),
   monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ago_Sep_Okt_Nov_Des'.split('_'),
   weekStart: 1,
+  ordinal: n => n,
   relativeTime: {
     future: 'kwa %s',
     past: '%s iliyopita',
