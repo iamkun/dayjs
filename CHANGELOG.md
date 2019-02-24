@@ -1,3 +1,14 @@
+## [1.8.7](https://github.com/iamkun/dayjs/compare/v1.8.6...v1.8.7) (2019-02-24)
+
+
+### Bug Fixes
+
+* Add plugin type definitions ([#418](https://github.com/iamkun/dayjs/issues/418)) ([361d437](https://github.com/iamkun/dayjs/commit/361d437))
+* Add Swahili locale ([#508](https://github.com/iamkun/dayjs/issues/508)) ([b9cee84](https://github.com/iamkun/dayjs/commit/b9cee84))
+* Parse month string 'MMMM MMM (February, Feb)' in customParseFormat ([#457](https://github.com/iamkun/dayjs/issues/457)) ([f343206](https://github.com/iamkun/dayjs/commit/f343206))
+* Update declaration file .diff .isBefore .isSame .isAfter ([#496](https://github.com/iamkun/dayjs/issues/496)) ([4523275](https://github.com/iamkun/dayjs/commit/4523275))
+* Word orders corrections for locale 'fa' ([#491](https://github.com/iamkun/dayjs/issues/491)) ([56050c2](https://github.com/iamkun/dayjs/commit/56050c2))
+
 ## [1.8.6](https://github.com/iamkun/dayjs/compare/v1.8.5...v1.8.6) (2019-02-14)
 
 
