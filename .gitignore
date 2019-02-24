@@ -17,6 +17,7 @@ coverage
 /plugin
 dayjs.min.js
 /esm
+index.d.ts
 
 #dev
 demo.js

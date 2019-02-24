@@ -28,12 +28,12 @@ const parseLocale = (preset, object, isLocal) => {
   return l
 }
 
-const dayjs = (date, c) => {
+const dayjs = (date, c, pl) => {
   if (isDayjs(date)) {
     return date.clone()
   }
   // eslint-disable-next-line no-nested-ternary
-  const cfg = c ? (typeof c === 'string' ? { format: c } : c) : {}
+  const cfg = c ? (typeof c === 'string' ? { format: c, pl } : c) : {}
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
@@ -46,34 +46,31 @@ Utils.isDayjs = isDayjs
 Utils.wrapper = wrapper
 
 const parseDate = (date) => {
-  let reg
-  if (date === null) return new Date(NaN) // Treat null as an invalid date
-  if (Utils.isUndefined(date)) return new Date()
+  if (date === null) return new Date(NaN) // null is invalid
+  if (Utils.isUndefined(date)) return new Date() // today
   if (date instanceof Date) return date
-  // eslint-disable-next-line no-cond-assign
-  if ((typeof date === 'string')
-    && (/.*[^Z]$/i.test(date)) // looking for a better way
-    && (reg = date.match(C.REGEX_PARSE))) {
-    // 2018-08-08 or 20180808
-    return new Date(
-      reg[1], reg[2] - 1, reg[3] || 1,
-      reg[4] || 0, reg[5] || 0, reg[6] || 0, reg[7] || 0
-    )
+  if (typeof date === 'string' && !/Z$/i.test(date)) {
+    const d = date.match(C.REGEX_PARSE)
+    if (d) {
+      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+    }
   }
-  return new Date(date) // timestamp
+
+  return new Date(date) // everything else
 }
 
 class Dayjs {
   constructor(cfg) {
+    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
     this.parse(cfg) // for plugin
   }
 
   parse(cfg) {
     this.$d = parseDate(cfg.date)
-    this.init(cfg)
+    this.init()
   }
 
-  init(cfg) {
+  init() {
     const { $d } = this
     this.$y = $d.getFullYear()
     this.$M = $d.getMonth()
@@ -83,7 +80,6 @@ class Dayjs {
     this.$m = $d.getMinutes()
     this.$s = $d.getSeconds()
     this.$ms = $d.getMilliseconds()
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -412,5 +408,6 @@ dayjs.unix = timestamp => (
 )
 
 dayjs.en = Ls[L]
+dayjs.Ls = Ls
 
 export default dayjs

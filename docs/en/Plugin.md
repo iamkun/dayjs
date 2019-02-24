@@ -25,10 +25,10 @@ dayjs.extend(plugin, options) // with plugin options
 - Via NPM:
 
 ```javascript
-import dayjs from "dayjs";
-import AdvancedFormat from "dayjs/plugin/advancedFormat"; // load on demand
+import dayjs from 'dayjs'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
 
-dayjs.extend(AdvancedFormat); // use plugin
+dayjs.extend(AdvancedFormat) // use plugin
 ```
 
 - Via CDN:
@@ -38,7 +38,7 @@ dayjs.extend(AdvancedFormat); // use plugin
 <!-- Load plugin as window.dayjs_plugin_NAME -->
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat"></script>
 <script>
-  dayjs.extend(dayjs_plugin_advancedFormat);
+  dayjs.extend(dayjs_plugin_advancedFormat)
 </script>
 ```
 
@@ -49,11 +49,11 @@ dayjs.extend(AdvancedFormat); // use plugin
 - AdvancedFormat extends `dayjs().format` API to supply more format options.
 
 ```javascript
-import advancedFormat from "dayjs/plugin/advancedFormat";
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 
-dayjs.extend(advancedFormat);
+dayjs.extend(advancedFormat)
 
-dayjs().format("Q Do k kk X x");
+dayjs().format('Q Do k kk X x')
 ```
 
 List of added formats:
@@ -68,7 +68,8 @@ List of added formats:
 | `x`    | 1360013296123    | Unix Timestamp in millisecond      |
 
 ### LocalizedFormat
- - LocalizedFormat extends `dayjs().format` API to supply localized format options.
+
+- LocalizedFormat extends `dayjs().format` API to supply localized format options.
 
 ```javascript
 import LocalizedFormat from 'dayjs/plugin/localizedFormat'
@@ -94,18 +95,18 @@ List of added formats:
 - RelativeTime adds `.from` `.to` `.fromNow` `.toNow` APIs to formats date to relative time strings (e.g. 3 hours ago).
 
 ```javascript
-import relativeTime from "dayjs/plugin/relativeTime";
+import relativeTime from 'dayjs/plugin/relativeTime'
 
-dayjs.extend(relativeTime);
+dayjs.extend(relativeTime)
 
-dayjs().from(dayjs("1990")); // 2 years ago
-dayjs().from(dayjs(), true); // 2 years
+dayjs().from(dayjs('1990')) // 2 years ago
+dayjs().from(dayjs(), true) // 2 years
 
-dayjs().fromNow();
+dayjs().fromNow()
 
-dayjs().to(dayjs());
+dayjs().to(dayjs())
 
-dayjs().toNow();
+dayjs().toNow()
 ```
 
 #### Time from now `.fromNow(withoutSuffix?: boolean)`
@@ -143,11 +144,11 @@ Returns the `string` of relative time to X.
 - IsLeapYear adds `.isLeapYear` API to returns a `boolean` indicating whether the `Dayjs`'s year is a leap year or not.
 
 ```javascript
-import isLeapYear from "dayjs/plugin/isLeapYear";
+import isLeapYear from 'dayjs/plugin/isLeapYear'
 
-dayjs.extend(isLeapYear);
+dayjs.extend(isLeapYear)
 
-dayjs("2000-01-01").isLeapYear(); // true
+dayjs('2000-01-01').isLeapYear() // true
 ```
 
 ### BuddhistEra
@@ -157,11 +158,11 @@ dayjs("2000-01-01").isLeapYear(); // true
 - To calculate BE year manually, just add 543 to year. For example 26 May 1977 AD/CE should display as 26 May 2520 BE (1977 + 543)
 
 ```javascript
-import buddhistEra from "dayjs/plugin/buddhistEra";
+import buddhistEra from 'dayjs/plugin/buddhistEra'
 
-dayjs.extend(buddhistEra);
+dayjs.extend(buddhistEra)
 
-dayjs().format("BBBB BB");
+dayjs().format('BBBB BB')
 ```
 
 List of added formats:
@@ -176,11 +177,11 @@ List of added formats:
 - IsSameOrAfter adds `.isSameOrAfter()` API to returns a `boolean` indicating if a date is same of after another date.
 
 ```javascript
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 
-dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrAfter)
 
-dayjs("2010-10-20").isSameOrAfter("2010-10-19", "year");
+dayjs('2010-10-20').isSameOrAfter('2010-10-19', 'year')
 ```
 
 ### IsSameOrBefore
@@ -188,11 +189,11 @@ dayjs("2010-10-20").isSameOrAfter("2010-10-19", "year");
 - IsSameOrBefore adds `.isSameOrBefore()` API to returns a `boolean` indicating if a date is same of before another date.
 
 ```javascript
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 
-dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrBefore)
 
-dayjs("2010-10-20").isSameOrBefore("2010-10-19", "year");
+dayjs('2010-10-20').isSameOrBefore('2010-10-19', 'year')
 ```
 
 ### IsBetween
@@ -200,12 +201,12 @@ dayjs("2010-10-20").isSameOrBefore("2010-10-19", "year");
 - IsBetween adds `.isBetween()` API to returns a `boolean` indicating if a date is between two other dates.
 
 ```javascript
-import isBetween from "dayjs/plugin/isBetween";
+import isBetween from 'dayjs/plugin/isBetween'
 
-dayjs.extend(isBetween);
+dayjs.extend(isBetween)
 
-dayjs("2010-10-20").isBetween("2010-10-19", dayjs("2010-10-25"), "year");
-dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', null, '[)'); 
+dayjs('2010-10-20').isBetween('2010-10-19', dayjs('2010-10-25'), 'year')
+dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', null, '[)')
 // '[' indicates inclusion, '(' indicates exclusion
 ```
 
@@ -214,12 +215,12 @@ dayjs('2016-10-30').isBetween('2016-01-01', '2016-10-30', null, '[)');
 - DayOfYear adds `.dayOfYear()` API to returns a `number` indicating the `Dayjs`'s day of the year, or to set the day of the year.
 
 ```javascript
-import dayOfYear from "dayjs/plugin/dayOfYear";
+import dayOfYear from 'dayjs/plugin/dayOfYear'
 
-dayjs.extend(dayOfYear);
+dayjs.extend(dayOfYear)
 
-dayjs("2010-01-01").dayOfYear(); // 1
-dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
+dayjs('2010-01-01').dayOfYear() // 1
+dayjs('2010-01-01').dayOfYear(365) // 2010-12-31
 ```
 
 ### WeekOfYear
@@ -227,11 +228,11 @@ dayjs("2010-01-01").dayOfYear(365); // 2010-12-31
 - WeekOfYear adds `.week()` API to returns a `number` indicating the `Dayjs`'s week of the year.
 
 ```javascript
-import weekOfYear from "dayjs/plugin/weekOfYear";
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 
-dayjs.extend(weekOfYear);
+dayjs.extend(weekOfYear)
 
-dayjs("2018-06-27").week(); // 26
+dayjs('2018-06-27').week() // 26
 ```
 
 ### QuarterOfYear
@@ -239,11 +240,11 @@ dayjs("2018-06-27").week(); // 26
 - QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date
 
 ```javascript
-import quarterOfYear from "dayjs/plugin/quarterOfYear";
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 
-dayjs.extend(quarterOfYear);
+dayjs.extend(quarterOfYear)
 
-dayjs("2010-04-01").quarter(); // 2
+dayjs('2010-04-01').quarter() // 2
 ```
 
 ### CustomParseFormat
@@ -253,39 +254,44 @@ dayjs("2010-04-01").quarter(); // 2
 To escape characters, wrap them in square brackets (e.g. `[G]`). Punctuation symbols (-:/.()) do not need to be wrapped.
 
 ```javascript
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
-dayjs.extend(customParseFormat);
+dayjs.extend(customParseFormat)
 
-dayjs("05/02/69 1:02:03 PM -05:00", "MM/DD/YY H:mm:ss A Z");
+dayjs('05/02/69 1:02:03 PM -05:00', 'MM/DD/YY H:mm:ss A Z')
 // Returns an instance containing '1969-05-02T18:02:03.000Z'
+
+dayjs('2018 Enero 15', 'YYYY MMMM DD', 'es')
+// Returns an instance containing '2018-01-15T00:00:00.000Z'
 ```
 
 #### List of all available format tokens
 
-| Format | Output  | Description                       |
-| ------ | ------- | --------------------------------- |
-| `YY`   | 18      | Two-digit year                    |
-| `YYYY` | 2018    | Four-digit year                   |
-| `M`    | 1-12    | Month, beginning at 1             |
-| `MM`   | 01-12   | Month, 2-digits                   |
-| `D`    | 1-31    | Day of month                      |
-| `DD`   | 01-31   | Day of month, 2-digits            |
-| `H`    | 0-23    | Hours                             |
-| `HH`   | 00-23   | Hours, 2-digits                   |
-| `h`    | 1-12    | Hours, 12-hour clock              |
-| `hh`   | 01-12   | Hours, 12-hour clock, 2-digits    |
-| `m`    | 0-59    | Minutes                           |
-| `mm`   | 00-59   | Minutes, 2-digits                 |
-| `s`    | 0-59    | Seconds                           |
-| `ss`   | 00-59   | Seconds, 2-digits                 |
-| `S`    | 0-9     | Hundreds of milliseconds, 1-digit |
-| `SS`   | 00-99   | Tens of milliseconds, 2-digits    |
-| `SSS`  | 000-999 | Milliseconds, 3-digits            |
-| `Z`    | -5:00   | Offset from UTC                   |
-| `ZZ`   | -0500   | Compact offset from UTC, 2-digits |
-| `A`    | AM PM   | Post or ante meridiem, upper-case |
-| `a`    | am pm   | Post or ante meridiem, lower-case |
+| Format | Output           | Description                       |
+| ------ | ---------------- | --------------------------------- |
+| `YY`   | 18               | Two-digit year                    |
+| `YYYY` | 2018             | Four-digit year                   |
+| `M`    | 1-12             | Month, beginning at 1             |
+| `MM`   | 01-12            | Month, 2-digits                   |
+| `MMM`  | Jan-Dec          | The abbreviated month name        |
+| `MMMM` | January-December | The full month name               |
+| `D`    | 1-31             | Day of month                      |
+| `DD`   | 01-31            | Day of month, 2-digits            |
+| `H`    | 0-23             | Hours                             |
+| `HH`   | 00-23            | Hours, 2-digits                   |
+| `h`    | 1-12             | Hours, 12-hour clock              |
+| `hh`   | 01-12            | Hours, 12-hour clock, 2-digits    |
+| `m`    | 0-59             | Minutes                           |
+| `mm`   | 00-59            | Minutes, 2-digits                 |
+| `s`    | 0-59             | Seconds                           |
+| `ss`   | 00-59            | Seconds, 2-digits                 |
+| `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
+| `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
+| `SSS`  | 000-999          | Milliseconds, 3-digits            |
+| `Z`    | -5:00            | Offset from UTC                   |
+| `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
+| `A`    | AM PM            | Post or ante meridiem, upper-case |
+| `a`    | am pm            | Post or ante meridiem, lower-case |
 
 ## Customize
 
@@ -299,19 +305,19 @@ Template of a Day.js plugin.
 export default (option, dayjsClass, dayjsFactory) => {
   // extend dayjs()
   // e.g. add dayjs().isSameOrBefore()
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {};
+  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
 
   // extend dayjs
   // e.g. add dayjs.utc()
-  dayjsFactory.utc = arguments => {};
+  dayjsFactory.utc = arguments => {}
 
   // overriding existing API
   // e.g. extend dayjs().format()
-  const oldFormat = dayjsClass.prototype.format;
+  const oldFormat = dayjsClass.prototype.format
   dayjsClass.prototype.format = function(arguments) {
     // original format result
-    const result = oldFormat(arguments);
+    const result = oldFormat(arguments)
     // return modified result
-  };
-};
+  }
+}
 ```

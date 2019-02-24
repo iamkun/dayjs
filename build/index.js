@@ -3,6 +3,7 @@ const configFactory = require('./rollup.config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
+const { ncp } = require('ncp')
 
 const { promisify } = util
 
@@ -39,6 +40,10 @@ async function build(option) {
       input: './src/index.js',
       fileName: './dayjs.min.js'
     }))
+
+    ncp('./types/', './', (err) => {
+      if (err) { throw err }
+    })
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
   }

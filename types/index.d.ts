@@ -1,10 +1,10 @@
 export = dayjs;
-declare function dayjs (config?: dayjs.ConfigType, option?: dayjs.OptionType): dayjs.Dayjs
+declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType, locale?: string): dayjs.Dayjs
 
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
 
-  export type OptionType = { locale: string }
+  export type OptionType = { locale?: string, format?: string } | string
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
@@ -57,7 +57,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(dayjs: Dayjs, unit: OpUnitType, float?: boolean): number
+    diff(date: ConfigType, unit: OpUnitType, float?: boolean): number
 
     valueOf(): number
 
@@ -77,24 +77,22 @@ declare namespace dayjs {
 
     toString(): string
 
-    isBefore(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isBefore(date: ConfigType, unit?: OpUnitType): boolean
 
-    isSame(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isSame(date: ConfigType, unit?: OpUnitType): boolean
 
-    isAfter(dayjs: Dayjs, unit?: OpUnitType): boolean
+    isAfter(date: ConfigType, unit?: OpUnitType): boolean
 
-    isLeapYear(): boolean
-
-    locale(arg1: any, arg2?: any): Dayjs
+    locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }): Dayjs
   }
 
-  export type PluginFunc = (option: ConfigType, d1: Dayjs, d2: Dayjs) => void
+  export type PluginFunc = (option: any, c: typeof Dayjs, d: typeof dayjs) => void
 
-  export function extend(plugin: PluginFunc, option?: ConfigType): Dayjs
+  export function extend(plugin: PluginFunc, option?: any): Dayjs
 
-  export function locale(arg1: any, arg2?: any): string
+  export function locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }, isLocal?: boolean): string
 
   export function isDayjs(d: any): d is Dayjs
-  
+
   export function unix(t: number): Dayjs
 }
