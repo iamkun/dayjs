@@ -31,7 +31,7 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
-  }  
+  }
 }
 
 dayjs.locale(locale, null, true)
