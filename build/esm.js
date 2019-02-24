@@ -16,6 +16,6 @@ const localeDir = path.join(process.env.PWD, 'esm/locale');
       await promisify(fs.writeFile)(filePath, result, 'utf8')
     })
   } catch (e) {
-    console.error(e)
+    console.error(e) // eslint-disable-line no-console
   }
 })()
