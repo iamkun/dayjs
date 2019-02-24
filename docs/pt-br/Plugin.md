@@ -233,6 +233,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 
 dayjs('06/27/2018').week() // 26
+dayjs('2018-06-27').week(5) // set week
 ```
 
 ### QuarterOfYear

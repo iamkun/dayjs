@@ -233,6 +233,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 
 dayjs('06/27/2018').week() // 26
+dayjs('2018-06-27').week(5) // 设置周
 ```
 
 ### QuarterOfYear
@@ -267,7 +268,7 @@ dayjs('2018 五月 15', 'YYYY MMMM DD', 'zh_cn')
 
 #### List of all available format tokens
 
-| Format | Output           | Description                       |
+| 格式   | 输出             | 描述                              |
 | ------ | ---------------- | --------------------------------- |
 | `YY`   | 18               | Two-digit year                    |
 | `YYYY` | 2018             | Four-digit year                   |
