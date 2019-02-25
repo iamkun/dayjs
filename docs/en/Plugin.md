@@ -62,8 +62,8 @@ List of added formats:
 | ------ | ---------------- | ---------------------------------- |
 | `Q`    | 1-4              | Quarter                            |
 | `Do`   | 1st 2nd ... 31st | Day of Month with ordinal          |
-| `k`    | 1-23             | The hour, beginning at 1           |
-| `kk`   | 01-23            | The hour, 2-digits, beginning at 1 |
+| `k`    | 1-24             | The hour, beginning at 1           |
+| `kk`   | 01-24            | The hour, 2-digits, beginning at 1 |
 | `X`    | 1360013296       | Unix Timestamp in second           |
 | `x`    | 1360013296123    | Unix Timestamp in millisecond      |
 
