@@ -62,8 +62,8 @@ Lista de formatos añadidos:
 | ------- | ------------- | ------------------------------------- |
 | `Q`     | 1-4           | Cuarto                                |
 | `Do`    | 1º 2º ... 31º | Día del mes con ordinal               |
-| `k`     | 1-23          | Hora, contando desde 1                |
-| `kk`    | 01-23         | Hora, con 2 dígitos, contando desde 1 |
+| `k`     | 1-24          | Hora, contando desde 1                |
+| `kk`    | 01-24         | Hora, con 2 dígitos, contando desde 1 |
 | `X`     | 1360013296    | Tiempo Unix en segundos               |
 | `x`     | 1360013296123 | Tiempo Unix en milisegundos           |
 
@@ -233,6 +233,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 
 dayjs('2018-06-27').week() // 26
+dayjs('2018-06-27').week(5) // set week
 ```
 
 ### QuarterOfYear

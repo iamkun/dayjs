@@ -62,8 +62,8 @@ dayjs().format('Q Do k kk X x')
 | ------------ | ---------------- | ---------------------------- |
 | `Q`          | 1-4              | 四半期                       |
 | `Do`         | 1st 2nd ... 31st | 序数付きの日                 |
-| `k`          | 1-23             | 1 始まりの時間               |
-| `kk`         | 01-23            | 1 始まりで 2 桁の時間        |
+| `k`          | 1-24             | 1 始まりの時間               |
+| `kk`         | 01-24            | 1 始まりで 2 桁の時間        |
 | `X`          | 1360013296       | Unix タイムスタンプ (秒)     |
 | `x`          | 1360013296123    | Unix タイムスタンプ (ミリ秒) |
 
@@ -242,6 +242,7 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 dayjs.extend(weekOfYear)
 
 dayjs('06/27/2018').week() // 26
+dayjs('2018-06-27').week(5) // set week
 ```
 
 ### QuarterOfYear
