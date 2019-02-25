@@ -265,10 +265,9 @@ class Dayjs {
     const getShort = (arr, index, full, length) => (
       (arr && arr[index]) || full[index].substr(0, length)
     )
-    const get$H = (match) => {
-      if (this.$H === 0) return 12
-      return Utils.padStart(this.$H < 13 ? this.$H : this.$H - 12, match === 'hh' ? 2 : 1, '0')
-    }
+    const get$H = num => (
+      Utils.padStart(this.$H % 12 || 12, num, '0')
+    )
 
     const matches = {
       YY: String(this.$y).slice(-2),
@@ -285,8 +284,8 @@ class Dayjs {
       dddd: weekdays[this.$W],
       H: String(this.$H),
       HH: Utils.padStart(this.$H, 2, '0'),
-      h: get$H('h'),
-      hh: get$H('hh'),
+      h: get$H(1),
+      hh: get$H(2),
       a: this.$H < 12 ? 'am' : 'pm',
       A: this.$H < 12 ? 'AM' : 'PM',
       m: String(this.$m),
