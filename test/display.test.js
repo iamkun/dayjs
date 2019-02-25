@@ -50,27 +50,39 @@ it('Format Hour H HH 24-hour', () => {
 })
 
 it('Format Hour h hh 12-hour', () => {
-  MockDate.set(new Date('2018-05-02T00:00:00.000'))
-  expect(dayjs().format('h')).toBe(moment().format('h'))
-  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+  const time = '2018-05-02T00:00:00.000'
+  const expected = '12'
+  expect(dayjs(time).format('h')).toBe(expected)
+  expect(dayjs(time).format('h')).toBe(moment(time).format('h'))
+  expect(dayjs(time).format('hh')).toBe(expected)
+  expect(dayjs(time).format('hh')).toBe(moment(time).format('hh'))
 
-  MockDate.set(new Date('2018-05-02T01:00:00.000'))
-  expect(dayjs().format('h')).toBe(moment().format('h'))
-  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+  const time2 = '2018-05-02T01:00:00.000'
+  expect(dayjs(time2).format('h')).toBe(moment(time2).format('h'))
+  expect(dayjs(time2).format('h')).toBe('1')
+  expect(dayjs(time2).format('hh')).toBe(moment(time2).format('hh'))
+  expect(dayjs(time2).format('hh')).toBe('01')
 
-  MockDate.set(new Date('2018-05-02T23:00:00.000'))
-  expect(dayjs().format('h')).toBe(moment().format('h'))
-  expect(dayjs().format('hh')).toBe(moment().format('hh'))
+  const time3 = '2018-05-02T23:00:00.000'
+  const expected3 = '11'
+  expect(dayjs(time3).format('h')).toBe(moment(time3).format('h'))
+  expect(dayjs(time3).format('h')).toBe(expected3)
+  expect(dayjs(time3).format('hh')).toBe(moment(time3).format('hh'))
+  expect(dayjs(time3).format('hh')).toBe(expected3)
 })
 
 it('Format meridiens a A am / pm', () => {
-  MockDate.set(new Date('2018-05-02T01:00:00.000'))
-  expect(dayjs().format('a')).toBe(moment().format('a'))
-  expect(dayjs().format('A')).toBe(moment().format('A'))
+  const time = '2018-05-02T01:00:00.000'
+  expect(dayjs(time).format('a')).toBe('am')
+  expect(dayjs(time).format('a')).toBe(moment(time).format('a'))
+  expect(dayjs(time).format('A')).toBe('AM')
+  expect(dayjs(time).format('A')).toBe(moment(time).format('A'))
 
-  MockDate.set(new Date('2018-05-02T23:00:00.000'))
-  expect(dayjs().format('a')).toBe(moment().format('a'))
-  expect(dayjs().format('A')).toBe(moment().format('A'))
+  const time2 = '2018-05-02T23:00:00.000'
+  expect(dayjs(time2).format('a')).toBe('pm')
+  expect(dayjs(time2).format('a')).toBe(moment(time2).format('a'))
+  expect(dayjs(time2).format('A')).toBe('PM')
+  expect(dayjs(time2).format('A')).toBe(moment(time2).format('A'))
 })
 
 it('Format Minute m mm', () => {
