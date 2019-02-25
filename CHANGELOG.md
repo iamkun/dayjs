@@ -1,3 +1,10 @@
+## [1.8.8](https://github.com/iamkun/dayjs/compare/v1.8.7...v1.8.8) (2019-02-25)
+
+
+### Bug Fixes
+
+* Update relativeTime plugin type definition ([de56f2c](https://github.com/iamkun/dayjs/commit/de56f2c))
+
 ## [1.8.7](https://github.com/iamkun/dayjs/compare/v1.8.6...v1.8.7) (2019-02-24)
 
 
