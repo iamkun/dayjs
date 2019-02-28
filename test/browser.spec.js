@@ -20,10 +20,12 @@ describe('Core APIs', function () {
       .format('{YYYY} MM-DDTHH:mm:ss')).toBe('{2010} 04-25T00:00:00')
   })
 
-  it('Date parse - nonstandard date string with only one digit', function () {
-    expect(dayjs('2018-4-1 1:1:1:22').isValid())
-      .toBe(true)
-    expect(dayjs('2018-4-1').isValid())
-      .toBe(true)
+  it('Date parse - nonstandard date string', function () {
+    expect(dayjs('2018-4-1 1:1:1:22').format('YYYY-MM-DD hh:mm:ss'))
+      .toBe('2018-04-01 01:01:01')
+    expect(dayjs('2018-4-1').format('YYYY-MM-DD hh:mm:ss'))
+      .toBe('2018-04-01 12:00:00')
+    expect(dayjs('2018-4-1 11:49').format('YYYY-MM-DD hh:mm:ss')) // fix ios bug
+      .toBe('2018-04-01 11:49:00')
   })
 })

@@ -24,15 +24,19 @@
 > Day.js es una librería JavaScript minimalista que analiza, valida, manipula y muestra fechas y horas para navegadores modernos, manteniendo una API casi totalmente compatible con Moment.js. Si usas Moment.js, ya sabes usar Day.js.
 
 ```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+dayjs()
+  .startOf('month')
+  .add(1, 'day')
+  .set('year', 2018)
+  .format('YYYY-MM-DD HH:mm:ss')
 ```
 
-* 🕒 API & patrones familiares para usuarios de Moment.js
-* 💪 Inmutable
-* 🔥 Encadenable
-* 🌐 Soporta I18n
-* 📦 Mini librería de 2kb
-* 👫 Compatible con todos los navegadores
+- 🕒 API & patrones familiares para usuarios de Moment.js
+- 💪 Inmutable
+- 🔥 Encadenable
+- 🌐 Soporta I18n
+- 📦 Mini librería de 2kb
+- 👫 Compatible con todos los navegadores
 
 ---
 
@@ -55,7 +59,9 @@ dayjs('2018-08-08') // analiza
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // da formato
 
-dayjs().set('month', 3).month() // get & set
+dayjs()
+  .set('month', 3)
+  .month() // get & set
 
 dayjs().add(1, 'year') // manipula
 
@@ -75,14 +81,16 @@ import 'dayjs/locale/es' // carga bajo demanda
 
 dayjs.locale('es') // usar la configuración regional española globalmente
 
-dayjs('2018-05-05').locale('zh-cn').format() // usar el chino simplificado en una instancia concreta
+dayjs('2018-05-05')
+  .locale('zh-cn')
+  .format() // usar el chino simplificado en una instancia concreta
 ```
 
 📚[Internacionalización](./I18n.md)
 
 ## Complementos
 
-Un complemento o *plugin* es un módulo independiente que puede añadirse a Day.js para extender su funcionalidad o añadir nuevas características.
+Un complemento o _plugin_ es un módulo independiente que puede añadirse a Day.js para extender su funcionalidad o añadir nuevas características.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // carga bajo demanda

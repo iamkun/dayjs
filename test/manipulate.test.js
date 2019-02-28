@@ -1,6 +1,8 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import '../src/locale/zh-cn'
+import '../src/locale/ar'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -23,6 +25,19 @@ describe('StartOf EndOf', () => {
   it('StartOf EndOf Other -> no change', () => {
     expect(dayjs().startOf('otherString').valueOf()).toBe(moment().startOf('otherString').valueOf())
     expect(dayjs().endOf('otherString').valueOf()).toBe(moment().endOf('otherString').valueOf())
+  })
+
+  it('StartOf week with locale', () => {
+    const testDate = [undefined, '2019-02-10', '2019-02-11', '2019-02-12', '2019-02-13', '2019-02-14', '2019-02-15', '2019-02-16']
+    const testLocale = ['zh-cn', 'ar', 'en']
+    testDate.forEach((d) => {
+      testLocale.forEach((l) => {
+        expect(dayjs(d).locale(l).startOf('week').date())
+          .toBe(moment(d).locale(l).startOf('week').date())
+        expect(dayjs(d).locale(l).endOf('week').date())
+          .toBe(moment(d).locale(l).endOf('week').date())
+      })
+    })
   })
 })
 
@@ -51,14 +66,4 @@ it('Add Time days', () => {
 
 it('Subtract Time days', () => {
   expect(dayjs().subtract(1, 'days').valueOf()).toBe(moment().subtract(1, 'days').valueOf())
-})
-
-it('Add Time days (DST)', () => {
-  // change timezone before running test
-  // New Zealand (-720)
-  expect(dayjs('2018-04-01').add(1, 'd').format()).toBe(moment('2018-04-01').add(1, 'd').format())
-  expect(dayjs('2018-03-28').add(1, 'w').format()).toBe(moment('2018-03-28').add(1, 'w').format())
-  // London (-60)
-  expect(dayjs('2018-10-28').add(1, 'd').format()).toBe(moment('2018-10-28').add(1, 'd').format())
-  expect(dayjs('2018-10-26').add(1, 'w').format()).toBe(moment('2018-10-26').add(1, 'w').format())
 })

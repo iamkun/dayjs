@@ -19,10 +19,12 @@ it('Locale keys', () => {
       ordinal,
       weekdays,
       months,
+      formats,
       relativeTime,
       weekdaysShort,
       monthsShort,
-      weekdaysMin
+      weekdaysMin,
+      weekStart
     } = l
     expect(name).toEqual(expect.any(String))
     expect(weekdays).toEqual(expect.any(Array))
@@ -30,12 +32,20 @@ it('Locale keys', () => {
     if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
     if (monthsShort) expect(monthsShort).toEqual(expect.any(Array))
     if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array))
+    if (weekStart) expect(weekStart).toEqual(expect.any(Number))
 
     expect(months).toEqual(expect.any(Array))
     // function pass date return string or number or null
-    expect(ordinal(1)).toEqual(expect.anything())
-    expect(ordinal(3)).toEqual(expect.anything())
+    if (name !== 'en') { // en ordinal set in advancedFormat
+      for (let i = 1; i <= 31; i += 1) {
+        expect(ordinal(i)).toEqual(expect.anything())
+      }
+    }
+
     expect(dayjs().locale(name).$locale().name).toBe(name)
+    if (formats) {
+      expect(Object.keys(formats).sort()).toEqual(['L', 'LL', 'LLL', 'LLLL', 'LT', 'LTS'].sort())
+    }
     if (relativeTime) {
       expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
         'past', 's', 'y', 'yy']

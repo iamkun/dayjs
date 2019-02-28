@@ -50,7 +50,18 @@ it('Format Hour k kk 24-hour 1 - 24', () => {
   expect(dayjs().format('k')).toBe(moment().format('k'))
   expect(dayjs().format('kk')).toBe(moment().format('kk'))
   let d = '2018-05-02 00:00:00.000'
+  expect(dayjs(d).format('k')).toBe('24')
   expect(dayjs(d).format('k')).toBe(moment(d).format('k'))
+  expect(dayjs(d).format('kk')).toBe('24')
+  expect(dayjs(d).format('kk')).toBe(moment(d).format('kk'))
   d = '2018-05-02 01:00:00.000'
+  expect(dayjs(d).format('k')).toBe('1')
   expect(dayjs(d).format('k')).toBe(moment(d).format('k'))
+  expect(dayjs(d).format('kk')).toBe('01')
+  expect(dayjs(d).format('kk')).toBe(moment(d).format('kk'))
+  d = '2018-05-02 23:59:59.999'
+  expect(dayjs(d).format('k')).toBe('23')
+  expect(dayjs(d).format('k')).toBe(moment(d).format('k'))
+  expect(dayjs(d).format('kk')).toBe('23')
+  expect(dayjs(d).format('kk')).toBe(moment(d).format('kk'))
 })

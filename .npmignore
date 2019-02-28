@@ -15,8 +15,10 @@ coverage
 # dev
 src
 test
+types
 build
-.babelrc
+babel.config.js
+prettier.config.js
 .eslintrc.json
 
 #doc
@@ -26,3 +28,4 @@ docs
 #other
 .travis.yml
 karma.sauce.conf.js
+.github

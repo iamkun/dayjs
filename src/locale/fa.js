@@ -5,20 +5,28 @@ const locale = {
   weekdays: 'یک‌شنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنج‌شنبه_جمعه_شنبه'.split('_'),
   months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split('_'),
   ordinal: n => n,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'DD/MM/YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd, D MMMM YYYY HH:mm'
+  },
   relativeTime: {
-    future: '%s در',
-    past: 'پیش %s',
+    future: 'در %s',
+    past: '%s پیش',
     s: 'چند ثانیه',
     m: 'یک دقیقه',
-    mm: 'دقیقه %d',
+    mm: '%d دقیقه',
     h: 'یک ساعت',
-    hh: 'ساعت %d',
+    hh: '%d ساعت',
     d: 'یک روز',
-    dd: 'روز %d',
+    dd: '%d روز',
     M: 'یک ماه',
-    MM: 'ماه %d',
+    MM: '%d ماه',
     y: 'یک سال',
-    yy: 'سال %d'
+    yy: '%d سال'
   }
 }
 
