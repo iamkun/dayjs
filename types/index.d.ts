@@ -4,7 +4,7 @@ declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType, loca
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
 
-  export type OptionType = { locale?: string, format?: string } | string
+  export type OptionType = { locale?: string, format?: string, utc?: boolean } | string
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
@@ -76,6 +76,8 @@ declare namespace dayjs {
     toObject(): DayjsObject
 
     toString(): string
+
+    utcOffset(): number
 
     isBefore(date: ConfigType, unit?: OpUnitType): boolean
 

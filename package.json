@@ -14,7 +14,7 @@
     "build": "cross-env BABEL_ENV=build node build && npm run size",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit && gzip-size dayjs.min.js"
+    "size": "size-limit && gzip-size dayjs.min.js && ls -l dayjs.min.js"
   },
   "pre-commit": [
     "lint"

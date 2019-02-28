@@ -1,10 +1,8 @@
 import Utils from '../src/utils'
 
-const {
-  prettyUnit,
-  padZoneStr,
-  padStart
-} = Utils
+const prettyUnit = Utils.p
+const padStart = Utils.s
+const padZoneStr = Utils.z
 
 it('PrettyUnit', () => {
   expect(prettyUnit('Days')).toBe('day')
@@ -14,12 +12,19 @@ it('PrettyUnit', () => {
 })
 
 it('PadZoneStr', () => {
-  expect(padZoneStr(0)).toBe('+00:00')
-  expect(padZoneStr(1 * 60)).toBe('-01:00')
-  expect(padZoneStr(-1 * 60)).toBe('+01:00')
-  expect(padZoneStr(-10 * 60)).toBe('+10:00')
-  expect(padZoneStr(10 * 60)).toBe('-10:00')
-  expect(padZoneStr((-5 * 60) - 30)).toBe('+05:30')
+  const instance = {}
+  instance.utcOffset = () => 0 * -1
+  expect(padZoneStr(instance)).toBe('+00:00')
+  instance.utcOffset = () => 1 * 60 * -1
+  expect(padZoneStr(instance)).toBe('-01:00')
+  instance.utcOffset = () => -1 * 60 * -1
+  expect(padZoneStr(instance)).toBe('+01:00')
+  instance.utcOffset = () => -10 * 60 * -1
+  expect(padZoneStr(instance)).toBe('+10:00')
+  instance.utcOffset = () => 10 * 60 * -1
+  expect(padZoneStr(instance)).toBe('-10:00')
+  instance.utcOffset = () => ((-5 * 60) - 30) * -1
+  expect(padZoneStr(instance)).toBe('+05:30')
 })
 
 it('PadStart', () => {
