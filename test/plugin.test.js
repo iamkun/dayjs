@@ -30,5 +30,6 @@ it('Plugin extend dayjs', () => {
 })
 
 it('Plugin use core utils', () => {
-  expect(dayjs().$utils().isUndefined).toBeInstanceOf(Function)
+  // u => isUndefined
+  expect(dayjs().$utils().u).toBeInstanceOf(Function)
 })

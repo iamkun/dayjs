@@ -135,7 +135,7 @@ function makeParser(format) {
   }
 }
 
-const parseFormattedInput = (input, format) => {
+const parseFormattedInput = (input, format, utc) => {
   try {
     const parser = makeParser(format)
     const {
@@ -149,10 +149,17 @@ const parseFormattedInput = (input, format) => {
       ) + (zone.offset * 60 * 1000))
     }
     const now = new Date()
-    return new Date(
-      year || now.getFullYear(), month > 0 ? month - 1 : now.getMonth(), day || now.getDate(),
-      hours || 0, minutes || 0, seconds || 0, milliseconds || 0
-    )
+    const y = year || now.getFullYear()
+    const M = month > 0 ? month - 1 : now.getMonth()
+    const d = day || now.getDate()
+    const h = hours || 0
+    const m = minutes || 0
+    const s = seconds || 0
+    const ms = milliseconds || 0
+    if (utc) {
+      return new Date(Date.UTC(y, M, d, h, m, s, ms))
+    }
+    return new Date(y, M, d, h, m, s, ms)
   } catch (e) {
     return new Date('') // Invalid Date
   }
@@ -163,10 +170,16 @@ export default (o, C, d) => {
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {
-    const { date: input, format, pl } = cfg
+    const {
+      date,
+      format,
+      pl,
+      utc
+    } = cfg
+    this.$u = utc
     if (format) {
       locale = pl ? d.Ls[pl] : this.$locale()
-      this.$d = parseFormattedInput(input, format)
+      this.$d = parseFormattedInput(date, format, utc)
       this.init(cfg)
     } else {
       oldParse.call(this, cfg)

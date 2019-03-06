@@ -22,7 +22,7 @@ export default (o, c, d) => { // locale needed later
         }
         case 'k':
         case 'kk':
-          return utils.padStart(String(this.$H === 0 ? 24 : this.$H), match === 'k' ? 1 : 2, '0')
+          return utils.s(String(this.$H === 0 ? 24 : this.$H), match === 'k' ? 1 : 2, '0')
         case 'X':
           return Math.floor(this.$d.getTime() / 1000)
         default: // 'x'
