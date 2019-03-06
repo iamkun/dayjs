@@ -1,3 +1,12 @@
+## [1.8.9](https://github.com/iamkun/dayjs/compare/v1.8.8...v1.8.9) (2019-03-06)
+
+
+### Bug Fixes
+
+* Add de-AT locale ([#515](https://github.com/iamkun/dayjs/issues/515)) ([d93f7b6](https://github.com/iamkun/dayjs/commit/d93f7b6))
+* Add UTC mode with UTC plugin ([#517](https://github.com/iamkun/dayjs/issues/517)) ([caf335c](https://github.com/iamkun/dayjs/commit/caf335c))
+* Adding locale zh-hk ([#516](https://github.com/iamkun/dayjs/issues/516)) ([5fc05a6](https://github.com/iamkun/dayjs/commit/5fc05a6))
+
 ## [1.8.8](https://github.com/iamkun/dayjs/compare/v1.8.7...v1.8.8) (2019-02-25)
 
 
