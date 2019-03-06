@@ -207,7 +207,7 @@ class Dayjs {
       [C.M]: `${utcPad}Month`,
       [C.Y]: `${utcPad}FullYear`,
       [C.H]: `${utcPad}Hours`,
-      [C.MIN]: `${utcPad}Minutes`, //  India GMT+5:30
+      [C.MIN]: `${utcPad}Minutes`,
       [C.S]: `${utcPad}Seconds`,
       [C.MS]: `${utcPad}Milliseconds`
     }[unit]
