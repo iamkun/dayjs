@@ -72,7 +72,7 @@ dayjs.utc('2018-01-01', 'YYYY-MM-DD') // with CustomParseFormat plugin
 
 By default, Day.js parses and displays in local time.
 
-If you want to parse or display in UTC, you can use dayjs.utc() instead of dayjs().
+If you want to parse or display in UTC, you can use `dayjs.utc()` instead of `dayjs()`.
 
 #### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string)`
 

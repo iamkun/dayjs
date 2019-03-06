@@ -44,6 +44,51 @@ dayjs.extend(advancedFormat) // 使用插件
 
 ## 官方插件列表
 
+### UTC
+
+- UTC 增加了 `.utc` `.local` `.isUTC` APIs 使用 UTC 模式来解析和展示时间.
+
+```javascript
+import utc from 'dayjs/plugin/utc'
+
+dayjs.extend(utc)
+
+// 默认当地时间
+dayjs().format() //2019-03-06T17:11:55+08:00
+// UTC 模式
+dayjs.utc().format() // 2019-03-06T09:11:55Z
+dayjs()
+  .utc()
+  .format() // 2019-03-06T09:11:55Z
+// 在 UTC 模式下，所有的展示方法都将使用 UTC 而不是本地时区
+// 所有的 get 和 set 方法也都会使用 Date#getUTC* 和 Date#setUTC* 而不是 Date#get* and Date#set*
+dayjs.utc().isUTC() // true
+dayjs
+  .utc()
+  .local()
+  .format() //2019-03-06T17:11:55+08:00
+dayjs.utc('2018-01-01', 'YYYY-MM-DD') // with CustomParseFormat plugin
+```
+
+Day.js 默认使用用户本地时区来解析和展示时间。
+如果想要使用 UTC 模式来解析和展示时间，可以使用 `dayjs.utc()` 而不是 `dayjs()`
+
+#### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string)`
+
+返回一个使用 UTC 模式的 `Dayjs` 对象。
+
+#### Use UTC time `.utc()`
+
+返回一个复制的包含使用 UTC 模式标记的 `Dayjs` 对象。
+
+#### Use local time `.local()`
+
+返回一个复制的包含使用本地时区标记的 `Dayjs` 对象。
+
+#### isUTC mode `.isUTC()`
+
+返回一个 `boolean` 来展示当前 `Dayjs` 对象是不是在 UTC 模式下。
+
 ### AdvancedFormat
 
 - AdvancedFormat 扩展了 `dayjs().format` API 以支持更多模版
@@ -141,7 +186,7 @@ dayjs().toNow()
 
 ## IsLeapYear
 
-- IsLeapYear 增加了 `.isLeapYear` API 返回一个 `boolean` 来展示一个 `Dayjs`'s 的年份是不是闰年.
+- IsLeapYear 增加了 `.isLeapYear` API 返回一个 `boolean` 来展示一个 `Dayjs`'s 的年份是不是闰年。
 
 ```javascript
 import isLeapYear from 'dayjs/plugin/isLeapYear'
@@ -153,7 +198,7 @@ dayjs('2000-01-01').isLeapYear() // true
 
 ### BuddhistEra
 
-- BuddhistEra 扩展了 `dayjs().format` API 以支持佛历格式化.
+- BuddhistEra 扩展了 `dayjs().format` API 以支持佛历格式化。
 - 佛历是一个年份编号系统，主要用于柬埔寨、老挝、缅甸和泰国等东南亚国家以及斯里兰卡、马来西亚和新加坡的中国人，用于宗教或官方场合（[Wikipedia]（https：//en.wikipedia.org/wiki/Buddhist_calendar））
 - 要计算 BE 年，只需在年份中添加 543。 例如，1977 年 5 月 26 日 AD / CE 应显示为 2520 年 5 月 26 日 BE（1977 + 543）
 
