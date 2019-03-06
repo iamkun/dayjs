@@ -48,6 +48,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared--dayjs-unit-string)
     - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared--dayjs-unit-string)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  - [UTC](#utc)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
@@ -442,6 +443,10 @@ The operator `instanceof` works equally well:
 ```js
 dayjs() instanceof dayjs // true
 ```
+
+## UTC
+
+If you want to parse or display in UTC, you can use `.utc` `.local` `.isUTC` with plugin [`UTC`](./Plugin.md#utc)
 
 ## Plugin APIs
 

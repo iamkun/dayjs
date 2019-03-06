@@ -48,26 +48,6 @@ dayjs.extend(AdvancedFormat) // use plugin
 
 - UTC adds `.utc` `.local` `.isUTC` APIs to parse or display in UTC.
 
-By default, Day.js parses and displays in local time.
-
-If you want to parse or display in UTC, you can use dayjs.utc() instead of dayjs().
-
-#### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string)`
-
-Returns a `Dayjs` object in UTC mode.
-
-#### Use UTC time `.utc()`
-
-Returns a cloned `Dayjs` object with a flag to use UTC time.
-
-#### Use local time `.local()`
-
-Returns a cloned `Dayjs` object with a flag to use local time.
-
-#### isUTC mode `.isUTC()`
-
-Returns a `boolean` indicating current `Dayjs` object is in UTC mode or not.
-
 ```javascript
 import utc from 'dayjs/plugin/utc'
 
@@ -89,6 +69,26 @@ dayjs
   .format() //2019-03-06T17:11:55+08:00
 dayjs.utc('2018-01-01', 'YYYY-MM-DD') // with CustomParseFormat plugin
 ```
+
+By default, Day.js parses and displays in local time.
+
+If you want to parse or display in UTC, you can use dayjs.utc() instead of dayjs().
+
+#### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string)`
+
+Returns a `Dayjs` object in UTC mode.
+
+#### Use UTC time `.utc()`
+
+Returns a cloned `Dayjs` object with a flag to use UTC time.
+
+#### Use local time `.local()`
+
+Returns a cloned `Dayjs` object with a flag to use local time.
+
+#### isUTC mode `.isUTC()`
+
+Returns a `boolean` indicating current `Dayjs` object is in UTC mode or not.
 
 ### AdvancedFormat
 

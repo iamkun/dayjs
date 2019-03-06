@@ -49,6 +49,7 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Igual que `.isSame(compared: Dayjs, unit?: string)`](#igual-que-issamecompared-dayjs-unit-string)
     - [Posterior a `.isAfter(compared: Dayjs, unit?: string)`](#posterior-a-isaftercompared-dayjs-unit-string)
     - [Es Dayjs `.isDayjs()`](#es-dayjs-isdayjscompared-any)
+  - [UTC](#utc)
   - [API de complementos](#api-de-complementos)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
@@ -443,6 +444,10 @@ The operator `instanceof` works equally well:
 ```js
 dayjs() instanceof dayjs // true
 ```
+
+## UTC
+
+If you want to parse or display in UTC, you can use `.utc` `.local` `.isUTC` with plugin [`UTC`](./Plugin.md#utc)
 
 ## API de complementos
 
