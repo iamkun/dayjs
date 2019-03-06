@@ -73,9 +73,27 @@ it('timezone with no hour', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
-it('parse just hh:mm)', () => {
+it('parse hh:mm', () => {
   const input = '12:00'
   const format = 'hh:mm'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss', () => {
+  const input = '00:27:21'
+  const format = 'HH:mm:ss'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss but only one digit', () => {
+  const input = '0:0:1'
+  const format = 'HH:mm:ss'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse hh:mm:ss but only one digit', () => {
+  const input = '0:0:1'
+  const format = 'hh:mm:ss'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
