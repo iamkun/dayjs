@@ -29,5 +29,25 @@ export default (o, c) => { // locale needed later
     this.$L = oldLocale.bind(this)(preset, object).$L
     return this
   }
+
+  const oldDaysInMonth = proto.daysInMonth
+  proto.daysInMonth = function () {
+    return oldDaysInMonth.bind(this.clone())()
+  }
+
+  const oldIsSame = proto.isSame
+  proto.isSame = function () {
+    return oldIsSame.bind(this.clone())()
+  }
+
+  const oldIsBefore = proto.isBefore
+  proto.isBefore = function () {
+    return oldIsBefore.bind(this.clone())()
+  }
+
+  const oldIsAfter = proto.isAfter
+  proto.isAfter = function () {
+    return oldIsAfter.bind(this.clone())()
+  }
 }
 

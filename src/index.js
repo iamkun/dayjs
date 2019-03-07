@@ -344,8 +344,7 @@ class Dayjs {
   }
 
   daysInMonth() {
-    // clone is for badMutable plugin
-    return this.clone().endOf(C.M).$D
+    return this.endOf(C.M).$D
   }
 
   $locale() { // get locale object

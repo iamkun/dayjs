@@ -161,3 +161,14 @@ it('Locale', () => {
   expect(d.locale()).toBe(m.locale())
   expect(d.format(format)).toBe(m.format(format))
 })
+
+it('isAfter isBefore isSame', () => {
+  const d = dayjs()
+  const format = dayjs().format()
+  d.isSame(dayjs, 'year')
+  expect(d.format()).toBe(format)
+  d.isBefore(dayjs, 'hour')
+  expect(d.format()).toBe(format)
+  d.isAfter(dayjs, 'month')
+  expect(d.format()).toBe(format)
+})
