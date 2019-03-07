@@ -38,7 +38,8 @@ const dayjs = (date, c, pl) => {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L, utc: instance.$u })
+const wrapper = (date, instance) =>
+  dayjs(date, { locale: instance.$L, utc: instance.$u, $offset: instance.$offset })
 
 const Utils = U // for plugin use
 Utils.l = parseLocale
