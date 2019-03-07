@@ -36,18 +36,18 @@ export default (o, c) => { // locale needed later
   }
 
   const oldIsSame = proto.isSame
-  proto.isSame = function () {
-    return oldIsSame.bind(this.clone())()
+  proto.isSame = function (that, units) {
+    return oldIsSame.bind(this.clone())(that, units)
   }
 
   const oldIsBefore = proto.isBefore
-  proto.isBefore = function () {
-    return oldIsBefore.bind(this.clone())()
+  proto.isBefore = function (that, units) {
+    return oldIsBefore.bind(this.clone())(that, units)
   }
 
   const oldIsAfter = proto.isAfter
-  proto.isAfter = function () {
-    return oldIsAfter.bind(this.clone())()
+  proto.isAfter = function (that, units) {
+    return oldIsAfter.bind(this.clone())(that, units)
   }
 }
 
