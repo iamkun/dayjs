@@ -232,7 +232,8 @@ class Dayjs {
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
     const instanceFactory = (u, n) => {
-      const date = this.set(C.DATE, 1).set(u, n + number)
+      // clone is for badMutable plugin
+      const date = this.clone().set(C.DATE, 1).set(u, n + number)
       return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
     }
     const instanceFactorySet = (n) => {
@@ -343,7 +344,8 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf(C.M).$D
+    // clone is for badMutable plugin
+    return this.clone().endOf(C.M).$D
   }
 
   $locale() { // get locale object
