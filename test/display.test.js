@@ -230,18 +230,10 @@ it('As Javascript Date -> toDate', () => {
   expect(jsDate.toUTCString()).not.toBe(base.toString())
 })
 
-it('As Array -> toArray', () => {
-  expect(dayjs().toArray()).toEqual(moment().toArray())
-})
-
 it('As JSON -> toJSON', () => {
   expect(dayjs().toJSON()).toBe(moment().toJSON())
 })
 
 it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
-})
-
-it('As Object -> toObject', () => {
-  expect(dayjs().toObject()).toEqual(moment().toObject())
 })
