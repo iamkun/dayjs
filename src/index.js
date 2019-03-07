@@ -109,36 +109,41 @@ class Dayjs {
     return this.endOf(units) < dayjs(that)
   }
 
-  year() {
-    return this.$y
+  $g(input, get, set) {
+    if (Utils.u(input)) return this[get]
+    return this.set(set, input)
   }
 
-  month() {
-    return this.$M
+  year(input) {
+    return this.$g(input, '$y', C.Y)
   }
 
-  day() {
-    return this.$W
+  month(input) {
+    return this.$g(input, '$M', C.M)
   }
 
-  date() {
-    return this.$D
+  day(input) {
+    return this.$g(input, '$W', C.D)
   }
 
-  hour() {
-    return this.$H
+  date(input) {
+    return this.$g(input, '$D', C.DATE)
   }
 
-  minute() {
-    return this.$m
+  hour(input) {
+    return this.$g(input, '$H', C.H)
   }
 
-  second() {
-    return this.$s
+  minute(input) {
+    return this.$g(input, '$m', C.MIN)
   }
 
-  millisecond() {
-    return this.$ms
+  second(input) {
+    return this.$g(input, '$s', C.S)
+  }
+
+  millisecond(input) {
+    return this.$g(input, '$ms', C.MS)
   }
 
   unix() {
