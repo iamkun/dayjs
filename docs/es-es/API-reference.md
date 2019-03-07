@@ -39,10 +39,8 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [UTC offset (minutos) `.utcOffset()`](#utc-offset-minutos-utcoffset)
     - [Días en el mes `.daysInMonth()`](#días-en-el-mes-daysinmonth)
     - [Como objeto `Date` `.toDate()`](#como-objeto-date-todate)
-    - [Como array `.toArray()`](#como-array-toarray)
     - [Como JSON `.toJSON()`](#como-json-tojson)
     - [Como cadena ISO 8601 `.toISOString()`](#como-cadena-iso-8601-toisostring)
-    - [Como objeto `.toObject()`](#como-objecto-toobject)
     - [Como cadena `.toString()`](#como-cadena-tostring)
   - [Consulta](#consulta)
     - [Anterior a `.isBefore(compared: Dayjs, unit?: string)`](#anterior-a-isbeforecompared-dayjs-unit-string)
@@ -58,6 +56,8 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
     - [QuarterOfYear](#quarterofyear)
+    - [ToArray](#toarray)
+    - [ToObject](#toobject)
 
 ## Análisis
 
@@ -354,14 +354,6 @@ Devuelve un objeto `Date` nativo, obtenido a partir del objeto `Dayjs`.
 dayjs('2019-01-25').toDate()
 ```
 
-### Como array `.toArray()`
-
-Devuelve un array que reproduce los parámetros de `new Date()`.
-
-```js
-dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
-```
-
 ### Como JSON `.toJSON()`
 
 Devuelve un objeto `Dayjs` formateado como una cadena ISO8601.
@@ -376,21 +368,6 @@ Devuelve un objeto `Dayjs` formateado como una cadena ISO8601.
 
 ```js
 dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
-```
-
-### Como objecto `.toObject()`
-
-Devuelve un dato de tipo `object`, con las propiedades de la fecha.
-
-```js
-dayjs('2019-01-25').toObject()
-/* { years: 2019,
-     months: 0,
-     date: 25,
-     hours: 0,
-     minutes: 0,
-     seconds: 0,
-     milliseconds: 0 } */
 ```
 
 ### Como cadena `.toString()`
@@ -492,3 +469,15 @@ complemento [`IsBetween`](./Plugin.md#isbetween)
 `.quarter` to get quarter of the year
 
 plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### ToArray
+
+`.toArray` to return an `array` that mirrors the parameters
+
+plugin [`ToArray`](./Plugin.md#toarray)
+
+### ToObject
+
+`.toObject` to return an `object` with the date's properties.
+
+plugin [`ToObject`](./Plugin.md#toobject)

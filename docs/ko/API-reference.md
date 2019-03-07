@@ -38,10 +38,8 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
     - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
-    - [As Array `.toArray()`](#as-array-toarray)
     - [As JSON `.toJSON()`](#as-json-tojson)
     - [As ISO 8601 String `.toISOString()`](#as-iso-8601-string-toisostring)
-    - [As Object `.toObject()`](#as-object-toobject)
     - [As String `.toString()`](#as-string-tostring)
   - [Query](#query)
     - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared--dayjs-unit-string)
@@ -57,6 +55,8 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
     - [QuarterOfYear](#quarterofyear)
+    - [ToArray](#toarray)
+    - [ToObject](#toobject)
 
 ## Parsing
 
@@ -353,14 +353,6 @@ dayjs('2019-01-25').daysInMonth() // 31
 dayjs('2019-01-25').toDate()
 ```
 
-### As Array `.toArray()`
-
-새로운 `Date()`로부터 매개변수로 입력한 날짜를 가져옵니다. 반환 타입은 `array` 입니다.
-
-```js
-dayjs('2019-01-25').toArray() // [ 2019, 01, 25, 0, 0, 0, 0 ]
-```
-
 ### As JSON `.toJSON()`
 
 ISO8601에 대한 형식으로 `Dayjs`를 출력합니다. 반환 타입은 `string` 입니다.
@@ -375,21 +367,6 @@ ISO8601에 대한 형식으로 `Dayjs`를 출력합니다. 반환 타입은 `str
 
 ```js
 dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
-```
-
-### As Object `.toObject()`
-
-날짜 속성을 가진 `object` 타입 값으로 반환합니다.
-
-```js
-dayjs('2019-01-25').toObject()
-/* { years: 2019,
-     months: 0,
-     date: 25,
-     hours: 0,
-     minutes: 0,
-     seconds: 0,
-     milliseconds: 0 } */
 ```
 
 ### As String `.toString()`
@@ -491,3 +468,15 @@ plugin [`IsBetween`](./Plugin.md#isbetween)
 `.quarter` to get quarter of the year
 
 plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### ToArray
+
+`.toArray` to return an `array` that mirrors the parameters
+
+plugin [`ToArray`](./Plugin.md#toarray)
+
+### ToObject
+
+`.toObject` to return an `object` with the date's properties.
+
+plugin [`ToObject`](./Plugin.md#toobject)

@@ -339,6 +339,37 @@ dayjs('2018 五月 15', 'YYYY MMMM DD', 'zh_cn')
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
 
+### ToArray
+
+- ToArray 增加了 `.toArray()` API 来返回包含时间数值的数组。
+
+```javascript
+import toArray from 'dayjs/plugin/toArray'
+
+dayjs.extend(toArray)
+
+dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
+```
+
+### ToObject
+
+- ToObject 增加了 `.toObject()` API 来返回包含时间数值的对象。
+
+```javascript
+import toObject from 'dayjs/plugin/toObject'
+
+dayjs.extend(toObject)
+
+dayjs('2019-01-25').toObject()
+/* { years: 2019,
+     months: 0,
+     date: 25,
+     hours: 0,
+     minutes: 0,
+     seconds: 0,
+     milliseconds: 0 } */
+```
+
 ## 自定义
 
 你可以根据需要自由的编写一个 Day.js 插件

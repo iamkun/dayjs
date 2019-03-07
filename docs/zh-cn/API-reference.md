@@ -36,10 +36,8 @@
   - [UTC 偏移量 (分)](#utc-偏移量-分)
   - [天数 (月)](#天数-月)
   - [Date 对象](#date-对象-1)
-  - [数组](#数组)
   - [JSON](#as-json)
   - [ISO 8601 字符串](#iso-8601-字符串)
-  - [对象](#对象)
   - [字符串](#字符串)
 - [查询](#查询)
   - [是否之前](#是否之前)
@@ -55,6 +53,8 @@
   - [是否相同或之前](#是否相同或之前)
   - [是否之间](#是否之间)
   - [年中第几季度](#年中第几季度)
+  - [转成数组](#转成数组)
+  - [转成对象](#转成对象)
 
 ---
 
@@ -406,16 +406,6 @@ dayjs().daysInMonth()
 dayjs().toDate()
 ```
 
-#### 数组
-
-- return Array
-
-返回包含时间数值的数组。
-
-```js
-dayjs().toArray() //[2018, 8, 18, 00, 00, 00, 000];
-```
-
 #### As JSON
 
 - return JSON String
@@ -434,16 +424,6 @@ dayjs().toJSON() //"2018-08-08T00:00:00.000Z"
 
 ```js
 dayjs().toISOString()
-```
-
-#### 对象
-
-- return Object
-
-返回包含时间数值的对象。
-
-```js
-dayjs().toObject() // { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
 
 #### 字符串
@@ -537,22 +517,34 @@ dayjs() instanceof dayjs // true
 
 `.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
 
-plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+插件 [`IsSameOrAfter`](./Plugin.md#issameorafter)
 
 ### 是否相同或之前
 
 `.isSameOrBefore` 返回一个时间是否和一个时间相同或在一个时间之前
 
-plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+插件 [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
 ### 是否之间
 
 `.isBetween` 返回一个时间是否介于两个时间之间
 
-plugin [`IsBetween`](./Plugin.md#isbetween)
+插件 [`IsBetween`](./Plugin.md#isbetween)
 
 ### 年中第几季度
 
 `.quarter` 返回年中第几季度
 
-plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+插件 [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### 转成数组
+
+`.toArray` 返回包含时间数值的数组。
+
+插件 [`ToArray`](./Plugin.md#toarray)
+
+### 转成对象
+
+`.toObject` 返回包含时间数值的对象
+
+插件 [`ToObject`](./Plugin.md#toobject)
