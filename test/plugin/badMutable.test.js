@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import badMutable from '../../src/plugin/badMutable'
+import '../../src/locale/zh-cn'
 
 dayjs.extend(badMutable)
 
@@ -147,4 +148,16 @@ it('daysInMonth', () => {
   const m = moment()
   expect(d.daysInMonth()).toBe(m.daysInMonth())
   expect(d.format()).toBe(m.format())
+})
+
+it('Locale', () => {
+  const d = dayjs()
+  const m = moment()
+  const format = 'MMMM'
+  expect(d.locale()).toBe(m.locale())
+  expect(d.format(format)).toBe(m.format(format))
+  d.locale('zh-cn')
+  m.locale('zh-cn')
+  expect(d.locale()).toBe(m.locale())
+  expect(d.format(format)).toBe(m.format(format))
 })

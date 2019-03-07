@@ -22,5 +22,12 @@ export default (o, c) => { // locale needed later
     this.init()
     return this
   }
+
+  const oldLocale = proto.locale
+  proto.locale = function (preset, object) {
+    if (!preset) return this.$L
+    this.$L = oldLocale.bind(this)(preset, object).$L
+    return this
+  }
 }
 
