@@ -138,82 +138,74 @@ dayjs().isValid()
 
 #### Year
 
-- Number を返します
-
-年を取得します。
+Gets or sets the year.
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 #### Month
 
-- Number を返します
-
-月を取得します。
+Gets or sets the month. Starts at 0
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 #### Date of Month
 
-- Number を返します
-
-日を取得します。
+Gets or sets the day of the month. Starts at 1
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 #### Day of Week
 
-- Number を返します
-
-曜日を取得します。
+Gets or sets the day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 #### Hour
 
-- Number を返します
-
-時間を取得します。
+Gets or sets the hour.
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 #### Minute
 
-- Number を返します
-
-分を取得します。
+Gets or sets the minute.
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 #### Second
 
-- Number を返します
-
-秒を取得します。
+Gets or sets the second.
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 #### Millisecond
 
-- Number を返します
-
-ミリ秒を取得します。
+Gets or sets the millisecond.
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 #### Set

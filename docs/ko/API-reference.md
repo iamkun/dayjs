@@ -124,66 +124,74 @@ dayjs().isValid()
 
 ### Year `.year()`
 
-`Dayjs`에서 연도 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the year.
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 ### Month `.month()`
 
-`Dayjs`에서 달을 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the month. Starts at 0
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 ### Day of the Month `.date()`
 
-`Dayjs`에서 날짜를 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the day of the month. Starts at 1
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 ### Day of the Week `.day()`
 
-`Dayjs`에서 요일을 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 ### Hour `.hour()`
 
-`Dayjs`에서 시를 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the hour.
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 ### Minute `.minute()`
 
-`Dayjs`에서 분을 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the minute.
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 ### Second `.second()`
 
-`Dayjs`에서 초를 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the second.
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 ### Millisecond `.millisecond()`
 
-`Dayjs`에서 밀리 초를 가져옵니다. 반환 타입은 `number` 입니다.
+Gets or sets the millisecond.
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 ### Set `.set(unit: string, value: number)`

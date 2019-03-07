@@ -140,82 +140,74 @@ dayjs().isValid()
 
 #### 年
 
-- return Number
-
-获取年份。
+获取或设置年份。
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 #### 月
 
-- return Number
-
-获取月份。
+获取或设置月份。从 0 开始
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 #### 日
 
-- return Number
-
-获取日期。
+获取或设置日期。从 1 开始
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 #### 星期
 
-- return Number
-
-获取星期。
+获取或设置星期。从星期天 0 开始
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 #### 时
 
-- return Number
-
-获取小时。
+获取或设置小时。
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 #### 分
 
-- return Number
-
-获取分钟。
+获取或设置分钟。
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 #### 秒
 
-- return Number
-
-获取秒。
+获取或设置秒。
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 #### 毫秒
 
-- return Number
-
-获取毫秒。
+获取或设置毫秒。
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 #### 设置

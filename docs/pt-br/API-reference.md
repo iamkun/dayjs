@@ -123,66 +123,74 @@ dayjs().isValid()
 
 ### Ano `.year()`
 
-Retorna um `number` representando o ano do objeto `Dayjs`.
+Gets or sets the year.
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 ### Mês `.month()`
 
-Retorna um `number` representando o mês do objeto `Dayjs`.
+Gets or sets the month. Starts at 0
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 ### Dia do Mês `.date()`
 
-Retorna um `number` representando o dia do mês do objeto `Dayjs`.
+Gets or sets the day of the month. Starts at 1
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 ### Dia da Semana `.day()`
 
-Retorna um `number` representando o dia da semana do objeto `Dayjs`.
+Gets or sets the day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 ### Hora `.hour()`
 
-Retorna um `number` representando a hora do objeto `Dayjs`.
+Gets or sets the hour.
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 ### Minuto `.minute()`
 
-Retorna um `number` representando os minutos do objeto `Dayjs`.
+Gets or sets the minute.
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 ### Segundo `.second()`
 
-Retorna um `number` representando os segundos do objeto `Dayjs`.
+Gets or sets the second.
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 ### Milissegundo `.millisecond()`
 
-Retorna um `number` representando os milissegundos do objeto `Dayjs`.
+Gets or sets the millisecond.
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 ### Set `.set(unit: string, value: number)`
