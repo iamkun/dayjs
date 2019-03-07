@@ -360,18 +360,6 @@ class Dayjs {
     return new Date(this.$d)
   }
 
-  toArray() {
-    return [
-      this.$y,
-      this.$M,
-      this.$D,
-      this.$H,
-      this.$m,
-      this.$s,
-      this.$ms
-    ]
-  }
-
   toJSON() {
     return this.toISOString()
   }
@@ -381,18 +369,6 @@ class Dayjs {
     // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
     // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
     return this.$d.toISOString()
-  }
-
-  toObject() {
-    return {
-      years: this.$y,
-      months: this.$M,
-      date: this.$D,
-      hours: this.$H,
-      minutes: this.$m,
-      seconds: this.$s,
-      milliseconds: this.$ms
-    }
   }
 
   toString() {

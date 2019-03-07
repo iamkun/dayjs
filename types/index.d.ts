@@ -12,16 +12,6 @@ declare namespace dayjs {
   type OpUnitTypeShort = 'w'
   export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
 
-  interface DayjsObject {
-    years: number
-    months: number
-    date: number
-    hours: number
-    minutes: number
-    seconds: number
-    milliseconds: number
-  }
-
   class Dayjs {
     constructor (config?: ConfigType)
 
@@ -67,13 +57,9 @@ declare namespace dayjs {
 
     toDate(): Date
 
-    toArray(): number[]
-
     toJSON(): string
 
     toISOString(): string
-
-    toObject(): DayjsObject
 
     toString(): string
 
