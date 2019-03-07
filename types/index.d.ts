@@ -21,19 +21,35 @@ declare namespace dayjs {
 
     year(): number
 
+    year(value: number): Dayjs
+
     month(): number
+
+    month(value: number): Dayjs
 
     date(): number
 
+    date(value: number): Dayjs
+
     day(): number
+
+    day(value: number): Dayjs
 
     hour(): number
 
+    hour(value: number): Dayjs
+
     minute(): number
+
+    minute(value: number): Dayjs
 
     second(): number
 
+    second(value: number): Dayjs
+
     millisecond(): number
+
+    millisecond(value: number): Dayjs
 
     set(unit: UnitType, value: number): Dayjs
 
