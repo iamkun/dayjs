@@ -5,6 +5,6 @@ export = plugin
 
 declare module 'dayjs' {
 
-  export function utc(input: any): boolean
-  
+  export function isMoment(input: any): boolean
+
 }
