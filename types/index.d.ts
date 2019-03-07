@@ -85,6 +85,8 @@ declare namespace dayjs {
 
     isAfter(date: ConfigType, unit?: OpUnitType): boolean
 
+    locale(): string
+
     locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }): Dayjs
   }
 
