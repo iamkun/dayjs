@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'np',
+  name: 'ne',
   weekdays: 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split('_'),
   months: 'वैशाख_जेठ_आषाढ_श्रावण_भाद्र_असोज_कार्तिक_मङ्सिर_पौष_माघ_फाल्गुन_चैत्र '.split('_'),
   relativeTime: {
