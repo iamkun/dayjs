@@ -19,7 +19,7 @@ const locale = {
     y: 'वर्ष',
     yy: '%d वर्ष'
   },
-  ordinal: n => (n + '').replace(/\d/g, i => '०१२३४५६७८९'[i])
+  ordinal: n => `${n}`.replace(/\d/g, i => '०१२३४५६७८९'[i])
 }
 
 dayjs.locale(locale, null, true)
