@@ -3,8 +3,10 @@ import moment from 'moment'
 import dayjs from '../../src'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import weekYear from '../../src/plugin/weekYear'
 import '../../src/locale/zh-cn'
 
+dayjs.extend(weekYear)
 dayjs.extend(weekOfYear)
 dayjs.extend(advancedFormat)
 
@@ -74,4 +76,9 @@ it('Format Week of Year wo', () => {
   expect(dayjs(d).format('wo')).toBe(moment(d).format('wo'))
   expect(dayjs(d).locale('zh-cn').format('wo'))
     .toBe(moment(d).locale('zh-cn').format('wo'))
+})
+
+it('Format Week Year gggg', () => {
+  const d = '2018-12-31'
+  expect(dayjs(d).format('gggg')).toBe(moment(d).format('gggg'))
 })
