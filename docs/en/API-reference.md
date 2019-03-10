@@ -192,7 +192,7 @@ dayjs().millisecond()
 Returns a `Dayjs` with the applied changes.
 
 ```js
-dayjs().set('date', 1)
+dayjs().set('date', 1) // if current is Sunday, will get next week's date, if current is not Sunday, will get current week's date
 dayjs().set('month', 3) // April
 dayjs().set('second', 30)
 ```
