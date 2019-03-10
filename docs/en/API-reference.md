@@ -49,6 +49,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared-dayjs-unit-string)
     - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared-dayjs-unit-string)
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  - [UTC](#utc)
   - [Plugin APIs](#plugin-apis)
     - [RelativeTime](#relativetime)
     - [IsLeapYear](#isleapyear)
@@ -60,7 +61,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 ## Parsing
 
-### Constructor `dayjs(existing?: string | number | Date | Dayjs)`
+### Constructor `dayjs(dateType?: string | number | Date | Dayjs)`
 
 Calling it without parameters returns a fresh `Dayjs` object with the current date and time.
 
@@ -443,6 +444,10 @@ The operator `instanceof` works equally well:
 ```js
 dayjs() instanceof dayjs // true
 ```
+
+## UTC
+
+If you want to parse or display in UTC, you can use `.utc` `.local` `.isUTC` with plugin [`UTC`](./Plugin.md#utc)
 
 ## Plugin APIs
 

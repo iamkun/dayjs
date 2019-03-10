@@ -33,7 +33,7 @@
   - [时间差](#时间差)
   - [Unix 时间戳 (毫秒)](#unix-时间戳-毫秒-1)
   - [Unix 时间戳 (秒)](#unix-时间戳-秒)
-  * [UTC 偏移量 (分)](#utc-偏移量-分)
+  - [UTC 偏移量 (分)](#utc-偏移量-分)
   - [天数 (月)](#天数-月)
   - [Date 对象](#date-对象-1)
   - [数组](#数组)
@@ -46,6 +46,7 @@
   - [是否相同](#是否相同)
   - [是否之后](#是否之后)
   - [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
+- [UTC](#utc)
 - [插件 APIs](#plugin-apis)
   - [相对时间](#relativetime)
   - [是否是闰年](#是否是闰年)
@@ -507,6 +508,10 @@ dayjs.isDayjs(new Date()) // false
 ```js
 dayjs() instanceof dayjs // true
 ```
+
+## UTC
+
+如果想要使用 UTC 模式来解析和展示时间，`.utc` `.local` `.isUTC` 可以使用插件 [`UTC`](./Plugin.md#utc)
 
 ## 插件 APIs
 
