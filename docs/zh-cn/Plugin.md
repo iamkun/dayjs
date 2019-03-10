@@ -338,6 +338,7 @@ dayjs('2018 五月 15', 'YYYY MMMM DD', 'zh_cn')
 | `ZZ`   | +0500            | UTC 的偏移量，数字前面加上 0 |
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
+| `Do`   | 1st... 31st      | 带序号的月份                 |
 
 ### ToArray
 
