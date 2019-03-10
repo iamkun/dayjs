@@ -2,7 +2,10 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import advancedFormat from '../../src/plugin/advancedFormat'
+import weekOfYear from '../../src/plugin/weekOfYear'
+import '../../src/locale/zh-cn'
 
+dayjs.extend(weekOfYear)
 dayjs.extend(advancedFormat)
 
 beforeEach(() => {
@@ -64,4 +67,11 @@ it('Format Hour k kk 24-hour 1 - 24', () => {
   expect(dayjs(d).format('k')).toBe(moment(d).format('k'))
   expect(dayjs(d).format('kk')).toBe('23')
   expect(dayjs(d).format('kk')).toBe(moment(d).format('kk'))
+})
+
+it('Format Week of Year wo', () => {
+  const d = '2018-12-01'
+  expect(dayjs(d).format('wo')).toBe(moment(d).format('wo'))
+  expect(dayjs(d).locale('zh-cn').format('wo'))
+    .toBe(moment(d).locale('zh-cn').format('wo'))
 })
