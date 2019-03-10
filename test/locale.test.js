@@ -1,4 +1,5 @@
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../src'
 import es from '../src/locale/es'
 
@@ -42,6 +43,17 @@ it('set global locale', () => {
   dayjs.locale('en')
   expect(dayjs('2018-4-28').format(format))
     .toBe('Saturday 28, April')
+})
+
+it('get instance locale name', () => {
+  expect(dayjs().locale()).toBe('en')
+  expect(dayjs().locale()).toBe(moment().locale())
+  expect(dayjs().locale('es').locale()).toBe('es')
+  expect(dayjs().locale('es').locale()).toBe(moment().locale('es').locale())
+  dayjs.locale(es)
+  moment.locale('es')
+  expect(dayjs().locale()).toBe('es')
+  expect(dayjs().locale()).toBe(moment().locale())
 })
 
 it('immutable instance locale', () => {

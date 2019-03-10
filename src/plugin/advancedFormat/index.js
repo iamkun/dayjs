@@ -13,13 +13,16 @@ export default (o, c, d) => { // locale needed later
     const locale = this.$locale()
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/Q|Do|X|x|k{1,2}|S/g, (match) => {
+    const result = str.replace(/Q|wo|gggg|Do|X|x|k{1,2}|S/g, (match) => {
       switch (match) {
         case 'Q':
           return Math.ceil((this.$M + 1) / 3)
-        case 'Do': {
+        case 'Do':
           return locale.ordinal(this.$D)
-        }
+        case 'gggg':
+          return this.weekYear()
+        case 'wo':
+          return locale.ordinal(this.week(), 'W') // W for week
         case 'k':
         case 'kk':
           return utils.s(String(this.$H === 0 ? 24 : this.$H), match === 'k' ? 1 : 2, '0')

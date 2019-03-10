@@ -12,34 +12,50 @@ afterEach(() => {
 
 it('Year', () => {
   expect(dayjs().year()).toBe(moment().year())
+  expect(dayjs().year(0).valueOf()).toBe(moment().year(0).valueOf())
+  expect(dayjs().year(2000).valueOf()).toBe(moment().year(2000).valueOf())
 })
 
 it('Month', () => {
   expect(dayjs().month()).toBe(moment().month())
+  expect(dayjs().month(0).valueOf()).toBe(moment().month(0).valueOf())
+  expect(dayjs().month(1).valueOf()).toBe(moment().month(1).valueOf())
 })
 
 it('Day of Week', () => {
   expect(dayjs().day()).toBe(moment().day())
+  expect(dayjs().day(0).format()).toBe(moment().day(0).format())
+  expect(dayjs().day(1).format()).toBe(moment().day(1).format())
 })
 
 it('Date', () => {
   expect(dayjs().date()).toBe(moment().date())
+  expect(dayjs().date(0).valueOf()).toBe(moment().date(0).valueOf())
+  expect(dayjs().date(1).valueOf()).toBe(moment().date(1).valueOf())
 })
 
 it('Hour', () => {
   expect(dayjs().hour()).toBe(moment().hour())
+  expect(dayjs().hour(0).valueOf()).toBe(moment().hour(0).valueOf())
+  expect(dayjs().hour(1).valueOf()).toBe(moment().hour(1).valueOf())
 })
 
 it('Minute', () => {
   expect(dayjs().minute()).toBe(moment().minute())
+  expect(dayjs().minute(0).valueOf()).toBe(moment().minute(0).valueOf())
+  expect(dayjs().minute(1).valueOf()).toBe(moment().minute(1).valueOf())
 })
 
 it('Second', () => {
   expect(dayjs().second()).toBe(moment().second())
+  expect(dayjs().second(0).valueOf()).toBe(moment().second(0).valueOf())
+  expect(dayjs().second(1).valueOf()).toBe(moment().second(1).valueOf())
 })
 
 it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
+  expect(dayjs().millisecond(0).valueOf()).toBe(moment().millisecond(0).valueOf())
+  expect(dayjs().millisecond(1).valueOf()).toBe(moment().millisecond(1).valueOf())
 })
 
 it('Set Day', () => {
