@@ -135,6 +135,15 @@ export default (o, c) => {
       DD: this.$utils().s(D, 2, '0')
     }
 
-    return this.format(str.replace(/Y{2,4}|M{1,4}|D{1,2}/g, m => matches[m]))
+    const fmt = this.format(str.replace(/Y{2,4}|M{1,4}|D{1,2}/g, m => matches[m]))
+
+    if (this.$locale().name === 'ne') return fmt.replace(/\d/g, i => '०१२३४५६७८९'[i])
+
+    const MMM = 'Bai_Je_Aaa_Shraa_Bhaa_A_Kaa_Ma_Pou_Maa_Faa_Chai'.split('_')[M - 1]
+    const MMMM = 'Baisakh_Jeth_Aashaadh_Shraawan_Bhaadra_Asoj_Kaartik_Mangsir_Poush_Maagh_Faalgun_Chaitra'.split('_')[M - 1]
+
+    return fmt
+      .replace(new RegExp(matches.MMMM, 'g'), MMMM)
+      .replace(new RegExp(matches.MMM, 'g'), MMM)
   }
 }
