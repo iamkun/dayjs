@@ -348,6 +348,38 @@ dayjs('2018 5月 15', 'YYYY MMMM DD', 'ja')
 | `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
 | `a`    | am pm            | Post or ante meridiem, lower-case |
+| `Do`   | 1st... 31st      | 序数付きの日                      |
+
+### ToArray
+
+- ToArray add `.toArray()` API to return an `array` that mirrors the parameters
+
+```javascript
+import toArray from 'dayjs/plugin/toArray'
+
+dayjs.extend(toArray)
+
+dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
+```
+
+### ToObject
+
+- ToObject add `.toObject()` API to return an `object` with the date's properties.
+
+```javascript
+import toObject from 'dayjs/plugin/toObject'
+
+dayjs.extend(toObject)
+
+dayjs('2019-01-25').toObject()
+/* { years: 2019,
+     months: 0,
+     date: 25,
+     hours: 0,
+     minutes: 0,
+     seconds: 0,
+     milliseconds: 0 } */
+```
 
 ## カスタマイズ
 

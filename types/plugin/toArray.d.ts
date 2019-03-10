@@ -5,8 +5,6 @@ export = plugin
 
 declare module 'dayjs' {
   interface Dayjs {
-    week(): number
-
-    week(value : number): Dayjs
+    toArray(): number[]
   }
 }

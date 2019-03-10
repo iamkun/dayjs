@@ -36,10 +36,8 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   - [UTC offset (minutes)](#utc-offset-minutes-utcoffset)
   - [Days in Month](#days-in-month)
   - [As Javascript Date](#as-javascript-date)
-  - [As Array](#as-array)
   - [As JSON](#as-json)
   - [As ISO 8601 String](#as-iso-8601-string)
-  - [As Object](#as-object)
   - [As String](#as-string)
 - [Query](#query)
   - [Is Before](#is-before)
@@ -55,6 +53,8 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   - [IsSameOrBefore](#issameorbefore)
   - [IsBetween](#isbetween)
   - [QuarterOfYear](#quarterofyear)
+  - [ToArray](#toarray)
+  - [ToObject](#toobject)
 
 ---
 
@@ -138,82 +138,74 @@ dayjs().isValid()
 
 #### Year
 
-- Number を返します
-
-年を取得します。
+Gets or sets the year.
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 #### Month
 
-- Number を返します
-
-月を取得します。
+Gets or sets the month. Starts at 0
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 #### Date of Month
 
-- Number を返します
-
-日を取得します。
+Gets or sets the day of the month. Starts at 1
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 #### Day of Week
 
-- Number を返します
-
-曜日を取得します。
+Gets or sets the day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 #### Hour
 
-- Number を返します
-
-時間を取得します。
+Gets or sets the hour.
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 #### Minute
 
-- Number を返します
-
-分を取得します。
+Gets or sets the minute.
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 #### Second
 
-- Number を返します
-
-秒を取得します。
+Gets or sets the second.
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 #### Millisecond
 
-- Number を返します
-
-ミリ秒を取得します。
+Gets or sets the millisecond.
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 #### Set
@@ -408,16 +400,6 @@ dayjs().daysInMonth()
 dayjs().toDate()
 ```
 
-#### As Array
-
-- Array を返します
-
-Date コンストラクタパラメータに対応する値の配列を返します。
-
-```js
-dayjs().toArray() //[2018, 8, 18, 00, 00, 00, 000];
-```
-
 #### As JSON
 
 - JSON String を返します
@@ -436,16 +418,6 @@ ISO8601 形式の文字列にフォーマットします。
 
 ```js
 dayjs().toISOString()
-```
-
-#### As Object
-
-- Object を返します
-
-年、月、...（中略）...、ミリ秒のオブジェクトを返します。
-
-```js
-dayjs().toObject() // { years:2018, months:8, date:18, hours:0, minutes:0, seconds:0, milliseconds:0}
 ```
 
 #### As String
@@ -561,3 +533,15 @@ plugin [`IsBetween`](./Plugin.md#isbetween)
 `.quarter` to get quarter of the year
 
 plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### ToArray
+
+`.toArray` to return an `array` that mirrors the parameters
+
+plugin [`ToArray`](./Plugin.md#toarray)
+
+### ToObject
+
+`.toObject` to return an `object` with the date's properties.
+
+plugin [`ToObject`](./Plugin.md#toobject)

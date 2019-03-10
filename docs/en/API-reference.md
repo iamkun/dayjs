@@ -39,10 +39,8 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
     - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
     - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
-    - [As Array `.toArray()`](#as-array-toarray)
     - [As JSON `.toJSON()`](#as-json-tojson)
     - [As ISO 8601 String `.toISOString()`](#as-iso-8601-string-toisostring)
-    - [As Object `.toObject()`](#as-object-toobject)
     - [As String `.toString()`](#as-string-tostring)
   - [Query](#query)
     - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared-dayjs-unit-string)
@@ -58,6 +56,8 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [IsSameOrBefore](#issameorbefore)
     - [IsBetween](#isbetween)
     - [QuarterOfYear](#quarterofyear)
+    - [ToArray](#toarray)
+    - [ToObject](#toobject)
 
 ## Parsing
 
@@ -125,66 +125,74 @@ dayjs().isValid()
 
 ### Year `.year()`
 
-Returns a `number` representing the `Dayjs`'s year.
+Gets or sets the year.
 
 ```js
 dayjs().year()
+dayjs().year(2000)
 ```
 
 ### Month `.month()`
 
-Returns a `number` representing the `Dayjs`'s month. Starts at 0
+Gets or sets the month. Starts at 0
 
 ```js
 dayjs().month()
+dayjs().month(0)
 ```
 
 ### Day of the Month `.date()`
 
-Returns a `number` representing the `Dayjs`'s day of the month. Starts at 1
+Gets or sets the day of the month. Starts at 1
 
 ```js
 dayjs().date()
+dayjs().date(1)
 ```
 
 ### Day of the Week `.day()`
 
-Returns a `number` representing the `Dayjs`'s day of the week. Starts on Sunday with 0
+Gets or sets the day of the week. Starts on Sunday with 0
 
 ```js
 dayjs().day()
+dayjs().day(0)
 ```
 
 ### Hour `.hour()`
 
-Returns a `number` representing the `Dayjs`'s hour.
+Gets or sets the hour.
 
 ```js
 dayjs().hour()
+dayjs().hour(12)
 ```
 
 ### Minute `.minute()`
 
-Returns a `number` representing the `Dayjs`'s minute.
+Gets or sets the minute.
 
 ```js
 dayjs().minute()
+dayjs().minute(59)
 ```
 
 ### Second `.second()`
 
-Returns a `number` representing the `Dayjs`'s second.
+Gets or sets the second.
 
 ```js
 dayjs().second()
+dayjs().second(1)
 ```
 
 ### Millisecond `.millisecond()`
 
-Returns a `number` representing the `Dayjs`'s millisecond.
+Gets or sets the millisecond.
 
 ```js
 dayjs().millisecond()
+dayjs().millisecond(1)
 ```
 
 ### Set `.set(unit: string, value: number)`
@@ -354,14 +362,6 @@ Returns a copy of the native `Date` object parsed from the `Dayjs` object.
 dayjs('2019-01-25').toDate()
 ```
 
-### As Array `.toArray()`
-
-Returns an `array` that mirrors the parameters from new Date().
-
-```js
-dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
-```
-
 ### As JSON `.toJSON()`
 
 Returns the `Dayjs` formatted in an ISO8601 `string`.
@@ -376,21 +376,6 @@ Returns the `Dayjs` formatted in an ISO8601 `string`.
 
 ```js
 dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
-```
-
-### As Object `.toObject()`
-
-Returns an `object` with the date's properties.
-
-```js
-dayjs('2019-01-25').toObject()
-/* { years: 2019,
-     months: 0,
-     date: 25,
-     hours: 0,
-     minutes: 0,
-     seconds: 0,
-     milliseconds: 0 } */
 ```
 
 ### As String `.toString()`
@@ -492,3 +477,15 @@ plugin [`IsBetween`](./Plugin.md#isbetween)
 `.quarter` to get quarter of the year
 
 plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### ToArray
+
+`.toArray` to return an `array` that mirrors the parameters
+
+plugin [`ToArray`](./Plugin.md#toarray)
+
+### ToObject
+
+`.toObject` to return an `object` with the date's properties.
+
+plugin [`ToObject`](./Plugin.md#toobject)

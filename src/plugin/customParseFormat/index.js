@@ -1,4 +1,4 @@
-const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -56,6 +56,16 @@ const expressions = {
   hh: [match1to2, addInput('hours')],
   D: [match1to2, addInput('day')],
   DD: [match2, addInput('day')],
+  Do: [matchWord, function (input) {
+    const { ordinal } = locale;
+    [this.day] = input.match(/\d+/)
+    if (!ordinal) return
+    for (let i = 1; i <= 31; i += 1) {
+      if (ordinal(i).replace(/\[|\]/g, '') === input) {
+        this.day = i
+      }
+    }
+  }],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {

@@ -3,6 +3,7 @@ import moment from 'moment'
 import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import uk from '../../src/locale/uk'
+import '../../src/locale/zh-cn'
 
 dayjs.extend(customParseFormat)
 
@@ -168,4 +169,20 @@ it('correctly parse month from string after changing locale globally', () => {
     dayjs.locale(dayjsLocale)
     moment.locale(momentLocale)
   }
+})
+
+it('correctly parse ordinal', () => {
+  const input = '7th March 2019'
+  const input2 = '17th March 2019'
+  const inputFalse = '7st March 2019'
+  const inputZHCN = '7日 三月 2019'
+  const format = 'Do MMMM YYYY'
+  expect(dayjs(input, format).valueOf())
+    .toBe(moment(input, format).valueOf())
+  expect(dayjs(input2, format).valueOf())
+    .toBe(moment(input2, format).valueOf())
+  expect(dayjs(inputFalse, format).valueOf())
+    .toBe(moment(inputFalse, format).valueOf())
+  expect(dayjs(inputZHCN, format, 'zh-cn').valueOf())
+    .toBe(moment(inputZHCN, format, 'zh-cn').valueOf())
 })
