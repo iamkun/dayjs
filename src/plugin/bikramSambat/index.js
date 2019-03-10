@@ -10,12 +10,10 @@ export default (o, c) => {
     let days = this.diff('1944-01-01', 'day')
 
     // Base conversion: 1944-01-01 AD = 2000-09-17 BS
-    let YYYY = 2000
-    let M = 9
-    let D = 17
+    let [YYYY, M, D] = [2000, 9, 17]
 
     // Day offsets for every months since 2000 BS
-    const nDays = [
+    const offsets = [
       [2, 4, 3, 4, 3, 2, 2, 2, 1, 2, 1, 3],
       [3, 3, 4, 3, 3, 3, 2, 1, 2, 1, 2, 2],
       [3, 3, 4, 4, 3, 2, 2, 1, 2, 1, 2, 2],
@@ -110,16 +108,9 @@ export default (o, c) => {
     ]
 
     for (; ; days -= 1, D += 1) {
-      const max = 28 + nDays[YYYY - 2000][M - 1]
-      if (D > max) {
-        D = 1
-        M += 1
-      }
-      if (M > 12) {
-        M = 1
-        YYYY += 1
-      }
-
+      const max = 28 + offsets[YYYY - 2000][M - 1]
+      if (D > max) [D, M] = [1, M + 1]
+      if (M > 12) [M, YYYY] = [1, YYYY + 1]
       if (days === 0) break
     }
 
