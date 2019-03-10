@@ -1,3 +1,16 @@
+## [1.8.10](https://github.com/iamkun/dayjs/compare/v1.8.9...v1.8.10) (2019-03-10)
+
+
+### Bug Fixes
+
+* **locale:** Add nepali (ne) locale ([#524](https://github.com/iamkun/dayjs/issues/524)) ([bdbec01](https://github.com/iamkun/dayjs/commit/bdbec01))
+* Add WeekYear plugin ([a892608](https://github.com/iamkun/dayjs/commit/a892608))
+* API .locale() with no argument should return current locale name string ([8d63d88](https://github.com/iamkun/dayjs/commit/8d63d88))
+* CustomParseFormat correct parse HH:mm:ss with only one digit like 0:12:10 ([600d547](https://github.com/iamkun/dayjs/commit/600d547))
+* CustomParseFormat plugin parse Do format string ([bf27fda](https://github.com/iamkun/dayjs/commit/bf27fda)), closes [#522](https://github.com/iamkun/dayjs/issues/522)
+* Expand setters like .year(2000) .hour(12) ([ac532a0](https://github.com/iamkun/dayjs/commit/ac532a0))
+* Move toObject, toArray API to separate plugin from core ([40a3431](https://github.com/iamkun/dayjs/commit/40a3431))
+
 ## [1.8.9](https://github.com/iamkun/dayjs/compare/v1.8.8...v1.8.9) (2019-03-06)
 
 
