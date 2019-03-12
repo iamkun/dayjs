@@ -7,10 +7,9 @@ declare namespace dayjs {
   export type OptionType = { locale?: string, format?: string, utc?: boolean } | string
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
-  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'quarter' | 'year' | 'date' | UnitTypeShort;
+  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
 
-  type OpUnitTypeShort = 'w'
-  export type OpUnitType = UnitType | "week" | OpUnitTypeShort;
+  export type OpUnitType = UnitType | "week" | 'w';
 
   class Dayjs {
     constructor (config?: ConfigType)
@@ -63,7 +62,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(date: ConfigType, unit: OpUnitType, float?: boolean): number
+    diff(date: ConfigType, unit: OpUnitType | 'quarter', float?: boolean): number
 
     valueOf(): number
 
