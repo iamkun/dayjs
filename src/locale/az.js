@@ -14,7 +14,7 @@ const locale = {
     L: 'DD.MM.YYYY',
     LL: 'D MMMM YYYY г.',
     LLL: 'D MMMM YYYY г., H:mm',
-    LLLL: 'dddd, D MMMM YYYY г., H:mm',
+    LLLL: 'dddd, D MMMM YYYY г., H:mm'
   },
   relativeTime: {
     future: '%s sonra',
@@ -29,9 +29,9 @@ const locale = {
     M: 'bir ay',
     MM: '%d ay',
     y: 'bir il',
-    yy: '%d il',
+    yy: '%d il'
   },
-  ordinal: n => n,
+  ordinal: n => n
 }
 
 dayjs.locale(locale, null, true)
