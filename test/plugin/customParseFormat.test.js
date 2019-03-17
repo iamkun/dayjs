@@ -26,6 +26,12 @@ it('parse padded string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse string for MMM month format', () => {
+  const input = '4/Mar/2019:11:16:26 +0800'
+  const format = 'D/MMM/YYYY:H:m:s zz'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('parse string January (getMonth() = 0)', () => {
   const input = '01/01/2019'
   const format = 'DD/MM/YYYY'
