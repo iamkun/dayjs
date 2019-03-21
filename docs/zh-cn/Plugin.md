@@ -283,7 +283,7 @@ dayjs('2018-06-27').week(5) // 设置周
 
 ### QuarterOfYear
 
-- QuarterOfYear 增加了 `.quarter()` API `number` 来表示 `Dayjs` 的日期是第几个季度.
+- QuarterOfYear 增加了 `.quarter()` API 返回一个 `number` 来表示 `Dayjs` 的日期是第几个季度，并扩展了 `.add`, `.subtract`, `.startOf`, `.endOf` API 来支持 `quarter` 季度单位。
 
 ```javascript
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
@@ -291,6 +291,7 @@ import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 dayjs.extend(quarterOfYear)
 
 dayjs('2010-04-01').quarter() // 2
+dayjs('2010-04-01').quarter(2)
 ```
 
 ### CustomParseFormat
