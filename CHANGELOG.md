@@ -1,3 +1,14 @@
+## [1.8.11](https://github.com/iamkun/dayjs/compare/v1.8.10...v1.8.11) (2019-03-21)
+
+
+### Bug Fixes
+
+* Add .add('quarter') .startOf('quarter') through plugin quarterOfYear ([dde39e9](https://github.com/iamkun/dayjs/commit/dde39e9)), closes [#537](https://github.com/iamkun/dayjs/issues/537) [#531](https://github.com/iamkun/dayjs/issues/531)
+* Add locale support for Azerbaijani language (az) ([#535](https://github.com/iamkun/dayjs/issues/535)) ([eeb20fa](https://github.com/iamkun/dayjs/commit/eeb20fa))
+* Correct typescript definition `add` ([22a249c](https://github.com/iamkun/dayjs/commit/22a249c)), closes [#531](https://github.com/iamkun/dayjs/issues/531)
+* Fix CustomParseFormat plugin formatting bug ([#536](https://github.com/iamkun/dayjs/issues/536)) ([8578546](https://github.com/iamkun/dayjs/commit/8578546)), closes [#533](https://github.com/iamkun/dayjs/issues/533)
+* Update pt locale ([#538](https://github.com/iamkun/dayjs/issues/538)) ([1ac9e1e](https://github.com/iamkun/dayjs/commit/1ac9e1e))
+
 ## [1.8.10](https://github.com/iamkun/dayjs/compare/v1.8.9...v1.8.10) (2019-03-10)
 
 
