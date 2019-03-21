@@ -35,7 +35,8 @@ const prettyUnit = (u) => {
     h: C.H,
     m: C.MIN,
     s: C.S,
-    ms: C.MS
+    ms: C.MS,
+    Q: C.Q
   }
   return special[u] || String(u || '').toLowerCase().replace(/s$/, '')
 }

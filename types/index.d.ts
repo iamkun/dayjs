@@ -10,6 +10,7 @@ declare namespace dayjs {
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
 
   export type OpUnitType = UnitType | "week" | 'w';
+  export type QUnitType = UnitType | "quarter" | 'Q';
 
   class Dayjs {
     constructor (config?: ConfigType)
@@ -62,7 +63,7 @@ declare namespace dayjs {
 
     format(template?: string): string
 
-    diff(date: ConfigType, unit: OpUnitType | 'quarter', float?: boolean): number
+    diff(date: ConfigType, unit: QUnitType, float?: boolean): number
 
     valueOf(): number
 
