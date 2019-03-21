@@ -284,7 +284,7 @@ dayjs('2018-06-27').week(5) // set week
 
 ### QuarterOfYear
 
-- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add`, `.subtract`, `.startOf`, `.endOf` API to support unit `quarter`.
+- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.
 
 ```javascript
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
