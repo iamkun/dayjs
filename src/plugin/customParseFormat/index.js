@@ -9,7 +9,7 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
-const matchWord = /\d*[^\s\d]+/ // Word
+const matchWord = /\d*[^\s\d-:/.()]+/ // Word
 
 let locale
 

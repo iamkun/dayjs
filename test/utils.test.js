@@ -8,6 +8,9 @@ it('PrettyUnit', () => {
   expect(prettyUnit('Days')).toBe('day')
   expect(prettyUnit('days')).toBe('day')
   expect(prettyUnit('day')).toBe('day')
+  expect(prettyUnit('Q')).toBe('quarter')
+  expect(prettyUnit('quarter')).toBe('quarter')
+  expect(prettyUnit('quarters')).toBe('quarter')
   expect(prettyUnit()).toBe('')
 })
 
