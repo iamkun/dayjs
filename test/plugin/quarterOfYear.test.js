@@ -26,11 +26,9 @@ it('get QuarterOfYear', () => {
 
 it('set QuarterOfYear', () => {
   const d1 = '2013-01-01T00:00:00.000'
-  expect(dayjs(d1).quarter(2).valueOf()).toBe(1364745600000)
   expect(dayjs(d1).quarter(2).format())
     .toBe(moment(d1).quarter(2).format())
   const d2 = '2013-02-05T05:06:07.000'
-  expect(dayjs(d2).quarter(2).valueOf()).toBe(1367701567000)
   expect(dayjs(d2).quarter(2).format())
     .toBe(moment(d2).quarter(2).format())
 })
