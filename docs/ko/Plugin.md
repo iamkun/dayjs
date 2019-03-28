@@ -374,6 +374,19 @@ dayjs('2019-01-25').toObject()
      milliseconds: 0 } */
 ```
 
+### MinMax
+
+- MinMax adds `.min` `.max` APIs to return a `dayjs` to compare given dayjs instances.
+
+```javascript
+import minMax from 'dayjs/plugin/minMax'
+
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
 ## Customize
 
 다양한 요구를 충족하기위해 자신만의 Day.js 플러그인을 만들 수 있습니다.

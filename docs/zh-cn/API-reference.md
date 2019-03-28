@@ -46,15 +46,6 @@
   - [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
 - [UTC](#utc)
 - [插件 APIs](#plugin-apis)
-  - [相对时间](#relativetime)
-  - [是否是闰年](#是否是闰年)
-  - [年中的第几周](#年中的第几周)
-  - [是否相同或之后](#是否相同或之后)
-  - [是否相同或之前](#是否相同或之前)
-  - [是否之间](#是否之间)
-  - [年中第几季度](#年中第几季度)
-  - [转成数组](#转成数组)
-  - [转成对象](#转成对象)
 
 ---
 
@@ -540,3 +531,9 @@ dayjs() instanceof dayjs // true
 `.toObject` 返回包含时间数值的对象
 
 插件 [`ToObject`](./Plugin.md#toobject)
+
+### 最小最大
+
+`.min` `.max` 比较传入的 dayjs 实例的大小
+
+plugin [`MinMax`](./Plugin.md#minmax)

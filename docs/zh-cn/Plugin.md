@@ -372,6 +372,19 @@ dayjs('2019-01-25').toObject()
      milliseconds: 0 } */
 ```
 
+### MinMax
+
+- MinMax 增加了 `.min` `.max` API 返回一个 `dayjs` 来比较传入的 dayjs 实例的大小.
+
+```javascript
+import minMax from 'dayjs/plugin/minMax'
+
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
 ## 自定义
 
 你可以根据需要自由的编写一个 Day.js 插件

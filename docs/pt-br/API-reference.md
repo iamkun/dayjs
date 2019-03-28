@@ -49,15 +49,6 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [É um objeto `Dayjs` `.isDayjs()`](#é-um-objeto-dayjs-isdayjs)
   - [UTC](#utc)
   - [Plugin APIs](#plugin-apis)
-    - [RelativeTime](#relativetime)
-    - [IsLeapYear](#isleapyear)
-    - [WeekOfYear](#weekofyear)
-    - [IsSameOrAfter](#issameorafter)
-    - [IsSameOrBefore](#issameorbefore)
-    - [IsBetween](#isbetween)
-    - [QuarterOfYear](#quarterofyear)
-    - [ToArray](#toarray)
-    - [ToObject](#toobject)
 
 ## Conversões
 
@@ -487,3 +478,9 @@ plugin [`ToArray`](./Plugin.md#toarray)
 `.toObject` to return an `object` with the date's properties.
 
 plugin [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max` to compare given dayjs instances.
+
+plugin [`MinMax`](./Plugin.md#minmax)

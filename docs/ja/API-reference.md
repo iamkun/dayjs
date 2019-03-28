@@ -46,15 +46,6 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   - [Is a Dayjs](#is-a-dayjs)
 - [UTC](#utc)
 - [Plugin APIs](#plugin-apis)
-  - [RelativeTime](#relativetime)
-  - [IsLeapYear](#isleapyear)
-  - [WeekOfYear](#weekofyear)
-  - [IsSameOrAfter](#issameorafter)
-  - [IsSameOrBefore](#issameorbefore)
-  - [IsBetween](#isbetween)
-  - [QuarterOfYear](#quarterofyear)
-  - [ToArray](#toarray)
-  - [ToObject](#toobject)
 
 ---
 
@@ -545,3 +536,9 @@ plugin [`ToArray`](./Plugin.md#toarray)
 `.toObject` to return an `object` with the date's properties.
 
 plugin [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max` to compare given dayjs instances.
+
+plugin [`MinMax`](./Plugin.md#minmax)

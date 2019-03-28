@@ -48,15 +48,6 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [UTC](#utc)
   - [Plugin APIs](#plugin-apis)
-    - [RelativeTime](#relativetime)
-    - [IsLeapYear](#isleapyear)
-    - [WeekOfYear](#weekofyear)
-    - [IsSameOrAfter](#issameorafter)
-    - [IsSameOrBefore](#issameorbefore)
-    - [IsBetween](#isbetween)
-    - [QuarterOfYear](#quarterofyear)
-    - [ToArray](#toarray)
-    - [ToObject](#toobject)
 
 ## Parsing
 
@@ -488,3 +479,9 @@ plugin [`ToArray`](./Plugin.md#toarray)
 `.toObject` to return an `object` with the date's properties.
 
 plugin [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max` to compare given dayjs instances.
+
+plugin [`MinMax`](./Plugin.md#minmax)

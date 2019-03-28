@@ -284,7 +284,7 @@ dayjs('2018-06-27').week(5) // set week
 
 ### QuarterOfYear
 
-- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.
+- QuarterOfYear adds `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.
 
 ```javascript
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
@@ -344,7 +344,7 @@ dayjs('2018 Enero 15', 'YYYY MMMM DD', 'es')
 
 ### ToArray
 
-- ToArray add `.toArray()` API to return an `array` that mirrors the parameters
+- ToArray adds `.toArray()` API to return an `array` that mirrors the parameters
 
 ```javascript
 import toArray from 'dayjs/plugin/toArray'
@@ -356,7 +356,7 @@ dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
 
 ### ToObject
 
-- ToObject add `.toObject()` API to return an `object` with the date's properties.
+- ToObject adds `.toObject()` API to return an `object` with the date's properties.
 
 ```javascript
 import toObject from 'dayjs/plugin/toObject'
@@ -371,6 +371,19 @@ dayjs('2019-01-25').toObject()
      minutes: 0,
      seconds: 0,
      milliseconds: 0 } */
+```
+
+### MinMax
+
+- MinMax adds `.min` `.max` APIs to return a `dayjs` to compare given dayjs instances.
+
+```javascript
+import minMax from 'dayjs/plugin/minMax'
+
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
 ```
 
 ## Customize
