@@ -18,14 +18,14 @@ afterEach(() => {
 it('Declares English localized formats', () => {
   expect(dayjs.en).toBeDefined()
   expect(dayjs.en.formats).toBeDefined();
-  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
+  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL', 'l', 'll', 'lll', 'llll'].forEach(option =>
     expect(dayjs.en.formats[option]).toBeDefined())
 })
 
 it('Recognizes localized format options', () => {
   const { formats } = dayjs.en
   const date = dayjs();
-  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
+  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL', 'l', 'll', 'lll', 'llll'].forEach(option =>
     expect(date.format(option)).toBe(date.format(formats[option])))
 })
 
@@ -33,7 +33,7 @@ it('Uses correct English formats', () => {
   const date = new Date()
   const actualDate = dayjs(date)
   const expectedDate = moment(date);
-  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
+  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL', 'l', 'll', 'lll', 'llll'].forEach(option =>
     expect(actualDate.format(option)).toBe(expectedDate.format(option)))
 })
 
