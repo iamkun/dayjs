@@ -501,6 +501,12 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsoWeeksInYear
+
+`.isoWeeksInYear` to get the number of weeks in year
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 #### IsSameOrAfter
 
 `.isSameOrAfter` はある日付が別の日付と同じまたは以降かどうかを判定します。

@@ -282,6 +282,21 @@ dayjs('06/27/2018').week() // 26
 dayjs('2018-06-27').week(5) // set week
 ```
 
+### IsoWeeksInYear
+
+- IsoWeeksInYear adds `.isoWeeksInYear()` API to return a `number` to get the number of weeks in year, according to ISO weeks.
+
+```javascript
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear from 'dayjs/plugin/isLeapYear' // rely on isLeapYear plugin
+
+dayjs.extend(isoWeeksInYear)
+dayjs.extend(isLeapYear)
+
+dayjs('2004-01-01').isoWeeksInYear() // 53
+dayjs('2005-01-01').isoWeeksInYear() // 52
+```
+
 ### QuarterOfYear
 
 - QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.

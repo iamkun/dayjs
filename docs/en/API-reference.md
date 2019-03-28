@@ -445,6 +445,12 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsoWeeksInYear
+
+`.isoWeeksInYear` to get the number of weeks in year
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 ### IsSameOrAfter
 
 `.isSameOrAfter` to check if a date is same of after another date
@@ -477,12 +483,12 @@ plugin [`ToArray`](./Plugin.md#toarray)
 
 ### ToObject
 
-`.toObject` to return an `object` with the date's properties.
+`.toObject` to return an `object` with the date's properties
 
 plugin [`ToObject`](./Plugin.md#toobject)
 
 ### MinMax
 
-`.min` `.max` to compare given dayjs instances.
+`.min` `.max` to compare given dayjs instances
 
 plugin [`MinMax`](./Plugin.md#minmax)

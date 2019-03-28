@@ -281,6 +281,21 @@ dayjs('06/27/2018').week() // 26
 dayjs('2018-06-27').week(5) // 设置周
 ```
 
+### IsoWeeksInYear
+
+- IsoWeeksInYear 增加了 `.isoWeeksInYear()` API 返回一个 `number` 来得到依据 ISO week 标准一年中有几周
+
+```javascript
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear from 'dayjs/plugin/isLeapYear' // rely on isLeapYear plugin
+
+dayjs.extend(isoWeeksInYear)
+dayjs.extend(isLeapYear)
+
+dayjs('2004-01-01').isoWeeksInYear() // 53
+dayjs('2005-01-01').isoWeeksInYear() // 52
+```
+
 ### QuarterOfYear
 
 - QuarterOfYear 增加了 `.quarter()` API 返回一个 `number` 来表示 `Dayjs` 的日期是第几个季度，并扩展了 `.add` `.subtract` `.startOf` `.endOf` API 来支持 `quarter` 季度单位。

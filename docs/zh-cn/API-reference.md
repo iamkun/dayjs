@@ -496,6 +496,12 @@ dayjs() instanceof dayjs // true
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### 年中有几周 ISO
+
+`.isoWeeksInYear` 获得年中有几周
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 ### 是否相同或之后
 
 `.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
