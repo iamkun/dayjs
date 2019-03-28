@@ -50,14 +50,22 @@ const parseDate = (cfg) => {
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
+
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
+      let dt
+
       if (utc) {
-        return new Date(Date.UTC(d[1], d[2] - 1, d[3]
+        dt = new Date(Date.UTC(d[1], d[2] - 1, d[3]
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+      } else {
+        dt = new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
       }
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+
+      dt.setUTCFullYear(d[1])
+
+      return dt
     }
   }
 

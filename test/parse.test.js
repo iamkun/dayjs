@@ -88,6 +88,15 @@ describe('Parse', () => {
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
+
+  it('Small value of year', () => {
+    let d = '0000-04-04'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '00100405'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+    d = '0900-04-04T11:12:13Z'
+    expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
+  })
 })
 
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
