@@ -548,3 +548,9 @@ plugin [`ToObject`](./Plugin.md#toobject)
 `.min` `.max` to compare given dayjs instances.
 
 plugin [`MinMax`](./Plugin.md#minmax)
+
+### Calendar
+
+`.calendar` to display calendar time
+
+plugin [`Calendar`](./Plugin.md#calendar)

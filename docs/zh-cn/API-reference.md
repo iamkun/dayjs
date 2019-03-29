@@ -543,3 +543,9 @@ plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
 `.min` `.max` 比较传入的 dayjs 实例的大小
 
 plugin [`MinMax`](./Plugin.md#minmax)
+
+### 日历时间
+
+`.calendar` 来显示日历时间
+
+plugin [`Calendar`](./Plugin.md#calendar)

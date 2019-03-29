@@ -219,6 +219,7 @@ class Dayjs {
     const arg = unit === C.D ? this.$D + (int - this.$W) : int
 
     if (unit === C.M || unit === C.Y) {
+      // clone is for badMutable plugin
       const date = this.clone().set(C.DATE, 1)
       date.$d[name](arg)
       date.init()

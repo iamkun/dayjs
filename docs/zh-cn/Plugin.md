@@ -389,7 +389,7 @@ dayjs('2019-01-25').toObject()
 
 ### MinMax
 
-- MinMax 增加了 `.min` `.max` API 返回一个 `dayjs` 来比较传入的 dayjs 实例的大小.
+- MinMax 增加了 `.min` `.max` API 返回一个 `dayjs` 来比较传入的 dayjs 实例的大小。
 
 ```javascript
 import minMax from 'dayjs/plugin/minMax'
@@ -398,6 +398,26 @@ dayjs.extend(minMax)
 
 dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
 dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
+### Calendar
+
+- Calendar 增加了 `.calendar` API 返回一个 `string` 来显示日历时间。
+
+```javascript
+import calendar from 'dayjs/plugin/calendar'
+
+dayjs.extend(calendar)
+
+dayjs().calendar(dayjs('2008-01-01'))
+dayjs().calendar(null, {
+  sameDay: '[今天] HH:mm', // 今天 ( 今天 2:30 AM )
+  nextDay: '[明天]', // 明天 ( 明天 2:30 AM )
+  nextWeek: '[下]dddd', // 下周 ( Sunday at 2:30 AM )
+  lastDay: '[昨天]', // 昨天 ( 昨天 2:30 AM )
+  lastWeek: '[上] dddd', // 上周 ( Last Monday at 2:30 AM )
+  sameElse: 'DD/MM/YYYY' // 其他情况 ( 7/10/2011 )
+})
 ```
 
 ## 自定义
