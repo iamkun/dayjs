@@ -90,6 +90,21 @@ it('Set Millisecond', () => {
   expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
 })
 
+it('Set Month and Year in last day of month', () => {
+  // 2011-07-31 -> 2011-02-28
+  const origin = dayjs('2011-07-31T14:48:00.000Z')
+  const setMonth = origin.set('month', 1)
+  expect(setMonth.month()).toBe(1)
+  expect(origin.date()).toBe(31)
+  expect(setMonth.date()).toBe(28)
+  // 2000-02-29 -> 2001-02-28
+  const origin2 = dayjs('2000-02-29T14:48:00.000Z')
+  const setYear = origin2.set('year', 2001)
+  expect(setYear.month()).toBe(1)
+  expect(origin2.date()).toBe(29)
+  expect(setYear.date()).toBe(28)
+})
+
 it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.valueOf())
