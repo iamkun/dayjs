@@ -296,10 +296,7 @@ class Dayjs {
       Z: zoneStr
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => {
-      if ($1) return $1.replace(/\[|\]/g, '')
-      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
-    })
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
   }
 
   utcOffset() {
