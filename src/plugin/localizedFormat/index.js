@@ -20,8 +20,8 @@ export default (o, c, d) => {
     const locale = this.$locale()
     const formats = locale.formats || {}
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/LTS|LT|L{1,4}|l{1,4}/g, match =>
-      formats[match] || englishFormats[match])
+    const result = str.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) =>
+      a || formats[b] || englishFormats[b])
     return oldFormat.call(this, result)
   }
 }

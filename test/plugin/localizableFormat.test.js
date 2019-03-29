@@ -22,6 +22,17 @@ it('Declares English localized formats', () => {
     expect(dayjs.en.formats[option]).toBeDefined())
 })
 
+it('Should not interpolate characters inside square brackets', () => {
+  const date = new Date(0)
+  const actualDate = dayjs(date)
+  const expectedDate = moment(date)
+
+  expect(actualDate.format('[l]')).toBe('l')
+  expect(actualDate.format('YYYY [l] YYYY')).toBe('1970 l 1970')
+  expect(actualDate.format('l [l] l')).toBe('1/1/1970 l 1/1/1970')
+  expect(actualDate.format('[L LL LLL LLLL]')).toBe(expectedDate.format('[L LL LLL LLLL]'))
+})
+
 it('Recognizes localized format options', () => {
   const { formats } = dayjs.en
   const date = dayjs();
