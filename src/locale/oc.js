@@ -3,7 +3,9 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ca',
   weekdays: 'Dimenge_Diluns_Dimars_Dimècres_Dijòus_Divendres_Dissabte'.split('_'),
+  weekdaysShort: 'Dg_Dl_Dm_Dc_Dj_Dv_Ds'.split('_'),
   months: 'Genièr_Febrièr_Març_Abrial_Mai_Junh_Julhet_Agost_Setembre_Octòbre_Novembre_Decembre'.split('_'),
+  monthsShort: 'Gen_Feb_Març_Abr_Mai_Junh_Julh_Ago_Set_Oct_Nov_Dec'.split('_'),
   weekStart: 1,
   formats: {
     LT: 'H:mm',
