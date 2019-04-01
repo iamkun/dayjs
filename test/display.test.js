@@ -138,7 +138,9 @@ it('Format Complex with other string - : / ', () => {
 })
 
 it('Format Escaping characters', () => {
-  const string = '[Z] Z'
+  let string = '[Z] Z'
+  expect(dayjs().format(string)).toBe(moment().format(string))
+  string = '[Z] Z [Z]'
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
 

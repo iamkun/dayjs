@@ -18,7 +18,6 @@ describe('Parse', () => {
   it('moment-js like formatted dates', () => {
     global.console.warn = jest.genMockFunction()// moment.js '2018-4-1 1:1:1:22' will throw warn
     let d = '20130108'
-    let f = '[interpolated] mm dd'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-04-24'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
@@ -40,9 +39,6 @@ describe('Parse', () => {
     expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
     d = '2018-05-02T11:12:13Z' // should go direct to new Date() rather our regex
     expect(dayjs(d).format()).toBe(moment(d).format()) // not recommend
-    expect(dayjs(d).format(f)).toBe(moment(d).format(f))
-    f = '[interpolated1] [interpolated2] mm dd'
-    expect(dayjs(d).format(f)).toBe(moment(d).format(f))
   })
 
   it('String ISO 8601 date, time and zone', () => {
