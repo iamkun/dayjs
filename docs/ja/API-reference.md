@@ -22,6 +22,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   - [Minute](#minute)
   - [Second](#second)
   - [Millisecond](#millisecond)
+  - [Get](#get)
   - [Set](#set)
 - [Manipulate](#manipulate)
   - [Add](#add)
@@ -199,16 +200,15 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-#### Set
+#### Get
 
-日付のセッターです。
+Returns a `number` with information getting from `Dayjs` object
 単位は大文字・小文字を区別しません。
 
 ```js
-dayjs().set((unit: String), (value: Int))
-dayjs().set('date', 1)
-dayjs().set('month', 3) // 4月
-dayjs().set('second', 30)
+dayjs().get(unit: String)
+dayjs().get('month') // start 0
+dayjs().get('day')
 ```
 
 #### List of all available units
@@ -224,7 +224,16 @@ dayjs().set('second', 30)
 | `second`      | `s`       | Second                                   |
 | `millisecond` | `ms`      | Millisecond                              |
 
----
+#### Set
+
+日付のセッターです。
+
+```js
+dayjs().set(unit: String, value: Int)
+dayjs().set('date', 1)
+dayjs().set('month', 3) // 4月
+dayjs().set('second', 30)
+```
 
 ### Manipulate
 
@@ -242,7 +251,7 @@ dayjs()
 時間を足して新しい `Dayjs` オブジェクトを返します。
 
 ```js
-dayjs().add((value: Number), (unit: String))
+dayjs().add(value: Number, unit: String)
 dayjs().add(7, 'day')
 ```
 

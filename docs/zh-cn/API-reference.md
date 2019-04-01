@@ -22,6 +22,7 @@
   - [分](#分)
   - [秒](#秒)
   - [毫秒](#毫秒)
+  - [获取](#获取)
   - [设置](#设置)
 - [操作](#操作)
   - [增加](#增加)
@@ -201,16 +202,15 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-#### 设置
+#### 获取
 
-设置时间
+获取从 `Dayjs` 对象中取到的信息
 传入的单位 (unit) 对大小写不敏感。
 
 ```js
-dayjs().set(unit : String, value : Int);
-dayjs().set('date', 1);
-dayjs().set('month', 3); // 四月
-dayjs().set('second', 30);
+dayjs().get(unit : String)
+dayjs().get('month') // 从 0 开始
+dayjs().get('day')
 ```
 
 #### 可用单位
@@ -226,7 +226,16 @@ dayjs().set('second', 30);
 | `second`      | `s`  | 秒                          |
 | `millisecond` | `ms` | 毫秒                        |
 
----
+#### 设置
+
+设置时间
+
+```js
+dayjs().set(unit : String, value : Int);
+dayjs().set('date', 1);
+dayjs().set('month', 3); // 四月
+dayjs().set('second', 30);
+```
 
 ### 操作
 

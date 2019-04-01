@@ -23,8 +23,9 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Minute `.minute()`](#minute-minute)
     - [Second `.second()`](#second-second)
     - [Millisecond `.millisecond()`](#millisecond-millisecond)
-    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+    - [Get `.get(unit: string)`](#get-getunit-string)
       - [List of all available units](#list-of-all-available-units)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
   - [Manipulating](#manipulating)
     - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
     - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
@@ -186,14 +187,13 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-### Set `.set(unit: string, value: number)`
+### Get `.get(unit: string)`
 
-Returns a `Dayjs` with the applied changes.
+Returns a `number` with information getting from `Dayjs` object
 
 ```js
-dayjs().set('date', 1)
-dayjs().set('month', 3) // April
-dayjs().set('second', 30)
+dayjs().get('month') // start 0
+dayjs().get('day')
 ```
 
 #### List of all available units
@@ -209,9 +209,19 @@ dayjs().set('second', 30)
 | `second`      | `s`       | Second                                   |
 | `millisecond` | `ms`      | Millisecond                              |
 
+### Set `.set(unit: string, value: number)`
+
+Returns a `Dayjs` with the applied changes.
+
+```js
+dayjs().set('date', 1)
+dayjs().set('month', 3) // April
+dayjs().set('second', 30)
+```
+
 ## Manipulating
 
-`Dayjs` objects can be manipulated in many ways.
+`Dayjs` object can be manipulated in many ways.
 
 ```js
 dayjs('2019-01-25')

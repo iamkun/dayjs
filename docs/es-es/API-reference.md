@@ -23,8 +23,9 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Minuto `.minute()`](#minuto-minute)
     - [Segundo `.second()`](#segundo-second)
     - [Milisegundo `.millisecond()`](#milisegundo-millisecond)
-    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+    - [Get `.get(unit: string)`](#get-getunit-string)
       - [Lista de unidades disponibles](#lista-de-unidades-disponibles)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
   - [Manipulación](#manipulación)
     - [Añadir `.add(value: number, unit: string)`](#añadir-addvalue-number-unit-string)
     - [Restar `.subtract(value: number, unit: string)`](#restar-subtractvalue-number-unit-string)
@@ -184,6 +185,15 @@ Gets or sets the millisecond.
 ```js
 dayjs().millisecond()
 dayjs().millisecond(1)
+```
+
+### Get `.get(unit: string)`
+
+Returns a `number` with information getting from `Dayjs` object
+
+```js
+dayjs().get('month') // start 0
+dayjs().get('day')
 ```
 
 ### Set `.set(unit: string, value: number)`

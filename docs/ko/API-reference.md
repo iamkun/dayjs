@@ -23,6 +23,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
     - [Minute `.minute()`](#minute-minute)
     - [Second `.second()`](#second-second)
     - [Millisecond `.millisecond()`](#millisecond-millisecond)
+    - [Get `.get(unit: string)`](#get-getunit-string)
     - [Set `.set(unit: string, value: number)`](#set-setunit--string--value--number)
   - [Manipulating](#manipulating)
     - [Add `.add(value: number, unit: string)`](#add-addvalue--number--unit--string)
@@ -185,14 +186,13 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-### Set `.set(unit: string, value: number)`
+### Get `.get(unit: string)`
 
-변경 사항이 적용된 `Dayjs`를 반환합니다.
+Returns a `number` with information getting from `Dayjs` object
 
 ```js
-dayjs().set('date', 1)
-dayjs().set('month', 3) // April
-dayjs().set('second', 30)
+dayjs().get('month') // start 0
+dayjs().get('day')
 ```
 
 #### List of all available units
@@ -207,6 +207,16 @@ dayjs().set('second', 30)
 | `minute`      | `m`       | Minute                                   |
 | `second`      | `s`       | Second                                   |
 | `millisecond` | `ms`      | Millisecond                              |
+
+### Set `.set(unit: string, value: number)`
+
+변경 사항이 적용된 `Dayjs`를 반환합니다.
+
+```js
+dayjs().set('date', 1)
+dayjs().set('month', 3) // April
+dayjs().set('second', 30)
+```
 
 ## Manipulating
 
