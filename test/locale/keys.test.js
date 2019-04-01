@@ -8,8 +8,11 @@ const Locale = []
 // load all locales from locale dir
 fs.readdirSync(path.join(__dirname, localeDir))
   .forEach((file) => {
-    // eslint-disable-next-line
-    Locale.push(require(path.join(__dirname, localeDir, file)).default)
+    Locale.push({
+      name: file,
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      content: require(path.join(__dirname, localeDir, file)).default
+    })
   })
 
 it('Locale keys', () => {
@@ -25,8 +28,9 @@ it('Locale keys', () => {
       monthsShort,
       weekdaysMin,
       weekStart
-    } = locale
-    expect(name).toEqual(expect.any(String))
+    } = locale.content
+
+    expect(name).toEqual(locale.name.replace('.js', ''))
     expect(weekdays).toEqual(expect.any(Array))
 
     if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
