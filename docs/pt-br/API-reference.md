@@ -200,7 +200,7 @@ dayjs().get('day')
 | ------------- | --------- | --------------------------------------------- |
 | `date`        |           | Data do Mês                                   |
 | `day`         | `d`       | Dia da Semana (Domingo como 0, Sábado como 6) |
-| `month`       | `M`       | Mês                                           |
+| `month`       | `M`       | Mês (January as 0, December as 11)            |
 | `year`        | `y`       | Ano                                           |
 | `hour`        | `h`       | Hora                                          |
 | `minute`      | `m`       | Minuto                                        |

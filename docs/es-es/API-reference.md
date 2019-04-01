@@ -212,7 +212,7 @@ dayjs().set('second', 30)
 | ------------- | ----------- | ------------------------------------------- |
 | `date`        |             | Día del mes                                 |
 | `day`         | `d`         | Día de la semana (de domingo 0, a sábado 6) |
-| `month`       | `M`         | Mes                                         |
+| `month`       | `M`         | Mes (January as 0, December as 11)          |
 | `year`        | `y`         | Año                                         |
 | `hour`        | `h`         | Hora                                        |
 | `minute`      | `m`         | Minuto                                      |
