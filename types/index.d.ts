@@ -53,6 +53,8 @@ declare namespace dayjs {
 
     set(unit: UnitType, value: number): Dayjs
 
+    get(unit: UnitType): number
+
     add(value: number, unit: OpUnitType): Dayjs
 
     subtract(value: number, unit: OpUnitType): Dayjs

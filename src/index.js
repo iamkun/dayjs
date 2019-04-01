@@ -234,6 +234,10 @@ class Dayjs {
     return this.clone().$set(string, int)
   }
 
+  get(unit) {
+    return this[Utils.p(unit)]()
+  }
+
   add(number, units) {
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
