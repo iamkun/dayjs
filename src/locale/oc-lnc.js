@@ -24,7 +24,7 @@ const locale = {
     h: 'una ora',
     hh: '%d oras',
     d: 'un jorn',
-    dd: '%d jorn',
+    dd: '%d jorns',
     M: 'un mes',
     MM: '%d meses',
     y: 'un an',
