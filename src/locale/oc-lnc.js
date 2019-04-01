@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'oc',
+  name: 'oc-lnc',
   weekdays: 'Dimenge_Diluns_Dimars_Dimècres_Dijòus_Divendres_Dissabte'.split('_'),
   weekdaysShort: 'Dg_Dl_Dm_Dc_Dj_Dv_Ds'.split('_'),
   months: 'Genièr_Febrièr_Març_Abrial_Mai_Junh_Julhet_Agost_Setembre_Octòbre_Novembre_Decembre'.split('_'),
