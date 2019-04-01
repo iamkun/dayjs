@@ -12,7 +12,11 @@ const locale = {
     L: 'YYYY.MM.DD.',
     LL: 'YYYY년 MMMM D일',
     LLL: 'YYYY년 MMMM D일 A h:mm',
-    LLLL: 'YYYY년 MMMM D일 dddd A h:mm'
+    LLLL: 'YYYY년 MMMM D일 dddd A h:mm',
+    l: 'YYYY.MM.DD.',
+    ll: 'YYYY년 MMMM D일',
+    lll: 'YYYY년 MMMM D일 A h:mm',
+    llll: 'YYYY년 MMMM D일 dddd A h:mm'
   },
   relativeTime: {
     future: '%s 후',
