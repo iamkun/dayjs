@@ -126,14 +126,18 @@ dayjs().format('L LT')
 
 扩展的模版列表:
 
-| 模版   | 格式                      | 输出                              |
-| ------ | ------------------------- | --------------------------------- |
-| `LT`   | h:mm A                    | 8:02 PM                           |
-| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
-| `L`    | MM/DD/YYYY                | 08/16/2018                        |
-| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
-| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
-| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+| 模版   | 格式                              | 输出                                    |
+| ------ | --------------------------------- | --------------------------------------- |
+| `LT`   | HH:mm                             | 8:02                                    |
+| `LTS`  | HH:mm:ss                          | 15:25:50                                |
+| `L`    | YYYY/MM/DD                        | 2010/02/14                              |
+| `LL`   | YYYY 年 M 月 D 日                 | 2010 年 2 月 14 日                      |
+| `LLL`  | YYYY 年 M 月 D 日 Ah 点 mm 分     | 2010 年 2 月 14 日下午 3 点 25 分       |
+| `LLLL` | YYYY 年 M 月 D 日 ddddAh 点 mm 分 | 2010 年 2 月 14 日星期日下午 3 点 25 分 |
+| `l`    | YYYY/M/D                          | 2010/2/14                               |
+| `ll`   | YYYY 年 M 月 D 日                 | 2010 年 2 月 14 日                      |
+| `lll`  | YYYY 年 M 月 D 日 HH:mm           | 2010 年 2 月 14 日 15:25                |
+| `llll` | YYYY 年 M 月 D 日 dddd HH:mm      | 2010 年 2 月 14 日星期日 15:25          |
 
 ### RelativeTime
 
