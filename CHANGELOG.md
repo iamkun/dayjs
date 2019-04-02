@@ -1,3 +1,18 @@
+## [1.8.12](https://github.com/iamkun/dayjs/compare/v1.8.11...v1.8.12) (2019-04-02)
+
+
+### Bug Fixes
+
+* Add .get API ([7318797](https://github.com/iamkun/dayjs/commit/7318797))
+* Add 79 locales ([#541](https://github.com/iamkun/dayjs/issues/541)) ([f75a125](https://github.com/iamkun/dayjs/commit/f75a125))
+* Add Calendar plugin ([d1b9cf9](https://github.com/iamkun/dayjs/commit/d1b9cf9))
+* Add isoWeeksInYear plugin ([2db8631](https://github.com/iamkun/dayjs/commit/2db8631))
+* Add Occitan (oc-lnc) locale file ([#551](https://github.com/iamkun/dayjs/issues/551)) ([c30b715](https://github.com/iamkun/dayjs/commit/c30b715))
+* Add plugin minMax to sopport .max .min ([2870a23](https://github.com/iamkun/dayjs/commit/2870a23))
+* Fix set Month Year error in last day of the month ([d058f4a](https://github.com/iamkun/dayjs/commit/d058f4a))
+* Update ko locale weekdaysShort  ([#543](https://github.com/iamkun/dayjs/issues/543)) ([317fd3e](https://github.com/iamkun/dayjs/commit/317fd3e))
+* Update localizedFormat plugin to support lowercase localizable formats (l, ll, lll, llll) ([#546](https://github.com/iamkun/dayjs/issues/546)) ([f2b5ebf](https://github.com/iamkun/dayjs/commit/f2b5ebf))
+
 ## [1.8.11](https://github.com/iamkun/dayjs/compare/v1.8.10...v1.8.11) (2019-03-21)
 
 
