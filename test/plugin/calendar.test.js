@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import calendar from '../../src/plugin/calendar'
+import zhCn from '../../src/locale/zh-cn'
 
 dayjs.extend(calendar)
 
@@ -78,4 +79,19 @@ it('Custom format', () => {
   const nextDayWithoutFormat = '2015-01-14T11:23:55.000Z'
   expect(dayjs(now).calendar(nextDayWithoutFormat, format))
     .toEqual(moment(now).calendar(nextDayWithoutFormat, format))
+})
+
+it('set global calendar in locale file', () => {
+  const now = '2019-04-03T14:21:22.000Z'
+  zhCn.calendar = {
+    sameDay: '[今天]HH:mm',
+    nextDay: '[明天]HH:mm',
+    nextWeek: '[下]ddddHH:mm',
+    lastDay: '[昨天]HH:mm',
+    lastWeek: '[上]ddddHH:mm',
+    sameElse: 'YYYY/MM/DD'
+  }
+  dayjs.locale(zhCn)
+  expect(dayjs(now).calendar())
+    .toEqual(moment(now).locale('zh-cn').calendar())
 })
