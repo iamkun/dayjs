@@ -23,8 +23,9 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Minuto `.minute()`](#minuto-minute)
     - [Segundo `.second()`](#segundo-second)
     - [Milisegundo `.millisecond()`](#milisegundo-millisecond)
-    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+    - [Get `.get(unit: string)`](#get-getunit-string)
       - [Lista de unidades disponibles](#lista-de-unidades-disponibles)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
   - [Manipulación](#manipulación)
     - [Añadir `.add(value: number, unit: string)`](#añadir-addvalue-number-unit-string)
     - [Restar `.subtract(value: number, unit: string)`](#restar-subtractvalue-number-unit-string)
@@ -49,15 +50,6 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
     - [Es Dayjs `.isDayjs()`](#es-dayjs-isdayjscompared-any)
   - [UTC](#utc)
   - [API de complementos](#api-de-complementos)
-    - [RelativeTime](#relativetime)
-    - [IsLeapYear](#isleapyear)
-    - [WeekOfYear](#weekofyear)
-    - [IsSameOrAfter](#issameorafter)
-    - [IsSameOrBefore](#issameorbefore)
-    - [IsBetween](#isbetween)
-    - [QuarterOfYear](#quarterofyear)
-    - [ToArray](#toarray)
-    - [ToObject](#toobject)
 
 ## Análisis
 
@@ -195,6 +187,15 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
+### Get `.get(unit: string)`
+
+Returns a `number` with information getting from `Dayjs` object
+
+```js
+dayjs().get('month') // start 0
+dayjs().get('day')
+```
+
 ### Set `.set(unit: string, value: number)`
 
 Devuelve un nuevo objeto `Dayjs` con los cambios aplicados.
@@ -211,7 +212,7 @@ dayjs().set('second', 30)
 | ------------- | ----------- | ------------------------------------------- |
 | `date`        |             | Día del mes                                 |
 | `day`         | `d`         | Día de la semana (de domingo 0, a sábado 6) |
-| `month`       | `M`         | Mes                                         |
+| `month`       | `M`         | Mes (January as 0, December as 11)          |
 | `year`        | `y`         | Año                                         |
 | `hour`        | `h`         | Hora                                        |
 | `minute`      | `m`         | Minuto                                      |
@@ -454,6 +455,12 @@ complemento [`IsLeapYear`](./Plugin.md#isleapyear)
 
 complemento [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsoWeeksInYear
+
+`.isoWeeksInYear` to get the number of weeks in year
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 ### IsSameOrAfter
 
 `.isSameOrAfter` to check if a date is same of after another date
@@ -489,3 +496,15 @@ plugin [`ToArray`](./Plugin.md#toarray)
 `.toObject` to return an `object` with the date's properties.
 
 plugin [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max` to compare given dayjs instances.
+
+plugin [`MinMax`](./Plugin.md#minmax)
+
+### Calendar
+
+`.calendar` to display calendar time
+
+plugin [`Calendar`](./Plugin.md#calendar)

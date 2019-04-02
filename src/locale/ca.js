@@ -11,7 +11,10 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM [de] YYYY',
     LLL: 'D MMMM [de] YYYY [a les] H:mm',
-    LLLL: 'dddd D MMMM [de] YYYY [a les] H:mm'
+    LLLL: 'dddd D MMMM [de] YYYY [a les] H:mm',
+    ll: 'D MMM YYYY',
+    lll: 'D MMM YYYY, H:mm',
+    llll: 'ddd D MMM YYYY, H:mm'
   },
   relativeTime: {
     future: 'en %s',

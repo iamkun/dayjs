@@ -135,6 +135,10 @@ List of added formats:
 | `LL`   | MMMM D, YYYY              | August 16, 2018                   |
 | `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
 | `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+| `l`    | M/D/YYYY                  | 8/16/2018                         |
+| `ll`   | MMM D, YYYY               | Aug 16, 2018                      |
+| `lll`  | MMM D, YYYY h:mm A        | Aug 16, 2018 8:02 PM              |
+| `llll` | ddd, MMM D, YYYY h:mm A   | Thu, Aug 16, 2018 8:02 PM         |
 
 ### RelativeTime
 
@@ -282,9 +286,24 @@ dayjs('2018-06-27').week() // 26
 dayjs('2018-06-27').week(5) // set week
 ```
 
+### IsoWeeksInYear
+
+- IsoWeeksInYear adds `.isoWeeksInYear()` API to return a `number` to get the number of weeks in year, according to ISO weeks.
+
+```javascript
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear from 'dayjs/plugin/isLeapYear' // rely on isLeapYear plugin
+
+dayjs.extend(isoWeeksInYear)
+dayjs.extend(isLeapYear)
+
+dayjs('2004-01-01').isoWeeksInYear() // 53
+dayjs('2005-01-01').isoWeeksInYear() // 52
+```
+
 ### QuarterOfYear
 
-- QuarterOfYear add `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.
+- QuarterOfYear adds `.quarter()` API to return to which quarter of the year belongs a date, and extends `.add` `.subtract` `.startOf` `.endOf` APIs to support unit `quarter`.
 
 ```javascript
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
@@ -344,7 +363,7 @@ dayjs('2018 Enero 15', 'YYYY MMMM DD', 'es')
 
 ### ToArray
 
-- ToArray add `.toArray()` API to return an `array` that mirrors the parameters
+- ToArray adds `.toArray()` API to return an `array` that mirrors the parameters
 
 ```javascript
 import toArray from 'dayjs/plugin/toArray'
@@ -356,7 +375,7 @@ dayjs('2019-01-25').toArray() // [ 2019, 0, 25, 0, 0, 0, 0 ]
 
 ### ToObject
 
-- ToObject add `.toObject()` API to return an `object` with the date's properties.
+- ToObject adds `.toObject()` API to return an `object` with the date's properties.
 
 ```javascript
 import toObject from 'dayjs/plugin/toObject'
@@ -371,6 +390,39 @@ dayjs('2019-01-25').toObject()
      minutes: 0,
      seconds: 0,
      milliseconds: 0 } */
+```
+
+### MinMax
+
+- MinMax adds `.min` `.max` APIs to return a `dayjs` to compare given dayjs instances.
+
+```javascript
+import minMax from 'dayjs/plugin/minMax'
+
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
+### Calendar
+
+- Calendar adds `.calendar` API to return a `string` to display calendar time
+
+```javascript
+import calendar from 'dayjs/plugin/calendar'
+
+dayjs.extend(calendar)
+
+dayjs().calendar(dayjs('2008-01-01'))
+dayjs().calendar(null, {
+  sameDay: '[Today at] h:mm A', // The same day ( Today at 2:30 AM )
+  nextDay: '[Tomorrow]', // The next day ( Tomorrow at 2:30 AM )
+  nextWeek: 'dddd', // The next week ( Sunday at 2:30 AM )
+  lastDay: '[Yesterday]', // The day before ( Yesterday at 2:30 AM )
+  lastWeek: '[Last] dddd', // Last week ( Last Monday at 2:30 AM )
+  sameElse: 'DD/MM/YYYY' // Everything else ( 7/10/2011 )
+})
 ```
 
 ## Customize

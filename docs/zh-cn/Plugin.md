@@ -126,14 +126,18 @@ dayjs().format('L LT')
 
 扩展的模版列表:
 
-| 模版   | 格式                      | 输出                              |
-| ------ | ------------------------- | --------------------------------- |
-| `LT`   | h:mm A                    | 8:02 PM                           |
-| `LTS`  | h:mm:ss A                 | 8:02:18 PM                        |
-| `L`    | MM/DD/YYYY                | 08/16/2018                        |
-| `LL`   | MMMM D, YYYY              | August 16, 2018                   |
-| `LLL`  | MMMM D, YYYY h:mm A       | August 16, 2018 8:02 PM           |
-| `LLLL` | dddd, MMMM D, YYYY h:mm A | Thursday, August 16, 2018 8:02 PM |
+| 模版   | 格式                              | 输出                                    |
+| ------ | --------------------------------- | --------------------------------------- |
+| `LT`   | HH:mm                             | 8:02                                    |
+| `LTS`  | HH:mm:ss                          | 15:25:50                                |
+| `L`    | YYYY/MM/DD                        | 2010/02/14                              |
+| `LL`   | YYYY 年 M 月 D 日                 | 2010 年 2 月 14 日                      |
+| `LLL`  | YYYY 年 M 月 D 日 Ah 点 mm 分     | 2010 年 2 月 14 日下午 3 点 25 分       |
+| `LLLL` | YYYY 年 M 月 D 日 ddddAh 点 mm 分 | 2010 年 2 月 14 日星期日下午 3 点 25 分 |
+| `l`    | YYYY/M/D                          | 2010/2/14                               |
+| `ll`   | YYYY 年 M 月 D 日                 | 2010 年 2 月 14 日                      |
+| `lll`  | YYYY 年 M 月 D 日 HH:mm           | 2010 年 2 月 14 日 15:25                |
+| `llll` | YYYY 年 M 月 D 日 dddd HH:mm      | 2010 年 2 月 14 日星期日 15:25          |
 
 ### RelativeTime
 
@@ -281,6 +285,21 @@ dayjs('06/27/2018').week() // 26
 dayjs('2018-06-27').week(5) // 设置周
 ```
 
+### IsoWeeksInYear
+
+- IsoWeeksInYear 增加了 `.isoWeeksInYear()` API 返回一个 `number` 来得到依据 ISO week 标准一年中有几周
+
+```javascript
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear from 'dayjs/plugin/isLeapYear' // rely on isLeapYear plugin
+
+dayjs.extend(isoWeeksInYear)
+dayjs.extend(isLeapYear)
+
+dayjs('2004-01-01').isoWeeksInYear() // 53
+dayjs('2005-01-01').isoWeeksInYear() // 52
+```
+
 ### QuarterOfYear
 
 - QuarterOfYear 增加了 `.quarter()` API 返回一个 `number` 来表示 `Dayjs` 的日期是第几个季度，并扩展了 `.add` `.subtract` `.startOf` `.endOf` API 来支持 `quarter` 季度单位。
@@ -370,6 +389,39 @@ dayjs('2019-01-25').toObject()
      minutes: 0,
      seconds: 0,
      milliseconds: 0 } */
+```
+
+### MinMax
+
+- MinMax 增加了 `.min` `.max` API 返回一个 `dayjs` 来比较传入的 dayjs 实例的大小。
+
+```javascript
+import minMax from 'dayjs/plugin/minMax'
+
+dayjs.extend(minMax)
+
+dayjs.max(dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01'))
+dayjs.min([dayjs(), dayjs('2018-01-01'), dayjs('2019-01-01')])
+```
+
+### Calendar
+
+- Calendar 增加了 `.calendar` API 返回一个 `string` 来显示日历时间。
+
+```javascript
+import calendar from 'dayjs/plugin/calendar'
+
+dayjs.extend(calendar)
+
+dayjs().calendar(dayjs('2008-01-01'))
+dayjs().calendar(null, {
+  sameDay: '[今天] HH:mm', // 今天 ( 今天 2:30 AM )
+  nextDay: '[明天]', // 明天 ( 明天 2:30 AM )
+  nextWeek: '[下]dddd', // 下周 ( Sunday at 2:30 AM )
+  lastDay: '[昨天]', // 昨天 ( 昨天 2:30 AM )
+  lastWeek: '[上] dddd', // 上周 ( Last Monday at 2:30 AM )
+  sameElse: 'DD/MM/YYYY' // 其他情况 ( 7/10/2011 )
+})
 ```
 
 ## 自定义

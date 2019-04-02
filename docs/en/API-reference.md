@@ -23,8 +23,9 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Minute `.minute()`](#minute-minute)
     - [Second `.second()`](#second-second)
     - [Millisecond `.millisecond()`](#millisecond-millisecond)
-    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+    - [Get `.get(unit: string)`](#get-getunit-string)
       - [List of all available units](#list-of-all-available-units)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
   - [Manipulating](#manipulating)
     - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
     - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
@@ -49,15 +50,6 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
     - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
   - [UTC](#utc)
   - [Plugin APIs](#plugin-apis)
-    - [RelativeTime](#relativetime)
-    - [IsLeapYear](#isleapyear)
-    - [WeekOfYear](#weekofyear)
-    - [IsSameOrAfter](#issameorafter)
-    - [IsSameOrBefore](#issameorbefore)
-    - [IsBetween](#isbetween)
-    - [QuarterOfYear](#quarterofyear)
-    - [ToArray](#toarray)
-    - [ToObject](#toobject)
 
 ## Parsing
 
@@ -195,6 +187,28 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
+### Get `.get(unit: string)`
+
+Returns a `number` with information getting from `Dayjs` object
+
+```js
+dayjs().get('month') // start 0
+dayjs().get('day')
+```
+
+#### List of all available units
+
+| Unit          | Shorthand | Description                              |
+| ------------- | --------- | ---------------------------------------- |
+| `date`        |           | Date of Month                            |
+| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
+| `month`       | `M`       | Month (January as 0, December as 11)     |
+| `year`        | `y`       | Year                                     |
+| `hour`        | `h`       | Hour                                     |
+| `minute`      | `m`       | Minute                                   |
+| `second`      | `s`       | Second                                   |
+| `millisecond` | `ms`      | Millisecond                              |
+
 ### Set `.set(unit: string, value: number)`
 
 Returns a `Dayjs` with the applied changes.
@@ -205,22 +219,9 @@ dayjs().set('month', 3) // April
 dayjs().set('second', 30)
 ```
 
-#### List of all available units
-
-| Unit          | Shorthand | Description                              |
-| ------------- | --------- | ---------------------------------------- |
-| `date`        |           | Date of Month                            |
-| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
-| `month`       | `M`       | Month                                    |
-| `year`        | `y`       | Year                                     |
-| `hour`        | `h`       | Hour                                     |
-| `minute`      | `m`       | Minute                                   |
-| `second`      | `s`       | Second                                   |
-| `millisecond` | `ms`      | Millisecond                              |
-
 ## Manipulating
 
-`Dayjs` objects can be manipulated in many ways.
+`Dayjs` object can be manipulated in many ways.
 
 ```js
 dayjs('2019-01-25')
@@ -454,6 +455,12 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### IsoWeeksInYear
+
+`.isoWeeksInYear` to get the number of weeks in year
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 ### IsSameOrAfter
 
 `.isSameOrAfter` to check if a date is same of after another date
@@ -486,6 +493,18 @@ plugin [`ToArray`](./Plugin.md#toarray)
 
 ### ToObject
 
-`.toObject` to return an `object` with the date's properties.
+`.toObject` to return an `object` with the date's properties
 
 plugin [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max` to compare given dayjs instances
+
+plugin [`MinMax`](./Plugin.md#minmax)
+
+### Calendar
+
+`.calendar` to display calendar time
+
+plugin [`Calendar`](./Plugin.md#calendar)

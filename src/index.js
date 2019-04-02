@@ -218,7 +218,13 @@ class Dayjs {
     }[unit]
     const arg = unit === C.D ? this.$D + (int - this.$W) : int
 
-    if (this.$d[name]) this.$d[name](arg)
+    if (unit === C.M || unit === C.Y) {
+      // clone is for badMutable plugin
+      const date = this.clone().set(C.DATE, 1)
+      date.$d[name](arg)
+      date.init()
+      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).toDate()
+    } else if (name) this.$d[name](arg)
 
     this.init()
     return this
@@ -228,24 +234,23 @@ class Dayjs {
     return this.clone().$set(string, int)
   }
 
+  get(unit) {
+    return this[Utils.p(unit)]()
+  }
+
   add(number, units) {
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
-    const instanceFactory = (u, n) => {
-      // clone is for badMutable plugin
-      const date = this.clone().set(C.DATE, 1).set(u, n + number)
-      return date.set(C.DATE, Math.min(this.$D, date.daysInMonth()))
-    }
     const instanceFactorySet = (n) => {
       const date = new Date(this.$d)
       date.setDate(date.getDate() + (n * number))
       return Utils.w(date, this)
     }
     if (unit === C.M) {
-      return instanceFactory(C.M, this.$M)
+      return this.set(C.M, this.$M + number)
     }
     if (unit === C.Y) {
-      return instanceFactory(C.Y, this.$y)
+      return this.set(C.Y, this.$y + number)
     }
     if (unit === C.D) {
       return instanceFactorySet(1)
@@ -310,10 +315,7 @@ class Dayjs {
       Z: zoneStr // 'ZZ' logic below
     }
 
-    return str.replace(C.REGEX_FORMAT, (match) => {
-      if (match.indexOf('[') > -1) return match.replace(/\[|\]/g, '')
-      return matches[match] || zoneStr.replace(':', '') // 'ZZ'
-    })
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
   }
 
   utcOffset() {

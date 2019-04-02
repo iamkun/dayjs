@@ -19,7 +19,9 @@ const locale = {
     L: 'YYYY-MM-DD',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY [kl.] HH:mm',
-    LLLL: 'dddd D MMMM YYYY [kl.] HH:mm'
+    LLLL: 'dddd D MMMM YYYY [kl.] HH:mm',
+    lll: 'D MMM YYYY HH:mm',
+    llll: 'ddd D MMM YYYY HH:mm'
   },
   relativeTime: {
     future: 'om %s',

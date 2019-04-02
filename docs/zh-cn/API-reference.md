@@ -22,6 +22,7 @@
   - [分](#分)
   - [秒](#秒)
   - [毫秒](#毫秒)
+  - [获取](#获取)
   - [设置](#设置)
 - [操作](#操作)
   - [增加](#增加)
@@ -46,15 +47,6 @@
   - [是否是 Dayjs `.isDayjs()`](#是否是-dayjs-isdayjscompared-any)
 - [UTC](#utc)
 - [插件 APIs](#plugin-apis)
-  - [相对时间](#relativetime)
-  - [是否是闰年](#是否是闰年)
-  - [年中的第几周](#年中的第几周)
-  - [是否相同或之后](#是否相同或之后)
-  - [是否相同或之前](#是否相同或之前)
-  - [是否之间](#是否之间)
-  - [年中第几季度](#年中第几季度)
-  - [转成数组](#转成数组)
-  - [转成对象](#转成对象)
 
 ---
 
@@ -210,16 +202,15 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-#### 设置
+#### 获取
 
-设置时间
+获取从 `Dayjs` 对象中取到的信息
 传入的单位 (unit) 对大小写不敏感。
 
 ```js
-dayjs().set(unit : String, value : Int);
-dayjs().set('date', 1);
-dayjs().set('month', 3); // 四月
-dayjs().set('second', 30);
+dayjs().get(unit : String)
+dayjs().get('month') // 从 0 开始
+dayjs().get('day')
 ```
 
 #### 可用单位
@@ -228,14 +219,23 @@ dayjs().set('second', 30);
 | ------------- | ---- | --------------------------- |
 | `date`        |      | 日期                        |
 | `day`         | `d`  | 星期几 (星期天 0, 星期六 6) |
-| `month`       | `M`  | 月                          |
+| `month`       | `M`  | 月 (一月 0, 十二月 11)      |
 | `year`        | `y`  | 年                          |
 | `hour`        | `h`  | 时                          |
 | `minute`      | `m`  | 分                          |
 | `second`      | `s`  | 秒                          |
 | `millisecond` | `ms` | 毫秒                        |
 
----
+#### 设置
+
+设置时间
+
+```js
+dayjs().set(unit : String, value : Int);
+dayjs().set('date', 1);
+dayjs().set('month', 3); // 四月
+dayjs().set('second', 30);
+```
 
 ### 操作
 
@@ -505,6 +505,12 @@ dayjs() instanceof dayjs // true
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### 年中有几周 ISO
+
+`.isoWeeksInYear` 获得年中有几周
+
+plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
 ### 是否相同或之后
 
 `.isSameOrAfter` 返回一个时间和一个时间相同或在一个时间之后
@@ -540,3 +546,15 @@ dayjs() instanceof dayjs // true
 `.toObject` 返回包含时间数值的对象
 
 插件 [`ToObject`](./Plugin.md#toobject)
+
+### 最小最大
+
+`.min` `.max` 比较传入的 dayjs 实例的大小
+
+plugin [`MinMax`](./Plugin.md#minmax)
+
+### 日历时间
+
+`.calendar` 来显示日历时间
+
+plugin [`Calendar`](./Plugin.md#calendar)
