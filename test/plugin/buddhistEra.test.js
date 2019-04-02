@@ -31,3 +31,8 @@ it('Format Buddhist Era 4 digit with other format', () => {
   const momentDate = today.format(format).replace('BBBB', today.year() + 543)
   expect(dayjs().format(format)).toBe(momentDate)
 })
+
+it('Skips format strings inside brackets', () => {
+  expect(dayjs().format('[BBBB]')).toBe('BBBB')
+  expect(dayjs().format('[BB]')).toBe('BB')
+})
