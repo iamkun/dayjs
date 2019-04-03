@@ -45,7 +45,7 @@ export default (o, c, d) => {
       }
       const abs = Math.round(Math.abs(result))
       if (abs <= t.r || !t.r) {
-        if (abs === 1) t = T[i - 1]
+        if (abs === 1) t = T[i - 1] // 1 minutes -> a minute
         out = loc[t.l].replace('%d', abs)
         break
       }
