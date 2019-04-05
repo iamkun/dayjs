@@ -15,8 +15,9 @@ fs.readdirSync(path.join(__dirname, localeDir))
     })
   })
 
-it('Locale keys', () => {
-  Locale.forEach((locale) => {
+const noRelTime = []
+Locale.forEach((locale) => {
+  it(`Locale keys for ${locale.content.name}`, () => {
     const {
       name,
       ordinal,
@@ -76,9 +77,18 @@ it('Locale keys', () => {
       if (llll) expect(llll).toEqual(expect.any(String))
     }
     if (relativeTime) {
-      expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
-        'past', 's', 'y', 'yy']
-        .sort())
+      try {
+        expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
+          'past', 's', 'y', 'yy']
+          .sort())
+      } catch (e) {
+        noRelTime.push(locale.content.name)
+      }
     }
   })
 })
+
+afterAll(() => {
+  console.log(noRelTime)
+})
+
