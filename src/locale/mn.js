@@ -7,7 +7,15 @@ const locale = {
   weekdaysShort: 'Ням_Дав_Мяг_Лха_Пүр_Баа_Бям'.split('_'),
   monthsShort: '1 сар_2 сар_3 сар_4 сар_5 сар_6 сар_7 сар_8 сар_9 сар_10 сар_11 сар_12 сар'.split('_'),
   weekdaysMin: 'Ня_Да_Мя_Лх_Пү_Ба_Бя'.split('_'),
-  ordinal: n => n
+  ordinal: n => n,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'YYYY-MM-DD',
+    LL: 'YYYY оны MMMMын D',
+    LLL: 'YYYY оны MMMMын D HH:mm',
+    LLLL: 'dddd, YYYY оны MMMMын D HH:mm'
+  }
 }
 
 dayjs.locale(locale, null, true)
