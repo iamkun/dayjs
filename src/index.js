@@ -243,7 +243,7 @@ class Dayjs {
     const unit = Utils.p(units)
     const instanceFactorySet = (n) => {
       const date = new Date(this.$d)
-      date.setDate(date.getDate() + (n * number))
+      date.setDate(date.getDate() + Math.round(n * number))
       return Utils.w(date, this)
     }
     if (unit === C.M) {

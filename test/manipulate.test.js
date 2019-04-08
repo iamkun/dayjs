@@ -64,6 +64,13 @@ it('Add Time days', () => {
   expect(dayjs().add('2', 'years').valueOf()).toBe(moment().add('2', 'years').valueOf())
 })
 
+it('Add Time with decimal', () => {
+  expect(dayjs().add(0.4, 'day').valueOf()).toBe(moment().add(0.4, 'day').valueOf())
+  expect(dayjs().add(0.5, 'day').valueOf()).toBe(moment().add(0.5, 'day').valueOf())
+  expect(dayjs().add(0.4, 'week').valueOf()).toBe(moment().add(0.4, 'week').valueOf())
+  expect(dayjs().add(0.5, 'week').valueOf()).toBe(moment().add(0.5, 'week').valueOf())
+})
+
 it('Subtract Time days', () => {
   expect(dayjs().subtract(1, 'days').valueOf()).toBe(moment().subtract(1, 'days').valueOf())
 })
