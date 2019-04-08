@@ -41,7 +41,6 @@ it('Time from X', () => {
     [35.5, 'hour'],
     [36, 'hour'], // 2 days
     [25, 'day'], // 25 days
-    // [25.4, 'day'], // shoud be 25 days ago but moment returns a month ago
     [26, 'day'], // a month
     [45, 'day'], // a month
     [47, 'day'], // 2 month
