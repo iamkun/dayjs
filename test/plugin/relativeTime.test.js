@@ -17,16 +17,28 @@ it('Time from X', () => {
   const T = [
     [0, 'second'], // a few seconds
     [44, 'second'], // a few seconds
+    [44.4, 'second'], // a few seconds
+    [44.5, 'second'], // a minute
     [45, 'second'], // a minute
     [89, 'second'], // a minute
+    [89.4, 'second'], // a minute
+    [89.5, 'second'], // a minute
     [90, 'second'], // 2 minutes
     [44, 'minute'], // 44 minutes
+    [44.4, 'minute'],
+    [44.5, 'minute'],
     [45, 'minute'], // an hour
     [89, 'minute'], // an hour
+    [89.4, 'minute'],
+    [89.5, 'minute'],
     [90, 'minute'], // 2 hours
     [21, 'hour'], // 21 hours
+    [21.4, 'hour'],
+    [21.5, 'hour'],
     [22, 'hour'], // a day
     [35, 'hour'], // a day
+    [35.4, 'hour'],
+    [35.5, 'hour'],
     [36, 'hour'], // 2 days
     [25, 'day'], // 25 days
     [26, 'day'], // a month
