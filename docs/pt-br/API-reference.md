@@ -268,7 +268,7 @@ Retorna uma `string` com um objeto `Dayjs` contendo a data formatada.
 Para escapar caracteres, envolva-os entre colchetes (por exemplo: `[A] [MM]`).
 
 ```js
-dayjs().format() // current date in ISO6801, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
+dayjs().format() // current date in ISO8601, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
 
 dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
 
