@@ -4,64 +4,107 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 
 `Dayjs` オブジェクトは不変 (immutable) です。すなわち、すべての API 操作は新しい `Dayjs` オブジェクトを返します。
 
-- [Parse](#parse)
-  - [Now](#now)
-  - [String](#string)
-  - [Date](#date)
-  - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
-  - [Unix Timestamp (seconds)](#unix-timestamp-seconds)
-  - [Custom Parse Format](#custom-parse-format)
-  - [Clone](#clone)
-  - [Validation](#validation)
-- [Get + Set](#get--set)
-  - [Year](#year)
-  - [Month](#month)
-  - [Date of Month](#date-of-month)
-  - [Day of Week](#day-of-week)
-  - [Hour](#hour)
-  - [Minute](#minute)
-  - [Second](#second)
-  - [Millisecond](#millisecond)
-  - [Get](#get)
-  - [Set](#set)
-- [Manipulate](#manipulate)
-  - [Add](#add)
-  - [Subtract](#subtract)
-  - [Start of Time](#start-of-time)
-  - [End of Time](#end-of-time)
-- [Display](#display)
-  - [Format](#format)
-  - [Difference](#difference)
-  - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
-  - [Unix Timestamp (seconds)](#unix-timestamp-seconds)
-  - [UTC offset (minutes)](#utc-offset-minutes-utcoffset)
-  - [Days in Month](#days-in-month)
-  - [As Javascript Date](#as-javascript-date)
-  - [As JSON](#as-json)
-  - [As ISO 8601 String](#as-iso-8601-string)
-  - [As String](#as-string)
-- [Query](#query)
-  - [Is Before](#is-before)
-  - [Is Same](#is-same)
-  - [Is After](#is-after)
-  - [Is a Dayjs](#is-a-dayjs)
-- [UTC](#utc)
-- [Plugin APIs](#plugin-apis)
 
----
 
-Day.js は指定されない限り、常に新しい Dayjs オブジェクトを返します。
+- [API Reference](#api-reference)
+  - [Parsing](#parsing)
+    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
+      - [ISO 8601 string](#iso-8601-string)
+      - [Native Javascript Date object](#native-javascript-date-object)
+      - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+    - [Unix Timestamp (seconds)](#unix-timestamp-seconds-unixvalue-number)
+    - [Custom Parse Format](#custom-parse-format)
+    - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
+    - [Validation `.isValid()`](#validation-isvalid)
+  - [Get and Set](#get-and-set)
+    - [Year `.year()`](#year-year)
+    - [Month `.month()`](#month-month)
+    - [Day of the Month `.date()`](#day-of-the-month-date)
+    - [Day of the Week `.day()`](#day-of-the-week-day)
+    - [Hour `.hour()`](#hour-hour)
+    - [Minute `.minute()`](#minute-minute)
+    - [Second `.second()`](#second-second)
+    - [Millisecond `.millisecond()`](#millisecond-millisecond)
+    - [Get `.get(unit: string)`](#get-getunit-string)
+      - [List of all available units](#list-of-all-available-units)
+    - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+  - [Manipulating](#manipulating)
+    - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
+    - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
+    - [Start of Time `.startOf(unit: string)`](#start-of-time-startofunit-string)
+    - [End of Time `.endOf(unit: string)`](#end-of-time-endofunit-string)
+  - [Displaying](#displaying)
+    - [Format `.format(stringWithTokens: string)`](#format-formatstringwithtokens-string)
+      - [List of all available formats](#list-of-all-available-formats)
+    - [Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`](#difference-diffcompared-dayjs-unit-string-default-milliseconds-float-boolean)
+    - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
+    - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
+    - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
+    - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
+    - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
+    - [As JSON `.toJSON()`](#as-json-tojson)
+    - [As ISO 8601 String `.toISOString()`](#as-iso-8601-string-toisostring)
+    - [As String `.toString()`](#as-string-tostring)
+  - [Query](#query)
+    - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared-dayjs-unit-string)
+    - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared-dayjs-unit-string)
+    - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared-dayjs-unit-string)
+    - [Is a Dayjs `.isDayjs()`](#is-a-dayjs-isdayjscompared-any)
+  - [UTC](#utc)
+  - [Plugin APIs](#plugin-apis)
 
-### Parse
+## Parsing
 
-サポートされている入力形式のいずれかで `dayjs()` を呼び出します。
+### コンストラクタ `dayjs(dateType?: string | number | Date | Dayjs)`
 
-#### Now
-
-現在の日付と時間を取得するには、パラメータなしで dayjs() を呼び出します。
+パラメータなしで実行すると現在の日付と時刻を持った新しい`Dayjs`オブジェクトを返します。
 
 ```js
 dayjs()
+```
+
+Day.jsは他の日付フォーマットもパースします。
+
+#### [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 形式
+
+```js
+dayjs('2018-04-04T16:00:00.000Z')
+```
+
+#### JavaScriptネイティブのDateオブジェクト
+
+```js
+dayjs(new Date(2018, 8, 18))
+```
+
+#### UNIXタイムスタンプ（ミリ秒）
+
+UNIXタイムスタンプ（UNIXエポックのミリ秒）から`Dayjs`オブジェクトを返します。
+
+```js
+dayjs(1318781876406)
+```
+
+### UNIXタイムスタンプ（秒） `.unix(value: number)`
+
+UNIXタイムスタンプ（UNIXエポックの秒）から`Dayjs`オブジェクトを返します。
+
+```js
+dayjs.unix(1318781876)
+dayjs.unix(1318781876.721)
+```
+
+### Custom Parse Format
+
+- `dayjs("12-25-1995", "MM-DD-YYYY")` といった独自フォーマットのパースは[`CustomParseFormat`](./Plugin.md#customparseformat)で行えます。
+
+### 複製 `.clone() | dayjs(original: Dayjs)`
+
+`Dayjs`オブジェクトを複製して返します。
+
+```js
+dayjs().clone()
+dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに渡しても複製されます
 ```
 
 ### String
