@@ -472,6 +472,12 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.isSameOrBefore`で日付が別の日付と同じかそれより前であるかを得られます。
 
 プラグイン [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+
+### IsBetween
+
+`.isBetween`で他の2つの日付の間であるかどうかを得られます。
+
+プラグイン [`IsBetween`](./Plugin.md#isbetween)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
