@@ -137,7 +137,7 @@ dayjs().month(0)
 
 ### Day of the Month `.date()`
 
-日の取得と設定です。日は`1`から始まります。
+月の日にちの取得と設定です。日にちは`1`から始まります。
 
 ```js
 dayjs().date()
@@ -188,6 +188,32 @@ dayjs().second(1)
 dayjs().millisecond()
 dayjs().millisecond(1)
 ```
+
+### 取得 `.get(unit: string)`
+
+`Dayjs` オブジェクトから`数値`を返します。
+
+```js
+dayjs().get('month') // `0`始まり
+dayjs().get('day')
+```
+
+#### 有効な単位
+
+| 単位 | ショートハンド | 説明 |
+| ---- | ---- | ---- |
+| `date` |  | 月の日ひち |
+| `day` | `d` | 曜日（日曜日は`0`、土曜日は`6`） |
+| `month` | `M` | 月（1月は`0`、12月は`11`） |
+| `year` | `y` | 年 |
+| `hour` | `h` | 時 |
+| `minute` | `m` | 分 |
+| `second` | `s` | 秒 |
+| `millisecond` | `ms` | ミリ秒 |
+
+
+
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
