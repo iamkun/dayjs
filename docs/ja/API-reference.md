@@ -75,7 +75,7 @@ dayjs()
 
 Day.jsは他の日付フォーマットもパースします。
 
-#### [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) 形式
+#### [ISO 8601](https://ja.wikipedia.org/wiki/ISO_8601) 形式
 
 ```js
 dayjs('2018-04-04T16:00:00.000Z')
