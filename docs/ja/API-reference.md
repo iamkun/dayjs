@@ -240,6 +240,14 @@ dayjs('2019-01-25')
 dayjs().add(7, 'day')
 ```
 
+### Subtract `.subtract(value: number, unit: string)`
+
+指定した時間を引いた`Dayjs`オブジェクトを複製して返します。
+
+```js
+dayjs().subtract(7, 'year')
+```
+
 
 
 
