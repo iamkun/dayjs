@@ -387,6 +387,20 @@ dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
 dayjs('2019-01-25').toString() // 'Fri, 25 Jan 2019 02:00:00 GMT'
 ```
 
+## Query
+
+### Is Before `.isBefore(compared: Dayjs, unit?: string)`
+
+`Dayjs`オブジェクトの日付が、引数に与えた他の`Dayjs`オブジェクトの日付より前かどうかの真偽値を返します。
+
+```js
+dayjs().isBefore(dayjs()) // false
+dayjs().isBefore(dayjs(), 'year') // false
+```
+
+
+
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
