@@ -256,6 +256,14 @@ dayjs().subtract(7, 'year')
 dayjs().startOf('week') // locale の `weekStart` に依存
 ```
 
+### End of Time `.endOf(unit: string)`
+
+指定した単位の終了時点に設定された`Dayjs`オブジェクトを複製して返します。
+
+```js
+dayjs().endOf('month')
+```
+
 
 
 
