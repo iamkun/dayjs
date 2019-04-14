@@ -279,8 +279,38 @@ dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25
 dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 ```
 
+#### List of all available formats
 
+| Format | Output           | Description                           |
+| ------ | ---------------- | ------------------------------------- |
+| `YY`   | 18               | 2桁の年                        |
+| `YYYY` | 2018             | 4桁の年                       |
+| `M`    | 1-12             | 1始まりの月             |
+| `MM`   | 01-12            | 1始まりの2桁の月                   |
+| `MMM`  | Jan-Dec          | 月の略称            |
+| `MMMM` | January-December | 月の正式名                   |
+| `D`    | 1-31             | 月ごとの日にち                  |
+| `DD`   | 01-31            | 月ごとの2桁の日にち        |
+| `d`    | 0-6              | `0`で日曜日から始まる曜日 |
+| `dd`   | Su-Sa            | 最も短い曜日の略称 |
+| `ddd`  | Sun-Sat          | 曜日の略称 |
+| `dddd` | Sunday-Saturday  | 曜日名       |
+| `H`    | 0-23             | 時間                              |
+| `HH`   | 00-23            | 2桁の時間                    |
+| `h`    | 1-12             | 12時制の時間               |
+| `hh`   | 01-12            | 12時制で2桁の時間     |
+| `m`    | 0-59             | 分                            |
+| `mm`   | 00-59            | 2桁の分 |
+| `s`    | 0-59             | 秒                            |
+| `ss`   | 00-59            | 2桁の秒                  |
+| `SSS`  | 000-999          | 3桁のミリ秒             |
+| `Z`    | +5:00            | UTCからのオフセット                   |
+| `ZZ`   | +0500            | UTCからの2桁のオフセット         |
+| `A`    | AM PM            | 午前と午後（大文字） |
+| `a`    | am pm            | 午前と午後（小文字） |
 
+- 利用可能な他のフォーマット `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- ローカライズのフォーマットオプション `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
 ### String
 
