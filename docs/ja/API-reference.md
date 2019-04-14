@@ -379,8 +379,13 @@ dayjs('2019-01-25').toJSON() // '2019-01-25T02:00:00.000Z'
 dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
 ```
 
+### As String `.toString()`
 
+日付を文字列で返します。
 
+```js
+dayjs('2019-01-25').toString() // 'Fri, 25 Jan 2019 02:00:00 GMT'
+```
 
 ### String
 
