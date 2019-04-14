@@ -435,6 +435,13 @@ dayjs() instanceof dayjs // true
 
 UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラグインの`.utc` `.local` `.isUTC` で行えます。
 
+## Plugin APIs
+
+### RelativeTime
+
+`.from` `.to` `.fromNow` `.toNow` で相対時間が得られます。
+
+プラグイン [`RelativeTime`](./Plugin.md#relativetime)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
