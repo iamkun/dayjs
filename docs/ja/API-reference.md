@@ -94,7 +94,7 @@ dayjs.unix(1318781876)
 dayjs.unix(1318781876.721)
 ```
 
-### Custom Parse Format
+### 独自フォーマットのパース
 
 - `dayjs("12-25-1995", "MM-DD-YYYY")` といった独自フォーマットのパースは[`CustomParseFormat`](./Plugin.md#customparseformat)で行えます。
 
