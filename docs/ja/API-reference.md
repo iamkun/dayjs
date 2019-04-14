@@ -115,6 +115,35 @@ dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに
 dayjs().isValid()
 ```
 
+## Get と Set
+
+### 年 `.year()`
+
+年の取得と設定。
+
+```js
+dayjs().year()
+dayjs().year(2000)
+```
+
+### 月 `.month()`
+
+月の取得と設定です。月は`0`から始まります。
+
+```js
+dayjs().month()
+dayjs().month(0)
+```
+
+### Day of the Month `.date()`
+
+日の取得と設定です。日は`1`から始まります。
+
+```js
+dayjs().date()
+dayjs().date(1)
+```
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
