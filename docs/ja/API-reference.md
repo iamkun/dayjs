@@ -398,6 +398,15 @@ dayjs().isBefore(dayjs()) // false
 dayjs().isBefore(dayjs(), 'year') // false
 ```
 
+### Is Same `.isSame(compared: Dayjs, unit?: string)`
+
+`Dayjs`オブジェクトの日付が、引数に与えた他の`Dayjs`オブジェクトの日付と同じかどうかの真偽値を返します。
+
+```js
+dayjs().isSame(dayjs()) // true
+dayjs().isSame(dayjs(), 'year') // true
+```
+
 
 
 
