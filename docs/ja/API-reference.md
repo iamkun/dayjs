@@ -354,6 +354,14 @@ dayjs().utcOffset()
 ```js
 dayjs('2019-01-25').daysInMonth() // 31
 ```
+
+### As Javascript Date `.toDate()`
+
+`Dayjs`オブジェクトをパースして複製したネイティブの`Date`オブジェクトを返します。
+
+```js
+dayjs('2019-01-25').toDate()
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
