@@ -484,6 +484,12 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.quarter`で年の四半期のいつかが得られます。
 
 プラグイン [`QuarterOfYear`](./Plugin.md#quarterofyear)
+
+### ToArray
+
+`.toArray`でパラメータの配列を返します。
+
+プラグイン [`ToArray`](./Plugin.md#toarray)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
