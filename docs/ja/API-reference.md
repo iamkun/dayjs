@@ -4,8 +4,6 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 
 `Dayjs` オブジェクトは不変 (immutable) です。すなわち、すべての API 操作は新しい `Dayjs` オブジェクトを返します。
 
-
-
 - [API Reference](#api-reference)
   - [Parsing](#parsing)
     - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
@@ -333,6 +331,13 @@ date1.diff(date2, 'day') // 233
 dayjs('2019-01-25').valueOf() // 1548381600000
 ```
 
+### Unix Timestamp (seconds) `.unix()`
+
+`Dayjs`オブジェクトのUnixエポックからの秒を数値で返します。
+
+```js
+dayjs('2019-01-25').unix() // 1548381600
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
