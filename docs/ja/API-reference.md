@@ -496,6 +496,12 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.toObject`でパラメータをキーに持ったオブジェクトを返します。
 
 プラグイン [`ToObject`](./Plugin.md#toobject)
+
+### MinMax
+
+`.min` `.max`で与えた複数の`Dayjs`インスタンスの中から最小もしくは最大のものを返します。
+
+プラグイン [`MinMax`](./Plugin.md#minmax)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
