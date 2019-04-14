@@ -478,6 +478,12 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.isBetween`で他の2つの日付の間であるかどうかを得られます。
 
 プラグイン [`IsBetween`](./Plugin.md#isbetween)
+
+### QuarterOfYear
+
+`.quarter`で年の四半期のいつかが得られます。
+
+プラグイン [`QuarterOfYear`](./Plugin.md#quarterofyear)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
