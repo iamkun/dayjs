@@ -221,6 +221,17 @@ dayjs().set('month', 3) // 4月
 dayjs().set('second', 30)
 ```
 
+## Manipulating
+
+`Dayjs`オブジェクトは様々な方法で操作できます。
+
+```js
+dayjs('2019-01-25')
+  .add(1, 'day')
+  .subtract(1, 'year')
+  .toString() // Fri, 26 Jan 2018 00:00:00 GMT
+```
+
 
 
 
