@@ -1,7 +1,10 @@
+export const MONTHS_A_YEAR = 12
+export const DAYS_A_WEEK = 7
+
 export const SECONDS_A_MINUTE = 60
 export const SECONDS_A_HOUR = SECONDS_A_MINUTE * 60
 export const SECONDS_A_DAY = SECONDS_A_HOUR * 24
-export const SECONDS_A_WEEK = SECONDS_A_DAY * 7
+export const SECONDS_A_WEEK = SECONDS_A_DAY * DAYS_A_WEEK
 
 export const MILLISECONDS_A_SECOND = 1e3
 export const MILLISECONDS_A_MINUTE = SECONDS_A_MINUTE * MILLISECONDS_A_SECOND
