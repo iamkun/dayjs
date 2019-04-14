@@ -264,6 +264,21 @@ dayjs().startOf('week') // locale の `weekStart` に依存
 dayjs().endOf('month')
 ```
 
+## Displaying
+
+### Format `.format(stringWithTokens: string)`
+
+フォーマットされた日付の文字列を返します。  
+文字をエスケープするにはブラケットで囲みます。（例 `[A][MM]`）
+
+```js
+dayjs().format() // ISO8601形式で、端数秒なしの現在の日時。例 '2020-04-02T08:02:17-05:00'
+
+dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
+
+dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
+```
+
 
 
 
