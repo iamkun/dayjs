@@ -416,9 +416,20 @@ dayjs().isAfter(dayjs()) // false
 dayjs().isAfter(dayjs(), 'year') // false
 ```
 
+### Is a Dayjs `.isDayjs(compared: any)`
 
+引数に与えた変数が`Dayjs`オブジェクトかどうかの真偽値を返します。
 
+```js
+dayjs.isDayjs(dayjs()) // true
+dayjs.isDayjs(new Date()) // false
+```
 
+`instanceof`オペレータでも同じように動作します。
+
+```js
+dayjs() instanceof dayjs // true
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
