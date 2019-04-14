@@ -499,24 +499,24 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 
 ### ToArray
 
-`.toArray`でパラメータの配列を返します。
+`.toArray`でパラメータの配列が得られます。
 
 プラグイン [`ToArray`](./Plugin.md#toarray)
 
 ### ToObject
 
-`.toObject`でパラメータをキーに持ったオブジェクトを返します。
+`.toObject`でパラメータをキーに持ったオブジェクトが得られます。
 
 プラグイン [`ToObject`](./Plugin.md#toobject)
 
 ### MinMax
 
-`.min` `.max`で与えた複数の`Dayjs`インスタンスの中から最小もしくは最大のものを返します。
+`.min` `.max`で与えた複数の`Dayjs`インスタンスの中から最小もしくは最大のものが得られます。
 
 プラグイン [`MinMax`](./Plugin.md#minmax)
 
 ### Calendar
 
-`.calendar`で与えた日付からのカレンダーを返します。
+`.calendar`で与えた日付のカレンダー上の情報が得られます。
 
 プラグイン [`Calendar`](./Plugin.md#calendar)
