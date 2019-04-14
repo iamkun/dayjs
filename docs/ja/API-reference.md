@@ -55,7 +55,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 
 ## Parsing
 
-### コンストラクタ `dayjs(dateType?: string | number | Date | Dayjs)`
+### Constructor `dayjs(dateType?: string | number | Date | Dayjs)`
 
 パラメータなしで実行すると現在の日付と時刻を持った新しい`Dayjs`オブジェクトを返します。
 
@@ -71,13 +71,13 @@ Day.jsは他の日付フォーマットもパースします。
 dayjs('2018-04-04T16:00:00.000Z')
 ```
 
-#### JavaScriptネイティブのDateオブジェクト
+#### Native Javascript Date object
 
 ```js
 dayjs(new Date(2018, 8, 18))
 ```
 
-#### UNIXタイムスタンプ（ミリ秒）
+#### Unix Timestamp (milliseconds)
 
 UNIXタイムスタンプ（UNIXエポックのミリ秒）から`Dayjs`オブジェクトを返します。
 
@@ -85,7 +85,7 @@ UNIXタイムスタンプ（UNIXエポックのミリ秒）から`Dayjs`オブ�
 dayjs(1318781876406)
 ```
 
-### UNIXタイムスタンプ（秒） `.unix(value: number)`
+### Unix Timestamp (seconds) `.unix(value: number)`
 
 UNIXタイムスタンプ（UNIXエポックの秒）から`Dayjs`オブジェクトを返します。
 
@@ -94,11 +94,11 @@ dayjs.unix(1318781876)
 dayjs.unix(1318781876.721)
 ```
 
-### 独自フォーマットのパース
+### Custom Parse Format
 
-- `dayjs("12-25-1995", "MM-DD-YYYY")` といった独自フォーマットのパースは[`CustomParseFormat`](./Plugin.md#customparseformat)で行えます。
+- `dayjs("12-25-1995", "MM-DD-YYYY")` といった独自フォーマットのパースは[`CustomParseFormat`](./Plugin.md#customparseformat)で利用できます。
 
-### 複製 `.clone() | dayjs(original: Dayjs)`
+### Clone `.clone() | dayjs(original: Dayjs)`
 
 `Dayjs`オブジェクトを複製して返します。
 
@@ -107,7 +107,7 @@ dayjs().clone()
 dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに渡しても複製されます
 ```
 
-### 検証 `.isValid()`
+### Validation `.isValid()`
 
 `Dayjs`の日付が有効かの真偽値を返します。
 
@@ -115,9 +115,9 @@ dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに
 dayjs().isValid()
 ```
 
-## Get と Set
+## Get and Set
 
-### 年 `.year()`
+### Year `.year()`
 
 年の取得と設定。
 
@@ -126,7 +126,7 @@ dayjs().year()
 dayjs().year(2000)
 ```
 
-### 月 `.month()`
+### Month `.month()`
 
 月の取得と設定です。月は`0`から始まります。
 
@@ -144,7 +144,7 @@ dayjs().date()
 dayjs().date(1)
 ```
 
-### 曜日 `.day()`
+### Day of the Week `.day()`
 
 曜日の取得と設定です。`0`で日曜日から始まります。
 
@@ -153,7 +153,7 @@ dayjs().day()
 dayjs().day(0)
 ```
 
-### 時 `.hour()`
+### Hour `.hour()`
 
 時の取得と設定です。
 
@@ -162,7 +162,7 @@ dayjs().hour()
 dayjs().hour(12)
 ```
 
-### 分 `.minute()`
+### Minute `.minute()`
 
 分の取得と設定です。
 
@@ -171,7 +171,7 @@ dayjs().minute()
 dayjs().minute(59)
 ```
 
-### 秒 `.second()`
+### Second `.second()`
 
 秒の取得と設定です。
 
@@ -180,7 +180,7 @@ dayjs().second()
 dayjs().second(1)
 ```
 
-### ミリ秒 `.millisecond()`
+### Millisecond `.millisecond()`
 
 ミリ秒の取得と設定です。
 
@@ -189,7 +189,7 @@ dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-### 取得 `.get(unit: string)`
+### Get `.get(unit: string)`
 
 `Dayjs` オブジェクトから`数値`を返します。
 
@@ -198,7 +198,7 @@ dayjs().get('month') // `0`始まり
 dayjs().get('day')
 ```
 
-#### 有効な単位
+#### List of all available units
 
 | 単位 | ショートハンド | 説明 |
 | ---- | ---- | ---- |
@@ -211,7 +211,7 @@ dayjs().get('day')
 | `second` | `s` | 秒 |
 | `millisecond` | `ms` | ミリ秒 |
 
-### 設定 `.set(unit: string, value: number)`
+### Set `.set(unit: string, value: number)`
 
 変更を適応した`Dayjs`オブジェクトを返します。
 
