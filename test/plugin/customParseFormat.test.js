@@ -161,6 +161,15 @@ it('return Invalid Date when parse corrupt short string', () => {
   expect(dayjs(input, format).format()).toBe('Invalid Date')
 })
 
+it('Invalid Dates', () => {
+  expect(dayjs('10/12/2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
+  expect(dayjs('10-12-2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
+})
+
+it('Valid Date', () => {
+  expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('10-12-2014')
+})
+
 it('correctly parse month from string after changing locale globally', () => {
   const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
