@@ -312,6 +312,19 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 - 利用可能な他のフォーマット `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 - ローカライズのフォーマットオプション `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
+### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
+
+2つの`Dayjs`オブジェクトの差分を指定した単位で数値で返します。
+
+```js
+const date1 = dayjs('2019-01-25')
+const date2 = dayjs('2018-06-05')
+date1.diff(date2) // 20214000000
+date1.diff(date2, 'month') // 7
+date1.diff(date2, 'month', true) // 7.645161290322581
+date1.diff(date2, 'day') // 233
+```
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
