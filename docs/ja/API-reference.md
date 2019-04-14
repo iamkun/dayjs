@@ -211,6 +211,16 @@ dayjs().get('day')
 | `second` | `s` | 秒 |
 | `millisecond` | `ms` | ミリ秒 |
 
+### 設定 `.set(unit: string, value: number)`
+
+変更を適応した`Dayjs`オブジェクトを返します。
+
+```js
+dayjs().set('date', 1)
+dayjs().set('month', 3) // 4月
+dayjs().set('second', 30)
+```
+
 
 
 
