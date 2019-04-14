@@ -248,6 +248,14 @@ dayjs().add(7, 'day')
 dayjs().subtract(7, 'year')
 ```
 
+### Start of Time `.startOf(unit: string)`
+
+指定した単位の開始時点に設定された`Dayjs`オブジェクトを複製して返します。
+
+```js
+dayjs().startOf('week') // locale の `weekStart` に依存
+```
+
 
 
 
