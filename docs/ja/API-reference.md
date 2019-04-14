@@ -346,6 +346,14 @@ dayjs('2019-01-25').unix() // 1548381600
 ```js
 dayjs().utcOffset()
 ```
+
+### Days in the Month `.daysInMonth()`
+
+`Dayjs`オブジェクトの月の日数を数値で返します。
+
+```js
+dayjs('2019-01-25').daysInMonth() // 31
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
