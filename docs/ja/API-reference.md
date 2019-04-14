@@ -223,13 +223,21 @@ dayjs().set('second', 30)
 
 ## Manipulating
 
-`Dayjs`オブジェクトは様々な方法で操作できます。
+様々な方法で`Dayjs`オブジェクトを操作できます。
 
 ```js
 dayjs('2019-01-25')
   .add(1, 'day')
   .subtract(1, 'year')
   .toString() // Fri, 26 Jan 2018 00:00:00 GMT
+```
+
+### Add `.add(value: number, unit: string)`
+
+指定した時間を追加した`Dayjs`オブジェクトを複製して返します。
+
+```js
+dayjs().add(7, 'day')
 ```
 
 
