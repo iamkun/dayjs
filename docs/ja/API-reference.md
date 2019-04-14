@@ -107,6 +107,14 @@ dayjs().clone()
 dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに渡しても複製されます
 ```
 
+### 検証 `.isValid()`
+
+`Dayjs`の日付が有効かの真偽値を返します。
+
+```js
+dayjs().isValid()
+```
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
