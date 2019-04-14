@@ -460,6 +460,12 @@ UTCでパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.isoWeeksInYear` でその年の週数が得られます。
 
 プラグイン [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+
+### IsSameOrAfter
+
+`.isSameOrAfter` で日付が別の日付と同じかそれより後であるかを得られます。
+
+プラグイン [`IsSameOrAfter`](./Plugin.md#issameorafter)
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
