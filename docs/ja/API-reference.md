@@ -370,6 +370,18 @@ dayjs('2019-01-25').toDate()
 ```js
 dayjs('2019-01-25').toJSON() // '2019-01-25T02:00:00.000Z'
 ```
+
+### As ISO 8601 String `.toISOString()`
+
+`Dayjs`オブジェクトの日付をISO8601形式にして文字列で返します。
+
+```js
+dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
+```
+
+
+
+
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
