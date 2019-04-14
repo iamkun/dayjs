@@ -338,6 +338,14 @@ dayjs('2019-01-25').valueOf() // 1548381600000
 ```js
 dayjs('2019-01-25').unix() // 1548381600
 ```
+
+### UTC Offset (minutes) `.utcOffset()`
+
+`Dayjs`オブジェクトのUTCオフセットを分単位の数値で返します。
+
+```js
+dayjs().utcOffset()
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
