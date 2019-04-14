@@ -144,6 +144,50 @@ dayjs().date()
 dayjs().date(1)
 ```
 
+### 曜日 `.day()`
+
+曜日の取得と設定です。`0`で日曜日から始まります。
+
+```js
+dayjs().day()
+dayjs().day(0)
+```
+
+### 時 `.hour()`
+
+時の取得と設定です。
+
+```js
+dayjs().hour()
+dayjs().hour(12)
+```
+
+### 分 `.minute()`
+
+分の取得と設定です。
+
+```js
+dayjs().minute()
+dayjs().minute(59)
+```
+
+### 秒 `.second()`
+
+秒の取得と設定です。
+
+```js
+dayjs().second()
+dayjs().second(1)
+```
+
+### ミリ秒 `.millisecond()`
+
+ミリ秒の取得と設定です。
+
+```js
+dayjs().millisecond()
+dayjs().millisecond(1)
+```
 ### String
 
 [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
