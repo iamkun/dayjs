@@ -79,7 +79,7 @@ dayjs(new Date(2018, 8, 18))
 
 #### Unix Timestamp (milliseconds)
 
-UNIXタイムスタンプ（UNIXエポックのミリ秒）から`Dayjs`オブジェクトを返します。
+Unixタイムスタンプ（Unixエポックのミリ秒）から`Dayjs`オブジェクトを返します。
 
 ```js
 dayjs(1318781876406)
@@ -87,7 +87,7 @@ dayjs(1318781876406)
 
 ### Unix Timestamp (seconds) `.unix(value: number)`
 
-UNIXタイムスタンプ（UNIXエポックの秒）から`Dayjs`オブジェクトを返します。
+Unixタイムスタンプ（Unixエポックの秒）から`Dayjs`オブジェクトを返します。
 
 ```js
 dayjs.unix(1318781876)
@@ -323,6 +323,14 @@ date1.diff(date2) // 20214000000
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
+```
+
+### Unix Timestamp (milliseconds) `.valueOf()`
+
+`Dayjs`オブジェクトのUnixエポックからのミリ秒を数値で返します。
+
+```js
+dayjs('2019-01-25').valueOf() // 1548381600000
 ```
 
 ### String
