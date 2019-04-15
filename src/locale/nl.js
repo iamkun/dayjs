@@ -1,5 +1,8 @@
 import dayjs from 'dayjs'
 
+const LT = 'HH:mm';
+const L = 'DD-MM-YYYY';
+
 const locale = {
   name: 'nl',
   weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
@@ -7,20 +10,20 @@ const locale = {
   ordinal: n => `${n}.`,
   weekStart: 1,
   formats: {
-    LT: 'HH:mm',
+    L,
+    LT,
     LTS: 'HH:mm:ss',
-    L: 'DD-MM-YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
   },
   calendar: {
-    lastDay: `[Gisteren om] LT`,
-    sameDay: `[Vandaag om] LT`,
-    nextDay: `[Morgen om] LT`,
-    nextWeek: `dddd [om] LT`,
-    lastWeek: `[Afgelopen] dddd [om] LT`,
-    sameElse: 'L'
+    lastDay: '[Gisteren om] ' + LT,
+    sameDay: '[Vandaag om] ' + LT,
+    nextDay: '[Morgen om] ' + LT,
+    nextWeek: 'dddd [om] ' + LT,
+    lastWeek: '[Afgelopen] dddd [om] ' + LT,
+    sameElse: L
   },
   relativeTime: {
     future: 'over %s',
