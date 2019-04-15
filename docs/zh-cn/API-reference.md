@@ -507,7 +507,7 @@ dayjs() instanceof dayjs // true
 
 ### 星期
 
-`.weekday` 获取或设置星期 (和语言有关)
+`.weekday` 来获取或设置当前语言的星期
 
 plugin [`WeekDay`](./Plugin.md#weekday)
 
