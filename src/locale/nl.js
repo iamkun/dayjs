@@ -14,6 +14,14 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
   },
+  calendar: {
+    lastDay: `[Gisteren om] LT`,
+    sameDay: `[Vandaag om] LT`,
+    nextDay: `[Morgen om] LT`,
+    nextWeek: `dddd [om] LT`,
+    lastWeek: `[Afgelopen] dddd [om] LT`,
+    sameElse: 'L'
+  },
   relativeTime: {
     future: 'over %s',
     past: '%s geleden',
