@@ -505,6 +505,12 @@ dayjs() instanceof dayjs // true
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### 星期
+
+`.weekday` 来获取或设置当前语言的星期
+
+plugin [`WeekDay`](./Plugin.md#weekday)
+
 ### 年中有几周 ISO
 
 `.isoWeeksInYear` 获得年中有几周

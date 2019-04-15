@@ -283,6 +283,19 @@ dayjs('06/27/2018').week() // 26
 dayjs('2018-06-27').week(5) // set week
 ```
 
+### WeekDay
+
+- WeekDay adds `.weekday()` API to get or set locale aware day of the week.
+
+```javascript
+import weekDay from 'dayjs/plugin/weekDay'
+
+dayjs.extend(weekDay)
+// when Monday is the first day of the week
+dayjs().weekday(-7) // last Monday
+dayjs().weekday(7) // next Monday
+```
+
 ### IsoWeeksInYear
 
 - IsoWeeksInYear adds `.isoWeeksInYear()` API to return a `number` to get the number of weeks in year, according to ISO weeks.
