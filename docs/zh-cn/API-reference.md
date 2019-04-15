@@ -259,7 +259,7 @@ dayjs().add(7, 'day');
 
 #### 减少
 
-减少时间并返回一个新的 `Dayjs()` 对象，使用方法和 `dayjs#add` 相同。
+减少时间并返回一个新的 `Dayjs()` 对象。
 
 ```js
 dayjs().subtract(value : Number, unit : String);
