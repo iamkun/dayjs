@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
-const LT = 'HH:mm';
-const L = 'DD-MM-YYYY';
+const LT = 'HH:mm'
+const L = 'DD-MM-YYYY'
 
 const locale = {
   name: 'nl',
@@ -18,11 +18,11 @@ const locale = {
     LLLL: 'dddd D MMMM YYYY HH:mm'
   },
   calendar: {
-    lastDay: '[Gisteren om] ' + LT,
-    sameDay: '[Vandaag om] ' + LT,
-    nextDay: '[Morgen om] ' + LT,
-    nextWeek: 'dddd [om] ' + LT,
-    lastWeek: '[Afgelopen] dddd [om] ' + LT,
+    lastDay: `[Gisteren om] ${LT}`,
+    sameDay: `[Vandaag om] ${LT}`,
+    nextDay: `[Morgen om] ${LT}`,
+    nextWeek: `dddd [om] ${LT}`,
+    lastWeek: `[Afgelopen] dddd [om] ${LT}`,
     sameElse: L
   },
   relativeTime: {
