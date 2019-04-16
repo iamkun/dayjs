@@ -457,9 +457,9 @@ UTC でパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 
 ### WeekDay
 
-`.weekday` to get or set locale aware day of the week
+`.weekday` でロケールに対応した曜日の取得、設定ができます。
 
-plugin [`WeekDay`](./Plugin.md#weekday)
+プラグイン [`WeekDay`](./Plugin.md#weekday)
 
 ### IsoWeeksInYear
 
