@@ -171,8 +171,8 @@ it('Valid Date', () => {
 })
 
 it('parse week day format', () => {
-  const input = 'Tuesday 16 January 18:00'
-  const format = 'dddd DD MMMM HH:mm'
+  const input = 'Tuesday, 16 January 18:00'
+  const format = 'dddd, DD MMMM HH:mm'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 

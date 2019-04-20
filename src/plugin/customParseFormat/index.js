@@ -1,4 +1,4 @@
-const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|dddd|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|dddd|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -9,7 +9,7 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
-const matchWord = /\d*[^\s\d-:/.()]+/ // Word
+const matchWord = /\d*[^\s\d-:/.,()]+/ // Word
 
 let locale
 
