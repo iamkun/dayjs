@@ -2,7 +2,6 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import es from '../../src/locale/es'
-import ar from '../../src/locale/ar'
 import localizedFormat from '../../src/plugin/localizedFormat'
 
 dayjs.extend(localizedFormat)
@@ -52,11 +51,12 @@ it('Uses English formats in other locales as default', () => {
   const date = new Date()
   const actualDate = dayjs(date)
   const expectedDate = moment(date)
-  // todo: ar here isn't a good fix here
-  const arOldFormats = ar.formats
-  ar.formats = {}
-  expect(actualDate.locale(ar).format('L')).toBe(expectedDate.format('L'))
-  ar.formats = arOldFormats
+  const mockLocale = {
+    name: 'mock',
+    weekdays: Array(7).fill(' '),
+    months: Array(12).fill(' ')
+  }
+  expect(actualDate.locale(mockLocale).format('L')).toBe(expectedDate.format('L'))
 })
 
 it('Leaves the default format intact', () => {
