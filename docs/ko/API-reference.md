@@ -454,6 +454,12 @@ plugin [`IsLeapYear`](./Plugin.md#isleapyear)
 
 plugin [`WeekOfYear`](./Plugin.md#weekofyear)
 
+### WeekDay
+
+`.weekday` to get or set locale aware day of the week
+
+plugin [`WeekDay`](./Plugin.md#weekday)
+
 ### IsoWeeksInYear
 
 `.isoWeeksInYear` to get the number of weeks in year

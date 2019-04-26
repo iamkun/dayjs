@@ -270,7 +270,7 @@ Devuelve un dato de tipo `string` con la fecha del objeto `Dayjs` formateada.
 Para escapar caracteres, estos se han de encerrar entre corchetes (p.ej.: `[A] [MM]`).
 
 ```js
-dayjs().format() // fecha actual en ISO6801, sin fracciones de segundo p.ej. '2020-04-02T08:02:17-05:00'
+dayjs().format() // fecha actual en ISO8601, sin fracciones de segundo p.ej. '2020-04-02T08:02:17-05:00'
 
 dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
 
@@ -454,6 +454,12 @@ complemento [`IsLeapYear`](./Plugin.md#isleapyear)
 `.week` para obtener la semana del año
 
 complemento [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### WeekDay
+
+`.weekday` to get or set locale aware day of the week
+
+plugin [`WeekDay`](./Plugin.md#weekday)
 
 ### IsoWeeksInYear
 

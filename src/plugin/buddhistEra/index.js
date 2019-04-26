@@ -7,10 +7,10 @@ export default (o, c) => { // locale needed later
   proto.format = function (formatStr) {
     const yearBias = 543
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/BBBB|BB/g, (match) => {
+    const result = str.replace(/(\[[^\]]+])|BBBB|BB/g, (match, a) => {
       const year = String(this.$y + yearBias)
       const args = match === 'BB' ? [year.slice(-2), 2] : [year, 4]
-      return this.$utils().s(...args, '0')
+      return a || this.$utils().s(...args, '0')
     })
     return oldFormat.bind(this)(result)
   }

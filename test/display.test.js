@@ -2,6 +2,7 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
 import th from '../src/locale/th'
+import '../src/locale/ja'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -77,12 +78,18 @@ it('Format meridiens a A am / pm', () => {
   expect(dayjs(time).format('a')).toBe(moment(time).format('a'))
   expect(dayjs(time).format('A')).toBe('AM')
   expect(dayjs(time).format('A')).toBe(moment(time).format('A'))
+  expect(dayjs(time).locale('ja').format('a')).toBe('午前')
+  expect(dayjs(time).locale('ja').format('a'))
+    .toBe(moment(time).locale('ja').format('a'))
 
   const time2 = '2018-05-02T23:00:00.000'
   expect(dayjs(time2).format('a')).toBe('pm')
   expect(dayjs(time2).format('a')).toBe(moment(time2).format('a'))
   expect(dayjs(time2).format('A')).toBe('PM')
   expect(dayjs(time2).format('A')).toBe(moment(time2).format('A'))
+  expect(dayjs(time2).locale('ja').format('a')).toBe('午後')
+  expect(dayjs(time2).locale('ja').format('a'))
+    .toBe(moment(time2).locale('ja').format('a'))
 })
 
 it('Format Minute m mm', () => {

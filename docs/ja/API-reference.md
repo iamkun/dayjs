@@ -4,326 +4,299 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 
 `Dayjs` オブジェクトは不変 (immutable) です。すなわち、すべての API 操作は新しい `Dayjs` オブジェクトを返します。
 
-- [Parse](#parse)
-  - [Now](#now)
-  - [String](#string)
-  - [Date](#date)
-  - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
-  - [Unix Timestamp (seconds)](#unix-timestamp-seconds)
+- [API Reference](#api-reference)
+- [Parsing](#parsing)
+  - [Constructor `dayjs(dateType?: string | number | Date | Dayjs)`](#constructor-dayjsdatetype-string--number--date--dayjs)
+    - [ISO 8601 形式](#iso-8601-%E5%BD%A2%E5%BC%8F)
+    - [Native Javascript Date object](#native-javascript-date-object)
+    - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
+  - [Unix Timestamp (seconds) `.unix(value: number)`](#unix-timestamp-seconds-unixvalue-number)
   - [Custom Parse Format](#custom-parse-format)
-  - [Clone](#clone)
-  - [Validation](#validation)
-- [Get + Set](#get--set)
-  - [Year](#year)
-  - [Month](#month)
-  - [Date of Month](#date-of-month)
-  - [Day of Week](#day-of-week)
-  - [Hour](#hour)
-  - [Minute](#minute)
-  - [Second](#second)
-  - [Millisecond](#millisecond)
-  - [Get](#get)
-  - [Set](#set)
-- [Manipulate](#manipulate)
-  - [Add](#add)
-  - [Subtract](#subtract)
-  - [Start of Time](#start-of-time)
-  - [End of Time](#end-of-time)
-- [Display](#display)
-  - [Format](#format)
-  - [Difference](#difference)
-  - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds-1)
-  - [Unix Timestamp (seconds)](#unix-timestamp-seconds)
-  - [UTC offset (minutes)](#utc-offset-minutes-utcoffset)
-  - [Days in Month](#days-in-month)
-  - [As Javascript Date](#as-javascript-date)
-  - [As JSON](#as-json)
-  - [As ISO 8601 String](#as-iso-8601-string)
-  - [As String](#as-string)
+  - [Clone `.clone() | dayjs(original: Dayjs)`](#clone-clone--dayjsoriginal-dayjs)
+  - [Validation `.isValid()`](#validation-isvalid)
+- [Get and Set](#get-and-set)
+  - [Year `.year()`](#year-year)
+  - [Month `.month()`](#month-month)
+  - [Day of the Month `.date()`](#day-of-the-month-date)
+  - [Day of the Week `.day()`](#day-of-the-week-day)
+  - [Hour `.hour()`](#hour-hour)
+  - [Minute `.minute()`](#minute-minute)
+  - [Second `.second()`](#second-second)
+  - [Millisecond `.millisecond()`](#millisecond-millisecond)
+  - [Get `.get(unit: string)`](#get-getunit-string)
+    - [List of all available units](#list-of-all-available-units)
+  - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+- [Manipulating](#manipulating)
+  - [Add `.add(value: number, unit: string)`](#add-addvalue-number-unit-string)
+  - [Subtract `.subtract(value: number, unit: string)`](#subtract-subtractvalue-number-unit-string)
+  - [Start of Time `.startOf(unit: string)`](#start-of-time-startofunit-string)
+  - [End of Time `.endOf(unit: string)`](#end-of-time-endofunit-string)
+- [Displaying](#displaying)
+  - [Format `.format(stringWithTokens: string)`](#format-formatstringwithtokens-string)
+    - [List of all available formats](#list-of-all-available-formats)
+  - [Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`](#difference-diffcompared-dayjs-unit-string-default-milliseconds-float-boolean)
+  - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
+  - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
+  - [UTC Offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
+  - [Days in the Month `.daysInMonth()`](#days-in-the-month-daysinmonth)
+  - [As Javascript Date `.toDate()`](#as-javascript-date-todate)
+  - [As JSON `.toJSON()`](#as-json-tojson)
+  - [As ISO 8601 String `.toISOString()`](#as-iso-8601-string-toisostring)
+  - [As String `.toString()`](#as-string-tostring)
 - [Query](#query)
-  - [Is Before](#is-before)
-  - [Is Same](#is-same)
-  - [Is After](#is-after)
-  - [Is a Dayjs](#is-a-dayjs)
+  - [Is Before `.isBefore(compared: Dayjs, unit?: string)`](#is-before-isbeforecompared-dayjs-unit-string)
+  - [Is Same `.isSame(compared: Dayjs, unit?: string)`](#is-same-issamecompared-dayjs-unit-string)
+  - [Is After `.isAfter(compared: Dayjs, unit?: string)`](#is-after-isaftercompared-dayjs-unit-string)
+  - [Is a Dayjs `.isDayjs(compared: any)`](#is-a-dayjs-isdayjscompared-any)
 - [UTC](#utc)
 - [Plugin APIs](#plugin-apis)
 
----
+## Parsing
 
-Day.js は指定されない限り、常に新しい Dayjs オブジェクトを返します。
+### Constructor `dayjs(dateType?: string | number | Date | Dayjs)`
 
-### Parse
-
-サポートされている入力形式のいずれかで `dayjs()` を呼び出します。
-
-#### Now
-
-現在の日付と時間を取得するには、パラメータなしで dayjs() を呼び出します。
+パラメータなしで実行すると現在の日付と時刻を持った新しい`Dayjs`オブジェクトを返します。
 
 ```js
 dayjs()
 ```
 
-### String
+Day.js は他の日付フォーマットもパースします。
 
-[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) に準拠する形式から作成します。
+#### [ISO 8601](https://ja.wikipedia.org/wiki/ISO_8601) 形式
 
 ```js
-dayjs(String)
-dayjs('1995-12-25')
+dayjs('2018-04-04T16:00:00.000Z')
 ```
 
-### Date
-
-JavaScript の組み込みの Date オブジェクトを渡します。
+#### Native Javascript Date object
 
 ```js
-dayjs(Date)
 dayjs(new Date(2018, 8, 18))
 ```
 
-### Unix Timestamp (milliseconds)
+#### Unix Timestamp (milliseconds)
 
-Unix エポック (1970 年 1 月 1 日 12:00AM UTC) 以降のミリ秒数を表す整数値を渡します。
+Unix タイムスタンプ（Unix エポックのミリ秒）から`Dayjs`オブジェクトを返します。
 
 ```js
-dayjs(Number)
 dayjs(1318781876406)
 ```
 
-### Unix Timestamp (seconds)
+### Unix Timestamp (seconds) `.unix(value: number)`
+
+Unix タイムスタンプ（Unix エポックの秒）から`Dayjs`オブジェクトを返します。
 
 ```js
-dayjs.unix(Number)
 dayjs.unix(1318781876)
+dayjs.unix(1318781876.721)
 ```
 
 ### Custom Parse Format
 
-- parse custom formats `dayjs("12-25-1995", "MM-DD-YYYY")` in plugin [`CustomParseFormat`](./Plugin.md#customparseformat)
+- `dayjs("12-25-1995", "MM-DD-YYYY")` といった独自フォーマットのパースは[`CustomParseFormat`](./Plugin.md#customparseformat)で利用できます。
 
-### Clone
+### Clone `.clone() | dayjs(original: Dayjs)`
 
-すべての `Dayjs` は不変 (immutable) です。 オブジェクトのコピーが必要な場合は、 `.clone()` を呼び出してください。
-`Dayjs` オブジェクトに対して dayjs() を呼び出すと、それもクローンされます。
+`Dayjs`オブジェクトを複製して返します。
 
 ```js
-dayjs(Dayjs)
 dayjs().clone()
+dayjs(dayjs('2019-01-25')) // Dayjsオブジェクトをコンストラクタに渡しても複製されます
 ```
 
-### Validation
+### Validation `.isValid()`
 
-- Boolean を返します
-
-`Dayjs` オブジェクトが有効な日付かどうかをチェックします。
+`Dayjs`の日付が有効かの真偽値を返します。
 
 ```js
 dayjs().isValid()
 ```
 
----
+## Get and Set
 
-### Get + Set
+### Year `.year()`
 
-日付の取得と設定です。
-
-#### Year
-
-Gets or sets the year.
+年の取得と設定。
 
 ```js
 dayjs().year()
 dayjs().year(2000)
 ```
 
-#### Month
+### Month `.month()`
 
-Gets or sets the month. Starts at 0
+月の取得と設定です。月は`0`から始まります。
 
 ```js
 dayjs().month()
 dayjs().month(0)
 ```
 
-#### Date of Month
+### Day of the Month `.date()`
 
-Gets or sets the day of the month. Starts at 1
+月の日にちの取得と設定です。日にちは`1`から始まります。
 
 ```js
 dayjs().date()
 dayjs().date(1)
 ```
 
-#### Day of Week
+### Day of the Week `.day()`
 
-Gets or sets the day of the week. Starts on Sunday with 0
+曜日の取得と設定です。`0`で日曜日から始まります。
 
 ```js
 dayjs().day()
 dayjs().day(0)
 ```
 
-#### Hour
+### Hour `.hour()`
 
-Gets or sets the hour.
+時の取得と設定です。
 
 ```js
 dayjs().hour()
 dayjs().hour(12)
 ```
 
-#### Minute
+### Minute `.minute()`
 
-Gets or sets the minute.
+分の取得と設定です。
 
 ```js
 dayjs().minute()
 dayjs().minute(59)
 ```
 
-#### Second
+### Second `.second()`
 
-Gets or sets the second.
+秒の取得と設定です。
 
 ```js
 dayjs().second()
 dayjs().second(1)
 ```
 
-#### Millisecond
+### Millisecond `.millisecond()`
 
-Gets or sets the millisecond.
+ミリ秒の取得と設定です。
 
 ```js
 dayjs().millisecond()
 dayjs().millisecond(1)
 ```
 
-#### Get
+### Get `.get(unit: string)`
 
-Returns a `number` with information getting from `Dayjs` object
-単位は大文字・小文字を区別しません。
+`Dayjs` オブジェクトから`数値`を返します。
 
 ```js
-dayjs().get(unit: String)
-dayjs().get('month') // start 0
+dayjs().get('month') // `0`始まり
 dayjs().get('day')
 ```
 
 #### List of all available units
 
-| Unit          | Shorthand | Description                              |
-| ------------- | --------- | ---------------------------------------- |
-| `date`        |           | Date of Month                            |
-| `day`         | `d`       | Day of Week (Sunday as 0, Saturday as 6) |
-| `month`       | `M`       | Month (January as 0, December as 11)     |
-| `year`        | `y`       | Year                                     |
-| `hour`        | `h`       | Hour                                     |
-| `minute`      | `m`       | Minute                                   |
-| `second`      | `s`       | Second                                   |
-| `millisecond` | `ms`      | Millisecond                              |
+| 単位          | ショートハンド | 説明                             |
+| ------------- | -------------- | -------------------------------- |
+| `date`        |                | 月の日ひち                       |
+| `day`         | `d`            | 曜日（日曜日は`0`、土曜日は`6`） |
+| `month`       | `M`            | 月（1 月は`0`、12 月は`11`）     |
+| `year`        | `y`            | 年                               |
+| `hour`        | `h`            | 時                               |
+| `minute`      | `m`            | 分                               |
+| `second`      | `s`            | 秒                               |
+| `millisecond` | `ms`           | ミリ秒                           |
 
-#### Set
+### Set `.set(unit: string, value: number)`
 
-日付のセッターです。
+変更を適応した`Dayjs`オブジェクトを返します。
 
 ```js
-dayjs().set(unit: String, value: Int)
 dayjs().set('date', 1)
 dayjs().set('month', 3) // 4月
 dayjs().set('second', 30)
 ```
 
-### Manipulate
+## Manipulating
 
-`Dayjs` オブジェクトは次のような方法で操作することができます:
+様々な方法で`Dayjs`オブジェクトを操作できます。
 
 ```js
-dayjs()
-  .startOf('month')
+dayjs('2019-01-25')
   .add(1, 'day')
   .subtract(1, 'year')
+  .toString() // Fri, 26 Jan 2018 00:00:00 GMT
 ```
 
-#### Add
+### Add `.add(value: number, unit: string)`
 
-時間を足して新しい `Dayjs` オブジェクトを返します。
+指定した時間を追加した`Dayjs`オブジェクトを複製して返します。
 
 ```js
-dayjs().add(value: Number, unit: String)
 dayjs().add(7, 'day')
 ```
 
-#### Subtract
+### Subtract `.subtract(value: number, unit: string)`
 
-時間を引いて新しい `Dayjs` オブジェクトを返します。 `dayjs#add` と全く同じです。
+指定した時間を引いた`Dayjs`オブジェクトを複製して返します。
 
 ```js
-dayjs().subtract((value: Number), (unit: String))
 dayjs().subtract(7, 'year')
 ```
 
-#### Start of Time
+### Start of Time `.startOf(unit: string)`
 
-Returns a new `Dayjs` object by by setting it to the start of a unit of time.
-
-ある単位の始まりの時間の新しい `Dayjs` オブジェクトを返します。
+指定した単位の開始時点に設定された`Dayjs`オブジェクトを複製して返します。
 
 ```js
-dayjs().startOf((unit: String))
-dayjs().startOf('week') // Depends on `weekStart` in locale
+dayjs().startOf('week') // locale の `weekStart` に依存
 ```
 
-#### End of Time
+### End of Time `.endOf(unit: string)`
 
-ある単位の終わりの時間の新しい `Dayjs` オブジェクトを返します。
+指定した単位の終了時点に設定された`Dayjs`オブジェクトを複製して返します。
 
 ```js
-dayjs().endOf((unit: String))
 dayjs().endOf('month')
 ```
 
----
+## Displaying
 
-### Display
+### Format `.format(stringWithTokens: string)`
 
-パースや操作が完了したならば `Dayjs` オブジェクトを表示する方法が求められるはずです。
-
-#### Format
-
-- String を返します
-
-文字列を受け取り、対応する日付の値で置き換えます。
+フォーマットされた日付の文字列を返します。  
+文字をエスケープするにはブラケットで囲みます。（例 `[A][MM]`）
 
 ```js
-dayjs().format(String)
-dayjs().format() // "2014-09-08T08:02:17-05:00" (ISO 8601 形式、小数部は含まない)
+dayjs().format() // ISO8601形式で、端数秒なしの現在の日時。例 '2020-04-02T08:02:17-05:00'
+
 dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25T00:00:00-02:00Z'
+
+dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 ```
 
-- 文字列内の文字をエスケープするには、文字を角括弧で囲みます (例: [Z]) 。
-
-使用可能なフォーマットの一覧:
+#### List of all available formats
 
 | フォーマット | 出力             | 説明                        |
 | ------------ | ---------------- | --------------------------- |
 | `YY`         | 18               | 2 桁の年                    |
 | `YYYY`       | 2018             | 4 桁の年                    |
 | `M`          | 1-12             | 1 始まりの月                |
-| `MM`         | 01-12            | 1 始まりかつ 2 桁の月       |
+| `MM`         | 01-12            | 1 始まりの 2 桁の月         |
 | `MMM`        | Jan-Dec          | 月の略称                    |
 | `MMMM`       | January-December | 月の正式名                  |
-| `D`          | 1-31             | 日                          |
-| `DD`         | 01-31            | 2 桁の日                    |
-| `d`          | 0-6              | 曜日 (日曜は 0)             |
+| `D`          | 1-31             | 月ごとの日にち              |
+| `DD`         | 01-31            | 月ごとの 2 桁の日にち       |
+| `d`          | 0-6              | `0`で日曜日から始まる曜日   |
 | `dd`         | Su-Sa            | 最も短い曜日の略称          |
 | `ddd`        | Sun-Sat          | 曜日の略称                  |
 | `dddd`       | Sunday-Saturday  | 曜日名                      |
 | `H`          | 0-23             | 時間                        |
 | `HH`         | 00-23            | 2 桁の時間                  |
 | `h`          | 1-12             | 12 時制の時間               |
-| `hh`         | 01-12            | 12 時制かつ 2 桁の時間      |
+| `hh`         | 01-12            | 12 時制で 2 桁の時間        |
 | `m`          | 0-59             | 分                          |
 | `mm`         | 00-59            | 2 桁の分                    |
 | `s`          | 0-59             | 秒                          |
@@ -331,17 +304,15 @@ dayjs('2019-01-25').format('[YYYY] YYYY-MM-DDTHH:mm:ssZ[Z]') // 'YYYY 2019-01-25
 | `SSS`        | 000-999          | 3 桁のミリ秒                |
 | `Z`          | +5:00            | UTC からのオフセット        |
 | `ZZ`         | +0500            | UTC からの 2 桁のオフセット |
-| `A`          | AM PM            | 午前と午後 (大文字)         |
-| `a`          | am pm            | 午前と午後 (小文字)         |
+| `A`          | AM PM            | 午前と午後（大文字）        |
+| `a`          | am pm            | 午前と午後（小文字）        |
 
-- plugin [`AdvancedFormat`](./Plugin.md#advancedformat) にはより多くのフォーマット（例： `Q Do k kk X x ...` ）が存在します。
-- Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
+- 利用可能な他のフォーマット `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
+- ローカライズのフォーマットオプション `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
-#### Difference
+### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
 
-- Number を返します
-
-2 つの `Dayjs` オブジェクトの差をミリ秒単位で取得します。
+2 つの`Dayjs`オブジェクトの差分を指定した単位で数値で返します。
 
 ```js
 const date1 = dayjs('2019-01-25')
@@ -352,214 +323,194 @@ date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
 ```
 
-#### Unix Timestamp (milliseconds)
+### Unix Timestamp (milliseconds) `.valueOf()`
 
-- Number を返します
-
-Unix エポックからのミリ秒数を出力します。
+`Dayjs`オブジェクトの Unix エポックからのミリ秒を数値で返します。
 
 ```js
-dayjs().valueOf()
+dayjs('2019-01-25').valueOf() // 1548381600000
 ```
 
-#### Unix Timestamp (seconds)
+### Unix Timestamp (seconds) `.unix()`
 
-- Number を返します
-
-Unix タイムスタンプ (Unix エポックからの秒数) を出力します。
+`Dayjs`オブジェクトの Unix エポックからの秒を数値で返します。
 
 ```js
-dayjs().unix()
+dayjs('2019-01-25').unix() // 1548381600
 ```
 
-### UTC Offset (minutes)
+### UTC Offset (minutes) `.utcOffset()`
 
-Returns the UTC offset in minutes for the `Dayjs`.
+`Dayjs`オブジェクトの UTC オフセットを分単位の数値で返します。
 
 ```js
 dayjs().utcOffset()
 ```
 
-#### Days in Month
+### Days in the Month `.daysInMonth()`
 
-- Number を返します
-
-その月の日数を取得します。
+`Dayjs`オブジェクトの月の日数を数値で返します。
 
 ```js
-dayjs().daysInMonth()
+dayjs('2019-01-25').daysInMonth() // 31
 ```
 
-#### As Javascript Date
+### As Javascript Date `.toDate()`
 
-- Javascript の `Date` オブジェクトを返します
-
-`Dayjs` オブジェクトから組み込みの `Date` オブジェクトのコピーを取得します。
+`Dayjs`オブジェクトをパースして複製したネイティブの`Date`オブジェクトを返します。
 
 ```js
-dayjs().toDate()
+dayjs('2019-01-25').toDate()
 ```
 
-#### As JSON
+### As JSON `.toJSON()`
 
-- JSON String を返します
-
-`Dayjs` オブジェクトを JSON シリアライズし、ISO8601 形式の日付文字列を返します。
+`Dayjs`オブジェクトの日付を ISO8601 形式にして文字列で返します。
 
 ```js
-dayjs().toJSON() //"2018-08-08T00:00:00.000Z"
+dayjs('2019-01-25').toJSON() // '2019-01-25T02:00:00.000Z'
 ```
 
-#### As ISO 8601 String
+### As ISO 8601 String `.toISOString()`
 
-- String を返します
-
-ISO8601 形式の文字列にフォーマットします。
+`Dayjs`オブジェクトの日付を ISO8601 形式にして文字列で返します。
 
 ```js
-dayjs().toISOString()
+dayjs('2019-01-25').toISOString() // '2019-01-25T02:00:00.000Z'
 ```
 
-#### As String
+### As String `.toString()`
 
-- String を返します
+日付を文字列で返します。
 
 ```js
-dayjs().toString()
+dayjs('2019-01-25').toString() // 'Fri, 25 Jan 2019 02:00:00 GMT'
 ```
 
----
+## Query
 
-### Query
+### Is Before `.isBefore(compared: Dayjs, unit?: string)`
 
-#### Is Before
-
-- Boolean を返します
-
-`Dayjs` オブジェクトが別の `Dayjs` オブジェクト以前の値かどうかを判定します。
+`Dayjs`オブジェクトの日付が、引数に与えた他の`Dayjs`オブジェクトの日付より前かどうかの真偽値を返します。
 
 ```js
-dayjs().isBefore(Dayjs, unit? : String);
-dayjs().isBefore(dayjs()); // false
-dayjs().isBefore(dayjs(), 'year'); // false
+dayjs().isBefore(dayjs()) // false
+dayjs().isBefore(dayjs(), 'year') // false
 ```
 
-#### Is Same
+### Is Same `.isSame(compared: Dayjs, unit?: string)`
 
-- Boolean を返します
-
-`Dayjs` オブジェクトが別の `Dayjs` オブジェクトの値と等しいかどうかを判定します。
+`Dayjs`オブジェクトの日付が、引数に与えた他の`Dayjs`オブジェクトの日付と同じかどうかの真偽値を返します。
 
 ```js
-dayjs().isSame(Dayjs, unit? : String);
-dayjs().isSame(dayjs()); // true
-dayjs().isSame(dayjs(), 'year'); // true
+dayjs().isSame(dayjs()) // true
+dayjs().isSame(dayjs(), 'year') // true
 ```
 
-#### Is After
+### Is After `.isAfter(compared: Dayjs, unit?: string)`
 
-- Boolean を返します
-
-`Dayjs` オブジェクトが別の `Dayjs` オブジェクト以降の値かどうかを判定します。
+`Dayjs`オブジェクトの日付が、引数に与えた他の`Dayjs`オブジェクトの日付より後かどうかの真偽値を返します。
 
 ```js
-dayjs().isAfter(Dayjs, unit? : String);
-dayjs().isAfter(dayjs()); // false
-dayjs().isAfter(dayjs(), 'year'); // false
+dayjs().isAfter(dayjs()) // false
+dayjs().isAfter(dayjs(), 'year') // false
 ```
 
-#### Is a Dayjs
+### Is a Dayjs `.isDayjs(compared: any)`
 
-- Boolean を返します
-
-与えられた値が `Dayjs` オブジェクトであるかどうかを判定します。
+引数に与えた変数が`Dayjs`オブジェクトかどうかの真偽値を返します。
 
 ```js
-dayjs.isDayjs(compared: any);
-dayjs.isDayjs(dayjs()); // true
-dayjs.isDayjs(new Date()); // false
+dayjs.isDayjs(dayjs()) // true
+dayjs.isDayjs(new Date()) // false
 ```
 
-The operator `instanceof` works equally well:
+`instanceof`オペレータでも同じように動作します。
 
 ```js
 dayjs() instanceof dayjs // true
 ```
 
-### UTC
+## UTC
 
-If you want to parse or display in UTC, you can use `.utc` `.local` `.isUTC` with plugin [`UTC`](./Plugin.md#utc)
+UTC でパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラグインの`.utc` `.local` `.isUTC` で行えます。
 
-### Plugin APIs
+## Plugin APIs
 
-#### RelativeTime
+### RelativeTime
 
-`.from` `.to` `.fromNow` `.toNow` は相対的な時刻を返します。
+`.from` `.to` `.fromNow` `.toNow` で相対時間が得られます。
 
-plugin [`RelativeTime`](./Plugin.md#relativetime)
+プラグイン [`RelativeTime`](./Plugin.md#relativetime)
 
-#### IsLeapYear
+### IsLeapYear
 
-`.isLeapYear` はうるう年かどうかを返します。
+`.isLeapYear` で閏年かどうかが得られます。
 
-plugin [`IsLeapYear`](./Plugin.md#isleapyear)
+プラグイン [`IsLeapYear`](./Plugin.md#isleapyear)
 
-#### WeekOfYear
+### WeekOfYear
 
-`.week` はその年の何週目かを返します。
+`.week` でその年における週数が得られます。
 
-plugin [`WeekOfYear`](./Plugin.md#weekofyear)
+プラグイン [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### WeekDay
+
+`.weekday` でロケールに対応した曜日の取得、設定ができます。
+
+プラグイン [`WeekDay`](./Plugin.md#weekday)
 
 ### IsoWeeksInYear
 
-`.isoWeeksInYear` to get the number of weeks in year
+`.isoWeeksInYear` でその年の週数が得られます。
 
-plugin [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
+プラグイン [`IsoWeeksInYear`](./Plugin.md#isoweeksinyear)
 
-#### IsSameOrAfter
+### IsSameOrAfter
 
-`.isSameOrAfter` はある日付が別の日付と同じまたは以降かどうかを判定します。
+`.isSameOrAfter` で日付が別の日付と同じかそれより後であるかを得られます。
 
-plugin [`IsSameOrAfter`](./Plugin.md#issameorafter)
+プラグイン [`IsSameOrAfter`](./Plugin.md#issameorafter)
 
-#### IsSameOrBefore
+### IsSameOrBefore
 
-`.isSameOrBefore` はある日付が別の日付と同じまたは以前かどうか判定します。
+`.isSameOrBefore`で日付が別の日付と同じかそれより前であるかを得られます。
 
-plugin [`IsSameOrBefore`](./Plugin.md#issameorbefore)
+プラグイン [`IsSameOrBefore`](./Plugin.md#issameorbefore)
 
-#### IsBetween
+### IsBetween
 
-`.isBetween` はある日付が別の 2 つの日付の間にあるかどうかを判定します。
+`.isBetween`で他の 2 つの日付の間であるかどうかを得られます。
 
-plugin [`IsBetween`](./Plugin.md#isbetween)
+プラグイン [`IsBetween`](./Plugin.md#isbetween)
 
 ### QuarterOfYear
 
-`.quarter` to get quarter of the year
+`.quarter`で年の四半期のいつかが得られます。
 
-plugin [`QuarterOfYear`](./Plugin.md#quarterofyear)
+プラグイン [`QuarterOfYear`](./Plugin.md#quarterofyear)
 
 ### ToArray
 
-`.toArray` to return an `array` that mirrors the parameters
+`.toArray`でパラメータの配列が得られます。
 
-plugin [`ToArray`](./Plugin.md#toarray)
+プラグイン [`ToArray`](./Plugin.md#toarray)
 
 ### ToObject
 
-`.toObject` to return an `object` with the date's properties.
+`.toObject`でパラメータをキーに持ったオブジェクトが得られます。
 
-plugin [`ToObject`](./Plugin.md#toobject)
+プラグイン [`ToObject`](./Plugin.md#toobject)
 
 ### MinMax
 
-`.min` `.max` to compare given dayjs instances.
+`.min` `.max`で与えた複数の`Dayjs`インスタンスの中から最小もしくは最大のものが得られます。
 
-plugin [`MinMax`](./Plugin.md#minmax)
+プラグイン [`MinMax`](./Plugin.md#minmax)
 
 ### Calendar
 
-`.calendar` to display calendar time
+`.calendar`で与えた日付のカレンダー上の情報が得られます。
 
-plugin [`Calendar`](./Plugin.md#calendar)
+プラグイン [`Calendar`](./Plugin.md#calendar)
