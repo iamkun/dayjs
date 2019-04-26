@@ -27,7 +27,8 @@ it('Locale keys', () => {
       weekdaysShort,
       monthsShort,
       weekdaysMin,
-      weekStart
+      weekStart,
+      meridiem
     } = locale.content
 
     expect(name).toEqual(locale.name.replace('.js', ''))
@@ -79,6 +80,12 @@ it('Locale keys', () => {
       expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
         'past', 's', 'y', 'yy']
         .sort())
+    }
+
+    if (meridiem) {
+      for (let i = 1; i <= 23; i += 1) {
+        expect(meridiem(i)).toEqual(expect.anything())
+      }
     }
   })
 })
