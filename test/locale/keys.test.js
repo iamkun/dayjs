@@ -15,8 +15,8 @@ fs.readdirSync(path.join(__dirname, localeDir))
     })
   })
 
-it('Locale keys', () => {
-  Locale.forEach((locale) => {
+Locale.forEach((locale) => {
+  it(`Locale keys for ${locale.content.name}`, () => {
     const {
       name,
       ordinal,

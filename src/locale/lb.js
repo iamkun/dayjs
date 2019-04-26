@@ -8,7 +8,15 @@ const locale = {
   weekdaysShort: 'So._Mé._Dë._Më._Do._Fr._Sa.'.split('_'),
   monthsShort: 'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
   weekdaysMin: 'So_Mé_Dë_Më_Do_Fr_Sa'.split('_'),
-  ordinal: n => n
+  ordinal: n => n,
+  formats: {
+    LT: 'H:mm [Auer]',
+    LTS: 'H:mm:ss [Auer]',
+    L: 'DD.MM.YYYY',
+    LL: 'D. MMMM YYYY',
+    LLL: 'D. MMMM YYYY H:mm [Auer]',
+    LLLL: 'dddd, D. MMMM YYYY H:mm [Auer]'
+  }
 }
 
 dayjs.locale(locale, null, true)

@@ -23,9 +23,18 @@ const locale = {
     MM: '%d hónap',
     y: 'egy éve',
     yy: '%d év'
+  },
+  formats: {
+    LT: 'H:mm',
+    LTS: 'H:mm:ss',
+    L: 'YYYY.MM.DD.',
+    LL: 'YYYY. MMMM D.',
+    LLL: 'YYYY. MMMM D. H:mm',
+    LLLL: 'YYYY. MMMM D., dddd H:mm'
   }
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
+

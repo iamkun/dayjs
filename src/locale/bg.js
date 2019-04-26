@@ -13,9 +13,25 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY H:mm',
     LLLL: 'dddd, D MMMM YYYY H:mm'
+  },
+  relativeTime: {
+    future: 'след %s',
+    past: 'преди %s',
+    s: 'няколко секунди',
+    m: 'минута',
+    mm: '%d минути',
+    h: 'час',
+    hh: '%d часа',
+    d: 'ден',
+    dd: '%d дни',
+    M: 'месец',
+    MM: '%d месеца',
+    y: 'година',
+    yy: '%d години'
   }
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
+

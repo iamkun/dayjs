@@ -53,7 +53,10 @@ it('Uses English formats in other locales as default', () => {
   const actualDate = dayjs(date)
   const expectedDate = moment(date)
   // todo: ar here isn't a good fix here
+  const arOldFormats = ar.formats
+  ar.formats = {}
   expect(actualDate.locale(ar).format('L')).toBe(expectedDate.format('L'))
+  ar.formats = arOldFormats
 })
 
 it('Leaves the default format intact', () => {
