@@ -3,6 +3,7 @@ import MockDate from 'mockdate'
 import dayjs from '../src'
 import th from '../src/locale/th'
 import '../src/locale/ja'
+import '../src/locale/ru'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -149,6 +150,17 @@ it('Format Escaping characters', () => {
   expect(dayjs().format(string)).toBe(moment().format(string))
   string = '[Z] Z [Z]'
   expect(dayjs().format(string)).toBe(moment().format(string))
+})
+
+it('Format Month with locale function', () => {
+  for (let i = 0; i <= 7; i += 1) {
+    const dayjsRU = dayjs().locale('ru').add(i, 'day')
+    const momentRU = moment().locale('ru').add(i, 'day')
+    const testFormat1 = 'DD MMMM YYYY'
+    const testFormat2 = 'MMMM'
+    expect(dayjsRU.format(testFormat1)).toEqual(momentRU.format(testFormat1))
+    expect(dayjsRU.format(testFormat2)).toEqual(momentRU.format(testFormat2))
+  }
 })
 
 describe('Difference', () => {

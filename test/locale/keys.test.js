@@ -39,7 +39,12 @@ Locale.forEach((locale) => {
     if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array))
     if (weekStart) expect(weekStart).toEqual(expect.any(Number))
 
-    expect(months).toEqual(expect.any(Array))
+    // months could be a function or array
+    if (Array.isArray(months)) {
+      expect(months).toEqual(expect.any(Array))
+    } else {
+      expect(months(dayjs(), 'str')).toEqual(expect.any(String))
+    }
     // function pass date return string or number or null
     if (name !== 'en') { // en ordinal set in advancedFormat
       for (let i = 1; i <= 31; i += 1) {

@@ -299,7 +299,7 @@ class Dayjs {
       M: String(this.$M + 1),
       MM: Utils.s(this.$M + 1, 2, '0'),
       MMM: getShort(locale.monthsShort, this.$M, months, 3),
-      MMMM: months[this.$M],
+      MMMM: months[this.$M] || months(this, str),
       D: String(this.$D),
       DD: Utils.s(this.$D, 2, '0'),
       d: String(this.$W),
