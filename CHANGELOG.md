@@ -1,3 +1,20 @@
+## [1.8.13](https://github.com/iamkun/dayjs/compare/v1.8.12...v1.8.13) (2019-04-26)
+
+
+### Bug Fixes
+
+* Add missing relativeTime and formats for some locales ([#560](https://github.com/iamkun/dayjs/issues/560)) ([96b917e](https://github.com/iamkun/dayjs/commit/96b917e))
+* Add weekday (locale aware day of the week) plugin ([#569](https://github.com/iamkun/dayjs/issues/569)) ([9007cc5](https://github.com/iamkun/dayjs/commit/9007cc5)), closes [#559](https://github.com/iamkun/dayjs/issues/559)
+* Allow customizing "am" / "pm" strings with locale meridiem function ([#580](https://github.com/iamkun/dayjs/issues/580)) ([576e93e](https://github.com/iamkun/dayjs/commit/576e93e)), closes [#578](https://github.com/iamkun/dayjs/issues/578)
+* Fix `.add` day/week decimal rouding bug ([800f6c9](https://github.com/iamkun/dayjs/commit/800f6c9))
+* Fix `.diff` type definition error ([#565](https://github.com/iamkun/dayjs/issues/565)) ([c4921ae](https://github.com/iamkun/dayjs/commit/c4921ae)), closes [#561](https://github.com/iamkun/dayjs/issues/561)
+* Fix CustomParseFormat plugin bug ([#568](https://github.com/iamkun/dayjs/issues/568)) ([1f5a9db](https://github.com/iamkun/dayjs/commit/1f5a9db)), closes [#555](https://github.com/iamkun/dayjs/issues/555)
+* Fix relativeTime plugin Math.round bug ([40bea40](https://github.com/iamkun/dayjs/commit/40bea40))
+* skip square brackets in  buddhistEra, advancedFormat plugins ([#556](https://github.com/iamkun/dayjs/issues/556)) ([9279718](https://github.com/iamkun/dayjs/commit/9279718)), closes [#554](https://github.com/iamkun/dayjs/issues/554)
+* Update Indonesian locale([#574](https://github.com/iamkun/dayjs/issues/574)) ([0aa7143](https://github.com/iamkun/dayjs/commit/0aa7143))
+* Update locale month to support both array and function ([#581](https://github.com/iamkun/dayjs/issues/581)) ([b6599d3](https://github.com/iamkun/dayjs/commit/b6599d3))
+* Update LocalizedFormat plugin lowercase formats logic ([#557](https://github.com/iamkun/dayjs/issues/557)) ([d409304](https://github.com/iamkun/dayjs/commit/d409304))
+
 ## [1.8.12](https://github.com/iamkun/dayjs/compare/v1.8.11...v1.8.12) (2019-04-02)
 
 
