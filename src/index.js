@@ -278,6 +278,7 @@ class Dayjs {
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.z(this)
     const locale = this.$locale()
+    const { $H, $m, $M } = this
     const {
       weekdays, months, meridiem
     } = locale
@@ -285,7 +286,7 @@ class Dayjs {
       (arr && (arr[index] || arr(this, str))) || full[index].substr(0, length)
     )
     const get$H = num => (
-      Utils.s(this.$H % 12 || 12, num, '0')
+      Utils.s($H % 12 || 12, num, '0')
     )
 
     const meridiemFunc = meridiem || ((hour, minute, isLowercase) => {
@@ -296,24 +297,24 @@ class Dayjs {
     const matches = {
       YY: String(this.$y).slice(-2),
       YYYY: this.$y,
-      M: this.$M + 1,
-      MM: Utils.s(this.$M + 1, 2, '0'),
-      MMM: getShort(locale.monthsShort, this.$M, months, 3),
-      MMMM: months[this.$M] || months(this, str),
+      M: $M + 1,
+      MM: Utils.s($M + 1, 2, '0'),
+      MMM: getShort(locale.monthsShort, $M, months, 3),
+      MMMM: months[$M] || months(this, str),
       D: this.$D,
       DD: Utils.s(this.$D, 2, '0'),
       d: this.$W,
       dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
       ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
       dddd: weekdays[this.$W],
-      H: this.$H,
-      HH: Utils.s(this.$H, 2, '0'),
+      H: $H,
+      HH: Utils.s($H, 2, '0'),
       h: get$H(1),
       hh: get$H(2),
-      a: meridiemFunc(this.$H, this.$m, true),
-      A: meridiemFunc(this.$H, this.$m, false),
-      m: this.$m,
-      mm: Utils.s(this.$m, 2, '0'),
+      a: meridiemFunc($H, $m, true),
+      A: meridiemFunc($H, $m, false),
+      m: $m,
+      mm: Utils.s($m, 2, '0'),
       s: this.$s,
       ss: Utils.s(this.$s, 2, '0'),
       SSS: Utils.s(this.$ms, 3, '0'),
