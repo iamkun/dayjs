@@ -295,32 +295,32 @@ class Dayjs {
 
     const matches = {
       YY: String(this.$y).slice(-2),
-      YYYY: String(this.$y),
-      M: String(this.$M + 1),
+      YYYY: this.$y,
+      M: this.$M + 1,
       MM: Utils.s(this.$M + 1, 2, '0'),
       MMM: getShort(locale.monthsShort, this.$M, months, 3),
       MMMM: months[this.$M] || months(this, str),
-      D: String(this.$D),
+      D: this.$D,
       DD: Utils.s(this.$D, 2, '0'),
-      d: String(this.$W),
+      d: this.$W,
       dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
       ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
       dddd: weekdays[this.$W],
-      H: String(this.$H),
+      H: this.$H,
       HH: Utils.s(this.$H, 2, '0'),
       h: get$H(1),
       hh: get$H(2),
       a: meridiemFunc(this.$H, this.$m, true),
       A: meridiemFunc(this.$H, this.$m, false),
-      m: String(this.$m),
+      m: this.$m,
       mm: Utils.s(this.$m, 2, '0'),
-      s: String(this.$s),
+      s: this.$s,
       ss: Utils.s(this.$s, 2, '0'),
       SSS: Utils.s(this.$ms, 3, '0'),
       Z: zoneStr // 'ZZ' logic below
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
+    return String(str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''))) // 'ZZ'
   }
 
   utcOffset() {
