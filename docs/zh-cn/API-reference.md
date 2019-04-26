@@ -259,7 +259,7 @@ dayjs().add(7, 'day');
 
 #### 减少
 
-减少时间并返回一个新的 `Dayjs()` 对象，使用方法和 `dayjs#add` 相同。
+减少时间并返回一个新的 `Dayjs()` 对象。
 
 ```js
 dayjs().subtract(value : Number, unit : String);
@@ -504,6 +504,12 @@ dayjs() instanceof dayjs // true
 `.week` 获取是第几个周
 
 插件 [`WeekOfYear`](./Plugin.md#weekofyear)
+
+### 星期
+
+`.weekday` 来获取或设置当前语言的星期
+
+plugin [`WeekDay`](./Plugin.md#weekday)
 
 ### 年中有几周 ISO
 

@@ -82,3 +82,14 @@ it('Format Week Year gggg', () => {
   const d = '2018-12-31'
   expect(dayjs(d).format('gggg')).toBe(moment(d).format('gggg'))
 })
+
+it('Skips format strings inside brackets', () => {
+  expect(dayjs().format('[Q]')).toBe('Q')
+  expect(dayjs().format('[Do]')).toBe('Do')
+  expect(dayjs().format('[gggg]')).toBe('gggg')
+  expect(dayjs().format('[wo]')).toBe('wo')
+  expect(dayjs().format('[k]')).toBe('k')
+  expect(dayjs().format('[kk]')).toBe('kk')
+  expect(dayjs().format('[X]')).toBe('X')
+  expect(dayjs().format('[x]')).toBe('x')
+})

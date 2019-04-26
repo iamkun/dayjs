@@ -20,9 +20,18 @@ const locale = {
     y: 'година',
     yy: '%d године'
   },
-  ordinal: n => `${n}.`
+  ordinal: n => `${n}.`,
+  formats: {
+    LT: 'H:mm',
+    LTS: 'H:mm:ss',
+    L: 'DD.MM.YYYY',
+    LL: 'D. MMMM YYYY',
+    LLL: 'D. MMMM YYYY H:mm',
+    LLLL: 'dddd, D. MMMM YYYY H:mm'
+  }
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
+

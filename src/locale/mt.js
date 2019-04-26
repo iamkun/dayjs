@@ -8,7 +8,30 @@ const locale = {
   weekdaysShort: 'Ħad_Tne_Tli_Erb_Ħam_Ġim_Sib'.split('_'),
   monthsShort: 'Jan_Fra_Mar_Apr_Mej_Ġun_Lul_Aww_Set_Ott_Nov_Diċ'.split('_'),
   weekdaysMin: 'Ħa_Tn_Tl_Er_Ħa_Ġi_Si'.split('_'),
-  ordinal: n => n
+  ordinal: n => n,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'DD/MM/YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd, D MMMM YYYY HH:mm'
+  },
+  relativeTime: {
+    future: 'f’ %s',
+    past: '%s ilu',
+    s: 'ftit sekondi',
+    m: 'minuta',
+    mm: '%d minuti',
+    h: 'siegħa',
+    hh: '%d siegħat',
+    d: 'ġurnata',
+    dd: '%d ġranet',
+    M: 'xahar',
+    MM: '%d xhur',
+    y: 'sena',
+    yy: '%d sni'
+  }
 }
 
 dayjs.locale(locale, null, true)

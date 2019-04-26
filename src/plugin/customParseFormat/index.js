@@ -137,7 +137,7 @@ function makeParser(format) {
         const match = regex.exec(part)
         const value = match[0]
         parser.call(time, value)
-        start += value.length
+        input = input.replace(value, '')
       }
     }
     correctHours(time)

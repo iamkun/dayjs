@@ -2,7 +2,6 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import es from '../../src/locale/es'
-import ar from '../../src/locale/ar'
 import znCn from '../../src/locale/zh-cn'
 import localizedFormat from '../../src/plugin/localizedFormat'
 
@@ -60,7 +59,7 @@ it('Uses correct English formats', () => {
   const date = new Date()
   const actualDate = dayjs(date)
   const expectedDate = moment(date);
-  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL', 'l', 'll', 'lll', 'llll'].forEach(option =>
+  ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL'].forEach(option =>
     expect(actualDate.format(option)).toBe(expectedDate.format(option)))
 })
 
@@ -68,8 +67,12 @@ it('Uses English formats in other locales as default', () => {
   const date = new Date()
   const actualDate = dayjs(date)
   const expectedDate = moment(date)
-  // todo: ar here isn't a good fix here
-  expect(actualDate.locale(ar).format('L')).toBe(expectedDate.format('L'))
+  const mockLocale = {
+    name: 'mock',
+    weekdays: Array(7).fill(' '),
+    months: Array(12).fill(' ')
+  }
+  expect(actualDate.locale(mockLocale).format('L')).toBe(expectedDate.format('L'))
 })
 
 it('Leaves the default format intact', () => {

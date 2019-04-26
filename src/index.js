@@ -243,7 +243,7 @@ class Dayjs {
     const unit = Utils.p(units)
     const instanceFactorySet = (n) => {
       const date = new Date(this.$d)
-      date.setDate(date.getDate() + (n * number))
+      date.setDate(date.getDate() + Math.round(n * number))
       return Utils.w(date, this)
     }
     if (unit === C.M) {
@@ -279,7 +279,7 @@ class Dayjs {
     const zoneStr = Utils.z(this)
     const locale = this.$locale()
     const {
-      weekdays, months
+      weekdays, months, meridiem
     } = locale
     const getShort = (arr, index, full, length) => (
       (arr && arr[index]) || full[index].substr(0, length)
@@ -287,6 +287,11 @@ class Dayjs {
     const get$H = num => (
       Utils.s(this.$H % 12 || 12, num, '0')
     )
+
+    const meridiemFunc = meridiem || ((hour, minute, isLowercase) => {
+      const m = (hour < 12 ? 'AM' : 'PM')
+      return isLowercase ? m.toLowerCase() : m
+    })
 
     const matches = {
       YY: String(this.$y).slice(-2),
@@ -305,8 +310,8 @@ class Dayjs {
       HH: Utils.s(this.$H, 2, '0'),
       h: get$H(1),
       hh: get$H(2),
-      a: this.$H < 12 ? 'am' : 'pm',
-      A: this.$H < 12 ? 'AM' : 'PM',
+      a: meridiemFunc(this.$H, this.$m, true),
+      A: meridiemFunc(this.$H, this.$m, false),
       m: String(this.$m),
       mm: Utils.s(this.$m, 2, '0'),
       s: String(this.$s),

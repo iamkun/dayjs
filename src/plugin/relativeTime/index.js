@@ -37,14 +37,15 @@ export default (o, c, d) => {
     let out
 
     for (let i = 0; i < Tl; i += 1) {
-      const t = T[i]
+      let t = T[i]
       if (t.d) {
         result = isFrom
           ? d(input).diff(instance, t.d, true)
           : instance.diff(input, t.d, true)
       }
-      const abs = Math.ceil(Math.abs(result))
+      const abs = Math.round(Math.abs(result))
       if (abs <= t.r || !t.r) {
+        if (abs === 1) t = T[i - 1] // 1 minutes -> a minute
         out = loc[t.l].replace('%d', abs)
         break
       }
