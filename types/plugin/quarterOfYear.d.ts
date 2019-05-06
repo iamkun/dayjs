@@ -1,4 +1,4 @@
-import { PluginFunc, QUnitType } from 'dayjs'
+import { PluginFunc, ConfigType, QUnitType } from 'dayjs'
 
 declare const plugin: PluginFunc
 export = plugin
@@ -6,7 +6,7 @@ export = plugin
 declare module 'dayjs' {
   interface Dayjs {
     quarter(): number
-    
+
     quarter(quarter: number): Dayjs
 
     add(value: number, unit: QUnitType): Dayjs
@@ -17,10 +17,10 @@ declare module 'dayjs' {
 
     endOf(unit: QUnitType): Dayjs
 
-    isSame(date: dayjs.ConfigType, unit?: QUnitType): Dayjs
+    isSame(date: ConfigType, unit?: QUnitType): Dayjs
 
-    isBefore(date: dayjs.ConfigType, unit?: QUnitType): Dayjs
+    isBefore(date: ConfigType, unit?: QUnitType): Dayjs
 
-    isAfter(date: dayjs.ConfigType, unit?: QUnitType): Dayjs
+    isAfter(date: ConfigType, unit?: QUnitType): Dayjs
   }
 }
