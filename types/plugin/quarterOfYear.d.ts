@@ -16,5 +16,6 @@ declare module 'dayjs' {
     startOf(unit: QUnitType): Dayjs
 
     endOf(unit: QUnitType): Dayjs
+    isSame(date: dayjs.ConfigType, unit?: QUnitType): Dayjs
   }
 }
