@@ -31,6 +31,9 @@ it('set QuarterOfYear', () => {
   const d2 = '2013-02-05T05:06:07.000'
   expect(dayjs(d2).quarter(2).format())
     .toBe(moment(d2).quarter(2).format())
+  const d3 = '2018-11-25T05:06:07.000'
+  expect(dayjs(d3).quarter(3).format())
+    .toBe(moment(d3).quarter(3).format())
 })
 
 it('add subtract quarter', () => {
