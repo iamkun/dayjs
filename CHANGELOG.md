@@ -1,3 +1,12 @@
+## [1.8.14](https://github.com/iamkun/dayjs/compare/v1.8.13...v1.8.14) (2019-05-07)
+
+
+### Bug Fixes
+
+* Fix `.format` API returns UTC offset when value is 0 bug ([b254964](https://github.com/iamkun/dayjs/commit/b254964))
+* Fix QuarterOfYear plugin bug ([#591](https://github.com/iamkun/dayjs/issues/591)) ([434f774](https://github.com/iamkun/dayjs/commit/434f774))
+* Fix UTC plugin add day DST bug ([#590](https://github.com/iamkun/dayjs/issues/590)) ([86cd839](https://github.com/iamkun/dayjs/commit/86cd839))
+
 ## [1.8.13](https://github.com/iamkun/dayjs/compare/v1.8.12...v1.8.13) (2019-04-26)
 
 
