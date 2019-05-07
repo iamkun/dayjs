@@ -98,12 +98,6 @@ it('Format Minute m mm', () => {
 })
 
 it('Format Second s ss SSS', () => {
-  // Todo: debug CI error
-  console.log(Date.now()) // eslint-disable-line no-console
-  console.log((new Date()).toString()) // eslint-disable-line no-console
-  console.log((new Date()).toLocaleString()) // eslint-disable-line no-console
-  console.log((new Date()).getTimezoneOffset()) // eslint-disable-line no-console
-  // debug
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
   expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
@@ -143,6 +137,13 @@ it('Format ddd dd MMM with short locale', () => {
     .format('MMM')).toBe(moment()
     .locale('th')
     .format('MMM'))
+})
+
+it('Format token value is 0', () => {
+  const sundayDate = '2000-01-02'
+  const sundayStr = 'd H m s'
+  expect(dayjs(sundayDate).format(sundayStr))
+    .toBe(moment(sundayDate).format(sundayStr))
 })
 
 it('Format Complex with other string - : / ', () => {

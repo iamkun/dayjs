@@ -302,25 +302,25 @@ class Dayjs {
       MMMM: months[$M] || months(this, str),
       D: this.$D,
       DD: Utils.s(this.$D, 2, '0'),
-      d: this.$W,
+      d: String(this.$W),
       dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
       ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
       dddd: weekdays[this.$W],
-      H: $H,
+      H: String($H),
       HH: Utils.s($H, 2, '0'),
       h: get$H(1),
       hh: get$H(2),
       a: meridiemFunc($H, $m, true),
       A: meridiemFunc($H, $m, false),
-      m: $m,
+      m: String($m),
       mm: Utils.s($m, 2, '0'),
-      s: this.$s,
+      s: String(this.$s),
       ss: Utils.s(this.$s, 2, '0'),
       SSS: Utils.s(this.$ms, 3, '0'),
       Z: zoneStr // 'ZZ' logic below
     }
 
-    return String(str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''))) // 'ZZ'
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
   }
 
   utcOffset() {
