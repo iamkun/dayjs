@@ -16,10 +16,12 @@ afterEach(() => {
 it('Time from X', () => {
   const T = [
     [0, 'second'], // a few seconds
+    [1, 'second'], // a few seconds
     [44, 'second'], // a few seconds
     [44.4, 'second'], // a few seconds
     [44.5, 'second'], // a minute
     [45, 'second'], // a minute
+    [1, 'minute'], // a minute
     [89, 'second'], // a minute
     [89.4, 'second'], // a minute
     [89.5, 'second'], // a minute
@@ -28,6 +30,7 @@ it('Time from X', () => {
     [44.4, 'minute'],
     [44.5, 'minute'],
     [45, 'minute'], // an hour
+    [1, 'hour'], // an hour
     [89, 'minute'], // an hour
     [89.4, 'minute'],
     [89.5, 'minute'],
@@ -36,16 +39,19 @@ it('Time from X', () => {
     [21.4, 'hour'],
     [21.5, 'hour'],
     [22, 'hour'], // a day
+    [1, 'day'], // a day
     [35, 'hour'], // a day
     [35.4, 'hour'],
     [35.5, 'hour'],
     [36, 'hour'], // 2 days
     [25, 'day'], // 25 days
     [26, 'day'], // a month
+    [1, 'month'], // a month
     [45, 'day'], // a month
     [47, 'day'], // 2 month
     [10, 'month'], // 2 month
     [11, 'month'], // a year
+    [1, 'year'], // a year
     [17, 'month'], // a year
     [18, 'month'] // 2 years
   ]

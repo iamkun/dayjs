@@ -139,6 +139,13 @@ it('Format ddd dd MMM with short locale', () => {
     .format('MMM'))
 })
 
+it('Format token value is 0', () => {
+  const sundayDate = '2000-01-02'
+  const sundayStr = 'd H m s'
+  expect(dayjs(sundayDate).format(sundayStr))
+    .toBe(moment(sundayDate).format(sundayStr))
+})
+
 it('Format Complex with other string - : / ', () => {
   const string = 'YY-M-D / HH:mm:ss'
   expect(dayjs().format(string)).toBe(moment().format(string))
