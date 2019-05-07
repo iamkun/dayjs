@@ -33,6 +33,22 @@ it('set QuarterOfYear', () => {
     .toBe(moment(d2).quarter(2).format())
 })
 
+it('set 3rd QuarterOfYear', () => {
+  const d1 = '2018-11-25'
+  expect(dayjs(d1)
+    .quarter(3)
+    .format()).toBe(moment(d1)
+    .quarter(3)
+    .format())
+
+  const d2 = '2018-03-09'
+  expect(dayjs(d2)
+    .quarter(3)
+    .format()).toBe(moment(d2)
+    .quarter(3)
+    .format())
+})
+
 it('add subtract quarter', () => {
   expect(dayjs().add(2, 'quarter').format())
     .toBe(moment().add(2, 'quarter').format())

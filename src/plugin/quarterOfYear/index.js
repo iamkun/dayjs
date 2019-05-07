@@ -4,7 +4,7 @@ export default (o, c) => {
   const proto = c.prototype
   proto.quarter = function (quarter) {
     if (!this.$utils().u(quarter)) {
-      return this.add((quarter - 1) * 3, M)
+      return this.month(((quarter - 1) * 3) + (this.month() % 3), M)
     }
     return Math.ceil((this.month() + 1) / 3)
   }
