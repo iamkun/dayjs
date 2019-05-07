@@ -242,9 +242,8 @@ class Dayjs {
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
     const instanceFactorySet = (n) => {
-      const date = new Date(this.$d)
-      date.setDate(date.getDate() + Math.round(n * number))
-      return Utils.w(date, this)
+      const d = dayjs(this)
+      return Utils.w(d.date(d.date() + Math.round(n * number)), this)
     }
     if (unit === C.M) {
       return this.set(C.M, this.$M + number)

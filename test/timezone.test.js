@@ -1,6 +1,9 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import utc from '../src/plugin/utc'
+
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -36,3 +39,18 @@ it('Diff (DST)', () => {
     expect(dayjsA.diff(dayjsB, unit, true)).toBe(momentA.diff(momentB, unit, true))
   })
 })
+
+it('UTC add day in DST', () => {
+  const testDate = '2019-03-10'
+  const dayTest = dayjs(testDate)
+    .utc()
+    .startOf('day')
+  const momentTest = moment(testDate)
+    .utc()
+    .startOf('day')
+  expect(dayTest.add(1, 'day').format())
+    .toBe(momentTest.clone().add(1, 'day').format())
+  expect(dayTest.add(2, 'day').format())
+    .toBe(momentTest.clone().add(2, 'day').format())
+})
+
