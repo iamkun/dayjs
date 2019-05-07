@@ -98,6 +98,12 @@ it('Format Minute m mm', () => {
 })
 
 it('Format Second s ss SSS', () => {
+  // Todo: debug CI error
+  console.log(Date.now()) // eslint-disable-line no-console
+  console.log((new Date()).toString()) // eslint-disable-line no-console
+  console.log((new Date()).toLocaleString()) // eslint-disable-line no-console
+  console.log((new Date()).getTimezoneOffset()) // eslint-disable-line no-console
+  // debug
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
   expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
