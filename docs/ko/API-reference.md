@@ -6,7 +6,7 @@ Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝
 
 - [API Reference](#api-reference)
   - [Parsing](#parsing)
-    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting--string-number-date-dayjs)
+    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
       - [ISO 8601 string](#iso-8601https---enwikipediaorg-wiki-iso-8601-string)
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
