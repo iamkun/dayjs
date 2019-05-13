@@ -6,7 +6,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 - [API Reference](#api-reference)
   - [Parsing](#parsing)
-    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
+    - [Constructor `dayjs(dateType?: string | number | Date | Dayjs)`](#constructor-dayjsdateType-string--number--date--dayjs)
       - [ISO 8601 string](#iso-8601-string)
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
