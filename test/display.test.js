@@ -255,7 +255,7 @@ it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
 })
 
 it('Format YYYY with leading zeros', () => {
-  const date = new Date('0001-01-01');
-  const yearFormat = 'YYYY';
-  expect(dayjs(date).format(yearFormat)).toBe(moment(date).format(yearFormat));
+  const date = new Date('0001-01-01')
+  const yearFormat = 'YYYY'
+  expect(dayjs(date).format(yearFormat)).toBe(moment(date).format(yearFormat))
 })
