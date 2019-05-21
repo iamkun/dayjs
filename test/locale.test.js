@@ -110,4 +110,14 @@ describe('Instance locale inheritance', () => {
     expect(esDayjs.add(1, 'minute').format(format))
       .toBe('sábado 28, Abril')
   })
+
+  it('dayjs.locale() returns locale name', () => {
+    dayjs.locale(es)
+    moment.locale('es')
+    expect(dayjs.locale()).toBe(moment.locale())
+
+    dayjs.locale('en')
+    moment.locale('en')
+    expect(dayjs.locale()).toBe(moment.locale())
+  })
 })
