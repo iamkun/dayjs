@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import localeData from '../../src/plugin/localeData'
+import '../../src/locale/zh-cn'
 
 dayjs.extend(localeData)
 
@@ -13,7 +14,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('localeData', () => {
+it('instance localeData', () => {
   const d = dayjs()
   const m = moment()
   const dayjsLocaleData = dayjs().localeData()
@@ -23,4 +24,17 @@ it('localeData', () => {
   expect(dayjsLocaleData.monthsShort(d)).toBe(momentLocaleData.monthsShort(m))
   expect(dayjsLocaleData.weekdaysMin(d)).toBe(momentLocaleData.weekdaysMin(m))
   expect(dayjsLocaleData.weekdaysShort(d)).toBe(momentLocaleData.weekdaysShort(m))
+})
+
+it('global localeData', () => {
+  dayjs.locale('zh-cn')
+  moment.locale('zh-cn')
+  let dayjsLocaleData = dayjs.localeData()
+  let momentLocaleData = moment.localeData()
+  expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
+  dayjs.locale('en')
+  moment.locale('en')
+  dayjsLocaleData = dayjs.localeData()
+  momentLocaleData = moment.localeData()
+  expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
 })

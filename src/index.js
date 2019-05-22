@@ -10,7 +10,7 @@ const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-def
 
 const parseLocale = (preset, object, isLocal) => {
   let l
-  if (!preset) return null
+  if (!preset) return L
   if (typeof preset === 'string') {
     if (Ls[preset]) {
       l = preset
@@ -66,7 +66,7 @@ const parseDate = (cfg) => {
 
 class Dayjs {
   constructor(cfg) {
-    this.$L = this.$L || parseLocale(cfg.locale, null, true) || L
+    this.$L = this.$L || parseLocale(cfg.locale, null, true)
     this.parse(cfg) // for plugin
   }
 

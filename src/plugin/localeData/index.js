@@ -1,4 +1,4 @@
-export default (o, c) => { // locale needed later
+export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
   const localeData = function () {
     return {
@@ -11,6 +11,13 @@ export default (o, c) => { // locale needed later
   }
   proto.localeData = function () {
     return localeData.bind(this)()
+  }
+
+  dayjs.localeData = () => {
+    const localeObject = dayjs.Ls[dayjs.locale()]
+    return {
+      firstDayOfWeek: () => localeObject.weekStart || 0
+    }
   }
 }
 
