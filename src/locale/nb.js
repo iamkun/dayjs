@@ -4,7 +4,7 @@ const locale = {
   name: 'nb',
   weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
   weekdaysShort: 'søn_man_tir_ons_tor_fre_lør'.split('_'),
-  weekdaysMin: 'sø_ma_ti_on_to_fr_lø'.split('_'),  
+  weekdaysMin: 'sø_ma_ti_on_to_fr_lø'.split('_'),
   months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
   monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
   ordinal: n => `${n}.`,
