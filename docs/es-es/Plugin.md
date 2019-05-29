@@ -287,9 +287,9 @@ dayjs('2018-06-27').week(5) // set week
 - WeekDay adds `.weekday()` API to get or set locale aware day of the week.
 
 ```javascript
-import weekDay from 'dayjs/plugin/weekDay'
+import weekday from 'dayjs/plugin/weekday'
 
-dayjs.extend(weekDay)
+dayjs.extend(weekday)
 // when Monday is the first day of the week
 dayjs().weekday(-7) // last Monday
 dayjs().weekday(7) // next Monday
