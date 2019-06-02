@@ -1,6 +1,7 @@
 import * as C from './constant'
 import U from './utils'
 import en from './locale/en'
+import polyfillLoader from './plugin/timezones/polyfillLoader'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
@@ -18,6 +19,9 @@ const parseLocale = (preset, object, isLocal) => {
     if (object) {
       Ls[preset] = object
       l = preset
+    } else if (!Ls[preset]) {
+      l = preset // using intl api
+      Ls[preset] = { name: preset }
     }
   } else {
     const { name } = preset
@@ -271,22 +275,119 @@ class Dayjs {
     return this.add(number * -1, string)
   }
 
-  format(formatStr) {
+  format(formatStr, options = {}) {
     if (!this.isValid()) return C.INVALID_DATE_STRING
-
-    const str = formatStr || C.FORMAT_DEFAULT
-    const zoneStr = Utils.z(this)
     const locale = this.$locale()
-    const { $H, $m, $M } = this
+    const { name } = locale
+    const isIntl = Object.keys(locale).length === 1
+    const str = formatStr || (!isIntl && C.FORMAT_DEFAULT) || ''
+    if (isIntl) {
+      polyfillLoader()
+    }
+    const zoneStr = Utils.z(this)
     const {
-      weekdays, months, meridiem
-    } = locale
+      $H, $m, $M, $W, $ms
+    } = this
     const getShort = (arr, index, full, length) => (
       (arr && (arr[index] || arr(this, str))) || full[index].substr(0, length)
     )
     const get$H = num => (
       Utils.s($H % 12 || 12, num, '0')
     )
+
+    if (isIntl) { // using intl api from browser
+      const a = { // value abreviations
+        n: 'numeric',
+        t: '2-digit',
+        s: 'short',
+        l: 'long',
+        na: 'narrow'
+      }
+
+      const c = field => // create object for options
+        value => ({ [field]: value })
+
+      const h12 = c('hour12')
+      const wd = c('weekday')
+      const y = c('year')
+      const m = c('month')
+      const d = c('day')
+      const h = c('hour')
+      const mi = c('minute')
+      const s = c('second')
+      const matches = {
+        YY: y(a.t),
+        YYYY: y(a.n),
+        M: m(a.n),
+        MM: m(a.t),
+        MMM: m(a.s),
+        MMMM: m(a.l),
+        D: d(a.n),
+        DD: d(a.t),
+        d: wd(a.s),
+        dd: wd(a.s),
+        ddd: wd(a.s),
+        dddd: wd(a.l),
+        H: [h(a.n), h12(false)],
+        HH: [h(a.t), h12(false)],
+        h: [h(a.n), h12(true)],
+        hh: [h(a.t), h12(true)],
+        a: { a: true }, // td
+        A: { A: true }, // td
+        m: mi(a.n),
+        mm: mi(a.t),
+        s: s(a.n),
+        ss: s(a.t),
+        SSS: { SSS: true }, // td
+        Z: { Z: zoneStr }, // 'ZZ' logic below
+        ZZ: { ZZ: zoneStr.replace(':', '') }
+      }
+      const keys = {}
+      const opt = (str.match(C.REGEX_FORMAT) || []).reduce((ab, x) => {
+        Object.assign(keys, { [x]: true })
+        if (Array.isArray(x)) { // h and H
+          return x.reduce((az, xz) => Object.assign(az, matches[xz]), ab)
+        }
+        return Object.assign(ab, matches[x])
+      }, {})
+      Object.assign(opt, options)
+      const stringified = Intl.DateTimeFormat(name, opt).formatToParts(this.$d).map((x) => {
+        switch (x.type) {
+          case 'weekday':
+            if (keys.d) {
+              return String($W)
+            } else if (opt.dd) {
+              return x.value.substring(0, 2)
+            }
+            break
+          case 'dayPeriod':
+            if (keys.a) {
+              return x.value.toLocaleLowerCase(name)
+            } else if (keys.A) {
+              return x.value.toLocaleUpperCase(name)
+            }
+            break
+          case 'second':
+            if (keys.SSS) {
+              return Utils.s($ms, 3, '0')
+            }
+            break
+          default:
+            return x.value
+        }
+        return x.value
+      }).join('')
+      if (opt.Z) {
+        return stringified + opt.Z
+      } else if (opt.ZZ) {
+        return stringified + opt.ZZ
+      }
+      return stringified
+    }
+    // using locale files
+    const {
+      weekdays, months, meridiem
+    } = locale
 
     const meridiemFunc = meridiem || ((hour, minute, isLowercase) => {
       const m = (hour < 12 ? 'AM' : 'PM')
@@ -319,7 +420,6 @@ class Dayjs {
       SSS: Utils.s(this.$ms, 3, '0'),
       Z: zoneStr // 'ZZ' logic below
     }
-
     return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
   }
 

@@ -21,3 +21,5 @@ index.d.ts
 
 #dev
 demo.js
+
+\.vscode/launch\.json

@@ -514,3 +514,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` to display calendar time
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### Timezones
+
+`.toUTC` `.toZone` to convert to and form timezones
+
+plugin [`Timezones`](./Plugin.md#timezones)

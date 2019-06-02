@@ -438,6 +438,18 @@ dayjs().calendar(null, {
 })
 ```
 
+### Timezones
+
+- Timezones adds `.toZone` `.toUTC` to convert dates to and from UTC timezones or local ones. If Intl is unsupported then a polyfill will be loaded synchronously. Nodejs doesn't have to support intl localizations, by default it loads system [ICU](https://nodejs.org/api/intl.html), Intl feature detection doesn't check if ICU is available.
+
+```javascript
+import timezones from 'dayjs/plugin/timezones'
+
+dayjs.extend(timezones)
+//if in New York, checking Almaty's time
+dayjs('2008-01-01').toUTC("America/New_York").toDate().toZone("Asia/Almaty")
+```
+
 ## Customize
 
 You could build your own Day.js plugin to meet different needs.

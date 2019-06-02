@@ -95,5 +95,8 @@
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "date-fns": "^2.0.0-alpha.27",
+    "date-fns-tz": "^1.0.7"
+  }
 }
