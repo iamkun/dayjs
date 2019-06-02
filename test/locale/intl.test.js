@@ -38,7 +38,7 @@ describe('intl api from browser without loading locale files', () => {
   })
   it('will run with default locale of en defined not by intl, therefore ignore intl options', () => {
     const dayjsBu = dayjs(new Date(1559387786502)) // 2019-06-01T17:16:26+06:00
-    expect(dayjsBu.format('', { timezone: 'UTC', hour: 'numeric' })).toEqual('2019-06-01T17:16:26+06:00')
+    expect(dayjsBu.format('', { timezone: 'UTC', hour: 'numeric' })).toEqual(dayjsBu.format())
   })
   // can't be bothered to setup plugin, can likely be implemented by changing timezone plugin
   it.skip('will use correct weekday, changing locale actually doesnt have bearing on what day week starts', () => {
