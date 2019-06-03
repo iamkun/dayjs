@@ -74,6 +74,8 @@
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "cross-env": "^5.1.6",
+    "date-fns": "^2.0.0-alpha.27",
+    "date-fns-tz": "^1.0.7",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
@@ -95,8 +97,5 @@
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
   },
-  "dependencies": {
-    "date-fns": "^2.0.0-alpha.27",
-    "date-fns-tz": "^1.0.7"
-  }
+  "dependencies": {}
 }
