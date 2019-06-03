@@ -36,4 +36,19 @@ describe('timezone plugin', () => {
     expect(a.format()).toEqual('2013-11-18T05:55:00+00:00') // 2013-11-18T19:55:00+08:00
     expect(b.format()).toEqual('2013-11-18T17:55:00+06:00') // 2013-11-18T06:55:00-05:00
   })
+  it.only('respects dst', () => {
+    // skips an hour on b
+    const a = dayjs.tz('2012-03-11 12:00:00', 'Asia/Almaty').tz('America/New_York').format() // 2012-03-11T03:00:00-04:00
+    const b = dayjs.tz('2012-03-11 13:00:00', 'Asia/Almaty').tz('America/New_York').format() // 2012-03-11T03:00:00-04:00
+    expect(a).toEqual('2012-03-11T01:00:00-05:00')
+    expect(b).toEqual('2012-03-11T03:00:00-04:00')
+    const c = dayjs.tz('2012-03-11 1:00:00', 'America/New_York').format() // 2012-03-11T03:00:00-04:00
+    const d = dayjs.tz('2012-03-11 2:00:00', 'America/New_York').format() // 2012-03-11T03:00:00-04:00
+    expect(c).toEqual('2012-03-11T01:00:00-05:00')
+    expect(d).toEqual('2012-03-11T03:00:00-04:00')
+    const e = dayjs.tz('2019-03-29 1:00:00', 'Asia/Jerusalem').format() // 2012-03-11T03:00:00-04:00
+    const f = dayjs.tz('2019-03-29 2:00:00', 'Asia/Jerusalem').format() // 2012-03-11T03:00:00-04:00
+    expect(e).toEqual('2019-03-29T01:00:00+02:00')
+    expect(f).toEqual('2019-03-29T03:00:00+03:00')
+  })
 })
