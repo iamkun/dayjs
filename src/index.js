@@ -36,13 +36,26 @@ const dayjs = (date, c, pl) => {
   if (isDayjs(date)) {
     return date.clone()
   }
-  // eslint-disable-next-line no-nested-ternary
-  const cfg = c ? (typeof c === 'string' ? { format: c, pl } : c) : {}
+  let cfg
+  if (c) {
+    if (typeof c === 'string') {
+      cfg = { format: c, pl }
+    } else {
+      cfg = c
+    }
+  } else {
+    cfg = {}
+  }
   cfg.date = date
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L, utc: instance.$u })
+const wrapper = (date, instance) => dayjs(date, {
+  locale: instance.$L,
+  utc: instance.$u,
+  timeZone: instance.timeZone,
+  tzOffsetModifier: instance.$tzOffsetModifier
+})
 
 const Utils = U // for plugin use
 Utils.l = parseLocale
@@ -76,6 +89,9 @@ class Dayjs {
 
   parse(cfg) {
     this.$d = parseDate(cfg)
+    this.timeZone = cfg.timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone
+    // how much offset changed after tz change
+    this.$tzOffsetModifier = cfg.tzOffsetModifier ? cfg.tzOffsetModifier : 0
     this.init()
   }
 
@@ -426,7 +442,7 @@ class Dayjs {
   utcOffset() {
     // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
     // https://github.com/moment/moment/pull/1871
-    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
+    return -Math.round((this.$d.getTimezoneOffset() + this.$tzOffsetModifier) / 15) * 15
   }
 
   diff(input, units, float) {
@@ -452,6 +468,12 @@ class Dayjs {
 
   daysInMonth() {
     return this.endOf(C.M).$D
+  }
+
+  utc() {
+    // const converted = this.tz('Etc/UTC')
+    const a = this.tz('Etc/UTC')
+    return a
   }
 
   $locale() { // get locale object
