@@ -17,7 +17,7 @@ export default (o, c, d) => {
     // for getTimezoneOffset in minutes used for output thats rounded anyway
     const iDifference = (parsed - zoned) / 1000 / 60
     const result = new Date(new Date(Date.parse(parsed) + (iDifference * 1000 * 60)).toLocaleString('en-US', { timeZone: tz }))
-    const difference = (iDifference + (parsed - result)) / 1000 / 60
+    const difference = iDifference + ((parsed - result) / 1000 / 60)
     return d(result, { tzOffsetModifier: difference, timeZone: tz })
   }
   proto.tz = function (tz) {
