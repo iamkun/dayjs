@@ -1,6 +1,9 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
+import tz from '../../src/plugin/timezones'
+
+dayjs.extend(tz) // use plugin
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -45,5 +48,10 @@ describe('intl api from browser without loading locale files', () => {
     const dayjsR = dayjs(new Date(1559387786502)).locale('en-US')
     const momentR = moment(new Date(1559387786502)).locale('en-US')
     expect(dayjsR.startOf('week').toDate()).toEqual(momentR.startOf('week').toDate())
+  })
+  it.only('will display the right timezone', () => {
+    const dayjsA = dayjs.tz(new Date(1559387786502), 'Asia/Taipei').locale('en-US')
+    expect(dayjsA.format('', {})).toEqual('6/1/2019')
+    expect(dayjsA.format('', { timeZoneName: 'long' })).toEqual('6/1/2019, Taipei Standard Time')
   })
 })

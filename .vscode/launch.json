@@ -9,8 +9,8 @@
             "name": "vscode-jest-tests",
             "request": "launch",
             "args": [
-                // "/test/locale/intl.test.js",
-                "/test/plugin/timezones.test.js",
+                "/test/locale/intl.test.js",
+                // "/test/plugin/timezones.test.js",
                 "--runInBand",
                 "--watch", 
                 // "--icu-data-dir=./node_modules/full-icu"

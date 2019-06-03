@@ -355,10 +355,10 @@ class Dayjs {
         s: s(a.n),
         ss: s(a.t),
         SSS: { SSS: true }, // td
-        Z: { Z: zoneStr }, // 'ZZ' logic below
+        Z: { Z: zoneStr },
         ZZ: { ZZ: zoneStr.replace(':', '') }
       }
-      const keys = {}
+      const keys = {} // used to determine which options are passed
       const opt = (str.match(C.REGEX_FORMAT) || []).reduce((ab, x) => {
         Object.assign(keys, { [x]: true })
         if (Array.isArray(x)) { // h and H
@@ -366,7 +366,7 @@ class Dayjs {
         }
         return Object.assign(ab, matches[x])
       }, {})
-      Object.assign(opt, options)
+      Object.assign(opt, options, { timeZone: this.timeZone })
       const stringified = Intl.DateTimeFormat(name, opt).formatToParts(this.$d).map((x) => {
         switch (x.type) {
           case 'weekday':
