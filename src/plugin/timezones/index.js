@@ -12,10 +12,25 @@ export default (o, c, d) => {
   }
   d.tz = function (iDate, tz) {
     // DST sensitive
-    const parsed = d(iDate).toDate()
+    const REGEX_OFFSET = /((-|\+)\d\d:\d\d|\.\d+|Z)+$/
+    const offset = typeof iDate === 'string' && iDate.match(REGEX_OFFSET)
+    const initialized = d(offset ? iDate.slice(0, -6) : iDate)
+    const parsed = initialized.toDate()
     const zoned = new Date(parsed.toLocaleString('en-US', { timeZone: tz }))
     // for getTimezoneOffset in minutes used for output thats rounded anyway
-    const iDifference = (parsed - zoned) / 1000 / 60
+    let iDifference = (parsed - zoned) / 1000 / 60
+    // accepts offsets for when backwards hour of dst is specified, offset +5 to +4 change
+    if (offset) {
+      const minutes = iDifference + parsed.getTimezoneOffset()
+      const hours = minutes / 60
+      if (hours > 9 ? `${hours}` : `0${hours}` !== offset[0].slice(1, 3)) {
+        const specOffset = Number(offset[0].slice(1, 3))
+        // const specDiff = hours - specOffset
+        // const ini = iDifference * 1
+        iDifference += ((specOffset - hours) * 60)
+        // const b = 0
+      } // should decrease
+    }
     const result = new Date(new Date(Date.parse(parsed) + (iDifference * 1000 * 60)).toLocaleString('en-US', { timeZone: tz }))
     const difference = iDifference + ((parsed - result) / 1000 / 60)
     return d(result, { tzOffsetModifier: difference, timeZone: tz })

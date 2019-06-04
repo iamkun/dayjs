@@ -49,9 +49,15 @@ describe('intl api from browser without loading locale files', () => {
     const momentR = moment(new Date(1559387786502)).locale('en-US')
     expect(dayjsR.startOf('week').toDate()).toEqual(momentR.startOf('week').toDate())
   })
-  it.only('will display the right timezone', () => {
+  it('will display the right timezone', () => {
     const dayjsA = dayjs.tz(new Date(1559387786502), 'Asia/Taipei').locale('en-US')
     expect(dayjsA.format('', {})).toEqual('6/1/2019')
     expect(dayjsA.format('', { timeZoneName: 'long' })).toEqual('6/1/2019, Taipei Standard Time')
+  })
+  it.only('will display the right timezone on backwards of DST', () => {
+    const a = dayjs.tz('2012-11-04 01:59:59', 'America/New_York').locale('en-US') // 2012-11-04T01:59:59-04:00
+    const b = dayjs.tz('2012-11-04 02:00:00', 'America/New_York').locale('en-US') // 2012-11-04T02:00:00-05:00
+    expect(a.format('', { timeZoneName: 'long' })).toEqual('2012-11-04T01:59:59-04:00')
+    expect(b.format('', { timeZoneName: 'long' })).toEqual('2012-11-04T01:00:00-05:00')
   })
 })
