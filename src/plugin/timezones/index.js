@@ -3,18 +3,11 @@ import polyfill from './polyfillLoader'
 export default (o, c, d) => {
   polyfill()
   const proto = c.prototype
-  // constructor
-  d.tz = function (date, tz) {
-    const parsed = d(date).toDate()
-    const zoned = new Date(parsed.toLocaleString('en', { timeZone: tz }))
-    const difference = (parsed - zoned) / 1000 / 60
-    return d(date, { tzOffsetModifier: difference, timeZone: tz })
-  }
   d.tz = function (iDate, tz) {
     // DST sensitive
     const REGEX_OFFSET = /((-|\+)\d\d:\d\d|\.\d+|Z)+$/
     const offset = typeof iDate === 'string' && iDate.match(REGEX_OFFSET)
-    const initialized = d(offset ? iDate.slice(0, -6) : iDate)
+    const initialized = d(offset ? iDate.slice(0, -6) : iDate) // cut off point, where nontz is used
     const parsed = initialized.toDate()
     const zoned = new Date(parsed.toLocaleString('en-US', { timeZone: tz }))
     // for getTimezoneOffset in minutes used for output thats rounded anyway
@@ -31,9 +24,22 @@ export default (o, c, d) => {
         // const b = 0
       } // should decrease
     }
+    // dst tripped during tz check as time is added if positive tz change
+    if (Math.sign(iDifference) === -1) {
+      const nDifference = new Date(initialized.add(iDifference, 'minutes').toDate().toLocaleString('en-US', { timeZone: tz }))
+      if (nDifference < parsed) {
+        iDifference += 60
+      }
+    }
     const result = new Date(new Date(Date.parse(parsed) + (iDifference * 1000 * 60)).toLocaleString('en-US', { timeZone: tz }))
     const difference = iDifference + ((parsed - result) / 1000 / 60)
-    return d(result, { tzOffsetModifier: difference, timeZone: tz })
+    const packed = d(result, { tzOffsetModifier: difference, timeZone: tz })
+    // determining tz offset triggers dst
+    // if (Math.sign(iDifference) === -1 && iDifference !== difference){
+    //   return packed.add(1, 'hour')
+    // } else {
+    return packed
+    // }
   }
   proto.tz = function (tz) {
     const date = new Date(Date.parse(this.toDate()) + (this.$tzOffsetModifier * 1000 * 60))

@@ -35,28 +35,25 @@ describe('timezone plugin', () => {
     expect(a.format()).toEqual('2013-11-18T05:55:00+00:00') // 2013-11-18T19:55:00+08:00
     expect(b.format()).toEqual('2013-11-18T17:55:00+06:00') // 2013-11-18T06:55:00-05:00
   })
-  it.only('respects forward dst', () => {
+  it('respects forward dst', () => {
     // skips an hour on b
-    // const a = dayjs.tz('2012-03-11 12:00:00', 'Asia/Almaty').tz('America/New_York').format()
-    // const b = dayjs.tz('2012-03-11 13:00:00', 'Asia/Almaty').tz('America/New_York').format()
-    // expect(a).toEqual('2012-03-11T01:00:00-05:00')
-    // expect(b).toEqual('2012-03-11T03:00:00-04:00')
-    // const c = dayjs.tz('2012-03-11 1:00:00', 'America/New_York').format()
-    // const d = dayjs.tz('2012-03-11 2:00:00', 'America/New_York').format()
-    // expect(c).toEqual('2012-03-11T01:00:00-05:00')
-    // expect(d).toEqual('2012-03-11T03:00:00-04:00')
-    // const e = dayjs.tz('2019-03-29 1:00:00', 'Asia/Jerusalem').format()
-    // const f = dayjs.tz('2019-03-29 2:00:00', 'Asia/Jerusalem').format()
-    // expect(e).toEqual('2019-03-29T01:00:00+02:00')
-    // expect(f).toEqual('2019-03-29T03:00:00+03:00')
+    const a = dayjs.tz('2012-03-11 12:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    const b = dayjs.tz('2012-03-11 13:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    expect(a).toEqual('2012-03-11T01:00:00-05:00')
+    expect(b).toEqual('2012-03-11T03:00:00-04:00')
+    const c = dayjs.tz('2012-03-11 1:00:00', 'America/New_York').format()
+    const d = dayjs.tz('2012-03-11 2:00:00', 'America/New_York').format()
+    expect(c).toEqual('2012-03-11T01:00:00-05:00')
+    expect(d).toEqual('2012-03-11T03:00:00-04:00')
+    const e = dayjs.tz('2019-03-29 1:00:00', 'Asia/Jerusalem').format()
+    const f = dayjs.tz('2019-03-29 2:00:00', 'Asia/Jerusalem').format()
+    expect(e).toEqual('2019-03-29T01:00:00+02:00')
+    expect(f).toEqual('2019-03-29T03:00:00+03:00')
+
     // the other extremety in case the math is bad, positive tz, and south hemisphere
-    // const g = dayjs.tz('1991-10-27 01:00:00', "Australia/Brisbane")
-    // console.log(
-    //   new Date('1991-10-26 20:00:00').toLocaleString('en', { timeZone: 'Australia/Brisbane' }),
-    //   new Date('1991-10-26 21:00:00').toLocaleString('en', { timeZone: 'Australia/Brisbane' }),
-    // )
+    const g = dayjs.tz('1991-10-27 01:00:00', 'Australia/Brisbane')
     const h = dayjs.tz('1991-10-27 02:00:00', 'Australia/Brisbane')
-    // expect(g.format()).toEqual('1991-10-27T01:00:00+10:00')
+    expect(g.format()).toEqual('1991-10-27T01:00:00+10:00')
     expect(h.format()).toEqual('1991-10-27T03:00:00+11:00')
   })
   it('respects backward dst', () => {
@@ -74,6 +71,12 @@ describe('timezone plugin', () => {
     const f = dayjs.tz('1991-03-03 02:00:00', 'Australia/Brisbane')
     expect(e.format()).toEqual('1991-03-03T02:59:59+11:00')
     expect(f.format()).toEqual('1991-03-03T02:00:00+10:00')
+  })
+  it('will create backwards dst specific duplicated hour', () => {
+    const c = dayjs.tz('2012-11-04 01:00:00-04:00', 'America/New_York')
+    const d = dayjs.tz('2012-11-04 01:00:00-05:00', 'America/New_York')
+    expect(c.format()).toEqual('2012-11-04T01:00:00-04:00')
+    expect(d.format()).toEqual('2012-11-04T01:00:00-05:00')
     const g = dayjs.tz('1991-03-03 02:00:00+11:00', 'Australia/Brisbane')
     const h = dayjs.tz('1991-03-03 02:00:00+10:00', 'Australia/Brisbane')
     expect(g.format()).toEqual('1991-03-03T02:00:00+11:00')
