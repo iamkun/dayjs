@@ -95,11 +95,11 @@ describe('timezone plugin', () => {
     expect(dayjs.tz('2012-5-1', 'America/New_York').zoneName()).toEqual('Eastern Daylight Time') // PST
   })
   it.skip('works in local time zone in past by not changing to utc when toDate() used', () => {
-    expect(dayjs('1991-03-02 20:00:00').toDate().toISOString()).not.toEqual('1991-03-02T14:00:00.000Z')
+    expect(dayjs('1991-03-02 20:00:00').toDate().toISOString().slice(-4)).not.toEqual('000Z')
     expect(dayjs.tz(
       '1991-03-02 20:00:00',
       Intl.DateTimeFormat().resolvedOptions().timeZone
-    ).toDate().toISOString()).not.toEqual('1991-03-02T14:00:00.000Z')
+    ).toDate().toISOString().slice(-4)).not.toEqual('000Z')
   })
   it.skip('changes default timezone and uses utc otherwise', () => {
     // should be utc, default of default
