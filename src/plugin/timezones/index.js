@@ -51,4 +51,16 @@ export default (o, c, d) => {
     clone.timeZone = tz
     return clone
   }
+  d.tz.guess = function () {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
+  function subTz(date) {
+    return date.slice(date.indexOf(',') + 2)
+  }
+  proto.zoneAbbr = function () {
+    return subTz(this.clone().locale('en-US').format('', { timeZoneName: 'short' }))
+  }
+  proto.zoneName = function () {
+    return subTz(this.clone().locale('en-US').format('', { timeZoneName: 'long' }))
+  }
 }
