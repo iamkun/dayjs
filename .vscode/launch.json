@@ -6,11 +6,28 @@
     "configurations": [
         {
             "type": "node",
-            "name": "vscode-jest-tests",
+            "name": "tz",
             "request": "launch",
             "args": [
                 // "/test/locale/intl.test.js",
                 "/test/plugin/timezones.test.js",
+                "--runInBand",
+                "--watch", 
+                // "--icu-data-dir=./node_modules/full-icu"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+        },
+        {
+            "type": "node",
+            "name": "intl",
+            "request": "launch",
+            "args": [
+                "/test/locale/intl.test.js",
+                // "/test/plugin/timezones.test.js",
                 "--runInBand",
                 "--watch", 
                 // "--icu-data-dir=./node_modules/full-icu"

@@ -76,19 +76,15 @@ describe('timezone plugin', () => {
     expect(e.format()).toEqual('1991-03-03T02:59:59+11:00')
     expect(f.format()).toEqual('1991-03-03T02:00:00+10:00')
   })
-  it.only('will create backwards dst specific duplicated hour', () => {
-    // const c = dayjs.tz('2012-11-04 01:00:00-04:00', 'America/New_York')
-    // const d = dayjs.tz('2012-11-04 01:00:00-05:00', 'America/New_York')
-    // expect(c.format()).toEqual('2012-11-04T01:00:00-04:00')
-    // expect(d.format()).toEqual('2012-11-04T01:00:00-05:00')
-    // console.log(
-    //   new Date('1991-03-02 20:00:00').toLocaleString('en', { timeZone: 'Australia/Brisbane' }),
-    //   new Date('1991-03-02 22:00:00').toLocaleString('en', { timeZone: 'Australia/Brisbane' }),
-    // )
+  it('will create backwards dst specific duplicated hour', () => {
+    const c = dayjs.tz('2012-11-04 01:00:00-04:00', 'America/New_York')
+    const d = dayjs.tz('2012-11-04 01:00:00-05:00', 'America/New_York')
+    expect(c.format()).toEqual('2012-11-04T01:00:00-04:00')
+    expect(d.format()).toEqual('2012-11-04T01:00:00-05:00')
     const g = dayjs.tz('1991-03-03 02:00:00+11:00', 'Australia/Brisbane')
-    // const h = dayjs.tz('1991-03-03 02:00:00+10:00', 'Australia/Brisbane')
+    const h = dayjs.tz('1991-03-03 02:00:00+10:00', 'Australia/Brisbane')
     expect(g.format()).toEqual('1991-03-03T02:00:00+11:00')
-    // expect(h.format()).toEqual('1991-03-03T02:00:00+10:00')
+    expect(h.format()).toEqual('1991-03-03T02:00:00+10:00')
   })
   it('gives zone info', () => {
     expect(dayjs.tz('2012-1-1', 'America/New_York').zoneAbbr()).toEqual('EST') // EST

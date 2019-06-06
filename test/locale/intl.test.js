@@ -44,7 +44,7 @@ describe('intl api from browser without loading locale files', () => {
     expect(dayjsBu.format('', { timezone: 'UTC', hour: 'numeric' })).toEqual(dayjsBu.format())
   })
   // can't be bothered to setup plugin, can likely be implemented by changing timezone plugin
-  it.skip('will use correct weekday, changing locale actually doesnt have bearing on what day week starts', () => {
+  it.skip('will use correct weekday, changing locale actually doesnt have bearing on what day week starts; failing', () => {
     const dayjsR = dayjs(new Date(1559387786502)).locale('en-US')
     const momentR = moment(new Date(1559387786502)).locale('en-US')
     expect(dayjsR.startOf('week').toDate()).toEqual(momentR.startOf('week').toDate())
@@ -54,10 +54,15 @@ describe('intl api from browser without loading locale files', () => {
     expect(dayjsA.format('', {})).toEqual('6/1/2019')
     expect(dayjsA.format('', { timeZoneName: 'long' })).toEqual('6/1/2019, Taipei Standard Time')
   })
-  it.only('will display the right timezone on backwards of DST', () => {
-    const a = dayjs.tz('2012-11-04 01:59:59', 'America/New_York').locale('en-US') // 2012-11-04T01:59:59-04:00
-    const b = dayjs.tz('2012-11-04 02:00:00', 'America/New_York').locale('en-US') // 2012-11-04T02:00:00-05:00
-    expect(a.format('', { timeZoneName: 'long' })).toEqual('2012-11-04T01:59:59-04:00')
-    expect(b.format('', { timeZoneName: 'long' })).toEqual('2012-11-04T01:00:00-05:00')
+  it('will display the right timezone', () => {
+    const dayjsA = dayjs.tz(new Date(1559387786502), 'Asia/Taipei').locale('en-US')
+    expect(dayjsA.format('', {})).toEqual('6/1/2019')
+    expect(dayjsA.format('', { timeZoneName: 'long' })).toEqual('6/1/2019, Taipei Standard Time')
+  })
+  it('will display the right timezone on backwards of DST', () => {
+    const a = dayjs.tz('2012-11-04 01:00:00', 'America/New_York') // 2012-11-04T01:59:59-04:00
+    const b = dayjs.tz('2012-11-04 02:00:00', 'America/New_York') // 2012-11-04T02:00:00-05:00
+    expect(a.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('1 AM Eastern Daylight Time')
+    expect(b.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('1 AM Eastern Standard Time')
   })
 })

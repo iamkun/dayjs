@@ -360,14 +360,21 @@ class Dayjs {
       }
       const keys = {} // used to determine which options are passed
       const opt = (str.match(C.REGEX_FORMAT) || []).reduce((ab, x) => {
-        Object.assign(keys, { [x]: true })
         if (Array.isArray(x)) { // h and H
-          return x.reduce((az, xz) => Object.assign(az, matches[xz]), ab)
+          const opts = x.reduce((az, xz) => Object.assign(az, matches[xz]), ab)
+          Object.assign(keys, opts)
+          return opts
         }
+        Object.assign(keys, { [x]: true })
         return Object.assign(ab, matches[x])
       }, {})
-      Object.assign(opt, options, { timeZone: this.timeZone })
-      const stringified = Intl.DateTimeFormat(name, opt).formatToParts(this.$d).map((x) => {
+      Object.assign(opt, options)
+      let dateToUse = this.$d
+      if (options.timeZoneName) {
+        dateToUse = this.add(this.$tzOffsetModifier, 'minute').toDate()
+        Object.assign(opt, { timeZone: this.timeZone })
+      }
+      const stringified = Intl.DateTimeFormat(name, opt).formatToParts(dateToUse).map((x) => {
         switch (x.type) {
           case 'weekday':
             if (keys.d) {
