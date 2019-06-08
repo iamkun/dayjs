@@ -12,7 +12,7 @@ export default (o, c, d) => {
     const zoned = new Date(parsed.toLocaleString('en-US', { timeZone: tz }))
     // for getTimezoneOffset in minutes used for output thats rounded anyway
     let iDifference = (parsed - zoned) / 1000 / 60
-    // dst tripped during tz check as time is added if positive tz change
+    // accepts offsets for when backwards hour of dst is specified, offset +5 to +4 change
     if (offset) {
       const minutes = iDifference + parsed.getTimezoneOffset()
       const hours = minutes / 60
@@ -21,11 +21,14 @@ export default (o, c, d) => {
         iDifference += ((specOffset - Math.abs(hours)) * 60 * Math.sign(iDifference))
       }
     }
-    // accepts offsets for when backwards hour of dst is specified, offset +5 to +4 change
+    // dst tripped during tz check as time is added if positive tz change
+    // const old = iDifference + 0
     if (Math.sign(iDifference) === -1) {
       const nDifference = new Date(initialized.add(iDifference, 'minutes').toDate().toLocaleString('en-US', { timeZone: tz }))
       if (nDifference < parsed) {
         iDifference += 60
+      } else {
+        iDifference -= 60
       }
     }
     const result = new Date(new Date(Date.parse(parsed) + (iDifference * 1000 * 60)).toLocaleString('en-US', { timeZone: tz }))
