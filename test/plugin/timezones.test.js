@@ -1,9 +1,18 @@
 import MockDate from 'mockdate'
 import { utcToZonedTime } from 'date-fns-tz'
+import moment from 'moment-timezone'
 import dayjs from '../../src'
 import tz from '../../src/plugin/timezones'
+import './timezonesData.test.js'
 
 dayjs.extend(tz) // use plugin
+
+function momentTzParity(date, TZ) {
+  const day = dayjs.tz(date, TZ).format()
+  const mom = moment.tz(date, TZ).format()
+  return expect(day).toEqual(mom)
+}
+
 beforeEach(() => {
   MockDate.set(new Date())
 })
@@ -28,7 +37,7 @@ describe('timezone plugin', () => {
     expect(b.utc().format()).toEqual('2013-11-18T16:55:00+00:00') // 2013-11-18T16:55Z
   })
   it('converts to tz', () => {
-    // no daylight savings
+    // no daylight savings, +6
     const a = dayjs.tz('2013-11-18 11:55', 'Asia/Almaty').tz('Etc/utc')
     const b = dayjs.tz('2013-11-18 11:55', 'Etc/utc').tz('Asia/Almaty')
 
@@ -37,85 +46,77 @@ describe('timezone plugin', () => {
   })
   it('respects forward dst', () => {
     // skips an hour on b
+    const z = dayjs.tz('2012-03-11 11:00:00', 'Asia/Almaty').tz('America/New_York').format()
     const a = dayjs.tz('2012-03-11 12:00:00', 'Asia/Almaty').tz('America/New_York').format()
     const b = dayjs.tz('2012-03-11 13:00:00', 'Asia/Almaty').tz('America/New_York').format()
     const ba = dayjs.tz('2012-03-11 14:00:00', 'Asia/Almaty').tz('America/New_York').format()
-    expect(a).toEqual('2012-03-11T01:00:00-05:00')
-    expect(b).toEqual('2012-03-11T03:00:00-04:00')
-    expect(ba).toEqual('2012-03-11T04:00:00-04:00')
-    const c = dayjs.tz('2012-03-11 1:00:00', 'America/New_York').format()
-    const d = dayjs.tz('2012-03-11 2:00:00', 'America/New_York').format()
-    expect(c).toEqual('2012-03-11T01:00:00-05:00')
-    expect(d).toEqual('2012-03-11T03:00:00-04:00')
-    const e = dayjs.tz('2019-03-29 1:00:00', 'Asia/Jerusalem').format()
-    const f = dayjs.tz('2019-03-29 2:00:00', 'Asia/Jerusalem').format()
-    expect(e).toEqual('2019-03-29T01:00:00+02:00')
-    expect(f).toEqual('2019-03-29T03:00:00+03:00')
+    const zz = moment.tz('2012-03-11 11:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    const az = moment.tz('2012-03-11 12:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    const bz = moment.tz('2012-03-11 13:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    const baz = moment.tz('2012-03-11 14:00:00', 'Asia/Almaty').tz('America/New_York').format()
+    expect(z).toEqual(zz)
+    expect(a).toEqual(az)
+    expect(b).toEqual(bz)
+    expect(ba).toEqual(baz)
+
+    momentTzParity('2012-03-10 01:59:59', 'America/New_York')
+    momentTzParity('2012-03-11 01:59:59', 'America/New_York')
+    momentTzParity('2012-03-11 02:00:00', 'America/New_York')
+    momentTzParity('2012-03-11 03:00:00', 'America/New_York')
+    momentTzParity('2012-03-12 20:59:59', 'America/New_York')
+
+
+    momentTzParity('2019-03-29 01:00:00', 'Asia/Jerusalem')
+    momentTzParity('2019-03-29 02:00:00', 'Asia/Jerusalem')
+    momentTzParity('2019-03-29 03:00:00', 'Asia/Jerusalem')
 
     // the other extremety in case the math is bad, positive tz, and south hemisphere
-    const g = dayjs.tz('1991-10-27 01:00:00', 'Australia/Brisbane')
-    const h = dayjs.tz('1991-10-27 02:00:00', 'Australia/Brisbane')
-    expect(g.format()).toEqual('1991-10-27T01:00:00+10:00')
-    expect(h.format()).toEqual('1991-10-27T03:00:00+11:00')
+    momentTzParity('1991-10-26 01:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-10-27 01:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-10-27 02:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-10-27 03:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-10-28 20:00:00', 'Australia/Brisbane')
   })
-  it.only('respects backward dst', () => {
-    const a = dayjs.tz('2012-11-04 01:59:59', 'America/New_York') // 2012-11-04T01:59:59-04:00
-    const b = dayjs.tz('2012-11-04 02:00:00', 'America/New_York') // 2012-11-04T02:00:00-05:00
-    const ba = dayjs.tz('2012-11-04 03:00:00', 'America/New_York') // 2012-11-04T02:00:00-05:00
-    expect(a.format()).toEqual('2012-11-04T01:59:59-04:00')
-    expect(b.format()).toEqual('2012-11-04T01:00:00-05:00')
-    expect(ba.format()).toEqual('2012-11-04T02:00:00-05:00')
-    // console.log(
-    //   moment.tz('1991-03-03 01:00:00', 'Australia/Brisbane').format(),
-    //   moment.tz('1991-03-03 02:00:00', 'Australia/Brisbane').format(),
-    //   moment.tz('1991-03-03 03:00:00', 'Australia/Brisbane').format()
-    //   // new Date('1991-03-02 21:00:00').toLocaleString('en',
-    // { timeZone: 'Australia/Brisbane' }),
-    //   // new Date('1991-03-02 22:00:00').toLocaleString('en',
-    // { timeZone: 'Australia/Brisbane' }),
-    // )
-    // the other extremety in case the math is bad, positive tz, and south hemisphere
-    const e = dayjs.tz('1991-03-03 02:00:00', 'Australia/Brisbane')
-    const f = dayjs.tz('1991-03-03 03:00:00', 'Australia/Brisbane')
-    expect(e.format()).toEqual('1991-03-03T02:00:00+11:00')
-    expect(f.format()).toEqual('1991-03-03T02:00:00+10:00')
-    // expect(e.format()).toEqual(moment.tz('1991-03-03 01:00:00', 'Australia/Brisbane').format())
-    // expect(f.format()).toEqual(moment.tz('1991-03-03 02:00:00', 'Australia/Brisbane').format())
+  it('respects backward dst', () => {
+    momentTzParity('2012-11-03 01:59:59', 'America/New_York')
+    momentTzParity('2012-11-04 01:59:59', 'America/New_York')
+    momentTzParity('2012-11-04 02:00:00', 'America/New_York')
+    momentTzParity('2012-11-04 03:00:00', 'America/New_York')
+    momentTzParity('2012-11-04 04:00:00', 'America/New_York')
+    momentTzParity('2012-11-05 01:59:59', 'America/New_York')
+
+    momentTzParity('1991-03-02 01:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-03 01:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-03 02:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-03 03:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-03 04:00:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-04 20:00:00', 'Australia/Brisbane')
   })
   it('will create backwards dst specific duplicated hour', () => {
-    const c = dayjs.tz('2012-11-04 01:00:00-04:00', 'America/New_York')
-    const d = dayjs.tz('2012-11-04 01:00:00-05:00', 'America/New_York')
-    expect(c.format()).toEqual('2012-11-04T01:00:00-04:00')
-    expect(d.format()).toEqual('2012-11-04T01:00:00-05:00')
-    const g = dayjs.tz('1991-03-03 02:00:00+11:00', 'Australia/Brisbane')
-    const h = dayjs.tz('1991-03-03 02:00:00+10:00', 'Australia/Brisbane')
-    expect(g.format()).toEqual('1991-03-03T02:00:00+11:00')
-    expect(h.format()).toEqual('1991-03-03T02:00:00+10:00')
+    momentTzParity('2012-11-04 01:00:00-04:00', 'America/New_York')
+    momentTzParity('2012-11-04 01:00:00-05:00', 'America/New_York')
+
+    momentTzParity('1991-03-03 02:00:00+11:00', 'Australia/Brisbane')
+    momentTzParity('1991-03-03 02:00:00+10:00', 'Australia/Brisbane')
   })
   it('gives zone info', () => {
     expect(dayjs.tz('2012-1-1', 'America/New_York').zoneAbbr()).toEqual('EST') // EST
     expect(dayjs.tz('2012-5-1', 'America/New_York').zoneName()).toEqual('Eastern Daylight Time') // PST
-  })
-  it.skip('works in local time zone in past by not changing to utc when toDate() used', () => {
-    expect(dayjs('1991-03-02 20:00:00').toDate().toISOString().slice(-4)).not.toEqual('000Z')
-    expect(dayjs.tz(
-      '1991-03-02 20:00:00',
-      Intl.DateTimeFormat().resolvedOptions().timeZone
-    ).toDate().toISOString().slice(-4)).not.toEqual('000Z')
   })
   it.skip('changes default timezone and uses utc otherwise', () => {
     // should be utc, default of default
     // moment.tz.setDefault("America/New_York");
     // moment.tz.setDefault(); //reset to utc
   })
-  // it('works with non-plugin methods', () => {
-  //   const m = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
-  //   expect(m.startOf('day').tz('Europe/Berlin').format())
-  // .toEqual('2013-11-18T06:00:00+01:00')// 2013-11-18T06:00:00+01:00
-  //   const a = dayjs.tz('1991-03-03 01:59:59', 'Australia/Brisbane').add(1, 'hour')
-  //   expect(a.format()).toEqual('1991-03-03T02:00:00+10:00')
-  //   // expect(f.format()).toEqual('1991-03-03T02:00:00+10:00')
-
-  // })
+  it.skip('works with non-plugin methods', () => {
+    const m = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
+    expect(m.startOf('day').tz('Europe/Berlin').format())
+      .toEqual('2013-11-18T06:00:00+01:00')// 2013-11-18T06:00:00+01:00
+    const a = dayjs.tz('1991-03-03 01:59:59', 'America/New_York').add(1, 'hour')
+    expect(a.format()).toEqual('2012-03-11T03:59:59-04:00')
+  // not sure when dst happens for australia anymore
+    // const a = dayjs.tz('1991-03-03 01:59:59', 'Australia/Brisbane').add(1, 'hour')
+    // expect(a.format()).toEqual('1991-03-03T02:00:00+10:00')
+  })
 })
 
