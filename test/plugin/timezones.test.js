@@ -3,7 +3,7 @@ import { utcToZonedTime } from 'date-fns-tz'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
 import tz from '../../src/plugin/timezones'
-import './timezonesData.test.js'
+import '../../src/plugin/timezones/timezonesTestData.js'
 
 dayjs.extend(tz) // use plugin
 
@@ -111,9 +111,10 @@ describe('timezone plugin', () => {
   it.skip('works with non-plugin methods', () => {
     const m = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
     expect(m.startOf('day').tz('Europe/Berlin').format())
-      .toEqual('2013-11-18T06:00:00+01:00')// 2013-11-18T06:00:00+01:00
-    const a = dayjs.tz('1991-03-03 01:59:59', 'America/New_York').add(1, 'hour')
-    expect(a.format()).toEqual('2012-03-11T03:59:59-04:00')
+      .toEqual('2013-11-18T00:00:00+01:00')// 2013-11-18T06:00:00+01:00
+    const a = dayjs.tz('1991-03-03 01:59:59', 'America/New_York')
+    expect(a.format()).toEqual('1991-03-03T01:59:59-05:00')
+    expect(a.add(1, 'hour').format()).toEqual('1991-03-03TT03:59:59-04:00')
   // not sure when dst happens for australia anymore
     // const a = dayjs.tz('1991-03-03 01:59:59', 'Australia/Brisbane').add(1, 'hour')
     // expect(a.format()).toEqual('1991-03-03T02:00:00+10:00')
