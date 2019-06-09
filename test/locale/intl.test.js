@@ -62,7 +62,9 @@ describe('intl api from browser without loading locale files', () => {
   it('will display the right timezone on backwards of DST', () => {
     const a = dayjs.tz('2012-11-04 01:00:00', 'America/New_York') // 2012-11-04T01:59:59-04:00
     const b = dayjs.tz('2012-11-04 02:00:00', 'America/New_York') // 2012-11-04T02:00:00-05:00
+    const c = dayjs.tz('2012-11-04 03:00:00', 'America/New_York') // 2012-11-04T02:00:00-05:00
     expect(a.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('1 AM Eastern Daylight Time')
-    expect(b.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('1 AM Eastern Standard Time')
+    expect(b.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('2 AM Eastern Standard Time')
+    expect(c.locale('en-US').format('', { timeZoneName: 'long', hour: 'numeric' })).toEqual('3 AM Eastern Standard Time')
   })
 })
