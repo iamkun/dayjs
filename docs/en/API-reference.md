@@ -517,6 +517,6 @@ plugin [`Calendar`](./Plugin.md#calendar)
 
 ### Timezones
 
-`.toUTC` `.toZone` to convert to and form timezones
+`prototype.tz` `.tz` `.tz.guess` `.zoneAbbr` `.zoneName` `.utc` to convert to and form timezones
 
 plugin [`Timezones`](./Plugin.md#timezones)

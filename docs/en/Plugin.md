@@ -440,17 +440,21 @@ dayjs().calendar(null, {
 
 ### Timezones
 
-- Timezones adds `instance.tz` `constructor.tz` `.utc`. `constructor.tz(date, timezone)` make date with label of that timezone available under timeZone property on instance (like moment). tz converts date to another timezone, and utc converts to utc timezone. If Intl is unsupported then a polyfill will be loaded synchronously. Nodejs doesn't have to support intl localizations, by default it loads system [ICU](https://nodejs.org/api/intl.html), Intl feature detection doesn't check if ICU is available.
-
+- Timezones adds `instance.tz` `constructor.tz` `.utc`. `constructor.tz(date, timezone)` makes date with label of that timezone available under timeZone property on instance (like moment) accounting for daylight savings changes. `.tz` converts date to another timezone, and utc converts to utc timezone. Is currently compatible with format, but not add/subtract and similar methods. Arguments that require timezone name, take IANA name which is difference to time zone names that try to convey offset such as Eastern standard time. If Intl is unsupported then a polyfill will be loaded synchronously. Nodejs doesn't have to support intl localizations, by default it loads system [ICU](https://nodejs.org/api/intl.html), Intl feature detection doesn't check if ICU is available.
+`prototype.tz` `.tz` `.tz.guess` `.zoneAbbr` `.zoneName`
 ```javascript
 import timezones from 'dayjs/plugin/timezones'
 
 dayjs.extend(timezones)
 //checking Almaty's time
 dayjs(new Date()).tz("Asia/Almaty")
+//specifying current time in your tz to be used only with the almaty tz attached
 const almaty = dayjs.tz(new Date(), "Asia/Almaty")
-almaty.timeZone
-almaty.utc()
+almaty.timeZone //returns "Asia/Almaty"
+almaty.tz.guess //your IANA
+almaty.zoneAbbr //+6 GMT
+almaty.zoneName //something like eastern standard time
+almaty.utc() //will subtract 6 hours if there's no DST for utc time
 ```
 
 ## Customize
