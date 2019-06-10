@@ -103,6 +103,22 @@ describe('timezone plugin', () => {
     expect(dayjs.tz('2012-1-1', 'America/New_York').zoneAbbr()).toEqual('EST') // EST
     expect(dayjs.tz('2012-5-1', 'America/New_York').zoneName()).toEqual('Eastern Daylight Time') // PST
   })
+  it('works in local dst', () => {
+    // my tz being almaty
+    momentTzParity('2004-03-27 01:00:00', 'Asia/Almaty')
+    momentTzParity('2004-03-28 01:00:00', 'Asia/Almaty')
+    momentTzParity('2004-03-28 02:00:00', 'Asia/Almaty')
+    momentTzParity('2004-03-28 03:00:00', 'Asia/Almaty')
+    momentTzParity('2004-03-28 04:00:00', 'Asia/Almaty')
+    momentTzParity('2004-03-29 20:00:00', 'Asia/Almaty')
+
+    momentTzParity('2004-10-30 01:00:00', 'Asia/Almaty')
+    momentTzParity('2004-10-31 01:00:00', 'Asia/Almaty')
+    momentTzParity('2004-10-31 02:00:00', 'Asia/Almaty')
+    momentTzParity('2004-10-31 03:00:00', 'Asia/Almaty')
+    momentTzParity('2004-10-31 04:00:00', 'Asia/Almaty')
+    momentTzParity('2004-10-31 23:00:00', 'Asia/Almaty')
+  })
   it.skip('changes default timezone and uses utc otherwise', () => {
     // should be utc, default of default
     // moment.tz.setDefault("America/New_York");
