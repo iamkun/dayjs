@@ -63,7 +63,7 @@ declare namespace dayjs {
 
     endOf(unit: OpUnitType): Dayjs
 
-    format(template?: string): string
+    format(template?: string, intlOptions: object): string
 
     diff(date: ConfigType, unit: QUnitType | OpUnitType, float?: boolean): number
 

@@ -451,10 +451,10 @@ dayjs(new Date()).tz("Asia/Almaty")
 //specifying current time in your tz to be used only with the almaty tz attached
 const almaty = dayjs.tz(new Date(), "Asia/Almaty")
 almaty.timeZone //returns "Asia/Almaty"
-almaty.tz.guess //your IANA
-almaty.zoneAbbr //+6 GMT
-almaty.zoneName //something like eastern standard time
-almaty.utc() //will subtract 6 hours if there's no DST for utc time
+almaty.tz.guess() //your local IANA
+almaty.zoneAbbr() //+6 GMT
+almaty.zoneName() //something like eastern standard time
+almaty.utc() //will subtract 6 hours if there's no DST for utc time with almaty's tz
 ```
 
 ## Customize
