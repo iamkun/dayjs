@@ -2,8 +2,8 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'fr',
-  weekdays: 'Dimanche_Lundi_Mardi_Mercredi_Jeudi_Vendredi_Samedi'.split('_'),
-  months: 'Janvier_Février_Mars_Avril_Mai_Juin_Juillet_Août_Septembre_Octobre_Novembre_Décembre'.split('_'),
+  weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+  months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
   monthsShort: 'janv_févr_mars_avril_mai_juin_juil_août_sept_oct_nov_déc'.split('_'),
   weekStart: 1,
   formats: {
