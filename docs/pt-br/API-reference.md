@@ -34,7 +34,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
   - [Exibindo](#exibindo)
     - [Formatação `.format(stringWithTokens: string)`](#formatação-formatstringwithtokens-string)
       - [Lista com todos os formatos disponíveis](#lista-com-todos-os-formatos-disponíveis)
-    - [Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`](#diferença-diffcompared-dayjs-unit-string-padrão-milliseconds-float-boolean)
+    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-float-boolean)
     - [Unix Timestamp (milissegundos) `.valueOf()`](#unix-timestamp-milissegundos-valueof)
     - [Unix Timestamp (segundos) `.unix()`](#unix-timestamp-segundos-unix)
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
@@ -308,14 +308,14 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 - Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 - Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
-### Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`
+### Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`
 
 Retorna um `number` indicando a diferença entre dois objetos `Dayjs` na unidade especificada.
 
 ```js
 const date1 = dayjs('2019-01-25')
 const date2 = dayjs('2018-06-05')
-date1.diff(date2) // 20214000000
+date1.diff(date2) // 20214000000 default milliseconds
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
