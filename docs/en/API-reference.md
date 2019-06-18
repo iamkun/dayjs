@@ -34,7 +34,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Displaying](#displaying)
     - [Format `.format(stringWithTokens: string)`](#format-formatstringwithtokens-string)
       - [List of all available formats](#list-of-all-available-formats)
-    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-default-milliseconds-float-boolean)
+    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-float-boolean)
     - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
     - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
