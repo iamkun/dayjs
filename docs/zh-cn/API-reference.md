@@ -344,7 +344,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]') // "{2014} 09-08T08:02:17-05:00Z"
 ```js
 const date1 = dayjs('2019-01-25')
 const date2 = dayjs('2018-06-05')
-date1.diff(date2) // 20214000000
+date1.diff(date2) // 20214000000 
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
