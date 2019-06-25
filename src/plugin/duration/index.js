@@ -6,11 +6,6 @@ export default (o, c) => {
     * @return {object} duration object
   */
   c.prototype.duration = function (value, unit) {
-    if (typeof value !== 'number') { // check for correct value input
-      // error not a number
-      return {}
-    }
-
     const TIME_CONSTANT = {
       seconde: { u: 60, s: 's', next: 'minute' },
       minute: { u: 60, s: 'm', next: 'hour' },
@@ -29,6 +24,17 @@ export default (o, c) => {
       M: 0,
       y: 0
     }
+
+    if (TIME_CONSTANT[unit] === undefined) { // check for correct unit input
+      // error not a proper unit
+      return {}
+    }
+
+    if (typeof value !== 'number') { // check for correct value input
+      // error not a number
+      return {}
+    }
+
     /**
     * convert a number to his time unit
     * @param  {number} v a number
