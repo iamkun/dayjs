@@ -12,12 +12,12 @@ export default (o, c) => {
     }
 
     const TIME_CONSTANT = {
-      seconde: { u: 60, s: 'S', next: 'minute' },
-      minute: { u: 60, s: 'M', next: 'hour' },
+      seconde: { u: 60, s: 's', next: 'minute' },
+      minute: { u: 60, s: 'm', next: 'hour' },
       hour: { u: 24, s: 'H', next: 'day' },
       day: { u: 30.417, s: 'D', next: 'month' }, // average number of day per month 30.417 in a year
       month: { u: 12, s: 'M', next: 'year' },
-      year: { u: 1, s: 'Y', next: '' }
+      year: { u: 1, s: 'y', next: '' }
     }
 
     const duration = {
@@ -39,13 +39,15 @@ export default (o, c) => {
       let nextUnit = ''
       const r = Math.floor(v / TIME_CONSTANT[u].u) // is it ok?
       if (r >= 1) {
-        duration.D = TIME_CONSTANT[u].u === 1 ? v : Math.floor(v % TIME_CONSTANT[u].u)
+        duration[TIME_CONSTANT[u].s] = TIME_CONSTANT[u].u === 1 ? v
+          : Math.floor(v % TIME_CONSTANT[u].u)
         nextUnit = TIME_CONSTANT[u].next
       } else {
-        duration.D = v
+        duration[TIME_CONSTANT[u].s] = v
         nextUnit = ''
       }
-      duration.ISO = u === 'hour' ? `T${duration.D}${TIME_CONSTANT[u].s}${duration.ISO}` : `${duration.D}${TIME_CONSTANT[u].s}${duration.ISO}`
+      duration.ISO = u === 'hour' ? `T${duration[TIME_CONSTANT[u].s]}${TIME_CONSTANT[u].s}${duration.ISO}`
+        : `${duration[TIME_CONSTANT[u].s]}${TIME_CONSTANT[u].s}${duration.ISO}`
       return [r, nextUnit]
     }
 
@@ -64,7 +66,7 @@ export default (o, c) => {
     while (u !== '') {
       [rest, u] = parse(rest, u)
     }
-    duration.ISO = `P${duration.ISO}`
+    duration.ISO = `P${duration.ISO.toUpperCase()}`
 
     return duration
   }
