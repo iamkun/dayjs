@@ -50,7 +50,6 @@ export default (o, c) => {
         nextUnit = TIME_CONSTANT[u].next
       } else {
         duration[TIME_CONSTANT[u].s] = v
-        nextUnit = ''
       }
       duration.ISO = u === 'hour' ? `T${duration[TIME_CONSTANT[u].s]}${TIME_CONSTANT[u].s}${duration.ISO}`
         : `${duration[TIME_CONSTANT[u].s]}${TIME_CONSTANT[u].s}${duration.ISO}`
