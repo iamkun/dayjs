@@ -41,9 +41,9 @@ export default (o, c) => {
     * @param  {string} u unit of time of the number
     * @return {array[r, nextUnit]} return a value and his time unit to parse
     */
-    function parse(v, u) { // way shorter
+    function parse(v, u) {
       let nextUnit = ''
-      const r = Math.floor(v / TIME_CONSTANT[u].u) // is it ok?
+      const r = Math.floor(v / TIME_CONSTANT[u].u)
       if (r >= 1) {
         duration[TIME_CONSTANT[u].s] = TIME_CONSTANT[u].u === 1 ? v
           : Math.floor(v % TIME_CONSTANT[u].u)
@@ -56,16 +56,6 @@ export default (o, c) => {
         : `${duration[TIME_CONSTANT[u].s]}${TIME_CONSTANT[u].s}${duration.ISO}`
       return [r, nextUnit]
     }
-
-    /**
-    * return the desired format of duration
-    * @param  {string} token a string describing the desired format
-    * @return {string} return duration format
-    */
-    // format function () {
-    //
-    // }
-    // duration.format = format
 
     let rest = value
     let u = unit
