@@ -12,5 +12,5 @@ it('should return an empty object', () => {
 })
 
 it('should return the duration in ISO 8601 format', () => {
-  expect(dayjs().duration(90, 'seconde').ISO).toBe('P1M30S')
+  expect(dayjs().duration(90, 'second').ISO).toBe('P1M30S')
 })
