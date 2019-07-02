@@ -7,7 +7,7 @@ export default (o, c) => {
   */
   c.prototype.duration = function (value, unit) {
     const TIME_CONSTANT = {
-      seconde: { u: 60, s: 's', next: 'minute' },
+      second: { u: 60, s: 's', next: 'minute' },
       minute: { u: 60, s: 'm', next: 'hour' },
       hour: { u: 24, s: 'H', next: 'day' },
       day: { u: 30.417, s: 'D', next: 'month' }, // average number of day per month 30.417 in a year
