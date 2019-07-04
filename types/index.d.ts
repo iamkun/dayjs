@@ -103,4 +103,6 @@ declare namespace dayjs {
   export function isDayjs(d: any): d is Dayjs
 
   export function unix(t: number): Dayjs
+
+  const Ls : { [key: string] :  { [key: string]: any } }
 }
