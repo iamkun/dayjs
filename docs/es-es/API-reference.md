@@ -34,7 +34,7 @@ El objeto `Dayjs` es inmutable, por lo que toda operación de la API que altere 
   - [Presentación](#presentación)
     - [Dar formato `.format(stringWithTokens: string)`](#dar-formato-formatstringwithtokens-string)
       - [Lista de formatos disponibles](#lista-de-formatos-disponibles)
-    - [Diferencia `.diff(compared: Dayjs, unit: string (predeterminada: 'milliseconds'), float?: boolean)`](#diferencia-diffcompared-dayjs-unit-string-predeterminada-milliseconds-float-boolean)
+    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-float-boolean)
     - [Tiempo Unix (milisegundos) `.valueOf()`](#tiempo-unix-milisegundos-valueof)
     - [Tiempo Unix (segundos) `.unix()`](#tiempo-unix-segundos-unix)
     - [UTC offset (minutos) `.utcOffset()`](#utc-offset-minutos-utcoffset)
@@ -310,14 +310,14 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 - Más formatos disponibles `Q Do k kk X x ...` con el complemento [`AdvancedFormat`](./Plugin.md#advancedformat)
 - Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
-### Diferencia `.diff(compared: Dayjs, unit: string (predeterminada: 'milliseconds'), float?: boolean)`
+### Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`
 
 Devuelve un dato de tipo `number`, que indica la diferencia existente entre dos objetos `Dayjs`, expresada en la unidad de tiempo dada.
 
 ```js
 const date1 = dayjs('2019-01-25')
 const date2 = dayjs('2018-06-05')
-date1.diff(date2) // 20214000000
+date1.diff(date2) // 20214000000 default milliseconds
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233

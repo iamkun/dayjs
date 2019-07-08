@@ -290,9 +290,9 @@ dayjs('2018-06-27').week(5) // 设置周
 - WeekDay 增加了 `.weekday()` API 来获取或设置当前语言的星期。
 
 ```javascript
-import weekDay from 'dayjs/plugin/weekDay'
+import weekday from 'dayjs/plugin/weekday'
 
-dayjs.extend(weekDay)
+dayjs.extend(weekday)
 // when Monday is the first day of the week
 dayjs().weekday(-7) // last Monday
 dayjs().weekday(7) // next Monday
