@@ -1,3 +1,15 @@
+## [1.8.15](https://github.com/iamkun/dayjs/compare/v1.8.14...v1.8.15) (2019-07-08)
+
+
+### Bug Fixes
+
+* Fix dayjs.locale() returns current global locale ([#602](https://github.com/iamkun/dayjs/issues/602)) ([790cd1a](https://github.com/iamkun/dayjs/commit/790cd1a))
+* Fix incorrect Thai locale translation of July ([#607](https://github.com/iamkun/dayjs/issues/607)) ([43cbfd3](https://github.com/iamkun/dayjs/commit/43cbfd3))
+* Lowercase french locale months and weekdays ([#615](https://github.com/iamkun/dayjs/issues/615)) ([e5a257c](https://github.com/iamkun/dayjs/commit/e5a257c))
+* Type - Export Ls object to query all available locales ([#623](https://github.com/iamkun/dayjs/issues/623)) ([f6bfae0](https://github.com/iamkun/dayjs/commit/f6bfae0))
+* Update  nb (Norsk Bokmål) locale ([#604](https://github.com/iamkun/dayjs/issues/604)) ([907f5c9](https://github.com/iamkun/dayjs/commit/907f5c9))
+* Update types of `.diff` API ([#617](https://github.com/iamkun/dayjs/issues/617)) ([f0f43d2](https://github.com/iamkun/dayjs/commit/f0f43d2))
+
 ## [1.8.14](https://github.com/iamkun/dayjs/compare/v1.8.13...v1.8.14) (2019-05-07)
 
 
