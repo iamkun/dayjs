@@ -17,7 +17,7 @@ const locale = {
     llll: 'ddd D MMM YYYY, H:mm'
   },
   relativeTime: {
-    future: 'en %s',
+    future: 'd\'aquí %s',
     past: 'fa %s',
     s: 'uns segons',
     m: 'un minut',
