@@ -26,6 +26,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
     - [Get `.get(unit: string)`](#get-getunit-string)
       - [Lista de todas as unidades disponíveis](#lista-de-todas-as-unidades-disponíveis)
     - [Set `.set(unit: string, value: number)`](#set-setunit-string-value-number)
+    - [Set `.set({ [unit: string]: number })`](#set-set-unit-string-number)
   - [Manipulando](#manipulando)
     - [Adicionar `.add(value: number, unit: string)`](#adicionar-addvalue-number-unit-string)
     - [Subtrair `.subtract(value: number, unit: string)`](#subtrair-subtractvalue-number-unit-string)
@@ -215,6 +216,15 @@ Retorna um `Dayjs` com as mudanças aplicadas.
 dayjs().set('date', 1)
 dayjs().set('month', 3) // April
 dayjs().set('second', 30)
+```
+
+### Set `.set({ [unit: string]: number })`
+
+Retorna um `Dayjs` com muitas mudanças aplicadas.
+
+```js
+dayjs().set({ date, 1, month: 3, second: 30 })
+dayjs().set({ hour, 0, minute: 0, second: 0, millisecond: 0 })  // ...T00:00:00.000
 ```
 
 ## Manipulando

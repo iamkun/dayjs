@@ -68,34 +68,52 @@ it('Millisecond', () => {
 
 it('Set Day', () => {
   expect(dayjs().set('date', 30).valueOf()).toBe(moment().set('date', 30).valueOf())
+  expect(dayjs().set({ date: 30 }).valueOf()).toBe(moment().set('date', 30).valueOf())
+})
+
+it('Set Day and Day of Week', () => {
+  expect(dayjs().set({ date: 30, day: 0 }).valueOf())
+    .toBe(moment().set({ date: 30, day: 0 }).valueOf())
 })
 
 it('Set Day of Week', () => {
   expect(dayjs().set('day', 0).valueOf()).toBe(moment().set('day', 0).valueOf())
+  expect(dayjs().set({ day: 0 }).valueOf()).toBe(moment().set('day', 0).valueOf())
 })
 
 it('Set Month', () => {
   expect(dayjs().set('month', 11).valueOf()).toBe(moment().set('month', 11).valueOf())
+  expect(dayjs().set({ month: 11 }).valueOf()).toBe(moment().set('month', 11).valueOf())
 })
 
 it('Set Year', () => {
   expect(dayjs().set('year', 2008).valueOf()).toBe(moment().set('year', 2008).valueOf())
+  expect(dayjs().set({ year: 2008 }).valueOf()).toBe(moment().set('year', 2008).valueOf())
 })
 
 it('Set Hour', () => {
   expect(dayjs().set('hour', 6).valueOf()).toBe(moment().set('hour', 6).valueOf())
+  expect(dayjs().set({ hour: 6 }).valueOf()).toBe(moment().set('hour', 6).valueOf())
 })
 
 it('Set Minute', () => {
   expect(dayjs().set('minute', 59).valueOf()).toBe(moment().set('minute', 59).valueOf())
+  expect(dayjs().set({ minute: 59 }).valueOf()).toBe(moment().set('minute', 59).valueOf())
 })
 
 it('Set Second', () => {
   expect(dayjs().set('second', 59).valueOf()).toBe(moment().set('second', 59).valueOf())
+  expect(dayjs().set({ second: 59 }).valueOf()).toBe(moment().set('second', 59).valueOf())
 })
 
 it('Set Millisecond', () => {
   expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
+  expect(dayjs().set({ millisecond: 999 }).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
+})
+
+it('Set Millisecond and Second', () => {
+  expect(dayjs().set({ millisecond: 999, second: 59 }).valueOf())
+    .toBe(moment().set({ millisecond: 999, second: 59 }).valueOf())
 })
 
 it('Set Month and Year in last day of month', () => {
@@ -117,6 +135,12 @@ it('Set Unknown String', () => {
   const newDate = dayjs().set('Unknown String', 1)
   expect(newDate.valueOf())
     .toBe(moment().set('Unknown String', 1).valueOf())
+})
+
+it('Set Unknown String multiple', () => {
+  const newDate = dayjs().set({ 'Unknown String': 1 })
+  expect(newDate.valueOf())
+    .toBe(moment().set({ 'Unknown String': 1 }).valueOf())
 })
 
 it('Immutable Set', () => {

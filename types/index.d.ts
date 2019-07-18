@@ -8,6 +8,7 @@ declare namespace dayjs {
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
+  export type UnitTypeObject = { [key in UnitType]?: number };
 
   export type OpUnitType = UnitType | "week" | 'w';
   export type QUnitType = UnitType | "quarter" | 'Q';
@@ -52,6 +53,8 @@ declare namespace dayjs {
     millisecond(value: number): Dayjs
 
     set(unit: UnitType, value: number): Dayjs
+
+    set(objectLiteral: UnitTypeObject): Dayjs
 
     get(unit: UnitType): number
 

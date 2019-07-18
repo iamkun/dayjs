@@ -231,7 +231,8 @@ class Dayjs {
   }
 
   set(string, int) {
-    return this.clone().$set(string, int)
+    if (typeof string === 'string') return this.clone().$set(string, int)
+    return Object.keys(string).reduce((self, key) => self.clone().$set(key, string[key]), this)
   }
 
   get(unit) {
