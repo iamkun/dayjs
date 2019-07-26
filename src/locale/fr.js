@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'fr',
   weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+  weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
   months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
   monthsShort: 'janv_févr_mars_avril_mai_juin_juil_août_sept_oct_nov_déc'.split('_'),
   weekStart: 1,
@@ -38,4 +39,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

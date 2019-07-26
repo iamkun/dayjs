@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ne',
   weekdays: 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split('_'),
+  weekdaysShort: 'आइत._सोम._मङ्गल._बुध._बिहि._शुक्र._शनि.'.split('_'),
   months: 'जनवरी_फेब्रुवरी_मार्च_अप्रिल_मे_जुन_जुलाई_अगष्ट_सेप्टेम्बर_अक्टोबर_नोभेम्बर_डिसेम्बर'.split('_'),
   relativeTime: {
     future: '%s पछि',
@@ -33,4 +34,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
