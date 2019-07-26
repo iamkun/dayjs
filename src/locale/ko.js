@@ -18,6 +18,7 @@ const locale = {
     lll: 'YYYY년 MMMM D일 A h:mm',
     llll: 'YYYY년 MMMM D일 dddd A h:mm'
   },
+  meridiem: hour => (hour < 12 ? '오전' : '오후'),
   relativeTime: {
     future: '%s 후',
     past: '%s 전',
@@ -38,4 +39,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
