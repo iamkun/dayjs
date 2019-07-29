@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'fa',
   weekdays: 'یک‌شنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنج‌شنبه_جمعه_شنبه'.split('_'),
+  weekdaysShort: 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
   months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split('_'),
   ordinal: n => n,
   formats: {
@@ -33,4 +34,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ro',
   weekdays: 'Duminică_Luni_Marți_Miercuri_Joi_Vineri_Sâmbătă'.split('_'),
+  weekdaysShort: 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
   months: 'Ianuarie_Februarie_Martie_Aprilie_Mai_Iunie_Iulie_August_Septembrie_Octombrie_Noiembrie_Decembrie'.split('_'),
   weekStart: 1,
   formats: {
@@ -34,4 +35,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
