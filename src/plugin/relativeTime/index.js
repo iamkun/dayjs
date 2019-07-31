@@ -39,9 +39,11 @@ export default (o, c, d) => {
     for (let i = 0; i < Tl; i += 1) {
       let t = T[i]
       if (t.d) {
+        // Add the last true argument to avoid comparing zones.
+        // Related to issue #646.
         result = isFrom
-          ? d(input).diff(instance, t.d, true)
-          : instance.diff(input, t.d, true)
+          ? d(input).diff(instance, t.d, true, true)
+          : instance.diff(input, t.d, true, true)
       }
       const abs = Math.round(Math.abs(result))
       if (abs <= t.r || !t.r) {
