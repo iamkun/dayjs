@@ -329,11 +329,10 @@ class Dayjs {
     return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
   }
 
-  diff(input, units, float, useInRelativeTime) {
+  diff(input, units, float) {
     const unit = Utils.p(units)
     const that = dayjs(input)
-    const zoneDelta = useInRelativeTime
-      ? 0 : (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
+    const zoneDelta = (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
     const diff = this - that
     let result = Utils.m(this, that)
 

@@ -39,11 +39,9 @@ export default (o, c, d) => {
     for (let i = 0; i < Tl; i += 1) {
       let t = T[i]
       if (t.d) {
-        // Add the last true argument to avoid comparing zones.
-        // Related to issue #646.
         result = isFrom
-          ? d(input).diff(instance, t.d, true, true)
-          : instance.diff(input, t.d, true, true)
+          ? d(input).diff(instance, t.d, true)
+          : instance.diff(input, t.d, true)
       }
       const abs = Math.round(Math.abs(result))
       if (abs <= t.r || !t.r) {
@@ -61,10 +59,13 @@ export default (o, c, d) => {
   proto.from = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this)
   }
+
+  const makeNow = thisDay => (thisDay.$u ? d.utc() : d())
+
   proto.toNow = function (withoutSuffix) {
-    return this.to(d(), withoutSuffix)
+    return this.to(makeNow(this), withoutSuffix)
   }
   proto.fromNow = function (withoutSuffix) {
-    return this.from(d(), withoutSuffix)
+    return this.from(makeNow(this), withoutSuffix)
   }
 }
