@@ -59,10 +59,13 @@ export default (o, c, d) => {
   proto.from = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this)
   }
+
+  const makeNow = thisDay => (thisDay.$u ? d.utc() : d())
+
   proto.toNow = function (withoutSuffix) {
-    return this.to(d(), withoutSuffix)
+    return this.to(makeNow(this), withoutSuffix)
   }
   proto.fromNow = function (withoutSuffix) {
-    return this.from(d(), withoutSuffix)
+    return this.from(makeNow(this), withoutSuffix)
   }
 }
