@@ -51,6 +51,8 @@ declare namespace dayjs {
 
     millisecond(value: number): Dayjs
 
+    week(): number
+
     set(unit: UnitType, value: number): Dayjs
 
     get(unit: UnitType): number
