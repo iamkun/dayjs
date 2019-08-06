@@ -21,9 +21,13 @@ it('instance localeData', () => {
   const momentLocaleData = moment().localeData()
   expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
   expect(dayjsLocaleData.months(d)).toBe(momentLocaleData.months(m))
+  expect(dayjsLocaleData.months()).toEqual(momentLocaleData.months())
   expect(dayjsLocaleData.monthsShort(d)).toBe(momentLocaleData.monthsShort(m))
+  expect(dayjsLocaleData.monthsShort()).toEqual(momentLocaleData.monthsShort())
   expect(dayjsLocaleData.weekdaysMin(d)).toBe(momentLocaleData.weekdaysMin(m))
+  expect(dayjsLocaleData.weekdaysMin()).toEqual(momentLocaleData.weekdaysMin())
   expect(dayjsLocaleData.weekdaysShort(d)).toBe(momentLocaleData.weekdaysShort(m))
+  expect(dayjsLocaleData.weekdaysShort()).toEqual(momentLocaleData.weekdaysShort())
 })
 
 it('global localeData', () => {

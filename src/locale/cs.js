@@ -4,7 +4,9 @@ const locale = {
   name: 'cs',
   weekdays: 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
   weekdaysShort: 'ne_po_út_st_čt_pá_so'.split('_'),
+  weekdaysMin: 'ne_po_út_st_čt_pá_so'.split('_'),
   months: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_'),
+  monthsShort: 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
   weekStart: 1,
   ordinal: n => `${n}.`,
   formats: {
