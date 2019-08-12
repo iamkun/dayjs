@@ -18,7 +18,8 @@ export default (o, c, d) => {
     yy: '%d years'
   }
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const loc = instance.$locale().relativeTime
+    const locale = instance.$locale()
+    const loc = locale.relativeTime
     const T = [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
@@ -50,6 +51,11 @@ export default (o, c, d) => {
         break
       }
     }
+
+    if (locale.postFormat) {
+      out = locale.postFormat(out)
+    }
+
     if (withoutSuffix) return out
     return ((result > 0) ? loc.future : loc.past).replace('%s', out)
   }

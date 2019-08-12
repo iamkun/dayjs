@@ -46,18 +46,24 @@ Utils.i = isDayjs
 Utils.w = wrapper
 
 const parseDate = (cfg) => {
-  const { date, utc } = cfg
+  let { date } = cfg
+  const { utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
-  if (typeof date === 'string' && !/Z$/i.test(date)) {
-    const d = date.match(C.REGEX_PARSE)
-    if (d) {
-      if (utc) {
-        return new Date(Date.UTC(d[1], d[2] - 1, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+  if (typeof date === 'string') {
+    if (cfg.locale && cfg.locale.preparse) {
+      date = cfg.locale.preparse(date);
+    }
+    if (!/Z$/i.test(date)) {
+      const d = date.match(C.REGEX_PARSE)
+      if (d) {
+        if (utc) {
+          return new Date(Date.UTC(d[1], d[2] - 1, d[3]
+            || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+        }
+        return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
       }
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
     }
   }
 
@@ -318,6 +324,10 @@ class Dayjs {
       ss: Utils.s(this.$s, 2, '0'),
       SSS: Utils.s(this.$ms, 3, '0'),
       Z: zoneStr // 'ZZ' logic below
+    }
+
+    if (locale.postFormat) {
+      return locale.postFormat(str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')));
     }
 
     return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'

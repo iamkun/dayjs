@@ -39,6 +39,7 @@
     ],
     "no-bitwise": 0,
     "default-case": 0,
-    "consistent-return": 0
+    "consistent-return": 0,
+    "linebreak-style": 0
   }
 }
