@@ -11,10 +11,7 @@
     "dayjs": true
   },
   "rules": {
-    "semi": [
-      2,
-      "never"
-    ],
+    "semi": [0],
     "comma-dangle": [
       "error",
       "never"
@@ -39,6 +36,9 @@
     "import/extensions": [
       2,
       "ignorePackages"
-    ]
+    ],
+    "no-bitwise": 0,
+    "default-case": 0,
+    "consistent-return": 0
   }
 }
