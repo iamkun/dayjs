@@ -6,6 +6,34 @@ const monthStandalone = 'январь_февраль_март_апрель_ма�
 const monthShortFormat = 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_')
 const monthShortStandalone = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
 
+const plural = (word, num) => {
+  const forms = word.split('_')
+
+  if (num % 10 === 1 && num % 100 !== 11) {
+    return forms[0]
+  } else if (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)) {
+    return forms[1]
+  }
+
+  return forms[2];
+}
+
+const relativeTimeWithPlural = (number, withoutSuffix, key) => {
+  const format = {
+    ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
+    mm: withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
+    hh: 'час_часа_часов',
+    dd: 'день_дня_дней',
+    MM: 'месяц_месяца_месяцев',
+    yy: 'год_года_лет'
+  };
+  if (key === 'm') {
+    return withoutSuffix ? 'минута' : 'минуту';
+  }
+
+  return `${number} ${plural(format[key], +number)}`;
+}
+
 const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
 const locale = {
   name: 'ru',
@@ -37,16 +65,16 @@ const locale = {
     future: 'через %s',
     past: '%s назад',
     s: 'несколько секунд',
-    m: 'минута',
-    mm: '%d минут',
+    m: relativeTimeWithPlural,
+    mm: relativeTimeWithPlural,
     h: 'час',
-    hh: '%d часов',
+    hh: relativeTimeWithPlural,
     d: 'день',
-    dd: '%d дней',
+    dd: relativeTimeWithPlural,
     M: 'месяц',
-    MM: '%d месяцев',
+    MM: relativeTimeWithPlural,
     y: 'год',
-    yy: '%d лет'
+    yy: relativeTimeWithPlural
   },
   ordinal: n => n
 }

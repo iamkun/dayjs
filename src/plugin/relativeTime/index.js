@@ -57,7 +57,13 @@ export default (o, c, d) => {
     }
 
     if (withoutSuffix) return out
-    return ((result > 0) ? loc.future : loc.past).replace('%s', out)
+
+    let resStr = result > 0 ? loc.future : loc.past
+    if (typeof resStr !== 'string') {
+      resStr = resStr(out)
+    }
+
+    return resStr.replace('%s', out)
   }
   proto.to = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this, true)

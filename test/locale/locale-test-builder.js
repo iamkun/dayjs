@@ -27,16 +27,18 @@ export const testFormat = (locale) => {
     expect(dayjsInstance.format(testFormat1)).toEqual(momentInstance.format(testFormat1))
     expect(dayjsInstance.format(testFormat2)).toEqual(momentInstance.format(testFormat2))
     expect(dayjsInstance.format(testFormat3)).toEqual(momentInstance.format(testFormat3))
+    expect(dayjs('2019-07-11').locale(locale).format('MMMM D'))
+      .toEqual(moment('2019-07-11').locale(locale).format('MMMM D'))
   }
 }
 
 export const testRelativeTime = (locale) => {
   dayjs.extend(relativeTime);
 
-  for (let i = 0; i <= 32; i += 1) {
-    assertByUnit(i, 'years', locale);
-    assertByUnit(i, 'months', locale);
-    assertByUnit(i, 'hours', locale);
-    assertByUnit(i, 'minutes', locale);
+  for (let i = 1; i <= 32; i += 1) {
+    assertByUnit(i, 'year', locale);
+    assertByUnit(i, 'month', locale);
+    assertByUnit(i, 'hour', locale);
+    assertByUnit(i, 'minute', locale);
   }
 }

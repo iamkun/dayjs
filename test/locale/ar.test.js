@@ -10,7 +10,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Format Month with locale function', () => {
+it('Format Month with Arabic locale function', () => {
   testFormat('ar');
 })
 
