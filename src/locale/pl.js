@@ -3,11 +3,9 @@ import dayjs from 'dayjs'
 const monthsNominative = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split('_');
 const monthsSubjective = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split('_');
 
-function plural(n) {
-  return (n % 10 < 5) && (n % 10 > 1) && ((Math.floor(n / 10) % 10) !== 1);
-}
+const plural = n => (n % 10 < 5) && (n % 10 > 1) && ((Math.floor(n / 10) % 10) !== 1);
 
-function translate(number, withoutSuffix, key) {
+const translate = (number, withoutSuffix, key) => {
   const result = `${number} `;
   switch (key) {
     case 'ss':

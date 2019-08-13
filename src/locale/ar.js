@@ -77,7 +77,7 @@ const plurals = {
   ]
 }
 
-const pluralForm = function (n) {
+const pluralForm = (n) => {
   if (n === 0) {
     return 0
   } else if (n === 1) {
@@ -93,17 +93,15 @@ const pluralForm = function (n) {
   return 5
 }
 
-const pluralize = function (u) {
-  return function (number, withoutSuffix) {
-    const f = pluralForm(number)
-    let str = plurals[u][pluralForm(number)]
+const pluralize = u => (number, withoutSuffix) => {
+  const f = pluralForm(number)
+  let str = plurals[u][pluralForm(number)]
 
-    if (f === 2) {
-      str = str[withoutSuffix ? 0 : 1]
-    }
-
-    return str.replace(/%d/i, number)
+  if (f === 2) {
+    str = str[withoutSuffix ? 0 : 1]
   }
+
+  return str.replace(/%d/i, number)
 }
 
 const locale = {
