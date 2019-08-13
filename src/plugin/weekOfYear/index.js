@@ -7,12 +7,7 @@ export default (o, c, d) => {
       return this.add((week - this.week()) * 7, 'day')
     }
 
-    let weekStart = 0
-    const locale = this.$locale()
-    if (locale.weekStart) {
-      // eslint-disable-next-line prefer-destructuring
-      weekStart = locale.weekStart
-    }
+    const weekStart = this.$locale().weekStart || 0
 
     // d(this) clone is for badMutable plugin
     const endOfYear = d(this).endOf(Y)
