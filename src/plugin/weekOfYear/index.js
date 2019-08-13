@@ -6,13 +6,27 @@ export default (o, c, d) => {
     if (week !== null) {
       return this.add((week - this.week()) * 7, 'day')
     }
+
+    let weekStart = 0
+    const locale = this.$locale()
+    if (locale.weekStart) {
+      // eslint-disable-next-line prefer-destructuring
+      weekStart = locale.weekStart
+    }
+
     // d(this) clone is for badMutable plugin
     const endOfYear = d(this).endOf(Y)
-    if (endOfYear.day() !== 6 && this.month() === 11 && (31 - this.date()) <= endOfYear.day()) {
+    if (
+      weekStart === 0 &&
+      endOfYear.day() !== 6 &&
+      this.month() === 11 &&
+      31 - this.date() <= endOfYear.day()
+    ) {
       return 1
     }
+
     const startOfYear = d(this).startOf(Y)
-    const compareDay = startOfYear.subtract(startOfYear.day(), D).subtract(1, MS)
+    const compareDay = startOfYear.subtract(startOfYear.day() - weekStart, D).subtract(1, MS)
     const diffInWeek = this.diff(compareDay, W, true)
     return Math.ceil(diffInWeek)
   }
