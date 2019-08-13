@@ -19,7 +19,7 @@ const locale = {
   relativeTime: {
     future: s => `${((/^[0-9].+$/).test(s) ? 'tra' : 'in')} ${s}`,
     past: '%s fa',
-    s: 'qualche secondo',
+    s: 'alcuni secondi',
     m: 'un minuto',
     mm: '%d minuti',
     h: 'un\'ora',

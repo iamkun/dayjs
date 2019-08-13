@@ -35,7 +35,7 @@ export const testFormat = (locale) => {
 export const testRelativeTime = (locale) => {
   dayjs.extend(relativeTime)
 
-  for (let i = 1; i <= 32; i += 1) {
+  for (let i = 0; i <= 32; i += 1) {
     assertByUnit(i, 'year', locale)
     assertByUnit(i, 'month', locale)
     assertByUnit(i, 'hour', locale)
