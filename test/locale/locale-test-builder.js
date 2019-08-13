@@ -2,6 +2,17 @@ import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 
+function assertByUnit(i, unit, locale) {
+  const dayjsInstance = () => dayjs().locale(locale)
+  const momentInstance = () => moment().locale(locale)
+
+  expect(dayjsInstance().subtract(i, unit).fromNow())
+    .toEqual(momentInstance().subtract(i, unit).fromNow())
+
+  expect(dayjsInstance().add(i, unit).fromNow())
+    .toEqual(momentInstance().add(i, unit).fromNow())
+}
+
 export function testFormat(locale) {
   for (let i = 1; i <= 7; i += 1) {
     const dayjsInstance = dayjs()
@@ -21,46 +32,11 @@ export function testFormat(locale) {
 
 export function testRelativeTime(locale) {
   dayjs.extend(relativeTime);
-  for (let i = 1; i <= 30; i++) {
-    const dayjsInstance = () => dayjs().locale(locale)
-    const momentInstance = () => moment().locale(locale)
 
-    expect(
-      dayjsInstance()
-        .subtract(i, 'days')
-        .fromNow()
-    ).toEqual(
-      momentInstance()
-        .subtract(i, 'days')
-        .fromNow()
-    )
-    expect(
-      dayjsInstance()
-        .subtract(i, 'minutes')
-        .fromNow()
-    ).toEqual(
-      momentInstance()
-        .subtract(i, 'minutes')
-        .fromNow()
-    )
-
-    expect(
-      dayjsInstance()
-        .add(i, 'days')
-        .fromNow()
-    ).toEqual(
-      momentInstance()
-        .add(i, 'days')
-        .fromNow()
-    )
-    expect(
-      dayjsInstance()
-        .add(i, 'minutes')
-        .fromNow()
-    ).toEqual(
-      momentInstance()
-        .add(i, 'minutes')
-        .fromNow()
-    )
+  for (let i = 0; i <= 32; i += 1) {
+    assertByUnit(i, 'years', locale);
+    assertByUnit(i, 'months', locale);
+    assertByUnit(i, 'hours', locale);
+    assertByUnit(i, 'minutes', locale);
   }
 }

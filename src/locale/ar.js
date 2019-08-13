@@ -1,16 +1,16 @@
 import dayjs from 'dayjs'
 
 const symbolMap = {
-  '1': '١',
-  '2': '٢',
-  '3': '٣',
-  '4': '٤',
-  '5': '٥',
-  '6': '٦',
-  '7': '٧',
-  '8': '٨',
-  '9': '٩',
-  '0': '٠'
+  1: '١',
+  2: '٢',
+  3: '٣',
+  4: '٤',
+  5: '٥',
+  6: '٦',
+  7: '٧',
+  8: '٨',
+  9: '٩',
+  0: '٠'
 };
 const numberMap = {
   '١': '1',
@@ -25,9 +25,7 @@ const numberMap = {
   '٠': '0'
 }
 
-const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
-  '_'
-)
+const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_');
 const plurals = {
   s: [
     'أقل من ثانية',
@@ -79,27 +77,31 @@ const plurals = {
   ]
 }
 
-const pluralForm = function(n) {
-  return n === 0
-    ? 0
-    : n === 1
-    ? 1
-    : n === 2
-    ? 2
-    : n % 100 >= 3 && n % 100 <= 10
-    ? 3
-    : n % 100 >= 11
-    ? 4
-    : 5
+const pluralForm = function (n) {
+  if (n === 0) {
+    return 0
+  } else if (n === 1) {
+    return 1
+  } else if (n === 2) {
+    return 2
+  } else if (n % 100 >= 3 && n % 100 <= 10) {
+    return 3
+  } else if (n % 100 >= 11) {
+    return 4
+  }
+
+  return 5
 }
 
-const pluralize = function(u) {
-  return function(number, withoutSuffix) {
-    var f = pluralForm(number),
-      str = plurals[u][pluralForm(number)]
+const pluralize = function (u) {
+  return function (number, withoutSuffix) {
+    const f = pluralForm(number)
+    let str = plurals[u][pluralForm(number)]
+
     if (f === 2) {
       str = str[withoutSuffix ? 0 : 1]
     }
+
     return str.replace(/%d/i, number)
   }
 }
@@ -112,19 +114,11 @@ const locale = {
   months,
   monthsShort: months,
   weekStart: 6,
-  preparse: function (string) {
-    return string.replace(/[١٢٣٤٥٦٧٨٩٠]/g, function (match) {
-        return numberMap[match];
-    }).replace(/،/g, ',');
-  },
-  postFormat: function (string) {
-    return string.replace(/\d/g, function (match) {
-        return symbolMap[match];
-    }).replace(/,/g, '،');
-  },
+  preparse: string => string.replace(/[١٢٣٤٥٦٧٨٩٠]/g, match => numberMap[match]).replace(/،/g, ','),
+  postFormat: string => string.replace(/\d/g, match => symbolMap[match].replace(/,/g, '،')),
   relativeTime: {
-    future : 'بعد %s',
-    past : 'منذ %s',
+    future: 'بعد %s',
+    past: 'منذ %s',
     s: 'ثانية واحدة',
     m: 'دقيقة واحدة',
     mm: pluralize('m'),

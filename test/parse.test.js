@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import ar from '../src/locale/ar';
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -125,3 +126,7 @@ it('Clone with same value', () => {
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
 })
+
+it('Parses with preparser', () => {
+  expect(dayjs('٢٠١٨-٠١-٠١', { locale: ar }).format('YYYY-MM-DD')).toEqual('٢٠١٨-٠١-٠١');
+});

@@ -326,11 +326,13 @@ class Dayjs {
       Z: zoneStr // 'ZZ' logic below
     }
 
-    if (locale.postFormat) {
-      return locale.postFormat(str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')));
+    const result = str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''));
+
+    if (!locale.postFormat) {
+      return result;
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
+    return locale.postFormat(result);
   }
 
   utcOffset() {
