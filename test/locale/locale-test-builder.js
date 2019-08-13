@@ -2,7 +2,7 @@ import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 
-function assertByUnit(i, unit, locale) {
+const assertByUnit = (i, unit, locale) => {
   const dayjsInstance = () => dayjs().locale(locale)
   const momentInstance = () => moment().locale(locale)
 
@@ -13,7 +13,7 @@ function assertByUnit(i, unit, locale) {
     .toEqual(momentInstance().add(i, unit).fromNow())
 }
 
-export function testFormat(locale) {
+export const testFormat = (locale) => {
   for (let i = 1; i <= 7; i += 1) {
     const dayjsInstance = dayjs()
       .locale(locale)
@@ -30,7 +30,7 @@ export function testFormat(locale) {
   }
 }
 
-export function testRelativeTime(locale) {
+export const testRelativeTime = (locale) => {
   dayjs.extend(relativeTime);
 
   for (let i = 0; i <= 32; i += 1) {
