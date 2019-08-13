@@ -27,9 +27,10 @@ export const testFormat = (locale) => {
     expect(dayjsInstance.format(testFormat1)).toEqual(momentInstance.format(testFormat1))
     expect(dayjsInstance.format(testFormat2)).toEqual(momentInstance.format(testFormat2))
     expect(dayjsInstance.format(testFormat3)).toEqual(momentInstance.format(testFormat3))
-    expect(dayjs('2019-07-11').locale(locale).format('MMMM D'))
-      .toEqual(moment('2019-07-11').locale(locale).format('MMMM D'))
   }
+
+  expect(dayjs('2019-07-11').locale(locale).format('MMMM D'))
+    .toEqual(moment('2019-07-11').locale(locale).format('MMMM D'))
 }
 
 export const testRelativeTime = (locale) => {
