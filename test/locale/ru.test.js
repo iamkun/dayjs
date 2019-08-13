@@ -1,6 +1,6 @@
 import MockDate from 'mockdate'
 import '../../src/locale/ru'
-import { testFormat, testRelativeTime } from './locale-test-builder';
+import { testFormat, testRelativeTime } from './locale-test-builder'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -11,9 +11,9 @@ afterEach(() => {
 })
 
 it('Formats Month with Russian locale function', () => {
-  testFormat('ru');
+  testFormat('ru')
 })
 
 it('formats relative time for Russian locale', () => {
-  testRelativeTime('ru');
+  testRelativeTime('ru')
 })

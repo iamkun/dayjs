@@ -15,7 +15,7 @@ const plural = (word, num) => {
     return forms[1]
   }
 
-  return forms[2];
+  return forms[2]
 }
 
 const relativeTimeWithPlural = (number, withoutSuffix, key) => {
@@ -26,12 +26,12 @@ const relativeTimeWithPlural = (number, withoutSuffix, key) => {
     dd: 'день_дня_дней',
     MM: 'месяц_месяца_месяцев',
     yy: 'год_года_лет'
-  };
+  }
   if (key === 'm') {
-    return withoutSuffix ? 'минута' : 'минуту';
+    return withoutSuffix ? 'минута' : 'минуту'
   }
 
-  return `${number} ${plural(format[key], +number)}`;
+  return `${number} ${plural(format[key], +number)}`
 }
 
 const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/

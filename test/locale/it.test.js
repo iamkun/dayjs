@@ -1,6 +1,6 @@
 import MockDate from 'mockdate'
-import '../../src/locale/it';
-import { testFormat, testRelativeTime } from './locale-test-builder';
+import '../../src/locale/it'
+import { testFormat, testRelativeTime } from './locale-test-builder'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -11,9 +11,9 @@ afterEach(() => {
 })
 
 it('Format Month with Italian locale function', () => {
-  testFormat('it');
+  testFormat('it')
 })
 
 it('formats relative time for Italian locale', () => {
-  testRelativeTime('it');
+  testRelativeTime('it')
 })

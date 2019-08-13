@@ -1,29 +1,29 @@
 import dayjs from 'dayjs'
 
-const monthsNominative = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split('_');
-const monthsSubjective = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split('_');
+const monthsNominative = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split('_')
+const monthsSubjective = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split('_')
 
-const plural = n => (n % 10 < 5) && (n % 10 > 1) && ((Math.floor(n / 10) % 10) !== 1);
+const plural = n => (n % 10 < 5) && (n % 10 > 1) && ((Math.floor(n / 10) % 10) !== 1)
 
 const translate = (number, withoutSuffix, key) => {
-  const result = `${number} `;
+  const result = `${number} `
   switch (key) {
     case 'ss':
-      return result + (plural(number) ? 'sekundy' : 'sekund');
+      return result + (plural(number) ? 'sekundy' : 'sekund')
     case 'm':
-      return withoutSuffix ? 'minuta' : 'minutę';
+      return withoutSuffix ? 'minuta' : 'minutę'
     case 'mm':
-      return result + (plural(number) ? 'minuty' : 'minut');
+      return result + (plural(number) ? 'minuty' : 'minut')
     case 'h':
-      return withoutSuffix ? 'godzina' : 'godzinę';
+      return withoutSuffix ? 'godzina' : 'godzinę'
     case 'hh':
-      return result + (plural(number) ? 'godziny' : 'godzin');
+      return result + (plural(number) ? 'godziny' : 'godzin')
     case 'MM':
-      return result + (plural(number) ? 'miesiące' : 'miesięcy');
+      return result + (plural(number) ? 'miesiące' : 'miesięcy')
     case 'yy':
-      return result + (plural(number) ? 'lata' : 'lat');
+      return result + (plural(number) ? 'lata' : 'lat')
     default:
-      return result;
+      return result
   }
 }
 
@@ -34,10 +34,10 @@ const locale = {
   weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
   months: (dayjsInstance, format) => {
     if (/D MMMM/.test(format)) {
-      return monthsSubjective[dayjsInstance.month()];
+      return monthsSubjective[dayjsInstance.month()]
     }
 
-    return monthsNominative[dayjsInstance.month()];
+    return monthsNominative[dayjsInstance.month()]
   },
   monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
   ordinal: n => `${n}.`,

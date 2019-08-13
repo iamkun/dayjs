@@ -53,7 +53,7 @@ const parseDate = (cfg) => {
   if (date instanceof Date) return new Date(date)
   if (typeof date === 'string') {
     if (cfg.locale && cfg.locale.preparse) {
-      date = cfg.locale.preparse(date);
+      date = cfg.locale.preparse(date)
     }
     if (!/Z$/i.test(date)) {
       const d = date.match(C.REGEX_PARSE)
@@ -326,13 +326,13 @@ class Dayjs {
       Z: zoneStr // 'ZZ' logic below
     }
 
-    const result = str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''));
+    const result = str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', ''))
 
     if (!locale.postFormat) {
-      return result;
+      return result
     }
 
-    return locale.postFormat(result);
+    return locale.postFormat(result)
   }
 
   utcOffset() {
