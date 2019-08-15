@@ -45,7 +45,7 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
-const parseDate = (cfg) => {
+const parseDate = cfg => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
@@ -241,7 +241,7 @@ class Dayjs {
   add(number, units) {
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
-    const instanceFactorySet = (n) => {
+    const instanceFactorySet = n => {
       const d = dayjs(this)
       return Utils.w(d.date(d.date() + Math.round(n * number)), this)
     }

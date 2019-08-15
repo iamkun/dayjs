@@ -6,7 +6,7 @@ const padStart = (string, length, pad) => {
   return `${Array((length + 1) - s.length).join(pad)}${string}`
 }
 
-const padZoneStr = (instance) => {
+const padZoneStr = instance => {
   const negMinuts = -instance.utcOffset()
   const minutes = Math.abs(negMinuts)
   const hourOffset = Math.floor(minutes / 60)
@@ -26,7 +26,7 @@ const monthDiff = (a, b) => {
 
 const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
 
-const prettyUnit = (u) => {
+const prettyUnit = u => {
   const special = {
     M: C.M,
     y: C.Y,

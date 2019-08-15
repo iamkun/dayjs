@@ -3,7 +3,7 @@ import { FORMAT_DEFAULT } from '../../constant'
 export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
-  d.en.ordinal = (number) => {
+  d.en.ordinal = number => {
     const s = ['th', 'st', 'nd', 'rd']
     const v = number % 100
     return `[${number}${(s[(v - 20) % 10] || s[v] || s[0])}]`
@@ -13,7 +13,7 @@ export default (o, c, d) => { // locale needed later
     const locale = this.$locale()
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/\[([^\]]+)]|Q|wo|gggg|Do|X|x|k{1,2}|S/g, (match) => {
+    const result = str.replace(/\[([^\]]+)]|Q|wo|gggg|Do|X|x|k{1,2}|S/g, match => {
       switch (match) {
         case 'Q':
           return Math.ceil((this.$M + 1) / 3)
