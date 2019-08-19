@@ -1,5 +1,5 @@
 import MockDate from 'mockdate'
-// import moment from 'moment'
+import moment from 'moment-timezone'
 import dayjs from '../../src'
 import timezone from '../../src/plugin/timezome'
 
@@ -13,14 +13,27 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Basic timezone format', () => {
+describe('Basic timezone format', () => {
   const dateStr = '2019-08-19T16:15:00+08:00'
-  const LATZString = 'america/los_angeles'
+  const LATZString = 'America/Los_Angeles'
   const TokyoTZString = 'Asia/Tokyo'
   const formatToken = 'YYYY-MM-DD HH:mm:ss'
-  expect(dayjs(dateStr).tz(LATZString).format(formatToken)).toEqual('2019-08-19 01:15:00')
-  expect(dayjs(dateStr).tz(TokyoTZString).format(formatToken)).toEqual('2019-08-19 17:15:00')
+  it('dayjs().tz', () => {
+    const d1 = dayjs(dateStr).tz(LATZString).format(formatToken)
+    const d2 = dayjs(dateStr).tz(TokyoTZString).format(formatToken)
+    expect(d1).toEqual('2019-08-19 01:15:00')
+    expect(d1).toEqual(moment(dateStr).tz(LATZString).format(formatToken))
+    expect(d2).toEqual('2019-08-19 17:15:00')
+    expect(d2).toEqual(moment(dateStr).tz(TokyoTZString).format(formatToken))
+  })
 
-  expect(dayjs.tz(dateStr, LATZString).format(formatToken)).toEqual('2019-08-19 01:15:00')
-  expect(dayjs.tz(dateStr, TokyoTZString).format(formatToken)).toEqual('2019-08-19 17:15:00')
+  it('dayjs.tz', () => {
+    const d1 = dayjs.tz(dateStr, LATZString).format(formatToken)
+    const d2 = dayjs.tz(dateStr, TokyoTZString).format(formatToken)
+    expect(d1).toEqual('2019-08-19 01:15:00')
+    expect(d1).toEqual(moment.tz(dateStr, LATZString).format(formatToken))
+    expect(d2).toEqual('2019-08-19 17:15:00')
+    expect(d2).toEqual(moment.tz(dateStr, TokyoTZString).format(formatToken))
+  })
 })
+

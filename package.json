@@ -86,6 +86,7 @@
     "karma-sauce-launcher": "^1.1.0",
     "mockdate": "^2.0.2",
     "moment": "^2.22.0",
+    "moment-timezone": "^0.5.26",
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.16.1",
