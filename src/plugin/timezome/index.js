@@ -22,7 +22,7 @@ export default (o, c, d) => {
     const zoneTime = new Date(localTimeObj.toLocaleString('en-US', { timeZone: timezone }))
     const iDifference = (localTimeObj - zoneTime) / 1000 / 60
     const actualLocalTime = localTime.add(iDifference, 'minute')
-    return actualLocalTime
+    return d(actualLocalTime).tz(timezone)
   }
 }
 
