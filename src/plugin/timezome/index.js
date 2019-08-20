@@ -1,5 +1,12 @@
 export default (o, c, d) => {
   const proto = c.prototype
+  const oldUtcOffset = proto.utcOffset
+  proto.utcOffset = function () {
+    if (this.$utcOffset) {
+      return this.$utcOffset
+    }
+    return oldUtcOffset.call(this)
+  }
   proto.tz = function (timezone) {
     const localDateObj = this.toDate()
     const intlFormatedString = localDateObj.toLocaleString('en-US', {
@@ -22,7 +29,10 @@ export default (o, c, d) => {
     const zoneTime = new Date(localTimeObj.toLocaleString('en-US', { timeZone: timezone }))
     const iDifference = (localTimeObj - zoneTime) / 1000 / 60
     const actualLocalTime = localTime.add(iDifference, 'minute')
-    return d(actualLocalTime).tz(timezone)
+    const result = d(actualLocalTime).tz(timezone)
+    const localUtcOffset = result.utcOffset()
+    result.$utcOffset = localUtcOffset - iDifference
+    return result
   }
 }
 
