@@ -14,7 +14,15 @@ export default (o, c, d) => {
     return d(standardFormatedString)
   }
   d.tz = function (input, timezone) {
-    return d(input).tz(timezone)
+    const REGEX_OFFSET = /((-|\+)\d\d:\d\d|\.\d+|Z)+$/
+    const offset = typeof input === 'string' && input.match(REGEX_OFFSET)
+    if (offset) return d(input).tz(timezone)
+    const localTime = d(input)
+    const localTimeObj = localTime.toDate()
+    const zoneTime = new Date(localTimeObj.toLocaleString('en-US', { timeZone: timezone }))
+    const iDifference = (localTimeObj - zoneTime) / 1000 / 60
+    const actualLocalTime = localTime.add(iDifference, 'minute')
+    return actualLocalTime
   }
 }
 
