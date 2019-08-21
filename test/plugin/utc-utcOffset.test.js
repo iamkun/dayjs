@@ -24,7 +24,6 @@ it('Set utcOffset -> Get utcOffset', () => {
 
   expect(dayjs().utcOffset(-60).format()).toBe(moment().utcOffset(-60).format())
   expect(dayjs().utcOffset(-8).format()).toBe(moment().utcOffset(-8).format())
-  expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
 })
 
 it('valueOf, toDate, toString, toISOString should be the same as original', () => {
@@ -51,4 +50,9 @@ it('immutable', () => {
   const du = d.utcOffset(9)
   expect(d.utcOffset()).not.toBe(du.utcOffset())
   expect(d.format()).not.toBe(du.format())
+})
+
+it('utcOffset(0) enable utc mode', () => {
+  expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
+  expect(dayjs().utcOffset(0).isUTC()).toBeTruthy()
 })
