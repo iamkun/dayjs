@@ -24,7 +24,7 @@ it('Set utcOffset -> Get utcOffset', () => {
 
   expect(dayjs().utcOffset(-60).format()).toBe(moment().utcOffset(-60).format())
   expect(dayjs().utcOffset(-8).format()).toBe(moment().utcOffset(-8).format())
-  // expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
+  expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
 })
 
 it('valueOf, toDate, toString, toISOString should be the same as original', () => {

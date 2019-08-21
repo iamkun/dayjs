@@ -59,6 +59,9 @@ export default (option, Dayjs, dayjs) => {
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     const newD = this.add(offset + localOffset, MIN)
     newD.$offset = offset
+    if (input === 0) { // UTC mode
+      newD.$u = true
+    }
     return newD
   }
 
