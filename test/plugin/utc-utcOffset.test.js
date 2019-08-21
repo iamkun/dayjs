@@ -1,9 +1,9 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import setUTCOffset from '../../src/plugin/setUTCOffset'
+import utc from '../../src/plugin/utc'
 
-dayjs.extend(setUTCOffset)
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
