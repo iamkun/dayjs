@@ -34,5 +34,11 @@ export default (option, Dayjs) => {
     return newD
   }
 
-  // todo toString valueOf toDate shoud minus back to original date
+  proto.toISOString = function () {
+    return this.toDate().toISOString()
+  }
+
+  proto.toString = function () {
+    return this.toDate().toUTCString()
+  }
 }

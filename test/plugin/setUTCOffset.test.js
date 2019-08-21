@@ -27,7 +27,7 @@ it('Set utcOffset -> Get utcOffset', () => {
   // expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
 })
 
-it('valueOf, toDate should be the same as original', () => {
+it('valueOf, toDate, toString, toISOString should be the same as original', () => {
   const d = dayjs()
   const du = dayjs().utcOffset(9)
   const mu = moment().utcOffset(9)
@@ -35,6 +35,8 @@ it('valueOf, toDate should be the same as original', () => {
   expect(du.valueOf()).toBe(mu.valueOf())
   expect(d.toDate()).toEqual(du.toDate())
   expect(du.toDate()).toEqual(mu.toDate())
+  expect(du.toISOString()).toEqual(mu.toISOString())
+  expect(d.toString()).toEqual(d.toString())
 })
 
 it('clone', () => {
