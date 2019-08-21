@@ -65,9 +65,12 @@ test('UTC mode', () => {
 })
 
 test('change hours when changing the utc offset in UTC mode', () => {
-  const d = dayjs.utc('2000-01-01T06:00:00Z')
+  const d = dayjs.utc('2000-01-01T06:31:00Z')
   expect(d.hour()).toBe(6)
   expect(d.utcOffset(0).hour()).toBe(6)
   expect(d.utcOffset(-60).hour()).toBe(5)
   expect(d.utcOffset(60).hour()).toBe(7)
+  expect(d.utcOffset(-30).format('HH:mm')).toBe('06:01')
+  expect(d.utcOffset(30).format('HH:mm')).toBe('07:01')
+  expect(d.utcOffset(-1380).format('HH:mm')).toBe('07:31')
 })
