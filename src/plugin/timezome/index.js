@@ -24,15 +24,21 @@ export default (o, c, d) => {
     const REGEX_OFFSET = /((-|\+)\d\d:\d\d|\.\d+|Z)+$/
     const offset = typeof input === 'string' && input.match(REGEX_OFFSET)
     if (offset) return d(input).tz(timezone)
-    const localTime = d(input)
-    const localTimeObj = localTime.toDate()
-    const zoneTime = new Date(localTimeObj.toLocaleString('en-US', { timeZone: timezone }))
-    const iDifference = (localTimeObj - zoneTime) / 1000 / 60
-    const actualLocalTime = localTime.add(iDifference, 'minute')
-    const result = d(actualLocalTime).tz(timezone)
-    const localUtcOffset = result.utcOffset()
-    result.$utcOffset = localUtcOffset - iDifference
-    return result
+    const local = d(input)
+    const makeTz = dayjsobj => d(new Date(dayjsobj.toDate().toLocaleString('en-US', { hour12: false, timeZone: timezone })))
+    const isGreat = makeTz(local).isBefore(local)
+    let re
+    for (let i = 0; i <= 24; i += 1) {
+      const cc = local[isGreat ? 'add' : 'subtract'](i, 'hour')
+      const compare = makeTz(cc)
+      if (compare[isGreat ? 'isAfter' : 'isBefore'](local) || compare.isSame(local)) {
+        re = cc
+        break
+      }
+    }
+    const localTime = d(re)
+    localTime.$utcOffset = 300
+    return localTime
   }
 }
 
