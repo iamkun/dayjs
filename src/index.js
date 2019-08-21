@@ -264,7 +264,7 @@ class Dayjs {
       [C.S]: C.MILLISECONDS_A_SECOND
     }[unit] || 1 // ms
 
-    const nextTimeStamp = this.valueOf() + (number * step)
+    const nextTimeStamp = this.$d.getTime() + (number * step)
     return Utils.w(nextTimeStamp, this)
   }
 
@@ -371,7 +371,7 @@ class Dayjs {
   }
 
   toDate() {
-    return new Date(this.$d)
+    return new Date(this.valueOf())
   }
 
   toJSON() {
