@@ -10,7 +10,8 @@ export default (option, Dayjs) => {
   }
 
   proto.valueOf = function () {
-    return this.$d.valueOf() - (((this.$offset || 0) + localOffset) * 60000)
+    const addedOffset = !this.$utils().u(this.$offset) ? (this.$offset || 0) + localOffset : 0
+    return this.$d.valueOf() - (addedOffset * 60000)
   }
 
   const oldUtcOffset = proto.utcOffset
