@@ -29,8 +29,9 @@ export default (option, Dayjs) => {
       return oldUtcOffset.call(this)
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    this.$offset = offset
-    return this.add(offset + localOffset, MIN)
+    const newD = this.add(offset + localOffset, MIN)
+    newD.$offset = offset
+    return newD
   }
 
   // todo toString valueOf toDate shoud minus back to original date

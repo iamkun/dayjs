@@ -36,3 +36,17 @@ it('valueOf, toDate should be the same as original', () => {
   expect(d.toDate()).toEqual(du.toDate())
   expect(du.toDate()).toEqual(mu.toDate())
 })
+
+it('clone', () => {
+  const du = dayjs().utcOffset(9)
+  const du2 = du.clone()
+  expect(du.valueOf()).toBe(du2.valueOf())
+  expect(du.format()).toBe(du2.format())
+})
+
+it('immutable', () => {
+  const d = dayjs()
+  const du = d.utcOffset(9)
+  expect(d.utcOffset()).not.toBe(du.utcOffset())
+  expect(d.format()).not.toBe(du.format())
+})

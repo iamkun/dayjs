@@ -367,7 +367,7 @@ class Dayjs {
   }
 
   clone() {
-    return Utils.w(this.toDate(), this)
+    return Utils.w(this.$d, this)
   }
 
   toDate() {
