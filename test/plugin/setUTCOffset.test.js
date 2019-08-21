@@ -13,7 +13,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('UTC Year', () => {
+it('Set utcOffset -> Get utcOffset', () => {
   expect(dayjs().utcOffset(540).utcOffset()).toBe(moment().utcOffset(540).utcOffset())
   expect(dayjs().utcOffset(540).format()).toBe(moment().utcOffset(540).format())
   expect(dayjs().utcOffset(60).format()).toBe(moment().utcOffset(60).format())
