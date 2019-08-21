@@ -40,9 +40,10 @@ it('valueOf, toDate, toString, toISOString should be the same as original', () =
 
 it('clone', () => {
   const du = dayjs().utcOffset(9)
-  const du2 = du.clone()
-  expect(du.valueOf()).toBe(du2.valueOf())
-  expect(du.format()).toBe(du2.format())
+  const duClone = du.clone()
+  expect(du.valueOf()).toBe(duClone.valueOf())
+  expect(du.format()).toBe(duClone.format())
+  expect(du.utcOffset()).toBe(duClone.utcOffset())
 })
 
 it('immutable', () => {
