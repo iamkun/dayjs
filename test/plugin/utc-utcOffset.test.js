@@ -56,3 +56,18 @@ it('utcOffset(0) enable utc mode', () => {
   expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
   expect(dayjs().utcOffset(0).isUTC()).toBeTruthy()
 })
+
+test('UTC mode', () => {
+  const d = dayjs.utc('2000-01-01T06:00:00Z')
+  expect(d.isUTC()).toBeTruthy()
+  expect(d.utcOffset(0).isUTC()).toBeTruthy()
+  expect(d.utcOffset(1).isUTC()).toBeFalsy()
+})
+
+test('change hours when changing the utc offset in UTC mode', () => {
+  const d = dayjs.utc('2000-01-01T06:00:00Z')
+  expect(d.hour()).toBe(6)
+  expect(d.utcOffset(0).hour()).toBe(6)
+  expect(d.utcOffset(-60).hour()).toBe(5)
+  expect(d.utcOffset(60).hour()).toBe(7)
+})

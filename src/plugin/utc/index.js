@@ -57,10 +57,12 @@ export default (option, Dayjs, dayjs) => {
       return oldUtcOffset.call(this)
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    const newD = this.add(offset + localOffset, MIN)
+    const newD = this.add(offset + (this.$u ? 0 : localOffset), MIN)
     newD.$offset = offset
     if (input === 0) { // UTC mode
       newD.$u = true
+    } else {
+      newD.$u = false
     }
     return newD
   }
@@ -73,7 +75,8 @@ export default (option, Dayjs, dayjs) => {
   }
 
   proto.valueOf = function () {
-    const addedOffset = !this.$utils().u(this.$offset) ? this.$offset + localOffset : 0
+    const addedOffset = !this.$utils().u(this.$offset)
+      ? this.$offset + (this.$u ? 0 : localOffset) : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 
