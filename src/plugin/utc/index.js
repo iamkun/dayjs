@@ -70,7 +70,7 @@ export default (option, Dayjs, dayjs) => {
   }
 
   proto.valueOf = function () {
-    const addedOffset = !this.$utils().u(this.$offset) ? (this.$offset || 0) + localOffset : 0
+    const addedOffset = !this.$utils().u(this.$offset) ? this.$offset + localOffset : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 
