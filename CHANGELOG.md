@@ -1,3 +1,18 @@
+## [1.8.16](https://github.com/iamkun/dayjs/compare/v1.8.15...v1.8.16) (2019-08-27)
+
+
+### Bug Fixes
+
+* Fix relativeTime Plugin .FromNow() result error in UTC mode ([a385d5c](https://github.com/iamkun/dayjs/commit/a385d5c))
+* Handle locale in WeekOfYear plugin ([#658](https://github.com/iamkun/dayjs/issues/658)) ([0e45b0a](https://github.com/iamkun/dayjs/commit/0e45b0a))
+* LocaleData plugin returns all months and weekdays data when pas no argument ([#645](https://github.com/iamkun/dayjs/issues/645)) ([95e70b4](https://github.com/iamkun/dayjs/commit/95e70b4))
+* Return null in toJSON if not valid ([#633](https://github.com/iamkun/dayjs/issues/633)) ([19affc8](https://github.com/iamkun/dayjs/commit/19affc8))
+* Update Danish (da) locale ([#626](https://github.com/iamkun/dayjs/issues/626)) ([ac2ec77](https://github.com/iamkun/dayjs/commit/ac2ec77))
+* Update Korean locale meridiem ([#642](https://github.com/iamkun/dayjs/issues/642)) ([b457146](https://github.com/iamkun/dayjs/commit/b457146))
+* update Occitan locale Catalan locale ([#630](https://github.com/iamkun/dayjs/issues/630)) ([fef135e](https://github.com/iamkun/dayjs/commit/fef135e))
+* update pt-br locale ([#628](https://github.com/iamkun/dayjs/issues/628)) ([ccf596d](https://github.com/iamkun/dayjs/commit/ccf596d))
+* Update weekdaysShort to some locale files ([#643](https://github.com/iamkun/dayjs/issues/643)) ([cc1f15f](https://github.com/iamkun/dayjs/commit/cc1f15f))
+
 ## [1.8.15](https://github.com/iamkun/dayjs/compare/v1.8.14...v1.8.15) (2019-07-08)
 
 
