@@ -1,7 +1,7 @@
 import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
-import timezone from '../../src/plugin/timezome'
+import timezone from '../../src/plugin/timezone'
 
 dayjs.extend(timezone)
 
