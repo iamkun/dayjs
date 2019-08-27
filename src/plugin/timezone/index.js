@@ -30,7 +30,7 @@ export default (o, c, d) => {
       }
     }
     const localTime = d(re)
-    return localTime.utcOffset(300)
+    return localTime.utcOffset(-420)
   }
 }
 

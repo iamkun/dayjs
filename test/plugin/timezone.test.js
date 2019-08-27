@@ -56,15 +56,24 @@ afterEach(() => {
 // })
 
 describe('Parse date string without zone (target zone time)', () => {
-  const dateStr = '2017-03-12 02:00:00'
+  const dateStr = '2017-03-11 02:00:00'
+  const dateDstStr = '2017-03-12 02:00:00'
+  // parse result 2017-03-12T03:00:00-07:00 (DST)
   const LATZString = 'America/Los_Angeles'
   // const TokyoTZString = 'Asia/Tokyo'
-  // const formatToken = 'YYYY-MM-DD HH:mm:ss'
 
   it('dayjs.tz', () => {
-    const d1 = dayjs.tz(dateStr, LATZString).toDate()
-    const d2 = moment.tz(dateStr, LATZString).toDate()
-    expect(d1).toEqual(d2)
+    const d1 = dayjs.tz(dateStr, LATZString)
+    const m1 = moment.tz(dateStr, LATZString)
+    expect(d1.toDate()).toEqual(m1.toDate())
+    expect(d1.format()).toEqual('2017-03-11T02:00:00-08:00')
+    expect(d1.format()).toEqual(m1.format())
+    // DST
+    const d2 = dayjs.tz(dateDstStr, LATZString)
+    const m2 = moment.tz(dateDstStr, LATZString)
+    expect(d2.toDate()).toEqual(m2.toDate())
+    expect(d2.format()).toEqual('2017-03-12T03:00:00-07:00')
+    expect(d2.format()).toEqual(m2.format())
   })
 })
 
