@@ -1,3 +1,4 @@
+// We don't need weekdaysShort, weekdaysMin, monthsShort in en.js locale
 export default {
   name: 'en',
   weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),

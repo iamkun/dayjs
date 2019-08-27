@@ -1,9 +1,14 @@
 import dayjs from 'dayjs'
 
+const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
+
 const locale = {
   name: 'ar',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
-  months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_'),
+  weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+  weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+  months,
+  monthsShort: months,
   weekStart: 6,
   relativeTime: {
     future: 'بعد %s',
@@ -34,4 +39,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

@@ -2,10 +2,11 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'oc-lnc',
-  weekdays: 'Dimenge_Diluns_Dimars_Dimècres_Dijòus_Divendres_Dissabte'.split('_'),
+  weekdays: 'dimenge_diluns_dimars_dimècres_dijòus_divendres_dissabte'.split('_'),
   weekdaysShort: 'Dg_Dl_Dm_Dc_Dj_Dv_Ds'.split('_'),
-  months: 'Genièr_Febrièr_Març_Abrial_Mai_Junh_Julhet_Agost_Setembre_Octòbre_Novembre_Decembre'.split('_'),
-  monthsShort: 'Gen_Feb_Març_Abr_Mai_Junh_Julh_Ago_Set_Oct_Nov_Dec'.split('_'),
+  weekdaysMin: 'dg_dl_dm_dc_dj_dv_ds'.split('_'),
+  months: 'genièr_febrièr_març_abrial_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split('_'),
+  monthsShort: 'gen_feb_març_abr_mai_junh_julh_ago_set_oct_nov_dec'.split('_'),
   weekStart: 1,
   formats: {
     LT: 'H:mm',
@@ -16,7 +17,7 @@ const locale = {
     LLLL: 'dddd D MMMM [de] YYYY [a] H:mm'
   },
   relativeTime: {
-    future: 'en %s',
+    future: 'd\'aquí %s',
     past: 'fa %s',
     s: 'unas segondas',
     m: 'una minuta',

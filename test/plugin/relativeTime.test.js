@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(relativeTime)
 
@@ -70,7 +71,6 @@ it('Time from now', () => {
   expect(dayjs().fromNow(true)).toBe(moment().fromNow(true))
 })
 
-
 it('Time to now', () => {
   expect(dayjs().toNow()).toBe(moment().toNow())
   expect(dayjs().toNow(true)).toBe(moment().toNow(true))
@@ -81,4 +81,27 @@ it('Time to X', () => {
   expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
   // past date
   expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
+})
+
+// https://github.com/iamkun/dayjs/issues/646
+it('Time from now with UTC', () => {
+  dayjs.extend(utc)
+
+  expect(dayjs.utc().fromNow()).toBe(moment.utc().fromNow())
+
+  const currentTime = new Date()
+  const currentTimestamp = currentTime.getTime()
+  const currentTimestampAfter37hrs = currentTimestamp + (37 * 60 * 60 * 1000)
+
+  let dutc = dayjs.utc(currentTimestampAfter37hrs)
+  let mutc = moment.utc(currentTimestampAfter37hrs)
+
+  expect(dutc.fromNow()).toBe(mutc.fromNow())
+
+  // More precise
+  const currentTimestampAfter36hrs = currentTimestamp + (36.0001 * 60 * 60 * 1000)
+  dutc = dayjs.utc(currentTimestampAfter36hrs)
+  mutc = moment.utc(currentTimestampAfter36hrs)
+
+  expect(dutc.fromNow()).toBe(mutc.fromNow())
 })

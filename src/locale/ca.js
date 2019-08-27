@@ -3,7 +3,10 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ca',
   weekdays: 'Diumenge_Dilluns_Dimarts_Dimecres_Dijous_Divendres_Dissabte'.split('_'),
+  weekdaysShort: 'Dg._Dl._Dt._Dc._Dj._Dv._Ds.'.split('_'),
+  weekdaysMin: 'Dg_Dl_Dt_Dc_Dj_Dv_Ds'.split('_'),
   months: 'Gener_Febrer_Març_Abril_Maig_Juny_Juliol_Agost_Setembre_Octubre_Novembre_Desembre'.split('_'),
+  monthsShort: 'Gen._Febr._Març_Abr._Maig_Juny_Jul._Ag._Set._Oct._Nov._Des.'.split('_'),
   weekStart: 1,
   formats: {
     LT: 'H:mm',
@@ -17,7 +20,7 @@ const locale = {
     llll: 'ddd D MMM YYYY, H:mm'
   },
   relativeTime: {
-    future: 'en %s',
+    future: 'd\'aquí %s',
     past: 'fa %s',
     s: 'uns segons',
     m: 'un minut',
@@ -37,4 +40,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

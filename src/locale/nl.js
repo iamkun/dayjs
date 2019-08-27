@@ -3,6 +3,8 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'nl',
   weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
+  weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
+  weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
   months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
   monthsShort: 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
   ordinal: n => `${n}.`,
@@ -35,4 +37,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
