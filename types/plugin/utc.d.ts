@@ -11,6 +11,8 @@ declare module 'dayjs' {
     local(): Dayjs
 
     isUTC(): boolean
+
+    utcOffset(offset: number): Dayjs
   }
 
   export function utc(config?: ConfigType, format?: string): Dayjs
