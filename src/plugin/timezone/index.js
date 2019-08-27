@@ -1,12 +1,5 @@
 export default (o, c, d) => {
   const proto = c.prototype
-  const oldUtcOffset = proto.utcOffset
-  proto.utcOffset = function () {
-    if (this.$utcOffset) {
-      return this.$utcOffset
-    }
-    return oldUtcOffset.call(this)
-  }
   proto.tz = function (timezone) {
     const localDateObj = this.toDate()
     const intlFormatedString = localDateObj.toLocaleString('en-US', {
@@ -37,8 +30,7 @@ export default (o, c, d) => {
       }
     }
     const localTime = d(re)
-    localTime.$utcOffset = 300
-    return localTime
+    return localTime.utcOffset(300)
   }
 }
 
