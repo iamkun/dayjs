@@ -248,6 +248,7 @@ it('As Javascript Date -> toDate', () => {
 
 it('As JSON -> toJSON', () => {
   expect(dayjs().toJSON()).toBe(moment().toJSON())
+  global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
   expect(dayjs('otherString').toJSON()).toBe(moment('otherString').toJSON())
   expect(dayjs('otherString').toJSON()).toBe(null)
 })

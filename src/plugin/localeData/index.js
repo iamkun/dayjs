@@ -1,16 +1,23 @@
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
+  const getShort = (ins, target, full, num) => {
+    const locale = ins.$locale()
+    if (!locale[target]) {
+      return locale[full].map(f => f.substr(0, num))
+    }
+    return locale[target]
+  }
   const localeData = function () {
     return {
       months: instance =>
-        (instance ? instance.format('MMMM') : this.$locale().months),
+        (instance ? instance.format('MMMM') : getShort(this, 'months')),
       monthsShort: instance =>
-        (instance ? instance.format('MMM') : this.$locale().monthsShort),
+        (instance ? instance.format('MMM') : getShort(this, 'monthsShort', 'months', 3)),
       firstDayOfWeek: () => this.$locale().weekStart || 0,
       weekdaysMin: instance =>
-        (instance ? instance.format('dd') : this.$locale().weekdaysMin),
+        (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
-        (instance ? instance.format('ddd') : this.$locale().weekdaysShort)
+        (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3))
     }
   }
   proto.localeData = function () {
