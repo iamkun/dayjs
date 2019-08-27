@@ -1,4 +1,7 @@
+import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
+
 export default (option, Dayjs, dayjs) => {
+  const localOffset = (new Date()).getTimezoneOffset()
   const proto = Dayjs.prototype
   dayjs.utc = function (date, format) {
     const cfg = { date, utc: true, format }
@@ -17,6 +20,9 @@ export default (option, Dayjs, dayjs) => {
   proto.parse = function (cfg) {
     if (cfg.utc) {
       this.$u = true
+    }
+    if (!this.$utils().u(cfg.$offset)) {
+      this.$offset = cfg.$offset
     }
     oldParse.call(this, cfg)
   }
@@ -39,11 +45,22 @@ export default (option, Dayjs, dayjs) => {
   }
 
   const oldUtcOffset = proto.utcOffset
-  proto.utcOffset = function () {
-    if (this.$u) {
-      return 0
+  proto.utcOffset = function (input) {
+    const { u } = this.$utils()
+    if (u(input)) {
+      if (this.$u) {
+        return 0
+      }
+      if (!u(this.$offset)) {
+        return this.$offset
+      }
+      return oldUtcOffset.call(this)
     }
-    return oldUtcOffset.call(this)
+    const offset = Math.abs(input) <= 16 ? input * 60 : input
+    const newD = this.add(offset + (this.$u ? 0 : localOffset), MIN)
+    newD.$offset = offset
+    newD.$u = input === 0 // UTC mode
+    return newD
   }
 
   const oldFormat = proto.format
@@ -53,7 +70,21 @@ export default (option, Dayjs, dayjs) => {
     return oldFormat.call(this, str)
   }
 
+  proto.valueOf = function () {
+    const addedOffset = !this.$utils().u(this.$offset)
+      ? this.$offset + localOffset : 0
+    return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
+  }
+
   proto.isUTC = function () {
     return !!this.$u
+  }
+
+  proto.toISOString = function () {
+    return this.toDate().toISOString()
+  }
+
+  proto.toString = function () {
+    return this.toDate().toUTCString()
   }
 }
