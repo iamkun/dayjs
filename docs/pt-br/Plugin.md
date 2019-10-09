@@ -104,14 +104,18 @@ dayjs().format('Q Do k kk X x')
 
 Lista de formatos adicionados:
 
-| Formato | Saída            | Descrição                            |
-| ------- | ---------------- | ------------------------------------ |
-| `Q`     | 1-4              | Quarter                              |
-| `Do`    | 1st 2nd ... 31st | Dia do mês com ordinal               |
-| `k`     | 1-24             | Hora (começando do 1)                |
-| `kk`    | 01-24            | Hora, com 2 dígitos (começando do 1) |
-| `X`     | 1360013296       | Unix Timestamp em segundos           |
-| `x`     | 1360013296123    | Unix Timestamp em milissegundos      |
+| Formato | Saída                 | Descrição                                             |
+| ------- | --------------------- | ----------------------------------------------------- |
+| `Q`     | 1-4                   | Quarter                                               |
+| `Do`    | 1st 2nd ... 31st      | Dia do mês com ordinal                                |
+| `k`     | 1-24                  | Hora (começando do 1)                                 |
+| `kk`    | 01-24                 | Hora, com 2 dígitos (começando do 1)                  |
+| `X`     | 1360013296            | Unix Timestamp em segundos                            |
+| `x`     | 1360013296123         | Unix Timestamp em milissegundos                       |
+| `w`     | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)              |
+| `ww`    | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)    |
+| `wo`    | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin) |
+| `gggg`  | 2017                  | Week Year (depend: weekYear plugin)                   |
 
 ### LocalizedFormat
 
