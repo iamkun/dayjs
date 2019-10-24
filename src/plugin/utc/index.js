@@ -24,6 +24,9 @@ export default (option, Dayjs, dayjs) => {
     if (!this.$utils().u(cfg.$offset)) {
       this.$offset = cfg.$offset
     }
+    if (!this.$utils().u(cfg.$lo)) {
+      this.$lo = cfg.$lo
+    }
     oldParse.call(this, cfg)
   }
 
@@ -59,6 +62,7 @@ export default (option, Dayjs, dayjs) => {
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     const newD = this.add(offset + (this.$u ? 0 : localOffset), MIN)
     newD.$offset = offset
+    newD.$lo = this.$u ? 0 : localOffset
     newD.$u = input === 0 // UTC mode
     return newD
   }
@@ -72,7 +76,7 @@ export default (option, Dayjs, dayjs) => {
 
   proto.valueOf = function () {
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + localOffset : 0
+      ? this.$offset + this.$lo : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 

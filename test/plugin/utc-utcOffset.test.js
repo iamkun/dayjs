@@ -75,3 +75,16 @@ test('change hours when changing the utc offset in UTC mode', () => {
   expect(d.utcOffset(30).format('HH:mm')).toBe('07:01')
   expect(d.utcOffset(-1380).format('HH:mm')).toBe('07:31')
 })
+
+test('utc costrustor', () => {
+  const d = new Date(2019, 8, 11, 0, 0, 0).getTime()
+  expect(moment(d).utc().utcOffset(480).valueOf())
+    .toBe(dayjs(d).utc().utcOffset(480).valueOf())
+
+  expect(moment(d).utc().local()
+    .utcOffset(480)
+    .valueOf())
+    .toBe(dayjs(d).utc().local()
+      .utcOffset(480)
+      .valueOf())
+})
