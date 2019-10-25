@@ -42,8 +42,7 @@ const wrapper = (date, instance) =>
   dayjs(date, {
     locale: instance.$L,
     utc: instance.$u,
-    $offset: instance.$offset, // todo: refactor; do not use this.$offset this.$lo in you code
-    $lo: instance.$lo // save local utcoffset; todo: refactor
+    $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
   })
 
 const Utils = U // for plugin use

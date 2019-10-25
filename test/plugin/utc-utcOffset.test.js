@@ -88,3 +88,16 @@ test('utc costrustor', () => {
       .utcOffset(480)
       .valueOf())
 })
+
+test('utc startOf', () => {
+  const d = new Date(2019, 8, 11, 0, 0, 0, 0).getTime()
+  expect(moment(d).utc().utcOffset(480).endOf('day')
+    .valueOf())
+    .toBe(dayjs(d).utc().utcOffset(480).endOf('day')
+      .valueOf())
+
+  expect(moment(d).utc().utcOffset(480).endOf('day')
+    .valueOf())
+    .toBe(dayjs(d).utc().utcOffset(480).endOf('day')
+      .valueOf())
+})
