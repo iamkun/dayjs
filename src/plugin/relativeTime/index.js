@@ -18,7 +18,15 @@ export default (o, c, d) => {
     yy: '%d years'
   }
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const loc = instance.$locale().relativeTime
+    let loc
+
+    try {
+      loc = instance.$locale().relativeTime
+    } catch (e) {
+      console.error('Tried to access locale which was not loaded. Falling back to EN.')
+      loc = d.en.relativeTime
+    }
+
     const T = [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
