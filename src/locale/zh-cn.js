@@ -42,6 +42,10 @@ const locale = {
     MM: '%d 个月',
     y: '1 年',
     yy: '%d 年'
+  },
+  meridiem: hour => {
+    // 可选, AM/PM
+    return hour > 12 ? '下午' : '上午'
   }
 }
 
