@@ -6,6 +6,8 @@
   "types": "index.d.ts",
   "module": "dayjs.min.js",
   "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
@@ -93,7 +95,8 @@
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
     "size-limit": "^0.18.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "vuepress": "^1.2.0"
   },
   "dependencies": {}
 }
