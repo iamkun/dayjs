@@ -10,7 +10,7 @@ const locale = {
   weekStart: 1,
   relativeTime: {
     future: 'через %s',
-    past: '%s назад',
+    past: '%s тому',
     s: 'декілька секунд',
     m: 'хвилина',
     mm: '%d хвилин',
