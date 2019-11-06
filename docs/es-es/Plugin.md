@@ -104,14 +104,18 @@ dayjs().format('Q Do k kk X x')
 
 Lista de formatos añadidos:
 
-| Formato | Salida        | Descripción                           |
-| ------- | ------------- | ------------------------------------- |
-| `Q`     | 1-4           | Cuarto                                |
-| `Do`    | 1º 2º ... 31º | Día del mes con ordinal               |
-| `k`     | 1-24          | Hora, contando desde 1                |
-| `kk`    | 01-24         | Hora, con 2 dígitos, contando desde 1 |
-| `X`     | 1360013296    | Tiempo Unix en segundos               |
-| `x`     | 1360013296123 | Tiempo Unix en milisegundos           |
+| Formato | Salida                | Descripción                                           |
+| ------- | --------------------- | ----------------------------------------------------- |
+| `Q`     | 1-4                   | Cuarto                                                |
+| `Do`    | 1º 2º ... 31º         | Día del mes con ordinal                               |
+| `k`     | 1-24                  | Hora, contando desde 1                                |
+| `kk`    | 01-24                 | Hora, con 2 dígitos, contando desde 1                 |
+| `X`     | 1360013296            | Tiempo Unix en segundos                               |
+| `x`     | 1360013296123         | Tiempo Unix en milisegundos                           |
+| `w`     | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)              |
+| `ww`    | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)    |
+| `wo`    | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin) |
+| `gggg`  | 2017                  | Week Year (depend: weekYear plugin)                   |
 
 ### LocalizedFormat
 
@@ -364,7 +368,7 @@ dayjs('2018 Enero 15', 'YYYY MMMM DD', 'es')
 | `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
 | `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
 | `SSS`  | 000-999          | Milliseconds, 3-digits            |
-| `Z`    | -5:00            | Offset from UTC                   |
+| `Z`    | -05:00           | Offset from UTC                   |
 | `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
 | `a`    | am pm            | Post or ante meridiem, lower-case |

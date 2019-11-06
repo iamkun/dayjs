@@ -104,14 +104,18 @@ dayjs().format('Q Do k kk X x')
 
 추가된 형식 목록:
 
-| Format | Output           | Description                  |
-| ------ | ---------------- | ---------------------------- |
-| `Q`    | 1-4              | 분기                         |
-| `Do`   | 1st 2nd ... 31st | 서수형식의 일자 명           |
-| `k`    | 1-24             | 시간, 1부터 시작             |
-| `kk`   | 01-24            | 시간, 2자리 표현, 1부터 시작 |
-| `X`    | 1360013296       | 유닉스 타임스템프, 초        |
-| `x`    | 1360013296123    | 유닉스 타임스탬프, 밀리 초   |
+| Format | Output                | Description                                           |
+| ------ | --------------------- | ----------------------------------------------------- |
+| `Q`    | 1-4                   | 분기                                                  |
+| `Do`   | 1st 2nd ... 31st      | 서수형식의 일자 명                                    |
+| `k`    | 1-24                  | 시간, 1부터 시작                                      |
+| `kk`   | 01-24                 | 시간, 2자리 표현, 1부터 시작                          |
+| `X`    | 1360013296            | 유닉스 타임스템프, 초                                 |
+| `x`    | 1360013296123         | 유닉스 타임스탬프, 밀리 초                            |
+| `w`    | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)              |
+| `ww`   | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)    |
+| `wo`   | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin) |
+| `gggg` | 2017                  | Week Year (depend: weekYear plugin)                   |
 
 ### LocalizedFormat
 
@@ -365,7 +369,7 @@ dayjs('2018 5월 15', 'YYYY MMMM DD', 'ko')
 | `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
 | `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
 | `SSS`  | 000-999          | Milliseconds, 3-digits            |
-| `Z`    | -5:00            | Offset from UTC                   |
+| `Z`    | -05:00           | Offset from UTC                   |
 | `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
 | `a`    | am pm            | Post or ante meridiem, lower-case |

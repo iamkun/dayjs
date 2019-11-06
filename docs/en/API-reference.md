@@ -302,7 +302,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 | `s`    | 0-59             | The second                            |
 | `ss`   | 00-59            | The second, 2-digits                  |
 | `SSS`  | 000-999          | The millisecond, 3-digits             |
-| `Z`    | +5:00            | The offset from UTC                   |
+| `Z`    | +05:00           | The offset from UTC                   |
 | `ZZ`   | +0500            | The offset from UTC, 2-digits         |
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |

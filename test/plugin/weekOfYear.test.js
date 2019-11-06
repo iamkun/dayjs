@@ -2,8 +2,10 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import advancedFormat from '../../src/plugin/advancedFormat'
 import '../../src/locale/en-gb'
 
+dayjs.extend(advancedFormat)
 dayjs.extend(weekOfYear)
 
 beforeEach(() => {
@@ -38,4 +40,11 @@ it('Week of year with locale', () => {
   // Edges
   expect(dayjs('2018-12-30').week()).toBe(moment('2018-12-30').week())
   expect(dayjs('2019-12-29').week()).toBe(moment('2019-12-29').week())
+})
+
+it('Format w ww wo', () => {
+  const day = '2019-07-28'
+  const D = dayjs(day)
+  const M = moment(day)
+  expect(D.format('w ww wo')).toBe(M.format('w ww wo'))
 })

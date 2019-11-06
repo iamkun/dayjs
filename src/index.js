@@ -38,7 +38,12 @@ const dayjs = (date, c, pl) => {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) => dayjs(date, { locale: instance.$L, utc: instance.$u })
+const wrapper = (date, instance) =>
+  dayjs(date, {
+    locale: instance.$L,
+    utc: instance.$u,
+    $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
+  })
 
 const Utils = U // for plugin use
 Utils.l = parseLocale
@@ -263,7 +268,7 @@ class Dayjs {
       [C.S]: C.MILLISECONDS_A_SECOND
     }[unit] || 1 // ms
 
-    const nextTimeStamp = this.valueOf() + (number * step)
+    const nextTimeStamp = this.$d.getTime() + (number * step)
     return Utils.w(nextTimeStamp, this)
   }
 
@@ -366,11 +371,11 @@ class Dayjs {
   }
 
   clone() {
-    return Utils.w(this.toDate(), this)
+    return Utils.w(this.$d, this)
   }
 
   toDate() {
-    return new Date(this.$d)
+    return new Date(this.valueOf())
   }
 
   toJSON() {
