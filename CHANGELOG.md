@@ -1,3 +1,16 @@
+## [1.8.17](https://github.com/iamkun/dayjs/compare/v1.8.16...v1.8.17) (2019-11-06)
+
+
+### Bug Fixes
+
+* Fix set utcOffset in utc mode ([d148115](https://github.com/iamkun/dayjs/commit/d148115dad8f1a5afc0a64e9b8163dfeba4616b6))
+* Update advancedFormat plugin to support w ww wo week tokens … ([#678](https://github.com/iamkun/dayjs/issues/678)) ([26cfa63](https://github.com/iamkun/dayjs/commit/26cfa63a524b803f7966dac5464f9cbf8f63387e)), closes [#676](https://github.com/iamkun/dayjs/issues/676)
+* Update ka locale weekdays ([f8ca3d4](https://github.com/iamkun/dayjs/commit/f8ca3d4ba1d3cbe41613d3909c0627935a51a0c4))
+* Update nb locale ([#679](https://github.com/iamkun/dayjs/issues/679)) ([1063b0e](https://github.com/iamkun/dayjs/commit/1063b0e1b5c19a1354d233cc0f21438e7073233a))
+* Update Polish locale (pl)([#713](https://github.com/iamkun/dayjs/issues/713)) ([30d2f02](https://github.com/iamkun/dayjs/commit/30d2f026b47188833a4f44fee4bab52467d4a718))
+* Update Ukrainian locale (uk) ([#710](https://github.com/iamkun/dayjs/issues/710)) ([360161c](https://github.com/iamkun/dayjs/commit/360161cac75f597fdd51d9d1ff138601282a1b4b))
+* UTC plugin set utcOffset value ([#668](https://github.com/iamkun/dayjs/issues/668)) ([8877883](https://github.com/iamkun/dayjs/commit/88778838e71dd309e79cd1a8094d5bea36ca3390))
+
 ## [1.8.16](https://github.com/iamkun/dayjs/compare/v1.8.15...v1.8.16) (2019-08-27)
 
 
