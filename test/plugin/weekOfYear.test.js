@@ -40,6 +40,8 @@ it('Week of year with locale', () => {
   // Edges
   expect(dayjs('2018-12-30').week()).toBe(moment('2018-12-30').week())
   expect(dayjs('2019-12-29').week()).toBe(moment('2019-12-29').week())
+  expect(dayjs('2016-01-01').week()).toBe(moment('2016-01-01').week())
+  expect(dayjs('2016-01-04').week()).toBe(moment('2016-01-04').week())
 })
 
 it('Format w ww wo', () => {
