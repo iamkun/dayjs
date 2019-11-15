@@ -42,7 +42,8 @@ const locale = {
     MM: '%d 个月',
     y: '1 年',
     yy: '%d 年'
-  }
+  },
+  meridiem: hour => (hour < 12 ? '上午' : '下午')
 }
 
 dayjs.locale(locale, null, true)
