@@ -43,21 +43,7 @@ const locale = {
     y: '1 年',
     yy: '%d 年'
   },
-  meridiem: (hour, minute) => {
-    const hm = (hour * 100) + minute
-    if (hm < 600) {
-      return '凌晨'
-    } else if (hm < 900) {
-      return '早上'
-    } else if (hm < 1130) {
-      return '上午'
-    } else if (hm < 1230) {
-      return '中午'
-    } else if (hm < 1800) {
-      return '下午'
-    }
-    return '晚上'
-  }
+  hour => (hour < 12 ? '上午' : '下午')
 }
 
 dayjs.locale(locale, null, true)
