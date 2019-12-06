@@ -55,14 +55,21 @@ const parseDate = (cfg) => {
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
-  if (typeof date === 'string' && !/Z$/i.test(date)) {
-    const d = date.match(C.REGEX_PARSE)
-    if (d) {
-      if (utc) {
-        return new Date(Date.UTC(d[1], d[2] - 1, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+  if (typeof date === 'string') {
+    if (C.REGEX_ISO8601_NO_COLON_TZ.test(date)) {
+      const dateColonized = date.replace(C.REGEX_ISO8601_NO_COLON_TZ, (string, $1, $2, $3) => `${$1}${$2}:${$3}`)
+      return new Date(dateColonized)
+    }
+
+    if (!/Z$/i.test(date)) {
+      const d = date.match(C.REGEX_PARSE)
+      if (d) {
+        if (utc) {
+          return new Date(Date.UTC(d[1], d[2] - 1, d[3]
+            || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+        }
+        return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
       }
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
     }
   }
 
