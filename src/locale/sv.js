@@ -11,7 +11,7 @@ const locale = {
   ordinal: (n) => {
     const b = n % 10
     const o = (b === 1) || (b === 2) ? 'a' : 'e'
-    return `${n}${o}`
+    return `[${n}${o}]`
   },
   formats: {
     LT: 'HH:mm',
