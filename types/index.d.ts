@@ -1,3 +1,5 @@
+/// <reference path="./locale/index.d.ts" />
+
 export = dayjs;
 declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType, locale?: string): dayjs.Dayjs
 
@@ -91,18 +93,18 @@ declare namespace dayjs {
 
     locale(): string
 
-    locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }): Dayjs
+    locale(preset: string | ILocale, object?: Partial<ILocale>): Dayjs
   }
 
   export type PluginFunc = (option: any, c: typeof Dayjs, d: typeof dayjs) => void
 
   export function extend(plugin: PluginFunc, option?: any): Dayjs
 
-  export function locale(preset: string | { name: string, [key: string]: any }, object?: { [key: string]: any }, isLocal?: boolean): string
+  export function locale(preset: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
   export function isDayjs(d: any): d is Dayjs
 
   export function unix(t: number): Dayjs
 
-  const Ls : { [key: string] :  { [key: string]: any } }
+  const Ls : { [key: string] :  ILocale }
 }

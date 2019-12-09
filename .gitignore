@@ -15,9 +15,9 @@ coverage
 # build
 /locale
 /plugin
-dayjs.min.js
+/dayjs.min.js
 /esm
-index.d.ts
+/index.d.ts
 
 #dev
 demo.js
