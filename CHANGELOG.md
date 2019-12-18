@@ -1,3 +1,18 @@
+## [1.8.18](https://github.com/iamkun/dayjs/compare/v1.8.17...v1.8.18) (2019-12-18)
+
+
+### Bug Fixes
+
+* Add missing locale type definition ([#716](https://github.com/iamkun/dayjs/issues/716)) ([cde5d0b](https://github.com/iamkun/dayjs/commit/cde5d0b91be7b2f5f3098de4aa0b9a4f0f28ea5c))
+* Fix .locale() handel unsupported locale ([78ec173](https://github.com/iamkun/dayjs/commit/78ec173fcecc1299516ab7b44f4554d431b4b2fd))
+* Update Italian locale (it) ([#727](https://github.com/iamkun/dayjs/issues/727)) ([5b53e98](https://github.com/iamkun/dayjs/commit/5b53e98c0a3ba0eb9573a9c77caeb907439be9e7))
+* Update locale (fa) ([#733](https://github.com/iamkun/dayjs/issues/733)) ([9ad2e47](https://github.com/iamkun/dayjs/commit/9ad2e47e0569b23991bb0d5578f49c792c12df08))
+* Update locale (zh-cn) ([#706](https://github.com/iamkun/dayjs/issues/706)) ([e31e544](https://github.com/iamkun/dayjs/commit/e31e54414fb90e1f54da13a117748ba37f52645d))
+* Update locale (zh-cn) meridiem ([#735](https://github.com/iamkun/dayjs/issues/735)) ([15d1b81](https://github.com/iamkun/dayjs/commit/15d1b813e7faf5a1f9d1ea6fc673fd27ac49d8b1))
+* Update LocaleData plugin to support dayjs().longDateFormat() ([#734](https://github.com/iamkun/dayjs/issues/734)) ([aa0f210](https://github.com/iamkun/dayjs/commit/aa0f210a1e3c4f6aba61c3b96f9eb445b43a33f0)), closes [#680](https://github.com/iamkun/dayjs/issues/680)
+* Update Mongolian (mn) locale relativeTime ([#753](https://github.com/iamkun/dayjs/issues/753)) ([6d51435](https://github.com/iamkun/dayjs/commit/6d51435092c0c94d8e50256d3f0f058cdd15febe))
+* Update Swedish locale (sv) fix ordinal error ([#745](https://github.com/iamkun/dayjs/issues/745)) ([49670d5](https://github.com/iamkun/dayjs/commit/49670d5ae31e4e21636cc5a8bfe35fef0f6d9e4a)), closes [#743](https://github.com/iamkun/dayjs/issues/743)
+
 ## [1.8.17](https://github.com/iamkun/dayjs/compare/v1.8.16...v1.8.17) (2019-11-06)
 
 
