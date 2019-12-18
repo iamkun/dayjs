@@ -121,3 +121,12 @@ describe('Instance locale inheritance', () => {
     expect(dayjs.locale()).toBe(moment.locale())
   })
 })
+
+
+it('Not supported locale string fallback to previous one', () => {
+  const D = dayjs()
+  const DFormat = D.format()
+  const D2 = D.locale('not_supported_locale_string')
+  const D2Format = D2.format()
+  expect(DFormat).toBe(D2Format)
+})
