@@ -15,6 +15,21 @@ const locale = {
     LL: 'YYYY оны MMMMын D',
     LLL: 'YYYY оны MMMMын D HH:mm',
     LLLL: 'dddd, YYYY оны MMMMын D HH:mm'
+  },
+  relativeTime: {
+    future: '%s',
+    past: '%s',
+    s: 'саяхан',
+    m: 'м',
+    mm: '%dм',
+    h: '1ц',
+    hh: '%dц',
+    d: '1ө',
+    dd: '%dө',
+    M: '1с',
+    MM: '%dс',
+    y: '1ж',
+    yy: '%dж'
   }
 }
 

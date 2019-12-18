@@ -366,7 +366,8 @@ class Dayjs {
   locale(preset, object) {
     if (!preset) return this.$L
     const that = this.clone()
-    that.$L = parseLocale(preset, object, true)
+    const nextLocaleName = parseLocale(preset, object, true)
+    if (nextLocaleName) that.$L = nextLocaleName
     return that
   }
 

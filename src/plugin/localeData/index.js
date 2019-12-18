@@ -17,7 +17,8 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysMin: instance =>
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
-        (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3))
+        (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
+      longDateFormat: format => this.$locale().formats[format]
     }
   }
   proto.localeData = function () {
