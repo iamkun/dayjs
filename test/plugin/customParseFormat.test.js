@@ -192,12 +192,20 @@ it('correctly parse ordinal', () => {
   const inputFalse = '7st March 2019'
   const inputZHCN = '7日 三月 2019'
   const format = 'Do MMMM YYYY'
+  const displayFormatWithLocale = 'MMMM dddd'
   expect(dayjs(input, format).valueOf())
     .toBe(moment(input, format).valueOf())
   expect(dayjs(input2, format).valueOf())
     .toBe(moment(input2, format).valueOf())
   expect(dayjs(inputFalse, format).valueOf())
     .toBe(moment(inputFalse, format).valueOf())
-  expect(dayjs(inputZHCN, format, 'zh-cn').valueOf())
-    .toBe(moment(inputZHCN, format, 'zh-cn').valueOf())
+
+  const dayjsCN = dayjs(inputZHCN, format, 'zh-cn')
+  const momentCN = moment(inputZHCN, format, 'zh-cn')
+  expect(dayjsCN.valueOf())
+    .toBe(momentCN.valueOf())
+  expect(dayjsCN.format(displayFormatWithLocale))
+    .toBe(momentCN.format(displayFormatWithLocale))
+  expect(dayjsCN.locale())
+    .toBe(momentCN.locale())
 })

@@ -191,6 +191,7 @@ export default (o, C, d) => {
       locale = pl ? d.Ls[pl] : this.$locale()
       this.$d = parseFormattedInput(date, format, utc)
       this.init(cfg)
+      if (pl) this.$L = pl
     } else {
       oldParse.call(this, cfg)
     }
