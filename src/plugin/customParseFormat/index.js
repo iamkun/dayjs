@@ -135,7 +135,7 @@ function makeParser(format) {
         const { regex, parser } = token
         const part = input.substr(start)
         const match = regex.exec(part)
-        const value = match[0]
+        const value = match?match[0]:''
         parser.call(time, value)
         input = input.replace(value, '')
       }
