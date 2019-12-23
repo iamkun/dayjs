@@ -1,0 +1,18 @@
+on: [push]
+
+name: Static analysis
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: check tests
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: testomatio/check-tests@stable
+      with:
+        framework: jest
+        tests: "./test/**/**.test.js"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        has-tests-label: true
