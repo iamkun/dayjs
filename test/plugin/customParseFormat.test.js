@@ -161,6 +161,10 @@ it('return Invalid Date when parse corrupt short string', () => {
   expect(dayjs(input, format).format()).toBe('Invalid Date')
 })
 
+it('YYYY-MM set 1st day of the month', () => {
+  expect(dayjs('2019-02', 'YYYY-MM').format('YYYY-MM-DD')).toBe('2019-02-01')
+})
+
 it('Invalid Dates', () => {
   expect(dayjs('10/12/2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
   expect(dayjs('10-12-2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
