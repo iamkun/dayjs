@@ -514,3 +514,9 @@ UTC でパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 `.calendar`で与えた日付のカレンダー上の情報が得られます。
 
 プラグイン [`Calendar`](./Plugin.md#calendar)
+
+### UpdateLocale
+
+`.updateLocale` to update a locale's properties
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)

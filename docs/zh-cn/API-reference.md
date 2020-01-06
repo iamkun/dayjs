@@ -564,3 +564,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` 来显示日历时间
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### 更新语言配置
+
+`.updateLocale` 来更新语言配置的属性
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)
