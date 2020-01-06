@@ -3,6 +3,7 @@ import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 import utc from '../../src/plugin/utc'
+import '../../src/locale/ru'
 
 dayjs.extend(relativeTime)
 
@@ -81,6 +82,15 @@ it('Time to X', () => {
   expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
   // past date
   expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
+})
+
+it('Locale Fonction', () => {
+  // e.g. in ru locale, m: x minute require additional processing
+  // and provides as a function instead of a string
+  const str0 = '2020-01-06 15:53:00'
+  const str = '2020-01-06 15:52:15'
+  const result = dayjs(str0).locale('ru').to(str)
+  expect(result).toEqual(expect.any(String))
 })
 
 // https://github.com/iamkun/dayjs/issues/646
