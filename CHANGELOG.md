@@ -1,3 +1,15 @@
+## [1.8.19](https://github.com/iamkun/dayjs/compare/v1.8.18...v1.8.19) (2020-01-06)
+
+
+### Bug Fixes
+
+* Add UpdateLocale plugin to update a locale's properties ([#766](https://github.com/iamkun/dayjs/issues/766)) ([82ce2ba](https://github.com/iamkun/dayjs/commit/82ce2ba8d7e402e40f6d005d400eb5356a0b0633))
+* Fix CustomParseFormat Plugin 'YYYY-MM' use first day of the month ([ba709ec](https://github.com/iamkun/dayjs/commit/ba709eca86a71ae648bc68bf67d9abdc229198d4)), closes [#761](https://github.com/iamkun/dayjs/issues/761)
+* Fix CustomParseFormat Plugin to set correct locale ([66ce23f](https://github.com/iamkun/dayjs/commit/66ce23f2e18c5506e8f1a7ef20d3483a4df80087))
+* Fix WeekOfYear Plugin wrong calender week number bug ([79b86db](https://github.com/iamkun/dayjs/commit/79b86dbbf3cfd3f1e2165b3d479a7061ad1b6925)), closes [#760](https://github.com/iamkun/dayjs/issues/760)
+* Update RelativeTime plugin to support function to make additional processing ([#767](https://github.com/iamkun/dayjs/issues/767)) ([4bd9250](https://github.com/iamkun/dayjs/commit/4bd9250fbe7131e2fddfb5fa1b3350e8c2262ca9))
+* Update ru, uk, cs locale to support relativeTime with plural ([3f080f7](https://github.com/iamkun/dayjs/commit/3f080f7d6bfdc4018cbb7c4d0112ff1ead4ef6b8))
+
 ## [1.8.18](https://github.com/iamkun/dayjs/compare/v1.8.17...v1.8.18) (2019-12-18)
 
 
