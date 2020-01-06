@@ -51,7 +51,7 @@ it('Time from X', () => {
     [1, 'month'], // a month
     [45, 'day'], // a month
     [47, 'day'], // 2 month
-    [10, 'month'], // 2 month
+    [10, 'month'], // 10 month
     [11, 'month'], // a year
     [1, 'year'], // a year
     [17, 'month'], // a year
