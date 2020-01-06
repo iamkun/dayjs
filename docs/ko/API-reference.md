@@ -513,3 +513,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` to display calendar time
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### UpdateLocale
+
+`.updateLocale` to update a locale's properties
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)

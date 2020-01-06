@@ -441,6 +441,19 @@ dayjs().calendar(null, {
 })
 ```
 
+### UpdateLocale
+
+- UpdateLocale 增加了 `.updateLocale` API 来更新语言配置的属性。
+
+```javascript
+import updateLocale from 'dayjs/plugin/updateLocale'
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  months : String[]
+})
+```
+
 ## 自定义
 
 你可以根据需要自由的编写一个 Day.js 插件
