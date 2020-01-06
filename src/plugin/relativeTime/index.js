@@ -35,6 +35,7 @@ export default (o, c, d) => {
     const Tl = T.length
     let result
     let out
+    let isFuture
 
     for (let i = 0; i < Tl; i += 1) {
       let t = T[i]
@@ -44,14 +45,20 @@ export default (o, c, d) => {
           : instance.diff(input, t.d, true)
       }
       const abs = Math.round(Math.abs(result))
+      isFuture = result > 0
       if (abs <= t.r || !t.r) {
         if (abs === 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute
-        out = loc[t.l].replace('%d', abs)
+        const format = loc[t.l]
+        if (typeof format === 'string') {
+          out = format.replace('%d', abs)
+        } else {
+          out = format(abs, withoutSuffix, t.l, isFuture)
+        }
         break
       }
     }
     if (withoutSuffix) return out
-    return ((result > 0) ? loc.future : loc.past).replace('%s', out)
+    return (isFuture ? loc.future : loc.past).replace('%s', out)
   }
   proto.to = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this, true)

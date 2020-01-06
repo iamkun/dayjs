@@ -159,9 +159,9 @@ const parseFormattedInput = (input, format, utc) => {
       ) + (zone.offset * 60 * 1000))
     }
     const now = new Date()
+    const d = day || ((!year && !month) ? now.getDate() : 1)
     const y = year || now.getFullYear()
     const M = month > 0 ? month - 1 : now.getMonth()
-    const d = day || now.getDate()
     const h = hours || 0
     const m = minutes || 0
     const s = seconds || 0
@@ -191,6 +191,7 @@ export default (o, C, d) => {
       locale = pl ? d.Ls[pl] : this.$locale()
       this.$d = parseFormattedInput(date, format, utc)
       this.init(cfg)
+      if (pl) this.$L = pl
     } else {
       oldParse.call(this, cfg)
     }

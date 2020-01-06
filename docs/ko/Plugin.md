@@ -439,6 +439,19 @@ dayjs().calendar(null, {
 })
 ```
 
+### UpdateLocale
+
+- UpdateLocale adds `.updateLocale` API to update a locale's properties.
+
+```javascript
+import updateLocale from 'dayjs/plugin/updateLocale'
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  months : String[]
+})
+```
+
 ## Customize
 
 다양한 요구를 충족하기위해 자신만의 Day.js 플러그인을 만들 수 있습니다.

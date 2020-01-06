@@ -7,6 +7,26 @@ const monthShortFormat = 'янв._февр._мар._апр._мая_июня_ию
 const monthShortStandalone = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
 
 const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
+
+function plural(word, num) {
+  const forms = word.split('_')
+  return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]) // eslint-disable-line
+}
+function relativeTimeWithPlural(number, withoutSuffix, key) {
+  const format = {
+    mm: withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
+    hh: 'час_часа_часов',
+    dd: 'день_дня_дней',
+    MM: 'месяц_месяца_месяцев',
+    yy: 'год_года_лет'
+  }
+  if (key === 'm') {
+    return withoutSuffix ? 'минута' : 'минуту'
+  }
+
+  return `${number} ${plural(format[key], +number)}`
+}
+
 const locale = {
   name: 'ru',
   weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
@@ -37,16 +57,16 @@ const locale = {
     future: 'через %s',
     past: '%s назад',
     s: 'несколько секунд',
-    m: 'минута',
-    mm: '%d минут',
+    m: relativeTimeWithPlural,
+    mm: relativeTimeWithPlural,
     h: 'час',
-    hh: '%d часов',
+    hh: relativeTimeWithPlural,
     d: 'день',
-    dd: '%d дней',
+    dd: relativeTimeWithPlural,
     M: 'месяц',
-    MM: '%d месяцев',
+    MM: relativeTimeWithPlural,
     y: 'год',
-    yy: '%d лет'
+    yy: relativeTimeWithPlural
   },
   ordinal: n => n
 }
