@@ -30,13 +30,20 @@ const formatString = 'MMMM LT'
 
 describe('Update locale', () => {
   it('Invalid argument', () => {
-    dayjs.updateLocale('InvalidLocaleName', {})
-    dayjs.updateLocale('en', {
-      invalidConfig: []
-    })
-
+    const result = dayjs.updateLocale('InvalidLocaleName', {})
+    expect(result)
+      .toEqual(undefined)
     expect(dayjs().format(formatString))
       .toEqual(moment().format(formatString))
+  })
+
+  it('Return value', () => {
+    const result1 = dayjs.updateLocale('en')
+    expect(typeof result1).toEqual('object')
+    const result2 = dayjs.updateLocale('en', {})
+    expect(typeof result2).toEqual('object')
+    const result3 = dayjs.updateLocale('en', newLocale)
+    expect(typeof result3).toEqual('object')
   })
 
   it('Update build-in en locale', () => {
