@@ -1,7 +1,6 @@
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import isoWeekOfYear from '../../src/plugin/isoWeekOfYear'
-import advancedFormat from '../../src/plugin/advancedFormat'
 
 dayjs.extend(advancedFormat)
 dayjs.extend(isoWeekOfYear)
