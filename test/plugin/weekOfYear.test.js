@@ -33,14 +33,25 @@ it('Week of year', () => {
 it('Week of year with locale', () => {
   dayjs.locale('en-gb')
   moment.locale('en-gb')
-
   const day = '2019-07-28'
   expect(dayjs(day).week()).toBe(moment(day).week())
+})
 
-  // Edges
-  expect(dayjs('2018-12-30').week()).toBe(moment('2018-12-30').week())
-  expect(dayjs('2019-12-29').week()).toBe(moment('2019-12-29').week())
-  expect(dayjs('2019-12-30').week()).toBe(moment('2019-12-30').week())
+describe('Week of year with locale edges', () => {
+  const testCases = [
+    '2018-12-30',
+    '2018-12-31',
+    '2019-12-29',
+    '2019-12-30',
+    '2016-01-01',
+    '2016-01-04'
+  ]
+  testCases.forEach((t) => {
+    it(`Edges ${t}`, () => {
+      expect(dayjs(t).week())
+        .toBe(moment(t).week())
+    })
+  })
 })
 
 it('Format w ww wo', () => {
