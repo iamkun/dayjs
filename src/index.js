@@ -256,7 +256,7 @@ class Dayjs {
     if (unit === C.Y) {
       return this.set(C.Y, this.$y + number)
     }
-    if (unit === C.D) {
+    if (unit === C.D || unit === C.DATE) {
       return instanceFactorySet(1)
     }
     if (unit === C.W) {
@@ -347,6 +347,7 @@ class Dayjs {
       [C.Q]: result / 3,
       [C.W]: (diff - zoneDelta) / C.MILLISECONDS_A_WEEK,
       [C.D]: (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
+      [C.DATE]: (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
       [C.H]: diff / C.MILLISECONDS_A_HOUR,
       [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
       [C.S]: diff / C.MILLISECONDS_A_SECOND

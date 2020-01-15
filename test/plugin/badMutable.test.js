@@ -123,7 +123,7 @@ describe('Add', () => {
     m.add(1, 'day')
     expect(d.format()).toBe(m.format())
     d.add(1, 'date')
-    m.add(1, 'date')
+    m.add(1, 'day')
     expect(d.format()).toBe(m.format())
     d.add(1, 'hour')
     m.add(1, 'hour')

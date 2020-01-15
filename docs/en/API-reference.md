@@ -208,6 +208,7 @@ dayjs().get('day')
 | `minute`      | `m`       | Minute                                   |
 | `second`      | `s`       | Second                                   |
 | `millisecond` | `ms`      | Millisecond                              |
+| `quarter`     | `Q`       | Quarter (Only support in `.diff()`)      |
 
 ### Set `.set(unit: string, value: number)`
 
