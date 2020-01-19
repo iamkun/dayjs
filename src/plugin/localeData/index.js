@@ -1,7 +1,7 @@
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
   const getShort = (ins, target, full, num) => {
-    const locale = ins.$locale()
+    const locale = ins.name ? ins : ins.$locale()
     if (!locale[target]) {
       return locale[full].map(f => f.substr(0, num))
     }
@@ -28,7 +28,12 @@ export default (o, c, dayjs) => { // locale needed later
   dayjs.localeData = () => {
     const localeObject = dayjs.Ls[dayjs.locale()]
     return {
-      firstDayOfWeek: () => localeObject.weekStart || 0
+      firstDayOfWeek: () => localeObject.weekStart || 0,
+      weekdays: () => localeObject.weekdays,
+      weekdaysShort: () => getShort(localeObject, 'weekdaysShort', 'weekdays', 3),
+      weekdaysMin: () => getShort(localeObject, 'weekdaysMin', 'weekdays', 2),
+      months: () => localeObject.months,
+      monthsShort: () => getShort(localeObject, 'monthsShort', 'months', 3)
     }
   }
 }
