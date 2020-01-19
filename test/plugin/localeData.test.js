@@ -51,3 +51,16 @@ it('Global localeData', () => {
     expect(dayjsLocaleData.weekdaysMin()).toEqual(momentLocaleData.weekdaysMin())
   })
 })
+
+
+it('Listing the months and weekdays', () => {
+  ['zh-cn', 'en'].forEach((lo) => {
+    dayjs.locale(lo)
+    moment.locale(lo)
+    expect(dayjs.months()).toEqual(moment.months())
+    expect(dayjs.monthsShort()).toEqual(moment.monthsShort())
+    expect(dayjs.weekdays()).toEqual(moment.weekdays())
+    expect(dayjs.weekdaysShort()).toEqual(moment.weekdaysShort())
+    expect(dayjs.weekdaysMin()).toEqual(moment.weekdaysMin())
+  })
+})

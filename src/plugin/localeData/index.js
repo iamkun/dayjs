@@ -7,6 +7,7 @@ export default (o, c, dayjs) => { // locale needed later
     }
     return locale[target]
   }
+  const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const localeData = function () {
     return {
       months: instance =>
@@ -26,14 +27,24 @@ export default (o, c, dayjs) => { // locale needed later
   }
 
   dayjs.localeData = () => {
-    const localeObject = dayjs.Ls[dayjs.locale()]
+    const localeObject = getDayjsLocaleObject()
     return {
       firstDayOfWeek: () => localeObject.weekStart || 0,
-      weekdays: () => localeObject.weekdays,
-      weekdaysShort: () => getShort(localeObject, 'weekdaysShort', 'weekdays', 3),
-      weekdaysMin: () => getShort(localeObject, 'weekdaysMin', 'weekdays', 2),
-      months: () => localeObject.months,
-      monthsShort: () => getShort(localeObject, 'monthsShort', 'months', 3)
+      weekdays: () => dayjs.weekdays(),
+      weekdaysShort: () => dayjs.weekdaysShort(),
+      weekdaysMin: () => dayjs.weekdaysMin(),
+      months: () => dayjs.months(),
+      monthsShort: () => dayjs.monthsShort()
     }
   }
+
+  dayjs.months = () => getDayjsLocaleObject().months
+
+  dayjs.monthsShort = () => getShort(getDayjsLocaleObject(), 'monthsShort', 'months', 3)
+
+  dayjs.weekdays = () => getDayjsLocaleObject().weekdays
+
+  dayjs.weekdaysShort = () => getShort(getDayjsLocaleObject(), 'weekdaysShort', 'weekdays', 3)
+
+  dayjs.weekdaysMin = () => getShort(getDayjsLocaleObject(), 'weekdaysMin', 'weekdays', 2)
 }
