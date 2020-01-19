@@ -1,3 +1,4 @@
+// Frisian [fy]
 import dayjs from 'dayjs'
 
 const locale = {

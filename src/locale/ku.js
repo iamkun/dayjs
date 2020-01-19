@@ -1,3 +1,4 @@
+// Kurdish [ku]
 import dayjs from 'dayjs'
 
 const locale = {

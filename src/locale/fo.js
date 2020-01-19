@@ -1,3 +1,4 @@
+// Faroese [fo]
 import dayjs from 'dayjs'
 
 const locale = {

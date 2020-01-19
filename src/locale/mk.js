@@ -1,3 +1,4 @@
+// Macedonian [mk]
 import dayjs from 'dayjs'
 
 const locale = {

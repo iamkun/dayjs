@@ -1,3 +1,4 @@
+// Bengali [bn]
 import dayjs from 'dayjs'
 
 const locale = {

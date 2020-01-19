@@ -1,3 +1,4 @@
+// Galician [gl]
 import dayjs from 'dayjs'
 
 const locale = {

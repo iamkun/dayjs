@@ -1,3 +1,4 @@
+// Spanish [es]
 import dayjs from 'dayjs'
 
 const locale = {

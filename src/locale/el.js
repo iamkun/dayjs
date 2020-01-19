@@ -1,3 +1,4 @@
+// Greek [el]
 import dayjs from 'dayjs'
 
 const locale = {

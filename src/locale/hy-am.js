@@ -1,3 +1,4 @@
+// Armenian [hy-am]
 import dayjs from 'dayjs'
 
 const locale = {

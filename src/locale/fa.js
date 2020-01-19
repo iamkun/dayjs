@@ -1,3 +1,4 @@
+// Persian [fa]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Luxembourgish [lb]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Czech [cs]
 import dayjs from 'dayjs'
 
 function plural(n) {

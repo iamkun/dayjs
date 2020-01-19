@@ -1,3 +1,4 @@
+// Maltese (Malta) [mt]
 import dayjs from 'dayjs'
 
 const locale = {

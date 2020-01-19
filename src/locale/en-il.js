@@ -1,3 +1,4 @@
+// English (Israel) [en-il]
 import dayjs from 'dayjs'
 
 const locale = {

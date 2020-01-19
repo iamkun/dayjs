@@ -1,3 +1,4 @@
+// Arabic (Saudi Arabia) [ar-sa]
 import dayjs from 'dayjs'
 
 const locale = {

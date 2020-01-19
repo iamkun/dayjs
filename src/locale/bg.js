@@ -1,3 +1,4 @@
+// Bulgarian [bg]
 import dayjs from 'dayjs'
 
 const locale = {

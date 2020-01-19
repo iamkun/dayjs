@@ -1,3 +1,4 @@
+// Arabic (Morocco) [ar-ma]
 import dayjs from 'dayjs'
 
 const locale = {

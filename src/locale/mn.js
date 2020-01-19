@@ -1,3 +1,4 @@
+// Mongolian [mn]
 import dayjs from 'dayjs'
 
 const locale = {

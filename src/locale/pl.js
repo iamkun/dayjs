@@ -1,3 +1,4 @@
+// Polish [pl]
 import dayjs from 'dayjs'
 
 function plural(n) {

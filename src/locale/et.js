@@ -1,3 +1,4 @@
+// Estonian [et]
 import dayjs from 'dayjs'
 
 const locale = {

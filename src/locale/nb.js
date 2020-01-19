@@ -1,3 +1,4 @@
+// Norwegian Bokmål [nb]
 import dayjs from 'dayjs'
 
 const locale = {

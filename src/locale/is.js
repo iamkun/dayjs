@@ -1,3 +1,4 @@
+// Icelandic [is]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Gujarati [gu]
 import dayjs from 'dayjs'
 
 const locale = {

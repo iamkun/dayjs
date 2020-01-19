@@ -1,3 +1,4 @@
+// Vietnamese [vi]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+//  Arabic (Tunisia) [ar-tn]
 import dayjs from 'dayjs'
 
 const locale = {
