@@ -1,3 +1,4 @@
+// Urdu [ur]
 import dayjs from 'dayjs'
 
 const locale = {

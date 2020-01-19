@@ -1,3 +1,4 @@
+// Belarusian [be]
 import dayjs from 'dayjs'
 
 const locale = {

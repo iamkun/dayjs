@@ -1,3 +1,4 @@
+// Portuguese [pt]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Catalan [ca]
 import dayjs from 'dayjs'
 
 const locale = {

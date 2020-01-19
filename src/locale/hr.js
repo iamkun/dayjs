@@ -1,3 +1,4 @@
+// Croatian [hr]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// English (Singapore) [en-sg]
 import dayjs from 'dayjs'
 
 const locale = {

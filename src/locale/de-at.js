@@ -1,3 +1,4 @@
+// German (Austria) [de-at]
 import dayjs from 'dayjs'
 
 const locale = {

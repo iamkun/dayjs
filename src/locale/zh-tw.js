@@ -1,3 +1,4 @@
+// Chinese (Taiwan) [zh-tw]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// English (United Kingdom) [en-gb]
 import dayjs from 'dayjs'
 
 const locale = {

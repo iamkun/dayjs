@@ -1,3 +1,4 @@
+// Spanish (Dominican Republic) [es-do]
 import dayjs from 'dayjs'
 
 const locale = {

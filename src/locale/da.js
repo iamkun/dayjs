@@ -1,3 +1,4 @@
+// Danish [da]
 import dayjs from 'dayjs'
 
 const locale = {

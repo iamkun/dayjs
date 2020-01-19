@@ -1,3 +1,4 @@
+// Malay [ms]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Konkani Latin script [gom-latn]
 import dayjs from 'dayjs'
 
 const locale = {

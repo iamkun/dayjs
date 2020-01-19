@@ -1,3 +1,4 @@
+// Georgian [ka]
 import dayjs from 'dayjs'
 
 const locale = {

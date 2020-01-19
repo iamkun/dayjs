@@ -1,3 +1,4 @@
+// Punjabi (India) [pa-in]
 import dayjs from 'dayjs'
 
 const locale = {

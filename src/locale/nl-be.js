@@ -1,3 +1,4 @@
+// Dutch (Belgium) [nl-be]
 import dayjs from 'dayjs'
 
 const locale = {

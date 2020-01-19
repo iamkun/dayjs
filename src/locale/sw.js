@@ -1,3 +1,4 @@
+// Swahili [sw]
 import dayjs from 'dayjs'
 
 const locale = {

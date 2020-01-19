@@ -1,3 +1,4 @@
+// Northern Sami [se]
 import dayjs from 'dayjs'
 
 const locale = {

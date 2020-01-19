@@ -1,3 +1,4 @@
+// Marathi [mr]
 import dayjs from 'dayjs'
 
 const locale = {

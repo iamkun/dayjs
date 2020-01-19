@@ -1,3 +1,4 @@
+// Slovenian [sl]
 import dayjs from 'dayjs'
 
 const locale = {

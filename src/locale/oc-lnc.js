@@ -1,3 +1,4 @@
+// Occitan, lengadocian dialecte [oc-lnc]
 import dayjs from 'dayjs'
 
 const locale = {

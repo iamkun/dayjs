@@ -1,3 +1,4 @@
+// Sinhalese [si]
 import dayjs from 'dayjs'
 
 const locale = {

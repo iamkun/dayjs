@@ -1,3 +1,4 @@
+// Esperanto [eo]
 import dayjs from 'dayjs'
 
 const locale = {

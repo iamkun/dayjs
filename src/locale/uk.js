@@ -1,3 +1,4 @@
+// Ukrainian [uk]
 import dayjs from 'dayjs'
 
 function plural(word, num) {
