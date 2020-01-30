@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 function relativeTimeWithTense(number, withoutSuffix, key, isFuture) {
   const format = {
     s: ['mõne sekundi', 'mõni sekund', 'paar sekundit'],
-    ss: ['%d sekundi', '%d sekundit'],
     m: ['ühe minuti', 'üks minut'],
     mm: ['%d minuti', '%d minutit'],
     h: ['ühe tunni', 'tund aega', 'üks tund'],
