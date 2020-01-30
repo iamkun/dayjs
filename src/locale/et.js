@@ -2,36 +2,23 @@
 import dayjs from 'dayjs'
 
 function relativeTimeWithTense(number, withoutSuffix, key, isFuture) {
-  const pastTense = {
-    s: 'mõni sekund',
-    m: 'minut',
-    mm: '%d minutit',
-    h: 'tund',
-    hh: '%d tundi',
-    d: 'päev',
-    dd: '%d päeva',
-    M: 'kuu',
-    MM: '%d kuud',
-    y: 'aasta',
-    yy: '%d aastat'
+  const format = {
+    s: ['mõne sekundi', 'mõni sekund', 'paar sekundit'],
+    ss: ['%d sekundi', '%d sekundit'],
+    m: ['ühe minuti', 'üks minut'],
+    mm: ['%d minuti', '%d minutit'],
+    h: ['ühe tunni', 'tund aega', 'üks tund'],
+    hh: ['%d tunni', '%d tundi'],
+    d: ['ühe päeva', 'üks päev'],
+    M: ['kuu aja', 'kuu aega', 'üks kuu'],
+    MM: ['%d kuu', '%d kuud'],
+    y: ['ühe aasta', 'aasta', 'üks aasta'],
+    yy: ['%d aasta', '%d aastat']
   }
-
-  // in Estonian future tenses don't care about plural
-  const futureTense = {
-    s: 'mõne sekundi',
-    m: 'minuti',
-    mm: '%d minuti',
-    h: 'tunni',
-    hh: '%d tunni',
-    d: 'päeva',
-    dd: '%d päeva',
-    M: 'kuu',
-    MM: '%d kuu',
-    y: 'aasta',
-    yy: '%d aasta'
+  if (withoutSuffix) {
+    return (format[key][2] ? format[key][2] : format[key][1]).replace('%d', number)
   }
-
-  return (isFuture ? futureTense : pastTense)[key].replace('%d', number)
+  return (isFuture ? format[key][0] : format[key][1]).replace('%d', number)
 }
 
 const locale = {
@@ -52,7 +39,7 @@ const locale = {
     h: relativeTimeWithTense,
     hh: relativeTimeWithTense,
     d: relativeTimeWithTense,
-    dd: relativeTimeWithTense,
+    dd: '%d päeva',
     M: relativeTimeWithTense,
     MM: relativeTimeWithTense,
     y: relativeTimeWithTense,
