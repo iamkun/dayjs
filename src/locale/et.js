@@ -1,6 +1,39 @@
 // Estonian [et]
 import dayjs from 'dayjs'
 
+function relativeTimeWithTense(number, withoutSuffix, key, isFuture) {
+  const pastTense = {
+    s: 'mõni sekund',
+    m: 'minut',
+    mm: '%d minutit',
+    h: 'tund',
+    hh: '%d tundi',
+    d: 'päev',
+    dd: '%d päeva',
+    M: 'kuu',
+    MM: '%d kuud',
+    y: 'aasta',
+    yy: '%d aastat'
+  }
+
+  // in Estonian future tenses don't care about plural
+  const futureTense = {
+    s: 'mõne sekundi',
+    m: 'minuti',
+    mm: '%d minuti',
+    h: 'tunni',
+    hh: '%d tunni',
+    d: 'päeva',
+    dd: '%d päeva',
+    M: 'kuu',
+    MM: '%d kuu',
+    y: 'aasta',
+    yy: '%d aasta'
+  }
+
+  return (isFuture ? futureTense : pastTense)[key].replace('%d', number)
+}
+
 const locale = {
   name: 'et', // Estonian
   weekdays: 'pühapäev_esmaspäev_teisipäev_kolmapäev_neljapäev_reede_laupäev'.split('_'), // Note weekdays are not capitalized in Estonian
@@ -10,28 +43,20 @@ const locale = {
   monthsShort: 'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
-  /*
-   * This relativeTime is currently configured for having proper past
-   * tense forms since Estonian needs a separate version for future tense
-   * and I think past tense is a more common use case for this kind of library.
-   *
-   * Doing this properly requires this issue to be fixed:
-   * https://github.com/iamkun/dayjs/issues/302
-   */
   relativeTime: {
     future: '%s pärast',
     past: '%s tagasi',
-    s: 'mõni sekund', // for past tense
-    m: 'minut', // for past tense
-    mm: '%d minutit', // for past tense
-    h: 'tund', // for past tense
-    hh: '%d tundi', // for past tense
-    d: 'päev', // for past tense
-    dd: '%d päeva', // for past tense
-    M: 'kuu', // for past tense
-    MM: '%d kuud', // for past tense
-    y: 'aasta', // for past tense
-    yy: '%d aastat' // for past tense
+    s: relativeTimeWithTense,
+    m: relativeTimeWithTense,
+    mm: relativeTimeWithTense,
+    h: relativeTimeWithTense,
+    hh: relativeTimeWithTense,
+    d: relativeTimeWithTense,
+    dd: relativeTimeWithTense,
+    M: relativeTimeWithTense,
+    MM: relativeTimeWithTense,
+    y: relativeTimeWithTense,
+    yy: relativeTimeWithTense
   },
   formats: {
     LT: 'H:mm',
