@@ -105,7 +105,7 @@ class Dayjs {
     const other = dayjs(that)
     return units !== undefined ?
       this.startOf(units) <= other && other <= this.endOf(units) :
-      this.valueOf() === (other || {}).valueOf()
+      this.valueOf() === other.valueOf()
   }
 
   isAfter(that, units) {
