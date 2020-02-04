@@ -1,3 +1,15 @@
+## [1.8.20](https://github.com/iamkun/dayjs/compare/v1.8.19...v1.8.20) (2020-02-04)
+
+
+### Bug Fixes
+
+* Add Bislama Locale (bi) ([#780](https://github.com/iamkun/dayjs/issues/780)) ([9ac6ab4](https://github.com/iamkun/dayjs/commit/9ac6ab481bc883dd4ecc02caab12c8b2fc218a42))
+* Fix weekOfYear plugin to support yearStart locale for better week number result ([#769](https://github.com/iamkun/dayjs/issues/769)) ([f00db36](https://github.com/iamkun/dayjs/commit/f00db36e70bc7beaca1abadeb30a9b1fbb3261ee))
+* Update et (Estonian) locale relativeTime ([#790](https://github.com/iamkun/dayjs/issues/790)) ([d8e0f45](https://github.com/iamkun/dayjs/commit/d8e0f45f6cd2d5e5704b9797929227454c92d1a5))
+* Update LocaleData plugin to support dayjs.localeData().weekdays() API ([287fed6](https://github.com/iamkun/dayjs/commit/287fed6db9eb4fd979b4861aca4dacbd32422533)), closes [#779](https://github.com/iamkun/dayjs/issues/779)
+* Update LocaleData plugin to support dayjs.months dayjs.weekdays API ([144c2ae](https://github.com/iamkun/dayjs/commit/144c2ae6e15fbf89e3acd7c8cb9e237c5f6e1348)), closes [#779](https://github.com/iamkun/dayjs/issues/779)
+* Update pl locale fusional config ([d372475](https://github.com/iamkun/dayjs/commit/d3724758bb27d5b17587b995ba14e7e80dcd1151))
+
 ## [1.8.19](https://github.com/iamkun/dayjs/compare/v1.8.18...v1.8.19) (2020-01-06)
 
 
