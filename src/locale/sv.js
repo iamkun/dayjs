@@ -1,3 +1,4 @@
+// Swedish [sv]
 import dayjs from 'dayjs'
 
 const locale = {

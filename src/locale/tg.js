@@ -1,3 +1,4 @@
+// Tajik [tg]
 import dayjs from 'dayjs'
 
 const locale = {

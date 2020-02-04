@@ -1,3 +1,4 @@
+// French (Canada) [fr-ca]
 import dayjs from 'dayjs'
 
 const locale = {

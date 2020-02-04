@@ -1,3 +1,4 @@
+// Japanese [ja]
 import dayjs from 'dayjs'
 
 const locale = {

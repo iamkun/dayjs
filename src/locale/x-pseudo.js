@@ -1,3 +1,4 @@
+// Pseudo [x-pseudo]
 import dayjs from 'dayjs'
 
 const locale = {

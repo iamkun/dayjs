@@ -1,3 +1,4 @@
+// Yoruba Nigeria [yo]
 import dayjs from 'dayjs'
 
 const locale = {

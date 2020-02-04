@@ -1,3 +1,4 @@
+// Lithuanian [lt]
 import dayjs from 'dayjs'
 
 const locale = {

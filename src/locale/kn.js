@@ -1,3 +1,4 @@
+// Kannada [kn]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,4 @@
+// Malayalam [ml]
 import dayjs from 'dayjs'
 
 const locale = {

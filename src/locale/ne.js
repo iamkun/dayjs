@@ -1,3 +1,4 @@
+// Nepalese [ne]
 import dayjs from 'dayjs'
 
 const locale = {

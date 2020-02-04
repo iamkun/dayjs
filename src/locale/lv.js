@@ -1,3 +1,4 @@
+// Latvian [lv]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -38,14 +38,29 @@ it('Instance localeData', () => {
 
 
 it('Global localeData', () => {
-  dayjs.locale('zh-cn')
-  moment.locale('zh-cn')
-  let dayjsLocaleData = dayjs.localeData()
-  let momentLocaleData = moment.localeData()
-  expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
-  dayjs.locale('en')
-  moment.locale('en')
-  dayjsLocaleData = dayjs.localeData()
-  momentLocaleData = moment.localeData()
-  expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
+  ['zh-cn', 'en'].forEach((lo) => {
+    dayjs.locale(lo)
+    moment.locale(lo)
+    const dayjsLocaleData = dayjs.localeData()
+    const momentLocaleData = moment.localeData()
+    expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
+    expect(dayjsLocaleData.months()).toEqual(momentLocaleData.months())
+    expect(dayjsLocaleData.monthsShort()).toEqual(momentLocaleData.monthsShort())
+    expect(dayjsLocaleData.weekdays()).toEqual(momentLocaleData.weekdays())
+    expect(dayjsLocaleData.weekdaysShort()).toEqual(momentLocaleData.weekdaysShort())
+    expect(dayjsLocaleData.weekdaysMin()).toEqual(momentLocaleData.weekdaysMin())
+  })
+})
+
+
+it('Listing the months and weekdays', () => {
+  ['zh-cn', 'en'].forEach((lo) => {
+    dayjs.locale(lo)
+    moment.locale(lo)
+    expect(dayjs.months()).toEqual(moment.months())
+    expect(dayjs.monthsShort()).toEqual(moment.monthsShort())
+    expect(dayjs.weekdays()).toEqual(moment.weekdays())
+    expect(dayjs.weekdaysShort()).toEqual(moment.weekdaysShort())
+    expect(dayjs.weekdaysMin()).toEqual(moment.weekdaysMin())
+  })
 })

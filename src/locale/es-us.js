@@ -1,3 +1,4 @@
+// Spanish (United States) [es-us]
 import dayjs from 'dayjs'
 
 const locale = {

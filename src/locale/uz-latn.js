@@ -1,3 +1,4 @@
+// Uzbek Latin [uz-latn]
 import dayjs from 'dayjs'
 
 const locale = {

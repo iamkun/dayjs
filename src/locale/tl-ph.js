@@ -1,3 +1,4 @@
+// Tagalog (Philippines) [tl-ph]
 import dayjs from 'dayjs'
 
 const locale = {

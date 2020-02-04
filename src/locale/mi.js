@@ -1,3 +1,4 @@
+// Maori [mi]
 import dayjs from 'dayjs'
 
 const locale = {
