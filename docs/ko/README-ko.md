@@ -42,13 +42,17 @@ dayjs()
 
 ## 시작해볼까요!
 
+### Documentation
+
+You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+
 ### 설치
 
 ```console
 npm install dayjs --save
 ```
 
-📚[설치 가이드](./Installation.md)
+📚[설치 가이드](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -68,7 +72,7 @@ dayjs().add(1, 'year') // manipulate
 dayjs().isBefore(dayjs()) // query
 ```
 
-📚[API 참고](./API-reference.md)
+📚[API 참고](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
@@ -86,7 +90,7 @@ dayjs('2018-05-05')
   .format() // use Chinese Simplified locale in a specific instance
 ```
 
-📚[I18n](./I18n.md)
+📚[I18n](https://day.js.org/docs/en/i18n/i18n)
 
 ### Plugin
 
@@ -100,7 +104,7 @@ dayjs.extend(advancedFormat) // use plugin
 dayjs().format('Q Do k kk X x') // more available formats
 ```
 
-📚[플러그인 목록](./Plugin.md)
+📚[플러그인 목록](https://day.js.org/docs/en/plugin/plugin)
 
 ## License
 
