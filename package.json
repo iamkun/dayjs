@@ -61,6 +61,7 @@
   ],
   "author": "iamkun",
   "license": "MIT",
+  "homepage": "https://day.js.org/",
   "repository": {
     "type": "git",
     "url": "https://github.com/iamkun/dayjs.git"
