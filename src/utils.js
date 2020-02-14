@@ -32,6 +32,7 @@ const prettyUnit = (u) => {
     y: C.Y,
     w: C.W,
     d: C.D,
+    D: C.DATE,
     h: C.H,
     m: C.MIN,
     s: C.S,
