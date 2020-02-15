@@ -1,6 +1,36 @@
 // Finnish [fi]
 import dayjs from 'dayjs'
 
+function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
+  const past = {
+    s: 'muutama sekunti',
+    m: 'minuutti',
+    mm: '%d minuuttia',
+    h: 'tunti',
+    hh: '%d tuntia',
+    d: 'päivä',
+    dd: '%d päivää',
+    M: 'kuukausi',
+    MM: '%d kuukautta',
+    y: 'vuosi',
+    yy: '%d vuotta'
+  }
+  const future = {
+    s: 'muutaman sekunnin',
+    m: 'minuutin',
+    mm: '%d minuutin',
+    h: 'tunnin',
+    hh: '%d tunnin',
+    d: 'päivän',
+    dd: '%d päivän',
+    M: 'kuukauden',
+    MM: '%d kuukauden',
+    y: 'vuoden',
+    yy: '%d vuoden'
+  }
+  return ((isFuture && !withoutSuffix) ? future : past)[key].replace('%d', number)
+}
+
 const locale = {
   name: 'fi', // Finnish
   weekdays: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'), // Note weekdays are not capitalized in Finnish
@@ -10,29 +40,20 @@ const locale = {
   monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
-  /*
-   * This relativeTime is currently configured for having proper past
-   * tense forms since Finnish needs a separate version for future tense
-   * and I think past tense is a more common use case for this kind of
-   * library.
-   *
-   * Doing this properly requires this issue to be fixed:
-   * https://github.com/iamkun/dayjs/issues/302
-   */
   relativeTime: {
     future: '%s kuluttua',
     past: '%s sitten',
-    s: 'muutama sekunti', // for past tense
-    m: 'minuutti', // for past tense
-    mm: '%d minuuttia', // for past tense
-    h: 'tunti', // for past tense
-    hh: '%d tuntia', // for past tense
-    d: 'päivä', // for past tense
-    dd: '%d päivää', // for past tense
-    M: 'kuukausi', // for past tense
-    MM: '%d kuukautta', // for past tense
-    y: 'vuosi', // for past tense
-    yy: '%d vuotta' // for past tense
+    s: relativeTimeFormatter,
+    m: relativeTimeFormatter,
+    mm: relativeTimeFormatter,
+    h: relativeTimeFormatter,
+    hh: relativeTimeFormatter,
+    d: relativeTimeFormatter,
+    dd: relativeTimeFormatter,
+    M: relativeTimeFormatter,
+    MM: relativeTimeFormatter,
+    y: relativeTimeFormatter,
+    yy: relativeTimeFormatter
   },
   formats: {
     LT: 'HH.mm',
