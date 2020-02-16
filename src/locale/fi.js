@@ -13,7 +13,8 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     M: 'kuukausi',
     MM: '%d kuukautta',
     y: 'vuosi',
-    yy: '%d vuotta'
+    yy: '%d vuotta',
+    numbers: 'nolla_yksi_kaksi_kolme_neljä_viisi_kuusi_seitsemän_kahdeksan_yhdeksän'.split('_')
   }
   const future = {
     s: 'muutaman sekunnin',
@@ -26,9 +27,15 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     M: 'kuukauden',
     MM: '%d kuukauden',
     y: 'vuoden',
-    yy: '%d vuoden'
+    yy: '%d vuoden',
+    numbers: 'nollan_yhden_kahden_kolmen_neljän_viiden_kuuden_seitsemän_kahdeksan_yhdeksän'.split('_')
   }
-  return ((isFuture && !withoutSuffix) ? future : past)[key].replace('%d', number)
+  const words = (isFuture && !withoutSuffix) ? future : past
+  const result = words[key]
+  if (number < 10) {
+    return result.replace('%d', words.numbers[number])
+  }
+  return result.replace('%d', number)
 }
 
 const locale = {
@@ -41,7 +48,7 @@ const locale = {
   ordinal: n => `${n}.`,
   weekStart: 1,
   relativeTime: {
-    future: '%s kuluttua',
+    future: '%s päästä',
     past: '%s sitten',
     s: relativeTimeFormatter,
     m: relativeTimeFormatter,
