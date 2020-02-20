@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # Referencia de la API
 
 En lugar de modificar el `Date.prototype` nativo, Day.js construye una abstracción sobre el objeto `Date`: el objeto `Dayjs`.

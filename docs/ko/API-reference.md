@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## API Reference
 
 Day.js는 네이티브 `Date.prototype`을 수정하는 대신 `Dayjs` 오브젝트인 Date 오브젝트 래퍼를 생성합니다.
