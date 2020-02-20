@@ -1,8 +1,8 @@
 ### Notice
 
-The document here is **no longer** update.
+The document here **no longer** updates.
 
-Please visit our website [https://day.js.org](https://day.js.org) for more  documentation.
+Please visit our website [https://day.js.org](https://day.js.org) for more  information.
 
 -------------
 
