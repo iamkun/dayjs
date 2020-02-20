@@ -2,9 +2,19 @@
 
 The document here is **no longer** update.
 
-Please visit our website [https://day.js.org](https://day.js.org).
+Please visit our website [https://day.js.org](https://day.js.org) for more  documentation.
 
 -------------
+
+
+
+
+
+
+
+
+
+
 
 
 # API Reference
