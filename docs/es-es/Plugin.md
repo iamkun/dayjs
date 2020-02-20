@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # Lista de complementos
 
 Un complemento o _plugin_ es un módulo independiente que puede añadirse a Day.js para extender su funcionalidad o añadir nuevas características.

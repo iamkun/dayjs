@@ -1,3 +1,22 @@
+### 提醒
+
+此处的文档将**不再**更新。
+
+请访问网站 [https://day.js.org](https://day.js.org) 查看更多信息。
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## API
 
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。

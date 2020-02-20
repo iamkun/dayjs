@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # Lista de Plugins
 
 Um plugin é um módulo independente que pode ser adicionado ao Day.js para estendê-lo ou adicionar novas funcionalidades.
