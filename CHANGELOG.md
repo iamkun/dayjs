@@ -1,3 +1,12 @@
+## [1.8.21](https://github.com/iamkun/dayjs/compare/v1.8.20...v1.8.21) (2020-02-26)
+
+
+### Bug Fixes
+
+* Set + Get accept 'D' as the short version of 'date' ([#795](https://github.com/iamkun/dayjs/issues/795)) ([523c038](https://github.com/iamkun/dayjs/commit/523c03880fa8bbad83214494ad02cd606cdb8b30))
+* Update DayOfYear plugin type ([#799](https://github.com/iamkun/dayjs/issues/799)) ([5809652](https://github.com/iamkun/dayjs/commit/5809652e40245b7759827d9bf317abdcfa75a330))
+* Update fi (Finnish) locale relativeTime ([#797](https://github.com/iamkun/dayjs/issues/797)) ([4a470fb](https://github.com/iamkun/dayjs/commit/4a470fbd6fef9e051727d0f26d53cc050b85935d))
+
 ## [1.8.20](https://github.com/iamkun/dayjs/compare/v1.8.19...v1.8.20) (2020-02-04)
 
 
