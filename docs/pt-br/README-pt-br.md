@@ -42,13 +42,17 @@ dayjs()
 
 ## Começando
 
+### Documentation
+
+You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+
 ### Instalação
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Guia de instalação](./Installation.md)
+📚[Guia de instalação](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -68,7 +72,7 @@ dayjs().add(1, 'year') // manipula
 dayjs().isBefore(dayjs()) // verifica
 ```
 
-📚[Referência da API](./API-reference.md)
+📚[Referência da API](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
@@ -86,7 +90,7 @@ dayjs('2018-05-05')
   .format() // usar locale em português brasileiro em uma instância específica
 ```
 
-📚[Internacionalização](./I18n.md)
+📚[Internacionalização](https://day.js.org/docs/en/i18n/i18n)
 
 ### Plugin
 
@@ -100,7 +104,7 @@ dayjs.extend(advancedFormat) // usar plugin
 dayjs().format('Q Do k kk X x') // mais formatos disponíveis pelo plugin
 ```
 
-📚[Lista de Plugins](./Plugin.md)
+📚[Lista de Plugins](https://day.js.org/docs/en/plugin/plugin)
 
 ## Patrocinadores
 

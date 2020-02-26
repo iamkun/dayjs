@@ -42,13 +42,17 @@ dayjs()
 
 ## はじめに
 
+### Documentation
+
+You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+
 ### インストール
 
 ```console
 npm install dayjs --save
 ```
 
-📚[インストールガイド](./Installation.md)
+📚[インストールガイド](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -68,7 +72,7 @@ dayjs().add(1, 'year') // 操作
 dayjs().isBefore(dayjs()) // クエリ
 ```
 
-📚[API リファレンス](./API-reference.md)
+📚[API リファレンス](https://day.js.org/docs/en/parse/parse)
 
 ### 国際化 (I18n)
 
@@ -86,7 +90,7 @@ dayjs('2018-05-05')
   .format() // 簡体字中国語を特定のインスタンスにのみ適用
 ```
 
-📚[国際化](./I18n.md)
+📚[国際化](https://day.js.org/docs/en/i18n/i18n)
 
 ### プラグイン
 
@@ -100,7 +104,7 @@ dayjs.extend(advancedFormat) // プラグインを使用
 dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 ```
 
-📚[プラグインリスト](./Plugin.md)
+📚[プラグインリスト](https://day.js.org/docs/en/plugin/plugin)
 
 ## ライセンス
 

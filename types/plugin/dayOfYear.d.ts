@@ -6,5 +6,6 @@ export = plugin
 declare module 'dayjs' {
   interface Dayjs {
     dayOfYear(): number
+    dayOfYear(value: number): Dayjs
   }
 }

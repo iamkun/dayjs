@@ -42,13 +42,17 @@ dayjs()
 
 # Primeros pasos
 
+### Documentation
+
+You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+
 ## Instalación
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Guía de instalación](./Installation.md)
+📚[Guía de instalación](https://day.js.org/docs/en/installation/installation)
 
 ## API
 
@@ -68,7 +72,7 @@ dayjs().add(1, 'year') // manipula
 dayjs().isBefore(dayjs()) // consulta
 ```
 
-📚[Referencia de la API](./API-reference.md)
+📚[Referencia de la API](https://day.js.org/docs/en/parse/parse)
 
 ## I18n
 
@@ -86,7 +90,7 @@ dayjs('2018-05-05')
   .format() // usar el chino simplificado en una instancia concreta
 ```
 
-📚[Internacionalización](./I18n.md)
+📚[Internacionalización](https://day.js.org/docs/en/i18n/i18n)
 
 ## Complementos
 
@@ -100,7 +104,7 @@ dayjs.extend(advancedFormat) // uso del complemento
 dayjs().format('Q Do k kk X x') // ahora tenemos más formatos disponibles
 ```
 
-📚[Lista de complementos](./Plugin.md)
+📚[Lista de complementos](https://day.js.org/docs/en/plugin/plugin)
 
 ## Patrocinadores
 

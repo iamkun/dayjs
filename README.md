@@ -40,13 +40,17 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 ## Getting Started
 
+### Documentation
+
+You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+
 ### Installation
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](./docs/en/Installation.md)
+📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -64,7 +68,7 @@ dayjs().add(1, 'year') // manipulate
 dayjs().isBefore(dayjs()) // query
 ```
 
-📚[API Reference](./docs/en/API-reference.md)
+📚[API Reference](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
@@ -79,7 +83,7 @@ dayjs.locale('es') // use Spanish locale globally
 
 dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
 ```
-📚[Internationalization](./docs/en/I18n.md)
+📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
 
 ### Plugin
 
@@ -93,7 +97,7 @@ dayjs.extend(advancedFormat) // use plugin
 dayjs().format('Q Do k kk X x') // more available formats
 ```
 
-📚[Plugin List](./docs/en/Plugin.md)
+📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
 
 ## Sponsors
 
