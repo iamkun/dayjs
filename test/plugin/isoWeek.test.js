@@ -32,6 +32,14 @@ it('startOf/endOf isoWeek', () => {
   expect(dayjs().endOf(ISOWEEK).valueOf()).toBe(moment().endOf(ISOWEEK).valueOf())
 })
 
+it('isoWeekday', () => {
+  expect(dayjs().isoWeekday()).toBe(moment().isoWeekday())
+  for (let i = 0; i < 7; i += 1) {
+    expect(dayjs().add(i, 'day').isoWeekday()).toBe(moment().add(i, 'day').isoWeekday())
+    expect(dayjs().isoWeekday(i).valueOf()).toBe(moment().isoWeekday(i).valueOf())
+  }
+})
+
 it('isoWeek of year', () => {
   expect(dayjs().isoWeek(1).isoWeek()).toBe(1)
   expect(dayjs().isoWeek(27).isoWeek()).toBe(27)
