@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import dayjs from '../../src'
-import isoWeekOfYear from '../../src/plugin/isoWeekOfYear'
+import isoWeek from '../../src/plugin/isoWeek'
 
-dayjs.extend(isoWeekOfYear)
+dayjs.extend(isoWeek)
 
 beforeEach(() => {
   MockDate.set(new Date())
