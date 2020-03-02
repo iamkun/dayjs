@@ -1,4 +1,5 @@
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../../src'
 import isoWeek from '../../src/plugin/isoWeek'
 
@@ -10,6 +11,19 @@ beforeEach(() => {
 
 afterEach(() => {
   MockDate.reset()
+})
+
+it('get isoWeek', () => {
+  expect(dayjs().isoWeek()).toBe(moment().isoWeek())
+})
+
+it('set isoWeek', () => {
+  expect(dayjs().isoWeek(1).valueOf()).toBe(moment().isoWeek(1).valueOf())
+  expect(dayjs().isoWeek(52).valueOf()).toBe(moment().isoWeek(52).valueOf())
+})
+
+it('get isoWeekYear', () => {
+  expect(dayjs().isoWeekYear()).toBe(moment().isoWeekYear())
 })
 
 it('isoWeek of year', () => {

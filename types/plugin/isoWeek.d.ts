@@ -7,7 +7,6 @@ declare module 'dayjs' {
   interface Dayjs {
     isoWeekYear(): number
     isoWeek(): number
-
     isoWeek(value: number): Dayjs
   }
 }
