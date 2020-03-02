@@ -1,5 +1,7 @@
 import { D, W, Y } from '../../constant'
 
+const isoWeekPrettyUnit = 'isoweek'
+
 export default (o, c, d) => {
   const days = day => day.day() || 7
 
@@ -21,12 +23,24 @@ export default (o, c, d) => {
     return nowWeekThursday.year()
   }
 
-  proto.isoWeek = function (isoWeek) {
-    if (!this.$utils().u(isoWeek)) {
-      return this.add((isoWeek - this.isoWeek()) * 7, D)
+  proto.isoWeek = function (week) {
+    if (!this.$utils().u(week)) {
+      return this.add((week - this.isoWeek()) * 7, D)
     }
     const nowWeekThursday = getCurrentWeekThursday(this)
     const diffWeekThursday = getYearFirstThursday(this.isoWeekYear())
     return nowWeekThursday.diff(diffWeekThursday, W) + 1
+  }
+
+  const oldStartOf = proto.startOf
+  proto.startOf = function (units, startOf) {
+    const utils = this.$utils()
+    const isStartOf = !utils.u(startOf) ? startOf : true
+    const unit = utils.p(units)
+    if (unit === isoWeekPrettyUnit) {
+      return isStartOf ? this.day(1).startOf('day') :
+        this.day(7).endOf('day')
+    }
+    return oldStartOf.bind(this)(units, startOf)
   }
 }
