@@ -1,0 +1,96 @@
+import MockDate from 'mockdate'
+import dayjs from '../../src'
+import isoWeekOfYear from '../../src/plugin/isoWeekOfYear'
+
+dayjs.extend(isoWeekOfYear)
+
+beforeEach(() => {
+  MockDate.set(new Date())
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
+
+it('isoWeek of year', () => {
+  expect(dayjs().isoWeek(1).isoWeek()).toBe(1)
+  expect(dayjs().isoWeek(27).isoWeek()).toBe(27)
+
+
+  expect(dayjs('20191223').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191223').isoWeek()).toBe(52)
+  expect(dayjs('20191224').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191224').isoWeek()).toBe(52)
+  expect(dayjs('20191225').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191225').isoWeek()).toBe(52)
+  expect(dayjs('20191226').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191226').isoWeek()).toBe(52)
+  expect(dayjs('20191227').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191227').isoWeek()).toBe(52)
+  expect(dayjs('20191228').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191228').isoWeek()).toBe(52)
+  expect(dayjs('20191229').isoWeekYear()).toBe(2019)
+  expect(dayjs('20191229').isoWeek()).toBe(52)
+
+  expect(dayjs('20191230').isoWeekYear()).toBe(2020)
+  expect(dayjs('20191230').isoWeek()).toBe(1)
+  expect(dayjs('20191231').isoWeekYear()).toBe(2020)
+  expect(dayjs('20191231').isoWeek()).toBe(1)
+  expect(dayjs('20200101').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200101').isoWeek()).toBe(1)
+  expect(dayjs('20200102').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200102').isoWeek()).toBe(1)
+  expect(dayjs('20200103').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200103').isoWeek()).toBe(1)
+  expect(dayjs('20200104').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200104').isoWeek()).toBe(1)
+  expect(dayjs('20200105').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200105').isoWeek()).toBe(1)
+
+  expect(dayjs('20200106').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200106').isoWeek()).toBe(2)
+  expect(dayjs('20200107').isoWeekYear()).toBe(2020)
+  expect(dayjs('20200107').isoWeek()).toBe(2)
+
+
+  expect(dayjs('20201223').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201223').isoWeek()).toBe(52)
+  expect(dayjs('20201224').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201224').isoWeek()).toBe(52)
+  expect(dayjs('20201225').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201225').isoWeek()).toBe(52)
+  expect(dayjs('20201226').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201226').isoWeek()).toBe(52)
+  expect(dayjs('20201227').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201227').isoWeek()).toBe(52)
+
+  expect(dayjs('20201228').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201228').isoWeek()).toBe(53)
+  expect(dayjs('20201229').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201229').isoWeek()).toBe(53)
+  expect(dayjs('20201230').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201230').isoWeek()).toBe(53)
+  expect(dayjs('20201231').isoWeekYear()).toBe(2020)
+  expect(dayjs('20201231').isoWeek()).toBe(53)
+  expect(dayjs('20210101').isoWeekYear()).toBe(2020)
+  expect(dayjs('20210101').isoWeek()).toBe(53)
+  expect(dayjs('20210102').isoWeekYear()).toBe(2020)
+  expect(dayjs('20210102').isoWeek()).toBe(53)
+  expect(dayjs('20210103').isoWeekYear()).toBe(2020)
+  expect(dayjs('20210103').isoWeek()).toBe(53)
+
+  expect(dayjs('20210104').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210104').isoWeek()).toBe(1)
+  expect(dayjs('20210105').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210105').isoWeek()).toBe(1)
+  expect(dayjs('20210106').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210106').isoWeek()).toBe(1)
+  expect(dayjs('20210107').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210107').isoWeek()).toBe(1)
+  expect(dayjs('20210108').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210108').isoWeek()).toBe(1)
+  expect(dayjs('20210109').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210109').isoWeek()).toBe(1)
+  expect(dayjs('20210110').isoWeekYear()).toBe(2021)
+  expect(dayjs('20210110').isoWeek()).toBe(1)
+})
