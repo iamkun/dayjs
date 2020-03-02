@@ -11,6 +11,9 @@ declare module 'dayjs' {
     isoWeek(): number
     isoWeek(value: number): Dayjs
 
+    isoWeekday(): number
+    isoWeekday(value: number): Dayjs
+
     startOf(unit: ISOUnitType): Dayjs
 
     endOf(unit: ISOUnitType): Dayjs
