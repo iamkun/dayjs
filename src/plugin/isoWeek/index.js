@@ -3,18 +3,16 @@ import { D, W, Y } from '../../constant'
 const isoWeekPrettyUnit = 'isoweek'
 
 export default (o, c, d) => {
-  const days = day => day.day() || 7
-
   const getYearFirstThursday = (year) => {
     const yearFirstDay = d().year(year).startOf(Y)
-    let addDiffDays = 4 - days(yearFirstDay)
-    if (days(yearFirstDay) > 4) {
+    let addDiffDays = 4 - yearFirstDay.isoWeekday()
+    if (yearFirstDay.isoWeekday() > 4) {
       addDiffDays += 7
     }
     return yearFirstDay.add(addDiffDays, D)
   }
 
-  const getCurrentWeekThursday = ins => ins.add((4 - days(ins)), D)
+  const getCurrentWeekThursday = ins => ins.add((4 - ins.isoWeekday()), D)
 
   const proto = c.prototype
 
@@ -32,14 +30,21 @@ export default (o, c, d) => {
     return nowWeekThursday.diff(diffWeekThursday, W) + 1
   }
 
+  proto.isoWeekday = function (week) {
+    if (!this.$utils().u(week)) {
+      return this.day(this.day() % 7 ? week : week - 7)
+    }
+    return this.day() || 7
+  }
+
   const oldStartOf = proto.startOf
   proto.startOf = function (units, startOf) {
     const utils = this.$utils()
     const isStartOf = !utils.u(startOf) ? startOf : true
     const unit = utils.p(units)
     if (unit === isoWeekPrettyUnit) {
-      return isStartOf ? this.day(1).startOf('day') :
-        this.day(7).endOf('day')
+      return isStartOf ? this.date(this.date() - (this.isoWeekday() - 1)).startOf('day') :
+        this.date((this.date() - 1 - (this.isoWeekday() - 1)) + 7).endOf('day')
     }
     return oldStartOf.bind(this)(units, startOf)
   }
