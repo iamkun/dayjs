@@ -1,12 +1,9 @@
 import { D, W, Y } from '../../constant'
 
 export default (o, c, d) => {
-  const days = function (day) {
-    const weekDay = day.day()
-    return weekDay === 0 ? 7 : weekDay
-  }
+  const days = day => day.day() || 7
 
-  const getYearFirstThursday = function (year) {
+  const getYearFirstThursday = (year) => {
     const yearFirstDay = d().year(year).startOf(Y)
     let addDiffDays = 4 - days(yearFirstDay)
     if (days(yearFirstDay) > 4) {
