@@ -1,8 +1,9 @@
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../../src'
-import isoWeekOfYear from '../../src/plugin/isoWeekOfYear'
+import isoWeek from '../../src/plugin/isoWeek'
 
-dayjs.extend(isoWeekOfYear)
+dayjs.extend(isoWeek)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -10,6 +11,34 @@ beforeEach(() => {
 
 afterEach(() => {
   MockDate.reset()
+})
+
+it('get isoWeek', () => {
+  expect(dayjs().isoWeek()).toBe(moment().isoWeek())
+})
+
+it('set isoWeek', () => {
+  expect(dayjs().isoWeek(1).valueOf()).toBe(moment().isoWeek(1).valueOf())
+  expect(dayjs().isoWeek(52).valueOf()).toBe(moment().isoWeek(52).valueOf())
+})
+
+it('get isoWeekYear', () => {
+  expect(dayjs().isoWeekYear()).toBe(moment().isoWeekYear())
+})
+
+it('startOf/endOf isoWeek', () => {
+  const ISOWEEK = 'isoWeek'
+  expect(dayjs().startOf(ISOWEEK).valueOf()).toBe(moment().startOf(ISOWEEK).valueOf())
+  expect(dayjs().endOf(ISOWEEK).valueOf()).toBe(moment().endOf(ISOWEEK).valueOf())
+})
+
+it('isoWeekday', () => {
+  expect(dayjs().isoWeekday()).toBe(moment().isoWeekday())
+  expect(dayjs('20200301').isoWeekday(1).valueOf()).toBe(moment('20200301').isoWeekday(1).valueOf()) // Sunday this.day() -> 0
+  for (let i = 0; i < 7; i += 1) {
+    expect(dayjs().add(i, 'day').isoWeekday()).toBe(moment().add(i, 'day').isoWeekday())
+    expect(dayjs().isoWeekday(i).valueOf()).toBe(moment().isoWeekday(i).valueOf())
+  }
 })
 
 it('isoWeek of year', () => {
