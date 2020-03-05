@@ -22,7 +22,7 @@ const locale = {
     llll: 'YYYY年M月D日dddd HH:mm'
   },
   relativeTime: {
-    future: '%s內',
+    future: '%s後',
     past: '%s前',
     s: '幾秒',
     m: '1分鐘',
