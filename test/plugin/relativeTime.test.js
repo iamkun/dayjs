@@ -115,3 +115,8 @@ it('Time from now with UTC', () => {
 
   expect(dutc.fromNow()).toBe(mutc.fromNow())
 })
+
+it('Fall back to english in case of missing locale', () => {
+  const d = dayjs(Date.now()).locale('pl').fromNow()
+  expect(d).toBeDefined()
+})
