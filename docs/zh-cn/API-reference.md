@@ -2,7 +2,7 @@
 
 此处的文档将**不再**更新。
 
-请访问网站 [https://day.js.org](https://day.js.org) 查看更多信息。
+请访问网站 [https://day.js.org](https://day.js.org/docs/zh-CN/parse/parse) 查看更多信息。
 
 -------------
 
