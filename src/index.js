@@ -24,8 +24,8 @@ const parseLocale = (preset, object, isLocal) => {
     Ls[name] = preset
     l = name
   }
-  if (!isLocal) L = l
-  return l
+  if (!isLocal && l) L = l
+  return l || (!isLocal && L)
 }
 
 const dayjs = (date, c, pl) => {
