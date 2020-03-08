@@ -1,3 +1,11 @@
+## [1.8.22](https://github.com/iamkun/dayjs/compare/v1.8.21...v1.8.22) (2020-03-08)
+
+
+### Bug Fixes
+
+* Add IsoWeek plugin ([#811](https://github.com/iamkun/dayjs/issues/811)) ([28a2207](https://github.com/iamkun/dayjs/commit/28a2207ef9849afbac15dd29267b2e7a09cd3c16))
+* Fix unsupported locale fallback to previous one ([#819](https://github.com/iamkun/dayjs/issues/819)) ([4868715](https://github.com/iamkun/dayjs/commit/48687152cf5bee6a4c1b8ceea4bda8b9bab9be10))
+
 ## [1.8.21](https://github.com/iamkun/dayjs/compare/v1.8.20...v1.8.21) (2020-02-26)
 
 
