@@ -52,7 +52,7 @@ dayjs()
 npm install dayjs --save
 ```
 
-📚[安装指南](https://day.js.org/docs/en/installation/installation)
+📚[安装指南](https://day.js.org/docs/zh-CN/installation/installation)
 
 ### API
 
@@ -72,7 +72,7 @@ dayjs().add(1, 'year') // 处理
 dayjs().isBefore(dayjs()) // 查询
 ```
 
-📚[API 参考](https://day.js.org/docs/en/parse/parse)
+📚[API 参考](https://day.js.org/docs/zh-CN/parse/parse)
 
 ### 国际化 I18n
 
@@ -90,7 +90,7 @@ dayjs('2018-05-05')
   .format() // 在这个实例上使用简体中文
 ```
 
-📚[国际化 I18n](https://day.js.org/docs/en/i18n/i18n)
+📚[国际化 I18n](https://day.js.org/docs/zh-CN/i18n/i18n)
 
 ### 插件
 
@@ -104,7 +104,7 @@ dayjs.extend(advancedFormat) // 使用插件
 dayjs().format('Q Do k kk X x') // 使用扩展后的API
 ```
 
-📚[插件列表](https://day.js.org/docs/en/plugin/plugin)
+📚[插件列表](https://day.js.org/docs/zh-CN/plugin/plugin)
 
 ## 开源协议
 

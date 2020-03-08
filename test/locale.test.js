@@ -12,6 +12,7 @@ afterEach(() => {
 })
 
 const format = 'dddd D, MMMM'
+const NOT_SUPPORTED_LOCALE_STRING = 'not_supported_locale_string'
 
 it('Uses spanish locale through constructor', () => { // not recommend
   expect(dayjs('2018-4-28', { locale: es })
@@ -123,10 +124,24 @@ describe('Instance locale inheritance', () => {
 })
 
 
-it('Not supported locale string fallback to previous one', () => {
+it('Not supported locale string fallback to previous one (instance)', () => {
   const D = dayjs()
-  const DFormat = D.format()
-  const D2 = D.locale('not_supported_locale_string')
-  const D2Format = D2.format()
-  expect(DFormat).toBe(D2Format)
+  expect(D.locale()).toBe('en')
+  const D2 = D.locale(NOT_SUPPORTED_LOCALE_STRING)
+  expect(D2.locale()).toBe('en')
+  expect(D2.format()).toBe(D.format())
+  const D3 = D2.locale('es')
+  expect(D3.locale()).toBe('es')
+  const D4 = D3.locale(NOT_SUPPORTED_LOCALE_STRING)
+  expect(D4.locale()).toBe('es')
+})
+
+it('Not supported locale string fallback to previous one (global)', () => {
+  expect(dayjs().locale()).toBe('en')
+  dayjs.locale(NOT_SUPPORTED_LOCALE_STRING)
+  expect(dayjs().locale()).toBe('en')
+  dayjs.locale('es')
+  expect(dayjs().locale()).toBe('es')
+  dayjs.locale(NOT_SUPPORTED_LOCALE_STRING)
+  expect(dayjs().locale()).toBe('es')
 })

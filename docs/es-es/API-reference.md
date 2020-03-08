@@ -2,7 +2,7 @@
 
 The document here **no longer** updates.
 
-Please visit our website [https://day.js.org](https://day.js.org) for more  information.
+Please visit our website [https://day.js.org](https://day.js.org/docs/en/parse/parse) for more  information.
 
 -------------
 
