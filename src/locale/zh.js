@@ -1,4 +1,4 @@
-// Chinese (China) [zh]
+// Chinese [zh]
 import dayjs from 'dayjs'
 
 const locale = {
