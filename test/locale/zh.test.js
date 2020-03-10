@@ -10,7 +10,7 @@ const zh = dayjs().locale('zh')
 const zhCN = dayjs().locale('zh-cn')
 
 test('ordinal', () => {
-  expect(zh.format('wo')).toEqual(`第${zh.format('w')}周`)
+  expect(zh.format('wo')).toEqual(`${zh.format('w')}周`)
 })
 
 test('Meridiem', () => {
