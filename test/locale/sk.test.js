@@ -2,7 +2,7 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
-import '../../src/locale/cs'
+import '../../src/locale/sk'
 
 dayjs.extend(relativeTime)
 
@@ -36,8 +36,8 @@ it('RelativeTime: Time from X', () => {
   ]
 
   T.forEach((t) => {
-    dayjs.locale('cs')
-    moment.locale('cs')
+    dayjs.locale('sk')
+    moment.locale('sk')
     const dayjsDay = dayjs()
     const momentDay = moment()
     const dayjsCompare = dayjs().add(t[0], t[1])
