@@ -1,4 +1,4 @@
-import { PluginFunc, QUnitType, ConfigType } from 'dayjs'
+import { PluginFunc, UnitType, ConfigType } from 'dayjs'
 
 declare const plugin: PluginFunc
 export = plugin
