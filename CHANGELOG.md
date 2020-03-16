@@ -1,3 +1,14 @@
+## [1.8.23](https://github.com/iamkun/dayjs/compare/v1.8.22...v1.8.23) (2020-03-16)
+
+
+### Bug Fixes
+
+* Add Chinese (zh) locale ([f9b8945](https://github.com/iamkun/dayjs/commit/f9b89453166d8b53d33b1d7eefd9942022552e6e))
+* Fix IsoWeek plugin typescript definition ([#828](https://github.com/iamkun/dayjs/issues/828)) ([30aab0c](https://github.com/iamkun/dayjs/commit/30aab0c7bce85dfac0ae208a891def30f88b5cb4))
+* Update Arabic (ar) locale relative time ([#836](https://github.com/iamkun/dayjs/issues/836)) ([14044c6](https://github.com/iamkun/dayjs/commit/14044c6fda1229e3f0e5473d3f886bd79589b15f))
+* Update Slovak (sk) locale,  Czech (cs) locale ([#833](https://github.com/iamkun/dayjs/issues/833)) ([f0d451f](https://github.com/iamkun/dayjs/commit/f0d451f795e9ebf752cd854d51b25b11de2343a3))
+* Update Thai (th) locale relativeTime ([#826](https://github.com/iamkun/dayjs/issues/826)) ([63b7c03](https://github.com/iamkun/dayjs/commit/63b7c03a6dbb0507d60776e8bad6cccde3828b88)), closes [#816](https://github.com/iamkun/dayjs/issues/816)
+
 ## [1.8.22](https://github.com/iamkun/dayjs/compare/v1.8.21...v1.8.22) (2020-03-08)
 
 
