@@ -16,7 +16,7 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
   }
   if (key === 'm') {
     return withoutSuffix ? 'хвилина' : 'хвилину'
-  } else if(key === 'h') {
+  } else if (key === 'h') {
     return withoutSuffix ? 'година' : 'годину'
   }
 
