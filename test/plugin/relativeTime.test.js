@@ -4,7 +4,6 @@ import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 import utc from '../../src/plugin/utc'
 import '../../src/locale/ru'
-import '../../src/locale/uk'
 
 dayjs.extend(relativeTime)
 
@@ -115,12 +114,4 @@ it('Time from now with UTC', () => {
   mutc = moment.utc(currentTimestampAfter36hrs)
 
   expect(dutc.fromNow()).toBe(mutc.fromNow())
-})
-
-it('Uk locale hour', () => {
-  const str0 = '2020-03-18 19:15:00'
-  const str = '2020-03-18 20:15:00'
-  const result = dayjs(str0).locale('uk').to(str)
-
-  expect(result).toEqual(moment(str0).locale('uk').to(str))
 })
