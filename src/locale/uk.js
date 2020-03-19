@@ -16,6 +16,8 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
   }
   if (key === 'm') {
     return withoutSuffix ? 'хвилина' : 'хвилину'
+  } else if (key === 'h') {
+    return withoutSuffix ? 'година' : 'годину'
   }
 
   return `${number} ${plural(format[key], +number)}`
@@ -35,7 +37,7 @@ const locale = {
     s: 'декілька секунд',
     m: relativeTimeWithPlural,
     mm: relativeTimeWithPlural,
-    h: 'годину',
+    h: relativeTimeWithPlural,
     hh: relativeTimeWithPlural,
     d: 'день',
     dd: relativeTimeWithPlural,
