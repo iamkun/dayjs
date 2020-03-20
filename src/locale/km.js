@@ -19,8 +19,8 @@ const locale = {
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
   relativeTime: {
-    future: '%sទៀត',
-    past: '%sមុន',
+    future: '%s ទៀត',
+    past: '%s មុន',
     s: 'ប៉ុន្មានវិនាទី',
     m: 'មួយនាទី',
     mm: '%d នាទី',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
