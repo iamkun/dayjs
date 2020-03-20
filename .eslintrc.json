@@ -38,7 +38,7 @@
     ],
     "import/extensions": [
       2,
-      "ignorePackages"
+      "never"
     ]
   }
 }
