@@ -111,7 +111,7 @@ dayjs().format('Q Do k kk X x') // больше доступных формат�
 
 Пожалуйста поставьте 💖 звездочку 💖, чтобы поддержать нас. Спасибо.
 
-И спасибо всем нашим спонсорам! 🙏
+Также выражаю благодарность всем нашим спонсорам! 🙏
 
 <a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
