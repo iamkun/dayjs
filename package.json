@@ -9,6 +9,7 @@
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "eslint src/* test/* build/*",
+    "lint:fix": "eslint --fix src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
     "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
