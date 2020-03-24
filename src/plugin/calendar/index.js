@@ -10,8 +10,8 @@ export default (o, c, d) => {
     sameElse: L
   }
   const proto = c.prototype
-  proto.calendar = function (referenceTime, callbacks) {
-    const format = callbacks || this.$locale().calendar || calendarFormat
+  proto.calendar = function (referenceTime, formats) {
+    const format = formats || this.$locale().calendar || calendarFormat
     const referenceStartOfDay = d(referenceTime || undefined).startOf('d')
     const diff = this.diff(referenceStartOfDay, 'd', true)
     const sameElse = 'sameElse'
@@ -25,10 +25,9 @@ export default (o, c, d) => {
     /* eslint-enable no-nested-ternary */
     const currentFormat = format[retVal] || calendarFormat[retVal]
     if (typeof currentFormat === 'function') {
-      return currentFormat(referenceStartOfDay)
+      return currentFormat.call(this, d())
     }
-    const formattedDate = this.format(currentFormat)
-    return formattedDate
+    return this.format(currentFormat)
   }
 }
 
