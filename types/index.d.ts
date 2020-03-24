@@ -1,9 +1,6 @@
 /// <reference path="./locale/index.d.ts" />
 
-export = dayjs;
-declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType, locale?: string): dayjs.Dayjs
-
-declare namespace dayjs {
+declare module 'dayjs' {
   export type ConfigType = string | number | Date | Dayjs
 
   export type OptionType = { locale?: string, format?: string, utc?: boolean } | string
@@ -95,6 +92,8 @@ declare namespace dayjs {
 
     locale(preset: string | ILocale, object?: Partial<ILocale>): Dayjs
   }
+
+  export default function dayjs (date?: ConfigType, option?: OptionType, locale?: string): Dayjs
 
   export type PluginFunc = (option: any, c: typeof Dayjs, d: typeof dayjs) => void
 
