@@ -1,18 +1,18 @@
-import moment from 'moment'
-import MockDate from 'mockdate'
-import dayjs from '../../src'
-import relativeTime from '../../src/plugin/relativeTime'
-import '../../src/locale/pl'
+import moment from 'moment';
+import MockDate from 'mockdate';
+import dayjs from '../../src';
+import relativeTime from '../../src/plugin/relativeTime';
+import '../../src/locale/pl';
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 beforeEach(() => {
-  MockDate.set(new Date())
-})
+  MockDate.set(new Date());
+});
 
 afterEach(() => {
-  MockDate.reset()
-})
+  MockDate.reset();
+});
 
 it('RelativeTime: Time from X', () => {
   const T = [
@@ -34,14 +34,14 @@ it('RelativeTime: Time from X', () => {
     [2, 'year'], // 2 year
     [5, 'year'], // 5 year
     [18, 'month'] // 2 years
-  ]
+  ];
 
   T.forEach((t) => {
-    dayjs.locale('pl')
-    moment.locale('pl')
+    dayjs.locale('pl');
+    moment.locale('pl');
     expect(dayjs().from(dayjs().add(t[0], t[1])))
-      .toBe(moment().from(moment().add(t[0], t[1])))
+      .toBe(moment().from(moment().add(t[0], t[1])));
     expect(dayjs().from(dayjs().add(t[0], t[1]), true))
-      .toBe(moment().from(moment().add(t[0], t[1]), true))
-  })
-})
+      .toBe(moment().from(moment().add(t[0], t[1]), true));
+  });
+});

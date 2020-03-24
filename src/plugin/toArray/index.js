@@ -1,5 +1,5 @@
 export default (o, c) => {
-  const proto = c.prototype
+  const proto = c.prototype;
   proto.toArray = function () {
     return [
       this.$y,
@@ -9,7 +9,6 @@ export default (o, c) => {
       this.$m,
       this.$s,
       this.$ms
-    ]
-  }
-}
-
+    ];
+  };
+};

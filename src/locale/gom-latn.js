@@ -1,5 +1,5 @@
 // Konkani Latin script [gom-latn]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'gom-latn',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Ait._Som._Mon._Bud._Bre._Suk._Son.'.split('_'),
   monthsShort: 'Jan._Feb._Mars_Abr._Mai_Jun_Jul._Ago._Set._Otu._Nov._Dez.'.split('_'),
   weekdaysMin: 'Ai_Sm_Mo_Bu_Br_Su_Sn'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'A h:mm [vazta]',
     LTS: 'A h:mm:ss [vazta]',
@@ -19,9 +19,8 @@ const locale = {
     LLLL: 'dddd, MMMM[achea] Do, YYYY, A h:mm [vazta]',
     llll: 'ddd, D MMM YYYY, A h:mm [vazta]'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

@@ -1,5 +1,5 @@
 // Kyrgyz [ky]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ky',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Жек_Дүй_Шей_Шар_Бей_Жум_Ише'.split('_'),
   monthsShort: 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_'),
   weekdaysMin: 'Жк_Дй_Шй_Шр_Бй_Жм_Иш'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'бир жыл',
     yy: '%d жыл'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

@@ -1,5 +1,5 @@
 // Frisian [fy]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'fy',
@@ -9,7 +9,7 @@ const locale = {
   weekStart: 1,
   weekdaysShort: 'si._mo._ti._wo._to._fr._so.'.split('_'),
   weekdaysMin: 'Si_Mo_Ti_Wo_To_Fr_So'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,8 +33,8 @@ const locale = {
     y: 'ien jier',
     yy: '%d jierren'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

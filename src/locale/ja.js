@@ -1,5 +1,5 @@
 // Japanese [ja]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ja',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: '日_月_火_水_木_金_土'.split('_'),
   months: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
   monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-  ordinal: n => `${n}日`,
+  ordinal: (n) => `${n}日`,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -21,7 +21,7 @@ const locale = {
     lll: 'YYYY年M月D日 HH:mm',
     llll: 'YYYY年M月D日(ddd) HH:mm'
   },
-  meridiem: hour => (hour < 12 ? '午前' : '午後'),
+  meridiem: (hour) => (hour < 12 ? '午前' : '午後'),
   relativeTime: {
     future: '%s後',
     past: '%s前',
@@ -37,8 +37,8 @@ const locale = {
     y: '1年',
     yy: '%d年'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

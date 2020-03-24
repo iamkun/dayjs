@@ -1,5 +1,5 @@
 // Catalan [ca]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ca',
@@ -35,9 +35,9 @@ const locale = {
     y: 'un any',
     yy: '%d anys'
   },
-  ordinal: n => `${n}º`
-}
+  ordinal: (n) => `${n}º`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

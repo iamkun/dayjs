@@ -1,5 +1,5 @@
 // Occitan, lengadocian dialecte [oc-lnc]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'oc-lnc',
@@ -32,9 +32,9 @@ const locale = {
     y: 'un an',
     yy: '%d ans'
   },
-  ordinal: n => `${n}º`
-}
+  ordinal: (n) => `${n}º`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

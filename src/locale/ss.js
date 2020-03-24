@@ -1,5 +1,5 @@
 // siSwati [ss]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ss',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Lis_Umb_Lsb_Les_Lsi_Lsh_Umg'.split('_'),
   monthsShort: 'Bhi_Ina_Inu_Mab_Ink_Inh_Kho_Igc_Iny_Imp_Lwe_Igo'.split('_'),
   weekdaysMin: 'Li_Us_Lb_Lt_Ls_Lh_Ug'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'h:mm A',
     LTS: 'h:mm:ss A',
@@ -33,9 +33,8 @@ const locale = {
     y: 'umnyaka',
     yy: '%d iminyaka'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

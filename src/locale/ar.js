@@ -1,7 +1,7 @@
 // Arabic [ar]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
-const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
+const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_');
 
 const locale = {
   name: 'ar',
@@ -26,7 +26,7 @@ const locale = {
     y: 'عام واحد',
     yy: '%d أعوام'
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -35,8 +35,8 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

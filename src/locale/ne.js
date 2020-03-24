@@ -1,5 +1,5 @@
 // Nepalese [ne]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ne',
@@ -23,7 +23,7 @@ const locale = {
     y: 'एक वर्ष',
     yy: '%d वर्ष'
   },
-  ordinal: n => `${n}`.replace(/\d/g, i => '०१२३४५६७८९'[i]),
+  ordinal: (n) => `${n}`.replace(/\d/g, (i) => '०१२३४५६७८९'[i]),
   formats: {
     LT: 'Aको h:mm बजे',
     LTS: 'Aको h:mm:ss बजे',
@@ -32,8 +32,8 @@ const locale = {
     LLL: 'D MMMM YYYY, Aको h:mm बजे',
     LLLL: 'dddd, D MMMM YYYY, Aको h:mm बजे'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

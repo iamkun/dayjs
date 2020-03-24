@@ -1,5 +1,5 @@
 // Hindi [hi]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'hi',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysShort: 'रवि_सोम_मंगल_बुध_गुरू_शुक्र_शनि'.split('_'),
   monthsShort: 'जन._फ़र._मार्च_अप्रै._मई_जून_जुल._अग._सित._अक्टू._नव._दिस.'.split('_'),
   weekdaysMin: 'र_सो_मं_बु_गु_शु_श'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'A h:mm बजे',
     LTS: 'A h:mm:ss बजे',
@@ -32,9 +32,8 @@ const locale = {
     y: 'एक वर्ष',
     yy: '%d वर्ष'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

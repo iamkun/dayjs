@@ -1,5 +1,5 @@
 // Scottish Gaelic [gd]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'gd',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Did_Dil_Dim_Dic_Dia_Dih_Dis'.split('_'),
   monthsShort: 'Faoi_Gear_Màrt_Gibl_Cèit_Ògmh_Iuch_Lùn_Sult_Dàmh_Samh_Dùbh'.split('_'),
   weekdaysMin: 'Dò_Lu_Mà_Ci_Ar_Ha_Sa'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'bliadhna',
     yy: '%d bliadhna'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

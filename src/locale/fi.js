@@ -1,5 +1,5 @@
 // Finnish [fi]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
   const past = {
@@ -15,7 +15,7 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     y: 'vuosi',
     yy: '%d vuotta',
     numbers: 'nolla_yksi_kaksi_kolme_neljä_viisi_kuusi_seitsemän_kahdeksan_yhdeksän'.split('_')
-  }
+  };
   const future = {
     s: 'muutaman sekunnin',
     m: 'minuutin',
@@ -29,13 +29,13 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     y: 'vuoden',
     yy: '%d vuoden',
     numbers: 'nollan_yhden_kahden_kolmen_neljän_viiden_kuuden_seitsemän_kahdeksan_yhdeksän'.split('_')
-  }
-  const words = (isFuture && !withoutSuffix) ? future : past
-  const result = words[key]
+  };
+  const words = (isFuture && !withoutSuffix) ? future : past;
+  const result = words[key];
   if (number < 10) {
-    return result.replace('%d', words.numbers[number])
+    return result.replace('%d', words.numbers[number]);
   }
-  return result.replace('%d', number)
+  return result.replace('%d', number);
 }
 
 const locale = {
@@ -45,7 +45,7 @@ const locale = {
   weekdaysMin: 'su_ma_ti_ke_to_pe_la'.split('_'),
   months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'), // Note month names are not capitalized in Finnish
   monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: '%s päästä',
@@ -74,9 +74,8 @@ const locale = {
     lll: 'Do MMM YYYY, [klo] HH.mm',
     llll: 'ddd, Do MMM YYYY, [klo] HH.mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

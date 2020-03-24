@@ -1,5 +1,5 @@
 // Gujarati [gu]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'gu',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysShort: 'રવિ_સોમ_મંગળ_બુધ્_ગુરુ_શુક્ર_શનિ'.split('_'),
   monthsShort: 'જાન્યુ._ફેબ્રુ._માર્ચ_એપ્રિ._મે_જૂન_જુલા._ઑગ._સપ્ટે._ઑક્ટ્._નવે._ડિસે.'.split('_'),
   weekdaysMin: 'ર_સો_મં_બુ_ગુ_શુ_શ'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'A h:mm વાગ્યે',
     LTS: 'A h:mm:ss વાગ્યે',
@@ -32,9 +32,8 @@ const locale = {
     y: 'એક વર્ષ',
     yy: '%d વર્ષ'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

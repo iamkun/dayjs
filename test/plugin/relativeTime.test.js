@@ -1,19 +1,19 @@
-import MockDate from 'mockdate'
-import moment from 'moment'
-import dayjs from '../../src'
-import relativeTime from '../../src/plugin/relativeTime'
-import utc from '../../src/plugin/utc'
-import '../../src/locale/ru'
+import MockDate from 'mockdate';
+import moment from 'moment';
+import dayjs from '../../src';
+import relativeTime from '../../src/plugin/relativeTime';
+import utc from '../../src/plugin/utc';
+import '../../src/locale/ru';
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 beforeEach(() => {
-  MockDate.set(new Date('2018-04-04T16:00:00.000Z'))
-})
+  MockDate.set(new Date('2018-04-04T16:00:00.000Z'));
+});
 
 afterEach(() => {
-  MockDate.reset()
-})
+  MockDate.reset();
+});
 
 it('Time from X', () => {
   const T = [
@@ -56,62 +56,62 @@ it('Time from X', () => {
     [1, 'year'], // a year
     [17, 'month'], // a year
     [18, 'month'] // 2 years
-  ]
+  ];
 
   T.forEach((t) => {
-    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(moment().from(moment().add(t[0], t[1])))
-  })
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(moment().from(moment().add(t[0], t[1])));
+  });
   // withoutSuffix
-  expect(dayjs().from(dayjs().add(3, 'year'), true)).toBe(moment().from(moment().add(3, 'year'), true))
+  expect(dayjs().from(dayjs().add(3, 'year'), true)).toBe(moment().from(moment().add(3, 'year'), true));
   // past date
-  expect(dayjs().from(dayjs().subtract(3, 'year'))).toBe(moment().from(moment().subtract(3, 'year')))
-})
+  expect(dayjs().from(dayjs().subtract(3, 'year'))).toBe(moment().from(moment().subtract(3, 'year')));
+});
 
 it('Time from now', () => {
-  expect(dayjs().fromNow()).toBe(moment().fromNow())
-  expect(dayjs().fromNow(true)).toBe(moment().fromNow(true))
-})
+  expect(dayjs().fromNow()).toBe(moment().fromNow());
+  expect(dayjs().fromNow(true)).toBe(moment().fromNow(true));
+});
 
 it('Time to now', () => {
-  expect(dayjs().toNow()).toBe(moment().toNow())
-  expect(dayjs().toNow(true)).toBe(moment().toNow(true))
-})
+  expect(dayjs().toNow()).toBe(moment().toNow());
+  expect(dayjs().toNow(true)).toBe(moment().toNow(true));
+});
 
 it('Time to X', () => {
   // withoutSuffix
-  expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true))
+  expect(dayjs().to(dayjs().add(3, 'year'), true)).toBe(moment().to(moment().add(3, 'year'), true));
   // past date
-  expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
-})
+  expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')));
+});
 
 it('Locale Function', () => {
   // e.g. in ru locale, m: x minute require additional processing
   // and provides as a function instead of a string
-  const str0 = '2020-01-06 15:53:00'
-  const str = '2020-01-06 15:52:15'
-  const result = dayjs(str0).locale('ru').to(str)
-  expect(result).toEqual(expect.any(String))
-})
+  const str0 = '2020-01-06 15:53:00';
+  const str = '2020-01-06 15:52:15';
+  const result = dayjs(str0).locale('ru').to(str);
+  expect(result).toEqual(expect.any(String));
+});
 
 // https://github.com/iamkun/dayjs/issues/646
 it('Time from now with UTC', () => {
-  dayjs.extend(utc)
+  dayjs.extend(utc);
 
-  expect(dayjs.utc().fromNow()).toBe(moment.utc().fromNow())
+  expect(dayjs.utc().fromNow()).toBe(moment.utc().fromNow());
 
-  const currentTime = new Date()
-  const currentTimestamp = currentTime.getTime()
-  const currentTimestampAfter37hrs = currentTimestamp + (37 * 60 * 60 * 1000)
+  const currentTime = new Date();
+  const currentTimestamp = currentTime.getTime();
+  const currentTimestampAfter37hrs = currentTimestamp + (37 * 60 * 60 * 1000);
 
-  let dutc = dayjs.utc(currentTimestampAfter37hrs)
-  let mutc = moment.utc(currentTimestampAfter37hrs)
+  let dutc = dayjs.utc(currentTimestampAfter37hrs);
+  let mutc = moment.utc(currentTimestampAfter37hrs);
 
-  expect(dutc.fromNow()).toBe(mutc.fromNow())
+  expect(dutc.fromNow()).toBe(mutc.fromNow());
 
   // More precise
-  const currentTimestampAfter36hrs = currentTimestamp + (36.0001 * 60 * 60 * 1000)
-  dutc = dayjs.utc(currentTimestampAfter36hrs)
-  mutc = moment.utc(currentTimestampAfter36hrs)
+  const currentTimestampAfter36hrs = currentTimestamp + (36.0001 * 60 * 60 * 1000);
+  dutc = dayjs.utc(currentTimestampAfter36hrs);
+  mutc = moment.utc(currentTimestampAfter36hrs);
 
-  expect(dutc.fromNow()).toBe(mutc.fromNow())
-})
+  expect(dutc.fromNow()).toBe(mutc.fromNow());
+});

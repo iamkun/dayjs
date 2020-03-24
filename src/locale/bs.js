@@ -1,5 +1,5 @@
 // Bosnian [bs]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'bs',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
   monthsShort: 'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split('_'),
   weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'D. MMMM YYYY H:mm',
     LLLL: 'dddd, D. MMMM YYYY H:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

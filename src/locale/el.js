@@ -1,5 +1,5 @@
 // Greek [el]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'el',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'Κυ_Δε_Τρ_Τε_Πε_Πα_Σα'.split('_'),
   months: 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split('_'),
   monthsShort: 'Ιαν_Φεβ_Μαρ_Απρ_Μαι_Ιουν_Ιουλ_Αυγ_Σεπτ_Οκτ_Νοε_Δεκ'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   weekStart: 1,
   relativeTime: {
     future: 'σε %s',
@@ -33,8 +33,8 @@ const locale = {
     LLL: 'D MMMM YYYY h:mm A',
     LLLL: 'dddd, D MMMM YYYY h:mm A'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

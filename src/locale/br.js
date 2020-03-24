@@ -1,5 +1,5 @@
 // Breton [br]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'br',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Sul_Lun_Meu_Mer_Yao_Gwe_Sad'.split('_'),
   monthsShort: "Gen_C'hwe_Meu_Ebr_Mae_Eve_Gou_Eos_Gwe_Her_Du_Ker".split('_'),
   weekdaysMin: 'Su_Lu_Me_Mer_Ya_Gw_Sa'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'h[e]mm A',
     LTS: 'h[e]mm:ss A',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'D [a viz] MMMM YYYY h[e]mm A',
     LLLL: 'dddd, D [a viz] MMMM YYYY h[e]mm A'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

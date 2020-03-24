@@ -1,5 +1,5 @@
 // Hungarian [hu]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'hu',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'v_h_k_sze_cs_p_szo'.split('_'),
   months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split('_'),
   monthsShort: 'jan_feb_márc_ápr_máj_jún_júl_aug_szept_okt_nov_dec'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: '%s múlva',
@@ -33,9 +33,8 @@ const locale = {
     LLL: 'YYYY. MMMM D. H:mm',
     LLLL: 'YYYY. MMMM D., dddd H:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

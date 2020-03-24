@@ -1,5 +1,5 @@
 // Basque [eu]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'eu',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'ig._al._ar._az._og._ol._lr.'.split('_'),
   monthsShort: 'urt._ots._mar._api._mai._eka._uzt._abu._ira._urr._aza._abe.'.split('_'),
   weekdaysMin: 'ig_al_ar_az_og_ol_lr'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -37,9 +37,8 @@ const locale = {
     y: 'urte bat',
     yy: '%d urte'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

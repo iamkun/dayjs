@@ -1,5 +1,5 @@
 // Uyghur (China) [ug-cn]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ug-cn',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'يە_دۈ_سە_چا_پە_جۈ_شە'.split('_'),
   monthsShort: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split('_'),
   weekdaysMin: 'يە_دۈ_سە_چا_پە_جۈ_شە'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'بىر يىل',
     yy: '%d يىل'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

@@ -1,5 +1,5 @@
 // Croatian [hr]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'hr',
@@ -32,9 +32,9 @@ const locale = {
     y: 'godina',
     yy: '%d godine'
   },
-  ordinal: n => `${n}.`
-}
+  ordinal: (n) => `${n}.`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

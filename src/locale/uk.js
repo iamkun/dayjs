@@ -1,8 +1,8 @@
 // Ukrainian [uk]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 function plural(word, num) {
-  const forms = word.split('_')
+  const forms = word.split('_');
   return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]) // eslint-disable-line
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
@@ -13,14 +13,14 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
     dd: 'день_дні_днів',
     MM: 'місяць_місяці_місяців',
     yy: 'рік_роки_років'
-  }
+  };
   if (key === 'm') {
-    return withoutSuffix ? 'хвилина' : 'хвилину'
-  } else if (key === 'h') {
-    return withoutSuffix ? 'година' : 'годину'
+    return withoutSuffix ? 'хвилина' : 'хвилину';
+  } if (key === 'h') {
+    return withoutSuffix ? 'година' : 'годину';
   }
 
-  return `${number} ${plural(format[key], +number)}`
+  return `${number} ${plural(format[key], +number)}`;
 }
 
 const locale = {
@@ -46,7 +46,7 @@ const locale = {
     y: 'рік',
     yy: relativeTimeWithPlural
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -55,9 +55,8 @@ const locale = {
     LLL: 'D MMMM YYYY р., HH:mm',
     LLLL: 'dddd, D MMMM YYYY р., HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

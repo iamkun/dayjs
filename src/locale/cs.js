@@ -1,5 +1,5 @@
 // Czech [cs]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 function plural(n) {
   return (n > 1) && (n < 5) && (~~(n / 10) !== 1) // eslint-disable-line
@@ -57,7 +57,7 @@ const locale = {
   monthsShort: 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
   weekStart: 1,
   yearStart: 4,
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -82,8 +82,8 @@ const locale = {
     y: translate,
     yy: translate
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

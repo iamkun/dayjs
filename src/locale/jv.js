@@ -1,5 +1,5 @@
 // Javanese [jv]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'jv',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Min_Sen_Sel_Reb_Kem_Jem_Sep'.split('_'),
   monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Ags_Sep_Okt_Nop_Des'.split('_'),
   weekdaysMin: 'Mg_Sn_Sl_Rb_Km_Jm_Sp'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH.mm',
     LTS: 'HH.mm.ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'setaun',
     yy: '%d taun'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

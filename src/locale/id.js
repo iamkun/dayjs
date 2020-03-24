@@ -1,5 +1,5 @@
 // Indonesian [id]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'id',
@@ -32,10 +32,9 @@ const locale = {
     y: 'setahun',
     yy: '%d tahun'
   },
-  ordinal: n => `${n}.`
-}
+  ordinal: (n) => `${n}.`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

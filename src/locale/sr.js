@@ -1,5 +1,5 @@
 // Serbian [sr]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'sr',
@@ -24,7 +24,7 @@ const locale = {
     y: 'godina',
     yy: '%d godine'
   },
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -33,8 +33,8 @@ const locale = {
     LLL: 'D. MMMM YYYY H:mm',
     LLLL: 'dddd, D. MMMM YYYY H:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

@@ -1,5 +1,5 @@
 // Dutch [nl]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'nl',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
   months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
   monthsShort: 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   formats: {
     LT: 'HH:mm',
@@ -33,8 +33,8 @@ const locale = {
     y: 'een jaar',
     yy: '%d jaar'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

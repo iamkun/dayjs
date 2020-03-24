@@ -1,5 +1,5 @@
 // Swedish [sv]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'sv',
@@ -10,9 +10,9 @@ const locale = {
   monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
   weekStart: 1,
   ordinal: (n) => {
-    const b = n % 10
-    const o = (b === 1) || (b === 2) ? 'a' : 'e'
-    return `[${n}${o}]`
+    const b = n % 10;
+    const o = (b === 1) || (b === 2) ? 'a' : 'e';
+    return `[${n}${o}]`;
   },
   formats: {
     LT: 'HH:mm',
@@ -39,9 +39,8 @@ const locale = {
     y: 'ett år',
     yy: '%d år'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

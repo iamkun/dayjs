@@ -1,5 +1,5 @@
 // Maori [mi]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'mi',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
   monthsShort: 'Kohi_Hui_Pou_Pae_Hara_Pipi_Hōngoi_Here_Mahu_Whi-nu_Whi-ra_Haki'.split('_'),
   weekdaysMin: 'Ta_Ma_Tū_We_Tāi_Pa_Hā'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'he tau',
     yy: '%d tau'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

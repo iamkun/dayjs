@@ -1,5 +1,5 @@
 // Latvian [lv]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'lv',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Sv_P_O_T_C_Pk_S'.split('_'),
   monthsShort: 'jan_feb_mar_apr_mai_jūn_jūl_aug_sep_okt_nov_dec'.split('_'),
   weekdaysMin: 'Sv_P_O_T_C_Pk_S'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'YYYY. [gada] D. MMMM, HH:mm',
     LLLL: 'YYYY. [gada] D. MMMM, dddd, HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

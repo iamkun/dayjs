@@ -1,5 +1,5 @@
 // Chinese (Taiwan) [zh-tw]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'zh-tw',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
   months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
   monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-  ordinal: n => `${n}日`,
+  ordinal: (n) => `${n}日`,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -36,9 +36,8 @@ const locale = {
     y: '1 年',
     yy: '%d 年'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

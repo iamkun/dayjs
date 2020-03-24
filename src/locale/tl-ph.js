@@ -1,5 +1,5 @@
 // Tagalog (Philippines) [tl-ph]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'tl-ph',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Lin_Lun_Mar_Miy_Huw_Biy_Sab'.split('_'),
   monthsShort: 'Ene_Peb_Mar_Abr_May_Hun_Hul_Ago_Set_Okt_Nob_Dis'.split('_'),
   weekdaysMin: 'Li_Lu_Ma_Mi_Hu_Bi_Sab'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'isang taon',
     yy: '%d taon'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

@@ -1,5 +1,5 @@
 // Bulgarian [bg]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'bg',
@@ -9,7 +9,7 @@ const locale = {
   months: 'Януари_Февруари_Март_Април_Май_Юни_Юли_Август_Септември_Октомври_Ноември_Декември'.split('_'),
   monthsShort: 'Янр_Фев_Мар_Апр_Май_Юни_Юли_Авг_Сеп_Окт_Ное_Дек'.split('_'),
   weekStart: 1,
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -33,8 +33,8 @@ const locale = {
     y: 'година',
     yy: '%d години'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

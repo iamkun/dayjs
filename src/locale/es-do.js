@@ -1,5 +1,5 @@
 // Spanish (Dominican Republic) [es-do]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'es-do',
@@ -24,7 +24,7 @@ const locale = {
     y: 'un año',
     yy: '%d años'
   },
-  ordinal: n => `${n}º`,
+  ordinal: (n) => `${n}º`,
   formats: {
     LT: 'h:mm A',
     LTS: 'h:mm:ss A',
@@ -33,9 +33,8 @@ const locale = {
     LLL: 'D [de] MMMM [de] YYYY h:mm A',
     LLLL: 'dddd, D [de] MMMM [de] YYYY h:mm A'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

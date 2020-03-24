@@ -1,5 +1,5 @@
 // Belarusian [be]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'be',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
   monthsShort: 'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split('_'),
   weekdaysMin: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'D MMMM YYYY г., HH:mm',
     LLLL: 'dddd, D MMMM YYYY г., HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

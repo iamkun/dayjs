@@ -1,5 +1,5 @@
 // Polish [pl]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 function plural(n) {
   return (n % 10 < 5) && (n % 10 > 1) && ((~~(n / 10) % 10) !== 1) // eslint-disable-line
@@ -30,7 +30,7 @@ const locale = {
   weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
   months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'),
   monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: 'za %s',
@@ -55,8 +55,8 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

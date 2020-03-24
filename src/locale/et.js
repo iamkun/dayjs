@@ -1,5 +1,5 @@
 // Estonian [et]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 function relativeTimeWithTense(number, withoutSuffix, key, isFuture) {
   const format = {
@@ -13,11 +13,11 @@ function relativeTimeWithTense(number, withoutSuffix, key, isFuture) {
     MM: ['%d kuu', '%d kuud'],
     y: ['ühe aasta', 'aasta', 'üks aasta'],
     yy: ['%d aasta', '%d aastat']
-  }
+  };
   if (withoutSuffix) {
-    return (format[key][2] ? format[key][2] : format[key][1]).replace('%d', number)
+    return (format[key][2] ? format[key][2] : format[key][1]).replace('%d', number);
   }
-  return (isFuture ? format[key][0] : format[key][1]).replace('%d', number)
+  return (isFuture ? format[key][0] : format[key][1]).replace('%d', number);
 }
 
 const locale = {
@@ -27,7 +27,7 @@ const locale = {
   weekdaysMin: 'P_E_T_K_N_R_L'.split('_'),
   months: 'jaanuar_veebruar_märts_aprill_mai_juuni_juuli_august_september_oktoober_november_detsember'.split('_'), // Note month names are not capitalized in Estonian
   monthsShort: 'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: '%s pärast',
@@ -52,9 +52,8 @@ const locale = {
     LLL: 'D. MMMM YYYY H:mm',
     LLLL: 'dddd, D. MMMM YYYY H:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

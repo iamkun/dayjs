@@ -1,5 +1,5 @@
 // Dutch (Belgium) [nl-be]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'nl-be',
@@ -9,7 +9,7 @@ const locale = {
   weekStart: 1,
   weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
   weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,8 +33,8 @@ const locale = {
     y: 'één jaar',
     yy: '%d jaar'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

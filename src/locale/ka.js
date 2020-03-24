@@ -1,5 +1,5 @@
 // Georgian [ka]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ka',
@@ -32,9 +32,9 @@ const locale = {
     y: 'წელი',
     yy: '%d წლის'
   },
-  ordinal: n => n
-}
+  ordinal: (n) => n
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

@@ -1,5 +1,5 @@
 // Danish [da]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'da',
@@ -9,7 +9,7 @@ const locale = {
   months: 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'.split('_'),
   monthsShort: 'jan._feb._mar._apr._maj_juni_juli_aug._sept._okt._nov._dec.'.split('_'),
   weekStart: 1,
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -33,9 +33,8 @@ const locale = {
     y: 'et år',
     yy: '%d år'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

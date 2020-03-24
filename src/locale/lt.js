@@ -1,5 +1,5 @@
 // Lithuanian [lt]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'lt',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 's_p_a_t_k_pn_š'.split('_'),
   months: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_'),
   monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: 'už %s',
@@ -49,8 +49,8 @@ const locale = {
     lll: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
     llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

@@ -1,5 +1,5 @@
 // Italian (Switzerland) [it-ch]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'it-ch',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'dom_lun_mar_mer_gio_ven_sab'.split('_'),
   monthsShort: 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
   weekdaysMin: 'do_lu_ma_me_gi_ve_sa'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

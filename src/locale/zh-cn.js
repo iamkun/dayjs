@@ -1,5 +1,5 @@
 // Chinese (China) [zh-cn]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'zh-cn',
@@ -11,9 +11,9 @@ const locale = {
   ordinal: (number, period) => {
     switch (period) {
       case 'W':
-        return `${number}周`
+        return `${number}周`;
       default:
-        return `${number}日`
+        return `${number}日`;
     }
   },
   weekStart: 1,
@@ -46,23 +46,22 @@ const locale = {
     yy: '%d 年'
   },
   meridiem: (hour, minute) => {
-    const hm = (hour * 100) + minute
+    const hm = (hour * 100) + minute;
     if (hm < 600) {
-      return '凌晨'
-    } else if (hm < 900) {
-      return '早上'
-    } else if (hm < 1130) {
-      return '上午'
-    } else if (hm < 1230) {
-      return '中午'
-    } else if (hm < 1800) {
-      return '下午'
+      return '凌晨';
+    } if (hm < 900) {
+      return '早上';
+    } if (hm < 1130) {
+      return '上午';
+    } if (hm < 1230) {
+      return '中午';
+    } if (hm < 1800) {
+      return '下午';
     }
-    return '晚上'
+    return '晚上';
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

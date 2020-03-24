@@ -1,16 +1,16 @@
 // Russian [ru]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
-const monthFormat = 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_')
-const monthStandalone = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_')
+const monthFormat = 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_');
+const monthStandalone = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
 
-const monthShortFormat = 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_')
-const monthShortStandalone = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
+const monthShortFormat = 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_');
+const monthShortStandalone = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_');
 
-const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
+const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/;
 
 function plural(word, num) {
-  const forms = word.split('_')
+  const forms = word.split('_');
   return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]) // eslint-disable-line
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
@@ -20,12 +20,12 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
     dd: 'день_дня_дней',
     MM: 'месяц_месяца_месяцев',
     yy: 'год_года_лет'
-  }
+  };
   if (key === 'm') {
-    return withoutSuffix ? 'минута' : 'минуту'
+    return withoutSuffix ? 'минута' : 'минуту';
   }
 
-  return `${number} ${plural(format[key], +number)}`
+  return `${number} ${plural(format[key], +number)}`;
 }
 
 const locale = {
@@ -35,15 +35,15 @@ const locale = {
   weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
   months: (dayjsInstance, format) => {
     if (MONTHS_IN_FORMAT.test(format)) {
-      return monthFormat[dayjsInstance.month()]
+      return monthFormat[dayjsInstance.month()];
     }
-    return monthStandalone[dayjsInstance.month()]
+    return monthStandalone[dayjsInstance.month()];
   },
   monthsShort: (dayjsInstance, format) => {
     if (MONTHS_IN_FORMAT.test(format)) {
-      return monthShortFormat[dayjsInstance.month()]
+      return monthShortFormat[dayjsInstance.month()];
     }
-    return monthShortStandalone[dayjsInstance.month()]
+    return monthShortStandalone[dayjsInstance.month()];
   },
   weekStart: 1,
   formats: {
@@ -69,10 +69,9 @@ const locale = {
     y: 'год',
     yy: relativeTimeWithPlural
   },
-  ordinal: n => n
-}
+  ordinal: (n) => n
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

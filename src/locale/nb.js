@@ -1,5 +1,5 @@
 // Norwegian Bokmål [nb]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'nb',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'sø_ma_ti_on_to_fr_lø'.split('_'),
   months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
   monthsShort: 'jan._feb._mars_april_mai_juni_juli_aug._sep._okt._nov._des.'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   formats: {
     LT: 'HH:mm',
@@ -33,8 +33,8 @@ const locale = {
     y: 'ett år',
     yy: '%d år'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

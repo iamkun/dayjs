@@ -1,18 +1,18 @@
-import MockDate from 'mockdate'
-import dayjs from '../../src'
-import isLeapYear from '../../src/plugin/isLeapYear'
+import MockDate from 'mockdate';
+import dayjs from '../../src';
+import isLeapYear from '../../src/plugin/isLeapYear';
 
-dayjs.extend(isLeapYear)
+dayjs.extend(isLeapYear);
 
 beforeEach(() => {
-  MockDate.set(new Date())
-})
+  MockDate.set(new Date());
+});
 
 afterEach(() => {
-  MockDate.reset()
-})
+  MockDate.reset();
+});
 
 it('IsLeapYear', () => {
-  expect(dayjs('20000101').isLeapYear()).toBe(true)
-  expect(dayjs('2100-01-01').isLeapYear()).toBe(false)
-})
+  expect(dayjs('20000101').isLeapYear()).toBe(true);
+  expect(dayjs('2100-01-01').isLeapYear()).toBe(false);
+});

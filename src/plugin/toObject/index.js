@@ -1,5 +1,5 @@
 export default (o, c) => {
-  const proto = c.prototype
+  const proto = c.prototype;
   proto.toObject = function () {
     return {
       years: this.$y,
@@ -9,7 +9,6 @@ export default (o, c) => {
       minutes: this.$m,
       seconds: this.$s,
       milliseconds: this.$ms
-    }
-  }
-}
-
+    };
+  };
+};

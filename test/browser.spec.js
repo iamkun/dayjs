@@ -3,9 +3,9 @@
 // Checkout our unit test files in test/*.test.js
 describe('Install', function () {
   it('window.dayjs ', function () {
-    if (!window.dayjs) throw new Error('No window.dayjs')
-  })
-})
+    if (!window.dayjs) throw new Error('No window.dayjs');
+  });
+});
 
 describe('Core APIs', function () {
   it('Chain Methods', function () {
@@ -17,15 +17,15 @@ describe('Core APIs', function () {
       .startOf('week')
       .add(1, 'day')
       .subtract(1, 'year')
-      .format('{YYYY} MM-DDTHH:mm:ss')).toBe('{2010} 04-25T00:00:00')
-  })
+      .format('{YYYY} MM-DDTHH:mm:ss')).toBe('{2010} 04-25T00:00:00');
+  });
 
   it('Date parse - nonstandard date string', function () {
     expect(dayjs('2018-4-1 1:1:1:22').format('YYYY-MM-DD hh:mm:ss'))
-      .toBe('2018-04-01 01:01:01')
+      .toBe('2018-04-01 01:01:01');
     expect(dayjs('2018-4-1').format('YYYY-MM-DD hh:mm:ss'))
-      .toBe('2018-04-01 12:00:00')
+      .toBe('2018-04-01 12:00:00');
     expect(dayjs('2018-4-1 11:49').format('YYYY-MM-DD hh:mm:ss')) // fix ios bug
-      .toBe('2018-04-01 11:49:00')
-  })
-})
+      .toBe('2018-04-01 11:49:00');
+  });
+});

@@ -1,5 +1,5 @@
 // Hebrew [he]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'he',
@@ -23,7 +23,7 @@ const locale = {
     y: 'שנה',
     yy: '%d שנים'
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   format: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -48,8 +48,8 @@ const locale = {
     lll: 'D MMM YYYY HH:mm',
     llll: 'ddd, D MMM YYYY HH:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

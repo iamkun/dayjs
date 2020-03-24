@@ -1,5 +1,5 @@
 // Korean [ko]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'ko',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: '일_월_화_수_목_금_토'.split('_'),
   months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
   monthsShort: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'A h:mm',
     LTS: 'A h:mm:ss',
@@ -21,7 +21,7 @@ const locale = {
     lll: 'YYYY년 MMMM D일 A h:mm',
     llll: 'YYYY년 MMMM D일 dddd A h:mm'
   },
-  meridiem: hour => (hour < 12 ? '오전' : '오후'),
+  meridiem: (hour) => (hour < 12 ? '오전' : '오후'),
   relativeTime: {
     future: '%s 후',
     past: '%s 전',
@@ -37,8 +37,8 @@ const locale = {
     y: '일 년',
     yy: '%d년'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

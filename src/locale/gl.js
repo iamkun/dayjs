@@ -1,5 +1,5 @@
 // Galician [gl]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'gl',
@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'dom._lun._mar._mér._xov._ven._sáb.'.split('_'),
   monthsShort: 'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'.split('_'),
   weekdaysMin: 'do_lu_ma_mé_xo_ve_sá'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -18,9 +18,8 @@ const locale = {
     LLL: 'D [de] MMMM [de] YYYY H:mm',
     LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

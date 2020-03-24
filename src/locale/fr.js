@@ -1,5 +1,5 @@
 // French [fr]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'fr',
@@ -33,11 +33,11 @@ const locale = {
     yy: '%d ans'
   },
   ordinal: (n) => {
-    const o = n === 1 ? 'er' : ''
-    return `${n}${o}`
+    const o = n === 1 ? 'er' : '';
+    return `${n}${o}`;
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

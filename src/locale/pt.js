@@ -1,5 +1,5 @@
 // Portuguese [pt]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'pt',
@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'Do_2ª_3ª_4ª_5ª_6ª_Sa'.split('_'),
   months: 'Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro'.split('_'),
   monthsShort: 'Jan_Fev_Mar_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez'.split('_'),
-  ordinal: n => `${n}º`,
+  ordinal: (n) => `${n}º`,
   weekStart: 1,
   formats: {
     LT: 'HH:mm',
@@ -33,8 +33,8 @@ const locale = {
     y: 'um ano',
     yy: '%d anos'
   }
-}
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;

@@ -1,12 +1,12 @@
 export default (o, c) => {
-  const proto = c.prototype
+  const proto = c.prototype;
   proto.weekYear = function () {
-    const month = this.month()
-    const weekOfYear = this.week()
-    const year = this.year()
+    const month = this.month();
+    const weekOfYear = this.week();
+    const year = this.year();
     if (weekOfYear === 1 && month === 11) {
-      return year + 1
+      return year + 1;
     }
-    return year
-  }
-}
+    return year;
+  };
+};

@@ -1,5 +1,5 @@
 // Italian [it]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'it',
@@ -32,10 +32,9 @@ const locale = {
     y: 'un anno',
     yy: '%d anni'
   },
-  ordinal: n => `${n}º`
-}
+  ordinal: (n) => `${n}º`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
-
+export default locale;

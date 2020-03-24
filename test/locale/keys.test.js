@@ -1,9 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-import dayjs from '../../src'
+import fs from 'fs';
+import path from 'path';
+import dayjs from '../../src';
 
-const localeDir = '../../src/locale'
-const Locale = []
+const localeDir = '../../src/locale';
+const Locale = [];
 
 // load all locales from locale dir
 fs.readdirSync(path.join(__dirname, localeDir))
@@ -12,8 +12,8 @@ fs.readdirSync(path.join(__dirname, localeDir))
       name: file,
       // eslint-disable-next-line import/no-dynamic-require, global-require
       content: require(path.join(__dirname, localeDir, file)).default
-    })
-  })
+    });
+  });
 
 Locale.forEach((locale) => {
   it(`Locale keys for ${locale.content.name}`, () => {
@@ -30,38 +30,38 @@ Locale.forEach((locale) => {
       weekStart,
       yearStart,
       meridiem
-    } = locale.content
+    } = locale.content;
 
-    expect(name).toEqual(locale.name.replace('.js', ''))
-    expect(weekdays).toEqual(expect.any(Array))
+    expect(name).toEqual(locale.name.replace('.js', ''));
+    expect(weekdays).toEqual(expect.any(Array));
 
-    if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
-    if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array))
-    if (weekStart) expect(weekStart).toEqual(expect.any(Number))
-    if (yearStart) expect(yearStart).toEqual(expect.any(Number))
+    if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array));
+    if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array));
+    if (weekStart) expect(weekStart).toEqual(expect.any(Number));
+    if (yearStart) expect(yearStart).toEqual(expect.any(Number));
 
     // months could be a function or array
     if (Array.isArray(months)) {
-      expect(months).toEqual(expect.any(Array))
+      expect(months).toEqual(expect.any(Array));
     } else {
-      expect(months(dayjs(), 'str')).toEqual(expect.any(String))
+      expect(months(dayjs(), 'str')).toEqual(expect.any(String));
     }
     // monthsShort could be a function or array
     if (monthsShort) {
       if (Array.isArray(monthsShort)) {
-        expect(monthsShort).toEqual(expect.any(Array))
+        expect(monthsShort).toEqual(expect.any(Array));
       } else {
-        expect(monthsShort(dayjs(), 'str')).toEqual(expect.any(String))
+        expect(monthsShort(dayjs(), 'str')).toEqual(expect.any(String));
       }
     }
     // function pass date return string or number or null
     if (name !== 'en') { // en ordinal set in advancedFormat
       for (let i = 1; i <= 31; i += 1) {
-        expect(ordinal(i)).toEqual(expect.anything())
+        expect(ordinal(i)).toEqual(expect.anything());
       }
     }
 
-    expect(dayjs().locale(name).$locale().name).toBe(name)
+    expect(dayjs().locale(name).$locale().name).toBe(name);
     if (formats) {
       const {
         LT,
@@ -75,7 +75,7 @@ Locale.forEach((locale) => {
         lll,
         llll,
         ...remainingFormats
-      } = formats
+      } = formats;
       expect(formats).toEqual(expect.objectContaining({
         L: expect.any(String),
         LL: expect.any(String),
@@ -83,23 +83,23 @@ Locale.forEach((locale) => {
         LLLL: expect.any(String),
         LT: expect.any(String),
         LTS: expect.any(String)
-      }))
-      expect(Object.keys(remainingFormats).length).toEqual(0)
-      if (l) expect(l).toEqual(expect.any(String))
-      if (ll) expect(ll).toEqual(expect.any(String))
-      if (lll) expect(lll).toEqual(expect.any(String))
-      if (llll) expect(llll).toEqual(expect.any(String))
+      }));
+      expect(Object.keys(remainingFormats).length).toEqual(0);
+      if (l) expect(l).toEqual(expect.any(String));
+      if (ll) expect(ll).toEqual(expect.any(String));
+      if (lll) expect(lll).toEqual(expect.any(String));
+      if (llll) expect(llll).toEqual(expect.any(String));
     }
     if (relativeTime) {
       expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
         'past', 's', 'y', 'yy']
-        .sort())
+        .sort());
     }
 
     if (meridiem) {
       for (let i = 1; i <= 23; i += 1) {
-        expect(meridiem(i)).toEqual(expect.anything())
+        expect(meridiem(i)).toEqual(expect.anything());
       }
     }
-  })
-})
+  });
+});

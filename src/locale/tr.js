@@ -1,5 +1,5 @@
 // Turkish [tr]
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const locale = {
   name: 'tr',
@@ -32,9 +32,9 @@ const locale = {
     y: 'bir yıl',
     yy: '%d yıl'
   },
-  ordinal: n => `${n}.`
-}
+  ordinal: (n) => `${n}.`
+};
 
-dayjs.locale(locale, null, true)
+dayjs.locale(locale, null, true);
 
-export default locale
+export default locale;
