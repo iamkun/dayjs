@@ -115,3 +115,40 @@ it('Time from now with UTC', () => {
 
   expect(dutc.fromNow()).toBe(mutc.fromNow())
 })
+
+it('Strict support', () => {
+  expect(dayjs().fromNow()).toBe('a few seconds ago')
+  expect(dayjs().subtract(45, 's').fromNow()).toBe('a minute ago')
+  expect(dayjs().subtract(45, 'm').fromNow()).toBe('an hour ago')
+  dayjs.extend(relativeTime, {
+    strict: true
+  })
+  expect(dayjs().fromNow()).toBe('0 second ago')
+  expect(dayjs().subtract(1, 's').fromNow()).toBe('1 second ago')
+  expect(dayjs().subtract(45, 's').fromNow()).toBe('45 seconds ago')
+  expect(dayjs().subtract(45, 'm').fromNow()).toBe('45 minutes ago')
+})
+
+it('Custom thresholds support', () => {
+  const { C } = dayjs().$utils()
+  dayjs.extend(relativeTime, {
+    thresholds: [
+      { l: 's', r: 44, d: C.S },
+      { l: 'm', r: 1 },
+      { l: 'mm', r: 59, d: C.MIN },
+      { l: 'h', r: 1 },
+      { l: 'hh', r: 23, d: C.H },
+      { l: 'd', r: 1 },
+      { l: 'dd', r: 30, d: C.D },
+      { l: 'M', r: 1 },
+      { l: 'MM', r: 11, d: C.M },
+      { l: 'y' },
+      { l: 'yy', d: C.Y }
+    ]
+  })
+  expect(dayjs().fromNow()).toBe('a few seconds ago')
+  expect(dayjs().subtract(44, 's').fromNow()).toBe('a few seconds ago')
+  expect(dayjs().subtract(45, 's').fromNow()).toBe('a minute ago')
+  expect(dayjs().subtract(45, 'm').fromNow()).toBe('45 minutes ago')
+  expect(dayjs().subtract(60, 'm').fromNow()).toBe('an hour ago')
+})
