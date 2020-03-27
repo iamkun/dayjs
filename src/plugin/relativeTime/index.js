@@ -29,35 +29,43 @@ const STRICT_THRESHOLDS = [
   { l: 'yy', d: C.Y }
 ]
 
+const LOOSE_EN_LOCALE = {
+  future: 'in %s',
+  past: '%s ago',
+  s: 'a few seconds',
+  m: 'a minute',
+  mm: '%d minutes',
+  h: 'an hour',
+  hh: '%d hours',
+  d: 'a day',
+  dd: '%d days',
+  M: 'a month',
+  MM: '%d months',
+  y: 'a year',
+  yy: '%d years'
+}
+
+const STRICT_EN_LOCALE = {
+  future: 'in %s',
+  past: '%s ago',
+  s: '%d second', // 0 or 1
+  ss: '%d seconds',
+  m: '1 minute',
+  mm: '%d minutes',
+  h: '1 hour',
+  hh: '%d hours',
+  d: '1 day',
+  dd: '%d days',
+  M: '1 month',
+  MM: '%d months',
+  y: '1 year',
+  yy: '%d years'
+}
+
 export default (o, c, d) => {
   o = o || {}
   const proto = c.prototype
-  d.en.relativeTime = {
-    future: 'in %s',
-    past: '%s ago',
-    s: 'a few seconds',
-    m: 'a minute',
-    mm: '%d minutes',
-    h: 'an hour',
-    hh: '%d hours',
-    d: 'a day',
-    dd: '%d days',
-    M: 'a month',
-    MM: '%d months',
-    y: 'a year',
-    yy: '%d years'
-  }
-  if (o.strict) {
-    Object.assign(d.en.relativeTime, {
-      s: '%d second', // 0 or 1
-      ss: '%d seconds',
-      m: '1 minute',
-      h: '1 hour',
-      d: '1 day',
-      M: '1 month',
-      y: '1 year'
-    })
-  }
+  d.en.relativeTime = o.strict ? STRICT_EN_LOCALE : LOOSE_EN_LOCALE
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
     const loc = instance.$locale().relativeTime
     const T = o.thresholds || (o.strict ? STRICT_THRESHOLDS : LOOSE_THRESHOLDS)
