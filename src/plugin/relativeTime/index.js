@@ -1,6 +1,7 @@
 import * as C from '../../constant'
 
 export default (o, c, d) => {
+  o = o || {}
   const proto = c.prototype
   d.en.relativeTime = {
     future: 'in %s',
@@ -19,7 +20,7 @@ export default (o, c, d) => {
   }
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
     const loc = instance.$locale().relativeTime
-    const T = [
+    const T = o.thresholds || [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
       { l: 'mm', r: 44, d: C.MIN },
@@ -44,10 +45,10 @@ export default (o, c, d) => {
           ? d(input).diff(instance, t.d, true)
           : instance.diff(input, t.d, true)
       }
-      const abs = Math.round(Math.abs(result))
+      const abs = (o.rounding || Math.round)(Math.abs(result))
       isFuture = result > 0
       if (abs <= t.r || !t.r) {
-        if (abs === 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute
+        if (abs <= 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute, 0 seconds -> 0 second
         const format = loc[t.l]
         if (typeof format === 'string') {
           out = format.replace('%d', abs)

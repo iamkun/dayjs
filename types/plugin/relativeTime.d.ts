@@ -1,6 +1,17 @@
 import { PluginFunc, ConfigType } from 'dayjs'
 
-declare const plugin: PluginFunc
+declare interface RelativeTimeThreshold {
+  l: string
+  r?: number
+  d?: string
+}
+
+declare interface RelativeTimeOptions {
+  rounding?: (num: number) => number
+  thresholds?: RelativeTimeThreshold[]
+}
+
+declare const plugin: PluginFunc<RelativeTimeOptions>
 export = plugin
 
 declare module 'dayjs' {

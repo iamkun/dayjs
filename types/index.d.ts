@@ -96,9 +96,9 @@ declare namespace dayjs {
     locale(preset: string | ILocale, object?: Partial<ILocale>): Dayjs
   }
 
-  export type PluginFunc = (option: any, c: typeof Dayjs, d: typeof dayjs) => void
+  export type PluginFunc<T = unknown> = (option: T, c: typeof Dayjs, d: typeof dayjs) => void
 
-  export function extend(plugin: PluginFunc, option?: any): Dayjs
+  export function extend<T = unknown>(plugin: PluginFunc<T>, option?: T): Dayjs
 
   export function locale(preset: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
