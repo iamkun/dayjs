@@ -7,7 +7,7 @@ declare interface RelativeTimeThreshold {
 }
 
 declare interface RelativeTimeOptions {
-  strict?: boolean
+  rounding?: (num: number) => number
   thresholds?: RelativeTimeThreshold[]
 }
 

@@ -45,7 +45,6 @@ const prettyUnit = (u) => {
 const isUndefined = s => s === undefined
 
 export default {
-  C, // for custom plugin
   s: padStart,
   z: padZoneStr,
   m: monthDiff,
