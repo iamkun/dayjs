@@ -14,7 +14,7 @@ const locales = [
   { locale: 'en-tt', expectedDate: '25/12/2019' }
 ]
 
-describe('Date formats', () => {
+describe('English date formats', () => {
   locales.forEach((locale) => {
     it(`should correctly format date with locale - ${locale.locale}`, () => {
       const dayjsWithLocale = dayjs('2019-12-25').locale(locale.locale)
