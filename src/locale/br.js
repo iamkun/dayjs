@@ -18,7 +18,7 @@ const locale = {
     LLL: 'D [a viz] MMMM YYYY h[e]mm A',
     LLLL: 'dddd, D [a viz] MMMM YYYY h[e]mm A'
   },
-  meridiem: hour => (hour < 12 ? 'a.m.' : 'g.m.'), // a-raok merenn | goude merenn
+  meridiem: hour => (hour < 12 ? 'a.m.' : 'g.m.') // a-raok merenn | goude merenn
 }
 
 dayjs.locale(locale, null, true)
