@@ -77,3 +77,8 @@ describe('Minutes', () => {
   expect(dayjs.duration(100000).minutes()).toBe(1)
   expect(dayjs.duration(100000).asMinutes().toFixed(2)).toBe('1.67')
 })
+
+describe('Hours', () => {
+  expect(dayjs.duration(10000000).hours()).toBe(2)
+  expect(dayjs.duration(10000000).asHours().toFixed(2)).toBe('2.78')
+})
