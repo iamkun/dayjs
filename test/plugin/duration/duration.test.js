@@ -2,6 +2,8 @@ import MockDate from 'mockdate'
 import dayjs from '../../../src'
 import duration from '../../../src/plugin/duration'
 import relativeTime from '../../../src/plugin/relativeTime'
+import '../../../src/locale/fr'
+import '../../../src/locale/es'
 
 dayjs.extend(relativeTime)
 dayjs.extend(duration)
@@ -36,4 +38,28 @@ describe('Humanize', () => {
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
     expect(dayjs.duration(-1, 'minutes').humanize(true)).toBe('a minute ago')
   })
+
+  it('Locale', () => {
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
+    expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
+    expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe('en un minuto')
+  })
 })
+
+describe('Clone', () => {
+  it('Locale clone', () => {
+    const d = dayjs.duration(1, 'minutes').locale('fr')
+    const r = 'dans une minute'
+    expect(d.humanize(true)).toBe(r)
+    expect(d.clone().humanize(true)).toBe(r)
+  })
+})
+
+// describe('Milliseconds', () => {
+//   expect(dayjs.duration(500).milliseconds()).toBe(500)
+//   expect(dayjs.duration(1500).milliseconds()).toBe(500)
+//   expect(dayjs.duration(15000).milliseconds()).toBe(0)
+//   expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+//   expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
+//   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+// })
