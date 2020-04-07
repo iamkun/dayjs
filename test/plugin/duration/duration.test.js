@@ -87,3 +87,13 @@ describe('Days', () => {
   expect(dayjs.duration(100000000).days()).toBe(1)
   expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
 })
+
+describe('Month', () => {
+  expect(dayjs.duration(10000000000).months()).toBe(3)
+  // expect(dayjs.duration(10000000000).asMonths().toFixed(2)).toBe('3.80')
+})
+
+describe('Years', () => {
+  expect(dayjs.duration(100000000000).years()).toBe(3)
+  expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.17')
+})
