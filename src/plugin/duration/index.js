@@ -19,11 +19,15 @@ const isDuration = d => (d instanceof Duration) // eslint-disable-line no-use-be
 
 let $d
 
+const wrapper = (input, instance, unit) =>
+  new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
+
 class Duration {
-  constructor(input, unit) {
+  constructor(input, unit, locale) {
     this.$d = {}
+    this.$l = locale || 'en'
     if (unit) {
-      return new Duration(input * unitToMS[unit])
+      return wrapper(input * unitToMS[unit], this)
     }
     if (typeof input === 'number') {
       this.$d.milliseconds = input
@@ -106,21 +110,27 @@ class Duration {
       another = input.$d.milliseconds
     }
     if (typeof unit === 'object') {
-      another = new Duration(input).$d.milliseconds
+      another = wrapper(input, this).$d.milliseconds
     }
-    return new Duration(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)))
+    return wrapper(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)), this)
   }
 
   subtract(input, unit) {
-    this.add(input, unit, true)
+    return this.add(input, unit, true)
+  }
+
+  locale(l) {
+    const that = this.clone()
+    that.$l = l
+    return that
   }
 
   clone() {
-    return new Duration(this.$d.milliseconds)
+    return wrapper(this.$d.milliseconds, this)
   }
 
   humanize(withSuffix) {
-    return $d().add(this.$d.milliseconds, 'ms').fromNow(!withSuffix)
+    return $d().add(this.$d.milliseconds, 'ms').locale(this.$l).fromNow(!withSuffix)
   }
 
   milliseconds() { return this.get('milliseconds') }
@@ -143,7 +153,7 @@ class Duration {
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
   dayjs.duration = function (input, unit) {
-    return new Duration(input, unit)
+    return wrapper(input, {}, unit)
   }
   dayjs.isDuration = isDuration
 }
