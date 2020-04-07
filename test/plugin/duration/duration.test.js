@@ -55,11 +55,20 @@ describe('Clone', () => {
   })
 })
 
-// describe('Milliseconds', () => {
-//   expect(dayjs.duration(500).milliseconds()).toBe(500)
-//   expect(dayjs.duration(1500).milliseconds()).toBe(500)
-//   expect(dayjs.duration(15000).milliseconds()).toBe(0)
-//   expect(dayjs.duration(500).asMilliseconds()).toBe(500)
-//   expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
-//   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
-// })
+describe('Milliseconds', () => {
+  expect(dayjs.duration(500).milliseconds()).toBe(500)
+  expect(dayjs.duration(1500).milliseconds()).toBe(500)
+  expect(dayjs.duration(15000).milliseconds()).toBe(0)
+  expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+  expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
+  expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+})
+
+describe('Seconds', () => {
+  expect(dayjs.duration(500).seconds()).toBe(0)
+  expect(dayjs.duration(1500).seconds()).toBe(1)
+  expect(dayjs.duration(15000).seconds()).toBe(15)
+  expect(dayjs.duration(500).asSeconds()).toBe(0.5)
+  expect(dayjs.duration(1500).asSeconds()).toBe(1.5)
+  expect(dayjs.duration(15000).asSeconds()).toBe(15)
+})

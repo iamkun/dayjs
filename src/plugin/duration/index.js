@@ -94,11 +94,17 @@ class Duration {
   }
 
   as(unit) {
-    return this.$d.milliseconds / unitToMS[unit]
+    return this.$d.milliseconds / (unitToMS[unit] || 1)
   }
 
   get(unit) {
-    return this.$d[unit]
+    let base = this.$d.milliseconds
+    if (unit === 'milliseconds') {
+      base %= 1000
+    } else {
+      base = Math.floor(base / unitToMS[unit])
+    }
+    return base
   }
 
   add(input, unit, isSubtract) {
@@ -136,19 +142,19 @@ class Duration {
   milliseconds() { return this.get('milliseconds') }
   asMilliseconds() { return this.as('milliseconds') }
   seconds() { return this.get('seconds') }
-  asSeconds() { return this.get('seconds') }
+  asSeconds() { return this.as('seconds') }
   minutes() { return this.get('minutes') }
-  asMinutes() { return this.get('minutes') }
+  asMinutes() { return this.as('minutes') }
   hours() { return this.get('hours') }
-  asHours() { return this.get('hours') }
+  asHours() { return this.as('hours') }
   days() { return this.get('days') }
-  asDays() { return this.get('days') }
+  asDays() { return this.as('days') }
   weeks() { return this.get('weeks') }
-  asWeeks() { return this.get('weeks') }
+  asWeeks() { return this.as('weeks') }
   months() { return this.get('months') }
-  asMonths() { return this.get('months') }
+  asMonths() { return this.as('months') }
   years() { return this.get('years') }
-  asYears() { return this.get('years') }
+  asYears() { return this.as('years') }
 }
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
