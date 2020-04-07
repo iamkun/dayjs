@@ -12,11 +12,10 @@ afterEach(() => {
   MockDate.reset()
 })
 
-describe('Creating from two argument', () => {
+describe('Creating', () => {
   it('milliseconds', () => {
     expect(dayjs.duration(100).toISOString()).toBe('PT0.1S')
     expect(dayjs.duration(1000).toISOString()).toBe('PT1S')
-    // expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
   it('two argument will bubble up to the next', () => {
     expect(dayjs.duration(59, 'seconds').toISOString()).toBe('PT59S')
@@ -43,5 +42,12 @@ describe('Creating from two argument', () => {
       months: 6,
       years: 7
     }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
+  })
+})
+
+
+describe('Parse ISO string', () => {
+  it('ISO string', () => {
+    expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
   })
 })
