@@ -82,3 +82,8 @@ describe('Hours', () => {
   expect(dayjs.duration(10000000).hours()).toBe(2)
   expect(dayjs.duration(10000000).asHours().toFixed(2)).toBe('2.78')
 })
+
+describe('Days', () => {
+  expect(dayjs.duration(100000000).days()).toBe(1)
+  expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+})
