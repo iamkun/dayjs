@@ -68,6 +68,8 @@ describe('Add', () => {
   const a = dayjs.duration(1, 'days')
   const b = dayjs.duration(2, 'days')
   expect(a.add(b).days()).toBe(3)
+  expect(a.add(1, 'days').days()).toBe(2)
+  // expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
 describe('Subtract', () => {
@@ -100,6 +102,11 @@ describe('Days', () => {
   expect(dayjs.duration(100000000).days()).toBe(1)
   expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
 })
+
+// describe('Weeks', () => {
+//   expect(dayjs.duration(10000000000).weeks()).toBe(0)
+//   expect(dayjs.duration(10000000000).asWeeks().toFixed(2)).toBe('0')
+// })
 
 describe('Month', () => {
   expect(dayjs.duration(10000000000).months()).toBe(3)
