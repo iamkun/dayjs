@@ -53,8 +53,7 @@ class Duration {
     milliseconds %= MILLISECONDS_A_HOUR
     this.minutes = Math.floor(milliseconds / MILLISECONDS_A_MINUTE)
     milliseconds %= MILLISECONDS_A_MINUTE
-    this.seconds = Math.floor(milliseconds / MILLISECONDS_A_SECOND)
-    milliseconds %= MILLISECONDS_A_SECOND
+    this.seconds = milliseconds / MILLISECONDS_A_SECOND
   }
 
   toISOString() {
