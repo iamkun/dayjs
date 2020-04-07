@@ -64,6 +64,19 @@ describe('Milliseconds', () => {
   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
 })
 
+describe('Add', () => {
+  const a = dayjs.duration(1, 'days')
+  const b = dayjs.duration(2, 'days')
+  expect(a.add(b).days()).toBe(3)
+})
+
+describe('Subtract', () => {
+  const a = dayjs.duration(3, 'days')
+  const b = dayjs.duration(2, 'days')
+  expect(a.subtract(b).days()).toBe(1)
+})
+
+
 describe('Seconds', () => {
   expect(dayjs.duration(500).seconds()).toBe(0)
   expect(dayjs.duration(1500).seconds()).toBe(1)
