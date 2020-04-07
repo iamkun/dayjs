@@ -68,6 +68,17 @@ class Duration {
   toJSON() {
     return this.toISOString()
   }
+
+  as(unit) {
+    return this.milliseconds / unitToMS[unit]
+  }
+  get(unit) {
+    return this[unit]
+  }
+  // isDuration
+  // add
+  // subtract
+  // negative duration
 }
 export default (option, Dayjs, dayjs) => {
   // const proto = Dayjs.prototype
