@@ -13,6 +13,9 @@ afterEach(() => {
 })
 
 it('Is duration', () => {
+  expect(dayjs.isDuration(dayjs.duration())).toBe(true)
   expect(dayjs.isDuration(dayjs.duration(1))).toBe(true)
+  expect(dayjs.isDuration(dayjs())).toBe(false)
   expect(dayjs.isDuration({})).toBe(false)
+  expect(dayjs.isDuration()).toBe(false)
 })
