@@ -17,6 +17,8 @@ const unitToMS = {
 
 const isDuration = d => (d instanceof Duration) // eslint-disable-line no-use-before-define
 
+let $d
+
 class Duration {
   constructor(input, unit) {
     this.$d = {}
@@ -117,6 +119,10 @@ class Duration {
     return new Duration(this.$d.milliseconds)
   }
 
+  humanize(withSuffix) {
+    return $d().add(this.$d.milliseconds, 'ms').fromNow(!withSuffix)
+  }
+
   milliseconds() { return this.get('milliseconds') }
   asMilliseconds() { return this.as('milliseconds') }
   seconds() { return this.get('seconds') }
@@ -135,6 +141,7 @@ class Duration {
   asYears() { return this.get('years') }
 }
 export default (option, Dayjs, dayjs) => {
+  $d = dayjs
   dayjs.duration = function (input, unit) {
     return new Duration(input, unit)
   }
