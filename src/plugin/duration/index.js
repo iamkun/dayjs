@@ -27,6 +27,9 @@ class Duration {
       Object.keys(input).forEach((k) => {
         this[k] = input[k]
       })
+      if (input.weeks) {
+        this.days += input.weeks * 7
+      }
       return this
     }
     if (typeof input === 'string') {
