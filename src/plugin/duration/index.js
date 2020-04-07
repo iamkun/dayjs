@@ -1,4 +1,4 @@
-import { MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND } from '../../constant'
+import { MILLISECONDS_A_WEEK, MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
@@ -11,8 +11,12 @@ const unitToMS = {
   days: MILLISECONDS_A_DAY,
   hours: MILLISECONDS_A_HOUR,
   minutes: MILLISECONDS_A_MINUTE,
-  seconds: MILLISECONDS_A_SECOND
+  seconds: MILLISECONDS_A_SECOND,
+  weeks: MILLISECONDS_A_WEEK
 }
+
+const isDuration = d => (d instanceof Duration) // eslint-disable-line no-use-before-define
+
 class Duration {
   constructor(input, unit) {
     this.$d = {}
@@ -28,6 +32,7 @@ class Duration {
       Object.keys(input).forEach((k) => {
         this.$d[k] = input[k]
       })
+      this.calMilliseconds()
       return this
     }
     if (typeof input === 'string') {
@@ -37,8 +42,15 @@ class Duration {
           this.$d.years, this.$d.months,,
           this.$d.days, this.$d.hours, this.$d.minutes, this.$d.seconds] = d
       }
+      this.calMilliseconds()
       return this
     }
+  }
+
+  calMilliseconds() {
+    this.$d.milliseconds = Object.keys(unitToMS).reduce((total, unit) => (
+      total + (this.$d[unit] * unitToMS[unit])
+    ), 0)
   }
 
   parseFromMilliseconds() {
@@ -78,13 +90,29 @@ class Duration {
   as(unit) {
     return this.$d.milliseconds / unitToMS[unit]
   }
+
   get(unit) {
     return this.$d[unit]
   }
-  // isDuration
-  // add
-  // subtract
-  // negative duration
+
+  add(input, unit, isSubtract) {
+    let another = input // milliseconds number
+    if (unit) {
+      another = input * unitToMS[unit]
+    }
+    if (isDuration(input)) {
+      another = input.$d.milliseconds
+    }
+    if (typeof unit === 'object') {
+      another = new Duration(input).$d.milliseconds
+    }
+    return new Duration(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)))
+  }
+
+  subtract(input, unit) {
+    this.add(input, unit, true)
+  }
+
   milliseconds() { return this.get('milliseconds') }
   asMilliseconds() { return this.as('milliseconds') }
   seconds() { return this.get('seconds') }
@@ -106,7 +134,5 @@ export default (option, Dayjs, dayjs) => {
   dayjs.duration = function (input, unit) {
     return new Duration(input, unit)
   }
-  dayjs.isDuration = function (d) {
-    return d instanceof Duration
-  }
+  dayjs.isDuration = isDuration
 }
