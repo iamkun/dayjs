@@ -9,15 +9,18 @@ class Duration {
   constructor(input, unit) {
     if (unit) {
       this[unit] = input
+      return
     }
     if (typeof input === 'number') {
       this.milliseconds = input
       this.parseFromMilliseconds()
+      return
     }
     if (typeof input === 'object') {
       Object.keys(input).forEach((k) => {
         this[k] = input[k]
       })
+      return
     }
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
