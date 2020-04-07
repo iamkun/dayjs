@@ -19,3 +19,9 @@ it('Is duration', () => {
   expect(dayjs.isDuration({})).toBe(false)
   expect(dayjs.isDuration()).toBe(false)
 })
+
+it('toJSON', () => {
+  expect(JSON.stringify({
+    postDuration: dayjs.duration(5, 'minutes')
+  })).toBe('{"postDuration":"P5M"}')
+})

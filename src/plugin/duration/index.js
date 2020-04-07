@@ -113,6 +113,10 @@ class Duration {
     this.add(input, unit, true)
   }
 
+  clone() {
+    return new Duration(this.$d.milliseconds)
+  }
+
   milliseconds() { return this.get('milliseconds') }
   asMilliseconds() { return this.as('milliseconds') }
   seconds() { return this.get('seconds') }
