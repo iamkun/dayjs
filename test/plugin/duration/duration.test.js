@@ -12,6 +12,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Duration', () => {
-  expect(true).toBe(true)
+it('Is duration', () => {
+  expect(dayjs.isDuration(dayjs.duration(1))).toBe(true)
+  expect(dayjs.isDuration({})).toBe(false)
 })

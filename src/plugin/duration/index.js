@@ -103,8 +103,10 @@ class Duration {
   asYears() { return this.get('years') }
 }
 export default (option, Dayjs, dayjs) => {
-  // const proto = Dayjs.prototype
   dayjs.duration = function (input, unit) {
     return new Duration(input, unit)
+  }
+  dayjs.isDuration = function (d) {
+    return d instanceof Duration
   }
 }
