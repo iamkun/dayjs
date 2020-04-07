@@ -3,13 +3,31 @@ import { MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISE
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
 
+const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+
 class Duration {
-  constructor(milliseconds) {
-    this.milliseconds = milliseconds
-    this.parse()
+  constructor(input, unit) {
+    if (unit) {
+      this[unit] = input
+    }
+    if (typeof input === 'number') {
+      this.milliseconds = input
+      this.parseFromMilliseconds()
+    }
+    if (typeof input === 'object') {
+      Object.keys(input).forEach((k) => {
+        this[k] = input[k]
+      })
+    }
+    if (typeof input === 'string') {
+      const d = input.match(durationRegex)
+      if (d) {
+        [this.years, this.months, this.days, this.hours, this.minutes, this.seconds] = d
+      }
+    }
   }
 
-  parse() {
+  parseFromMilliseconds() {
     let { milliseconds } = this
     this.years = Math.floor(milliseconds / MILLISECONDS_A_YEAR)
     milliseconds %= MILLISECONDS_A_YEAR
@@ -42,11 +60,11 @@ class Duration {
 }
 export default (option, Dayjs, dayjs) => {
   // const proto = Dayjs.prototype
-  dayjs.duration = function (milliseconds) {
+  dayjs.duration = function (input, unit) {
     // 1 milliseconds number
     // 2 object
     // 3 'P1Y2M3DT4H5M6S' string
     // 4 (2, 'seconds') two agrs
-    return new Duration(milliseconds)
+    return new Duration(input, unit)
   }
 }
