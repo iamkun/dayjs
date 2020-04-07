@@ -1,6 +1,6 @@
 import MockDate from 'mockdate'
-import dayjs from '../../src'
-import duration from '../../src/plugin/duration'
+import dayjs from '../../../src'
+import duration from '../../../src/plugin/duration'
 
 dayjs.extend(duration)
 
