@@ -32,7 +32,7 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
       if (d) {
-        [this.years, this.months, this.days, this.hours, this.minutes, this.seconds] = d
+        [,, this.years, this.months, , this.days, this.hours, this.minutes, this.seconds] = d
       }
       return this
     }
