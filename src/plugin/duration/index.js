@@ -33,7 +33,7 @@ class Duration {
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
     if (typeof input === 'number') {
-      this.$d.milliseconds = input
+      this.$ms = input
       this.parseFromMilliseconds()
       return this
     }
@@ -58,24 +58,24 @@ class Duration {
   }
 
   calMilliseconds() {
-    this.$d.milliseconds = Object.keys(this.$d).reduce((total, unit) => (
+    this.$ms = Object.keys(this.$d).reduce((total, unit) => (
       total + ((this.$d[unit] || 0) * (unitToMS[unit] || 1))
     ), 0)
   }
 
   parseFromMilliseconds() {
-    let { milliseconds } = this.$d
-    this.$d.years = Math.floor(milliseconds / MILLISECONDS_A_YEAR)
-    milliseconds %= MILLISECONDS_A_YEAR
-    this.$d.months = Math.floor(milliseconds / MILLISECONDS_A_MONTH)
-    milliseconds %= MILLISECONDS_A_MONTH
-    this.$d.days = Math.floor(milliseconds / MILLISECONDS_A_DAY)
-    milliseconds %= MILLISECONDS_A_DAY
-    this.$d.hours = Math.floor(milliseconds / MILLISECONDS_A_HOUR)
-    milliseconds %= MILLISECONDS_A_HOUR
-    this.$d.minutes = Math.floor(milliseconds / MILLISECONDS_A_MINUTE)
-    milliseconds %= MILLISECONDS_A_MINUTE
-    this.$d.seconds = milliseconds / MILLISECONDS_A_SECOND
+    let { $ms } = this
+    this.$d.years = Math.floor($ms / MILLISECONDS_A_YEAR)
+    $ms %= MILLISECONDS_A_YEAR
+    this.$d.months = Math.floor($ms / MILLISECONDS_A_MONTH)
+    $ms %= MILLISECONDS_A_MONTH
+    this.$d.days = Math.floor($ms / MILLISECONDS_A_DAY)
+    $ms %= MILLISECONDS_A_DAY
+    this.$d.hours = Math.floor($ms / MILLISECONDS_A_HOUR)
+    $ms %= MILLISECONDS_A_HOUR
+    this.$d.minutes = Math.floor($ms / MILLISECONDS_A_MINUTE)
+    $ms %= MILLISECONDS_A_MINUTE
+    this.$d.seconds = $ms / MILLISECONDS_A_SECOND
   }
 
   toISOString() {
@@ -103,11 +103,11 @@ class Duration {
   }
 
   as(unit) {
-    return this.$d.milliseconds / (unitToMS[prettyUnit(unit)] || 1)
+    return this.$ms / (unitToMS[prettyUnit(unit)] || 1)
   }
 
   get(unit) {
-    let base = this.$d.milliseconds
+    let base = this.$ms
     const pUnit = prettyUnit(unit)
     if (pUnit === 'milliseconds') {
       base %= 1000
@@ -122,11 +122,11 @@ class Duration {
     if (unit) {
       another = input * unitToMS[prettyUnit(unit)]
     } else if (isDuration(input)) {
-      another = input.$d.milliseconds
+      another = input.$ms
     } else {
-      another = wrapper(input, this).$d.milliseconds
+      another = wrapper(input, this).$ms
     }
-    return wrapper(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)), this)
+    return wrapper(this.$ms + (another * (isSubtract ? -1 : 1)), this)
   }
 
   subtract(input, unit) {
@@ -140,11 +140,11 @@ class Duration {
   }
 
   clone() {
-    return wrapper(this.$d.milliseconds, this)
+    return wrapper(this.$ms, this)
   }
 
   humanize(withSuffix) {
-    return $d().add(this.$d.milliseconds, 'ms').locale(this.$l).fromNow(!withSuffix)
+    return $d().add(this.$ms, 'ms').locale(this.$l).fromNow(!withSuffix)
   }
 
   milliseconds() { return this.get('milliseconds') }
