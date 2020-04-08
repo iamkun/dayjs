@@ -57,6 +57,9 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Invalid ISO string', () => {
+    expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
+  })
 })
 
 it('Is duration', () => {

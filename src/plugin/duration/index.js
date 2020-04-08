@@ -50,10 +50,11 @@ class Duration {
         [,,
           this.$d.years, this.$d.months,,
           this.$d.days, this.$d.hours, this.$d.minutes, this.$d.seconds] = d
+        this.calMilliseconds()
+        return this
       }
-      this.calMilliseconds()
-      return this
     }
+    return this
   }
 
   calMilliseconds() {
@@ -89,7 +90,8 @@ class Duration {
     const m = this.$d.minutes ? `${this.$d.minutes}M` : ''
     const S = this.$d.seconds ? `${this.$d.seconds}S` : ''
     const T = (H || M || S) ? 'T' : ''
-    return `P${Y}${M}${D}${T}${H}${m}${S}`
+    const result = `P${Y}${M}${D}${T}${H}${m}${S}`
+    return result === 'P' ? 'P0D' : result
   }
 
   toJSON() {
