@@ -103,10 +103,10 @@ describe('Days', () => {
   expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
 })
 
-// describe('Weeks', () => {
-//   expect(dayjs.duration(10000000000).weeks()).toBe(0)
-//   expect(dayjs.duration(10000000000).asWeeks().toFixed(2)).toBe('0')
-// })
+describe('Weeks', () => {
+  expect(dayjs.duration(1000000000).weeks()).toBe(1)
+  expect(dayjs.duration(1000000000).asWeeks().toFixed(2)).toBe('1.65')
+})
 
 describe('Month', () => {
   expect(dayjs.duration(10000000000).months()).toBe(3)
