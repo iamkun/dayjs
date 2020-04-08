@@ -160,3 +160,10 @@ describe('Years', () => {
   expect(dayjs.duration(100000000000).years()).toBe(3)
   expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.17')
 })
+
+describe('prettyUnit', () => {
+  const d = dayjs.duration(2, 's')
+  expect(d.toISOString()).toBe('PT2S')
+  expect(d.as('Second')).toBe(2)
+  expect(d.get('s')).toBe(2)
+})
