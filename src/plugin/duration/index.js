@@ -54,8 +54,8 @@ class Duration {
   }
 
   calMilliseconds() {
-    this.$d.milliseconds = Object.keys(unitToMS).reduce((total, unit) => (
-      total + (this.$d[unit] * unitToMS[unit])
+    this.$d.milliseconds = Object.keys(this.$d).reduce((total, unit) => (
+      total + (this.$d[unit] * (unitToMS[unit] || 0))
     ), 0)
   }
 
@@ -111,11 +111,9 @@ class Duration {
     let another = input // milliseconds number
     if (unit) {
       another = input * unitToMS[unit]
-    }
-    if (isDuration(input)) {
+    } else if (isDuration(input)) {
       another = input.$d.milliseconds
-    }
-    if (typeof unit === 'object') {
+    } else if (typeof input === 'object') {
       another = wrapper(input, this).$d.milliseconds
     }
     return wrapper(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)), this)
