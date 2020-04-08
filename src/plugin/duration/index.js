@@ -18,16 +18,19 @@ const unitToMS = {
 const isDuration = d => (d instanceof Duration) // eslint-disable-line no-use-before-define
 
 let $d
+let $u
 
 const wrapper = (input, instance, unit) =>
   new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
+
+const prettyUnit = unit => `${$u.p(unit)}s`
 
 class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
     this.$l = locale || 'en'
     if (unit) {
-      return wrapper(input * unitToMS[unit], this)
+      return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
     if (typeof input === 'number') {
       this.$d.milliseconds = input
@@ -94,15 +97,16 @@ class Duration {
   }
 
   as(unit) {
-    return this.$d.milliseconds / (unitToMS[unit] || 1)
+    return this.$d.milliseconds / (unitToMS[prettyUnit(unit)] || 1)
   }
 
   get(unit) {
     let base = this.$d.milliseconds
-    if (unit === 'milliseconds') {
+    const pUnit = prettyUnit(unit)
+    if (pUnit === 'milliseconds') {
       base %= 1000
     } else {
-      base = Math.floor(base / unitToMS[unit])
+      base = Math.floor(base / unitToMS[pUnit])
     }
     return base
   }
@@ -110,7 +114,7 @@ class Duration {
   add(input, unit, isSubtract) {
     let another = input // milliseconds number
     if (unit) {
-      another = input * unitToMS[unit]
+      another = input * unitToMS[prettyUnit(unit)]
     } else if (isDuration(input)) {
       another = input.$d.milliseconds
     } else if (typeof input === 'object') {
@@ -156,6 +160,7 @@ class Duration {
 }
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
+  $u = dayjs().$utils()
   dayjs.duration = function (input, unit) {
     return wrapper(input, {}, unit)
   }
