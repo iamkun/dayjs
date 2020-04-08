@@ -69,7 +69,7 @@ describe('Add', () => {
   const b = dayjs.duration(2, 'days')
   expect(a.add(b).days()).toBe(3)
   expect(a.add(1, 'days').days()).toBe(2)
-  // expect(a.add({ days: 5 }).days()).toBe(6)
+  expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
 describe('Subtract', () => {
