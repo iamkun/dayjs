@@ -47,6 +47,11 @@ describe('Creating', () => {
       years: 7
     }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
   })
+  it('object with millisecond', () => {
+    expect(dayjs.duration({
+      ms: 1
+    }).toISOString()).toBe('PT0.001S')
+  })
 })
 
 

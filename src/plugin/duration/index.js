@@ -59,7 +59,7 @@ class Duration {
 
   calMilliseconds() {
     this.$d.milliseconds = Object.keys(this.$d).reduce((total, unit) => (
-      total + ((this.$d[unit] || 0) * (unitToMS[unit] || 0))
+      total + ((this.$d[unit] || 0) * (unitToMS[unit] || 1))
     ), 0)
   }
 
@@ -88,7 +88,11 @@ class Duration {
     const D = days ? `${days}D` : ''
     const H = this.$d.hours ? `${this.$d.hours}H` : ''
     const m = this.$d.minutes ? `${this.$d.minutes}M` : ''
-    const S = this.$d.seconds ? `${this.$d.seconds}S` : ''
+    let seconds = this.$d.seconds || 0
+    if (this.$d.milliseconds) {
+      seconds += this.$d.milliseconds / 1000
+    }
+    const S = seconds ? `${seconds}S` : ''
     const T = (H || M || S) ? 'T' : ''
     const result = `P${Y}${M}${D}${T}${H}${m}${S}`
     return result === 'P' ? 'P0D' : result
@@ -114,12 +118,12 @@ class Duration {
   }
 
   add(input, unit, isSubtract) {
-    let another = input // milliseconds number
+    let another
     if (unit) {
       another = input * unitToMS[prettyUnit(unit)]
     } else if (isDuration(input)) {
       another = input.$d.milliseconds
-    } else if (typeof input === 'object') {
+    } else {
       another = wrapper(input, this).$d.milliseconds
     }
     return wrapper(this.$d.milliseconds + (another * (isSubtract ? -1 : 1)), this)
