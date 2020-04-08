@@ -55,7 +55,7 @@ class Duration {
 
   calMilliseconds() {
     this.$d.milliseconds = Object.keys(this.$d).reduce((total, unit) => (
-      total + (this.$d[unit] * (unitToMS[unit] || 0))
+      total + (this.$d[unit] || 0 * (unitToMS[unit] || 0))
     ), 0)
   }
 

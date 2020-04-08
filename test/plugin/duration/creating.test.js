@@ -47,7 +47,11 @@ describe('Creating', () => {
 
 
 describe('Parse ISO string', () => {
-  it('ISO string', () => {
+  it('Full ISO string', () => {
     expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
   })
+  it('Part ISO string', () => {
+    expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
+  })
 })
+
