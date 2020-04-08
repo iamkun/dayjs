@@ -110,7 +110,7 @@ describe('Weeks', () => {
 
 describe('Month', () => {
   expect(dayjs.duration(10000000000).months()).toBe(3)
-  // expect(dayjs.duration(10000000000).asMonths().toFixed(2)).toBe('3.80')
+  expect(dayjs.duration({ months: 3 }).asMonths()).toBe(3)
 })
 
 describe('Years', () => {
