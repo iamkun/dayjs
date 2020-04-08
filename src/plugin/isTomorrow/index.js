@@ -1,12 +1,11 @@
 export default (o, c, d) => {
   const proto = c.prototype
   proto.isTomorrow = function () {
-    const comparisonKey = ['$y', '$D', '$m']
+    const comparisonTemplate = 'YYYY-MM-DD'
     const tomorrow = d().add(1, 'day')
 
-    return comparisonKey.filter(function (key) {
-      return tomorrow[key] === this[key]
-    }, this).length === 3
+    return (
+      this.format(comparisonTemplate) === tomorrow.format(comparisonTemplate)
+    )
   }
 }
-
