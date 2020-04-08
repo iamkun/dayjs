@@ -3,10 +3,10 @@ import { PluginFunc } from 'dayjs'
 declare const plugin: PluginFunc
 export = plugin
 
-export type DurationInputType = string | number | object
-export type DurationAddType = number | object | Duration
+type DurationInputType = string | number | object
+type DurationAddType = number | object | Duration
 
-class Duration {
+declare class Duration {
   constructor (input: DurationInputType, unit?: string, locale?: string)
 
   clone(): Duration
@@ -53,6 +53,6 @@ class Duration {
 }
 
 declare module 'dayjs' {
-  export function duration(input: DurationInputType , unit?: string): Duration
+  export function duration(input?: DurationInputType , unit?: string): Duration
   export function isDuration(d: any): d is Duration
 }
