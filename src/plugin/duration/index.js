@@ -39,7 +39,7 @@ class Duration {
     }
     if (typeof input === 'object') {
       Object.keys(input).forEach((k) => {
-        this.$d[k] = input[k]
+        this.$d[prettyUnit(k)] = input[k]
       })
       this.calMilliseconds()
       return this

@@ -166,4 +166,8 @@ describe('prettyUnit', () => {
   expect(d.toISOString()).toBe('PT2S')
   expect(d.as('Second')).toBe(2)
   expect(d.get('s')).toBe(2)
+  expect(dayjs.duration({
+    M: 12,
+    m: 12
+  }).toISOString()).toBe('P12MT12M')
 })
