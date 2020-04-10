@@ -1,3 +1,17 @@
+## [1.8.24](https://github.com/iamkun/dayjs/compare/v1.8.23...v1.8.24) (2020-04-10)
+
+
+### Bug Fixes
+
+* Add config option to RelativeTime plugin ([#851](https://github.com/iamkun/dayjs/issues/851)) ([bd24034](https://github.com/iamkun/dayjs/commit/bd24034b95bfc656024b75ef3f3c986708845fed))
+* add Duration plugin ([#858](https://github.com/iamkun/dayjs/issues/858)) ([d568273](https://github.com/iamkun/dayjs/commit/d568273223199ca0497f238e2cc3a8d3dcf32d0f))
+* Add en-in, en-tt locales ([#855](https://github.com/iamkun/dayjs/issues/855)) ([c39fb96](https://github.com/iamkun/dayjs/commit/c39fb96e2a9102c14b004c14a6c073af9d266f2f))
+* add isToday, isTomorrow, isYesterday plugins ([#857](https://github.com/iamkun/dayjs/issues/857)) ([fc08ab6](https://github.com/iamkun/dayjs/commit/fc08ab68f8a28269802deeab9d6b0473b92cdc51))
+* Add option callback to Calendar plugin ([#839](https://github.com/iamkun/dayjs/issues/839)) ([b25be90](https://github.com/iamkun/dayjs/commit/b25be9094325295310c8fc5e617fb058be8a5f68))
+* Fix monthsShort for locale fr ([#862](https://github.com/iamkun/dayjs/issues/862)) ([d2de9a0](https://github.com/iamkun/dayjs/commit/d2de9a0b44b830038ed0094f79bfd40726311f2a))
+* Update Breton locale (br) meridiem config ([#856](https://github.com/iamkun/dayjs/issues/856)) ([a2a6672](https://github.com/iamkun/dayjs/commit/a2a66720abb788a8f1cffbfd0929b35579f29c72))
+* Update Ukrainian (uk) locale relative time ([#842](https://github.com/iamkun/dayjs/issues/842)) ([578bc1a](https://github.com/iamkun/dayjs/commit/578bc1a23c6e737783bbac3da12c0ed5d1edcf82))
+
 ## [1.8.23](https://github.com/iamkun/dayjs/compare/v1.8.22...v1.8.23) (2020-03-16)
 
 
