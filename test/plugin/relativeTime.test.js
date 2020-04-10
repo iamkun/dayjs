@@ -1,6 +1,7 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
+import * as C from '../../src/constant'
 import relativeTime from '../../src/plugin/relativeTime'
 import utc from '../../src/plugin/utc'
 import '../../src/locale/ru'
@@ -84,7 +85,7 @@ it('Time to X', () => {
   expect(dayjs().to(dayjs().subtract(3, 'year'))).toBe(moment().to(moment().subtract(3, 'year')))
 })
 
-it('Locale Fonction', () => {
+it('Locale Function', () => {
   // e.g. in ru locale, m: x minute require additional processing
   // and provides as a function instead of a string
   const str0 = '2020-01-06 15:53:00'
@@ -114,4 +115,25 @@ it('Time from now with UTC', () => {
   mutc = moment.utc(currentTimestampAfter36hrs)
 
   expect(dutc.fromNow()).toBe(mutc.fromNow())
+})
+
+it('Custom thresholds and rounding support', () => {
+  expect(dayjs().subtract(45, 'm').fromNow()).toBe('an hour ago')
+  dayjs.extend(relativeTime, {
+    rounding: Math.floor,
+    thresholds: [
+      { l: 's', r: 1 },
+      { l: 'm', r: 1 },
+      { l: 'mm', r: 59, d: C.MIN },
+      { l: 'h', r: 1 },
+      { l: 'hh', r: 23, d: C.H },
+      { l: 'd', r: 1 },
+      { l: 'dd', r: 29, d: C.D },
+      { l: 'M', r: 1 },
+      { l: 'MM', r: 11, d: C.M },
+      { l: 'y' },
+      { l: 'yy', d: C.Y }
+    ]
+  })
+  expect(dayjs().subtract(45, 'm').fromNow()).toBe('45 minutes ago')
 })
