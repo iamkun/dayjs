@@ -100,7 +100,7 @@ declare namespace dayjs {
 
   export function extend<T = unknown>(plugin: PluginFunc<T>, option?: T): Dayjs
 
-  export function locale(preset: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
+  export function locale(preset?: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
   export function isDayjs(d: any): d is Dayjs
 
