@@ -16,7 +16,7 @@ describe('Parse', () => {
   })
 
   it('moment-js like formatted dates', () => {
-    global.console.warn = jest.genMockFunction()// moment.js '2018-4-1 1:1:1:22' will throw warn
+    global.console.warn = jest.fn()// moment.js '2018-4-1 1:1:1:22' will throw warn
     let d = '20130108'
     expect(dayjs(d).valueOf()).toBe(moment(d).valueOf())
     d = '2018-04-24'
@@ -81,7 +81,7 @@ describe('Parse', () => {
   })
 
   it('String Other, Null and isValid', () => {
-    global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
+    global.console.warn = jest.fn()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
     expect(dayjs().isValid()).toBe(true)
     expect(dayjs('').isValid()).toBe(false)
