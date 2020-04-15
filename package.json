@@ -71,6 +71,9 @@
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "@size-limit/preset-app": "^4.4.5",
+    "@size-limit/preset-big-lib": "^4.4.5",
+    "@size-limit/preset-small-lib": "^4.4.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -79,7 +82,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.15.0",
-    "gzip-size-cli": "^2.1.0",
+    "gzip-size-cli": "^3.0.0",
     "jasmine-core": "^2.99.1",
     "jest": "^22.4.3",
     "karma": "^2.0.2",
@@ -93,7 +96,7 @@
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^4.0.0-beta.4",
     "rollup-plugin-uglify": "^3.0.0",
-    "size-limit": "^0.18.0",
+    "size-limit": "^4.4.5",
     "typescript": "^2.8.3"
   },
   "dependencies": {}
