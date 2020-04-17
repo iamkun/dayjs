@@ -172,7 +172,7 @@ class Dayjs {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
       return Utils.w(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate(),
+        this.toDate('s'),
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }

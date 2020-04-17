@@ -100,4 +100,11 @@ test('utc startOf', () => {
     .valueOf())
     .toBe(dayjs(d).utc().utcOffset(480).endOf('day')
       .valueOf())
+  const d2 = '2017-07-20T11:00:00+00:00'
+  const d2d = dayjs(d2).utcOffset(-12).startOf('day').valueOf()
+  const d2m = moment(d2).utcOffset(-12).startOf('day').valueOf()
+  expect(d2d)
+    .toBe(d2m)
+  expect(d2d)
+    .toBe(1500465600000)
 })
