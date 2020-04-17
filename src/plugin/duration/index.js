@@ -75,7 +75,9 @@ class Duration {
     $ms %= MILLISECONDS_A_HOUR
     this.$d.minutes = Math.floor($ms / MILLISECONDS_A_MINUTE)
     $ms %= MILLISECONDS_A_MINUTE
-    this.$d.seconds = $ms / MILLISECONDS_A_SECOND
+    this.$d.seconds = Math.floor($ms / MILLISECONDS_A_SECOND)
+    $ms %= MILLISECONDS_A_SECOND
+    this.$d.milliseconds = $ms
   }
 
   toISOString() {
@@ -111,8 +113,10 @@ class Duration {
     const pUnit = prettyUnit(unit)
     if (pUnit === 'milliseconds') {
       base %= 1000
-    } else {
+    } else if (pUnit === 'weeks') {
       base = Math.floor(base / unitToMS[pUnit])
+    } else {
+      base = this.$d[pUnit]
     }
     return base
   }
