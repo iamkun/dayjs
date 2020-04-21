@@ -1,3 +1,13 @@
+## [1.8.25](https://github.com/iamkun/dayjs/compare/v1.8.24...v1.8.25) (2020-04-21)
+
+
+### Bug Fixes
+
+* Fix CustomParseFormat plugin of parsing only YYYY / YYYY-MM bug ([#873](https://github.com/iamkun/dayjs/issues/873)) ([3cea04d](https://github.com/iamkun/dayjs/commit/3cea04d33d54d44bbdd3d026b5c7f67ebf176116)), closes [#849](https://github.com/iamkun/dayjs/issues/849)
+* Fix Duration plugin get seconds ([#867](https://github.com/iamkun/dayjs/issues/867)) ([62b092d](https://github.com/iamkun/dayjs/commit/62b092d9f9a3db5506ef01f798bdf211f163f53f))
+* Fix type definition of locale ([9790b85](https://github.com/iamkun/dayjs/commit/9790b853e6113243a7f4a81dd12c6509e406a102))
+* Fix UTC plugin startOf, endOf bug ([#872](https://github.com/iamkun/dayjs/issues/872)) ([4141084](https://github.com/iamkun/dayjs/commit/4141084ba96d35cadcda3f1e661bf1d0f6c8e4de)), closes [#809](https://github.com/iamkun/dayjs/issues/809) [#808](https://github.com/iamkun/dayjs/issues/808)
+
 ## [1.8.24](https://github.com/iamkun/dayjs/compare/v1.8.23...v1.8.24) (2020-04-10)
 
 
