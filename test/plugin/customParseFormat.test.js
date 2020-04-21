@@ -98,6 +98,25 @@ it('parse HH:mm:ss but only one digit', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+describe('parse YYYY / YYYY-MM only', () => {
+  it('YYYY', () => {
+    const input = '2001 +08:00'
+    const format = 'YYYY Z'
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+    const input2 = '2001'
+    const format2 = 'YYYY'
+    expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  })
+  it('YYYY-MM', () => {
+    const input = '2001-01 +08:00'
+    const format = 'YYYY-MM Z'
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+    const input2 = '2001-01'
+    const format2 = 'YYYY-MM'
+    expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  })
+})
+
 it('parse hh:mm:ss but only one digit', () => {
   const input = '0:0:1'
   const format = 'hh:mm:ss'

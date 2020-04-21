@@ -134,6 +134,7 @@ describe('Seconds', () => {
   expect(dayjs.duration(500).seconds()).toBe(0)
   expect(dayjs.duration(1500).seconds()).toBe(1)
   expect(dayjs.duration(15000).seconds()).toBe(15)
+  expect(dayjs.duration(61000).seconds()).toBe(1) // 1 minute 1 second
   expect(dayjs.duration(500).asSeconds()).toBe(0.5)
   expect(dayjs.duration(1500).asSeconds()).toBe(1.5)
   expect(dayjs.duration(15000).asSeconds()).toBe(15)
@@ -141,6 +142,7 @@ describe('Seconds', () => {
 
 describe('Minutes', () => {
   expect(dayjs.duration(100000).minutes()).toBe(1)
+  expect(dayjs.duration(61000).minutes()).toBe(1) // 1 minute 1 second
   expect(dayjs.duration(100000).asMinutes().toFixed(2)).toBe('1.67')
 })
 

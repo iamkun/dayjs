@@ -91,4 +91,12 @@ export default (option, Dayjs, dayjs) => {
   proto.toString = function () {
     return this.toDate().toUTCString()
   }
+
+  const oldToDate = proto.toDate
+  proto.toDate = function (type) {
+    if (type === 's' && this.$offset) {
+      return dayjs(this.format('YYYY-MM-DD HH:mm:ss:SSS')).toDate()
+    }
+    return oldToDate.call(this)
+  }
 }
