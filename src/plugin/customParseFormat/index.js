@@ -185,12 +185,22 @@ export default (o, C, d) => {
       args
     } = cfg
     this.$u = utc
-    if (typeof args[1] === 'string') {
-      const pl = args[2]
-      locale = pl ? d.Ls[pl] : this.$locale()
-      this.$d = parseFormattedInput(date, args[1], utc)
+    const format = args[1]
+    if (typeof format === 'string') {
+      const isStrictWithoutLocale = args[2] === true
+      const isStrictWithLocale = args[3] === true
+      const isStrict = isStrictWithoutLocale || isStrictWithLocale
+      let pl = args[2]
+      if (isStrictWithLocale) [,, pl] = args
+      if (!isStrictWithoutLocale) {
+        locale = pl ? d.Ls[pl] : this.$locale()
+      }
+      this.$d = parseFormattedInput(date, format, utc)
       this.init(cfg)
-      if (pl) this.$L = pl
+      if (isStrict && date !== this.format(format)) {
+        this.$d = new Date('')
+      }
+      if (pl && pl !== true) this.$L = pl
     } else {
       oldParse.call(this, cfg)
     }
