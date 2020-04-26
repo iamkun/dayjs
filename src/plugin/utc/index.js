@@ -3,8 +3,8 @@ import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
 export default (option, Dayjs, dayjs) => {
   const localOffset = (new Date()).getTimezoneOffset()
   const proto = Dayjs.prototype
-  dayjs.utc = function (date, format) {
-    const cfg = { date, utc: true, format }
+  dayjs.utc = function (date) {
+    const cfg = { date, utc: true, args: arguments } // eslint-disable-line prefer-rest-params
     return new Dayjs(cfg) // eslint-disable-line no-use-before-define
   }
 

@@ -181,14 +181,14 @@ export default (o, C, d) => {
   proto.parse = function (cfg) {
     const {
       date,
-      format,
-      pl,
-      utc
+      utc,
+      args
     } = cfg
     this.$u = utc
-    if (format) {
+    if (typeof args[1] === 'string') {
+      const pl = args[2]
       locale = pl ? d.Ls[pl] : this.$locale()
-      this.$d = parseFormattedInput(date, format, utc)
+      this.$d = parseFormattedInput(date, args[1], utc)
       this.init(cfg)
       if (pl) this.$L = pl
     } else {
