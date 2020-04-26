@@ -19,7 +19,7 @@ export default (o, c, d) => {
     yy: '%d years'
   }
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const loc = instance.$locale().relativeTime
+    const loc = instance.$locale().relativeTime || d.en.relativeTime
     const T = o.thresholds || [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
