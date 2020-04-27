@@ -50,19 +50,47 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
+/**
+ * Array to date
+ * @param d
+ * @param utc
+ * @returns {Date}
+ */
+const parseArrayArgument = (d, utc) => {
+  if (utc) {
+    return new Date(Date.UTC(d[1], d[2] - 1, d[3]
+      || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+  }
+  return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+}
+
+/**
+ * Converts the object to a date array
+ * @param d Object { years, months, date, hours, minutes, seconds, milliseconds}
+ * @param utc
+ */
+const parseObjectArgument = (d, utc) => parseArrayArgument([
+  0,
+  d.years,
+  d.months,
+  d.date,
+  d.hours,
+  d.minutes,
+  d.seconds,
+  d.milliseconds
+], utc)
+
 const parseDate = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
+  if (Array.isArray(date)) return parseArrayArgument([0, ...date], utc)
+  if (date instanceof Object) return parseObjectArgument(date, utc)
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
-      if (utc) {
-        return new Date(Date.UTC(d[1], d[2] - 1, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
-      }
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+      return parseArrayArgument(d, utc)
     }
   }
 
@@ -236,7 +264,19 @@ class Dayjs {
   }
 
   set(string, int) {
+    if (string instanceof Object) {
+      return this.setObject(string)
+    }
     return this.clone().$set(string, int)
+  }
+
+  setObject(argument) {
+    const keys = Object.keys(argument)
+    let chain = this.clone()
+    keys.forEach((key) => {
+      chain = chain.$set(key, argument[key])
+    })
+    return chain
   }
 
   get(unit) {
@@ -244,6 +284,9 @@ class Dayjs {
   }
 
   add(number, units) {
+    if (number instanceof Object) {
+      return this.addObject(number)
+    }
     number = Number(number) // eslint-disable-line no-param-reassign
     const unit = Utils.p(units)
     const instanceFactorySet = (n) => {
@@ -272,8 +315,29 @@ class Dayjs {
     return Utils.w(nextTimeStamp, this)
   }
 
+  addObject(argument) {
+    const keys = Object.keys(argument)
+    let chain = this
+    keys.forEach((key) => {
+      chain = chain.add(argument[key], key)
+    })
+    return chain
+  }
+
   subtract(number, string) {
+    if (number instanceof Object) {
+      return this.subtractObject(number)
+    }
     return this.add(number * -1, string)
+  }
+
+  subtractObject(argument) {
+    const keys = Object.keys(argument)
+    let chain = this
+    keys.forEach((key) => {
+      chain = chain.subtract(argument[key], key)
+    })
+    return chain
   }
 
   format(formatStr) {
