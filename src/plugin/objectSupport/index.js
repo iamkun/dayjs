@@ -34,17 +34,19 @@ export default (o, c) => {
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array) && obj instanceof Object
   const parseDate = (cfg) => {
     const { date, utc } = cfg
+    // if (Array.isArray(date)) return parseArrayArgument([0, ...date], utc)
     if (isObject(date)) return parseObjectArgument(date, utc)
     return date
   }
 
   const oldParse = proto.parse
   proto.parse = function (cfg) {
+    // console.log(cfg)
     cfg.date = parseDate(cfg)
     oldParse.bind(this)(cfg)
   }
 
-  proto.setObject = function (argument) {
+  const setObject = function (argument) {
     const keys = Object.keys(argument)
     let chain = this.clone()
     keys.forEach((key) => {
@@ -52,15 +54,7 @@ export default (o, c) => {
     })
     return chain
   }
-  const oldSet = proto.set
-  proto.set = function (string, int) {
-    if (string instanceof Object) {
-      return this.setObject(string)
-    }
-    return oldSet.bind(this)(string, int)
-  }
-
-  proto.addObject = function (argument) {
+  const addObject = function (argument) {
     const keys = Object.keys(argument)
     let chain = this
     keys.forEach((key) => {
@@ -68,14 +62,8 @@ export default (o, c) => {
     })
     return chain
   }
-  const oldAdd = proto.add
-  proto.add = function (number, string) {
-    if (number instanceof Object) {
-      return this.addObject(number)
-    }
-    return oldAdd.bind(this)(number, string)
-  }
-  proto.subtractObject = function (argument) {
+
+  const subtractObject = function (argument) {
     const keys = Object.keys(argument)
     let chain = this
     keys.forEach((key) => {
@@ -83,10 +71,25 @@ export default (o, c) => {
     })
     return chain
   }
+
+  const oldSet = proto.set
+  proto.set = function (string, int) {
+    if (string instanceof Object) {
+      return setObject(string)
+    }
+    return oldSet.bind(this)(string, int)
+  }
+  const oldAdd = proto.add
+  proto.add = function (number, string) {
+    if (number instanceof Object) {
+      return addObject(number)
+    }
+    return oldAdd.bind(this)(number, string)
+  }
   const oldSubtract = proto.subtract
   proto.subtract = function (number, string) {
     if (number instanceof Object) {
-      return this.subtractObject(number)
+      return subtractObject(number)
     }
     return oldSubtract.bind(this)(number, string)
   }
