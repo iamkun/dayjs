@@ -23,7 +23,7 @@ describe('Creating', () => {
   })
   it('two argument will bubble up to the next', () => {
     expect(dayjs.duration(59, 'seconds').toISOString()).toBe('PT59S')
-    expect(dayjs.duration(60, 'seconds').toISOString()).toBe('P1M')
+    expect(dayjs.duration(60, 'seconds').toISOString()).toBe('PT1M')
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
   it('object with float', () => {
@@ -78,7 +78,7 @@ it('Is duration', () => {
 it('toJSON', () => {
   expect(JSON.stringify({
     postDuration: dayjs.duration(5, 'minutes')
-  })).toBe('{"postDuration":"P5M"}')
+  })).toBe('{"postDuration":"PT5M"}')
 })
 
 describe('Humanize', () => {

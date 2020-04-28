@@ -95,7 +95,7 @@ class Duration {
       seconds += this.$d.milliseconds / 1000
     }
     const S = seconds ? `${seconds}S` : ''
-    const T = (H || M || S) ? 'T' : ''
+    const T = (H || m || S) ? 'T' : ''
     const result = `P${Y}${M}${D}${T}${H}${m}${S}`
     return result === 'P' ? 'P0D' : result
   }
