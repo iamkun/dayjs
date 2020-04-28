@@ -75,21 +75,21 @@ export default (o, c) => {
   const oldSet = proto.set
   proto.set = function (string, int) {
     if (string instanceof Object) {
-      return setObject(string)
+      return setObject.bind(this)(string)
     }
     return oldSet.bind(this)(string, int)
   }
   const oldAdd = proto.add
   proto.add = function (number, string) {
     if (number instanceof Object) {
-      return addObject(number)
+      return addObject.bind(this)(number)
     }
     return oldAdd.bind(this)(number, string)
   }
   const oldSubtract = proto.subtract
   proto.subtract = function (number, string) {
     if (number instanceof Object) {
-      return subtractObject(number)
+      return subtractObject.bind(this)(number)
     }
     return oldSubtract.bind(this)(number, string)
   }
