@@ -137,3 +137,9 @@ it('Custom thresholds and rounding support', () => {
   })
   expect(dayjs().subtract(45, 'm').fromNow()).toBe('45 minutes ago')
 })
+
+it('Locale without relativeTime config fallback', () => {
+  expect(dayjs().locale({
+    name: 'test-locale'
+  }).fromNow()).toEqual(expect.any(String))
+})
