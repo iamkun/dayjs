@@ -1,41 +1,27 @@
+import U from '../../utils'
+
 export default (o, c) => {
   const proto = c.prototype
-
-  /**
-   * Array to date
-   * @param d
-   * @param utc
-   * @returns {Date}
-   */
-  const parseArrayArgument = (d, utc) => {
-    if (utc) {
-      return new Date(Date.UTC(d[1], d[2] - 1, d[3]
-        || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
-    }
-    return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
-  }
-
-  /**
-   * Converts the object to a date array
-   * @param d Object { years, months, date, hours, minutes, seconds, milliseconds}
-   * @param utc
-   */
-  const parseObjectArgument = (d, utc) => parseArrayArgument([
-    0,
-    d.y || d.year || d.years || 1970,
-    d.M || d.month || d.months || 1,
-    d.d || d.day || d.days || d.date || 1,
-    d.h || d.hour || d.hours || 0,
-    d.m || d.minute || d.minutes || 0,
-    d.s || d.second || d.seconds || 0,
-    d.ms || d.millisecond || d.milliseconds || 0
-  ], utc)
-
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array) && obj instanceof Object
   const parseDate = (cfg) => {
     const { date, utc } = cfg
-    // if (Array.isArray(date)) return parseArrayArgument([0, ...date], utc)
-    if (isObject(date)) return parseObjectArgument(date, utc)
+    const $d = {}
+    if (isObject(date)) {
+      Object.keys(date).forEach((k) => {
+        $d[U.p(k)] = date[k]
+      })
+      const arr = [
+        $d.year || 1970,
+        $d.month - 1 || 0,
+        $d.day || 1,
+        $d.hour || 0,
+        $d.minute || 0,
+        $d.second || 0,
+        $d.millisecond || 0
+      ]
+      if (utc) return new Date(Date.UTC(...arr))
+      return new Date(...arr)
+    }
     return date
   }
 
