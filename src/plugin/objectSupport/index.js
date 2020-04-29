@@ -12,19 +12,17 @@ export default (o, c) => {
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
       })
-      const d = [
-        $d.year || 1970,
-        $d.month - 1 || 0,
-        $d.day || 1,
-        $d.hour || 0,
-        $d.minute || 0,
-        $d.second || 0,
-        $d.millisecond || 0
-      ]
+      const y = $d.year || 1970
+      const M = $d.month - 1 || 0
+      const d = $d.day || 1
+      const h = $d.hour || 0
+      const m = $d.minute || 0
+      const s = $d.second || 0
+      const ms = $d.millisecond || 0
       if (utc) {
-        return new Date(Date.UTC(d[0], d[1], d[2], d[3], d[4], d[5], d[6]))
+        return new Date(Date.UTC(y, M, d, h, m, s, ms))
       }
-      return new Date(d[0], d[1], d[2], d[3], d[4], d[5], d[6])
+      return new Date(y, M, d, h, m, s, ms)
     }
     return date
   }
