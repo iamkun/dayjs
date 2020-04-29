@@ -1,14 +1,16 @@
-import U from '../../utils'
-
 export default (o, c) => {
   const proto = c.prototype
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array) && obj instanceof Object
+  const prettyUnit = (u) => {
+    const unit = proto.$utils().p(u)
+    return unit === 'date' ? 'day' : unit
+  }
   const parseDate = (cfg) => {
     const { date, utc } = cfg
     const $d = {}
     if (isObject(date)) {
       Object.keys(date).forEach((k) => {
-        $d[U.p(k)] = date[k]
+        $d[prettyUnit(k)] = date[k]
       })
       const arr = [
         $d.year || 1970,
@@ -28,7 +30,7 @@ export default (o, c) => {
   const oldParse = proto.parse
   proto.parse = function (cfg) {
     // console.log(cfg)
-    cfg.date = parseDate(cfg)
+    cfg.date = parseDate.bind(this)(cfg)
     oldParse.bind(this)(cfg)
   }
 

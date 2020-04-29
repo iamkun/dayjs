@@ -22,6 +22,7 @@ const tests = [
   [{ year: 2010 }, '2010-01-01 00:00:00.000'],
   [{ year: 2010, month: 1 }, '2010-01-01 00:00:00.000'],
   [{ year: 2010, month: 1, day: 12 }, '2010-01-12 00:00:00.000'],
+  [{ year: 2010, month: 1, date: 12 }, '2010-01-12 00:00:00.000'],
   [
     {
       year: 2010, month: 1, day: 12, hours: 1
@@ -30,7 +31,7 @@ const tests = [
   ],
   [
     {
-      year: 2010, month: 1, day: 12, hours: 1
+      year: 2010, month: 1, date: 12, hours: 1
     },
     '2010-01-12 01:00:00.000'
   ],
@@ -42,7 +43,7 @@ const tests = [
   ],
   [
     {
-      year: 2010, month: 1, day: 12, hours: 1, minutes: 1
+      year: 2010, month: 1, date: 12, hours: 1, minutes: 1
     },
     '2010-01-12 01:01:00.000'
   ],
@@ -121,7 +122,7 @@ it('add short reverse args', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -154,7 +155,7 @@ it('add long reverse args', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -176,7 +177,7 @@ it('add long singular reverse args', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -198,7 +199,7 @@ it('add string long', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -220,7 +221,7 @@ it('add string long singular', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -242,7 +243,7 @@ it('add string short', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -264,7 +265,7 @@ it('add strings string short', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -286,7 +287,7 @@ it('add no string with milliseconds default', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
@@ -300,7 +301,7 @@ it('subtract strings string short', () => {
   const a = dayjs({
     year: 2011,
     month: 9,
-    day: 12,
+    date: 12,
     hour: 6,
     minute: 7,
     second: 8,
