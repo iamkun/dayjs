@@ -25,6 +25,11 @@ const tests = [
   [{ year: 2010, month: 1, date: 12 }, '2010-01-12 00:00:00.000'],
   [
     {
+      hour: 15, minute: 25, second: 50, millisecond: 125
+    },
+    '1970-01-01 15:25:50.125'],
+  [
+    {
       year: 2010, month: 1, day: 12, hours: 1
     },
     '2010-01-12 01:00:00.000'
