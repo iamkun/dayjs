@@ -5,8 +5,6 @@ import * as C from '../../src/constant'
 import relativeTime from '../../src/plugin/relativeTime'
 import utc from '../../src/plugin/utc'
 import '../../src/locale/ru'
-import en from '../../locale/en'
-
 
 dayjs.extend(relativeTime)
 
@@ -138,10 +136,4 @@ it('Custom thresholds and rounding support', () => {
     ]
   })
   expect(dayjs().subtract(45, 'm').fromNow()).toBe('45 minutes ago')
-})
-
-it('Set the default language to en->There is no relativeTime property', () => {
-  const d = dayjs()
-  d.locale(en)
-  expect(d.subtract(45, 'm').fromNow('45 minutes ago'))
 })
