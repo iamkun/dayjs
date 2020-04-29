@@ -12,7 +12,7 @@ export default (o, c) => {
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
       })
-      const arr = [
+      const d = [
         $d.year || 1970,
         $d.month - 1 || 0,
         $d.day || 1,
@@ -21,8 +21,10 @@ export default (o, c) => {
         $d.second || 0,
         $d.millisecond || 0
       ]
-      if (utc) return new Date(Date.UTC(...arr))
-      return new Date(...arr)
+      if (utc) {
+        return new Date(Date.UTC(d[0], d[1], d[2], d[3], d[4], d[5], d[6]))
+      }
+      return new Date(d[0], d[1], d[2], d[3], d[4], d[5], d[6])
     }
     return date
   }
