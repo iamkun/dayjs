@@ -29,56 +29,35 @@ export default (o, c) => {
 
   const oldParse = proto.parse
   proto.parse = function (cfg) {
-    // console.log(cfg)
     cfg.date = parseDate.bind(this)(cfg)
     oldParse.bind(this)(cfg)
   }
 
-  const setObject = function (argument) {
-    const keys = Object.keys(argument)
-    let chain = this.clone()
-    keys.forEach((key) => {
-      chain = chain.$set(key, argument[key])
-    })
-    return chain
-  }
-  const addObject = function (argument) {
-    const keys = Object.keys(argument)
-    let chain = this
-    keys.forEach((key) => {
-      chain = chain.add(argument[key], key)
-    })
-    return chain
-  }
-
-  const subtractObject = function (argument) {
-    const keys = Object.keys(argument)
-    let chain = this
-    keys.forEach((key) => {
-      chain = chain.subtract(argument[key], key)
-    })
-    return chain
-  }
-
-  const oldSet = proto.set
-  proto.set = function (string, int) {
-    if (string instanceof Object) {
-      return setObject.bind(this)(string)
-    }
-    return oldSet.bind(this)(string, int)
+  const oldSet = function (int, string) {
+    return this.clone().$set(string, int)
   }
   const oldAdd = proto.add
-  proto.add = function (number, string) {
-    if (number instanceof Object) {
-      return addObject.bind(this)(number)
+
+  const callObject = function (call, argument, string, offset = 1) {
+    if (argument instanceof Object) {
+      const keys = Object.keys(argument)
+      let chain = this
+      keys.forEach((key) => {
+        chain = call.bind(chain)(argument[key] * offset, key)
+      })
+      return chain
     }
-    return oldAdd.bind(this)(number, string)
+    return call.bind(this)(argument * offset, string)
   }
-  const oldSubtract = proto.subtract
+
+  proto.set = function (string, int) {
+    int = int === undefined ? string : int
+    return callObject.bind(this)(oldSet, int, string)
+  }
+  proto.add = function (number, string) {
+    return callObject.bind(this)(oldAdd, number, string)
+  }
   proto.subtract = function (number, string) {
-    if (number instanceof Object) {
-      return subtractObject.bind(this)(number)
-    }
-    return oldSubtract.bind(this)(number, string)
+    return callObject.bind(this)(oldAdd, number, string, -1)
   }
 }
