@@ -33,9 +33,7 @@ export default (o, c) => {
     oldParse.bind(this)(cfg)
   }
 
-  const oldSet = function (int, string) {
-    return this.clone().$set(string, int)
-  }
+  const oldSet = proto.set
   const oldAdd = proto.add
 
   const callObject = function (call, argument, string, offset = 1) {
@@ -52,7 +50,9 @@ export default (o, c) => {
 
   proto.set = function (string, int) {
     int = int === undefined ? string : int
-    return callObject.bind(this)(oldSet, int, string)
+    return callObject.bind(this)(function (i, s) {
+      return oldSet.bind(this)(s, i)
+    }, int, string)
   }
   proto.add = function (number, string) {
     return callObject.bind(this)(oldAdd, number, string)
