@@ -3,7 +3,7 @@ import * as C from '../../constant'
 export default (o, c, d) => {
   o = o || {}
   const proto = c.prototype
-  d.en.relativeTime = {
+  const relObj = {
     future: 'in %s',
     past: '%s ago',
     s: 'a few seconds',
@@ -18,8 +18,9 @@ export default (o, c, d) => {
     y: 'a year',
     yy: '%d years'
   }
+  d.en.relativeTime = relObj
   const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const loc = instance.$locale().relativeTime
+    const loc = instance.$locale().relativeTime || relObj
     const T = o.thresholds || [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
