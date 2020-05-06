@@ -200,7 +200,7 @@ export default (o, C, d) => {
       if (isStrict && date !== this.format(format)) {
         this.$d = new Date('')
       }
-      if (pl && pl !== true) this.$L = pl
+      if (pl && pl !== true) this.$L = this.locale(pl).$L
     } else {
       oldParse.call(this, cfg)
     }
