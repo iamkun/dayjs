@@ -4,9 +4,6 @@ import dayjs from 'dayjs'
 const monthFormat = 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split('_');
 const monthStandalone = 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split('_');
 
-const monthShortFormat = 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_');
-const monthShortStandalone = 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_');
-
 const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
 
 function plural(word, num) {
@@ -42,12 +39,7 @@ const locale = {
     }
     return monthStandalone[dayjsInstance.month()]
   },
-  monthsShort: (dayjsInstance, format) => {
-    if (MONTHS_IN_FORMAT.test(format)) {
-      return monthShortFormat[dayjsInstance.month()]
-    }
-    return monthShortStandalone[dayjsInstance.month()]
-  },
+  monthsShort: 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
   weekStart: 1,
   relativeTime: {
     future: 'за %s',
