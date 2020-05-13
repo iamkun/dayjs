@@ -204,17 +204,15 @@ export default (o, C, d) => {
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
-        const arg = Array.prototype.slice.call(args, 0)
-        arg[1] = format[i - 1]
-        const result = d.apply(this, arg)
+        args[1] = format[i - 1]
+        const result = d.apply(this, args)
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
           this.init()
           break
-        } else if (i === len) {
-          this.$d = new Date('')
         }
+        if (i === len) this.$d = new Date('')
       }
     } else {
       oldParse.call(this, cfg)
