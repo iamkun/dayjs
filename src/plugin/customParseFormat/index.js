@@ -196,11 +196,26 @@ export default (o, C, d) => {
         locale = pl ? d.Ls[pl] : this.$locale()
       }
       this.$d = parseFormattedInput(date, format, utc)
-      this.init(cfg)
+      this.init()
+      if (pl && pl !== true) this.$L = this.locale(pl).$L
       if (isStrict && date !== this.format(format)) {
         this.$d = new Date('')
       }
-      if (pl && pl !== true) this.$L = this.locale(pl).$L
+    } else if (format instanceof Array) {
+      const len = format.length
+      for (let i = 1; i <= len; i += 1) {
+        const arg = Array.prototype.slice.call(args, 0)
+        arg[1] = format[i - 1]
+        const result = d.apply(this, arg)
+        if (result.isValid()) {
+          this.$d = result.$d
+          this.$L = result.$L
+          this.init()
+          break
+        } else if (i === len) {
+          this.$d = new Date('')
+        }
+      }
     } else {
       oldParse.call(this, cfg)
     }

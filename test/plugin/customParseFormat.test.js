@@ -248,3 +248,22 @@ describe('Strict mode', () => {
     expect(dayjs(input, format, 'zh-cn', true).isValid()).toBe(false)
   })
 })
+
+describe('Array format support', () => {
+  it('second ok', () => {
+    const input = '2012-05-28'
+    const format = ['YYYY', 'YYYY-MM-DD']
+    expect(dayjs(input, format).isValid()).toBe(true)
+    expect(dayjs(input, format, true).format('YYYY-MM-DD')).toBe('2012-05-28')
+  })
+  it('all invalid', () => {
+    const input = '2012-05-28'
+    const format = ['DD', 'MM-DD']
+    expect(dayjs(input, format, true).isValid()).toBe(false)
+  })
+  it('with locale', () => {
+    const input = '2018 三月 12'
+    const format = ['YYYY', 'MM', 'YYYY MMMM DD']
+    expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+  })
+})
