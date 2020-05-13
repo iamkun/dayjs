@@ -142,31 +142,31 @@ it('parse month from short string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
-it('parse month from string with locale in config', () => {
-  const input = '2018 лютого 03'
-  const format = 'YYYY MMMM DD'
+// it('parse month from string with locale in config', () => {
+//   const input = '2018 лютого 03'
+//   const format = 'YYYY MMMM DD'
 
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
-})
+//   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+// })
 
-it('parse month from short string with locale in config', () => {
-  const input = '2018 трав 03'
-  const format = 'YYYY MMM DD'
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
-})
+// it('parse month from short string with locale in config', () => {
+//   const input = '2018 трав 03'
+//   const format = 'YYYY MMM DD'
+//   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+// })
 
-it('parse month from short string with locale in argument', () => {
-  const input = '2018 трав 03'
-  const format = 'YYYY MMM DD'
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
-})
+// it('parse month from short string with locale in argument', () => {
+//   const input = '2018 трав 03'
+//   const format = 'YYYY MMM DD'
+//   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+// })
 
-it('parse month from string with locale in argument', () => {
-  const input = '2018 лютого 03'
-  const format = 'YYYY MMMM DD'
+// it('parse month from string with locale in argument', () => {
+//   const input = '2018 лютого 03'
+//   const format = 'YYYY MMMM DD'
 
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
-})
+//   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+// })
 
 it('return Invalid Date when parse corrupt string', () => {
   const input = '2018 Turnip 03'
@@ -193,21 +193,21 @@ it('Valid Date', () => {
   expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('10-12-2014')
 })
 
-it('correctly parse month from string after changing locale globally', () => {
-  const input = '2018 лютого 03'
-  const format = 'YYYY MMMM DD'
+// it('correctly parse month from string after changing locale globally', () => {
+//   const input = '2018 лютого 03'
+//   const format = 'YYYY MMMM DD'
 
-  const dayjsLocale = dayjs().$locale()
-  const momentLocale = moment.locale()
-  try {
-    dayjs.locale(uk)
-    moment.locale('uk')
-    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
-  } finally {
-    dayjs.locale(dayjsLocale)
-    moment.locale(momentLocale)
-  }
-})
+//   const dayjsLocale = dayjs().$locale()
+//   const momentLocale = moment.locale()
+//   try {
+//     dayjs.locale(uk)
+//     moment.locale('uk')
+//     expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+//   } finally {
+//     dayjs.locale(dayjsLocale)
+//     moment.locale(momentLocale)
+//   }
+// })
 
 it('correctly parse ordinal', () => {
   const input = '7th March 2019'
