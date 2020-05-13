@@ -143,7 +143,7 @@ it('parse month from short string', () => {
 })
 
 it('parse month from string with locale in config', () => {
-  const input = '2018 травня 03'
+  const input = '2018 травень 03'
   const format = 'YYYY MMMM DD'
 
   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
@@ -162,7 +162,7 @@ it('parse month from short string with locale in argument', () => {
 })
 
 it('parse month from string with locale in argument', () => {
-  const input = '2018 травня 03'
+  const input = '2018 травень 03'
   const format = 'YYYY MMMM DD'
 
   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
@@ -194,7 +194,7 @@ it('Valid Date', () => {
 })
 
 it('correctly parse month from string after changing locale globally', () => {
-  const input = '2018 травня 03'
+  const input = '2018 травень 03'
   const format = 'YYYY MMMM DD'
 
   const dayjsLocale = dayjs().$locale()
