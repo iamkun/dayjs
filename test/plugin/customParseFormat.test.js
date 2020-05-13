@@ -2,10 +2,14 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import localeData from '../../src/plugin/localeData'
+import localizedFormat from '../../src/plugin/localizedFormat'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
 
 dayjs.extend(customParseFormat)
+dayjs.extend(localizedFormat)
+dayjs.extend(localeData)
 
 beforeEach(() => {
   MockDate.set(new Date())
