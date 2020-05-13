@@ -193,6 +193,19 @@ it('Valid Date', () => {
   expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('10-12-2014')
 })
 
+it('parse week day format', () => {
+  const input = 'Tuesday, 16 January 18:00'
+  const format = 'dddd, DD MMMM HH:mm'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+
+it('parse invalid week day format', () => {
+  const input = 'xyz 16 January 18:00'
+  const format = 'dddd DD MMMM HH:mm'
+  expect(dayjs(input, format).format()).toBe('Invalid Date')
+})
+
 it('correctly parse month from string after changing locale globally', () => {
   const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
