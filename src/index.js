@@ -305,7 +305,7 @@ class Dayjs {
       M: $M + 1,
       MM: Utils.s($M + 1, 2, '0'),
       MMM: getShort(locale.monthsShort, $M, months, 3),
-      MMMM: months[$M] || months(this, str),
+      MMMM: getShort(months, $M),
       D: this.$D,
       DD: Utils.s(this.$D, 2, '0'),
       d: String(this.$W),

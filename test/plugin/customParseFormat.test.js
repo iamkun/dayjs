@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ru'
 
 dayjs.extend(customParseFormat)
 
@@ -233,6 +234,18 @@ it('correctly parse ordinal', () => {
     .toBe(momentCN.locale())
 })
 
+describe('month function locale', () => {
+  it('MMMM', () => {
+    const input = '08 мая 2020'
+    const format = 'DD MMMM YYYY'
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+  })
+  it('MMM', () => {
+    const input = '08 февр. 2020'
+    const format = 'DD MMM YYYY'
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+  })
+})
 
 describe('Strict mode', () => {
   it('without locale', () => {
