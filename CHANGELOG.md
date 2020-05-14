@@ -1,3 +1,15 @@
+## [1.8.27](https://github.com/iamkun/dayjs/compare/v1.8.26...v1.8.27) (2020-05-14)
+
+
+### Bug Fixes
+
+* Add Kinyarwanda (rw) locale ([#903](https://github.com/iamkun/dayjs/issues/903)) ([f355235](https://github.com/iamkun/dayjs/commit/f355235a836540d77880959fb1b614c87e9f7b3e))
+* Add plugin objectSupport ([#887](https://github.com/iamkun/dayjs/issues/887)) ([52dfb13](https://github.com/iamkun/dayjs/commit/52dfb13a6b84f0a753cc5761192b92416f440961))
+* Add Turkmen (tk) locale ([#893](https://github.com/iamkun/dayjs/issues/893)) ([a9ca8dc](https://github.com/iamkun/dayjs/commit/a9ca8dcbbd0964c5b9abb4e8a2d620c983cf091a))
+* Fix CustomParseFormat plugin set locale error ([#896](https://github.com/iamkun/dayjs/issues/896)) ([8035c8a](https://github.com/iamkun/dayjs/commit/8035c8a760549b631252252718db3cdc4ab2f68f))
+* Fix locale month function bug ([#908](https://github.com/iamkun/dayjs/issues/908)) ([bf347c3](https://github.com/iamkun/dayjs/commit/bf347c36e401f50727fb5afcc537497b54b90d6b))
+* Update CustomParseFormat plugin to support Array formats ([#906](https://github.com/iamkun/dayjs/issues/906)) ([97856c6](https://github.com/iamkun/dayjs/commit/97856c603ef5fbbeb1cf8a42387479e56a77dbe8))
+
 ## [1.8.26](https://github.com/iamkun/dayjs/compare/v1.8.25...v1.8.26) (2020-04-30)
 
 
