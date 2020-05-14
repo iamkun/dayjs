@@ -9,7 +9,7 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
-const matchWord = /\d*[^\s\d-:/.()]+/ // Word
+const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
 let locale
 
@@ -29,6 +29,13 @@ const zoneExpressions = [matchOffset, function (input) {
   const zone = this.zone || (this.zone = {})
   zone.offset = offsetFromString(input)
 }]
+
+const getLocalePart = (name) => {
+  const part = locale[name]
+  return part && (
+    part.indexOf ? part : part.s.concat(part.f)
+  )
+}
 
 const expressions = {
   A: [matchUpperCaseAMPM, function (input) {
@@ -69,22 +76,21 @@ const expressions = {
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
-    const { months, monthsShort } = locale
-    const matchIndex = monthsShort
-      ? monthsShort.findIndex(month => month === input)
-      : months.findIndex(month => month.substr(0, 3) === input)
+    const months = getLocalePart('months')
+    const monthsShort = getLocalePart('monthsShort')
+    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input)
     if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = matchIndex + 1
+    this.month = (matchIndex + 1) % 12
   }],
   MMMM: [matchWord, function (input) {
-    const { months } = locale
+    const months = getLocalePart('months')
     const matchIndex = months.indexOf(input)
     if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = matchIndex + 1
+    this.month = (matchIndex + 1) % 12
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
