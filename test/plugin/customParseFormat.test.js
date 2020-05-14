@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ru'
 
 dayjs.extend(customParseFormat)
 
@@ -233,6 +234,20 @@ it('correctly parse ordinal', () => {
     .toBe(momentCN.locale())
 })
 
+describe('month function locale', () => {
+  it('MMMM', () => {
+    const input = '08 мая 2020'
+    const input2 = '08 май 2020'
+    const format = 'DD MMMM YYYY'
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+    expect(dayjs(input2, format, 'ru').valueOf()).toBe(moment(input2, format, 'ru').valueOf())
+  })
+  it('MMM', () => {
+    const input = '08 февр. 2020'
+    const format = 'DD MMM YYYY'
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+  })
+})
 
 describe('Strict mode', () => {
   it('without locale', () => {
@@ -246,5 +261,24 @@ describe('Strict mode', () => {
     const format = 'YYYY MMMM DD'
     expect(dayjs(input, format, 'zh-cn').isValid()).toBe(true)
     expect(dayjs(input, format, 'zh-cn', true).isValid()).toBe(false)
+  })
+})
+
+describe('Array format support', () => {
+  it('second ok', () => {
+    const input = '2012-05-28'
+    const format = ['YYYY', 'YYYY-MM-DD']
+    expect(dayjs(input, format).isValid()).toBe(true)
+    expect(dayjs(input, format, true).format('YYYY-MM-DD')).toBe('2012-05-28')
+  })
+  it('all invalid', () => {
+    const input = '2012-05-28'
+    const format = ['DD', 'MM-DD']
+    expect(dayjs(input, format, true).isValid()).toBe(false)
+  })
+  it('with locale', () => {
+    const input = '2018 三月 12'
+    const format = ['YYYY', 'MM', 'YYYY MMMM DD']
+    expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
   })
 })
