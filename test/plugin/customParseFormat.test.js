@@ -237,8 +237,10 @@ it('correctly parse ordinal', () => {
 describe('month function locale', () => {
   it('MMMM', () => {
     const input = '08 мая 2020'
+    const input2 = '08 май 2020'
     const format = 'DD MMMM YYYY'
     expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+    expect(dayjs(input2, format, 'ru').valueOf()).toBe(moment(input2, format, 'ru').valueOf())
   })
   it('MMM', () => {
     const input = '08 февр. 2020'
