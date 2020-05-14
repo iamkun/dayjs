@@ -1,3 +1,13 @@
+## [1.8.26](https://github.com/iamkun/dayjs/compare/v1.8.25...v1.8.26) (2020-04-30)
+
+
+### Bug Fixes
+
+* Fix Duration plugin `.toISOString` format bug ([#889](https://github.com/iamkun/dayjs/issues/889)) ([058d624](https://github.com/iamkun/dayjs/commit/058d624808fd2be024ae846bcb2e03885f39b556)), closes [#888](https://github.com/iamkun/dayjs/issues/888)
+* Fix WeekOfYear plugin bug while using BadMutable plugin ([#884](https://github.com/iamkun/dayjs/issues/884)) ([2977438](https://github.com/iamkun/dayjs/commit/2977438458542573a4500e21f7ba5d1f8442960e))
+* Update CustomParseFormat plugin strict mode ([#882](https://github.com/iamkun/dayjs/issues/882)) ([db642ac](https://github.com/iamkun/dayjs/commit/db642ac73e52e00d8c41546b2935c9e691cf66e0))
+* Update RelativeTime plugin default config ([#883](https://github.com/iamkun/dayjs/issues/883)) ([0606f42](https://github.com/iamkun/dayjs/commit/0606f425aef8ccbfc3da3e43cba368130603b0cc))
+
 ## [1.8.25](https://github.com/iamkun/dayjs/compare/v1.8.24...v1.8.25) (2020-04-21)
 
 
