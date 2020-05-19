@@ -28,18 +28,31 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
   return `${number} ${plural(format[key], +number)}`
 }
 
+const months = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthFormat[dayjsInstance.month()]
+  }
+  return monthStandalone[dayjsInstance.month()]
+}
+months.s = monthStandalone
+months.f = monthFormat
+
+const monthsShort = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthShortFormat[dayjsInstance.month()]
+  }
+  return monthShortStandalone[dayjsInstance.month()]
+}
+monthsShort.s = monthShortStandalone
+monthsShort.f = monthShortFormat
+
 const locale = {
   name: 'uk',
   weekdays: 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split('_'),
   weekdaysShort: 'ндл_пнд_втр_срд_чтв_птн_сбт'.split('_'),
   weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
-  months: (dayjsInstance, format) => {
-    if (MONTHS_IN_FORMAT.test(format)) {
-      return monthFormat[dayjsInstance.month()]
-    }
-    return monthStandalone[dayjsInstance.month()]
-  },
-  monthsShort: 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
+  months,
+  monthsShort,
   weekStart: 1,
   relativeTime: {
     future: 'за %s',
