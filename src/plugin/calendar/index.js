@@ -23,7 +23,11 @@ export default (o, c, d) => {
             diff < 2 ? 'nextDay' :
               diff < 7 ? 'nextWeek' : sameElse
     /* eslint-enable no-nested-ternary */
-    return this.format(format[retVal] || calendarFormat[retVal])
+    const currentFormat = format[retVal] || calendarFormat[retVal]
+    if (typeof currentFormat === 'function') {
+      return currentFormat.call(this, d())
+    }
+    return this.format(currentFormat)
   }
 }
 

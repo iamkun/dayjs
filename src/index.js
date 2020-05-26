@@ -28,13 +28,14 @@ const parseLocale = (preset, object, isLocal) => {
   return l || (!isLocal && L)
 }
 
-const dayjs = (date, c, pl) => {
+const dayjs = function (date, c) {
   if (isDayjs(date)) {
     return date.clone()
   }
   // eslint-disable-next-line no-nested-ternary
-  const cfg = c ? (typeof c === 'string' ? { format: c, pl } : c) : {}
+  const cfg = typeof c === 'object' ? c : {}
   cfg.date = date
+  cfg.args = arguments// eslint-disable-line prefer-rest-params
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
@@ -172,7 +173,7 @@ class Dayjs {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
       return Utils.w(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate(),
+        this.toDate('s'),
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }
@@ -304,7 +305,7 @@ class Dayjs {
       M: $M + 1,
       MM: Utils.s($M + 1, 2, '0'),
       MMM: getShort(locale.monthsShort, $M, months, 3),
-      MMMM: months[$M] || months(this, str),
+      MMMM: getShort(months, $M),
       D: this.$D,
       DD: Utils.s(this.$D, 2, '0'),
       d: String(this.$W),

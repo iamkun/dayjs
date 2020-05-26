@@ -3,7 +3,9 @@ import moment from 'moment'
 import dayjs from '../../src'
 import localeData from '../../src/plugin/localeData'
 import localizedFormat from '../../src/plugin/localizedFormat'
+import '../../src/locale/fr'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ru'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(localeData)
@@ -38,7 +40,7 @@ it('Instance localeData', () => {
 
 
 it('Global localeData', () => {
-  ['zh-cn', 'en'].forEach((lo) => {
+  ['zh-cn', 'en', 'fr'].forEach((lo) => {
     dayjs.locale(lo)
     moment.locale(lo)
     const dayjsLocaleData = dayjs.localeData()
@@ -54,7 +56,7 @@ it('Global localeData', () => {
 
 
 it('Listing the months and weekdays', () => {
-  ['zh-cn', 'en'].forEach((lo) => {
+  ['zh-cn', 'en', 'fr'].forEach((lo) => {
     dayjs.locale(lo)
     moment.locale(lo)
     expect(dayjs.months()).toEqual(moment.months())
@@ -63,4 +65,15 @@ it('Listing the months and weekdays', () => {
     expect(dayjs.weekdaysShort()).toEqual(moment.weekdaysShort())
     expect(dayjs.weekdaysMin()).toEqual(moment.weekdaysMin())
   })
+})
+
+it('Month function', () => {
+  const dayjsLocaleData = dayjs().locale('ru').localeData()
+  const momentLocaleData = moment().locale('ru').localeData()
+  expect(dayjsLocaleData.months()).toEqual(momentLocaleData.months())
+  expect(dayjsLocaleData.monthsShort()).toEqual(momentLocaleData.monthsShort())
+  dayjs.locale('ru')
+  moment.locale('ru')
+  expect(dayjs.months()).toEqual(moment.months())
+  expect(dayjs.monthsShort()).toEqual(moment.monthsShort())
 })

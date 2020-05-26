@@ -45,6 +45,8 @@ Locale.forEach((locale) => {
       expect(months).toEqual(expect.any(Array))
     } else {
       expect(months(dayjs(), 'str')).toEqual(expect.any(String))
+      expect(months.f).toEqual(expect.any(Array))
+      expect(months.s).toEqual(expect.any(Array))
     }
     // monthsShort could be a function or array
     if (monthsShort) {
@@ -52,6 +54,8 @@ Locale.forEach((locale) => {
         expect(monthsShort).toEqual(expect.any(Array))
       } else {
         expect(monthsShort(dayjs(), 'str')).toEqual(expect.any(String))
+        expect(monthsShort.f).toEqual(expect.any(Array))
+        expect(monthsShort.s).toEqual(expect.any(Array))
       }
     }
     // function pass date return string or number or null
