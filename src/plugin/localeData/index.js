@@ -1,11 +1,11 @@
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
+  const getLocalePart = part => (part && (part.indexOf ? part : part.s))
   const getShort = (ins, target, full, num) => {
     const locale = ins.name ? ins : ins.$locale()
-    if (!locale[target]) {
-      return locale[full].map(f => f.substr(0, num))
-    }
-    return locale[target]
+    const targetLocale = getLocalePart(locale[target])
+    const fullLocale = getLocalePart(locale[full])
+    return targetLocale || fullLocale.map(f => f.substr(0, num))
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const localeData = function () {
@@ -38,7 +38,7 @@ export default (o, c, dayjs) => { // locale needed later
     }
   }
 
-  dayjs.months = () => getDayjsLocaleObject().months
+  dayjs.months = () => getShort(getDayjsLocaleObject(), 'months')
 
   dayjs.monthsShort = () => getShort(getDayjsLocaleObject(), 'monthsShort', 'months', 3)
 

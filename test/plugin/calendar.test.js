@@ -81,6 +81,51 @@ it('Custom format', () => {
     .toEqual(moment(now).calendar(nextDayWithoutFormat, format))
 })
 
+it('Custom callback', () => {
+  const callbacks = {
+    sameDay: jest.fn(),
+    sameElse: jest.fn()
+  }
+  const now = '2015-01-15T14:21:22.000Z'
+  const nextDayWithoutFormat = '2015-01-14T11:23:55.000Z'
+  expect(dayjs(now).calendar(nextDayWithoutFormat, callbacks))
+    .toEqual(moment(now).calendar(nextDayWithoutFormat, callbacks))
+})
+
+it('Calls callback', () => {
+  const callbacks = {
+    sameDay: jest.fn(),
+    sameElse: jest.fn()
+  }
+  dayjs().calendar(null, callbacks)
+  expect(callbacks.sameElse).not.toBeCalled()
+  expect(callbacks.sameDay).toBeCalled()
+})
+
+it('callback is a function with the scope of the current moment', () => {
+  const callbacks = {
+    sameDay: jest.fn()
+  }
+  expect(dayjs().calendar(null, callbacks)).toEqual(callbacks.sameDay())
+  const callbacks2 = {
+    sameDay: function cb() {
+      return this
+    }
+  }
+  const result = dayjs().calendar(null, callbacks2)
+  expect(result.format).not.toBeUndefined()
+  expect(dayjs.isDayjs(result)).toBeTruthy()
+})
+
+it('callback is a function and first argument a moment that depicts now', () => {
+  const callbacks = {
+    sameDay: jest.fn()
+  }
+  const now = dayjs()
+  dayjs(now).calendar(now, callbacks)
+  expect(callbacks.sameDay).toBeCalledWith(now)
+})
+
 it('set global calendar in locale file', () => {
   const now = '2019-04-03T14:21:22.000Z'
   zhCn.calendar = {

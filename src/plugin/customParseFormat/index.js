@@ -9,7 +9,7 @@ const matchUpperCaseAMPM = /[AP]M/
 const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
-const matchWord = /\d*[^\s\d-:/.()]+/ // Word
+const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
 let locale
 
@@ -29,6 +29,13 @@ const zoneExpressions = [matchOffset, function (input) {
   const zone = this.zone || (this.zone = {})
   zone.offset = offsetFromString(input)
 }]
+
+const getLocalePart = (name) => {
+  const part = locale[name]
+  return part && (
+    part.indexOf ? part : part.s.concat(part.f)
+  )
+}
 
 const expressions = {
   A: [matchUpperCaseAMPM, function (input) {
@@ -69,22 +76,21 @@ const expressions = {
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
-    const { months, monthsShort } = locale
-    const matchIndex = monthsShort
-      ? monthsShort.findIndex(month => month === input)
-      : months.findIndex(month => month.substr(0, 3) === input)
+    const months = getLocalePart('months')
+    const monthsShort = getLocalePart('monthsShort')
+    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input)
     if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = matchIndex + 1
+    this.month = (matchIndex + 1) % 12
   }],
   MMMM: [matchWord, function (input) {
-    const { months } = locale
+    const months = getLocalePart('months')
     const matchIndex = months.indexOf(input)
     if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = matchIndex + 1
+    this.month = (matchIndex + 1) % 12
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
@@ -151,21 +157,20 @@ const parseFormattedInput = (input, format, utc) => {
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
     } = parser(input)
-    if (zone) {
-      return new Date(Date.UTC(
-        year, month - 1, day,
-        hours || 0,
-        minutes || 0, seconds || 0, milliseconds || 0
-      ) + (zone.offset * 60 * 1000))
-    }
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
     const y = year || now.getFullYear()
-    const M = month > 0 ? month - 1 : now.getMonth()
+    let M = 0
+    if (!(year && !month)) {
+      M = month > 0 ? month - 1 : now.getMonth()
+    }
     const h = hours || 0
     const m = minutes || 0
     const s = seconds || 0
     const ms = milliseconds || 0
+    if (zone) {
+      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+    }
     if (utc) {
       return new Date(Date.UTC(y, M, d, h, m, s, ms))
     }
@@ -182,16 +187,39 @@ export default (o, C, d) => {
   proto.parse = function (cfg) {
     const {
       date,
-      format,
-      pl,
-      utc
+      utc,
+      args
     } = cfg
     this.$u = utc
-    if (format) {
-      locale = pl ? d.Ls[pl] : this.$locale()
+    const format = args[1]
+    if (typeof format === 'string') {
+      const isStrictWithoutLocale = args[2] === true
+      const isStrictWithLocale = args[3] === true
+      const isStrict = isStrictWithoutLocale || isStrictWithLocale
+      let pl = args[2]
+      if (isStrictWithLocale) [,, pl] = args
+      if (!isStrictWithoutLocale) {
+        locale = pl ? d.Ls[pl] : this.$locale()
+      }
       this.$d = parseFormattedInput(date, format, utc)
-      this.init(cfg)
-      if (pl) this.$L = pl
+      this.init()
+      if (pl && pl !== true) this.$L = this.locale(pl).$L
+      if (isStrict && date !== this.format(format)) {
+        this.$d = new Date('')
+      }
+    } else if (format instanceof Array) {
+      const len = format.length
+      for (let i = 1; i <= len; i += 1) {
+        args[1] = format[i - 1]
+        const result = d.apply(this, args)
+        if (result.isValid()) {
+          this.$d = result.$d
+          this.$L = result.$L
+          this.init()
+          break
+        }
+        if (i === len) this.$d = new Date('')
+      }
     } else {
       oldParse.call(this, cfg)
     }
