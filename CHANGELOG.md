@@ -1,3 +1,11 @@
+## [1.8.28](https://github.com/iamkun/dayjs/compare/v1.8.27...v1.8.28) (2020-05-28)
+
+
+### Bug Fixes
+
+* Fix CustomParseFormat plugin month index error ([#918](https://github.com/iamkun/dayjs/issues/918)) ([fa2ec7f](https://github.com/iamkun/dayjs/commit/fa2ec7fcb980dcd2c7498dafe2f9ca2e52d735cf)), closes [#915](https://github.com/iamkun/dayjs/issues/915)
+* Update Ukrainian (uk) locale monthFormat and monthStandalone ([#899](https://github.com/iamkun/dayjs/issues/899)) ([a08756e](https://github.com/iamkun/dayjs/commit/a08756e80bd1d7126fca28c5ad9e382613fc86c4))
+
 ## [1.8.27](https://github.com/iamkun/dayjs/compare/v1.8.26...v1.8.27) (2020-05-14)
 
 
