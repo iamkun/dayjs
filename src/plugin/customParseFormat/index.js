@@ -78,19 +78,19 @@ const expressions = {
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
     const monthsShort = getLocalePart('monthsShort')
-    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input)
-    if (matchIndex < 0) {
+    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input) + 1
+    if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex + 1) % 12
+    this.month = (matchIndex % 12) || matchIndex
   }],
   MMMM: [matchWord, function (input) {
     const months = getLocalePart('months')
-    const matchIndex = months.indexOf(input)
-    if (matchIndex < 0) {
+    const matchIndex = months.indexOf(input) + 1
+    if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex + 1) % 12
+    this.month = (matchIndex % 12) || matchIndex
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
