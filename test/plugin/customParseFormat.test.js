@@ -31,6 +31,9 @@ it('parse string for MMM month format', () => {
   const input = '4/Mar/2019:11:16:26 +0800'
   const format = 'D/MMM/YYYY:H:m:s zz'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '21-Dec-18'
+  const format2 = 'D-MMM-YY'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
 })
 
 it('parse string January (getMonth() = 0)', () => {
@@ -135,6 +138,9 @@ it('parse month from string', () => {
   const input = '2018 February 03'
   const format = 'YYYY MMMM DD'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '21-December-18'
+  const format2 = 'D-MMMM-YY'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
 })
 
 it('parse month from short string', () => {
