@@ -1,4 +1,4 @@
-/// <reference path="./locale/index.d.ts" />
+import { ILocale } from './locale/types'
 
 export = dayjs;
 declare function dayjs (date?: dayjs.ConfigType, option?: dayjs.OptionType, locale?: string): dayjs.Dayjs

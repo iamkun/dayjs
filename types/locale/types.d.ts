@@ -1,4 +1,4 @@
-declare interface ILocale {
+export declare interface ILocale {
   name: string
   weekdays?: string[]
   months?: string[]

@@ -1,4 +1,4 @@
-/// <reference path="./types.d.ts" />
+import { ILocale } from './types'
 
 declare module 'dayjs/locale/*' {
   namespace locale {
