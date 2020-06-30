@@ -1,11 +1,14 @@
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
   const getLocalePart = part => (part && (part.indexOf ? part : part.s))
-  const getShort = (ins, target, full, num) => {
+  const getShort = (ins, target, full, num, localeOrder) => {
     const locale = ins.name ? ins : ins.$locale()
     const targetLocale = getLocalePart(locale[target])
     const fullLocale = getLocalePart(locale[full])
-    return targetLocale || fullLocale.map(f => f.substr(0, num))
+    const result = targetLocale || fullLocale.map(f => f.substr(0, num))
+    if (!localeOrder) return result
+    const { weekStart } = locale || 0
+    return result.map((_, index) => (result[(index + weekStart) % 7]))
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const localeData = function () {
@@ -42,9 +45,9 @@ export default (o, c, dayjs) => { // locale needed later
 
   dayjs.monthsShort = () => getShort(getDayjsLocaleObject(), 'monthsShort', 'months', 3)
 
-  dayjs.weekdays = () => getDayjsLocaleObject().weekdays
+  dayjs.weekdays = localeOrder => getShort(getDayjsLocaleObject(), 'weekdays', null, null, localeOrder)
 
-  dayjs.weekdaysShort = () => getShort(getDayjsLocaleObject(), 'weekdaysShort', 'weekdays', 3)
+  dayjs.weekdaysShort = localeOrder => getShort(getDayjsLocaleObject(), 'weekdaysShort', 'weekdays', 3, localeOrder)
 
-  dayjs.weekdaysMin = () => getShort(getDayjsLocaleObject(), 'weekdaysMin', 'weekdays', 2)
+  dayjs.weekdaysMin = localeOrder => getShort(getDayjsLocaleObject(), 'weekdaysMin', 'weekdays', 2, localeOrder)
 }
