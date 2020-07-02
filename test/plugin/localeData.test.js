@@ -77,3 +77,15 @@ it('Month function', () => {
   expect(dayjs.months()).toEqual(moment.months())
   expect(dayjs.monthsShort()).toEqual(moment.monthsShort())
 })
+
+it('Locale order', () => {
+  dayjs.locale('fr')
+  moment.locale('fr')
+  expect(dayjs.weekdays(true)).toEqual(moment.weekdays(true))
+  expect(dayjs.weekdaysShort(true)).toEqual(moment.weekdaysShort(true))
+  expect(dayjs.weekdaysMin(true)).toEqual(moment.weekdaysMin(true))
+  expect(dayjs.weekdays()).not.toEqual(dayjs.weekdays(true))
+  dayjs.locale('en')
+  moment.locale('en')
+  expect(dayjs.weekdays(true)).toEqual(moment.weekdays(true))
+})

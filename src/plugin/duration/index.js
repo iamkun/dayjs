@@ -48,7 +48,7 @@ class Duration {
       const d = input.match(durationRegex)
       if (d) {
         [,,
-          this.$d.years, this.$d.months,,
+          this.$d.years, this.$d.months, this.$d.weeks,
           this.$d.days, this.$d.hours, this.$d.minutes, this.$d.seconds] = d
         this.calMilliseconds()
         return this
@@ -83,7 +83,7 @@ class Duration {
   toISOString() {
     const Y = this.$d.years ? `${this.$d.years}Y` : ''
     const M = this.$d.months ? `${this.$d.months}M` : ''
-    let days = this.$d.days || 0
+    let days = +this.$d.days || 0
     if (this.$d.weeks) {
       days += this.$d.weeks * 7
     }

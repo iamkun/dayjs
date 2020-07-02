@@ -1,6 +1,6 @@
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md)
 
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
@@ -102,6 +102,9 @@ dayjs().format('Q Do k kk X x') // more available formats
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
+
+<a href="https://tracking.gitads.io/?repo=dayjs" target="_blank" rel="noopener noreferrer">
+<img src="https://images.gitads.io/dayjs" alt="sponsors"></a>
 
 <a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
