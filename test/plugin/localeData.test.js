@@ -85,4 +85,7 @@ it('Locale order', () => {
   expect(dayjs.weekdaysShort(true)).toEqual(moment.weekdaysShort(true))
   expect(dayjs.weekdaysMin(true)).toEqual(moment.weekdaysMin(true))
   expect(dayjs.weekdays()).not.toEqual(dayjs.weekdays(true))
+  dayjs.locale('en')
+  moment.locale('en')
+  expect(dayjs.weekdays(true)).toEqual(moment.weekdays(true))
 })
