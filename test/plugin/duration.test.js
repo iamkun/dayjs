@@ -62,6 +62,12 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('ISO string with week', () => {
+    const d = dayjs.duration('P2M3W4D')
+    expect(d.toISOString()).toBe('P2M25D')
+    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+  })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
