@@ -1,3 +1,13 @@
+## [1.8.29](https://github.com/iamkun/dayjs/compare/v1.8.28...v1.8.29) (2020-07-02)
+
+
+### Bug Fixes
+
+* Duration plugin supports parse ISO string with week (W) ([#950](https://github.com/iamkun/dayjs/issues/950)) ([f0fc12a](https://github.com/iamkun/dayjs/commit/f0fc12adadcab53fb0577ad8f5e2f1cf784fd8f5))
+* LocaleData plugin supports locale order ([#938](https://github.com/iamkun/dayjs/issues/938)) ([62f429d](https://github.com/iamkun/dayjs/commit/62f429db73a0a069b1267231dea172b85f4b90e3)), closes [#936](https://github.com/iamkun/dayjs/issues/936)
+* Update type definition to support array format ([#945](https://github.com/iamkun/dayjs/issues/945)) ([81d4740](https://github.com/iamkun/dayjs/commit/81d4740511d47e34f891b21afeb0449ef8a28688)), closes [#944](https://github.com/iamkun/dayjs/issues/944)
+* Update type definition to support strict mode ([#951](https://github.com/iamkun/dayjs/issues/951)) ([8d54f3f](https://github.com/iamkun/dayjs/commit/8d54f3f7d4d161e72c767fa09699e70a2b3d681c))
+
 ## [1.8.28](https://github.com/iamkun/dayjs/compare/v1.8.27...v1.8.28) (2020-05-28)
 
 
