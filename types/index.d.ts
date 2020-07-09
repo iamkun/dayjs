@@ -96,9 +96,9 @@ declare namespace dayjs {
 
     isAfter(date: ConfigType, unit?: OpUnitType): boolean
 
-    locale(): string
+    locale(): LocalePresetType
 
-    locale(preset: string | ILocale, object?: Partial<ILocale>): Dayjs
+    locale(preset: LocalePresetType | ILocale, object?: Partial<ILocale>): Dayjs
   }
 
   export type PluginFunc<T = unknown> = (option: T, c: typeof Dayjs, d: typeof dayjs) => void
