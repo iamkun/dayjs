@@ -103,6 +103,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
 
+Day.js is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial.
 <a href="https://tracking.gitads.io/?repo=dayjs" target="_blank" rel="noopener noreferrer">
 <img src="https://images.gitads.io/dayjs" alt="sponsors"></a>
 
