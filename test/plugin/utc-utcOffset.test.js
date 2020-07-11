@@ -48,7 +48,7 @@ it('clone', () => {
 
 it('immutable', () => {
   const d = dayjs()
-  const du = d.utcOffset(9)
+  const du = d.utcOffset(d.utcOffset() + 1)
   expect(d.utcOffset()).not.toBe(du.utcOffset())
   expect(d.format()).not.toBe(du.format())
 })
