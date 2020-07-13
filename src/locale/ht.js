@@ -1,4 +1,4 @@
-// French (Canada) [fr-ca]
+// Haitian Creole (Haiti) [ht]
 import dayjs from 'dayjs'
 
 const locale = {
