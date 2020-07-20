@@ -6,12 +6,12 @@ declare function dayjs (date?: dayjs.ConfigType): dayjs.Dayjs
 
 declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, strict?: boolean): dayjs.Dayjs
 
-declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, locale?: string, strict?: boolean): dayjs.Dayjs
+declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, locale?: LocalePresetType, strict?: boolean): dayjs.Dayjs
 
 declare namespace dayjs {
   export type ConfigType = string | number | Date | Dayjs
 
-  export type OptionType = { locale?: string, format?: string, utc?: boolean } | string | string[]
+  export type OptionType = { locale?: LocalePresetType, format?: string, utc?: boolean } | string | string[]
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
   export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
@@ -105,7 +105,7 @@ declare namespace dayjs {
 
   export function extend<T = unknown>(plugin: PluginFunc<T>, option?: T): Dayjs
 
-  export function locale(preset?: string | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
+  export function locale(preset?: LocalePresetType | ILocale, object?: Partial<ILocale>, isLocal?: boolean): string
 
   export function isDayjs(d: any): d is Dayjs
 
