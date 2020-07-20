@@ -229,7 +229,7 @@ class Dayjs {
       const date = this.clone().set(C.DATE, 1)
       date.$d[name](arg)
       date.init()
-      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).toDate()
+      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).$d
     } else if (name) this.$d[name](arg)
 
     this.init()

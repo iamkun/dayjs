@@ -48,7 +48,7 @@ it('clone', () => {
 
 it('immutable', () => {
   const d = dayjs()
-  const du = d.utcOffset(9)
+  const du = d.utcOffset(d.utcOffset() + 1)
   expect(d.utcOffset()).not.toBe(du.utcOffset())
   expect(d.format()).not.toBe(du.format())
 })
@@ -74,6 +74,30 @@ test('change hours when changing the utc offset in UTC mode', () => {
   expect(d.utcOffset(-30).format('HH:mm')).toBe('06:01')
   expect(d.utcOffset(30).format('HH:mm')).toBe('07:01')
   expect(d.utcOffset(-1380).format('HH:mm')).toBe('07:31')
+})
+
+test('correctly set and add hours in offset mode', () => {
+  const d10 = dayjs('2000-01-30T06:31:00+10:00').utcOffset(10)
+  const dm8 = dayjs('2000-01-30T06:31:00-08:00').utcOffset(-8)
+
+  expect(d10.hour(5).hour()).toBe(5)
+  expect(d10.hour(5).add(1, 'hour').hour()).toBe(6)
+  expect(d10.hour(5).add(-10, 'hour').hour()).toBe(19)
+
+  expect(dm8.hour(5).hour()).toBe(5)
+  expect(dm8.hour(5).add(1, 'hour').hour()).toBe(6)
+  expect(dm8.hour(5).add(-10, 'hour').hour()).toBe(19)
+})
+
+test('keep hours when adding month in offset mode', () => {
+  const d10 = dayjs('2000-01-30T06:31:00+10:00').utcOffset(10)
+  const dm8 = dayjs('2000-01-30T06:31:00-08:00').utcOffset(-8)
+
+  expect(d10.add(1, 'month').hour()).toBe(6)
+  expect(dm8.add(1, 'month').hour()).toBe(6)
+
+  expect(d10.add(-2, 'month').hour()).toBe(6)
+  expect(dm8.add(-2, 'month').hour()).toBe(6)
 })
 
 test('utc costrustor', () => {
