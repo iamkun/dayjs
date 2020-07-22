@@ -66,13 +66,13 @@ const locale = {
     LT: 'HH.mm',
     LTS: 'HH.mm.ss',
     L: 'DD.MM.YYYY',
-    LL: 'Do MMMM[ta] YYYY',
-    LLL: 'Do MMMM[ta] YYYY, [klo] HH.mm',
-    LLLL: 'dddd, Do MMMM[ta] YYYY, [klo] HH.mm',
+    LL: 'D. MMMM[ta] YYYY',
+    LLL: 'D. MMMM[ta] YYYY, [klo] HH.mm',
+    LLLL: 'dddd, D. MMMM[ta] YYYY, [klo] HH.mm',
     l: 'D.M.YYYY',
-    ll: 'Do MMM YYYY',
-    lll: 'Do MMM YYYY, [klo] HH.mm',
-    llll: 'ddd, Do MMM YYYY, [klo] HH.mm'
+    ll: 'D. MMM YYYY',
+    lll: 'D. MMM YYYY, [klo] HH.mm',
+    llll: 'ddd, D. MMM YYYY, [klo] HH.mm'
   }
 }
 
