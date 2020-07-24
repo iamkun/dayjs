@@ -33,6 +33,7 @@ declare interface ILocale {
 }
 
 declare type LocalePresetType =
+  | string
   | 'af'
   | 'ar-dz'
   | 'ar-kw'
