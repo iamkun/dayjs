@@ -56,12 +56,17 @@ describe('Parse UTC ', () => {
 
   it('Parse date string without timezome', () => {
     const d = '2018-09-06'
-    const d2 = '2018-09'
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
     expect(dayjs.utc(d).format()).toEqual('2018-09-06T00:00:00Z')
+    expect(dayjs(d).utc().format()).toEqual(moment(d).utc().format())
+    const d2 = '2018-09'
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
     expect(dayjs.utc(d2).format()).toEqual('2018-09-01T00:00:00Z')
-    expect(dayjs(d).utc().format()).toEqual(moment(d).utc().format())
+    expect(dayjs(d2).utc().format()).toEqual(moment(d2).utc().format())
+    const d3 = '2018'
+    expect(dayjs.utc(d3).format()).toEqual(moment.utc(d3).format())
+    expect(dayjs.utc(d3).format()).toEqual('2018-01-01T00:00:00Z')
+    expect(dayjs(d3).utc().format()).toEqual(moment(d3).utc().format())
   })
 
   it('creating with utc with timezone', () => {
