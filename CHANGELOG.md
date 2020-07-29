@@ -1,3 +1,12 @@
+## [1.8.30](https://github.com/iamkun/dayjs/compare/v1.8.29...v1.8.30) (2020-07-22)
+
+
+### Bug Fixes
+
+* Add Haitian Creole (ht) and Spanish Puerto Rico (es-pr) locale configs ([#958](https://github.com/iamkun/dayjs/issues/958)) ([b2642e2](https://github.com/iamkun/dayjs/commit/b2642e2d1f87734a34808c66e5176cb18bc0414d))
+* Fix UTC plugin wrong hour bug while adding month or year  ([#957](https://github.com/iamkun/dayjs/issues/957)) ([28ae070](https://github.com/iamkun/dayjs/commit/28ae070024ff26685c88ce4cc8747307e86923c9))
+* Update French (fr) locale to set correct yearStart ([14ab808](https://github.com/iamkun/dayjs/commit/14ab808a7b7e226f2eb2cbe894916a18ed5d967d)), closes [#956](https://github.com/iamkun/dayjs/issues/956)
+
 ## [1.8.29](https://github.com/iamkun/dayjs/compare/v1.8.28...v1.8.29) (2020-07-02)
 
 
