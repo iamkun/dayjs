@@ -45,7 +45,7 @@ export default (option, Dayjs, dayjs) => {
   }
 
   const oldUtcOffset = proto.utcOffset
-  proto.utcOffset = function (input) {
+  proto.utcOffset = function (input, keepLocalTime) {
     const { u } = this.$utils()
     if (u(input)) {
       if (this.$u) {
@@ -63,6 +63,9 @@ export default (option, Dayjs, dayjs) => {
       ins.$offset = offset
     } else {
       ins = this.utc()
+    }
+    if (keepLocalTime) {
+      ['h', 'm', 's', 'ms'].forEach(unit => ins.$set(unit, this.get(unit)))
     }
     return ins
   }
