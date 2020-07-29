@@ -1,3 +1,11 @@
+## [1.8.31](https://github.com/iamkun/dayjs/compare/v1.8.30...v1.8.31) (2020-07-29)
+
+
+### Bug Fixes
+
+* Rollback LocalePresetType to string ([#968](https://github.com/iamkun/dayjs/issues/968)) ([b342bd3](https://github.com/iamkun/dayjs/commit/b342bd3d84987d6c7587a0c4590d614fb0e670d7))
+* Update Regex to parse 'YYYY' correctly ([#969](https://github.com/iamkun/dayjs/issues/969)) ([70c1239](https://github.com/iamkun/dayjs/commit/70c123990dcc6bd479fa2b5d7f9985127872a826))
+
 ## [1.8.30](https://github.com/iamkun/dayjs/compare/v1.8.29...v1.8.30) (2020-07-22)
 
 
