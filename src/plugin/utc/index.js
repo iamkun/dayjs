@@ -57,15 +57,17 @@ export default (option, Dayjs, dayjs) => {
       return oldUtcOffset.call(this)
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    let ins
+    let ins = this
+    if (keepLocalTime) {
+      ins.$offset = offset
+      ins.$u = input === 0
+      return ins
+    }
     if (input !== 0) {
       ins = this.local().add(offset + localOffset, MIN)
       ins.$offset = offset
     } else {
       ins = this.utc()
-    }
-    if (keepLocalTime) {
-      ['h', 'm', 's', 'ms'].forEach(unit => ins.$set(unit, this.get(unit)))
     }
     return ins
   }

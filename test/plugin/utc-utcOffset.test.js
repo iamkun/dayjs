@@ -62,8 +62,17 @@ it('utcOffset keepLocalTime', () => {
   const d = '2000-01-01T06:00:00Z'
   expect(dayjs.utc(d).utcOffset(5, true).format())
     .toBe(moment.utc(d).utcOffset(5, true).format())
+  expect(dayjs.utc(d).utcOffset(0, true).format())
+    .toBe(moment.utc(d).utcOffset(0, true).format())
   expect(dayjs.utc(d).utcOffset(-5, true).format())
     .toBe(moment.utc(d).utcOffset(-5, true).format())
+  const d2 = '2016-01-01 00:00:00'
+  expect(dayjs(d2).utcOffset(0, true).format())
+    .toBe(moment(d2).utcOffset(0, true).format())
+  expect(dayjs(d2).utcOffset(-5, true).format())
+    .toBe(moment(d2).utcOffset(-5, true).format())
+  expect(dayjs(d2).utcOffset(5, true).format())
+    .toBe(moment(d2).utcOffset(5, true).format())
 })
 
 test('UTC mode', () => {
