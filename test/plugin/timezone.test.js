@@ -46,7 +46,7 @@ describe('Parse', () => {
 describe('Convert', () => {
   it('convert to target time', () => {
     const losAngeles = dayjs('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    const MlosAngeles = dayjs('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
+    const MlosAngeles = moment('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
     expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
     expect(losAngeles.format()).toBe(MlosAngeles.format())
     expect(losAngeles.valueOf()).toBe(1401624000000)
@@ -56,23 +56,26 @@ describe('Convert', () => {
   })
 
   it('convert to target time', () => {
-    const losAngeles = dayjs('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
-    expect(losAngeles.valueOf()).toBe(1401624000000)
+    [dayjs, moment].forEach((_) => {
+      const losAngeles = _('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
+      expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
+      expect(losAngeles.valueOf()).toBe(1401624000000)
+    })
   })
 
   it('DST', () => {
-    const jun = dayjs('2014-06-01T12:00:00Z')
-    const dec = dayjs('2014-12-01T12:00:00Z')
-
-    expect(jun.tz('America/Los_Angeles').format('ha')).toBe('5am')
-    expect(dec.tz('America/Los_Angeles').format('ha')).toBe('4am')
-    expect(jun.tz(NY).format('ha')).toBe('8am')
-    expect(dec.tz(NY).format('ha')).toBe('7am')
-    expect(jun.tz('Asia/Tokyo').format('ha')).toBe('9pm')
-    expect(dec.tz('Asia/Tokyo').format('ha')).toBe('9pm')
-    expect(jun.tz('Australia/Sydney').format('ha')).toBe('10pm')
-    expect(dec.tz('Australia/Sydney').format('ha')).toBe('11pm')
+    [dayjs, moment].forEach((_) => {
+      const jun = _('2014-06-01T12:00:00Z')
+      const dec = _('2014-12-01T12:00:00Z')
+      expect(jun.tz('America/Los_Angeles').format('ha')).toBe('5am')
+      expect(dec.tz('America/Los_Angeles').format('ha')).toBe('4am')
+      expect(jun.tz(NY).format('ha')).toBe('8am')
+      expect(dec.tz(NY).format('ha')).toBe('7am')
+      expect(jun.tz('Asia/Tokyo').format('ha')).toBe('9pm')
+      expect(dec.tz('Asia/Tokyo').format('ha')).toBe('9pm')
+      expect(jun.tz('Australia/Sydney').format('ha')).toBe('10pm')
+      expect(dec.tz('Australia/Sydney').format('ha')).toBe('11pm')
+    })
   })
 })
 
