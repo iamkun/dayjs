@@ -80,7 +80,7 @@ describe('Convert', () => {
 })
 
 
-describe('DST, a time that never existed', () => {
+describe('DST, a time that never existed Spring Forward', () => {
   // 11 March 2012, 02:00:00 clocks were
   // turned forward 1 hour to 11 March 2012, 03:00:00 local
   // daylight time instead.
@@ -130,5 +130,46 @@ describe('DST, a time that never existed', () => {
     expect(d.valueOf()).toBe(1331449200000)
     expect(d.utcOffset()).toBe(-240)
     expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+})
+
+describe('DST, a time that never existed Fall Back', () => {
+  // In the fall, at the end of DST
+
+  it('2012-11-04 00:59:59', () => {
+    const s = '2012-11-04 00:59:59';
+    [dayjs, moment].forEach((_) => {
+      const d = _.tz(s, NY)
+      expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
+      expect(d.utcOffset()).toBe(-240)
+      expect(d.valueOf()).toBe(1352005199000)
+    })
+  })
+  it('2012-11-04 01:00:00', () => {
+    const s = '2012-11-04 01:00:00';
+    [dayjs, moment].forEach((_) => {
+      const d = _.tz(s, NY)
+      expect(d.format()).toBe('2012-11-04T01:00:00-04:00')
+      expect(d.utcOffset()).toBe(-240)
+      expect(d.valueOf()).toBe(1352005200000)
+    })
+  })
+  it('2012-11-04 01:59:59', () => {
+    const s = '2012-11-04 01:59:59';
+    [dayjs, moment].forEach((_) => {
+      const d = _.tz(s, NY)
+      expect(d.format()).toBe('2012-11-04T01:59:59-04:00')
+      expect(d.utcOffset()).toBe(-240)
+      expect(d.valueOf()).toBe(1352008799000)
+    })
+  })
+  it('2012-11-04 02:00:00', () => {
+    const s = '2012-11-04 02:00:00';
+    [dayjs, moment].forEach((_) => {
+      const d = _.tz(s, NY)
+      expect(d.format()).toBe('2012-11-04T02:00:00-05:00')
+      expect(d.utcOffset()).toBe(-300)
+      expect(d.valueOf()).toBe(1352012400000)
+    })
   })
 })

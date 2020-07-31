@@ -35,7 +35,7 @@ export default (o, c, d) => {
     const utcTs = d.utc(utcString).valueOf()
     let asTS = +date
     const over = asTS % 1000
-    asTS -= over >= 0 ? over : 1000 + over
+    asTS -= over
     return (utcTs - asTS) / (60 * 1000)
   }
   const fixOffset = (localTS, o0, tz) => {
