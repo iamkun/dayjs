@@ -21,10 +21,10 @@ export default (o, c, d) => {
       minute: '2-digit',
       second: '2-digit'
     })
-    const fotmatResult = dtf.formatToParts(date)
+    const formatResult = dtf.formatToParts(date)
     const filled = []
-    for (let i = 0; i < fotmatResult.length; i += 1) {
-      const { type, value } = fotmatResult[i]
+    for (let i = 0; i < formatResult.length; i += 1) {
+      const { type, value } = formatResult[i]
       const pos = typeToPos[type]
 
       if (pos >= 0) {
@@ -58,9 +58,9 @@ export default (o, c, d) => {
     return d(target).utcOffset(localUtcOffset - diff, true)
   }
   d.tz = function (input, timezone) {
-    const previousoffset = tzOffset(+d(), timezone)
+    const previousOffset = tzOffset(+d(), timezone)
     const localTs = d.utc(input).valueOf()
-    const [targetTs, targetOffset] = fixOffset(localTs, previousoffset, timezone)
+    const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
     return ins
   }
