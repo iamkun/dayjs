@@ -7,11 +7,11 @@ const padStart = (string, length, pad) => {
 }
 
 const padZoneStr = (instance) => {
-  const negMinuts = -instance.utcOffset()
-  const minutes = Math.abs(negMinuts)
+  const negMinutes = -instance.utcOffset()
+  const minutes = Math.abs(negMinutes)
   const hourOffset = Math.floor(minutes / 60)
   const minuteOffset = minutes % 60
-  return `${negMinuts <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
+  return `${negMinutes <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
 }
 
 const monthDiff = (a, b) => {
