@@ -16,6 +16,9 @@ const padZoneStr = (instance) => {
 
 const monthDiff = (a, b) => {
   // function from moment.js in order to keep the same result
+  if (a.date() < b.date()) {
+    return -monthDiff(b, a)
+  }
   const wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month())
   const anchor = a.clone().add(wholeMonthDiff, C.M)
   const c = b - anchor < 0
