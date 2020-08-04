@@ -1,3 +1,13 @@
+## [1.8.32](https://github.com/iamkun/dayjs/compare/v1.8.31...v1.8.32) (2020-08-04)
+
+
+### Bug Fixes
+
+* Add Experimental Timezone Plugin ([#974](https://github.com/iamkun/dayjs/issues/974)) ([e69caba](https://github.com/iamkun/dayjs/commit/e69caba1b0957241a855aa0ae38db899fa2c3795))
+* fix parse date string error e.g. '2020/9/30' ([#980](https://github.com/iamkun/dayjs/issues/980)) ([231790d](https://github.com/iamkun/dayjs/commit/231790da62af0494732960c2c50d86ae9bf63ec6)), closes [#979](https://github.com/iamkun/dayjs/issues/979)
+* update monthDiff function to get more accurate results ([19e8a7f](https://github.com/iamkun/dayjs/commit/19e8a7f2f7582b717f49d446822e39603694433c))
+* Update UTC plugin to support keepLocalTime ([#973](https://github.com/iamkun/dayjs/issues/973)) ([9f488e5](https://github.com/iamkun/dayjs/commit/9f488e5aca92f0b4c2951459436829d79f86d8d7))
+
 ## [1.8.31](https://github.com/iamkun/dayjs/compare/v1.8.30...v1.8.31) (2020-07-29)
 
 
