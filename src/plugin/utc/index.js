@@ -45,7 +45,7 @@ export default (option, Dayjs, dayjs) => {
   }
 
   const oldUtcOffset = proto.utcOffset
-  proto.utcOffset = function (input) {
+  proto.utcOffset = function (input, keepLocalTime) {
     const { u } = this.$utils()
     if (u(input)) {
       if (this.$u) {
@@ -57,7 +57,12 @@ export default (option, Dayjs, dayjs) => {
       return oldUtcOffset.call(this)
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    let ins
+    let ins = this
+    if (keepLocalTime) {
+      ins.$offset = offset
+      ins.$u = input === 0
+      return ins
+    }
     if (input !== 0) {
       ins = this.local().add(offset + localOffset, MIN)
       ins.$offset = offset

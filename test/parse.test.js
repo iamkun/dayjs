@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import { REGEX_PARSE } from '../src/constant'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -124,4 +125,13 @@ it('Clone with same value', () => {
   const newBase = base.set('year', year + 1)
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
+})
+
+describe('REGEX_PARSE', () => {
+  it('2020/9/30', () => {
+    const date = '2020/9/30'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2020/9/30-2020-9-30----')
+  })
 })
