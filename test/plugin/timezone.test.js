@@ -77,6 +77,13 @@ describe('Convert', () => {
       expect(dec.tz('Australia/Sydney').format('ha')).toBe('11pm')
     })
   })
+
+  it('format Z', () => {
+    [dayjs, moment].forEach((_) => {
+      const losAngeles = _('2020-08-06T03:48:10.258Z').tz('Asia/Tokyo')
+      expect(losAngeles.format('Z')).toBe('+09:00')
+    })
+  })
 })
 
 
