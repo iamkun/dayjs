@@ -3,8 +3,8 @@ import { D, W, Y } from '../../constant'
 const isoWeekPrettyUnit = 'isoweek'
 
 export default (o, c, d) => {
-  const getYearFirstThursday = (year) => {
-    const yearFirstDay = d().year(year).startOf(Y)
+  const getYearFirstThursday = (year, isUtc) => {
+    const yearFirstDay = (isUtc ? d.utc : d)().year(year).startOf(Y)
     let addDiffDays = 4 - yearFirstDay.isoWeekday()
     if (yearFirstDay.isoWeekday() > 4) {
       addDiffDays += 7
@@ -26,7 +26,7 @@ export default (o, c, d) => {
       return this.add((week - this.isoWeek()) * 7, D)
     }
     const nowWeekThursday = getCurrentWeekThursday(this)
-    const diffWeekThursday = getYearFirstThursday(this.isoWeekYear())
+    const diffWeekThursday = getYearFirstThursday(this.isoWeekYear(), this.$u)
     return nowWeekThursday.diff(diffWeekThursday, W) + 1
   }
 
