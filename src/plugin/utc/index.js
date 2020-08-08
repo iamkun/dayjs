@@ -104,4 +104,10 @@ export default (option, Dayjs, dayjs) => {
     }
     return oldToDate.call(this)
   }
+  const oldDiff = proto.diff
+  proto.diff = function (input, units, float) {
+    const localThis = this.local()
+    const localInput = dayjs(input).local()
+    return oldDiff.call(localThis, localInput, units, float)
+  }
 }
