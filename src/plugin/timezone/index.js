@@ -59,7 +59,12 @@ export default (o, c, d) => {
   }
   d.tz = function (input, timezone) {
     const previousOffset = tzOffset(+d(), timezone)
-    const localTs = d.utc(input).valueOf()
+    let localTs
+    if (typeof input !== 'string') {
+      // timestamp number || js Date || Day.js
+      localTs = d(input) + (previousOffset * 60 * 1000)
+    }
+    localTs = localTs || d.utc(input).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
     return ins

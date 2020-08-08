@@ -1,16 +1,16 @@
-import { PluginFunc } from 'dayjs'
+import { PluginFunc, ConfigType } from 'dayjs'
 
 declare const plugin: PluginFunc
 export = plugin
 
-interface DayjsTimezone {
-  (): Dayjs
-  guess(): string
-}
-
 declare module 'dayjs' {
   interface Dayjs {
-    tz(): Dayjs
+    tz(timezone: string): Dayjs
+  }
+
+  interface DayjsTimezone {
+    (date: ConfigType, timezone: string): Dayjs
+    guess(): string
   }
 
   const tz: DayjsTimezone
