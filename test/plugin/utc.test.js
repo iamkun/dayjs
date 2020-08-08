@@ -230,17 +230,15 @@ describe('Diff', () => {
     })
   })
   it('local.diff(utc)', () => {
-    [dayjs, moment].forEach((_) => {
-      expect(_(d1).diff(_.utc(d2), 'days')).toBe(0)
-    })
+    expect(dayjs(d1).diff(dayjs.utc(d2), 'days'))
+      .toBe(moment(d1).diff(moment.utc(d2), 'days'))
     expect(dayjs(d1).diff(dayjs.utc(d2), 'm'))
-      .toBe(moment(d1).diff(moment.utc(d2), 'm'))// timezone
+      .toBe(moment(d1).diff(moment.utc(d2), 'm'))
   })
   it('utc.diff(local)', () => {
-    [dayjs, moment].forEach((_) => {
-      expect(_.utc(d1).diff(d2, 'days')).toBe(1)
-    })
+    expect(dayjs.utc(d1).diff(d2, 'days'))
+      .toBe(moment.utc(d1).diff(d2, 'days'))
     expect(dayjs.utc(d1).diff(d2, 'm'))
-      .toBe(moment.utc(d1).diff(d2, 'm'))// timezone
+      .toBe(moment.utc(d1).diff(d2, 'm'))
   })
 })
