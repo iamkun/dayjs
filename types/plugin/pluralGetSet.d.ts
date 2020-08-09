@@ -17,6 +17,10 @@ declare module 'dayjs' {
 
     dates(value: number): Dayjs
 
+    weeks(): number
+
+    weeks(value: number): Dayjs
+
     days(): number
 
     days(value: number): Dayjs
