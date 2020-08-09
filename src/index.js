@@ -122,38 +122,6 @@ class Dayjs {
     return this.set(set, input)
   }
 
-  year(input) {
-    return this.$g(input, '$y', C.Y)
-  }
-
-  month(input) {
-    return this.$g(input, '$M', C.M)
-  }
-
-  day(input) {
-    return this.$g(input, '$W', C.D)
-  }
-
-  date(input) {
-    return this.$g(input, '$D', C.DATE)
-  }
-
-  hour(input) {
-    return this.$g(input, '$H', C.H)
-  }
-
-  minute(input) {
-    return this.$g(input, '$m', C.MIN)
-  }
-
-  second(input) {
-    return this.$g(input, '$s', C.S)
-  }
-
-  millisecond(input) {
-    return this.$g(input, '$ms', C.MS)
-  }
-
   unix() {
     return Math.floor(this.valueOf() / 1000)
   }
@@ -398,7 +366,22 @@ class Dayjs {
   }
 }
 
-dayjs.prototype = Dayjs.prototype
+const proto = Dayjs.prototype
+dayjs.prototype = proto;
+[
+  ['$ms', C.MS],
+  ['$s', C.S],
+  ['$m', C.MIN],
+  ['$H', C.H],
+  ['$W', C.D],
+  ['$M', C.M],
+  ['$y', C.Y],
+  ['$D', C.DATE]
+].forEach((g) => {
+  proto[g[1]] = function (input) {
+    return this.$g(input, g[0], g[1])
+  }
+})
 
 dayjs.extend = (plugin, option) => {
   plugin(option, Dayjs, dayjs)
