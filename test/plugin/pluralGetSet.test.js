@@ -4,13 +4,16 @@ import dayjs from '../../src'
 import pluralGetSet from '../../src/plugin/pluralGetSet'
 
 dayjs.extend(pluralGetSet)
-
+const warnBackup = global.console.warn
 beforeEach(() => {
   MockDate.set(new Date())
+  global.console.warn = jest.genMockFunction()
+  // moment.js .years, .dates, .months will throw warn
 })
 
 afterEach(() => {
   MockDate.reset()
+  global.console.warn = warnBackup
 })
 
 it('Years', () => {
