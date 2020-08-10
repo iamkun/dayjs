@@ -16,6 +16,8 @@ afterEach(() => {
 })
 
 const NY = 'America/New_York'
+const VAN = 'America/Vancouver'
+const TOKYO = 'Asia/Tokyo'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -34,6 +36,19 @@ describe('Parse', () => {
     expect(newYork.utcOffset()).toBe(MnewYork.utcOffset())
     expect(newYork.valueOf()).toBe(1401638400000)
     expect(newYork.valueOf()).toBe(MnewYork.valueOf())
+  })
+
+  it('parse timestamp, js Date, Day.js object', () => {
+    const d = new Date('2020-08-07T12:00-07:00')
+    const result = '2020-08-07T12:00:00-07:00'
+    const TjsDate = dayjs.tz(d, VAN)
+    const Tdayjs = dayjs.tz(dayjs(d), VAN)
+    const Timestamp = dayjs.tz(d.getTime(), VAN)
+    const Tmoment = moment.tz(d, VAN)
+    expect(TjsDate.format()).toBe(result)
+    expect(Tdayjs.format()).toBe(result)
+    expect(Timestamp.format()).toBe(result)
+    expect(Tmoment.format()).toBe(result)
   })
 
   it('parse and convert between timezones', () => {
@@ -71,10 +86,17 @@ describe('Convert', () => {
       expect(dec.tz('America/Los_Angeles').format('ha')).toBe('4am')
       expect(jun.tz(NY).format('ha')).toBe('8am')
       expect(dec.tz(NY).format('ha')).toBe('7am')
-      expect(jun.tz('Asia/Tokyo').format('ha')).toBe('9pm')
-      expect(dec.tz('Asia/Tokyo').format('ha')).toBe('9pm')
+      expect(jun.tz(TOKYO).format('ha')).toBe('9pm')
+      expect(dec.tz(TOKYO).format('ha')).toBe('9pm')
       expect(jun.tz('Australia/Sydney').format('ha')).toBe('10pm')
       expect(dec.tz('Australia/Sydney').format('ha')).toBe('11pm')
+    })
+  })
+
+  it('format Z', () => {
+    [dayjs, moment].forEach((_) => {
+      const t = _('2020-08-06T03:48:10.258Z').tz(TOKYO)
+      expect(t.format('Z')).toBe('+09:00')
     })
   })
 })

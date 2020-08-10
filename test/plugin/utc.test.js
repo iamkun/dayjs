@@ -219,3 +219,26 @@ describe('UTC Offset', () => {
     expect(dayjs().utc().utcOffset()).toBe(moment().utc().utcOffset())
   })
 })
+
+describe('Diff', () => {
+  const d1 = '2021-06-07'
+  const d2 = '2021-06-06'
+  it('utc.diff(utc)', () => {
+    [dayjs, moment].forEach((_) => {
+      expect(_.utc(d1).diff(_.utc(d2), 'days')).toBe(1)
+      expect(_.utc(d1).diff(_.utc(d2), 'm')).toBe(1440)
+    })
+  })
+  it('local.diff(utc)', () => {
+    expect(dayjs(d1).diff(dayjs.utc(d2), 'days'))
+      .toBe(moment(d1).diff(moment.utc(d2), 'days'))
+    expect(dayjs(d1).diff(dayjs.utc(d2), 'm'))
+      .toBe(moment(d1).diff(moment.utc(d2), 'm'))
+  })
+  it('utc.diff(local)', () => {
+    expect(dayjs.utc(d1).diff(d2, 'days'))
+      .toBe(moment.utc(d1).diff(d2, 'days'))
+    expect(dayjs.utc(d1).diff(d2, 'm'))
+      .toBe(moment.utc(d1).diff(d2, 'm'))
+  })
+})

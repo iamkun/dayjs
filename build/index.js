@@ -41,9 +41,7 @@ async function build(option) {
       fileName: './dayjs.min.js'
     }))
 
-    ncp('./types/', './', (err) => {
-      if (err) { throw err }
-    })
+    await promisify(ncp)('./types/', './')
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
   }
