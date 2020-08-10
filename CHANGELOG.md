@@ -1,3 +1,16 @@
+## [1.8.33](https://github.com/iamkun/dayjs/compare/v1.8.32...v1.8.33) (2020-08-10)
+
+
+### Bug Fixes
+
+* Add PluralGetSet plugin for plural getters/setters ([#996](https://github.com/iamkun/dayjs/issues/996)) ([f76e3ce](https://github.com/iamkun/dayjs/commit/f76e3ce2fbe5d3e9ed9121086baf55eb0cc4d355))
+* Add typescript type defs in esm build ([#985](https://github.com/iamkun/dayjs/issues/985)) ([50e3b3c](https://github.com/iamkun/dayjs/commit/50e3b3c6719cb0b4ec6eff394dacd63d5db8f253))
+* Fix isoWeek Plugin cal bug in UTC mode ([#993](https://github.com/iamkun/dayjs/issues/993)) ([f2e5f32](https://github.com/iamkun/dayjs/commit/f2e5f327aaf12b4572296ec6e107ecc05fcf76e7))
+* Fix Timezone plugin parsing js date, Day.js object, timestamp bug && update type file ([#994](https://github.com/iamkun/dayjs/issues/994)) ([22f3d49](https://github.com/iamkun/dayjs/commit/22f3d49405da98db6da56d1673eebcd01b57554b)), closes [#992](https://github.com/iamkun/dayjs/issues/992) [#989](https://github.com/iamkun/dayjs/issues/989)
+* Fix Timezone plugin UTCOffset rounding bug ([#987](https://github.com/iamkun/dayjs/issues/987)) ([b07182b](https://github.com/iamkun/dayjs/commit/b07182bbdf5aef7f6bf1e88fcd38432e2b8ee465)), closes [#986](https://github.com/iamkun/dayjs/issues/986)
+* Fix UTC plugin bug while comparing an utc instance to a local one ([#995](https://github.com/iamkun/dayjs/issues/995)) ([747c0fb](https://github.com/iamkun/dayjs/commit/747c0fb4eba6353755b5dad3417fd8d5a408c378))
+* Update pt-br locale weekStart 0 ([#984](https://github.com/iamkun/dayjs/issues/984)) ([0f881c1](https://github.com/iamkun/dayjs/commit/0f881c18efb02b9d0ba7f76cba92bb504226fa95))
+
 ## [1.8.32](https://github.com/iamkun/dayjs/compare/v1.8.31...v1.8.32) (2020-08-04)
 
 
