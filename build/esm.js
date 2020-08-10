@@ -5,9 +5,11 @@ const { ncp } = require('ncp')
 
 const { promisify } = util
 
+const typeFileExt = '.d.ts'
 const localeDir = path.join(process.env.PWD, 'esm/locale')
 const pluginDir = path.join(process.env.PWD, 'esm/plugin')
-const typeFileExt = '.d.ts';
+const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFileExt}`);
+
 (async () => {
   try {
     const readLocaleDir = await promisify(fs.readdir)(localeDir)
@@ -19,6 +21,10 @@ const typeFileExt = '.d.ts';
     })
 
     await promisify(ncp)('./types/', './esm')
+
+    const readLocaleFile = await promisify(fs.readFile)(localeTypePath, 'utf8')
+    const localResult = readLocaleFile.replace("'dayjs", "'dayjs/esm")
+    await promisify(fs.writeFile)(localeTypePath, localResult, 'utf8')
 
     const readPluginDir = await promisify(fs.readdir)(pluginDir)
     readPluginDir.forEach(async (p) => {
