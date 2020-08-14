@@ -54,7 +54,7 @@ describe('Parse UTC ', () => {
     expect(dayjs().utc().format()).toBe(moment().utc().format())
   })
 
-  it('Parse date string without timezome', () => {
+  it('Parse date string without timezone', () => {
     const d = '2018-09-06'
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
     expect(dayjs.utc(d).format()).toEqual('2018-09-06T00:00:00Z')
@@ -76,7 +76,7 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
-  it('Parse date string without timezome', () => {
+  it('Parse date string without timezone', () => {
     const d = '2017-04-22 19:50:16'
     expect(dayjs.utc(d).format()).toEqual('2017-04-22T19:50:16Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
