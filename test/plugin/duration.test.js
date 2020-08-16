@@ -101,6 +101,15 @@ describe('Humanize', () => {
     expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
     expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe('en un minuto')
   })
+  it('Global Locale', () => {
+    dayjs.locale('en')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
+    dayjs.locale('fr')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('dans une minute')
+    dayjs.locale('es')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('en un minuto')
+    dayjs.locale('en')
+  })
 })
 
 describe('Clone', () => {
