@@ -27,37 +27,50 @@ describe('Creating', () => {
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
   it('object with float', () => {
-    expect(dayjs.duration({
-      seconds: 1,
-      minutes: 2,
-      hours: 3,
-      days: 4,
-      months: 6,
-      years: 7
-    }).toISOString()).toBe('P7Y6M4DT3H2M1S')
+    expect(
+      dayjs
+        .duration({
+          seconds: 1,
+          minutes: 2,
+          hours: 3,
+          days: 4,
+          months: 6,
+          years: 7
+        })
+        .toISOString()
+    ).toBe('P7Y6M4DT3H2M1S')
   })
   it('object with weeks and float', () => {
-    expect(dayjs.duration({
-      seconds: 1.1,
-      minutes: 2,
-      hours: 3,
-      days: 4,
-      weeks: 5,
-      months: 6,
-      years: 7
-    }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
+    expect(
+      dayjs
+        .duration({
+          seconds: 1.1,
+          minutes: 2,
+          hours: 3,
+          days: 4,
+          weeks: 5,
+          months: 6,
+          years: 7
+        })
+        .toISOString()
+    ).toBe('P7Y6M39DT3H2M1.1S')
   })
   it('object with millisecond', () => {
-    expect(dayjs.duration({
-      ms: 1
-    }).toISOString()).toBe('PT0.001S')
+    expect(
+      dayjs
+        .duration({
+          ms: 1
+        })
+        .toISOString()
+    ).toBe('PT0.001S')
   })
 })
 
-
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
-    expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
+    expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe(
+      'P7Y6M4DT3H2M1S'
+    )
   })
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
@@ -82,9 +95,11 @@ it('Is duration', () => {
 })
 
 it('toJSON', () => {
-  expect(JSON.stringify({
-    postDuration: dayjs.duration(5, 'minutes')
-  })).toBe('{"postDuration":"PT5M"}')
+  expect(
+    JSON.stringify({
+      postDuration: dayjs.duration(5, 'minutes')
+    })
+  ).toBe('{"postDuration":"PT5M"}')
 })
 
 describe('Humanize', () => {
@@ -98,8 +113,18 @@ describe('Humanize', () => {
 
   it('Locale', () => {
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
-    expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
-    expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe('en un minuto')
+    expect(
+      dayjs
+        .duration(1, 'minutes')
+        .locale('fr')
+        .humanize(true)
+    ).toBe('dans une minute')
+    expect(
+      dayjs
+        .duration(1, 'minutes')
+        .locale('es')
+        .humanize(true)
+    ).toBe('en un minuto')
   })
 })
 
@@ -135,6 +160,15 @@ describe('Subtract', () => {
   expect(a.subtract(b).days()).toBe(1)
 })
 
+describe('Seconds', () => {
+  expect(dayjs.duration(500).seconds()).toBe(0)
+  expect(dayjs.duration(1500).seconds()).toBe(1)
+  expect(dayjs.duration(15000).seconds()).toBe(15)
+  expect(dayjs.duration(61000).seconds()).toBe(1) // 1 minute 1 second
+  expect(dayjs.duration(500).asSeconds()).toBe(0.5)
+  expect(dayjs.duration(1500).asSeconds()).toBe(1.5)
+  expect(dayjs.duration(15000).asSeconds()).toBe(15)
+})
 
 describe('Seconds', () => {
   expect(dayjs.duration(500).seconds()).toBe(0)
@@ -149,22 +183,42 @@ describe('Seconds', () => {
 describe('Minutes', () => {
   expect(dayjs.duration(100000).minutes()).toBe(1)
   expect(dayjs.duration(61000).minutes()).toBe(1) // 1 minute 1 second
-  expect(dayjs.duration(100000).asMinutes().toFixed(2)).toBe('1.67')
+  expect(
+    dayjs
+      .duration(100000)
+      .asMinutes()
+      .toFixed(2)
+  ).toBe('1.67')
 })
 
 describe('Hours', () => {
   expect(dayjs.duration(10000000).hours()).toBe(2)
-  expect(dayjs.duration(10000000).asHours().toFixed(2)).toBe('2.78')
+  expect(
+    dayjs
+      .duration(10000000)
+      .asHours()
+      .toFixed(2)
+  ).toBe('2.78')
 })
 
 describe('Days', () => {
   expect(dayjs.duration(100000000).days()).toBe(1)
-  expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  expect(
+    dayjs
+      .duration(100000000)
+      .asDays()
+      .toFixed(2)
+  ).toBe('1.16')
 })
 
 describe('Weeks', () => {
   expect(dayjs.duration(1000000000).weeks()).toBe(1)
-  expect(dayjs.duration(1000000000).asWeeks().toFixed(2)).toBe('1.65')
+  expect(
+    dayjs
+      .duration(1000000000)
+      .asWeeks()
+      .toFixed(2)
+  ).toBe('1.65')
 })
 
 describe('Month', () => {
@@ -174,7 +228,12 @@ describe('Month', () => {
 
 describe('Years', () => {
   expect(dayjs.duration(100000000000).years()).toBe(3)
-  expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.17')
+  expect(
+    dayjs
+      .duration(100000000000)
+      .asYears()
+      .toFixed(2)
+  ).toBe('3.17')
 })
 
 describe('prettyUnit', () => {
@@ -182,8 +241,19 @@ describe('prettyUnit', () => {
   expect(d.toISOString()).toBe('PT2S')
   expect(d.as('Second')).toBe(2)
   expect(d.get('s')).toBe(2)
-  expect(dayjs.duration({
-    M: 12,
-    m: 12
-  }).toISOString()).toBe('P12MT12M')
+  expect(
+    dayjs
+      .duration({
+        M: 12,
+        m: 12
+      })
+      .toISOString()
+  ).toBe('P12MT12M')
+})
+
+describe('fromString', () => {
+  const d = dayjs.duration()
+  expect(d.fromString('g days 57 minutes 34 seconds').get('d')).toBe(0)
+  expect(d.fromString('g days 57 minutes 34 seconds').get('s')).toBe(34)
+  expect(d.fromString('g days 57 minutes 34 seconds').get('m')).toBe(57)
 })
