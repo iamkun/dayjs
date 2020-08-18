@@ -60,12 +60,13 @@ const parseDate = (cfg) => {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
       const m = d[2] - 1 || 0
+      const ms = (d[7] || '0').substring(0, 3)
       if (utc) {
         return new Date(Date.UTC(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
       }
       return new Date(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
 

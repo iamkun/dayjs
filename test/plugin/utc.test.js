@@ -94,6 +94,14 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d).format()).toEqual('2018-09-06T19:34:28Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
   })
+
+  it('parses unlimited millisecond in utc', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const ds = dayjs.utc(date)
+    const ms = moment.utc(date)
+    expect(ds.valueOf()).toEqual(ms.valueOf())
+    expect(ds.millisecond()).toEqual(ms.millisecond())
+  })
 })
 
 it('Clone retains the UTC mode', () => {
