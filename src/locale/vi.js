@@ -36,6 +36,14 @@ const locale = {
     MM: '%d tháng',
     y: 'một năm',
     yy: '%d năm'
+  },
+  calendar: {
+    sameDay: '[Hôm nay lúc] LT',
+    nextDay: '[Ngày mai lúc] LT',
+    nextWeek: 'dddd [tuần tới lúc] LT',
+    lastDay: '[Hôm qua lúc] LT',
+    lastWeek: 'dddd [tuần trước lúc] LT',
+    sameElse: 'L',
   }
 }
 
