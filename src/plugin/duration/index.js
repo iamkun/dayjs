@@ -28,7 +28,7 @@ const prettyUnit = unit => `${$u.p(unit)}s`
 class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
-    this.$l = locale || 'en'
+    this.$l = locale
     if (unit) {
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
@@ -172,7 +172,8 @@ export default (option, Dayjs, dayjs) => {
   $d = dayjs
   $u = dayjs().$utils()
   dayjs.duration = function (input, unit) {
-    return wrapper(input, {}, unit)
+    const $l = dayjs.locale()
+    return wrapper(input, { $l }, unit)
   }
   dayjs.isDuration = isDuration
 }

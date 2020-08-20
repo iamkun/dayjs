@@ -7,6 +7,8 @@ const typeToPos = {
   second: 5
 }
 
+const ms = 'ms'
+
 export default (o, c, d) => {
   const localUtcOffset = d().utcOffset()
   const tzOffset = (timestamp, timezone) => {
@@ -55,7 +57,7 @@ export default (o, c, d) => {
   proto.tz = function (timezone) {
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
-    return d(target).utcOffset(localUtcOffset - diff, true)
+    return d(target).utcOffset(localUtcOffset - diff, true).$set(ms, this.$ms)
   }
   d.tz = function (input, timezone) {
     const previousOffset = tzOffset(+d(), timezone)

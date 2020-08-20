@@ -56,6 +56,14 @@ describe('Parse', () => {
     expect(newYork.tz('America/Los_Angeles').format()).toBe('2014-06-01T09:00:00-07:00')
     expect(newYork.tz('Europe/London').format()).toBe('2014-06-01T17:00:00+01:00')
   })
+
+  it('preserve milliseconds', () => {
+    const d = dayjs(1596735327399)
+    const oldMs = d.millisecond()
+    const dTz = d.tz('America/New_York')
+    const newMs = dTz.millisecond()
+    expect(oldMs).toEqual(newMs)
+  })
 })
 
 describe('Convert', () => {
