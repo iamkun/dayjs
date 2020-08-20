@@ -1,3 +1,12 @@
+## [1.8.34](https://github.com/iamkun/dayjs/compare/v1.8.33...v1.8.34) (2020-08-20)
+
+
+### Bug Fixes
+
+* Fix Timezone plugin to preserve milliseconds while changing timezone ([#1003](https://github.com/iamkun/dayjs/issues/1003)) ([5f446ed](https://github.com/iamkun/dayjs/commit/5f446eda770fa97e895c81a8195b3ba5d082cef0)), closes [#1002](https://github.com/iamkun/dayjs/issues/1002)
+* support parsing unlimited decimals of millisecond ([#1010](https://github.com/iamkun/dayjs/issues/1010)) ([d1bdd36](https://github.com/iamkun/dayjs/commit/d1bdd36a56e3d1786523a180e3fc18068f609135)), closes [#544](https://github.com/iamkun/dayjs/issues/544)
+* update Duration plugin to support global locale ([#1008](https://github.com/iamkun/dayjs/issues/1008)) ([1c49c83](https://github.com/iamkun/dayjs/commit/1c49c83e79811eede13db6372b5d65db598aee77)), closes [#1007](https://github.com/iamkun/dayjs/issues/1007)
+
 ## [1.8.33](https://github.com/iamkun/dayjs/compare/v1.8.32...v1.8.33) (2020-08-10)
 
 
