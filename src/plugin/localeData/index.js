@@ -18,6 +18,7 @@ export default (o, c, dayjs) => { // locale needed later
       monthsShort: instance =>
         (instance ? instance.format('MMM') : getShort(this, 'monthsShort', 'months', 3)),
       firstDayOfWeek: () => this.$locale().weekStart || 0,
+      weekdays: instance => (instance ? instance.format('dddd') : getShort(this, 'weekdays')),
       weekdaysMin: instance =>
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
