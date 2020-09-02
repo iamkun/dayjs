@@ -1,3 +1,12 @@
+## [1.8.35](https://github.com/iamkun/dayjs/compare/v1.8.34...v1.8.35) (2020-09-02)
+
+
+### Bug Fixes
+
+* Fix BadMutable plugin bug in .diff ([#1023](https://github.com/iamkun/dayjs/issues/1023)) ([40ab6d9](https://github.com/iamkun/dayjs/commit/40ab6d9a53e8047cfca63c611c25dd045372d021))
+* fix LocaleData plugin to support instance.weekdays() API ([#1019](https://github.com/iamkun/dayjs/issues/1019)) ([a09d259](https://github.com/iamkun/dayjs/commit/a09d259a407b81d1cb6bb5623fad551c775d8674)), closes [#1017](https://github.com/iamkun/dayjs/issues/1017)
+* Update Dutch (nl) locale to set correct yearStart ([1533a2c](https://github.com/iamkun/dayjs/commit/1533a2cc1475270032da2d87b19fc3d62327e6e3))
+
 ## [1.8.34](https://github.com/iamkun/dayjs/compare/v1.8.33...v1.8.34) (2020-08-20)
 
 
