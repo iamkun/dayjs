@@ -164,6 +164,16 @@ it('Locale', () => {
   expect(d.format(format)).toBe(m.format(format))
 })
 
+it('Diff', () => {
+  const d = dayjs()
+  const m = moment()
+  const unit = 'year'
+  const d2 = d.clone().add(1, unit)
+  const m2 = m.clone().add(1, unit)
+  expect(d.diff(d2, unit)).toBe(-1)
+  expect(m.diff(m2, unit)).toBe(-1)
+})
+
 it('isAfter isBefore isSame', () => {
   const d = dayjs()
   const format = dayjs().format()
