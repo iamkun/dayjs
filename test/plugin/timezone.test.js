@@ -203,3 +203,52 @@ describe('DST, a time that never existed Fall Back', () => {
     })
   })
 })
+
+describe('set Default', () => {
+  it('default timezone', () => {
+    const dateStr = '2014-06-01 12:00'
+    dayjs.tz.setDefault(NY)
+    const newYork = dayjs.tz(dateStr)
+    expect(newYork.format()).toBe('2014-06-01T12:00:00-04:00')
+    expect(newYork.utcOffset()).toBe(-240)
+    expect(newYork.valueOf()).toBe(1401638400000)
+
+    expect(dayjs(dateStr).tz().format()).toBe(dayjs(dateStr).tz(NY).format())
+  })
+
+  it('empty timezone means local timezone', () => {
+    const LOCAL_TZ = dayjs.tz.guess()
+    const dateStr = '2014-06-01 12:00'
+    dayjs.tz.setDefault()
+    expect(dayjs(dateStr).tz().valueOf()).toBe(dayjs(dateStr).tz(LOCAL_TZ).valueOf())
+    expect(dayjs.tz(dateStr).valueOf()).toBe(dayjs.tz(dateStr, LOCAL_TZ).valueOf())
+  })
+
+  it('change default timezone', () => {
+    dayjs.tz.setDefault(NY)
+    const newYork = dayjs.tz('2014-06-01 12:00')
+    expect(newYork.utcOffset()).toBe(-240)
+
+    dayjs.tz.setDefault(TOKYO)
+    const tokyo = dayjs.tz('2014-06-01 12:00')
+    expect(tokyo.format()).toBe('2014-06-01T12:00:00+09:00')
+    expect(tokyo.format('Z')).toBe('+09:00')
+    expect(tokyo.valueOf()).toBe(1401591600000)
+  })
+
+  it('override default timezone in proto.tz', () => {
+    dayjs.tz.setDefault(NY)
+    const tokyo = dayjs.tz('2014-06-01 12:00', TOKYO)
+    expect(tokyo.format()).toBe('2014-06-01T12:00:00+09:00')
+    expect(tokyo.format('Z')).toBe('+09:00')
+    expect(tokyo.valueOf()).toBe(1401591600000)
+  })
+
+  it('override default timezone in d.tz', () => {
+    dayjs.tz.setDefault(NY)
+    const tokyo = dayjs.tz('2014-06-01 12:00', TOKYO)
+    expect(tokyo.format()).toBe('2014-06-01T12:00:00+09:00')
+    expect(tokyo.format('Z')).toBe('+09:00')
+    expect(tokyo.valueOf()).toBe(1401591600000)
+  })
+})
