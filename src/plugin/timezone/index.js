@@ -10,6 +10,8 @@ const typeToPos = {
 const ms = 'ms'
 
 export default (o, c, d) => {
+  let defaultTimezone
+
   const localUtcOffset = d().utcOffset()
   const tzOffset = (timestamp, timezone) => {
     const date = new Date(timestamp)
@@ -33,7 +35,7 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
-    // Workaround for the same performance in different node version
+    // Workaround for the same behavior in different node version
     // https://github.com/nodejs/node/issues/33027
     const hour = filled[3]
     const fixedHour = hour === 24 ? 0 : hour
@@ -68,13 +70,16 @@ export default (o, c, d) => {
     // The offset has changed, but the we don't adjust the time
     return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
   }
+
   const proto = c.prototype
-  proto.tz = function (timezone) {
+
+  proto.tz = function (timezone = defaultTimezone) {
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
     return d(target).utcOffset(localUtcOffset - diff, true).$set(ms, this.$ms)
   }
-  d.tz = function (input, timezone) {
+
+  d.tz = function (input, timezone = defaultTimezone) {
     const previousOffset = tzOffset(+d(), timezone)
     let localTs
     if (typeof input !== 'string') {
@@ -89,5 +94,9 @@ export default (o, c, d) => {
 
   d.tz.guess = function () {
     return Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
+
+  d.tz.setDefault = function (timezone) {
+    defaultTimezone = timezone
   }
 }
