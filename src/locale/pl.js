@@ -23,12 +23,26 @@ function translate(number, withoutSuffix, key) {
   }
 }
 /* eslint-enable */
+
+const monthFormat = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split('_')
+const monthStandalone = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split('_')
+const MONTHS_IN_FORMAT = /D MMMM/
+
+const months = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthFormat[dayjsInstance.month()]
+  }
+  return monthStandalone[dayjsInstance.month()]
+}
+months.s = monthStandalone
+months.f = monthFormat
+
 const locale = {
   name: 'pl',
-  weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
-  weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
+  weekdays: 'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split('_'),
+  weekdaysShort: 'ndz_pon_wt_śr_czw_pt_sob'.split('_'),
   weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
-  months: 'Styczeń_Luty_Marzec_Kwiecień_Maj_Czerwiec_Lipiec_Sierpień_Wrzesień_Październik_Listopad_Grudzień'.split('_'),
+  months,
   monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
