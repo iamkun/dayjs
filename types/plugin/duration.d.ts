@@ -1,12 +1,12 @@
 import { PluginFunc } from 'dayjs'
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin
 
 type DurationInputType = string | number | object
 type DurationAddType = number | object | Duration
 
-declare class Duration {
+export declare class Duration {
   constructor (input: DurationInputType, unit?: string, locale?: string)
 
   clone(): Duration
