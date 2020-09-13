@@ -33,7 +33,7 @@ const locale = {
     LLL: 'MMMM D ፣ YYYY HH:mm',
     LLLL: 'dddd ፣ MMMM D ፣ YYYY HH:mm'
   },
-  ordinal: (n) => `${n}ኛ`
+  ordinal: n => `${n}ኛ`
 }
 
 dayjs.locale(locale, null, true)
