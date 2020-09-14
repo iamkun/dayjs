@@ -19,6 +19,7 @@ coverage
 /dayjs.min.js
 /esm
 /index.d.ts
+locale.json
 
 #dev
 demo.js
