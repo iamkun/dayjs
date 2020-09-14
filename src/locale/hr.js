@@ -1,13 +1,26 @@
 // Croatian [hr]
 import dayjs from 'dayjs'
 
+const monthFormat = 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split('_')
+const monthStandalone = 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_')
+const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
+
+const months = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthFormat[dayjsInstance.month()]
+  }
+  return monthStandalone[dayjsInstance.month()]
+}
+months.s = monthStandalone
+months.f = monthFormat
+
 const locale = {
   name: 'hr',
-  weekdays: 'Nedjelja_Ponedjeljak_Utorak_Srijeda_Četvrtak_Petak_Subota'.split('_'),
-  weekdaysShort: 'Ned._Pon._Uto._Sri._Čet._Pet._Sub.'.split('_'),
-  weekdaysMin: 'Ne_Po_Ut_Sr_Če_Pe_Su'.split('_'),
-  months: 'Siječanj_Veljača_Ožujak_Travanj_Svibanj_Lipanj_Srpanj_Kolovoz_Rujan_Listopad_Studeni_Prosinac'.split('_'),
-  monthsShort: 'Sij._Velj._Ožu._Tra._Svi._Lip._Srp._Kol._Ruj._Lis._Stu._Pro.'.split('_'),
+  weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
+  weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+  weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+  months,
+  monthsShort: 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split('_'),
   weekStart: 1,
   formats: {
     LT: 'H:mm',
