@@ -22,30 +22,30 @@ function romanise(num) {
 }
 function getMonthInGenitive(month) {
   switch (month) {
-    case 'Ianuarius':
-      return 'Ianuarii'
-    case 'Februarius':
-      return 'Februarii'
-    case 'Martius':
-      return 'Martii'
-    case 'Aprilis':
-      return 'Aprilis'
-    case 'Maius':
-      return 'Maii'
-    case 'Iunius':
-      return 'Iunii'
-    case 'Iulius':
-      return 'Iulii'
-    case 'Augustus':
-      return 'Augusti'
-    case 'September':
-      return 'Septembris'
-    case 'October':
-      return 'Octobris'
-    case 'November':
-      return 'Novembris'
-    case 'December':
-      return 'Decembris'
+    case 'ianuarius':
+      return 'ianuarii'
+    case 'februarius':
+      return 'februarii'
+    case 'martius':
+      return 'martii'
+    case 'aprilis':
+      return 'aprilis'
+    case 'maius':
+      return 'maii'
+    case 'iunius':
+      return 'iunii'
+    case 'iulius':
+      return 'iulii'
+    case 'augustus':
+      return 'augusti'
+    case 'september':
+      return 'septembris'
+    case 'october':
+      return 'octobris'
+    case 'november':
+      return 'novembris'
+    case 'december':
+      return 'decembris'
   }
 }
 /* eslint-enable */
@@ -54,35 +54,34 @@ const locale = {
   weekdays: 'Dominica_feria secunda_feria tertia_feria quarta_feria quinta_feria sexta_Sabbato'.split('_'),
   weekdaysShort: 'Dominica_feria II_feria III_feria IV_feria V_feria VI_Sabbato'.split('_'),
   weekdaysMin: 'Dom._II_III_IV_V_VI_Sab.'.split('_'),
-  months: 'Ianuarius_Februarius_Martius_Aprilis_Maius_Iunius_Iulius_Augustus_September_October_November_December'.split('_'),
-  monthsShort: 'Ian_Feb_Mar_Apr_Mai_Iun_Iul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+  months: 'ianuarius_februarius_martius_aprilis_maius_iunius_iulius_augustus_september_october_november_december'.split('_'),
+  monthsShort: 'ian_feb_mar_apr_mai_iun_iul_aug_sep_oct_nov_dec'.split('_'),
   weekStart: 0,
   yearStart: 4,
-  // ordinal: n => romanise(n) + 'ᵒ',
   ordinal: n => [romanise(n), 'ᵒ'].join(''),
   // The relative time variables are in Nominative case only
   relativeTime: {
-    future: ['ad ', romanise('%s')].join(''),
-    past: ['abhinc ', romanise('%s')].join(''),
+    future: 'ad %s',
+    past: 'abhinc %s',
     s: 'paucæ secundæ',
     m: 'minuta',
-    mm: [romanise('%d'), ' minutæ'].join(''),
+    mm: '%d minutæ',
     h: 'hora',
-    hh: [romanise('%d'), ' horæ'].join(''),
+    hh: '%d horæ',
     d: 'dies',
-    dd: [romanise('%d'), ' dies'].join(''),
+    dd: '%d dies',
     M: 'mensis',
-    MM: [romanise('%d'), ' menses'].join(''),
+    MM: '%d menses',
     y: 'annus',
-    yy: [romanise('%d'), ' anni'].join('')
+    yy: '%d anni'
   },
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
-    L: [romanise('D'), ' MM. ', romanise('YYYY')].join(''),
-    LL: [romanise('D'), ' ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY')].join(''),
-    LLL: [romanise('D'), ' ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY'), ' HH:mm'].join(''),
-    LLLL: ['dddd, ', romanise('D'), ' ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY'), ' HH:mm'].join('')
+    L: ['D. MM. ', romanise('YYYY')].join(''),
+    LL: ['D. ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY')].join(''),
+    LLL: ['D. ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY'), ' HH:mm'].join(''),
+    LLLL: ['dddd, ', 'D. ', getMonthInGenitive('MMMM'), ' ', romanise('YYYY'), ' HH:mm'].join('')
   }
 }
 
