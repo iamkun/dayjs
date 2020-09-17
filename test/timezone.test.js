@@ -55,7 +55,7 @@ it('UTC add day in DST', () => {
 })
 
 it('UTC and utcOffset', () => {
-  const test1 = 1331449199000
+  const test1 = 1331449199000 // 2012/3/11 14:59:59
   expect(moment(test1).utcOffset(-300).format())
     .toBe(dayjs(test1).utcOffset(-300).format())
   const test2 = '2000-01-01T06:31:00Z'
