@@ -10,6 +10,8 @@ const typeToPos = {
 const ms = 'ms'
 
 export default (o, c, d) => {
+  let defaultTimezone
+
   const localUtcOffset = d().utcOffset()
   const tzOffset = (timestamp, timezone) => {
     const date = new Date(timestamp)
@@ -33,33 +35,51 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${filled[3]}:${filled[4]}:${filled[5]}:000`
+    // Workaround for the same behavior in different node version
+    // https://github.com/nodejs/node/issues/33027
+    const hour = filled[3]
+    const fixedHour = hour === 24 ? 0 : hour
+    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
     const utcTs = d.utc(utcString).valueOf()
     let asTS = +date
     const over = asTS % 1000
     asTS -= over
     return (utcTs - asTS) / (60 * 1000)
   }
+
+  // find the right offset a given local time. The o input is our guess, which determines which
+  // offset we'll pick in ambiguous cases (e.g. there are two 3 AMs b/c Fallback DST)
+  // https://github.com/moment/luxon/blob/master/src/datetime.js#L76
   const fixOffset = (localTS, o0, tz) => {
+    // Our UTC time is just a guess because our offset is just a guess
     let utcGuess = localTS - (o0 * 60 * 1000)
+    // Test whether the zone matches the offset for this ts
     const o2 = tzOffset(utcGuess, tz)
+    // If so, offset didn't change and we're done
     if (o0 === o2) {
       return [utcGuess, o0]
     }
+    // If not, change the ts by the difference in the offset
     utcGuess -= (o2 - o0) * 60 * 1000
+    // If that gives us the local time we want, we're done
     const o3 = tzOffset(utcGuess, tz)
     if (o2 === o3) {
       return [utcGuess, o2]
     }
+    // If it's different, we're in a hole time.
+    // The offset has changed, but the we don't adjust the time
     return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
   }
+
   const proto = c.prototype
-  proto.tz = function (timezone) {
+
+  proto.tz = function (timezone = defaultTimezone) {
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
     return d(target).utcOffset(localUtcOffset - diff, true).$set(ms, this.$ms)
   }
-  d.tz = function (input, timezone) {
+
+  d.tz = function (input, timezone = defaultTimezone) {
     const previousOffset = tzOffset(+d(), timezone)
     let localTs
     if (typeof input !== 'string') {
@@ -74,5 +94,9 @@ export default (o, c, d) => {
 
   d.tz.guess = function () {
     return Intl.DateTimeFormat().resolvedOptions().timeZone
+  }
+
+  d.tz.setDefault = function (timezone) {
+    defaultTimezone = timezone
   }
 }

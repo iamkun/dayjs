@@ -14,6 +14,21 @@ afterEach(() => {
   MockDate.reset()
 })
 
+it('Format month with locale function', () => {
+  for (let i = 0; i <= 7; i += 1) {
+    const dayjsUK = dayjs().locale('pl').add(i, 'day')
+    const momentUK = moment().locale('pl').add(i, 'day')
+    const testFormat1 = 'DD MMMM YYYY MMM'
+    const testFormat2 = 'dddd, MMMM D YYYY'
+    const testFormat3 = 'MMMM'
+    const testFormat4 = 'MMM'
+    expect(dayjsUK.format(testFormat1)).toEqual(momentUK.format(testFormat1))
+    expect(dayjsUK.format(testFormat2)).toEqual(momentUK.format(testFormat2))
+    expect(dayjsUK.format(testFormat3)).toEqual(momentUK.format(testFormat3))
+    expect(dayjsUK.format(testFormat4)).toEqual(momentUK.format(testFormat4))
+  }
+})
+
 it('RelativeTime: Time from X', () => {
   const T = [
     [44.4, 'second'], // a few seconds

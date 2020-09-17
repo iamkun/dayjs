@@ -4,14 +4,17 @@ import dayjs from '../../src'
 
 const localeDir = '../../src/locale'
 const Locale = []
+const localeNameRegex = /\/\/ (.*) \[/
 
 // load all locales from locale dir
 fs.readdirSync(path.join(__dirname, localeDir))
   .forEach((file) => {
+    const fPath = path.join(__dirname, localeDir, file)
     Locale.push({
       name: file,
       // eslint-disable-next-line import/no-dynamic-require, global-require
-      content: require(path.join(__dirname, localeDir, file)).default
+      content: require(fPath).default,
+      file: fs.readFileSync(fPath, 'utf-8')
     })
   })
 
@@ -31,6 +34,9 @@ Locale.forEach((locale) => {
       yearStart,
       meridiem
     } = locale.content
+    // comments required
+    const commentsMatchResult = locale.file.match(localeNameRegex)
+    expect(commentsMatchResult[1]).not.toBeUndefined()
 
     expect(name).toEqual(locale.name.replace('.js', ''))
     expect(weekdays).toEqual(expect.any(Array))
