@@ -1,3 +1,4 @@
+// English [en]
 // We don't need weekdaysShort, weekdaysMin, monthsShort in en.js locale
 export default {
   name: 'en',
