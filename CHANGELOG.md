@@ -1,3 +1,16 @@
+## [1.8.36](https://github.com/iamkun/dayjs/compare/v1.8.35...v1.8.36) (2020-09-17)
+
+
+### Bug Fixes
+
+* Add Amharic (am) locale ([#1046](https://github.com/iamkun/dayjs/issues/1046)) ([cdc49a1](https://github.com/iamkun/dayjs/commit/cdc49a1911c74b7ea96ed222f42796d53715cfed))
+* Export Duration type in duration plugin ([#1043](https://github.com/iamkun/dayjs/issues/1043)) ([0f20c3a](https://github.com/iamkun/dayjs/commit/0f20c3ac75d9ac1026a15a7bb343d3a150d9b30f))
+* Fix duration plugin parsing milliseconds bug ([#1042](https://github.com/iamkun/dayjs/issues/1042)) ([fe2301b](https://github.com/iamkun/dayjs/commit/fe2301b22318886aaa89ed1620e0a118e98c2b8a))
+* Timezone plugin set default timezone ([#1033](https://github.com/iamkun/dayjs/issues/1033)) ([0c2050a](https://github.com/iamkun/dayjs/commit/0c2050a152da708b01edd6150a5013f642b14576))
+* Timezone plugin should have the same behavior in latest ICU version ([#1032](https://github.com/iamkun/dayjs/issues/1032)) ([de31592](https://github.com/iamkun/dayjs/commit/de315921575cc50c38464b27d0338e30a54d8e2a))
+* Update Finnish (fi) locale ([#963](https://github.com/iamkun/dayjs/issues/963)) ([cf8b6a0](https://github.com/iamkun/dayjs/commit/cf8b6a096f24b54cbdb95675ac386d8ac85ea616))
+* Update Polish (pl) , Hungarian (hr) and Lithuanian (lt) localization ([#1045](https://github.com/iamkun/dayjs/issues/1045)) ([638fd39](https://github.com/iamkun/dayjs/commit/638fd394fc24f4188390faf387da6b156e7c6320))
+
 ## [1.8.35](https://github.com/iamkun/dayjs/compare/v1.8.34...v1.8.35) (2020-09-02)
 
 
