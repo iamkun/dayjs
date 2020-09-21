@@ -24,6 +24,13 @@ it('Return current time if no argument', () => {
     .toBe(dayjs().format())
 })
 
+it('Return current time if passing empty array', () => {
+  expect(dayjs.max([]).format())
+    .toBe(dayjs().format())
+  expect(dayjs.min([]).format())
+    .toBe(dayjs().format())
+})
+
 it('Compare between arguments', () => {
   expect(dayjs.max(arg1, arg2, arg3).format())
     .toBe(arg1.format())

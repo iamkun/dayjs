@@ -1,6 +1,6 @@
 export default (o, c, d) => {
   const sortBy = (method, dates) => {
-    if (!dates.length) {
+    if (!dates.length || (dates.length === 1 && !dates[0].length)) {
       return d()
     }
     if (dates.length === 1 && dates[0].length > 0) {
