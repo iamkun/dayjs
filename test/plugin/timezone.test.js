@@ -261,7 +261,7 @@ describe('Get offsetName', () => {
     expect(d).toBe(m)
     expect(d).toBe('EST')
   })
-  it('short', () => {
+  it('long', () => {
     const d = dtz.offsetName('long')
     expect(d).toBe('Eastern Standard Time')
   })
