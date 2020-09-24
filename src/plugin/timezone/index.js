@@ -9,13 +9,13 @@ const typeToPos = {
 
 const ms = 'ms'
 
-export default (o, c, d) => {
-  let defaultTimezone
-
-  const localUtcOffset = d().utcOffset()
-  const tzOffset = (timestamp, timezone) => {
-    const date = new Date(timestamp)
-    const dtf = new Intl.DateTimeFormat('en-US', {
+// Cache time-zone lookups from Intl.DateTimeFormat,
+// as it is a *very* slow method.
+const dtfCache = {}
+const getDateTimeFormat = (timezone) => {
+  let dtf = dtfCache[timezone]
+  if (!dtf) {
+    dtf = new Intl.DateTimeFormat('en-US', {
       hour12: false,
       timeZone: timezone,
       year: 'numeric',
@@ -25,6 +25,18 @@ export default (o, c, d) => {
       minute: '2-digit',
       second: '2-digit'
     })
+    dtfCache[timezone] = dtf
+  }
+  return dtf
+}
+
+export default (o, c, d) => {
+  let defaultTimezone
+
+  const localUtcOffset = d().utcOffset()
+  const tzOffset = (timestamp, timezone) => {
+    const date = new Date(timestamp)
+    const dtf = getDateTimeFormat(timezone)
     const formatResult = dtf.formatToParts(date)
     const filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
