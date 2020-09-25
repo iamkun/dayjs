@@ -13,7 +13,8 @@ const ms = 'ms'
 // as it is a *very* slow method.
 const dtfCache = {}
 const getDateTimeFormat = (timezone, options = {}) => {
-  const key = `${timezone}|${(options.timeZoneName || 'short')}`
+  const timeZoneName = options.timeZoneName || 'short'
+  const key = `${timezone}|${timeZoneName}`
   let dtf = dtfCache[key]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
@@ -25,7 +26,7 @@ const getDateTimeFormat = (timezone, options = {}) => {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      timeZoneName: options.timeZoneName || 'short'
+      timeZoneName
     })
     dtfCache[key] = dtf
   }
