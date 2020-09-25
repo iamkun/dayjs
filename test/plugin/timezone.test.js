@@ -252,3 +252,17 @@ describe('set Default', () => {
     expect(tokyo.valueOf()).toBe(1401591600000)
   })
 })
+
+describe('Get offsetName', () => {
+  const dtz = dayjs.tz('2012-03-11 01:59:59', NY)
+  it('short', () => {
+    const d = dtz.offsetName('short')
+    const m = moment.tz('2012-03-11 01:59:59', NY).format('z')
+    expect(d).toBe(m)
+    expect(d).toBe('EST')
+  })
+  it('long', () => {
+    const d = dtz.offsetName('long')
+    expect(d).toBe('Eastern Standard Time')
+  })
+})
