@@ -83,7 +83,7 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone) {
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
-    const ins = d(target).utcOffset(localUtcOffset - diff, true).$set(ms, this.$ms)
+    const ins = d(target).$set(ms, this.$ms).utcOffset(localUtcOffset - diff, true)
     ins.$x.$timezone = timezone
     return ins
   }

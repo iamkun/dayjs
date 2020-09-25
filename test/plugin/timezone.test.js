@@ -86,6 +86,13 @@ describe('Convert', () => {
     })
   })
 
+  it('convert from time with timezone to target time', () => {
+    const losAngelesInUTC = dayjs('2014-06-01T05:00:00-07:00').tz('UTC')
+    const MlosAngelesInUTC = moment('2014-06-01T05:00:00-07:00').tz('UTC')
+    expect(losAngelesInUTC.format()).toBe('2014-06-01T12:00:00Z')
+    expect(losAngelesInUTC.format()).toBe(MlosAngelesInUTC.format())
+  })
+
   it('DST', () => {
     [dayjs, moment].forEach((_) => {
       const jun = _('2014-06-01T12:00:00Z')
