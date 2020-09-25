@@ -12,8 +12,9 @@ const ms = 'ms'
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
 const dtfCache = {}
-const getDateTimeFormat = (timezone) => {
-  let dtf = dtfCache[timezone]
+const getDateTimeFormat = (timezone, options = {}) => {
+  const key = `${timezone}|${(options.timeZoneName || 'short')}`
+  let dtf = dtfCache[key]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
       hour12: false,
@@ -23,9 +24,10 @@ const getDateTimeFormat = (timezone) => {
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
+      second: '2-digit',
+      timeZoneName: options.timeZoneName || 'short'
     })
-    dtfCache[timezone] = dtf
+    dtfCache[key] = dtf
   }
   return dtf
 }
@@ -34,10 +36,15 @@ export default (o, c, d) => {
   let defaultTimezone
 
   const localUtcOffset = d().utcOffset()
-  const tzOffset = (timestamp, timezone) => {
+
+  const makeFormatParts = (timestamp, timezone, options = {}) => {
     const date = new Date(timestamp)
-    const dtf = getDateTimeFormat(timezone)
-    const formatResult = dtf.formatToParts(date)
+    const dtf = getDateTimeFormat(timezone, options)
+    return dtf.formatToParts(date)
+  }
+
+  const tzOffset = (timestamp, timezone) => {
+    const formatResult = makeFormatParts(timestamp, timezone)
     const filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
       const { type, value } = formatResult[i]
@@ -47,13 +54,14 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
+    const hour = filled[3]
     // Workaround for the same behavior in different node version
     // https://github.com/nodejs/node/issues/33027
-    const hour = filled[3]
+    /* istanbul ignore next */
     const fixedHour = hour === 24 ? 0 : hour
     const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
     const utcTs = d.utc(utcString).valueOf()
-    let asTS = +date
+    let asTS = +timestamp
     const over = asTS % 1000
     asTS -= over
     return (utcTs - asTS) / (60 * 1000)
@@ -88,7 +96,16 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone) {
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
-    return d(target).utcOffset(localUtcOffset - diff, true).$set(ms, this.$ms)
+    const ins = d(target).$set(ms, this.$ms).utcOffset(localUtcOffset - diff, true)
+    ins.$x.$timezone = timezone
+    return ins
+  }
+
+  proto.offsetName = function (type) {
+    // type: short(default) / long
+    const zone = this.$x.$timezone || d.tz.guess()
+    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
+    return result && result.value
   }
 
   d.tz = function (input, timezone = defaultTimezone) {
@@ -101,6 +118,7 @@ export default (o, c, d) => {
     localTs = localTs || d.utc(input).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
+    ins.$x.$timezone = timezone
     return ins
   }
 
