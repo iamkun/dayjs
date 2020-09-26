@@ -7,8 +7,12 @@ export default (option, Dayjs, dayjs) => {
     return new Dayjs(cfg) // eslint-disable-line no-use-before-define
   }
 
-  proto.utc = function () {
-    return dayjs(this.toDate(), { locale: this.$L, utc: true })
+  proto.utc = function (keepLocalTime) {
+    const ins = dayjs(this.toDate(), { locale: this.$L, utc: true })
+    if (keepLocalTime) {
+      return ins.add(this.utcOffset(), MIN)
+    }
+    return ins
   }
 
   proto.local = function () {

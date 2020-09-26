@@ -6,7 +6,7 @@ export = plugin
 declare module 'dayjs' {
   interface Dayjs {
     
-    utc(): Dayjs
+    utc(keepLocalTime?: boolean): Dayjs
     
     local(): Dayjs
 
