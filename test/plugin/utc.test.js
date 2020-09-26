@@ -252,7 +252,7 @@ describe('Diff', () => {
 })
 
 it('utc keepLocalTime', () => {
-  const t = '2016-05-03T22:15:01+02:00'
+  const t = '2016-05-03 22:15:01'
   const d = dayjs(t).utc(true)
   const m = moment(t).utc(true)
   const fd = d.format()
@@ -262,7 +262,7 @@ it('utc keepLocalTime', () => {
   const dm = m.toDate()
   const vm = m.valueOf()
   expect(fd).toEqual(fm)
+  expect(fd).toEqual('2016-05-03T22:15:01Z')
   expect(dd).toEqual(dm)
   expect(vd).toEqual(vm)
-  expect(vd).toEqual(1462335301000)
 })
