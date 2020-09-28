@@ -1,3 +1,21 @@
+# [1.9.0](https://github.com/iamkun/dayjs/compare/v1.8.36...v1.9.0) (2020-09-28)
+
+
+### Bug Fixes
+
+* Add `setDefault` typing to timezone.d.ts ([#1057](https://github.com/iamkun/dayjs/issues/1057)) ([c0f0886](https://github.com/iamkun/dayjs/commit/c0f088620f17260e6e3ebce7697d561b5623f5f3))
+* fix DST bug in utc plugin ([#1053](https://github.com/iamkun/dayjs/issues/1053)) ([3d73543](https://github.com/iamkun/dayjs/commit/3d7354361f042ced1176d91f9ae9edffe6173425))
+* Fix optional type for timezone plugin ([#1081](https://github.com/iamkun/dayjs/issues/1081)) ([a6ebcf2](https://github.com/iamkun/dayjs/commit/a6ebcf283a83273562dce5663155e3b3a12ea9a5)), closes [#1079](https://github.com/iamkun/dayjs/issues/1079)
+* Fix timezone plugin conversion bug ([#1073](https://github.com/iamkun/dayjs/issues/1073)) ([16816a3](https://github.com/iamkun/dayjs/commit/16816a31ff43220aca9d1d179df6b729182abb55))
+* update duration plugin type file ([#1065](https://github.com/iamkun/dayjs/issues/1065)) ([94af9af](https://github.com/iamkun/dayjs/commit/94af9af27c5bc182cbb24f1845e561dd1d82d776))
+* update timezone plugin to support getting offset name e.g. EST ([#1069](https://github.com/iamkun/dayjs/issues/1069)) ([cbb755e](https://github.com/iamkun/dayjs/commit/cbb755e5c68d49c5678291f3ce832b32831a056e))
+* update utc plugin to support keepLocalTime `.utc(true)` ([#1080](https://github.com/iamkun/dayjs/issues/1080)) ([5ce4e0d](https://github.com/iamkun/dayjs/commit/5ce4e0d2f552f3645262537ff7afdc946f5a7e72))
+
+
+### Features
+
+* Correct casing for en-sg locale name ([#1048](https://github.com/iamkun/dayjs/issues/1048)) ([2edaddc](https://github.com/iamkun/dayjs/commit/2edaddc22a7eb914f915531f389766217acd7034))
+
 ## [1.8.36](https://github.com/iamkun/dayjs/compare/v1.8.35...v1.8.36) (2020-09-17)
 
 
