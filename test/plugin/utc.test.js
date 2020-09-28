@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import utc from '../../src/plugin/utc'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 
@@ -249,4 +249,20 @@ describe('Diff', () => {
     expect(dayjs.utc(d1).diff(d2, 'm'))
       .toBe(moment.utc(d1).diff(d2, 'm'))
   })
+})
+
+it('utc keepLocalTime', () => {
+  const t = '2016-05-03 22:15:01'
+  const d = dayjs(t).utc(true)
+  const m = moment(t).utc(true)
+  const fd = d.format()
+  const dd = d.toDate()
+  const vd = d.valueOf()
+  const fm = m.format()
+  const dm = m.toDate()
+  const vm = m.valueOf()
+  expect(fd).toEqual(fm)
+  expect(fd).toEqual('2016-05-03T22:15:01Z')
+  expect(dd).toEqual(dm)
+  expect(vd).toEqual(vm)
 })

@@ -1,15 +1,18 @@
 import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
 
 export default (option, Dayjs, dayjs) => {
-  const localOffset = (new Date()).getTimezoneOffset()
   const proto = Dayjs.prototype
   dayjs.utc = function (date) {
     const cfg = { date, utc: true, args: arguments } // eslint-disable-line prefer-rest-params
     return new Dayjs(cfg) // eslint-disable-line no-use-before-define
   }
 
-  proto.utc = function () {
-    return dayjs(this.toDate(), { locale: this.$L, utc: true })
+  proto.utc = function (keepLocalTime) {
+    const ins = dayjs(this.toDate(), { locale: this.$L, utc: true })
+    if (keepLocalTime) {
+      return ins.add(this.utcOffset(), MIN)
+    }
+    return ins
   }
 
   proto.local = function () {
@@ -64,8 +67,11 @@ export default (option, Dayjs, dayjs) => {
       return ins
     }
     if (input !== 0) {
-      ins = this.local().add(offset + localOffset, MIN)
+      const localTimezoneOffset = this.$u
+        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+      ins = this.local().add(offset + localTimezoneOffset, MIN)
       ins.$offset = offset
+      ins.$x.$localOffset = localTimezoneOffset
     } else {
       ins = this.utc()
     }
@@ -81,7 +87,7 @@ export default (option, Dayjs, dayjs) => {
 
   proto.valueOf = function () {
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + localOffset : 0
+      ? this.$offset + (this.$x.$localOffset || (new Date()).getTimezoneOffset()) : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 

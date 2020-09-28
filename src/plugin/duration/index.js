@@ -60,7 +60,7 @@ class Duration {
 
   calMilliseconds() {
     this.$ms = Object.keys(this.$d).reduce((total, unit) => (
-      total + ((this.$d[unit] || 0) * (unitToMS[unit] || 1))
+      total + ((this.$d[unit] || 0) * (unitToMS[unit]))
     ), 0)
   }
 
@@ -106,7 +106,7 @@ class Duration {
   }
 
   as(unit) {
-    return this.$ms / (unitToMS[prettyUnit(unit)] || 1)
+    return this.$ms / (unitToMS[prettyUnit(unit)])
   }
 
   get(unit) {
