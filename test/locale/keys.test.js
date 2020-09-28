@@ -39,6 +39,7 @@ Locale.forEach((locale) => {
     expect(commentsMatchResult[1]).not.toBeUndefined()
 
     expect(name).toEqual(locale.name.replace('.js', ''))
+    expect(name).toBe(name.toLowerCase())
     expect(weekdays).toEqual(expect.any(Array))
 
     if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
