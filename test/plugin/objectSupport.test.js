@@ -1,9 +1,10 @@
-import moment from 'moment'
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../../src'
 import objectSupport from '../../src/plugin/objectSupport'
 import quarterOfYear from '../../src/plugin/quarterOfYear'
 import utc from '../../src/plugin/utc'
+import utils from '../../src/utils'
 
 dayjs.extend(utc)
 dayjs.extend(quarterOfYear)
@@ -17,40 +18,43 @@ afterEach(() => {
   MockDate.reset()
 })
 const now = new Date()
+const currentYear = now.getFullYear()
+const currentMonth = utils.s(now.getMonth() + 1, 2, '0')
+const currentDate = utils.s(now.getDate(), 2, '0')
 const fmt = 'YYYY-MM-DD HH:mm:ss.SSS'
 const tests = [
   [{ year: 2010 }, '2010-01-01 00:00:00.000'],
-  [{ year: 2010, month: 1 }, '2010-01-01 00:00:00.000'],
-  [{ year: 2010, month: 1, day: 12 }, '2010-01-12 00:00:00.000'],
-  [{ year: 2010, month: 1, date: 12 }, '2010-01-12 00:00:00.000'],
+  [{ year: 2010, month: 1 }, '2010-02-01 00:00:00.000'],
+  [{ year: 2010, month: 1, day: 12 }, '2010-02-12 00:00:00.000'],
+  [{ year: 2010, month: 1, date: 12 }, '2010-02-12 00:00:00.000'],
   [
     {
       hour: 15, minute: 25, second: 50, millisecond: 125
     },
-    '1970-01-01 15:25:50.125'],
+    `${currentYear}-${currentMonth}-${currentDate} 15:25:50.125`],
   [
     {
       year: 2010, month: 1, day: 12, hours: 1
     },
-    '2010-01-12 01:00:00.000'
+    '2010-02-12 01:00:00.000'
   ],
   [
     {
       year: 2010, month: 1, date: 12, hours: 1
     },
-    '2010-01-12 01:00:00.000'
+    '2010-02-12 01:00:00.000'
   ],
   [
     {
       year: 2010, month: 1, day: 12, hours: 1, minutes: 1
     },
-    '2010-01-12 01:01:00.000'
+    '2010-02-12 01:01:00.000'
   ],
   [
     {
       year: 2010, month: 1, date: 12, hours: 1, minutes: 1
     },
-    '2010-01-12 01:01:00.000'
+    '2010-02-12 01:01:00.000'
   ],
   [
     {
@@ -61,7 +65,7 @@ const tests = [
       minutes: 1,
       seconds: 1
     },
-    '2010-01-12 01:01:01.000'
+    '2010-02-12 01:01:01.000'
   ],
   [
     {
@@ -73,7 +77,7 @@ const tests = [
       seconds: 1,
       milliseconds: 1
     },
-    '2010-01-12 01:01:01.001'
+    '2010-02-12 01:01:01.001'
   ],
   [
     {
@@ -85,7 +89,7 @@ const tests = [
       seconds: 50,
       milliseconds: 125
     },
-    '2010-01-14 15:25:50.125'
+    '2010-02-14 15:25:50.125'
   ],
   [
     {
@@ -97,24 +101,26 @@ const tests = [
       second: 50,
       millisecond: 125
     },
-    '2010-01-14 15:25:50.125'
+    '2010-02-14 15:25:50.125'
   ],
   [
     {
       y: 2010, M: 1, d: 14, h: 15, m: 25, s: 50, ms: 125
     },
-    '2010-01-14 15:25:50.125'
+    '2010-02-14 15:25:50.125'
   ]
 ]
 it('Constructor from Object', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs(tests[i][0]).format(fmt)).toBe(tests[i][1])
+    expect(moment(tests[i][0]).format(fmt)).toBe(tests[i][1])
   }
 })
 
 it('Constructor from Object UTC', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs.utc(tests[i][0]).format(fmt)).toBe(tests[i][1])
+    expect(moment.utc(tests[i][0]).format(fmt)).toBe(tests[i][1])
   }
 })
 it('Set from Object', () => {
@@ -139,9 +145,28 @@ it('add short reverse args', () => {
   expect(a.add({ h: 1 }).hour()).toBe(7)
   expect(a.add({ d: 1 }).date()).toBe(13)
   expect(a.add({ w: 1 }).date()).toBe(19)
-  expect(a.add({ M: 1 }).month()).toBe(9)
+  expect(a.add({ M: 1 }).month()).toBe(10)
   expect(a.add({ y: 1 }).year()).toBe(2012)
-  expect(a.add({ Q: 1 }).month()).toBe(11)
+  expect(a.add({ Q: 1 }).month()).toBe(0)
+
+  const aM = moment({
+    year: 2011,
+    month: 9,
+    date: 12,
+    hour: 6,
+    minute: 7,
+    second: 8,
+    millisecond: 500
+  })
+  expect(aM.clone().add({ ms: 50 }).millisecond()).toBe(550)
+  expect(aM.clone().add({ s: 1 }).second()).toBe(9)
+  expect(aM.clone().add({ m: 1 }).minute()).toBe(8)
+  expect(aM.clone().add({ h: 1 }).hour()).toBe(7)
+  expect(aM.clone().add({ d: 1 }).date()).toBe(13)
+  expect(aM.clone().add({ w: 1 }).date()).toBe(19)
+  expect(aM.clone().add({ M: 1 }).month()).toBe(10)
+  expect(aM.clone().add({ y: 1 }).year()).toBe(2012)
+  expect(aM.clone().add({ Q: 1 }).month()).toBe(0)
 
   const b = dayjs([2010, 1, 31]).add({ M: 1 })
   const c = dayjs([2010, 2, 28]).subtract({ M: 1 })
@@ -173,9 +198,9 @@ it('add long reverse args', () => {
   expect(a.add({ hours: 1 }).hour()).toBe(7)
   expect(a.add({ days: 1 }).date()).toBe(13)
   expect(a.add({ weeks: 1 }).date()).toBe(19)
-  expect(a.add({ months: 1 }).month()).toBe(9)
+  expect(a.add({ months: 1 }).month()).toBe(10)
   expect(a.add({ years: 1 }).year()).toBe(2012)
-  expect(a.add({ quarters: 1 }).month()).toBe(11)
+  expect(a.add({ quarters: 1 }).month()).toBe(0)
 })
 
 it('add long singular reverse args', () => {
@@ -195,9 +220,9 @@ it('add long singular reverse args', () => {
   expect(a.add({ hour: 1 }).hour()).toBe(7)
   expect(a.add({ day: 1 }).date()).toBe(13)
   expect(a.add({ week: 1 }).date()).toBe(19)
-  expect(a.add({ month: 1 }).month()).toBe(9)
+  expect(a.add({ month: 1 }).month()).toBe(10)
   expect(a.add({ year: 1 }).year()).toBe(2012)
-  expect(a.add({ quarter: 1 }).month()).toBe(11)
+  expect(a.add({ quarter: 1 }).month()).toBe(0)
 })
 
 it('add string long', () => {
@@ -217,9 +242,9 @@ it('add string long', () => {
   expect(a.add(1, 'hour').hour()).toBe(7)
   expect(a.add(1, 'day').date()).toBe(13)
   expect(a.add(1, 'week').date()).toBe(19)
-  expect(a.add(1, 'month').month()).toBe(9)
+  expect(a.add(1, 'month').month()).toBe(10)
   expect(a.add(1, 'year').year()).toBe(2012)
-  expect(a.add(1, 'quarter').month()).toBe(11)
+  expect(a.add(1, 'quarter').month()).toBe(0)
 })
 
 it('add string long singular', () => {
@@ -239,9 +264,9 @@ it('add string long singular', () => {
   expect(a.add(1, 'hours').hour()).toBe(7)
   expect(a.add(1, 'days').date()).toBe(13)
   expect(a.add(1, 'weeks').date()).toBe(19)
-  expect(a.add(1, 'months').month()).toBe(9)
+  expect(a.add(1, 'months').month()).toBe(10)
   expect(a.add(1, 'years').year()).toBe(2012)
-  expect(a.add(1, 'quarters').month()).toBe(11)
+  expect(a.add(1, 'quarters').month()).toBe(0)
 })
 
 it('add string short', () => {
@@ -261,9 +286,9 @@ it('add string short', () => {
   expect(a.add(1, 'h').hour()).toBe(7)
   expect(a.add(1, 'd').date()).toBe(13)
   expect(a.add(1, 'w').date()).toBe(19)
-  expect(a.add(1, 'M').month()).toBe(9)
+  expect(a.add(1, 'M').month()).toBe(10)
   expect(a.add(1, 'y').year()).toBe(2012)
-  expect(a.add(1, 'Q').month()).toBe(11)
+  expect(a.add(1, 'Q').month()).toBe(0)
 })
 
 it('add strings string short', () => {
@@ -283,9 +308,9 @@ it('add strings string short', () => {
   expect(a.add('1', 'h').hour()).toBe(7)
   expect(a.add('1', 'd').date()).toBe(13)
   expect(a.add('1', 'w').date()).toBe(19)
-  expect(a.add('1', 'M').month()).toBe(9)
+  expect(a.add('1', 'M').month()).toBe(10)
   expect(a.add('1', 'y').year()).toBe(2012)
-  expect(a.add('1', 'Q').month()).toBe(11)
+  expect(a.add('1', 'Q').month()).toBe(0)
 })
 
 it('add no string with milliseconds default', () => {
@@ -318,9 +343,9 @@ it('subtract strings string short', () => {
   expect(a.subtract('1', 'h').hour()).toBe(5)
   expect(a.subtract('1', 'd').date()).toBe(11)
   expect(a.subtract('1', 'w').date()).toBe(5)
-  expect(a.subtract('1', 'M').month()).toBe(7)
+  expect(a.subtract('1', 'M').month()).toBe(8)
   expect(a.subtract('1', 'y').year()).toBe(2010)
-  expect(a.subtract('1', 'Q').month()).toBe(5)
+  expect(a.subtract('1', 'Q').month()).toBe(6)
 })
 
 it('add decimal values of days and months', () => {
