@@ -1,16 +1,16 @@
 import { PluginFunc } from 'dayjs'
 
 declare const plugin: PluginFunc
-export default plugin
+export = plugin
 
 type DurationInputType = string | number | object
 type DurationAddType = number | object | Duration
 
-export declare class Duration {
+declare class Duration {
   constructor (input: DurationInputType, unit?: string, locale?: string)
 
   clone(): Duration
-  
+
   humanize(withSuffix?: boolean): string
 
   milliseconds(): number
@@ -42,7 +42,7 @@ export declare class Duration {
   get(unit: string): number
 
   add(input: DurationAddType, unit? : string): Duration
-  
+
   subtract(input: DurationAddType, unit? : string): Duration
 
   toJSON(): string
