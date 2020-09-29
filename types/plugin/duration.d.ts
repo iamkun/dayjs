@@ -1,58 +1,61 @@
 import { PluginFunc } from 'dayjs'
 
 declare const plugin: PluginFunc
+export as namespace plugin;
 export = plugin
 
-type DurationInputType = string | number | object
-type DurationAddType = number | object | Duration
+declare namespace plugin {
+  type DurationInputType = string | number | object
+  type DurationAddType = number | object | Duration
 
-declare class Duration {
-  constructor (input: DurationInputType, unit?: string, locale?: string)
+  interface Duration {
+    new (input: DurationInputType, unit?: string, locale?: string): Duration
 
-  clone(): Duration
+    clone(): Duration
 
-  humanize(withSuffix?: boolean): string
+    humanize(withSuffix?: boolean): string
 
-  milliseconds(): number
-  asMilliseconds(): number
+    milliseconds(): number
+    asMilliseconds(): number
 
-  seconds(): number
-  asSeconds(): number
+    seconds(): number
+    asSeconds(): number
 
-  minutes(): number
-  asMinutes(): number
+    minutes(): number
+    asMinutes(): number
 
-  hours(): number
-  asHours(): number
+    hours(): number
+    asHours(): number
 
-  days(): number
-  asDays(): number
+    days(): number
+    asDays(): number
 
-  weeks(): number
-  asWeeks(): number
+    weeks(): number
+    asWeeks(): number
 
-  months(): number
-  asMonths(): number
+    months(): number
+    asMonths(): number
 
-  years(): number
-  asYears(): number
+    years(): number
+    asYears(): number
 
-  as(unit: string): number
+    as(unit: string): number
 
-  get(unit: string): number
+    get(unit: string): number
 
-  add(input: DurationAddType, unit? : string): Duration
+    add(input: DurationAddType, unit? : string): Duration
 
-  subtract(input: DurationAddType, unit? : string): Duration
+    subtract(input: DurationAddType, unit? : string): Duration
 
-  toJSON(): string
+    toJSON(): string
 
-  toISOString(): string
+    toISOString(): string
 
-  locale(locale: string): Duration
+    locale(locale: string): Duration
+  }
 }
 
 declare module 'dayjs' {
-  export function duration(input?: DurationInputType , unit?: string): Duration
-  export function isDuration(d: any): d is Duration
+  export function duration(input?: plugin.DurationInputType , unit?: string): plugin.Duration
+  export function isDuration(d: any): d is plugin.Duration
 }
