@@ -13,7 +13,7 @@ export default (o, c, d) => {
     l: 'M/D/YYYY',
     ll: 'MMM D, YYYY',
     lll: 'MMM D, YYYY h:mm A',
-    llll: 'ddd, MMM D, YYYY h:mm A',
+    llll: 'ddd, MMM D, YYYY h:mm A'
   }
   d.en.formats = englishFormats
   const t = format => format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
