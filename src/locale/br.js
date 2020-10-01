@@ -20,7 +20,7 @@ const locale = {
   },
   relativeTime: {
     future: 'a-benn %s',
-    past: '%s \'zo',
+    past: '%s ʼzo',
     s: 'un nebeud segondennoù',
     m: 'ur vunutenn',
     mm: '%d munutenn',
