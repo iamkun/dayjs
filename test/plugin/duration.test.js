@@ -138,6 +138,12 @@ describe('Add', () => {
   expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
+describe('Add duration', () => {
+  const a = dayjs('2020-10-01')
+  const duration = dayjs.duration(2, 'days')
+  expect(a.add(duration).format('YYYY-MM-DD')).toBe('2020-10-03')
+})
+
 describe('Subtract', () => {
   const a = dayjs.duration(3, 'days')
   const b = dayjs.duration(2, 'days')

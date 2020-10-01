@@ -176,4 +176,12 @@ export default (option, Dayjs, dayjs) => {
     return wrapper(input, { $l }, unit)
   }
   dayjs.isDuration = isDuration
+
+  const oldAdd = Dayjs.prototype.add
+  Dayjs.prototype.add = function (addition, units) {
+    if (isDuration(addition)) {
+      return oldAdd.bind(this)(addition.asMilliseconds(), 'ms')
+    }
+    return oldAdd.bind(this)(addition, units)
+  }
 }
