@@ -18,6 +18,21 @@ const locale = {
     LLL: 'D [a viz] MMMM YYYY h[e]mm A',
     LLLL: 'dddd, D [a viz] MMMM YYYY h[e]mm A'
   },
+  relativeTime: {
+    future: 'a-benn %s',
+    past: '%s \'zo',
+    s: 'un nebeud segondennoù',
+    m: 'ur vunutenn',
+    mm: '%d munutenn',
+    h: 'un eur',
+    hh: '%d eur',
+    d: 'un devezh',
+    dd: '%d devezh',
+    M: 'ur miz',
+    MM: '%d miz',
+    y: 'ur bloaz',
+    yy: '%d bloaz'
+  },
   meridiem: hour => (hour < 12 ? 'a.m.' : 'g.m.') // a-raok merenn | goude merenn
 }
 
