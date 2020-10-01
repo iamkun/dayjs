@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const monthFormat = 'ianuarii_februarii_martii_aprilis_maii_iunii_iulii_augusti_septembris_octobris_novembris_decembris'.split('_')
 const monthStandalone = 'ianuarius_februarius_martius_aprilis_maius_iunius_iulius_augustus_september_october_november_december'.split('_')
-const MONTHS_IN_FORMAT = /(D|[CDILMVX]+)[oD.ᵒ]?(\[[^[\]]*\]|\s)+MMMM?/
+const MONTHS_IN_FORMAT = /D[oD.ᵒ]?(\[[^[\]]*\]|\s)+MMMM?|MMMM?(\[[^[\]]*\]|\s)+D[oD.ᵒ]?/
 const months = (dayjsInstance, format) => {
   if (MONTHS_IN_FORMAT.test(format)) {
     return monthFormat[dayjsInstance.month()]
@@ -13,9 +13,8 @@ const months = (dayjsInstance, format) => {
 months.s = monthStandalone
 months.f = monthFormat
 
-/* eslint-disable */
 // src: https://stackoverflow.com/a/9083076
-// function romanise(num) {
+/* eslint-disable */
 function romanise(num) {
   if (isNaN(num)) {
     return NaN
@@ -33,14 +32,15 @@ function romanise(num) {
   }
   return Array(+digits.join('') + 1).join('M') + roman
 }
-/* eslint-enable */
+/* eslint-disable */
+
 const locale = {
   name: 'la',
   weekdays: 'Dominica_feria secunda_feria tertia_feria quarta_feria quinta_feria sexta_Sabbato'.split('_'),
   weekdaysShort: 'Dominica_feria II_feria III_feria IV_feria V_feria VI_Sabbato'.split('_'),
   weekdaysMin: 'Dom._II_III_IV_V_VI_Sab.'.split('_'),
   months,
-  monthsShort: 'ian._feb._mar._apr._mai._iun._iul._aug._sep._oct._nov._dec'.split('_'),
+  monthsShort: 'ian._feb._mar._apr._mai._iun._iul._aug._sep._oct._nov._dec.'.split('_'),
   weekStart: 0,
   yearStart: 4,
   ordinal: n => [romanise(n), 'ᵒ'].join(''),

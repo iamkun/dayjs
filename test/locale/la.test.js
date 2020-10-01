@@ -18,34 +18,42 @@ afterEach(() => {
   MockDate.reset()
 })
 
-describe('Latin: Output month name:', () => {
-  const M = [
-    [1, 'ianuarius', 'ianuarii'],
-    [2, 'februarius', 'februarii'],
-    [3, 'martius', 'martii'],
-    [4, 'aprilis', 'aprilis'],
-    [5, 'maius', 'maii'],
-    [6, 'iunius', 'iunii'],
-    [7, 'iulius', 'iulii'],
-    [8, 'augustus', 'augusti'],
-    [9, 'september', 'septembris'],
-    [10, 'october', 'octobris'],
-    [11, 'november', 'novembris'],
-    [12, 'december', 'decembris']
+describe('Latin: Test output of month names:', () => {
+  const T = [
+    [1, 'ianuarius', 'ianuarii', 'ian.'],
+    [2, 'februarius', 'februarii', 'feb.'],
+    [3, 'martius', 'martii', 'mar.'],
+    [4, 'aprilis', 'aprilis', 'apr.'],
+    [5, 'maius', 'maii', 'mai.'],
+    [6, 'iunius', 'iunii', 'iun.'],
+    [7, 'iulius', 'iulii', 'iul.'],
+    [8, 'augustus', 'augusti', 'aug.'],
+    [9, 'september', 'septembris', 'sep.'],
+    [10, 'october', 'octobris', 'oct.'],
+    [11, 'november', 'novembris', 'nov.'],
+    [12, 'december', 'decembris', 'dec.']
   ]
 
   it('in genitive case if day of month is output', () => {
-    M.forEach((m) => {
-      const dayjsDay = dayjs(['2020-', m[0], '-01'].join('')).locale('la').format('D MMMM')
-      const expected = ['1 ', m[2]].join('')
+    T.forEach((t) => {
+      const dayjsDay = dayjs(['2020-', t[0], '-01'].join('')).locale('la').format('D MMMM')
+      const expected = ['1 ', t[2]].join('')
       expect(dayjsDay).toBe(expected)
     })
   })
 
-  it('otherwise output it in nominative', () => {
-    M.forEach((m) => {
-      const dayjsDay = dayjs(['2020-', m[0], '-01'].join('')).locale('la').format('MMMM')
-      const expected = m[1]
+  it('in nominative if day of month is not output', () => {
+    T.forEach((t) => {
+      const dayjsDay = dayjs(['2020-', t[0], '-01'].join('')).locale('la').format('MMMM')
+      const expected = t[1]
+      expect(dayjsDay).toBe(expected)
+    })
+  })
+
+  it('also as a shortcut', () => {
+    T.forEach((t) => {
+      const dayjsDay = dayjs(['2020-', t[0], '-01'].join('')).locale('la').format('MMM')
+      const expected = t[3]
       expect(dayjsDay).toBe(expected)
     })
   })
@@ -73,7 +81,7 @@ it('Latin: Test relative time', () => {
   ]
 
   T.forEach((t) => {
-    dayjs.locale('la')
+    // dayjs.locale('la')
     const dayjsDay = dayjs()
     const dayjsCompare = dayjs().add(t[0], t[1])
     const expectedFrom = ['abhinc ', t[2]].join('')
@@ -86,5 +94,90 @@ it('Latin: Test relative time', () => {
   })
 })
 
-// TODO: Test formats
-// TODO: Test romanisation of year (both standalone and in dates incl L, LL, LLL, LLL)
+it('Latin: Test ordinal numbers', () => {
+  const T = [
+    [1, 'Iᵒ'],
+    [2, 'IIᵒ'],
+    [3, 'IIIᵒ'],
+    [4, 'IVᵒ'],
+    [5, 'Vᵒ'],
+    [6, 'VIᵒ'],
+    [7, 'VIIᵒ'],
+    [8, 'VIIIᵒ'],
+    [9, 'IXᵒ'],
+    [10, 'Xᵒ'],
+    [20, 'XXᵒ'],
+    [30, 'XXXᵒ'],
+    [31, 'XXXIᵒ']
+    // [10, 'Xᵒ'],
+    // [20, 'XXᵒ'],
+    // [40, 'XLᵒ'],
+    // [50, 'Lᵒ'],
+    // [90, 'XCᵒ'],
+    // [100, 'Cᵒ'],
+    // [200, 'CCᵒ'],
+    // [500, 'Dᵒ'],
+    // [900, 'CMᵒ'],
+    // [1000, 'Mᵒ'],
+    // [2000, 'MMᵒ']
+  ]
+
+  T.forEach((t) => {
+    const dayjsDay = dayjs(['2020-01-', t[0]].join('')).locale('la').format('Do')
+    const expected = t[1]
+    expect(dayjsDay).toBe(expected)
+  })
+})
+
+describe('Latin: Test weeday names:', () => {
+  const T = [
+    ['2020-01-05', 'Dominica', 'Dominica', 'Dom.'],
+    ['2020-01-06', 'feria secunda', 'feria II', 'II'],
+    ['2020-01-07', 'feria tertia', 'feria III', 'III'],
+    ['2020-01-01', 'feria quarta', 'feria IV', 'IV'],
+    ['2020-01-02', 'feria quinta', 'feria V', 'V'],
+    ['2020-01-03', 'feria sexta', 'feria VI', 'VI'],
+    ['2020-01-04', 'Sabbato', 'Sabbato', 'Sab.']
+  ]
+
+  it('full weekday names', () => {
+    T.forEach((t) => {
+      const dayjsDay = dayjs(t[0]).format('dddd')
+      const expected = t[1]
+      expect(dayjsDay).toBe(expected)
+    })
+  })
+
+  it('short weekday names', () => {
+    T.forEach((t) => {
+      const dayjsDay = dayjs(t[0]).format('ddd')
+      const expected = t[2]
+      expect(dayjsDay).toBe(expected)
+    })
+  })
+
+  it('minimal weekday names', () => {
+    T.forEach((t) => {
+      const dayjsDay = dayjs(t[0]).format('dd')
+      const expected = t[3]
+      expect(dayjsDay).toBe(expected)
+    })
+  })
+})
+
+it('minimal weekday names', () => {
+  const T = [
+    ['LT', '15:15'],
+    ['LTS', '15:15:32'],
+    ['L', '1. 01. 2020'],
+    ['LL', '1 ianuarii 2020'],
+    ['LLL', '1 ianuarii 2020, 15:15'],
+    ['LLLL', 'feria quarta, 1 ianuarii 2020, 15:15']
+  ]
+
+  T.forEach((t) => {
+    const dayjsDay = dayjs('2020-01-01 15:15:32').format(t[0])
+    const expected = t[1]
+    expect(dayjsDay).toBe(expected)
+  })
+})
