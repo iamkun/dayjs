@@ -35,8 +35,8 @@ it('RelativeTime: Time from X', () => {
     [1, 'hour'], // 1 hour
     [21, 'hour'], // 21 hours
     [25, 'day'], // 25 days
-    [10, 'month'] // 2 month
-    // [18, 'month'] // 2 years
+    [10, 'month'], // 2 month
+    [18, 'month'] // 2 years
   ]
 
   T.forEach((t) => {
