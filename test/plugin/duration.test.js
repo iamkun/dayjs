@@ -140,8 +140,8 @@ describe('Add', () => {
 
 describe('Add duration', () => {
   const a = dayjs('2020-10-01')
-  const duration = dayjs.duration(2, 'days')
-  expect(a.add(duration).format('YYYY-MM-DD')).toBe('2020-10-03')
+  const days = dayjs.duration(2, 'days')
+  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
 })
 
 describe('Subtract', () => {
