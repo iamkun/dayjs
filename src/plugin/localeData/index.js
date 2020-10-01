@@ -12,6 +12,7 @@ export default (o, c, dayjs) => { // locale needed later
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const localeData = function () {
+    const t = format => format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
     return {
       months: instance =>
         (instance ? instance.format('MMMM') : getShort(this, 'months')),
@@ -23,7 +24,8 @@ export default (o, c, dayjs) => { // locale needed later
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
-      longDateFormat: format => this.$locale().formats[format]
+      longDateFormat: format =>
+        this.$locale().formats[format] || t(this.$locale().formats[format.toUpperCase()])
     }
   }
   proto.localeData = function () {
