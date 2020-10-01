@@ -4,8 +4,12 @@ import dayjs from '../../src'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
 import weekYear from '../../src/plugin/weekYear'
+import timezone from '../../src/plugin/timezone'
+import utc from '../../src/plugin/utc'
 import '../../src/locale/zh-cn'
 
+dayjs.extend(utc)
+dayjs.extend(timezone)
 dayjs.extend(weekYear)
 dayjs.extend(weekOfYear)
 dayjs.extend(advancedFormat)
@@ -81,6 +85,14 @@ it('Format Week of Year wo', () => {
 it('Format Week Year gggg', () => {
   const d = '2018-12-31'
   expect(dayjs(d).format('gggg')).toBe(moment(d).format('gggg'))
+})
+
+it('Format offsetName z zzz', () => {
+  const dtz = dayjs.tz('2012-03-11 01:59:59', 'America/New_York')
+  expect(dtz.format('z')).toBe('EST')
+  expect(dtz.format('zzz')).toBe('Eastern Standard Time')
+  expect(dayjs().format('z')).toBeDefined()
+  expect(dayjs().format('zzz')).toBeDefined()
 })
 
 it('Skips format strings inside brackets', () => {

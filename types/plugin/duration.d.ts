@@ -11,7 +11,7 @@ export declare class Duration {
 
   clone(): Duration
   
-  humanize(withSuffix: boolean): string
+  humanize(withSuffix?: boolean): string
 
   milliseconds(): number
   asMilliseconds(): number

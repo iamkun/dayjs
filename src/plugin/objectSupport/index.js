@@ -9,12 +9,13 @@ export default (o, c) => {
     const { date, utc } = cfg
     const $d = {}
     if (isObject(date)) {
+      const now = new Date()
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
       })
-      const y = $d.year || 1970
-      const M = $d.month - 1 || 0
-      const d = $d.day || 1
+      const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.getDate() : 1)
+      const y = $d.year || now.getFullYear()
+      const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.getMonth() : 0)// eslint-disable-line no-nested-ternary,max-len
       const h = $d.hour || 0
       const m = $d.minute || 0
       const s = $d.second || 0

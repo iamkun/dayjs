@@ -1,3 +1,34 @@
+# [1.9.0](https://github.com/iamkun/dayjs/compare/v1.8.36...v1.9.0) (2020-09-28)
+
+
+### Bug Fixes
+
+* Add `setDefault` typing to timezone.d.ts ([#1057](https://github.com/iamkun/dayjs/issues/1057)) ([c0f0886](https://github.com/iamkun/dayjs/commit/c0f088620f17260e6e3ebce7697d561b5623f5f3))
+* fix DST bug in utc plugin ([#1053](https://github.com/iamkun/dayjs/issues/1053)) ([3d73543](https://github.com/iamkun/dayjs/commit/3d7354361f042ced1176d91f9ae9edffe6173425))
+* Fix optional type for timezone plugin ([#1081](https://github.com/iamkun/dayjs/issues/1081)) ([a6ebcf2](https://github.com/iamkun/dayjs/commit/a6ebcf283a83273562dce5663155e3b3a12ea9a5)), closes [#1079](https://github.com/iamkun/dayjs/issues/1079)
+* Fix timezone plugin conversion bug ([#1073](https://github.com/iamkun/dayjs/issues/1073)) ([16816a3](https://github.com/iamkun/dayjs/commit/16816a31ff43220aca9d1d179df6b729182abb55))
+* update duration plugin type file ([#1065](https://github.com/iamkun/dayjs/issues/1065)) ([94af9af](https://github.com/iamkun/dayjs/commit/94af9af27c5bc182cbb24f1845e561dd1d82d776))
+* update timezone plugin to support getting offset name e.g. EST ([#1069](https://github.com/iamkun/dayjs/issues/1069)) ([cbb755e](https://github.com/iamkun/dayjs/commit/cbb755e5c68d49c5678291f3ce832b32831a056e))
+* update utc plugin to support keepLocalTime `.utc(true)` ([#1080](https://github.com/iamkun/dayjs/issues/1080)) ([5ce4e0d](https://github.com/iamkun/dayjs/commit/5ce4e0d2f552f3645262537ff7afdc946f5a7e72))
+
+
+### Features
+
+* Correct casing for en-sg locale name ([#1048](https://github.com/iamkun/dayjs/issues/1048)) ([2edaddc](https://github.com/iamkun/dayjs/commit/2edaddc22a7eb914f915531f389766217acd7034))
+
+## [1.8.36](https://github.com/iamkun/dayjs/compare/v1.8.35...v1.8.36) (2020-09-17)
+
+
+### Bug Fixes
+
+* Add Amharic (am) locale ([#1046](https://github.com/iamkun/dayjs/issues/1046)) ([cdc49a1](https://github.com/iamkun/dayjs/commit/cdc49a1911c74b7ea96ed222f42796d53715cfed))
+* Export Duration type in duration plugin ([#1043](https://github.com/iamkun/dayjs/issues/1043)) ([0f20c3a](https://github.com/iamkun/dayjs/commit/0f20c3ac75d9ac1026a15a7bb343d3a150d9b30f))
+* Fix duration plugin parsing milliseconds bug ([#1042](https://github.com/iamkun/dayjs/issues/1042)) ([fe2301b](https://github.com/iamkun/dayjs/commit/fe2301b22318886aaa89ed1620e0a118e98c2b8a))
+* Timezone plugin set default timezone ([#1033](https://github.com/iamkun/dayjs/issues/1033)) ([0c2050a](https://github.com/iamkun/dayjs/commit/0c2050a152da708b01edd6150a5013f642b14576))
+* Timezone plugin should have the same behavior in latest ICU version ([#1032](https://github.com/iamkun/dayjs/issues/1032)) ([de31592](https://github.com/iamkun/dayjs/commit/de315921575cc50c38464b27d0338e30a54d8e2a))
+* Update Finnish (fi) locale ([#963](https://github.com/iamkun/dayjs/issues/963)) ([cf8b6a0](https://github.com/iamkun/dayjs/commit/cf8b6a096f24b54cbdb95675ac386d8ac85ea616))
+* Update Polish (pl) , Hungarian (hr) and Lithuanian (lt) localization ([#1045](https://github.com/iamkun/dayjs/issues/1045)) ([638fd39](https://github.com/iamkun/dayjs/commit/638fd394fc24f4188390faf387da6b156e7c6320))
+
 ## [1.8.35](https://github.com/iamkun/dayjs/compare/v1.8.34...v1.8.35) (2020-09-02)
 
 

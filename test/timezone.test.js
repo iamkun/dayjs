@@ -1,5 +1,5 @@
-import moment from 'moment'
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../src'
 import utc from '../src/plugin/utc'
 
@@ -54,3 +54,11 @@ it('UTC add day in DST', () => {
     .toBe(momentTest.clone().add(2, 'day').format())
 })
 
+it('UTC and utcOffset', () => {
+  const test1 = 1331449199000 // 2012/3/11 14:59:59
+  expect(moment(test1).utcOffset(-300).format())
+    .toBe(dayjs(test1).utcOffset(-300).format())
+  const test2 = '2000-01-01T06:31:00Z'
+  expect(moment.utc(test2).utcOffset(-60).format())
+    .toBe(dayjs.utc(test2).utcOffset(-60).format())
+})

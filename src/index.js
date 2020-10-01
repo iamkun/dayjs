@@ -1,6 +1,6 @@
 import * as C from './constant'
-import U from './utils'
 import en from './locale/en'
+import U from './utils'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
@@ -43,6 +43,7 @@ const wrapper = (date, instance) =>
   dayjs(date, {
     locale: instance.$L,
     utc: instance.$u,
+    x: instance.$x,
     $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
   })
 
@@ -81,6 +82,7 @@ class Dayjs {
 
   parse(cfg) {
     this.$d = parseDate(cfg)
+    this.$x = cfg.x || {}
     this.init()
   }
 
