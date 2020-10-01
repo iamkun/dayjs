@@ -61,6 +61,10 @@ it('Global localeData', () => {
     expect(dayjsLocaleData.weekdays()).toEqual(momentLocaleData.weekdays())
     expect(dayjsLocaleData.weekdaysShort()).toEqual(momentLocaleData.weekdaysShort())
     expect(dayjsLocaleData.weekdaysMin()).toEqual(momentLocaleData.weekdaysMin())
+    const longDateFormats = ['LT', 'LTS', 'L', 'LL', 'LLL', 'LLLL']
+    longDateFormats.forEach((f) => {
+      expect(dayjsLocaleData.longDateFormat(f)).toEqual(momentLocaleData.longDateFormat(f))
+    })
   })
 })
 
