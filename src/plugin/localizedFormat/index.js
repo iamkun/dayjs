@@ -1,5 +1,8 @@
 import { FORMAT_DEFAULT } from '../../constant'
 
+export const t = format =>
+  format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
+
 export default (o, c, d) => {
   const proto = c.prototype
   const oldFormat = proto.format
@@ -12,7 +15,6 @@ export default (o, c, d) => {
     LLLL: 'dddd, MMMM D, YYYY h:mm A'
   }
   d.en.formats = englishFormats
-  const t = format => format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
   proto.format = function (formatStr = FORMAT_DEFAULT) {
     const { formats = {} } = this.$locale()
     const result = formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
