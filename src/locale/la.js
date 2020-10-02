@@ -16,9 +16,6 @@ months.f = monthFormat
 // src: https://stackoverflow.com/a/9083076
 /* eslint-disable */
 function romanise(num) {
-  if (isNaN(num)) {
-    return NaN
-  }
   const key = [
     '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM',
     '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC',
