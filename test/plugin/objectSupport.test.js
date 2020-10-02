@@ -21,6 +21,9 @@ const now = new Date()
 const currentYear = now.getFullYear()
 const currentMonth = utils.s(now.getMonth() + 1, 2, '0')
 const currentDate = utils.s(now.getDate(), 2, '0')
+const currentUTCYear = now.getUTCFullYear()
+const currentUTCMonth = utils.s(now.getUTCMonth() + 1, 2, '0')
+const currentUTCDate = utils.s(now.getUTCDate(), 2, '0')
 const fmt = 'YYYY-MM-DD HH:mm:ss.SSS'
 const tests = [
   [{ year: 2010 }, '2010-01-01 00:00:00.000'],
@@ -31,7 +34,8 @@ const tests = [
     {
       hour: 15, minute: 25, second: 50, millisecond: 125
     },
-    `${currentYear}-${currentMonth}-${currentDate} 15:25:50.125`],
+    `${currentYear}-${currentMonth}-${currentDate} 15:25:50.125`,
+    `${currentUTCYear}-${currentUTCMonth}-${currentUTCDate} 15:25:50.125`],
   [
     {
       year: 2010, month: 1, day: 12, hours: 1
@@ -119,8 +123,9 @@ it('Constructor from Object', () => {
 
 it('Constructor from Object UTC', () => {
   for (let i = 0; i < tests.length; i += 1) {
-    expect(dayjs.utc(tests[i][0]).format(fmt)).toBe(tests[i][1])
-    expect(moment.utc(tests[i][0]).format(fmt)).toBe(tests[i][1])
+    const result = tests[i][2] || tests[i][1]
+    expect(dayjs.utc(tests[i][0]).format(fmt)).toBe(result)
+    expect(moment.utc(tests[i][0]).format(fmt)).toBe(result)
   }
 })
 it('Set from Object', () => {
