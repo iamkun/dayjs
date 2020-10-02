@@ -1,4 +1,4 @@
-export default (o, c, dayjs) => {
+export default (o, c) => {
   const proto = c.prototype
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array) && obj instanceof Object
   const prettyUnit = (u) => {
@@ -9,13 +9,13 @@ export default (o, c, dayjs) => {
     const { date, utc } = cfg
     const $d = {}
     if (isObject(date)) {
-      const now = utc ? dayjs.utc() : dayjs()
+      const now = new Date()
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
       })
-      const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.date() : 1)
-      const y = $d.year || now.year()
-      const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.month() : 0)// eslint-disable-line no-nested-ternary,max-len
+      const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.getDate() : 1)
+      const y = $d.year || now.getFullYear()
+      const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.getMonth() : 0)// eslint-disable-line no-nested-ternary,max-len
       const h = $d.hour || 0
       const m = $d.minute || 0
       const s = $d.second || 0
