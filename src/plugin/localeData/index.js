@@ -42,7 +42,8 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysMin: () => dayjs.weekdaysMin(),
       months: () => dayjs.months(),
       monthsShort: () => dayjs.monthsShort(),
-      longDateFormat: format => localeObject.formats[format]
+      longDateFormat: format =>
+        localeObject.formats[format] || t(localeObject.formats[format.toUpperCase()])
     }
   }
 
