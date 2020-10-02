@@ -1,3 +1,5 @@
+import { t } from '../localizedFormat'
+
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
   const getLocalePart = part => (part && (part.indexOf ? part : part.s))
@@ -12,7 +14,6 @@ export default (o, c, dayjs) => { // locale needed later
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const localeData = function () {
-    const t = format => format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
     return {
       months: instance =>
         (instance ? instance.format('MMMM') : getShort(this, 'months')),
