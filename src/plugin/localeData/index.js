@@ -38,7 +38,8 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysShort: () => dayjs.weekdaysShort(),
       weekdaysMin: () => dayjs.weekdaysMin(),
       months: () => dayjs.months(),
-      monthsShort: () => dayjs.monthsShort()
+      monthsShort: () => dayjs.monthsShort(),
+      longDateFormat: format => localeObject.formats[format]
     }
   }
 
