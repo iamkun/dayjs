@@ -180,9 +180,9 @@ export default (option, Dayjs, dayjs) => {
   const oldAdd = Dayjs.prototype.add
   Dayjs.prototype.add = function (addition, units) {
     if (isDuration(addition)) {
-      addition = addition.asMilliseconds();
-      units = 'ms';
+      addition = addition.asMilliseconds()
+      units = 'ms'
     }
-    return oldAdd.bind(this)(addition, units);
+    return oldAdd.bind(this)(addition, units)
   }
 }
