@@ -31,12 +31,15 @@ it('RelativeTime: Time from X', () => {
   const T = [
     [44.4, 'second'], // a few seconds
     [89.5, 'second'], // a minute
+    [130, 'second'], // two minutes
     [43, 'minute'], // 44 minutes
     [1, 'hour'], // 1 hour
     [21, 'hour'], // 21 hours
+    [2, 'day'], // 2 days
     [25, 'day'], // 25 days
-    [10, 'month'] // 2 month
-    // [18, 'month'] // 2 years
+    [2, 'month'], // 2 months
+    [10, 'month'], // 10 months
+    [18, 'month'] // 2 years
   ]
 
   T.forEach((t) => {
