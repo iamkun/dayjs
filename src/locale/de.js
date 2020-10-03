@@ -2,8 +2,6 @@
 import dayjs from 'dayjs'
 
 const texts = {
-  future: 'in %s',
-  past: 'vor %s',
   s: 'ein paar Sekunden',
   m: ['eine Minute', 'einer Minute'],
   mm: '%d Minuten',
