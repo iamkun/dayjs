@@ -17,7 +17,7 @@ const texts = {
   yy: ['%d Jahre', '%d Jahren']
 }
 
-function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
+function relativeTimeFormatter(number, withoutSuffix, key) {
   let l = texts[key]
   if (Array.isArray(l)) {
     l = l[withoutSuffix ? 0 : 1]
