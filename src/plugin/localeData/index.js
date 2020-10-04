@@ -1,3 +1,5 @@
+import { t } from '../localizedFormat'
+
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
   const getLocalePart = part => (part && (part.indexOf ? part : part.s))
@@ -11,6 +13,9 @@ export default (o, c, dayjs) => { // locale needed later
     return result.map((_, index) => (result[(index + (weekStart || 0)) % 7]))
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
+  const getLongDateFormat = (l, format) =>
+    l.formats[format] || t(l.formats[format.toUpperCase()])
+
   const localeData = function () {
     return {
       months: instance =>
@@ -23,7 +28,8 @@ export default (o, c, dayjs) => { // locale needed later
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
-      longDateFormat: format => this.$locale().formats[format]
+      longDateFormat: format => getLongDateFormat(this.$locale(), format)
+
     }
   }
   proto.localeData = function () {
@@ -39,7 +45,7 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysMin: () => dayjs.weekdaysMin(),
       months: () => dayjs.months(),
       monthsShort: () => dayjs.monthsShort(),
-      longDateFormat: format => localeObject.formats[format]
+      longDateFormat: format => getLongDateFormat(localeObject, format)
     }
   }
 
