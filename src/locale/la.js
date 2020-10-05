@@ -14,7 +14,6 @@ months.s = monthStandalone
 months.f = monthFormat
 
 // src: https://stackoverflow.com/a/9083076
-/* eslint-disable */
 function romanise(num) {
   const key = [
     '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM',
@@ -24,12 +23,12 @@ function romanise(num) {
   const digits = String(+num).split('')
   let roman = ''
   let i = 3
-  while (i--) {
+  while (i > 0) {
+    i -= 1
     roman = (key[+digits.pop() + (i * 10)] || '') + roman
   }
   return Array(+digits.join('') + 1).join('M') + roman
 }
-/* eslint-disable */
 
 const locale = {
   name: 'la',
