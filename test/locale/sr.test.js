@@ -20,7 +20,7 @@ it('Serbian locale relative time in past and future', () => {
     [4, 's', 'za nekoliko sekundi', 'nekoliko sekundi'],
     [1, 'm', 'za jedan minut', 'jedan minut'],
     [-1, 'm', 'pre jednog minuta', 'jedan minut'],
-    [4, 'm', 'za 4 minute', '4 minute'],
+    [4, 'm', 'za 4 minuta', '4 minuta'],
     [5, 'm', 'za 5 minuta', '5 minuta'],
     [21, 'm', 'za 21 minut', '21 minut'],
     [1, 'h', 'za jedan sat', 'jedan sat'],

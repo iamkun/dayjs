@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 const translator = {
   words: {
     m: ['jedan minut', 'jednog minuta'],
-    mm: ['%d minut', '%d minute', '%d minuta'],
+    mm: ['%d minut', '%d minuta', '%d minuta'],
     h: ['jedan sat', 'jednog sata'],
     hh: ['%d sat', '%d sata', '%d sati'],
     d: ['jedan dan', 'jednog dana'],
