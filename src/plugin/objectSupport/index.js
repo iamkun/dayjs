@@ -9,6 +9,9 @@ export default (o, c, dayjs) => {
     const { date, utc } = cfg
     const $d = {}
     if (isObject(date)) {
+      if (!Object.keys(date).length) {
+        return new Date()
+      }
       const now = utc ? dayjs.utc() : dayjs()
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
