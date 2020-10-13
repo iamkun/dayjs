@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/iamkun/dayjs/compare/v1.9.0...v1.9.1) (2020-09-28)
+
+
+### Bug Fixes
+
+* Fix objectSupport plugin to get the correct result (zero-based month) ([#1089](https://github.com/iamkun/dayjs/issues/1089)) ([f95ac15](https://github.com/iamkun/dayjs/commit/f95ac15a4577ae5a3d1ce353872a2cd9fc454bc2))
+
 # [1.9.0](https://github.com/iamkun/dayjs/compare/v1.8.36...v1.9.0) (2020-09-28)
 
 
