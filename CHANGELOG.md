@@ -1,3 +1,21 @@
+## [1.9.2](https://github.com/iamkun/dayjs/compare/v1.9.1...v1.9.2) (2020-10-13)
+
+
+### Bug Fixes
+
+* add arraySupport plugin ([#1129](https://github.com/iamkun/dayjs/issues/1129)) ([be505c2](https://github.com/iamkun/dayjs/commit/be505c2c540261027342cecc55d8919a3d18d893))
+* export type of duration plugin ([#1094](https://github.com/iamkun/dayjs/issues/1094)) ([2c92e71](https://github.com/iamkun/dayjs/commit/2c92e71bf55d09601120cdf433da7a19cc8abff6))
+* Fix LocaleData plugin longDateFormat lowercase error ([#1101](https://github.com/iamkun/dayjs/issues/1101)) ([7937ccd](https://github.com/iamkun/dayjs/commit/7937ccdeac47d094a60e65ebb62a6020b81c46f4))
+* Fix objectSupport plugin bug in UTC ([#1107](https://github.com/iamkun/dayjs/issues/1107)) ([fe90bb6](https://github.com/iamkun/dayjs/commit/fe90bb6944f2ff1969ca975954d303b449dfa95b)), closes [#1105](https://github.com/iamkun/dayjs/issues/1105)
+* fix Serbian locale grammar (sr, sr-cyrl) ([#1108](https://github.com/iamkun/dayjs/issues/1108)) ([cc87eff](https://github.com/iamkun/dayjs/commit/cc87eff8b75b0d86ce0956516319d402bccae6c0))
+* Fix typo for "monday" in arabic ([#1067](https://github.com/iamkun/dayjs/issues/1067)) ([2e1e426](https://github.com/iamkun/dayjs/commit/2e1e42650124f30282dc4d710798d576b928f1c7))
+* support dayjs.add(Duration), dayjs.subtract(Duration) ([#1099](https://github.com/iamkun/dayjs/issues/1099)) ([b1a0294](https://github.com/iamkun/dayjs/commit/b1a02942c5238203aaa04ce9a074c73742324ab7))
+* update Breton [br] locale relativeTime config ([#1103](https://github.com/iamkun/dayjs/issues/1103)) ([b038bfd](https://github.com/iamkun/dayjs/commit/b038bfdb128889d677c95534d2be29cc30c9e72f))
+* update Catalan [ca] locale ordinal ([73da380](https://github.com/iamkun/dayjs/commit/73da38024c8b550bdcfbe3ff7e578e742c7aecf2))
+* update German [de] locale relativeTime config ([#1109](https://github.com/iamkun/dayjs/issues/1109)) ([f6e771b](https://github.com/iamkun/dayjs/commit/f6e771b70f93d19ebb12e6b794aa4628a1796248))
+* update localeData plugin to add longDateFormat to global localeData ([#1106](https://github.com/iamkun/dayjs/issues/1106)) ([16937d1](https://github.com/iamkun/dayjs/commit/16937d16e053b8c1d4a607622fa2fdbfd9809832))
+* Update objectSupport plugin to return current date time while parsing empty object ([f56783e](https://github.com/iamkun/dayjs/commit/f56783e14d8cf50916b015e7188b23bb6fbca839))
+
 ## [1.9.1](https://github.com/iamkun/dayjs/compare/v1.9.0...v1.9.1) (2020-09-28)
 
 
