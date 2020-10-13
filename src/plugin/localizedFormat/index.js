@@ -1,7 +1,5 @@
 import { FORMAT_DEFAULT } from '../../constant'
-
-export const t = format =>
-  format.replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g, (_, a, b) => a || b.slice(1))
+import { t } from './utils'
 
 export default (o, c, d) => {
   const proto = c.prototype
