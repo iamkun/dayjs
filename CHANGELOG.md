@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/iamkun/dayjs/compare/v1.9.2...v1.9.3) (2020-10-13)
+
+
+### Bug Fixes
+
+* fix localizedFormat export error ([#1133](https://github.com/iamkun/dayjs/issues/1133)) ([deecd6a](https://github.com/iamkun/dayjs/commit/deecd6ab8a2f4173ee7046f6b568b41fd2677531)), closes [#1132](https://github.com/iamkun/dayjs/issues/1132)
+
 ## [1.9.2](https://github.com/iamkun/dayjs/compare/v1.9.1...v1.9.2) (2020-10-13)
 
 
