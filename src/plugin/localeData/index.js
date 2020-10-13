@@ -1,4 +1,4 @@
-import { t } from '../localizedFormat'
+import { t } from '../localizedFormat/utils'
 
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
