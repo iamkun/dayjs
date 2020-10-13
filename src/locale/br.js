@@ -1,6 +1,47 @@
 // Breton [br]
 import dayjs from 'dayjs'
 
+function lastNumber(number) {
+  if (number > 9) {
+    return lastNumber(number % 10)
+  }
+  return number
+}
+function softMutation(text) {
+  const mutationTable = {
+    m: 'v',
+    b: 'v',
+    d: 'z'
+  }
+  return mutationTable[text.charAt(0)] + text.substring(1)
+}
+function mutation(text, number) {
+  if (number === 2) {
+    return softMutation(text)
+  }
+  return text
+}
+function relativeTimeWithMutation(number, withoutSuffix, key) {
+  const format = {
+    mm: 'munutenn',
+    MM: 'miz',
+    dd: 'devezh'
+  }
+  return `${number} ${mutation(format[key], number)}`
+}
+function specialMutationForYears(number) {
+  switch (lastNumber(number)) {
+    case 1:
+    case 3:
+    case 4:
+    case 5:
+    case 9:
+      return `${number} bloaz`
+    default:
+      return `${number} vloaz`
+  }
+}
+
 const locale = {
   name: 'br',
   weekdays: 'Sul_Lun_Meurzh_Mercʼher_Yaou_Gwener_Sadorn'.split('_'),
@@ -17,6 +58,21 @@ const locale = {
     LL: 'D [a viz] MMMM YYYY',
     LLL: 'D [a viz] MMMM YYYY h[e]mm A',
     LLLL: 'dddd, D [a viz] MMMM YYYY h[e]mm A'
+  },
+  relativeTime: {
+    future: 'a-benn %s',
+    past: '%s ʼzo',
+    s: 'un nebeud segondennoù',
+    m: 'ur vunutenn',
+    mm: relativeTimeWithMutation,
+    h: 'un eur',
+    hh: '%d eur',
+    d: 'un devezh',
+    dd: relativeTimeWithMutation,
+    M: 'ur miz',
+    MM: relativeTimeWithMutation,
+    y: 'ur bloaz',
+    yy: specialMutationForYears
   },
   meridiem: hour => (hour < 12 ? 'a.m.' : 'g.m.') // a-raok merenn | goude merenn
 }
