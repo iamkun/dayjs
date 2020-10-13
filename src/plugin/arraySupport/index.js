@@ -3,15 +3,13 @@ export default (o, c, dayjs) => {
   const parseDate = (cfg) => {
     const { date, utc } = cfg
     if (Array.isArray(date)) {
-      const isEmptyArray = date.length === 0
-      const isYearOnly = date.length === 1
       if (utc) {
-        if (isEmptyArray) {
+        if (!date.length) {
           return new Date()
         }
         return new Date(Date.UTC.apply(null, date))
       }
-      if (isYearOnly) {
+      if (date.length === 1) {
         return dayjs(String(date[0])).toDate()
       }
       return new (Function.prototype.bind.apply(Date, [null].concat(date)))()
