@@ -7,8 +7,8 @@ dayjs.extend(relativeTime)
 
 it('RelativeTime: Time from X', () => {
   const T = [
-    //   [44.4, 'second'], // a few seconds
-    //   [89.5, 'second'], // a minute
+    [44.4, 'second'], // a few seconds
+    [89.5, 'second'], // a minute
     [2, 'minute'], // 2 minutes
     [43, 'minute'], // 43 minutes
     [45, 'minute'], // an hour
@@ -36,13 +36,10 @@ it('RelativeTime: Time from X', () => {
     const dayjsCompare = dayjs().add(t[0], t[1])
     const momentCompare = moment().add(t[0], t[1])
 
-    expect(dayjsDay.from(dayjsCompare))
-      .toBe(momentDay.from(momentCompare))
+    expect(dayjsDay.from(dayjsCompare)).toBe(momentDay.from(momentCompare))
 
-    expect(dayjsDay.to(dayjsCompare))
-      .toBe(momentDay.to(momentCompare))
+    expect(dayjsDay.to(dayjsCompare)).toBe(momentDay.to(momentCompare))
 
-    expect(dayjsDay.from(dayjsCompare, true))
-      .toBe(momentDay.from(momentCompare, true))
+    expect(dayjsDay.from(dayjsCompare, true)).toBe(momentDay.from(momentCompare, true))
   })
 })
