@@ -32,14 +32,14 @@ function romanise(num) {
 
 const locale = {
   name: 'la',
-  weekdays: 'Dominica_feria secunda_feria tertia_feria quarta_feria quinta_feria sexta_Sabbato'.split('_'),
-  weekdaysShort: 'Dominica_feria II_feria III_feria IV_feria V_feria VI_Sabbato'.split('_'),
-  weekdaysMin: 'Dom._II_III_IV_V_VI_Sab.'.split('_'),
+  weekdays: 'dominica_feria secunda_feria tertia_feria quarta_feria quinta_feria sexta_sabbato'.split('_'),
+  weekdaysShort: 'dominica_feria II_feria III_feria IV_feria V_feria VI_sabbato'.split('_'),
+  weekdaysMin: 'dom._II_III_IV_V_VI_sab.'.split('_'),
   months,
   monthsShort: 'ian._feb._mar._apr._mai._iun._iul._aug._sep._oct._nov._dec.'.split('_'),
   weekStart: 0,
   yearStart: 4,
-  ordinal: n => [romanise(n), 'ᵒ'].join(''),
+  ordinal: n => romanise(n),
   // The relative time variables are in nominative case only
   relativeTime: {
     future: 'ad %s',

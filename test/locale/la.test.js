@@ -94,32 +94,21 @@ it('Latin: Test relative time', () => {
   })
 })
 
-it('Latin: Test ordinal numbers', () => {
+it('Latin: Test ordinal numbers in day of months', () => {
   const T = [
-    [1, 'Iᵒ'],
-    [2, 'IIᵒ'],
-    [3, 'IIIᵒ'],
-    [4, 'IVᵒ'],
-    [5, 'Vᵒ'],
-    [6, 'VIᵒ'],
-    [7, 'VIIᵒ'],
-    [8, 'VIIIᵒ'],
-    [9, 'IXᵒ'],
-    [10, 'Xᵒ'],
-    [20, 'XXᵒ'],
-    [30, 'XXXᵒ'],
-    [31, 'XXXIᵒ']
-    // [10, 'Xᵒ'],
-    // [20, 'XXᵒ'],
-    // [40, 'XLᵒ'],
-    // [50, 'Lᵒ'],
-    // [90, 'XCᵒ'],
-    // [100, 'Cᵒ'],
-    // [200, 'CCᵒ'],
-    // [500, 'Dᵒ'],
-    // [900, 'CMᵒ'],
-    // [1000, 'Mᵒ'],
-    // [2000, 'MMᵒ']
+    [1, 'I'],
+    [2, 'II'],
+    [3, 'III'],
+    [4, 'IV'],
+    [5, 'V'],
+    [6, 'VI'],
+    [7, 'VII'],
+    [8, 'VIII'],
+    [9, 'IX'],
+    [10, 'X'],
+    [20, 'XX'],
+    [30, 'XXX'],
+    [31, 'XXXI']
   ]
 
   T.forEach((t) => {
@@ -131,13 +120,13 @@ it('Latin: Test ordinal numbers', () => {
 
 describe('Latin: Test weeday names:', () => {
   const T = [
-    ['2020-01-05', 'Dominica', 'Dominica', 'Dom.'],
+    ['2020-01-05', 'dominica', 'dominica', 'dom.'],
     ['2020-01-06', 'feria secunda', 'feria II', 'II'],
     ['2020-01-07', 'feria tertia', 'feria III', 'III'],
     ['2020-01-01', 'feria quarta', 'feria IV', 'IV'],
     ['2020-01-02', 'feria quinta', 'feria V', 'V'],
     ['2020-01-03', 'feria sexta', 'feria VI', 'VI'],
-    ['2020-01-04', 'Sabbato', 'Sabbato', 'Sab.']
+    ['2020-01-04', 'sabbato', 'sabbato', 'sab.']
   ]
 
   it('full weekday names', () => {
