@@ -1,4 +1,4 @@
-import { t } from '../localizedFormat'
+import { u } from '../localizedFormat'
 
 const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
@@ -120,9 +120,7 @@ function correctHours(time) {
 }
 
 function makeParser(format) {
-  if (format.match(/l/i)) {
-    format = format.replace(/(\[[^\]]+])|(LTS|LT|l+|L+)/g, (_, a, b) => a || locale.formats[b] || t(locale.formats[b.toUpperCase()]))
-  }
+  format = u(format, locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
   for (let i = 0; i < length; i += 1) {
