@@ -1,6 +1,42 @@
 // Serbian [sr]
 import dayjs from 'dayjs'
 
+const translator = {
+  words: {
+    m: ['jedan minut', 'jednog minuta'],
+    mm: ['%d minut', '%d minuta', '%d minuta'],
+    h: ['jedan sat', 'jednog sata'],
+    hh: ['%d sat', '%d sata', '%d sati'],
+    d: ['jedan dan', 'jednog dana'],
+    dd: ['%d dan', '%d dana', '%d dana'],
+    M: ['jedan mesec', 'jednog meseca'],
+    MM: ['%d mesec', '%d meseca', '%d meseci'],
+    y: ['jednu godinu', 'jedne godine'],
+    yy: ['%d godinu', '%d godine', '%d godina']
+  },
+  correctGrammarCase(number, wordKey) {
+    if (number % 10 >= 1 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20)) {
+      return number % 10 === 1 ? wordKey[0] : wordKey[1]
+    }
+    return wordKey[2]
+  },
+  relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
+    const wordKey = translator.words[key]
+
+    if (key.length === 1) {
+      // Nominativ
+      if (key === 'y' && withoutSuffix) return 'jedna godina'
+      return isFuture || withoutSuffix ? wordKey[0] : wordKey[1]
+    }
+
+    const word = translator.correctGrammarCase(number, wordKey)
+    // Nominativ
+    if (key === 'yy' && withoutSuffix && word === '%d godinu') return `${number} godina`
+
+    return word.replace('%d', number)
+  }
+}
+
 const locale = {
   name: 'sr',
   weekdays: 'Nedelja_Ponedeljak_Utorak_Sreda_Četvrtak_Petak_Subota'.split('_'),
@@ -12,26 +48,26 @@ const locale = {
   relativeTime: {
     future: 'za %s',
     past: 'pre %s',
-    s: 'sekunda',
-    m: 'minut',
-    mm: '%d minuta',
-    h: 'sat',
-    hh: '%d sati',
-    d: 'dan',
-    dd: '%d dana',
-    M: 'mesec',
-    MM: '%d meseci',
-    y: 'godina',
-    yy: '%d godine'
+    s: 'nekoliko sekundi',
+    m: translator.relativeTimeFormatter,
+    mm: translator.relativeTimeFormatter,
+    h: translator.relativeTimeFormatter,
+    hh: translator.relativeTimeFormatter,
+    d: translator.relativeTimeFormatter,
+    dd: translator.relativeTimeFormatter,
+    M: translator.relativeTimeFormatter,
+    MM: translator.relativeTimeFormatter,
+    y: translator.relativeTimeFormatter,
+    yy: translator.relativeTimeFormatter
   },
   ordinal: n => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
-    L: 'DD.MM.YYYY',
-    LL: 'D. MMMM YYYY',
-    LLL: 'D. MMMM YYYY H:mm',
-    LLLL: 'dddd, D. MMMM YYYY H:mm'
+    L: 'D. M. YYYY.',
+    LL: 'D. MMMM YYYY.',
+    LLL: 'D. MMMM YYYY. H:mm',
+    LLLL: 'dddd, D. MMMM YYYY. H:mm'
   }
 }
 
