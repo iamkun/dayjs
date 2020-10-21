@@ -180,17 +180,12 @@ export default (option, Dayjs, dayjs) => {
 
   const oldAdd = Dayjs.prototype.add
   const oldSubtract = Dayjs.prototype.subtract
-  const transformArgs = (value, units) => {
-    if (isDuration(value)) {
-      value = value.asMilliseconds()
-      units = 'ms'
-    }
-    return [value, units]
+  Dayjs.prototype.add = function (value, unit) {
+    if (isDuration(value)) value = value.asMilliseconds()
+    return oldAdd.bind(this)(value, unit)
   }
-  Dayjs.prototype.add = function (value, units) {
-    return oldAdd.apply(this, transformArgs(value, units))
-  }
-  Dayjs.prototype.subtract = function (value, units) {
-    return oldSubtract.apply(this, transformArgs(value, units))
+  Dayjs.prototype.subtract = function (value, unit) {
+    if (isDuration(value)) value = value.asMilliseconds()
+    return oldSubtract.bind(this)(value, unit)
   }
 }
