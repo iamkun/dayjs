@@ -222,21 +222,21 @@ declare namespace dayjs {
      * ```
      * dayjs().add(7, 'day')// => Dayjs
      * ```
-     * Units are case insensitive, and support plural and short forms.
+     * Units are case insensitive, support plural and short forms, and default to 'ms' if not supplied.
      *
      * Docs: https://day.js.org/docs/en/manipulate/add
      */
-    add(value: number, unit: OpUnitType): Dayjs
+    add(value: number, unit?: OpUnitType): Dayjs
     /**
      * Returns a cloned Day.js object with a specified amount of time subtracted.
      * ```
      * dayjs().subtract(7, 'year')// => Dayjs
      * ```
-     * Units are case insensitive, and support plural and short forms.
+     * Units are case insensitive, support plural and short forms, and default to 'ms' if not supplied.
      *
      * Docs: https://day.js.org/docs/en/manipulate/subtract
      */
-    subtract(value: number, unit: OpUnitType): Dayjs
+    subtract(value: number, unit?: OpUnitType): Dayjs
     /**
      * Returns a cloned Day.js object and set it to the start of a unit of time.
      * ```
