@@ -222,7 +222,7 @@ declare namespace dayjs {
      * ```
      * dayjs().add(7, 'day')// => Dayjs
      * ```
-     * Units are case insensitive, support plural and short forms, and default to 'ms' if not supplied.
+     * Units are case insensitive, and support plural and short forms.
      *
      * Docs: https://day.js.org/docs/en/manipulate/add
      */
@@ -232,7 +232,7 @@ declare namespace dayjs {
      * ```
      * dayjs().subtract(7, 'year')// => Dayjs
      * ```
-     * Units are case insensitive, support plural and short forms, and default to 'ms' if not supplied.
+     * Units are case insensitive, and support plural and short forms.
      *
      * Docs: https://day.js.org/docs/en/manipulate/subtract
      */
