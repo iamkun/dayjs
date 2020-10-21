@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
-import utc from '../../src/plugin/utc'
 import timezone from '../../src/plugin/timezone'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -257,6 +257,14 @@ describe('set Default', () => {
     expect(tokyo.format()).toBe('2014-06-01T12:00:00+09:00')
     expect(tokyo.format('Z')).toBe('+09:00')
     expect(tokyo.valueOf()).toBe(1401591600000)
+  })
+})
+
+describe('keepLocalTime', () => {
+  const base = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
+  it('keepLocalTime', () => {
+    expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
+    expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
   })
 })
 
