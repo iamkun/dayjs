@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 export default (o, c, d) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (!process || process.env.NODE_ENV !== 'production') {
     const proto = c.prototype
     const oldParse = proto.parse
     proto.parse = function (cfg) {
