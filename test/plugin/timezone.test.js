@@ -263,6 +263,14 @@ describe('set Default', () => {
   })
 })
 
+describe('keepLocalTime', () => {
+  const base = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
+  it('keepLocalTime', () => {
+    expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
+    expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
+  })
+})
+
 describe('Get offsetName', () => {
   const dtz = dayjs.tz('2012-03-11 01:59:59', NY)
   it('short', () => {

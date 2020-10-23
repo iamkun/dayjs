@@ -1,3 +1,5 @@
+import { MIN, MS } from '../../constant'
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -6,8 +8,6 @@ const typeToPos = {
   minute: 4,
   second: 5
 }
-
-const ms = 'ms'
 
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
@@ -94,10 +94,15 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
-  proto.tz = function (timezone = defaultTimezone) {
+  proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
+    const oldOffset = this.utcOffset()
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
-    const ins = d(target).$set(ms, this.$ms).utcOffset(localUtcOffset - diff, true)
+    let ins = d(target).$set(MS, this.$ms).utcOffset(localUtcOffset - diff, true)
+    if (keepLocalTime) {
+      const newOffset = ins.utcOffset()
+      ins = ins.add(oldOffset - newOffset, MIN)
+    }
     ins.$x.$timezone = timezone
     return ins
   }
