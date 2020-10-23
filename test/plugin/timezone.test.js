@@ -2,10 +2,12 @@ import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
+import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(customParseFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -17,6 +19,7 @@ afterEach(() => {
 
 const NY = 'America/New_York'
 const VAN = 'America/Vancouver'
+const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 
 describe('Guess', () => {
@@ -279,5 +282,15 @@ describe('Get offsetName', () => {
   it('long', () => {
     const d = dtz.offsetName('long')
     expect(d).toBe('Eastern Standard Time')
+  })
+})
+
+describe('CustomPraseFormat', () => {
+  const result = 1602786600
+  it('normal', () => {
+    expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
+  })
+  it('custom', () => {
+    expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(result)
   })
 })
