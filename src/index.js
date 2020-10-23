@@ -76,7 +76,7 @@ const parseDate = (cfg) => {
 
 class Dayjs {
   constructor(cfg) {
-    this.$L = this.$L || parseLocale(cfg.locale, null, true)
+    this.$L = parseLocale(cfg.locale, null, true)
     this.parse(cfg) // for plugin
   }
 
