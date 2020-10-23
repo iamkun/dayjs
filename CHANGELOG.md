@@ -1,3 +1,18 @@
+## [1.9.4](https://github.com/iamkun/dayjs/compare/v1.9.3...v1.9.4) (2020-10-23)
+
+
+### Bug Fixes
+
+* Add descriptions to types ([#1148](https://github.com/iamkun/dayjs/issues/1148)) ([9a407a1](https://github.com/iamkun/dayjs/commit/9a407a140b089345a387d1aceab4d0d1635229c7))
+* add devHelper plugin ([#1163](https://github.com/iamkun/dayjs/issues/1163)) ([de49dc8](https://github.com/iamkun/dayjs/commit/de49dc80c83b85de4170571b64412bd60ada221b))
+* Fix Hungarian (hu) locale ([#1112](https://github.com/iamkun/dayjs/issues/1112)) ([ab13754](https://github.com/iamkun/dayjs/commit/ab13754f43c5033dacaa0eb2042dc4ab1a7a2754))
+* fix minMax plugin parsing empty array bug ([#1062](https://github.com/iamkun/dayjs/issues/1062)) ([368108b](https://github.com/iamkun/dayjs/commit/368108bc6d5cb1542f711b8eba722bd4dfaab0cd))
+* update adding/subtracting Duration from Dayjs object ([#1156](https://github.com/iamkun/dayjs/issues/1156)) ([f861aca](https://github.com/iamkun/dayjs/commit/f861acac3e83e28d3a4a96312c71119fd6b544fc))
+* update en-NZ locale to use proper ordinal formatting function ([#1143](https://github.com/iamkun/dayjs/issues/1143)) ([fcdbc58](https://github.com/iamkun/dayjs/commit/fcdbc5880710456a29b2bacf250542230bf48b99))
+* update localeData plugin type ([#1116](https://github.com/iamkun/dayjs/issues/1116)) ([ee5a4ec](https://github.com/iamkun/dayjs/commit/ee5a4ec41edddfb57d103c35182dc635c9264a10))
+* update timezone plugin to support custom parse format ([#1160](https://github.com/iamkun/dayjs/issues/1160)) ([48cbf31](https://github.com/iamkun/dayjs/commit/48cbf3118ba5427de428777c2e025896db654f2e)), closes [#1159](https://github.com/iamkun/dayjs/issues/1159)
+* update timezone plugin to support keepLocalTime ([#1161](https://github.com/iamkun/dayjs/issues/1161)) ([1d429e5](https://github.com/iamkun/dayjs/commit/1d429e5fe4467ebddcf81b43cf6f36e5e3be944c)), closes [#1149](https://github.com/iamkun/dayjs/issues/1149)
+
 ## [1.9.3](https://github.com/iamkun/dayjs/compare/v1.9.2...v1.9.3) (2020-10-13)
 
 
