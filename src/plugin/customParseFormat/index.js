@@ -182,6 +182,7 @@ const parseFormattedInput = (input, format, utc) => {
 
 
 export default (o, C, d) => {
+  d.p.customParseFormat = true
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {

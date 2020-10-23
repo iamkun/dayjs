@@ -1,3 +1,5 @@
+import { MIN, MS } from '../../constant'
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -6,8 +8,6 @@ const typeToPos = {
   minute: 4,
   second: 5
 }
-
-const ms = 'ms'
 
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
@@ -94,10 +94,15 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
-  proto.tz = function (timezone = defaultTimezone) {
+  proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
+    const oldOffset = this.utcOffset()
     const target = this.toDate().toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((this.toDate() - new Date(target)) / 1000 / 60)
-    const ins = d(target).$set(ms, this.$ms).utcOffset(localUtcOffset - diff, true)
+    let ins = d(target).$set(MS, this.$ms).utcOffset(localUtcOffset - diff, true)
+    if (keepLocalTime) {
+      const newOffset = ins.utcOffset()
+      ins = ins.add(oldOffset - newOffset, MIN)
+    }
     ins.$x.$timezone = timezone
     return ins
   }
@@ -109,14 +114,16 @@ export default (o, c, d) => {
     return result && result.value
   }
 
-  d.tz = function (input, timezone = defaultTimezone) {
+  d.tz = function (input, arg1, arg2) {
+    const parseFormat = arg2 && arg1
+    const timezone = arg2 || arg1 || defaultTimezone
     const previousOffset = tzOffset(+d(), timezone)
     let localTs
     if (typeof input !== 'string') {
       // timestamp number || js Date || Day.js
       localTs = d(input) + (previousOffset * 60 * 1000)
     }
-    localTs = localTs || d.utc(input).valueOf()
+    localTs = localTs || d.utc(input, parseFormat).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
     ins.$x.$timezone = timezone

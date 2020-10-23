@@ -56,6 +56,11 @@ declare namespace plugin {
 }
 
 declare module 'dayjs' {
+  interface Dayjs {
+    add(value: plugin.Duration): Dayjs
+    subtract(value: plugin.Duration): Dayjs
+  }
+
   export function duration(input?: plugin.DurationInputType , unit?: string): plugin.Duration
   export function isDuration(d: any): d is plugin.Duration
 }

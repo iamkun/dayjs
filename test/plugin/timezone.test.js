@@ -1,11 +1,13 @@
 import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
-import utc from '../../src/plugin/utc'
 import timezone from '../../src/plugin/timezone'
+import customParseFormat from '../../src/plugin/customParseFormat'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(customParseFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -17,6 +19,7 @@ afterEach(() => {
 
 const NY = 'America/New_York'
 const VAN = 'America/Vancouver'
+const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 
 describe('Guess', () => {
@@ -260,6 +263,14 @@ describe('set Default', () => {
   })
 })
 
+describe('keepLocalTime', () => {
+  const base = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
+  it('keepLocalTime', () => {
+    expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
+    expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
+  })
+})
+
 describe('Get offsetName', () => {
   const dtz = dayjs.tz('2012-03-11 01:59:59', NY)
   it('short', () => {
@@ -271,5 +282,15 @@ describe('Get offsetName', () => {
   it('long', () => {
     const d = dtz.offsetName('long')
     expect(d).toBe('Eastern Standard Time')
+  })
+})
+
+describe('CustomPraseFormat', () => {
+  const result = 1602786600
+  it('normal', () => {
+    expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
+  })
+  it('custom', () => {
+    expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(result)
   })
 })
