@@ -2,11 +2,13 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import localizedFormats from '../../src/plugin/localizedFormat'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
 import '../../src/locale/ru'
 
 dayjs.extend(customParseFormat)
+dayjs.extend(localizedFormats)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -70,6 +72,21 @@ it('recognizes noon in small letters', () => {
   const input = '2018-05-02 12:00 pm'
   const format = 'YYYY-MM-DD hh:mm a'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+describe('parse localizedFormats', () => {
+  ['zh-cn', 'ru', 'uk', 'en'].forEach((lo) => {
+    it(`Locale: ${lo}`, () => {
+      const input = '2018-05-02 01:02:03.004'
+      dayjs.locale(lo)
+      moment.locale(lo)
+      const longDateFormats = ['LT', 'LTS', 'L', 'LL', 'l', 'll', 'lll', 'l LT', 'LL [l] LTS'] // TODO: fix LLL, LLLL and llll
+      longDateFormats.forEach((f) => {
+        const localizedInput = moment(input).format(f)
+        expect(dayjs(localizedInput, f).valueOf()).toBe(moment(localizedInput, f).valueOf())
+      })
+    })
+  })
 })
 
 it('leaves non-token parts of the format intact', () => {
