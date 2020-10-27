@@ -1,11 +1,11 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import customParseFormat from '../../src/plugin/customParseFormat'
-import localizedFormats from '../../src/plugin/localizedFormat'
+import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
-import '../../src/locale/ru'
+import customParseFormat from '../../src/plugin/customParseFormat'
+import localizedFormats from '../../src/plugin/localizedFormat'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
@@ -303,5 +303,20 @@ describe('Array format support', () => {
     const input = '2018 三月 12'
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+  })
+})
+
+describe('meridiem locale', () => {
+  const format = 'YYYY年M月D日Ah点mm分ss秒'
+  const format2 = 'YYYY-MM-DD HH:mm:ss'
+  it('AM', () => {
+    const input = '2018-05-02 01:02:03'
+    const date = dayjs(input).locale('zh-cn').format(format)
+    expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+  it('PM', () => {
+    const input = '2018-05-02 20:02:03'
+    const date = dayjs(input).locale('zh-cn').format(format)
+    expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
   })
 })

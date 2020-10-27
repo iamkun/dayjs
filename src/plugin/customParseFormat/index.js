@@ -7,8 +7,6 @@ const match2 = /\d\d/ // 00 - 99
 const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
-const matchUpperCaseAMPM = /[AP]M/
-const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
 const matchWord = /\d*[^\s\d-:/()]+/ // Word
@@ -38,13 +36,28 @@ const getLocalePart = (name) => {
     part.indexOf ? part : part.s.concat(part.f)
   )
 }
-
+const meridiemMatch = (input, isLowerCase) => {
+  let isAfternoon
+  const { meridiem } = locale
+  if (!meridiem) {
+    isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
+  } else {
+    for (let i = 1; i <= 24; i += 1) {
+      // todo: fix input === meridiem(i, 0, isLowerCase)
+      if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
+        isAfternoon = i > 12
+        break
+      }
+    }
+  }
+  return isAfternoon
+}
 const expressions = {
-  A: [matchUpperCaseAMPM, function (input) {
-    this.afternoon = input === 'PM'
+  A: [matchWord, function (input) {
+    this.afternoon = meridiemMatch(input, false)
   }],
-  a: [matchLowerCaseAMPM, function (input) {
-    this.afternoon = input === 'pm'
+  a: [matchWord, function (input) {
+    this.afternoon = meridiemMatch(input, true)
   }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
