@@ -15,6 +15,7 @@ declare module 'dayjs' {
     months(instance?: Dayjs): MonthNames;
     monthsShort(instance?: Dayjs): MonthNames;
     longDateFormat(format: string): string;
+    meridiem(hour?: number, minute?: number, isLower?: boolean): string;
   }
 
   interface GlobalLocaleDataReturn {
@@ -25,6 +26,7 @@ declare module 'dayjs' {
     months(): MonthNames;
     monthsShort(): MonthNames;
     longDateFormat(format: string): string;
+    meridiem(hour?: number, minute?: number, isLower?: boolean): string;
   }
 
   interface Dayjs {
