@@ -4,7 +4,8 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
-<br>
+<p align="center">
+<a href="https://www.duohui.cn?utm_source=dayjs" title="多会 - 专业活动管理系统" target="_blank"><img height="80px" alt="多会" src="https://user-images.githubusercontent.com/17680888/97982403-b16cb900-1e0e-11eb-88bc-42ea1a3c0143.png"/></a></p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
