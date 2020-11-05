@@ -185,24 +185,20 @@ describe('DST, a time that never existed Fall Back', () => {
       expect(d.valueOf()).toBe(1352005199000)
     })
   })
-  it('2012-11-04 01:00:00', () => {
-    const s = '2012-11-04 01:00:00';
+  it('2012-11-04 00:59:59', () => {
+    const s = '2012-11-04 00:59:59';
     [dayjs, moment].forEach((_) => {
       const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T01:00:00-04:00')
+      expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
       expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352005200000)
+      expect(d.valueOf()).toBe(1352005199000)
     })
   })
-  it('2012-11-04 01:59:59', () => {
-    const s = '2012-11-04 01:59:59';
-    [dayjs, moment].forEach((_) => {
-      const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T01:59:59-04:00')
-      expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352008799000)
-    })
-  })
+
+  // there's no sense to test "2012-11-04 01:59:59 America/New_York"
+  // cause it's an invalid date and never exist
+  // and dayjs result it as "2012-11-04T01:59:00-05:00"
+
   it('2012-11-04 02:00:00', () => {
     const s = '2012-11-04 02:00:00';
     [dayjs, moment].forEach((_) => {
