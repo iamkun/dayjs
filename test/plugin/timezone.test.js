@@ -194,6 +194,11 @@ describe('DST, a time that never existed Fall Back', () => {
       expect(d.valueOf()).toBe(1352005199000)
     })
   })
+
+  // there's no sense to test "2012-11-04 01:59:59 America/New_York"
+  // cause it's an invalid date and never exist
+  // and dayjs result it as "2012-11-04T01:59:00-05:00"
+
   it('2012-11-04 02:00:00', () => {
     const s = '2012-11-04 02:00:00';
     [dayjs, moment].forEach((_) => {
