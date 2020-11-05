@@ -1,3 +1,16 @@
+## [1.9.5](https://github.com/iamkun/dayjs/compare/v1.9.4...v1.9.5) (2020-11-05)
+
+
+### Bug Fixes
+
+* customParseFormat plugin supports parsing localizedFormats  ([#1110](https://github.com/iamkun/dayjs/issues/1110)) ([402b603](https://github.com/iamkun/dayjs/commit/402b603aa3ee4199786950bc88b3fdc6b527aa35))
+* fix customParseFormat plugin parse meridiem bug ([#1169](https://github.com/iamkun/dayjs/issues/1169)) ([9e8f8d9](https://github.com/iamkun/dayjs/commit/9e8f8d96c69d557f4d267f42567c25ae9e7ab227)), closes [#1168](https://github.com/iamkun/dayjs/issues/1168)
+* fix devHelper error in umd bundle in browser ([#1165](https://github.com/iamkun/dayjs/issues/1165)) ([d11b5ee](https://github.com/iamkun/dayjs/commit/d11b5ee7dc11af671355f65ccda00f6ba42cc725))
+* fix utc plugin diff bug in DST ([#1171](https://github.com/iamkun/dayjs/issues/1171)) ([f8da3fe](https://github.com/iamkun/dayjs/commit/f8da3fe7e50c84c0502bf5be0b364910922dbd79)), closes [#1097](https://github.com/iamkun/dayjs/issues/1097) [#1021](https://github.com/iamkun/dayjs/issues/1021)
+* isoWeek plugin type ([#1177](https://github.com/iamkun/dayjs/issues/1177)) ([c3d0436](https://github.com/iamkun/dayjs/commit/c3d0436b06f74989e3a2c751a5d170f8072c4aad))
+* update localeData plugin to support meridiem ([#1174](https://github.com/iamkun/dayjs/issues/1174)) ([fdb09e4](https://github.com/iamkun/dayjs/commit/fdb09e4074cc7e8f6196846f18d3566c1f9e8fcd)), closes [#1172](https://github.com/iamkun/dayjs/issues/1172)
+* update timezone plugin parse Date instance / timestamp logic & remove useless test ([#1183](https://github.com/iamkun/dayjs/issues/1183)) ([a7f858b](https://github.com/iamkun/dayjs/commit/a7f858bb70ad81f718ba35c479e84b54eace48b2))
+
 ## [1.9.4](https://github.com/iamkun/dayjs/compare/v1.9.3...v1.9.4) (2020-10-23)
 
 
