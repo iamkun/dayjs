@@ -133,7 +133,7 @@ function correctHours(time) {
 }
 
 function makeParser(format) {
-  format = u(format, locale.formats)
+  format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
   for (let i = 0; i < length; i += 1) {
@@ -224,6 +224,8 @@ export default (o, C, d) => {
       if (isStrict && date !== this.format(format)) {
         this.$d = new Date('')
       }
+      // reset global locale to make parallel unit test
+      locale = undefined
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
