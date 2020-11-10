@@ -145,7 +145,7 @@ it('Locale without relativeTime config fallback', () => {
   }).fromNow()).toEqual(expect.any(String))
 })
 
-it('Past and Future keys  should support function for additional processing', () => {
+it('Past and Future keys should support function for additional processing', () => {
   dayjs.extend(updateLocale)
   dayjs.updateLocale('en', {
     relativeTime: {
