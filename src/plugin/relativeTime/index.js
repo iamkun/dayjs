@@ -60,7 +60,7 @@ export default (o, c, d) => {
       }
     }
     if (withoutSuffix) return out
-    const pastOrFuture = (isFuture ? loc.future : loc.past)
+    const pastOrFuture = isFuture ? loc.future : loc.past
     if (typeof pastOrFuture === 'function') {
       return pastOrFuture(out)
     }
