@@ -1,3 +1,11 @@
+## [1.9.6](https://github.com/iamkun/dayjs/compare/v1.9.5...v1.9.6) (2020-11-10)
+
+
+### Bug Fixes
+
+* fix customParseFormat plugin parsing date bug ([#1198](https://github.com/iamkun/dayjs/issues/1198)) ([50f05ad](https://github.com/iamkun/dayjs/commit/50f05ad3addf27827c5657ae7519514e40d9faec)), closes [#1194](https://github.com/iamkun/dayjs/issues/1194)
+* Update lv (Latvian) locale relative time ([#1192](https://github.com/iamkun/dayjs/issues/1192)) ([6d6c684](https://github.com/iamkun/dayjs/commit/6d6c6841b13ba4f7e69de92caf132a3592c5253a))
+
 ## [1.9.5](https://github.com/iamkun/dayjs/compare/v1.9.4...v1.9.5) (2020-11-05)
 
 
