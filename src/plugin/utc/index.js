@@ -112,7 +112,7 @@ export default (option, Dayjs, dayjs) => {
   }
   const oldDiff = proto.diff
   proto.diff = function (input, units, float) {
-    if (this.$u === input.$u) {
+    if (input && this.$u === input.$u) {
       return oldDiff.call(this, input, units, float)
     }
     const localThis = this.local()
