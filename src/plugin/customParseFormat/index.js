@@ -8,14 +8,15 @@ const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchOffset = /[+-]\d\d:?(\d\d)?/ // +00:00 -00:00 +0000 or -0000 +00
 const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
 let locale
 
 function offsetFromString(string) {
+  if (!string) return 0
   const parts = string.match(/([+-]|\d\d)/g)
-  const minutes = +(parts[1] * 60) + +parts[2]
+  const minutes = +(parts[1] * 60) + (+parts[2] || 0)
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
@@ -133,7 +134,7 @@ function correctHours(time) {
 }
 
 function makeParser(format) {
-  format = u(format, locale.formats)
+  format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
   for (let i = 0; i < length; i += 1) {
@@ -224,6 +225,8 @@ export default (o, C, d) => {
       if (isStrict && date !== this.format(format)) {
         this.$d = new Date('')
       }
+      // reset global locale to make parallel unit test
+      locale = undefined
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
