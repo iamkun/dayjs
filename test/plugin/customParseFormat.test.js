@@ -101,6 +101,22 @@ it('timezone with no hour', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+describe('Timezone Offset', () => {
+  it('timezone with 2-digit offset', () => {
+    const input = '2020-12-01T20:00:00+09'
+    const format = 'YYYY-MM-DD[T]HH:mm:ssZZ'
+    const result = dayjs(input, format)
+    expect(result.valueOf()).toBe(moment(input, format).valueOf())
+    expect(result.valueOf()).toBe(1606820400000)
+  })
+  it('no timezone format token should parse in local time', () => {
+    const input = '2020-12-01T20:00:00+01:00'
+    const format = 'YYYY-MM-DD[T]HH:mm:ss'
+    const result = dayjs(input, format)
+    expect(result.valueOf()).toBe(moment(input, format).valueOf())
+  })
+})
+
 it('parse hh:mm', () => {
   const input = '12:00'
   const format = 'hh:mm'

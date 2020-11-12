@@ -8,14 +8,15 @@ const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchOffset = /[+-]\d\d:?(\d\d)?/ // +00:00 -00:00 +0000 or -0000 +00
 const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
 let locale
 
 function offsetFromString(string) {
+  if (!string) return 0
   const parts = string.match(/([+-]|\d\d)/g)
-  const minutes = +(parts[1] * 60) + +parts[2]
+  const minutes = +(parts[1] * 60) + (+parts[2] || 0)
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
