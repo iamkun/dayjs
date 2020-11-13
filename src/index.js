@@ -387,7 +387,12 @@ dayjs.prototype = proto;
 })
 
 dayjs.extend = (plugin, option) => {
+  if (plugin.installed) {
+    return dayjs
+  }
+
   plugin(option, Dayjs, dayjs)
+  plugin.installed = true
   return dayjs
 }
 
