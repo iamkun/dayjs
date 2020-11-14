@@ -269,3 +269,7 @@ it('utc keepLocalTime', () => {
   expect(dd).toEqual(dm)
   expect(vd).toEqual(vm)
 })
+
+it('utc diff undefined edge case', () => {
+  expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
+})
