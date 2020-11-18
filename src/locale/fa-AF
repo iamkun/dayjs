@@ -1,8 +1,8 @@
-// Persian [fa]
+// Persian (Afghanistan) [fa-AF]
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'fa',
+  name: 'fa-AF',
   weekdays: 'یک‌شنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنج‌شنبه_جمعه_شنبه'.split('_'),
   weekdaysShort: 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
   weekdaysMin: 'ی_د_س_چ_پ_ج_ش'.split('_'),
