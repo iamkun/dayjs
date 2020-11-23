@@ -120,6 +120,7 @@ it('Time from now with UTC', () => {
 
 it('Custom thresholds and rounding support', () => {
   expect(dayjs().subtract(45, 'm').fromNow()).toBe('an hour ago')
+  delete relativeTime.$i // this allow plugin to be installed again
   dayjs.extend(relativeTime, {
     rounding: Math.floor,
     thresholds: [

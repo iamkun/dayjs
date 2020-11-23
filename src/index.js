@@ -387,12 +387,10 @@ dayjs.prototype = proto;
 })
 
 dayjs.extend = (plugin, option) => {
-  if (plugin.installed) {
-    return dayjs
+  if (!plugin.$i) { // install plugin only once
+    plugin(option, Dayjs, dayjs)
+    plugin.$i = true
   }
-
-  plugin(option, Dayjs, dayjs)
-  plugin.installed = true
   return dayjs
 }
 
