@@ -208,3 +208,27 @@ describe('prettyUnit', () => {
     m: 12
   }).toISOString()).toBe('P12MT12M')
 })
+
+describe('Format', () => {
+  test('no formatStr', () => {
+    const d = dayjs.duration(15, 'seconds')
+      .add(13, 'hours')
+      .add(35, 'minutes')
+      .add(16, 'days')
+      .add(10, 'months')
+      .add(22, 'years')
+    expect(d.format()).toBe('0022-10-16T13:35:15')
+  })
+
+  test('with formatStr for all tokens', () => {
+    const d = dayjs.duration(1, 'seconds')
+      .add(8, 'hours')
+      .add(5, 'minutes')
+      .add(6, 'days')
+      .add(9, 'months')
+      .add(2, 'years')
+      .add(10, 'milliseconds')
+    expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
+      .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
+  })
+})

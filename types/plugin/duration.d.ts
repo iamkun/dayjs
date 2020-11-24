@@ -51,6 +51,8 @@ declare namespace plugin {
 
     toISOString(): string
 
+    format(formatStr?: string): string
+
     locale(locale: string): Duration
   }
 }
