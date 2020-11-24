@@ -290,3 +290,17 @@ describe('CustomPraseFormat', () => {
     expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(result)
   })
 })
+
+describe('startOf and endOf', () => {
+  it('corrects for timezone offset in startOf', () => {
+    const originalDay = dayjs.tz('2010-01-01 00:00:00', NY)
+    const startOfDay = originalDay.startOf('day')
+    expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('corrects for timezone offset in endOf', () => {
+    const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
+    const endOfDay = originalDay.endOf('day')
+    expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+})
