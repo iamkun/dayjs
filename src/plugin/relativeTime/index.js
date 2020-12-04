@@ -60,7 +60,11 @@ export default (o, c, d) => {
       }
     }
     if (withoutSuffix) return out
-    return (isFuture ? loc.future : loc.past).replace('%s', out)
+    const pastOrFuture = isFuture ? loc.future : loc.past
+    if (typeof pastOrFuture === 'function') {
+      return pastOrFuture(out)
+    }
+    return pastOrFuture.replace('%s', out)
   }
   proto.to = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this, true)

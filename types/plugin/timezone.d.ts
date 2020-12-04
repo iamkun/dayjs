@@ -6,6 +6,7 @@ export = plugin
 declare module 'dayjs' {
   interface Dayjs {
     tz(timezone?: string, keepLocalTime?: boolean): Dayjs
+    offsetName(type?: 'short' | 'long'): string | undefined
   }
 
   interface DayjsTimezone {
