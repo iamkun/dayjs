@@ -237,6 +237,9 @@ describe('Diff', () => {
       expect(_.utc(d1).diff(_.utc(d2), 'm')).toBe(1440)
     })
   })
+  it('default diff', () => {
+    expect(dayjs().diff()).toBeDefined()
+  })
   it('local.diff(utc)', () => {
     expect(dayjs(d1).diff(dayjs.utc(d2), 'days'))
       .toBe(moment(d1).diff(moment.utc(d2), 'days'))
@@ -265,4 +268,8 @@ it('utc keepLocalTime', () => {
   expect(fd).toEqual('2016-05-03T22:15:01Z')
   expect(dd).toEqual(dm)
   expect(vd).toEqual(vm)
+})
+
+it('utc diff undefined edge case', () => {
+  expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
 })
