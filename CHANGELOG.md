@@ -1,3 +1,18 @@
+## [1.9.7](https://github.com/iamkun/dayjs/compare/v1.9.6...v1.9.7) (2020-12-05)
+
+
+### Bug Fixes
+
+* add duration.format to format a Duration ([#1202](https://github.com/iamkun/dayjs/issues/1202)) ([9a859a1](https://github.com/iamkun/dayjs/commit/9a859a147ba223a1eeff0f2bb6f33d97e0ccc6c7))
+* Add function handling for relativeTime.future and relativeTime.past ([#1197](https://github.com/iamkun/dayjs/issues/1197)) ([ef1979c](https://github.com/iamkun/dayjs/commit/ef1979ce85c61fe2d759ef3c37cb6aaf2358094f))
+* avoid install installed plugin ([#1214](https://github.com/iamkun/dayjs/issues/1214)) ([a92eb6c](https://github.com/iamkun/dayjs/commit/a92eb6c4dc1437ec920e69484d52984f5921a8ea))
+* avoid memory leak after installing a plugin too many times ([b8d2e32](https://github.com/iamkun/dayjs/commit/b8d2e32a9eb59661a7ed6200daa070687becaebd))
+* fix diff bug when UTC plugin enabled ([#1201](https://github.com/iamkun/dayjs/issues/1201)) ([9544ed2](https://github.com/iamkun/dayjs/commit/9544ed2a6c466b8308d26b33a388a6737435a1f4)), closes [#1200](https://github.com/iamkun/dayjs/issues/1200)
+* fix startOf/endOf bug in timezone plugin ([#1229](https://github.com/iamkun/dayjs/issues/1229)) ([eb5fbc4](https://github.com/iamkun/dayjs/commit/eb5fbc4c7d1b62a8615d2f263b404a9515d8e15c))
+* fix utc plugin diff edge case ([#1187](https://github.com/iamkun/dayjs/issues/1187)) ([971b3d4](https://github.com/iamkun/dayjs/commit/971b3d40b4c9403165138f1034e2223cd97c3abf))
+* update customParseFormat plugin to parse 2-digit offset ([#1209](https://github.com/iamkun/dayjs/issues/1209)) ([b56936a](https://github.com/iamkun/dayjs/commit/b56936ab77b8f6289a1b77d49307b495c4bf9f91)), closes [#1205](https://github.com/iamkun/dayjs/issues/1205)
+* Update timezone plugin type definition ([#1221](https://github.com/iamkun/dayjs/issues/1221)) ([34cfb92](https://github.com/iamkun/dayjs/commit/34cfb920b9653ad44d4b31fe49e533692a3ce01b))
+
 ## [1.9.6](https://github.com/iamkun/dayjs/compare/v1.9.5...v1.9.6) (2020-11-10)
 
 
