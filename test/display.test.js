@@ -26,6 +26,27 @@ it('Format Year YY YYYY', () => {
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
 })
 
+/**
+ * LTS: 'h:mm:ss A',
+ * LT: 'h:mm A',
+ * L: 'MM/DD/YYYY',
+ * LL: 'MMMM D, YYYY',
+ * LLL: 'MMMM D, YYYY h:mm A',
+ * LLLL: 'dddd, MMMM D, YYYY h:mm A',
+ */
+it('Format Localized', () => {
+  expect(dayjs().format('LTS')).toBe(moment().format('LTS'))
+  expect(dayjs().format('LT')).toBe(moment().format('LT'))
+  expect(dayjs().format('L')).toBe(moment().format('L'))
+  expect(dayjs().format('LL')).toBe(moment().format('LL'))
+  expect(dayjs().format('LLL')).toBe(moment().format('LLL'))
+  expect(dayjs().format('LLLL')).toBe(moment().format('LLLL'))
+  expect(dayjs().format('l')).toBe(moment().format('l'))
+  expect(dayjs().format('ll')).toBe(moment().format('ll'))
+  expect(dayjs().format('lll')).toBe(moment().format('lll'))
+  expect(dayjs().format('llll')).toBe(moment().format('llll'))
+})
+
 it('Format Month M MM MMM MMMM', () => {
   expect(dayjs().format('M')).toBe(moment().format('M'))
   expect(dayjs().format('MM')).toBe(moment().format('MM'))

@@ -296,7 +296,17 @@ class Dayjs {
       s: String(this.$s),
       ss: Utils.s(this.$s, 2, '0'),
       SSS: Utils.s(this.$ms, 3, '0'),
-      Z: zoneStr // 'ZZ' logic below
+      Z: zoneStr, // 'ZZ' logic below
+      LTS: `${get$H(1)}:${Utils.s($m, 2, '0')}:${Utils.s(this.$s, 2, '0')} ${meridiemFunc($H, $m, false)}`,
+      LT: `${get$H(1)}:${Utils.s($m, 2, '0')} ${meridiemFunc($H, $m, false)}`,
+      L: `${Utils.s($M + 1, 2, '0')}/${Utils.s(this.$D, 2, '0')}/${this.$y}`,
+      LL: `${getShort(months, $M)} ${this.$D}, ${this.$y}`,
+      LLL: `${getShort(months, $M)} ${this.$D}, ${this.$y} ${get$H(1)}:${Utils.s($m, 2, '0')} ${meridiemFunc($H, $m, false)}`,
+      LLLL: `${weekdays[this.$W]}, ${getShort(months, $M)} ${this.$D}, ${this.$y} ${get$H(1)}:${Utils.s($m, 2, '0')} ${meridiemFunc($H, $m, false)}`,
+      l: `${$M + 1}/${this.$D}/${this.$y}`,
+      ll: `${getShort(locale.monthsShort, $M, months, 3)} ${String(this.$D)}, ${this.$y}`,
+      lll: `${getShort(locale.monthsShort, $M, months, 3)} ${String(this.$D)}, ${this.$y} ${get$H(1)}:${Utils.s($m, 2, '0')} ${meridiemFunc($H, $m, false)}`,
+      llll: `${getShort(locale.weekdaysShort, this.$W, weekdays, 3)}, ${getShort(locale.monthsShort, $M, months, 3)} ${String(this.$D)}, ${this.$y} ${get$H(1)}:${Utils.s($m, 2, '0')} ${meridiemFunc($H, $m, false)}`
     }
 
     return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
