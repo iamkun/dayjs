@@ -1,17 +1,18 @@
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md)
 
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
-<br>
+<p align="center">
+<a href="https://www.duohui.cn?utm_source=dayjs" title="多会 - 专业活动管理系统" target="_blank"><img height="120px" alt="多会" src="https://user-images.githubusercontent.com/17680888/97983132-c433bd80-1e0f-11eb-8dde-9f216e05ee8a.png"/></a></p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.org/iamkun/dayjs"><img
+    <a href="https://travis-ci.com/iamkun/dayjs"><img
             src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>

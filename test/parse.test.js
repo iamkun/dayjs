@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import { REGEX_PARSE } from '../src/constant'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -80,6 +81,14 @@ describe('Parse', () => {
     expect(normalized.toISOString()).toEqual(expected)
   })
 
+  it('parses unlimited millisecond', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const ds = dayjs(date)
+    const ms = moment(date)
+    expect(ds.valueOf()).toEqual(ms.valueOf())
+    expect(ds.millisecond()).toEqual(ms.millisecond())
+  })
+
   it('String Other, Null and isValid', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
@@ -124,4 +133,19 @@ it('Clone with same value', () => {
   const newBase = base.set('year', year + 1)
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
+})
+
+describe('REGEX_PARSE', () => {
+  it('2020/9/30', () => {
+    const date = '2020/9/30'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2020/9/30-2020-9-30----')
+  })
+  it('2019-03-25T06:41:00.999999999', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2019-03-25T06:41:00.999999999-2019-03-25-06-41-00-999999999')
+  })
 })

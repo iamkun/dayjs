@@ -18,6 +18,7 @@ afterEach(() => {
 
 describe('Creating', () => {
   it('milliseconds', () => {
+    expect(dayjs.duration(1, 'ms').toISOString()).toBe('PT0.001S')
     expect(dayjs.duration(100).toISOString()).toBe('PT0.1S')
     expect(dayjs.duration(1000).toISOString()).toBe('PT1S')
   })
@@ -62,6 +63,12 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('ISO string with week', () => {
+    const d = dayjs.duration('P2M3W4D')
+    expect(d.toISOString()).toBe('P2M25D')
+    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+  })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
@@ -95,6 +102,15 @@ describe('Humanize', () => {
     expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
     expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe('en un minuto')
   })
+  it('Global Locale', () => {
+    dayjs.locale('en')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
+    dayjs.locale('fr')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('dans une minute')
+    dayjs.locale('es')
+    expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('en un minuto')
+    dayjs.locale('en')
+  })
 })
 
 describe('Clone', () => {
@@ -123,12 +139,23 @@ describe('Add', () => {
   expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
+test('Add duration', () => {
+  const a = dayjs('2020-10-01')
+  const days = dayjs.duration(2, 'days')
+  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+})
+
 describe('Subtract', () => {
   const a = dayjs.duration(3, 'days')
   const b = dayjs.duration(2, 'days')
   expect(a.subtract(b).days()).toBe(1)
 })
 
+test('Subtract duration', () => {
+  const a = dayjs('2020-10-20')
+  const days = dayjs.duration(2, 'days')
+  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+})
 
 describe('Seconds', () => {
   expect(dayjs.duration(500).seconds()).toBe(0)
@@ -180,4 +207,28 @@ describe('prettyUnit', () => {
     M: 12,
     m: 12
   }).toISOString()).toBe('P12MT12M')
+})
+
+describe('Format', () => {
+  test('no formatStr', () => {
+    const d = dayjs.duration(15, 'seconds')
+      .add(13, 'hours')
+      .add(35, 'minutes')
+      .add(16, 'days')
+      .add(10, 'months')
+      .add(22, 'years')
+    expect(d.format()).toBe('0022-10-16T13:35:15')
+  })
+
+  test('with formatStr for all tokens', () => {
+    const d = dayjs.duration(1, 'seconds')
+      .add(8, 'hours')
+      .add(5, 'minutes')
+      .add(6, 'days')
+      .add(9, 'months')
+      .add(2, 'years')
+      .add(10, 'milliseconds')
+    expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
+      .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
+  })
 })

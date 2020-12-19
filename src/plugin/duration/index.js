@@ -1,4 +1,4 @@
-import { MILLISECONDS_A_WEEK, MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND } from '../../constant'
+import { MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND, MILLISECONDS_A_WEEK, REGEX_FORMAT } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
@@ -12,6 +12,7 @@ const unitToMS = {
   hours: MILLISECONDS_A_HOUR,
   minutes: MILLISECONDS_A_MINUTE,
   seconds: MILLISECONDS_A_SECOND,
+  milliseconds: 1,
   weeks: MILLISECONDS_A_WEEK
 }
 
@@ -28,7 +29,7 @@ const prettyUnit = unit => `${$u.p(unit)}s`
 class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
-    this.$l = locale || 'en'
+    this.$l = locale
     if (unit) {
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
@@ -48,7 +49,7 @@ class Duration {
       const d = input.match(durationRegex)
       if (d) {
         [,,
-          this.$d.years, this.$d.months,,
+          this.$d.years, this.$d.months, this.$d.weeks,
           this.$d.days, this.$d.hours, this.$d.minutes, this.$d.seconds] = d
         this.calMilliseconds()
         return this
@@ -59,7 +60,7 @@ class Duration {
 
   calMilliseconds() {
     this.$ms = Object.keys(this.$d).reduce((total, unit) => (
-      total + ((this.$d[unit] || 0) * (unitToMS[unit] || 1))
+      total + ((this.$d[unit] || 0) * (unitToMS[unit]))
     ), 0)
   }
 
@@ -83,7 +84,7 @@ class Duration {
   toISOString() {
     const Y = this.$d.years ? `${this.$d.years}Y` : ''
     const M = this.$d.months ? `${this.$d.months}M` : ''
-    let days = this.$d.days || 0
+    let days = +this.$d.days || 0
     if (this.$d.weeks) {
       days += this.$d.weeks * 7
     }
@@ -104,8 +105,29 @@ class Duration {
     return this.toISOString()
   }
 
+  format(formatStr) {
+    const str = formatStr || 'YYYY-MM-DDTHH:mm:ss'
+    const matches = {
+      Y: this.$d.years,
+      YY: $u.s(this.$d.years, 2, '0'),
+      YYYY: $u.s(this.$d.years, 4, '0'),
+      M: this.$d.months,
+      MM: $u.s(this.$d.months, 2, '0'),
+      D: this.$d.days,
+      DD: $u.s(this.$d.days, 2, '0'),
+      H: this.$d.hours,
+      HH: $u.s(this.$d.hours, 2, '0'),
+      m: this.$d.minutes,
+      mm: $u.s(this.$d.minutes, 2, '0'),
+      s: this.$d.seconds,
+      ss: $u.s(this.$d.seconds, 2, '0'),
+      SSS: $u.s(this.$d.milliseconds, 3, '0')
+    }
+    return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
+  }
+
   as(unit) {
-    return this.$ms / (unitToMS[prettyUnit(unit)] || 1)
+    return this.$ms / (unitToMS[prettyUnit(unit)])
   }
 
   get(unit) {
@@ -172,7 +194,19 @@ export default (option, Dayjs, dayjs) => {
   $d = dayjs
   $u = dayjs().$utils()
   dayjs.duration = function (input, unit) {
-    return wrapper(input, {}, unit)
+    const $l = dayjs.locale()
+    return wrapper(input, { $l }, unit)
   }
   dayjs.isDuration = isDuration
+
+  const oldAdd = Dayjs.prototype.add
+  const oldSubtract = Dayjs.prototype.subtract
+  Dayjs.prototype.add = function (value, unit) {
+    if (isDuration(value)) value = value.asMilliseconds()
+    return oldAdd.bind(this)(value, unit)
+  }
+  Dayjs.prototype.subtract = function (value, unit) {
+    if (isDuration(value)) value = value.asMilliseconds()
+    return oldSubtract.bind(this)(value, unit)
+  }
 }

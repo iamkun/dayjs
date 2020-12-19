@@ -1,58 +1,68 @@
 import { PluginFunc } from 'dayjs'
 
 declare const plugin: PluginFunc
+export as namespace plugin;
 export = plugin
 
-type DurationInputType = string | number | object
-type DurationAddType = number | object | Duration
+declare namespace plugin {
+  type DurationInputType = string | number | object
+  type DurationAddType = number | object | Duration
 
-declare class Duration {
-  constructor (input: DurationInputType, unit?: string, locale?: string)
+  interface Duration {
+    new (input: DurationInputType, unit?: string, locale?: string): Duration
 
-  clone(): Duration
-  
-  humanize(withSuffix: boolean): string
+    clone(): Duration
 
-  milliseconds(): number
-  asMilliseconds(): number
+    humanize(withSuffix?: boolean): string
 
-  seconds(): number
-  asSeconds(): number
+    milliseconds(): number
+    asMilliseconds(): number
 
-  minutes(): number
-  asMinutes(): number
+    seconds(): number
+    asSeconds(): number
 
-  hours(): number
-  asHours(): number
+    minutes(): number
+    asMinutes(): number
 
-  days(): number
-  asDays(): number
+    hours(): number
+    asHours(): number
 
-  weeks(): number
-  asWeeks(): number
+    days(): number
+    asDays(): number
 
-  months(): number
-  asMonths(): number
+    weeks(): number
+    asWeeks(): number
 
-  years(): number
-  asYears(): number
+    months(): number
+    asMonths(): number
 
-  as(unit: string): number
+    years(): number
+    asYears(): number
 
-  get(unit: string): number
+    as(unit: string): number
 
-  add(input: DurationAddType, unit? : string): Duration
-  
-  subtract(input: DurationAddType, unit? : string): Duration
+    get(unit: string): number
 
-  toJSON(): string
+    add(input: DurationAddType, unit? : string): Duration
 
-  toISOString(): string
+    subtract(input: DurationAddType, unit? : string): Duration
 
-  locale(locale: string): Duration
+    toJSON(): string
+
+    toISOString(): string
+
+    format(formatStr?: string): string
+
+    locale(locale: string): Duration
+  }
 }
 
 declare module 'dayjs' {
-  export function duration(input?: DurationInputType , unit?: string): Duration
-  export function isDuration(d: any): d is Duration
+  interface Dayjs {
+    add(value: plugin.Duration): Dayjs
+    subtract(value: plugin.Duration): Dayjs
+  }
+
+  export function duration(input?: plugin.DurationInputType , unit?: string): plugin.Duration
+  export function isDuration(d: any): d is plugin.Duration
 }

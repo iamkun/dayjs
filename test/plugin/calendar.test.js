@@ -16,8 +16,7 @@ afterEach(() => {
 
 it('No argument && null && undefined', () => {
   expect(dayjs().calendar()).toEqual(moment().calendar())
-  expect(dayjs().calendar(null)).toEqual(moment().calendar(null))
-  expect(dayjs().calendar(undefined)).toEqual(moment().calendar(undefined))
+  // moment@2.27.0 does not support calendar(null) calendar(undefined)
 })
 
 it('ReferenceTime', () => {

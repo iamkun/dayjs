@@ -4,10 +4,10 @@ cache:
     - ~/.npm
     - node_modules
 node_js:
+  - '14'
   - '12'
   - '10'
   - '8'
-  - '6'
 install:
   - npm install -g codecov
   - npm install

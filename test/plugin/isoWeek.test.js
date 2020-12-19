@@ -2,8 +2,10 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import isoWeek from '../../src/plugin/isoWeek'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(isoWeek)
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -123,4 +125,12 @@ it('isoWeek of year', () => {
   expect(dayjs('20210109').isoWeek()).toBe(1)
   expect(dayjs('20210110').isoWeekYear()).toBe(2021)
   expect(dayjs('20210110').isoWeek()).toBe(1)
+})
+
+
+it('utc mode', () => {
+  // Wednesday, 1 January 2020 00:00:00 UTC
+  const d = dayjs.utc(1577836800000).isoWeek()
+  expect(d).toBe(1)
+  expect(moment.utc(1577836800000).isoWeek()).toBe(d)
 })

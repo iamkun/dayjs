@@ -1,3 +1,5 @@
+import { u } from '../localizedFormat/utils'
+
 const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
@@ -5,17 +7,16 @@ const match2 = /\d\d/ // 00 - 99
 const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
-const matchUpperCaseAMPM = /[AP]M/
-const matchLowerCaseAMPM = /[ap]m/
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /[+-]\d\d:?\d\d/ // +00:00 -00:00 +0000 or -0000
+const matchOffset = /[+-]\d\d:?(\d\d)?/ // +00:00 -00:00 +0000 or -0000 +00
 const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
 let locale
 
 function offsetFromString(string) {
+  if (!string) return 0
   const parts = string.match(/([+-]|\d\d)/g)
-  const minutes = +(parts[1] * 60) + +parts[2]
+  const minutes = +(parts[1] * 60) + (+parts[2] || 0)
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
 }
 
@@ -36,13 +37,28 @@ const getLocalePart = (name) => {
     part.indexOf ? part : part.s.concat(part.f)
   )
 }
-
+const meridiemMatch = (input, isLowerCase) => {
+  let isAfternoon
+  const { meridiem } = locale
+  if (!meridiem) {
+    isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
+  } else {
+    for (let i = 1; i <= 24; i += 1) {
+      // todo: fix input === meridiem(i, 0, isLowerCase)
+      if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
+        isAfternoon = i > 12
+        break
+      }
+    }
+  }
+  return isAfternoon
+}
 const expressions = {
-  A: [matchUpperCaseAMPM, function (input) {
-    this.afternoon = input === 'PM'
+  A: [matchWord, function (input) {
+    this.afternoon = meridiemMatch(input, false)
   }],
-  a: [matchLowerCaseAMPM, function (input) {
-    this.afternoon = input === 'pm'
+  a: [matchWord, function (input) {
+    this.afternoon = meridiemMatch(input, true)
   }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
@@ -118,6 +134,7 @@ function correctHours(time) {
 }
 
 function makeParser(format) {
+  format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
   for (let i = 0; i < length; i += 1) {
@@ -182,6 +199,7 @@ const parseFormattedInput = (input, format, utc) => {
 
 
 export default (o, C, d) => {
+  d.p.customParseFormat = true
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {
@@ -207,6 +225,8 @@ export default (o, C, d) => {
       if (isStrict && date !== this.format(format)) {
         this.$d = new Date('')
       }
+      // reset global locale to make parallel unit test
+      locale = undefined
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {

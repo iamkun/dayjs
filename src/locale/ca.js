@@ -35,7 +35,16 @@ const locale = {
     y: 'un any',
     yy: '%d anys'
   },
-  ordinal: n => `${n}º`
+  ordinal: (n) => {
+    let ord
+
+    if (n === 1 || n === 3) ord = 'r'
+    else if (n === 2) ord = 'n'
+    else if (n === 4) ord = 't'
+    else ord = 'è'
+
+    return `${n}${ord}`
+  }
 }
 
 dayjs.locale(locale, null, true)

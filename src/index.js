@@ -1,6 +1,6 @@
 import * as C from './constant'
-import U from './utils'
 import en from './locale/en'
+import U from './utils'
 
 let L = 'en' // global locale
 const Ls = {} // global loaded locale
@@ -43,6 +43,7 @@ const wrapper = (date, instance) =>
   dayjs(date, {
     locale: instance.$L,
     utc: instance.$u,
+    x: instance.$x,
     $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
   })
 
@@ -59,11 +60,14 @@ const parseDate = (cfg) => {
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
+      const m = d[2] - 1 || 0
+      const ms = (d[7] || '0').substring(0, 3)
       if (utc) {
-        return new Date(Date.UTC(d[1], d[2] - 1, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0))
+        return new Date(Date.UTC(d[1], m, d[3]
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
       }
-      return new Date(d[1], d[2] - 1, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, d[7] || 0)
+      return new Date(d[1], m, d[3]
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
 
@@ -72,12 +76,13 @@ const parseDate = (cfg) => {
 
 class Dayjs {
   constructor(cfg) {
-    this.$L = this.$L || parseLocale(cfg.locale, null, true)
+    this.$L = parseLocale(cfg.locale, null, true)
     this.parse(cfg) // for plugin
   }
 
   parse(cfg) {
     this.$d = parseDate(cfg)
+    this.$x = cfg.x || {}
     this.init()
   }
 
@@ -118,38 +123,6 @@ class Dayjs {
   $g(input, get, set) {
     if (Utils.u(input)) return this[get]
     return this.set(set, input)
-  }
-
-  year(input) {
-    return this.$g(input, '$y', C.Y)
-  }
-
-  month(input) {
-    return this.$g(input, '$M', C.M)
-  }
-
-  day(input) {
-    return this.$g(input, '$W', C.D)
-  }
-
-  date(input) {
-    return this.$g(input, '$D', C.DATE)
-  }
-
-  hour(input) {
-    return this.$g(input, '$H', C.H)
-  }
-
-  minute(input) {
-    return this.$g(input, '$m', C.MIN)
-  }
-
-  second(input) {
-    return this.$g(input, '$s', C.S)
-  }
-
-  millisecond(input) {
-    return this.$g(input, '$ms', C.MS)
   }
 
   unix() {
@@ -229,7 +202,7 @@ class Dayjs {
       const date = this.clone().set(C.DATE, 1)
       date.$d[name](arg)
       date.init()
-      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).toDate()
+      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).$d
     } else if (name) this.$d[name](arg)
 
     this.init()
@@ -396,10 +369,28 @@ class Dayjs {
   }
 }
 
-dayjs.prototype = Dayjs.prototype
+const proto = Dayjs.prototype
+dayjs.prototype = proto;
+[
+  ['$ms', C.MS],
+  ['$s', C.S],
+  ['$m', C.MIN],
+  ['$H', C.H],
+  ['$W', C.D],
+  ['$M', C.M],
+  ['$y', C.Y],
+  ['$D', C.DATE]
+].forEach((g) => {
+  proto[g[1]] = function (input) {
+    return this.$g(input, g[0], g[1])
+  }
+})
 
 dayjs.extend = (plugin, option) => {
-  plugin(option, Dayjs, dayjs)
+  if (!plugin.$i) { // install plugin only once
+    plugin(option, Dayjs, dayjs)
+    plugin.$i = true
+  }
   return dayjs
 }
 
@@ -413,5 +404,5 @@ dayjs.unix = timestamp => (
 
 dayjs.en = Ls[L]
 dayjs.Ls = Ls
-
+dayjs.p = {}
 export default dayjs
