@@ -51,9 +51,9 @@ const locale = {
       return '凌晨'
     } else if (hm < 900) {
       return '早上'
-    } else if (hm < 1130) {
+    } else if (hm < 1100) {
       return '上午'
-    } else if (hm < 1230) {
+    } else if (hm < 1300) {
       return '中午'
     } else if (hm < 1800) {
       return '下午'
