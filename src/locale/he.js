@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 
 const texts = {
   s: 'מספר שניות',
+  ss: '%d שניות',
   m: 'דקה',
   mm: '%d דקות',
   h: 'שעה',
@@ -20,7 +21,7 @@ const texts = {
 }
 
 function relativeTimeFormatter(number, withoutSuffix, key) {
-  let text = texts[key + (number === 2 ? '2' : '')] || texts[key]
+  const text = texts[key + (number === 2 ? '2' : '')] || texts[key]
   return text.replace('%d', number)
 }
 
