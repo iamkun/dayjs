@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 
 const texts = {
-  s: 'כמה שניות',
+  s: 'מספר שניות',
   m: 'דקה',
   mm: '%d דקות',
   h: 'שעה',
