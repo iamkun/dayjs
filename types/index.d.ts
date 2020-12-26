@@ -14,10 +14,14 @@ declare namespace dayjs {
   export type OptionType = { locale?: string, format?: string, utc?: boolean } | string | string[]
 
   type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
-  export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
 
-  export type OpUnitType = UnitType | "week" | 'w';
-  export type QUnitType = UnitType | "quarter" | 'Q';
+  type UnitTypeLong = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date'
+
+  type UnitTypeLongPlural = `${UnitTypeLong}s`
+  export type UnitType = UnitTypeLong | UnitTypeLongPlural | UnitTypeShort;
+
+  export type OpUnitType = UnitType | "week" | "weeks" | 'w';
+  export type QUnitType = UnitType | "quarter" | "quarters" | 'Q';
 
   class Dayjs {
     constructor (config?: ConfigType)
