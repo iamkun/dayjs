@@ -1,3 +1,13 @@
+## [1.9.8](https://github.com/iamkun/dayjs/compare/v1.9.7...v1.9.8) (2020-12-27)
+
+
+### Bug Fixes
+
+* fix Ukrainian [uk] locale typo ([1605cc0](https://github.com/iamkun/dayjs/commit/1605cc0f6fe0e9c46a92d529bc9cd6e130432337))
+* update Hebrew [he] locale for double units ([#1287](https://github.com/iamkun/dayjs/issues/1287)) ([1c4b0da](https://github.com/iamkun/dayjs/commit/1c4b0da1468522e59dc9ee646d10dd2b31477d99))
+* update zh locale meridiem "noon" ([0e7ff3d](https://github.com/iamkun/dayjs/commit/0e7ff3dd29ca3aed85cb76dfcb8298d326e26542))
+* update zh-cn locale definition of noon  ([#1278](https://github.com/iamkun/dayjs/issues/1278)) ([d5930b9](https://github.com/iamkun/dayjs/commit/d5930b96ff884f4176ca3fcb1bc95e8f1ec75c71))
+
 ## [1.9.7](https://github.com/iamkun/dayjs/compare/v1.9.6...v1.9.7) (2020-12-05)
 
 
