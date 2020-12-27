@@ -43,7 +43,7 @@ const locale = {
   weekdaysShort: 'ндл_пнд_втр_срд_чтв_птн_сбт'.split('_'),
   weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
   months,
-  monthsShort: 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
+  monthsShort: 'січ_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
   weekStart: 1,
   relativeTime: {
     future: 'за %s',
