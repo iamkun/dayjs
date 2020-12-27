@@ -5,7 +5,7 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
                                                                              alt="Day.js"></a></p>
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
 <p align="center">
-<a href="https://www.duohui.cn?utm_source=dayjs" title="多会 - 专业活动管理系统" target="_blank"><img height="120px" alt="多会" src="https://user-images.githubusercontent.com/17680888/97983132-c433bd80-1e0f-11eb-8dde-9f216e05ee8a.png"/></a></p>
+<a href="https://www.duohui.cn?utm_source=dayjs" title="多会 - 专业活动管理系统" target="_blank"><img height="120px" width="120px" alt="多会" src="https://user-images.githubusercontent.com/17680888/97983132-c433bd80-1e0f-11eb-8dde-9f216e05ee8a.png"/></a></p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
