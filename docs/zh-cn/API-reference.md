@@ -115,8 +115,8 @@ dayjs(1318781876406)
 可以解析传入的一个 Unix 时间戳 (10 位数字)。
 
 ```js
-dayjs.unix(Number)
-dayjs.unix(1318781876)
+dayjs().unix(Number)
+dayjs().unix(1318781876)
 ```
 
 ### 自定义时间格式
@@ -490,8 +490,8 @@ dayjs().isAfter(dayjs(), 'year'); // false
 返回一个 `boolean` 验证传入值是否是一个 Dayjs 对象.
 
 ```js
-dayjs.isDayjs(dayjs()) // true
-dayjs.isDayjs(new Date()) // false
+dayjs().isDayjs(dayjs()) // true
+dayjs().isDayjs(new Date()) // false
 ```
 
 也可以使用 `instanceof`
