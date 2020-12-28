@@ -107,8 +107,8 @@ dayjs(1318781876406)
 Unix タイムスタンプ（Unix エポックの秒）から`Dayjs`オブジェクトを返します。
 
 ```js
-dayjs.unix(1318781876)
-dayjs.unix(1318781876.721)
+dayjs().unix(1318781876)
+dayjs().unix(1318781876.721)
 ```
 
 ### Custom Parse Format
@@ -440,8 +440,8 @@ dayjs().isAfter(dayjs(), 'year') // false
 引数に与えた変数が`Dayjs`オブジェクトかどうかの真偽値を返します。
 
 ```js
-dayjs.isDayjs(dayjs()) // true
-dayjs.isDayjs(new Date()) // false
+dayjs().isDayjs(dayjs()) // true
+dayjs().isDayjs(new Date()) // false
 ```
 
 `instanceof`オペレータでも同じように動作します。
