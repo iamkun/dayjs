@@ -105,8 +105,8 @@ dayjs(1318781876406)
 Returns a `Dayjs` from a Unix timestamp (seconds since the Unix Epoch)
 
 ```js
-dayjs.unix(1318781876)
-dayjs.unix(1318781876.721)
+dayjs().unix(1318781876)
+dayjs().unix(1318781876.721)
 ```
 
 ### Custom Parse Format
@@ -438,8 +438,8 @@ dayjs().isAfter(dayjs(), 'year') // false
 Retorna um `boolean` indicando se a variável é um objeto `Dayjs` ou não.
 
 ```js
-dayjs.isDayjs(dayjs()) // true
-dayjs.isDayjs(new Date()) // false
+dayjs().isDayjs(dayjs()) // true
+dayjs().isDayjs(new Date()) // false
 ```
 
 The operator `instanceof` works equally well:
