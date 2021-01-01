@@ -3,8 +3,10 @@ import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
+import localeData from '../../src/plugin/localeData'
 import '../../src/locale/ar'
 
+dayjs.extend(localeData)
 dayjs.extend(relativeTime)
 dayjs.extend(preParsePostFormat)
 

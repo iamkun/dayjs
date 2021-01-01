@@ -1,11 +1,5 @@
-import localeData from '../localeData'
-
 // Plugin template from https://day.js.org/docs/en/plugin/plugin
-export default (option, dayjsClass, dayjsFactory) => {
-  // This plugin depends on other plugins - so I will import them here
-  // equivalent to dayjsClass.extend(duration)
-  localeData(option, dayjsClass, dayjsFactory)
-
+export default (option, dayjsClass) => {
   const oldParse = dayjsClass.prototype.parse
   dayjsClass.prototype.parse = function (cfg) {
     if (typeof cfg.date === 'string') {
@@ -25,7 +19,7 @@ export default (option, dayjsClass, dayjsFactory) => {
     const result = oldFormat.call(this, ...args)
     // return modified result
     const locale = this.$locale()
-    return locale.postformat ? locale.postformat(result) : result
+    return locale && locale.postformat ? locale.postformat(result) : result
   }
 
   const oldFromTo = dayjsClass.prototype.fromToBase
@@ -46,7 +40,7 @@ export default (option, dayjsClass, dayjsFactory) => {
         withoutSuffix,
         instance,
         isFrom,
-        locale.postformat
+        locale && locale.postformat
       )
     }
   }

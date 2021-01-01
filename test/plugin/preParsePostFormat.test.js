@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 // import moment from 'moment'
 import dayjs from '../../src'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
+import localeData from '../../src/plugin/localeData'
 import duration from '../../src/plugin/duration'
 import calendar from '../../src/plugin/calendar'
 import objectSupport from '../../src/plugin/objectSupport'
@@ -12,6 +13,7 @@ import arraySupport from '../../src/plugin/arraySupport'
 import en from '../../src/locale/en'
 
 dayjs.extend(utc)
+dayjs.extend(localeData)
 dayjs.extend(customParseFormat)
 dayjs.extend(arraySupport)
 dayjs.extend(objectSupport)
