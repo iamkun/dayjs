@@ -148,4 +148,49 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d.join('-')).toBe('2019-03-25T06:41:00.999999999-2019-03-25-06-41-00-999999999')
   })
+  it('20210102T012345', () => {
+    const date = '20210102T012345'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('20210102T012345-2021-01-02-01-23-45-')
+  })
+  it('2021-01-02T01:23', () => {
+    const date = '2021-01-02T01:23'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-01-02T01:23-2021-01-02-01-23--')
+  })
+  it('2021-01-02T01:23:45', () => {
+    const date = '2021-01-02T01:23:45'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-01-02T01:23:45-2021-01-02-01-23-45-')
+  })
+
+  it('2020-12-31T18:00:00.000-0500 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00.000-0500'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  it('2020-12-31T18:00:00-05:00 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00-05:00'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  it('2021-01-02T01:23:45-0500 (no regex match)', () => {
+    const date = '2021-01-02T01:23:45-0500'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+  it('2021-01-02T01:23:45Z (no regex match)', () => {
+    const date = '2021-01-02T01:23:45Z'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
 })
