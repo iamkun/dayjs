@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/iamkun/dayjs/compare/v1.10.0...v1.10.1) (2021-01-03)
+
+
+### Bug Fixes
+
+* fix typescript type error UnitTypeLongPlural ([#1302](https://github.com/iamkun/dayjs/issues/1302)) ([bfaabe4](https://github.com/iamkun/dayjs/commit/bfaabe4f398c11564eca6cda7c8aded22e1b231a)), closes [#1300](https://github.com/iamkun/dayjs/issues/1300)
+
 # [1.10.0](https://github.com/iamkun/dayjs/compare/v1.9.8...v1.10.0) (2021-01-03)
 
 
