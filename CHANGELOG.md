@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/iamkun/dayjs/compare/v1.9.8...v1.10.0) (2021-01-03)
+
+
+### Bug Fixes
+
+* add ordinal to localeData plugin ([#1266](https://github.com/iamkun/dayjs/issues/1266)) ([fd229fa](https://github.com/iamkun/dayjs/commit/fd229fa5bd26bcba810e2535eb937ea8d99106c2))
+* add preParsePostFormat plugin & update Arabic [ar] locale ([#1255](https://github.com/iamkun/dayjs/issues/1255)) ([f2e4790](https://github.com/iamkun/dayjs/commit/f2e479006a9a49bc0917f8620101d40ac645f7f2))
+* add type support for plural forms of units ([#1289](https://github.com/iamkun/dayjs/issues/1289)) ([de49bb1](https://github.com/iamkun/dayjs/commit/de49bb100badfb92b9a5933cc568841f340a923f))
+* escape last period to match only milliseconds ([#1239](https://github.com/iamkun/dayjs/issues/1239)) ([#1295](https://github.com/iamkun/dayjs/issues/1295)) ([64037e6](https://github.com/iamkun/dayjs/commit/64037e6a8cf303dcfd2b954f309bd9691f87fffc))
+
+
+### Features
+
+* add ES6 Module Support, package.json module point to "esm/index.js" ([#1298](https://github.com/iamkun/dayjs/issues/1298)) ([f63375d](https://github.com/iamkun/dayjs/commit/f63375dea89becbd3bb2bb8ea7289c58c752bfed)), closes [#598](https://github.com/iamkun/dayjs/issues/598) [#313](https://github.com/iamkun/dayjs/issues/313)
+
 ## [1.9.8](https://github.com/iamkun/dayjs/compare/v1.9.7...v1.9.8) (2020-12-27)
 
 
