@@ -166,6 +166,21 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d.join('-')).toBe('2021-01-02T01:23:45-2021-01-02-01-23-45-')
   })
+
+  it('2020-12-31T18:00:00.000-0500 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00.000-0500'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  it('2020-12-31T18:00:00-05:00 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00-05:00'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
   it('2021-01-02T01:23:45-0500 (no regex match)', () => {
     const date = '2021-01-02T01:23:45-0500'
     const d = date.match(REGEX_PARSE)
