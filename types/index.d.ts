@@ -17,7 +17,8 @@ declare namespace dayjs {
 
   type UnitTypeLong = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date'
 
-  type UnitTypeLongPlural = `${UnitTypeLong}s`
+  type UnitTypeLongPlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years' | 'dates'
+  
   export type UnitType = UnitTypeLong | UnitTypeLongPlural | UnitTypeShort;
 
   export type OpUnitType = UnitType | "week" | "weeks" | 'w';
