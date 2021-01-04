@@ -16,6 +16,10 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
             src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
+    <a href="https://travis-ci.com/iamkun/dayjs"><img
+            src="generated/avg-maintainability.svg" alt="Average Maintainability"></a>
+    <a href="https://travis-ci.com/iamkun/dayjs"><img
+            src="generated/worst-maintainability.svg" alt="Worst Maintainability"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="License"></a>
     <br>

@@ -1,0 +1,5 @@
+{
+    "skipDirectories": ["/types", "/docs", "/build"],
+    "excludeFilenames": [".conf.js"],
+    "minimumThreshold": 20
+  }
