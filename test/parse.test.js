@@ -174,6 +174,14 @@ describe('REGEX_PARSE', () => {
     expect(d).toBe(null)
   })
 
+  // format used in timezone plugin utcString
+  it('2021-1-4 0:42:53:000', () => {
+    const date = '2021-1-4 0:42:53:000'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-1-4 0:42:53:000-2021-1-4-0-42-53-000')
+  })
+
   it('2020-12-31T18:00:00-05:00 (no regex match)', () => {
     const date = '2020-12-31T18:00:00-05:00'
     const d = date.match(REGEX_PARSE)
