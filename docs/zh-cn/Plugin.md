@@ -132,8 +132,11 @@ dayjs().format('Q Do k kk X x')
 | `x`    | 1360013296123         | 毫秒单位的 Unix 时间戳                     |
 | `w`    | 1 2 ... 52 53         | 年中第几周 (依赖: weekOfYear 插件)         |
 | `ww`   | 01 02 ... 52 53       | 年中第几周，二位数 (依赖: weekOfYear 插件) |
+| `W`    | 1 2 ... 52 53         | ISO 年中第几周 (依赖: weekOfYear & isoWeek 插件)         |
+| `WW`   | 01 02 ... 52 53       | ISO 年中第几周，二位数 (依赖: weekOfYear & isoWeek 插件) |
 | `wo`   | 1st 2nd ... 52nd 53rd | 带序号的年中第几周 (依赖: weekOfYear 插件) |
 | `gggg` | 2017                  | 根据周计算的年份 (依赖: weekYear 插件)     |
+| `GGGG` | 2017                  | ISO 根据周计算的年份 (依赖: weekYear & isoWeek& isoWeek 插件)  |
 
 ### LocalizedFormat
 
