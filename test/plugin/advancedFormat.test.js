@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import advancedFormat from '../../src/plugin/advancedFormat'
+import isoWeek from '../../src/plugin/isoWeek'
 import weekOfYear from '../../src/plugin/weekOfYear'
 import weekYear from '../../src/plugin/weekYear'
 import timezone from '../../src/plugin/timezone'
@@ -10,6 +11,7 @@ import '../../src/locale/zh-cn'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(isoWeek)
 dayjs.extend(weekYear)
 dayjs.extend(weekOfYear)
 dayjs.extend(advancedFormat)
@@ -82,9 +84,27 @@ it('Format Week of Year wo', () => {
     .toBe(moment(d).locale('zh-cn').format('wo'))
 })
 
+it('Format Week of Year wo', () => {
+  const d = '2018-12-01'
+  expect(dayjs(d).format('wo')).toBe(moment(d).format('wo'))
+  expect(dayjs(d).locale('zh-cn').format('wo'))
+    .toBe(moment(d).locale('zh-cn').format('wo'))
+})
+
 it('Format Week Year gggg', () => {
   const d = '2018-12-31'
   expect(dayjs(d).format('gggg')).toBe(moment(d).format('gggg'))
+})
+
+it('Format Iso Week Year GGGG', () => {
+  const d = '2021-01-01'
+  expect(dayjs(d).format('GGGG')).toBe(moment(d).format('GGGG'))
+})
+
+it('Format Iso Week of Year', () => {
+  const d = '2021-01-01'
+  expect(dayjs(d).format('W')).toBe(moment(d).format('W'))
+  expect(dayjs(d).format('WW')).toBe(moment(d).format('WW'))
 })
 
 it('Format offsetName z zzz', () => {
@@ -99,6 +119,11 @@ it('Skips format strings inside brackets', () => {
   expect(dayjs().format('[Q]')).toBe('Q')
   expect(dayjs().format('[Do]')).toBe('Do')
   expect(dayjs().format('[gggg]')).toBe('gggg')
+  expect(dayjs().format('[GGGG]')).toBe('GGGG')
+  expect(dayjs().format('[w]')).toBe('w')
+  expect(dayjs().format('[ww]')).toBe('ww')
+  expect(dayjs().format('[W]')).toBe('W')
+  expect(dayjs().format('[WW]')).toBe('WW')
   expect(dayjs().format('[wo]')).toBe('wo')
   expect(dayjs().format('[k]')).toBe('k')
   expect(dayjs().format('[kk]')).toBe('kk')
