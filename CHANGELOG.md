@@ -1,3 +1,12 @@
+## [1.10.2](https://github.com/iamkun/dayjs/compare/v1.10.1...v1.10.2) (2021-01-05)
+
+
+### Bug Fixes
+
+* fix parse regex bug ([#1307](https://github.com/iamkun/dayjs/issues/1307)) ([db2b6a5](https://github.com/iamkun/dayjs/commit/db2b6a5ea8e70f9fda645d113ca33495aa96b616)), closes [#1305](https://github.com/iamkun/dayjs/issues/1305)
+* remove module entry in package.json to revert 1.10.1 change ([#1314](https://github.com/iamkun/dayjs/issues/1314)) ([824dcb8](https://github.com/iamkun/dayjs/commit/824dcb8dfcccf14f64b6a2741a00fcdfe53dcd98))
+* update devHelper add warning "passing Year as a Number will be parsed as a Unix timestamp" ([#1315](https://github.com/iamkun/dayjs/issues/1315)) ([b0dda31](https://github.com/iamkun/dayjs/commit/b0dda3139e25441ab4e7c1f4f192dee0ecce6ef8))
+
 ## [1.10.1](https://github.com/iamkun/dayjs/compare/v1.10.0...v1.10.1) (2021-01-03)
 
 
