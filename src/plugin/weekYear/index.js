@@ -7,6 +7,9 @@ export default (o, c) => {
     if (weekOfYear === 1 && month === 11) {
       return year + 1
     }
+    if (month === 0 && weekOfYear >= 52) {
+      return year - 1
+    }
     return year
   }
 }
