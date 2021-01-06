@@ -27,6 +27,11 @@ describe('Creating', () => {
     expect(dayjs.duration(60, 'seconds').toISOString()).toBe('PT1M')
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
+  it('two argument will bubble up to the next (negative number)', () => {
+    expect(dayjs.duration(-59, 'seconds').toISOString()).toBe('PT-59S')
+    expect(dayjs.duration(-60, 'seconds').toISOString()).toBe('PT-1M')
+    expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('PT-3H-40M-13S')
+  })
   it('object with float', () => {
     expect(dayjs.duration({
       seconds: 1,
@@ -53,8 +58,12 @@ describe('Creating', () => {
       ms: 1
     }).toISOString()).toBe('PT0.001S')
   })
+  it('object with negative millisecond', () => {
+    expect(dayjs.duration({
+      ms: -1
+    }).toISOString()).toBe('PT-0.001S')
+  })
 })
-
 
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
@@ -129,6 +138,26 @@ describe('Milliseconds', () => {
   expect(dayjs.duration(500).asMilliseconds()).toBe(500)
   expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+})
+
+describe('Milliseconds', () => {
+  describe('Positive number', () => {
+    expect(dayjs.duration(500).milliseconds()).toBe(500)
+    expect(dayjs.duration(1500).milliseconds()).toBe(500)
+    expect(dayjs.duration(15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+    expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
+    expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+  })
+
+  describe('Negative number', () => {
+    expect(dayjs.duration(-500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(-500).asMilliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).asMilliseconds()).toBe(-1500)
+    expect(dayjs.duration(-15000).asMilliseconds()).toBe(-15000)
+  })
 })
 
 describe('Add', () => {

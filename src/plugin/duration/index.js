@@ -25,7 +25,7 @@ const wrapper = (input, instance, unit) =>
   new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
 
 const prettyUnit = unit => `${$u.p(unit)}s`
-const roundNumber = number => number < 0 ? Math.ceil(number) : Math.floor(number)
+const roundNumber = number => (number < 0 ? Math.ceil(number) : Math.floor(number))
 
 class Duration {
   constructor(input, unit, locale) {
@@ -141,7 +141,7 @@ class Duration {
     } else {
       base = this.$d[pUnit]
     }
-    return base
+    return base === 0 || base === -0 ? 0 : base
   }
 
   add(input, unit, isSubtract) {
