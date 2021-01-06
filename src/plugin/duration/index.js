@@ -141,7 +141,7 @@ class Duration {
     } else {
       base = this.$d[pUnit]
     }
-    return base === 0 || base === -0 ? 0 : base
+    return Object.is(base, -0) ? 0 : base
   }
 
   add(input, unit, isSubtract) {
