@@ -208,8 +208,15 @@ describe('Hours', () => {
 })
 
 describe('Days', () => {
-  expect(dayjs.duration(100000000).days()).toBe(1)
-  expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  it('positive number', () => {
+    expect(dayjs.duration(100000000).days()).toBe(1)
+    expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  })
+
+  it('negative number', () => {
+    expect(dayjs.duration(-1).days()).toBe(0)
+    expect(dayjs.duration(-86399999).asDays()).toBeCloseTo(-0.999999, 4)
+  })
 })
 
 describe('Weeks', () => {
