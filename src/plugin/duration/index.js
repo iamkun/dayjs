@@ -25,6 +25,7 @@ const wrapper = (input, instance, unit) =>
   new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
 
 const prettyUnit = unit => `${$u.p(unit)}s`
+const roundNumber = number => number < 0 ? Math.ceil(number) : Math.floor(number)
 
 class Duration {
   constructor(input, unit, locale) {
@@ -66,17 +67,17 @@ class Duration {
 
   parseFromMilliseconds() {
     let { $ms } = this
-    this.$d.years = Math.floor($ms / MILLISECONDS_A_YEAR)
+    this.$d.years = roundNumber($ms / MILLISECONDS_A_YEAR)
     $ms %= MILLISECONDS_A_YEAR
-    this.$d.months = Math.floor($ms / MILLISECONDS_A_MONTH)
+    this.$d.months = roundNumber($ms / MILLISECONDS_A_MONTH)
     $ms %= MILLISECONDS_A_MONTH
-    this.$d.days = Math.floor($ms / MILLISECONDS_A_DAY)
+    this.$d.days = roundNumber($ms / MILLISECONDS_A_DAY)
     $ms %= MILLISECONDS_A_DAY
-    this.$d.hours = Math.floor($ms / MILLISECONDS_A_HOUR)
+    this.$d.hours = roundNumber($ms / MILLISECONDS_A_HOUR)
     $ms %= MILLISECONDS_A_HOUR
-    this.$d.minutes = Math.floor($ms / MILLISECONDS_A_MINUTE)
+    this.$d.minutes = roundNumber($ms / MILLISECONDS_A_MINUTE)
     $ms %= MILLISECONDS_A_MINUTE
-    this.$d.seconds = Math.floor($ms / MILLISECONDS_A_SECOND)
+    this.$d.seconds = roundNumber($ms / MILLISECONDS_A_SECOND)
     $ms %= MILLISECONDS_A_SECOND
     this.$d.milliseconds = $ms
   }
@@ -136,7 +137,7 @@ class Duration {
     if (pUnit === 'milliseconds') {
       base %= 1000
     } else if (pUnit === 'weeks') {
-      base = Math.floor(base / unitToMS[pUnit])
+      base = roundNumber(base / unitToMS[pUnit])
     } else {
       base = this.$d[pUnit]
     }
