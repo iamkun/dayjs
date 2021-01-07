@@ -294,6 +294,8 @@ describe('Strict mode', () => {
     const format = 'YYYY-MM-DD'
     expect(dayjs(input, format).isValid()).toBe(true)
     expect(dayjs(input, format, true).isValid()).toBe(false)
+    expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
+    expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
   })
   it('with locale', () => {
     const input = '2018 三月 99'
