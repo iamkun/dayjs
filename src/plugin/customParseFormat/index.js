@@ -11,7 +11,7 @@ const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?(\d\d)?/ // +00:00 -00:00 +0000 or -0000 +00
 const matchWord = /\d*[^\s\d-:/()]+/ // Word
 
-let locale
+let locale = {}
 
 function offsetFromString(string) {
   if (!string) return 0
@@ -216,8 +216,9 @@ export default (o, C, d) => {
       const isStrict = isStrictWithoutLocale || isStrictWithLocale
       let pl = args[2]
       if (isStrictWithLocale) [,, pl] = args
-      if (!isStrictWithoutLocale) {
-        locale = pl ? d.Ls[pl] : this.$locale()
+      locale = this.$locale()
+      if (!isStrictWithoutLocale && pl) {
+        locale = d.Ls[pl]
       }
       this.$d = parseFormattedInput(date, format, utc)
       this.init()
@@ -226,7 +227,7 @@ export default (o, C, d) => {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
-      locale = undefined
+      locale = {}
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
