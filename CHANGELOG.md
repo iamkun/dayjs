@@ -1,3 +1,14 @@
+## [1.10.3](https://github.com/iamkun/dayjs/compare/v1.10.2...v1.10.3) (2021-01-09)
+
+
+### Bug Fixes
+
+* fix customParseFormat plugin strict mode parse meridiem bug ([#1321](https://github.com/iamkun/dayjs/issues/1321)) ([e49eeef](https://github.com/iamkun/dayjs/commit/e49eeefbe8acb36419d36ca2e7ed8bc152f73ac1))
+* fix weekYear plugin missing locale bug ([#1319](https://github.com/iamkun/dayjs/issues/1319)) ([344bdc0](https://github.com/iamkun/dayjs/commit/344bdc0eed6843edb05723dc7853a41833d88f08)), closes [#1304](https://github.com/iamkun/dayjs/issues/1304)
+* update advancedFormat plugin to add format options for iso week and weekyear ([#1309](https://github.com/iamkun/dayjs/issues/1309)) ([2c54c64](https://github.com/iamkun/dayjs/commit/2c54c6441871a175ac9b95e41e4cd075dbac10cb))
+* update devHelper to add dev warning setting locale before loading ([c5cc893](https://github.com/iamkun/dayjs/commit/c5cc89355e1e206ca72433c19c40cb528690b04f))
+* update German [de] locale yearStart ([1858df8](https://github.com/iamkun/dayjs/commit/1858df8008de56570680723df89b36a8cbc970ef)), closes [#1264](https://github.com/iamkun/dayjs/issues/1264)
+
 ## [1.10.2](https://github.com/iamkun/dayjs/compare/v1.10.1...v1.10.2) (2021-01-05)
 
 
