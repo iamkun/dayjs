@@ -16,6 +16,15 @@ export default (o, c, d) => {
       }
       return oldParse.bind(this)(cfg)
     }
+    const oldLocale = d.locale
+    d.locale = function (preset, object, isLocal) {
+      if (typeof object === 'undefined' && typeof preset === 'string') {
+        if (!d.Ls[preset]) {
+          console.warn(`Guessing you may want to use locale ${preset}, you have to load it before using it. https://day.js.org/docs/en/i18n/loading-into-nodejs`)
+        }
+      }
+      return oldLocale(preset, object, isLocal)
+    }
   }
 }
 
