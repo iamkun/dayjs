@@ -28,9 +28,9 @@ describe('Creating', () => {
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
   it('two argument will bubble up to the next (negative number)', () => {
-    expect(dayjs.duration(-59, 'seconds').toISOString()).toBe('PT-59S')
-    expect(dayjs.duration(-60, 'seconds').toISOString()).toBe('PT-1M')
-    expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('PT-3H-40M-13S')
+    expect(dayjs.duration(-59, 'seconds').toISOString()).toBe('-PT59S')
+    expect(dayjs.duration(-60, 'seconds').toISOString()).toBe('-PT1M')
+    expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('-PT3H40M13S')
   })
   it('object with float', () => {
     expect(dayjs.duration({
@@ -61,7 +61,7 @@ describe('Creating', () => {
   it('object with negative millisecond', () => {
     expect(dayjs.duration({
       ms: -1
-    }).toISOString()).toBe('PT-0.001S')
+    }).toISOString()).toBe('-PT0.001S')
   })
 })
 
