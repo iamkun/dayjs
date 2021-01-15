@@ -32,7 +32,7 @@ const locale = {
     MM: '%d mesecev',
     y: 'leto',
     yy: '%d let'
-  },
+  }
 }
 
 dayjs.locale(locale, null, true)
