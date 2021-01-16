@@ -17,6 +17,21 @@ const locale = {
     LL: 'D. MMMM YYYY',
     LLL: 'D. MMMM YYYY H:mm',
     LLLL: 'dddd, D. MMMM YYYY H:mm'
+  },
+  relativeTime: {
+    future: 'čez %s',
+    past: 'pred %s',
+    s: 'nekaj sekund',
+    m: 'minuta',
+    mm: '%d minut',
+    h: 'ura',
+    hh: '%d ur',
+    d: 'dan',
+    dd: '%d dni',
+    M: 'mesec',
+    MM: '%d mesecev',
+    y: 'leto',
+    yy: '%d let'
   }
 }
 
