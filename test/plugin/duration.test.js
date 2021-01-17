@@ -201,7 +201,7 @@ describe('Years', () => {
 describe('prettyUnit', () => {
   const d = dayjs.duration(2, 's')
   expect(d.toISOString()).toBe('PT2S')
-  expect(d.as('Second')).toBe(2)
+  expect(d.as('seconds')).toBe(2)
   expect(d.get('s')).toBe(2)
   expect(dayjs.duration({
     M: 12,
