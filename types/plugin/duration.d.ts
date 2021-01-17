@@ -11,7 +11,7 @@ declare namespace plugin {
   }>;
   type DurationUnitType = Exclude<OpUnitType, "date" | "dates">
   type CreateDurationType = 
-    & ((units: DurationUnitsObjectType) => Duration)
+    ((units: DurationUnitsObjectType) => Duration)
     & ((time: number, unit?: DurationUnitType) => Duration)
     & ((ISO_8601: string) => Duration)
 
