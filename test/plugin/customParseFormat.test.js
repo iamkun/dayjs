@@ -338,3 +338,12 @@ describe('meridiem locale', () => {
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
   })
 })
+
+it('parse a string for MMM month format with underscore delimiter', () => {
+  const input = 'Jan_2021'
+  const format = 'MMM_YYYY'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '21_Jan_2021_123523'
+  const format2 = 'DD_MMM_YYYY_hhmmss'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+})
