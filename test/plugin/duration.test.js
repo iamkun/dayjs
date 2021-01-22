@@ -27,6 +27,11 @@ describe('Creating', () => {
     expect(dayjs.duration(60, 'seconds').toISOString()).toBe('PT1M')
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
   })
+  it('two argument will bubble up to the next (negative number)', () => {
+    expect(dayjs.duration(-59, 'seconds').toISOString()).toBe('-PT59S')
+    expect(dayjs.duration(-60, 'seconds').toISOString()).toBe('-PT1M')
+    expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('-PT3H40M13S')
+  })
   it('object with float', () => {
     expect(dayjs.duration({
       seconds: 1,
@@ -53,8 +58,12 @@ describe('Creating', () => {
       ms: 1
     }).toISOString()).toBe('PT0.001S')
   })
+  it('object with negative millisecond', () => {
+    expect(dayjs.duration({
+      ms: -1
+    }).toISOString()).toBe('-PT0.001S')
+  })
 })
-
 
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
@@ -131,6 +140,26 @@ describe('Milliseconds', () => {
   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
 })
 
+describe('Milliseconds', () => {
+  describe('Positive number', () => {
+    expect(dayjs.duration(500).milliseconds()).toBe(500)
+    expect(dayjs.duration(1500).milliseconds()).toBe(500)
+    expect(dayjs.duration(15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+    expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
+    expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+  })
+
+  describe('Negative number', () => {
+    expect(dayjs.duration(-500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(-500).asMilliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).asMilliseconds()).toBe(-1500)
+    expect(dayjs.duration(-15000).asMilliseconds()).toBe(-15000)
+  })
+})
+
 describe('Add', () => {
   const a = dayjs.duration(1, 'days')
   const b = dayjs.duration(2, 'days')
@@ -179,8 +208,15 @@ describe('Hours', () => {
 })
 
 describe('Days', () => {
-  expect(dayjs.duration(100000000).days()).toBe(1)
-  expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  it('positive number', () => {
+    expect(dayjs.duration(100000000).days()).toBe(1)
+    expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  })
+
+  it('negative number', () => {
+    expect(dayjs.duration(-1).days()).toBe(0)
+    expect(dayjs.duration(-86399999).asDays()).toBeCloseTo(-0.999999, 4)
+  })
 })
 
 describe('Weeks', () => {
@@ -201,7 +237,7 @@ describe('Years', () => {
 describe('prettyUnit', () => {
   const d = dayjs.duration(2, 's')
   expect(d.toISOString()).toBe('PT2S')
-  expect(d.as('Second')).toBe(2)
+  expect(d.as('seconds')).toBe(2)
   expect(d.get('s')).toBe(2)
   expect(dayjs.duration({
     M: 12,

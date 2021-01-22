@@ -1,4 +1,11 @@
-import { MILLISECONDS_A_DAY, MILLISECONDS_A_HOUR, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND, MILLISECONDS_A_WEEK, REGEX_FORMAT } from '../../constant'
+import {
+  MILLISECONDS_A_DAY,
+  MILLISECONDS_A_HOUR,
+  MILLISECONDS_A_MINUTE,
+  MILLISECONDS_A_SECOND,
+  MILLISECONDS_A_WEEK,
+  REGEX_FORMAT
+} from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
@@ -16,7 +23,7 @@ const unitToMS = {
   weeks: MILLISECONDS_A_WEEK
 }
 
-const isDuration = d => (d instanceof Duration) // eslint-disable-line no-use-before-define
+const isDuration = d => d instanceof Duration // eslint-disable-line no-use-before-define
 
 let $d
 let $u
@@ -25,6 +32,30 @@ const wrapper = (input, instance, unit) =>
   new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
 
 const prettyUnit = unit => `${$u.p(unit)}s`
+const isNegative = number => number < 0
+const roundNumber = number =>
+  (isNegative(number) ? Math.ceil(number) : Math.floor(number))
+const absolute = number => Math.abs(number)
+const getNumberUnitFormat = (number, unit) => {
+  if (!number) {
+    return {
+      negative: false,
+      format: ''
+    }
+  }
+
+  if (isNegative(number)) {
+    return {
+      negative: true,
+      format: `${absolute(number)}${unit}`
+    }
+  }
+
+  return {
+    negative: false,
+    format: `${number}${unit}`
+  }
+}
 
 class Duration {
   constructor(input, unit, locale) {
@@ -49,8 +80,14 @@ class Duration {
       const d = input.match(durationRegex)
       if (d) {
         [,,
-          this.$d.years, this.$d.months, this.$d.weeks,
-          this.$d.days, this.$d.hours, this.$d.minutes, this.$d.seconds] = d
+          this.$d.years,
+          this.$d.months,
+          this.$d.weeks,
+          this.$d.days,
+          this.$d.hours,
+          this.$d.minutes,
+          this.$d.seconds
+        ] = d
         this.calMilliseconds()
         return this
       }
@@ -66,39 +103,54 @@ class Duration {
 
   parseFromMilliseconds() {
     let { $ms } = this
-    this.$d.years = Math.floor($ms / MILLISECONDS_A_YEAR)
+    this.$d.years = roundNumber($ms / MILLISECONDS_A_YEAR)
     $ms %= MILLISECONDS_A_YEAR
-    this.$d.months = Math.floor($ms / MILLISECONDS_A_MONTH)
+    this.$d.months = roundNumber($ms / MILLISECONDS_A_MONTH)
     $ms %= MILLISECONDS_A_MONTH
-    this.$d.days = Math.floor($ms / MILLISECONDS_A_DAY)
+    this.$d.days = roundNumber($ms / MILLISECONDS_A_DAY)
     $ms %= MILLISECONDS_A_DAY
-    this.$d.hours = Math.floor($ms / MILLISECONDS_A_HOUR)
+    this.$d.hours = roundNumber($ms / MILLISECONDS_A_HOUR)
     $ms %= MILLISECONDS_A_HOUR
-    this.$d.minutes = Math.floor($ms / MILLISECONDS_A_MINUTE)
+    this.$d.minutes = roundNumber($ms / MILLISECONDS_A_MINUTE)
     $ms %= MILLISECONDS_A_MINUTE
-    this.$d.seconds = Math.floor($ms / MILLISECONDS_A_SECOND)
+    this.$d.seconds = roundNumber($ms / MILLISECONDS_A_SECOND)
     $ms %= MILLISECONDS_A_SECOND
     this.$d.milliseconds = $ms
   }
 
   toISOString() {
-    const Y = this.$d.years ? `${this.$d.years}Y` : ''
-    const M = this.$d.months ? `${this.$d.months}M` : ''
+    const Y = getNumberUnitFormat(this.$d.years, 'Y')
+    const M = getNumberUnitFormat(this.$d.months, 'M')
+
     let days = +this.$d.days || 0
     if (this.$d.weeks) {
       days += this.$d.weeks * 7
     }
-    const D = days ? `${days}D` : ''
-    const H = this.$d.hours ? `${this.$d.hours}H` : ''
-    const m = this.$d.minutes ? `${this.$d.minutes}M` : ''
+
+    const D = getNumberUnitFormat(days, 'D')
+    const H = getNumberUnitFormat(this.$d.hours, 'H')
+    const m = getNumberUnitFormat(this.$d.minutes, 'M')
+
     let seconds = this.$d.seconds || 0
     if (this.$d.milliseconds) {
       seconds += this.$d.milliseconds / 1000
     }
-    const S = seconds ? `${seconds}S` : ''
-    const T = (H || m || S) ? 'T' : ''
-    const result = `P${Y}${M}${D}${T}${H}${m}${S}`
-    return result === 'P' ? 'P0D' : result
+
+    const S = getNumberUnitFormat(seconds, 'S')
+
+    const negativeMode =
+      Y.negative ||
+      M.negative ||
+      D.negative ||
+      H.negative ||
+      m.negative ||
+      S.negative
+
+    const T = H.format || m.format || S.format ? 'T' : ''
+    const P = negativeMode ? '-' : ''
+
+    const result = `${P}P${Y.format}${M.format}${D.format}${T}${H.format}${m.format}${S.format}`
+    return result === 'P' || result === '-P' ? 'P0D' : result
   }
 
   toJSON() {
@@ -136,11 +188,11 @@ class Duration {
     if (pUnit === 'milliseconds') {
       base %= 1000
     } else if (pUnit === 'weeks') {
-      base = Math.floor(base / unitToMS[pUnit])
+      base = roundNumber(base / unitToMS[pUnit])
     } else {
       base = this.$d[pUnit]
     }
-    return base
+    return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
   }
 
   add(input, unit, isSubtract) {
@@ -152,6 +204,7 @@ class Duration {
     } else {
       another = wrapper(input, this).$ms
     }
+
     return wrapper(this.$ms + (another * (isSubtract ? -1 : 1)), this)
   }
 
@@ -170,7 +223,10 @@ class Duration {
   }
 
   humanize(withSuffix) {
-    return $d().add(this.$ms, 'ms').locale(this.$l).fromNow(!withSuffix)
+    return $d()
+      .add(this.$ms, 'ms')
+      .locale(this.$l)
+      .fromNow(!withSuffix)
   }
 
   milliseconds() { return this.get('milliseconds') }
@@ -190,6 +246,7 @@ class Duration {
   years() { return this.get('years') }
   asYears() { return this.as('years') }
 }
+
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
   $u = dayjs().$utils()
