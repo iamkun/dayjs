@@ -14,6 +14,7 @@ declare namespace plugin {
     ((units: DurationUnitsObjectType) => Duration)
     & ((time: number, unit?: DurationUnitType) => Duration)
     & ((ISO_8601: string) => Duration)
+  type AddDurationType = CreateDurationType & ((duration: Duration) => Duration)
 
   interface Duration {
     new (input: string | number | object, unit?: string, locale?: string): Duration
@@ -50,9 +51,9 @@ declare namespace plugin {
 
     get(unit: DurationUnitType): number
 
-    add: CreateDurationType;
+    add: AddDurationType
     
-    subtract: CreateDurationType
+    subtract: AddDurationType
 
     toJSON(): string
 
