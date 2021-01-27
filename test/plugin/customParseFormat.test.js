@@ -109,6 +109,13 @@ describe('Timezone Offset', () => {
     expect(result.valueOf()).toBe(moment(input, format).valueOf())
     expect(result.valueOf()).toBe(1606820400000)
   })
+  it('zulu', () => {
+    const input = '2021-01-26T15:38:43.000Z'
+    const format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+    const result = dayjs(input, format)
+    expect(result.valueOf()).toBe(moment(input, format).valueOf())
+    expect(result.valueOf()).toBe(1611675523000)
+  })
   it('no timezone format token should parse in local time', () => {
     const input = '2020-12-01T20:00:00+01:00'
     const format = 'YYYY-MM-DD[T]HH:mm:ss'
@@ -347,3 +354,4 @@ it('parse a string for MMM month format with underscore delimiter', () => {
   const format2 = 'DD_MMM_YYYY_hhmmss'
   expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
 })
+
