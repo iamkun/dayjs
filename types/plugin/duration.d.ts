@@ -6,6 +6,9 @@ export as namespace plugin;
 export = plugin
 
 declare namespace plugin {
+  type DurationInputType = string | number | object
+  type DurationAddType = number | object | Duration
+  
   type DurationUnitsObjectType = Partial<{
     [unit in Exclude<UnitTypeLongPlural, "dates"> | "weeks"]: number
   }>;
