@@ -1,3 +1,16 @@
+## [1.10.4](https://github.com/iamkun/dayjs/compare/v1.10.3...v1.10.4) (2021-01-22)
+
+
+### Bug Fixes
+
+* Correct handling negative duration ([#1317](https://github.com/iamkun/dayjs/issues/1317)) ([3f5c085](https://github.com/iamkun/dayjs/commit/3f5c085608182472f20b84766b10949945663e44))
+* Improve `Duration` types ([#1338](https://github.com/iamkun/dayjs/issues/1338)) ([4aca4b1](https://github.com/iamkun/dayjs/commit/4aca4b1b584a15de1146d929f95c944594032f20))
+* parse a string for MMM month format with underscore delimiter ([#1349](https://github.com/iamkun/dayjs/issues/1349)) ([82ef9a3](https://github.com/iamkun/dayjs/commit/82ef9a304f06287ac0a14c4da9a7fe6152b5fec9))
+* Update Bengali [bn] locale ([#1329](https://github.com/iamkun/dayjs/issues/1329)) ([02d96ec](https://github.com/iamkun/dayjs/commit/02d96ec7189f62d6ef8987135919cbb5ceff20a6))
+* update locale Portuguese [pt] yearStart ([#1345](https://github.com/iamkun/dayjs/issues/1345)) ([5c785d5](https://github.com/iamkun/dayjs/commit/5c785d528cc08811638d7cbfc7fc158d67b32d75))
+* update Polish [pl] locale yearStart ([#1348](https://github.com/iamkun/dayjs/issues/1348)) ([e93e6b8](https://github.com/iamkun/dayjs/commit/e93e6b8ffa61036b26382f1763e3864d4a7d5df5))
+* Update Slovenian [sl] relativeTime locale ([#1333](https://github.com/iamkun/dayjs/issues/1333)) ([fe5f1d0](https://github.com/iamkun/dayjs/commit/fe5f1d0afbe57b70339e268047e6c3028ca3d59b))
+
 ## [1.10.3](https://github.com/iamkun/dayjs/compare/v1.10.2...v1.10.3) (2021-01-09)
 
 
