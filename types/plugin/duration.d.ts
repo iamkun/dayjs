@@ -86,5 +86,3 @@ declare module 'dayjs' {
   export const duration: plugin.CreateDurationType;
   export function isDuration(d: any): d is plugin.Duration
 }
-
-type a = FnPa<plugin.AddDurationType>;
