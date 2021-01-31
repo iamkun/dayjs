@@ -1,4 +1,4 @@
-import utils from '../../utils';
+import { extend } from '../extend';
 
 export default (option, Dayjs, dayjs) => {
   dayjs.updateLocale = function (locale, customConfig) {
@@ -7,7 +7,7 @@ export default (option, Dayjs, dayjs) => {
     if (!localeConfig) return
     const customConfigKeys = customConfig ? Object.keys(customConfig) : []
     customConfigKeys.forEach((c) => {
-      localeConfig[c] = typeof localeConfig[c] === 'object' ? utils.e(localeConfig[c], customConfig[c]) : customConfig[c]
+      localeConfig[c] = typeof localeConfig[c] === 'object' ? extend(localeConfig[c], customConfig[c]) : customConfig[c]
     })
     return localeConfig // eslint-disable-line consistent-return
   }
