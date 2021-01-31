@@ -6,7 +6,13 @@ export as namespace plugin;
 export = plugin
 
 declare namespace plugin {
+  /**
+   * @deprecated Please use more strict types
+   */
   type DurationInputType = string | number | object
+  /**
+   * @deprecated Please use more strict types
+   */
   type DurationAddType = number | object | Duration
   
   type DurationUnitsObjectType = Partial<{
@@ -80,3 +86,5 @@ declare module 'dayjs' {
   export const duration: plugin.CreateDurationType;
   export function isDuration(d: any): d is plugin.Duration
 }
+
+type a = FnPa<plugin.AddDurationType>;
