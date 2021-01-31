@@ -1,4 +1,4 @@
-import { extend } from '../extend';
+import { extend } from './utils';
 
 export default (option, Dayjs, dayjs) => {
   dayjs.updateLocale = function (locale, customConfig) {
