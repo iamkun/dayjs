@@ -1,23 +1,25 @@
-export const extend = () => {
-
-	// Create a new object
+export function extend() {
 	let extended = {};
 
 	// Merge the object into the extended object
-	const merge = function (obj) {
-		for (var prop in obj) {
+	let merge = function (obj) {
+		for (let prop in obj) {
 			if (obj.hasOwnProperty(prop)) {
-				// Push each value from `obj` into `extended`
-				extended[prop] = obj[prop];
+				if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+					// If we're doing a deep merge and the property is an object
+					extended[prop] = extend(extended[prop], obj[prop]);
+				} else {
+					// Otherwise, do a regular merge
+					extended[prop] = obj[prop];
+				}
 			}
 		}
 	};
 
-	// Loop through each object and conduct a merge
-	for (var i = 0; i < arguments.length; i++) {
+	for (let i = 0 ; i < arguments.length; i++) {
 		merge(arguments[i]);
 	}
 
 	return extended;
 
-};
+}
