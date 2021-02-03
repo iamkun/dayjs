@@ -53,6 +53,7 @@ const locale = {
   months,
   monthsShort,
   weekStart: 1,
+  yearStart: 1,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
