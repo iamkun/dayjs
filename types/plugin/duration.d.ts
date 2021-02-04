@@ -6,6 +6,15 @@ export as namespace plugin;
 export = plugin
 
 declare namespace plugin {
+  /**
+   * @deprecated Please use more strict types
+   */
+  type DurationInputType = string | number | object
+  /**
+   * @deprecated Please use more strict types
+   */
+  type DurationAddType = number | object | Duration
+  
   type DurationUnitsObjectType = Partial<{
     [unit in Exclude<UnitTypeLongPlural, "dates"> | "weeks"]: number
   }>;
