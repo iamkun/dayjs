@@ -9,6 +9,7 @@ const locale = {
   months: 'januari_februari_mars_april_maj_juni_juli_augusti_september_oktober_november_december'.split('_'),
   monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   ordinal: (n) => {
     const b = n % 10
     const o = (b === 1) || (b === 2) ? 'a' : 'e'
