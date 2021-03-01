@@ -1,4 +1,23 @@
-import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
+import { MILLISECONDS_A_MINUTE, MIN, REGEX_VALID_OFFSET_FORMAT, REGEX_OFFSET_HOURS_MINUTES_FORMAT } from '../../constant'
+
+
+function offsetFromString(value = '') {
+  const offset = value.match(REGEX_VALID_OFFSET_FORMAT)
+
+  if (!offset) {
+    return null
+  }
+
+  const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT) || ['-', 0, 0]
+  const totalOffsetInMinutes = (+hoursOffset * 60) + (+minutesOffset)
+
+  if (totalOffsetInMinutes === 0) {
+    return 0
+  }
+
+  return indicator === '+' ? totalOffsetInMinutes : -totalOffsetInMinutes
+}
+
 
 export default (option, Dayjs, dayjs) => {
   const proto = Dayjs.prototype
@@ -58,6 +77,12 @@ export default (option, Dayjs, dayjs) => {
         return this.$offset
       }
       return oldUtcOffset.call(this)
+    }
+    if (typeof input === 'string') {
+      input = offsetFromString(input)
+      if (input === null) {
+        return this
+      }
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     let ins = this
