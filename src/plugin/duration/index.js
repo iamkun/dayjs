@@ -79,14 +79,17 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
       if (d) {
-        this.$d.years = Number(d[2])
-        this.$d.months = Number(d[3])
-        this.$d.weeks = Number(d[4])
-        this.$d.days = Number(d[5])
-        this.$d.hours = Number(d[6])
-        this.$d.minutes = Number(d[7])
-        this.$d.seconds = Number(d[8])
-
+        const [,, ...properties] = d
+        const numberD = properties.map(value => Number(value));
+        [
+          this.$d.years,
+          this.$d.months,
+          this.$d.weeks,
+          this.$d.days,
+          this.$d.hours,
+          this.$d.minutes,
+          this.$d.seconds
+        ] = numberD
         this.calMilliseconds()
         return this
       }
