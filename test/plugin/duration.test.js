@@ -17,6 +17,10 @@ afterEach(() => {
 })
 
 describe('Creating', () => {
+  it('no argument', () => {
+    expect(dayjs.duration().toISOString()).toBe('P0D')
+    expect(dayjs.duration().asMilliseconds()).toBe(0)
+  })
   it('milliseconds', () => {
     expect(dayjs.duration(1, 'ms').toISOString()).toBe('PT0.001S')
     expect(dayjs.duration(100).toISOString()).toBe('PT0.1S')
