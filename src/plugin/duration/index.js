@@ -61,6 +61,10 @@ class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
     this.$l = locale
+    if (input === undefined) {
+      this.$ms = 0
+      this.parseFromMilliseconds()
+    }
     if (unit) {
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
