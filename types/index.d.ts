@@ -9,7 +9,11 @@ declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, stri
 declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, locale?: string, strict?: boolean): dayjs.Dayjs
 
 declare namespace dayjs {
-  export type ConfigType = string | number | Date | Dayjs
+  interface ConfigTypeMap {
+    default: string | number | Date | Dayjs
+  }
+
+  export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
 
   export type OptionType = { locale?: string, format?: string, utc?: boolean } | string | string[]
 
