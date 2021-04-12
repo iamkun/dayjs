@@ -22,7 +22,8 @@ module.exports = (config) => {
       name: name || 'dayjs',
       globals: {
         dayjs: 'dayjs'
-      }
+      },
+      compact: true
     }
   }
 }
