@@ -238,7 +238,7 @@ export default (o, C, d) => {
       const currentOffset = this.utcOffset()
       if (isStrict) {
         if (
-          (parsedOffsetMilliseconds !== undefined && date.replace(/[+-]\d\d:?\d\d$/, '') !== this.add(-currentOffset, 'minute').add(-parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(ZZ|ZZZ)$/, '')))
+          (parsedOffsetMilliseconds !== undefined && date.replace(/[+-]\d\d:?\d\d$/, '') !== this.subtract(currentOffset, 'minute').subtract(parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(ZZ|ZZZ)$/, '')))
           || (parsedOffsetMilliseconds === undefined && date !== this.format(format))
         ) {
           this.$d = new Date('')
