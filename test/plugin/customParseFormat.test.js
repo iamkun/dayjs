@@ -358,7 +358,7 @@ it('parse a string for MMM month format with underscore delimiter', () => {
 it('custom two-digit year parse function', () => {
   delete customParseFormat.$i // this allow plugin to be installed again
   dayjs.extend(customParseFormat, {
-    twoDigitYearParseFn: yearString => (+yearString) + 1800
+    parseTwoDigitYear: yearString => (+yearString) + 1800
   })
   const format = 'YY-MM-DD'
   const input = '00-05-02'

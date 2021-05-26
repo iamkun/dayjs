@@ -13,7 +13,7 @@ const matchWord = /\d*[^\s\d-_:/()]+/ // Word
 
 let locale = {}
 
-let twoDigitYearParseFn = function (input) {
+let parseTwoDigitYear = function (input) {
   input = +input
   return input + (input > 68 ? 1900 : 2000)
 }
@@ -116,7 +116,7 @@ const expressions = {
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
-    this.year = twoDigitYearParseFn(input)
+    this.year = parseTwoDigitYear(input)
   }],
   YYYY: [match4, addInput('year')],
   Z: zoneExpressions,
@@ -205,8 +205,8 @@ const parseFormattedInput = (input, format, utc) => {
 
 export default (o, C, d) => {
   d.p.customParseFormat = true
-  if (o && o.twoDigitYearParseFn) {
-    ({ twoDigitYearParseFn } = o)
+  if (o && o.parseTwoDigitYear) {
+    ({ parseTwoDigitYear: parseTwoDigitYear } = o)
   }
   const proto = C.prototype
   const oldParse = proto.parse
