@@ -1,4 +1,7 @@
-import { MILLISECONDS_A_MINUTE, MIN, REGEX_VALID_OFFSET_FORMAT, REGEX_OFFSET_HOURS_MINUTES_FORMAT } from '../../constant'
+import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
+
+const REGEX_VALID_OFFSET_FORMAT = /[+-]\d\d(?::?\d\d)?/g
+const REGEX_OFFSET_HOURS_MINUTES_FORMAT = /([+-]|\d\d)/g
 
 function offsetFromString(value = '') {
   const offset = value.match(REGEX_VALID_OFFSET_FORMAT)
