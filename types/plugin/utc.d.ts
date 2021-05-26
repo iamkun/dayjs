@@ -15,5 +15,5 @@ declare module 'dayjs' {
     utcOffset(offset: number, keepLocalTime?: boolean): Dayjs
   }
 
-  export function utc(config?: ConfigType, format?: string): Dayjs
+  export function utc(config?: ConfigType, format?: string, strict?: boolean): Dayjs
 }

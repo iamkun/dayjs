@@ -30,6 +30,7 @@ function relativeTimeWithMutation(number, withoutSuffix, key) {
   return `${number} ${mutation(format[key], number)}`
 }
 function specialMutationForYears(number) {
+  /* istanbul ignore next line */
   switch (lastNumber(number)) {
     case 1:
     case 3:

@@ -291,6 +291,16 @@ describe('UTC Offset', () => {
     expect(daysJS.utcOffset()).toEqual(0)
     expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
   })
+
+  it('get utc offset with an invalid string value, value: 0', () => {
+    const time = '2021-02-28 19:40:10'
+    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('+0000')
+    const momentJS = moment(time).utc(true).utcOffset('+0000')
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(0)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
 })
 
 describe('Diff', () => {
