@@ -28,3 +28,7 @@ export const INVALID_DATE_STRING = 'Invalid Date'
 // regex
 export const REGEX_PARSE = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/
 export const REGEX_FORMAT = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g
+
+// used by plugins/utc
+export const REGEX_VALID_OFFSET_FORMAT = /[+-]\d\d(?::?\d\d)?/g
+export const REGEX_OFFSET_HOURS_MINUTES_FORMAT = /([+-]|\d\d)/g
