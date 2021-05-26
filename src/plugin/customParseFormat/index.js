@@ -206,7 +206,7 @@ const parseFormattedInput = (input, format, utc) => {
 export default (o, C, d) => {
   d.p.customParseFormat = true
   if (o && o.parseTwoDigitYear) {
-    ({ parseTwoDigitYear: parseTwoDigitYear } = o)
+    ({ parseTwoDigitYear } = o)
   }
   const proto = C.prototype
   const oldParse = proto.parse
