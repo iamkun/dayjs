@@ -61,6 +61,10 @@ class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
     this.$l = locale
+    if (input === undefined) {
+      this.$ms = 0
+      this.parseFromMilliseconds()
+    }
     if (unit) {
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
@@ -79,7 +83,9 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
       if (d) {
-        [,,
+        const properties = d.slice(2)
+        const numberD = properties.map(value => Number(value));
+        [
           this.$d.years,
           this.$d.months,
           this.$d.weeks,
@@ -87,7 +93,7 @@ class Duration {
           this.$d.hours,
           this.$d.minutes,
           this.$d.seconds
-        ] = d
+        ] = numberD
         this.calMilliseconds()
         return this
       }

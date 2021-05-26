@@ -226,6 +226,81 @@ describe('UTC Offset', () => {
     expect(dayjs().utcOffset()).toBe(moment().utcOffset())
     expect(dayjs().utc().utcOffset()).toBe(moment().utc().utcOffset())
   })
+
+  it('get utc offset with a number value', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(hoursOffset * 60, true)
+    const momentJS = moment(time).utc(true).utcOffset(hoursOffset, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a negative valid string value, format: HH:mm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a positive valid string value, format: HH:mm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 8
+    const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}:00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}:00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a negative valid string value, format: HHmm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a positive valid string value, format: HHmm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 8
+    const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with an invalid string value, value: random', () => {
+    const time = '2021-02-28 19:40:10'
+    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('random')
+    const momentJS = moment(time).utc(true).utcOffset('random')
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(0)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with an invalid string value, value: 0', () => {
+    const time = '2021-02-28 19:40:10'
+    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('+0000')
+    const momentJS = moment(time).utc(true).utcOffset('+0000')
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(0)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
 })
 
 describe('Diff', () => {

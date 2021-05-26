@@ -47,6 +47,7 @@ const locale = {
   monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
+  yearStart: 4,
   relativeTime: {
     future: '%s päästä',
     past: '%s sitten',

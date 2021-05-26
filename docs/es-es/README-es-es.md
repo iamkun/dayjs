@@ -1,7 +1,7 @@
 <p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Alternativa ligera, <b>2kB</b>, a Moment.js, con la misma API moderna</p>
+<p align="center">Alternativa rápida y ligera <b>2kB</b> a Moment.js, con la misma API moderna</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
@@ -21,7 +21,7 @@
     </a>
 </p>
 
-> Day.js es una librería JavaScript minimalista que analiza, valida, manipula y muestra fechas y horas para navegadores modernos, manteniendo una API casi totalmente compatible con Moment.js. Si usas Moment.js, ya sabes usar Day.js.
+> Day.js es una librería minimalista para JavaScript que analiza, valida, manipula y muestra fechas y horas para navegadores modernos, manteniendo una API casi completamente compatible con Moment.js. Si usas o has usado Moment.js, ya sabes usar Day.js
 
 ```js
 dayjs()
@@ -42,9 +42,9 @@ dayjs()
 
 # Primeros pasos
 
-### Documentation
+### Documentación
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+Puedes encontrar más detalles, la API y otros documentos en [day.js.org](https://day.js.org/) el sitio web.
 
 ## Instalación
 
@@ -56,7 +56,7 @@ npm install dayjs --save
 
 ## API
 
-Usar las API de Day.js para analizar, validar, manipular y mostrar fechas y horas es muy sencillo.
+Es fácil el usar las APIs de Day.js para analizar, validar, manipular y mostrar fechas y horas.
 
 ```javascript
 dayjs('2018-08-08') // analiza
@@ -125,4 +125,4 @@ Por favor, danos una 💖 estrella 💖 para apoyarnos. Gracias.
 
 ## Licencia
 
-Day.js está licenciada bajo la [Licencia MIT](./LICENSE).
+Day.js está licenciado bajo la [Licencia MIT](./LICENSE).

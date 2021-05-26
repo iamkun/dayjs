@@ -35,6 +35,16 @@ it('Format Month with locale function', () => {
   }
 })
 
+it('Month short', () => {
+  const date = '2021-02-01T05:54:32.005Z'
+  const dayjsBN = dayjs(date)
+    .locale('bn')
+  const momentBN = moment(date)
+    .locale('bn')
+  const testFormat1 = 'DD MMMM YYYY MMM'
+  expect(dayjsBN.format(testFormat1)).toEqual(momentBN.format(testFormat1))
+})
+
 it('Preparse with locale function', () => {
   for (let i = 0; i <= 7; i += 1) {
     dayjs.locale('bn')
