@@ -9,7 +9,23 @@ const locale = {
   months: 'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split('_'),
   monthsShort: 'янр_фев_мар_апр_май_юни_юли_авг_сеп_окт_ное_дек'.split('_'),
   weekStart: 1,
-  ordinal: n => `${n}.`,
+  ordinal: (n) => {
+    const last2Digits = n % 100
+    if (last2Digits > 10 && last2Digits < 20) {
+      return `${n}-ти`
+    }
+
+    const lastDigit = n % 10
+    if (lastDigit === 1) {
+      return `${n}-ви`
+    } else if (lastDigit === 2) {
+      return `${n}-ри`
+    } else if (lastDigit === 7 || lastDigit === 8) {
+      return `${n}-ми`
+    }
+
+    return `${n}-ти`
+  },
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -27,7 +43,7 @@ const locale = {
     h: 'час',
     hh: '%d часа',
     d: 'ден',
-    dd: '%d дни',
+    dd: '%d дена',
     M: 'месец',
     MM: '%d месеца',
     y: 'година',
