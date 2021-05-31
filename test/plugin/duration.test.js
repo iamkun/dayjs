@@ -67,11 +67,20 @@ describe('Creating', () => {
       ms: -1
     }).toISOString()).toBe('-PT0.001S')
   })
+  it('object with units of mixed positive and negative', () => {
+    expect(dayjs.duration({ months: -6, days: 3 }).toISOString()).toBe('-P6M-3D')
+    expect(dayjs.duration({ months: 6, days: -3 }).toISOString()).toBe('P6M-3D')
+    expect(dayjs.duration({ hours: -6, minutes: 3 }).toISOString()).toBe('-PT6H-3M')
+    expect(dayjs.duration({ hours: 6, minutes: -3 }).toISOString()).toBe('PT6H-3M')
+  })
 })
 
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
     expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
+  })
+  it('Negative Full ISO string', () => {
+    expect(dayjs.duration('-P7Y6M4DT3H2M1S').toISOString()).toBe('-P7Y6M4DT3H2M1S')
   })
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
@@ -84,6 +93,33 @@ describe('Parse ISO string', () => {
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
+  })
+})
+
+describe('Internal representation', () => {
+  it('milliseconds', () => {
+    expect(dayjs.duration(1, 'ms')).toEqual(dayjs.duration({ milliseconds: 1 }))
+    expect(dayjs.duration(100)).toEqual(dayjs.duration({ milliseconds: 100 }))
+    expect(dayjs.duration(1000)).toEqual(dayjs.duration({ seconds: 1 }))
+  })
+  it('two argument will bubble up to the next', () => {
+    expect(dayjs.duration(59, 'seconds')).toEqual(dayjs.duration({ seconds: 59 }))
+    expect(dayjs.duration(60, 'seconds')).toEqual(dayjs.duration({ minutes: 1 }))
+    expect(dayjs.duration(13213, 'seconds')).toEqual(dayjs.duration({ hours: 3, minutes: 40, seconds: 13 }))
+  })
+  it('two argument will bubble up to the next (negative number)', () => {
+    expect(dayjs.duration(-59, 'seconds')).toEqual(dayjs.duration({ seconds: -59 }))
+    expect(dayjs.duration(-60, 'seconds')).toEqual(dayjs.duration({ minutes: -1 }))
+    expect(dayjs.duration(-13213, 'seconds')).toEqual(dayjs.duration({ hours: -3, minutes: -40, seconds: -13 }))
+  })
+  it('ISO string', () => {
+    expect(dayjs.duration('PT20.345S')).toEqual(dayjs.duration({ seconds: 20.345 }))
+    expect(dayjs.duration('PT15M')).toEqual(dayjs.duration({ minutes: 15 }))
+    expect(dayjs.duration('PT10H')).toEqual(dayjs.duration({ hours: 10 }))
+    expect(dayjs.duration('P2DT3H4M')).toEqual(dayjs.duration({ days: 2, hours: 3, minutes: 4 }))
+    expect(dayjs.duration('PT-6H3M')).toEqual(dayjs.duration({ hours: -6, minutes: 3 }))
+    expect(dayjs.duration('-PT6H3M')).toEqual(dayjs.duration({ hours: -6, minutes: -3 }))
+    expect(dayjs.duration('-PT-6H+3M')).toEqual(dayjs.duration({ hours: 6, minutes: -3 }))
   })
 })
 

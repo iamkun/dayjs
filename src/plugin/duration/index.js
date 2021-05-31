@@ -36,7 +36,8 @@ const isNegative = number => number < 0
 const roundNumber = number =>
   (isNegative(number) ? Math.ceil(number) : Math.floor(number))
 const absolute = number => Math.abs(number)
-const getNumberUnitFormat = (number, unit) => {
+const xor = (a, b) => (a && !b) || (!a && b)
+const getNumberUnitFormat = (number, unit, negativeMode) => {
   if (!number) {
     return {
       negative: false,
@@ -44,16 +45,18 @@ const getNumberUnitFormat = (number, unit) => {
     }
   }
 
-  if (isNegative(number)) {
+  const negative = isNegative(number)
+
+  if (xor(negative, negativeMode)) {
     return {
-      negative: true,
-      format: `${absolute(number)}${unit}`
+      negative,
+      format: `-${absolute(number)}${unit}`
     }
   }
 
   return {
-    negative: false,
-    format: `${number}${unit}`
+    negative,
+    format: `${absolute(number)}${unit}`
   }
 }
 
@@ -83,8 +86,9 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
       if (d) {
+        const negativeMode = d[1] === '-'
         const properties = d.slice(2)
-        const numberD = properties.map(value => Number(value));
+        const numberD = properties.map(value => (!negativeMode ? Number(value) : -Number(value)));
         [
           this.$d.years,
           this.$d.months,
@@ -94,6 +98,7 @@ class Duration {
           this.$d.minutes,
           this.$d.seconds
         ] = numberD
+        this.deleteNanOrZeroUnits()
         this.calMilliseconds()
         return this
       }
@@ -122,35 +127,55 @@ class Duration {
     this.$d.seconds = roundNumber($ms / MILLISECONDS_A_SECOND)
     $ms %= MILLISECONDS_A_SECOND
     this.$d.milliseconds = $ms
+    this.deleteNanOrZeroUnits()
+  }
+
+  deleteNanOrZeroUnits() {
+    Object.keys(this.$d).forEach((unit) => {
+      if (Number.isNaN(this.$d[unit]) || this.$d[unit] === 0) {
+        delete this.$d[unit]
+      }
+    })
   }
 
   toISOString() {
-    const Y = getNumberUnitFormat(this.$d.years, 'Y')
-    const M = getNumberUnitFormat(this.$d.months, 'M')
+    let negativeMode = false
+    if (this.$d.years !== undefined) {
+      negativeMode = isNegative(this.$d.years)
+    } else if (this.$d.months !== undefined) {
+      negativeMode = isNegative(this.$d.months)
+    } else if (this.$d.weeks !== undefined) {
+      negativeMode = isNegative(this.$d.weeks)
+    } else if (this.$d.days !== undefined) {
+      negativeMode = isNegative(this.$d.days)
+    } else if (this.$d.hours !== undefined) {
+      negativeMode = isNegative(this.$d.hours)
+    } else if (this.$d.minutes !== undefined) {
+      negativeMode = isNegative(this.$d.minutes)
+    } else if (this.$d.seconds !== undefined) {
+      negativeMode = isNegative(this.$d.seconds)
+    } else if (this.$d.milliseconds !== undefined) {
+      negativeMode = isNegative(this.$d.milliseconds)
+    }
+
+    const Y = getNumberUnitFormat(this.$d.years, 'Y', negativeMode)
+    const M = getNumberUnitFormat(this.$d.months, 'M', negativeMode)
 
     let days = +this.$d.days || 0
     if (this.$d.weeks) {
       days += this.$d.weeks * 7
     }
 
-    const D = getNumberUnitFormat(days, 'D')
-    const H = getNumberUnitFormat(this.$d.hours, 'H')
-    const m = getNumberUnitFormat(this.$d.minutes, 'M')
+    const D = getNumberUnitFormat(days, 'D', negativeMode)
+    const H = getNumberUnitFormat(this.$d.hours, 'H', negativeMode)
+    const m = getNumberUnitFormat(this.$d.minutes, 'M', negativeMode)
 
     let seconds = this.$d.seconds || 0
     if (this.$d.milliseconds) {
       seconds += this.$d.milliseconds / 1000
     }
 
-    const S = getNumberUnitFormat(seconds, 'S')
-
-    const negativeMode =
-      Y.negative ||
-      M.negative ||
-      D.negative ||
-      H.negative ||
-      m.negative ||
-      S.negative
+    const S = getNumberUnitFormat(seconds, 'S', negativeMode)
 
     const T = H.format || m.format || S.format ? 'T' : ''
     const P = negativeMode ? '-' : ''
@@ -198,7 +223,7 @@ class Duration {
     } else {
       base = this.$d[pUnit]
     }
-    return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
+    return base === 0 || base === undefined ? 0 : base // a === 0 will be true on both 0 and -0
   }
 
   add(input, unit, isSubtract) {
