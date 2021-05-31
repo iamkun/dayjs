@@ -90,6 +90,17 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Part ISO string mixed positive and negative', () => {
+    expect(dayjs.duration('P6M3D').toISOString()).toBe('P6M3D')
+    expect(dayjs.duration('-P6M-3D').toISOString()).toBe('-P6M-3D')
+    expect(dayjs.duration('P6M-3D').toISOString()).toBe('P6M-3D')
+    expect(dayjs.duration('-P6M3D').toISOString()).toBe('-P6M3D')
+
+    expect(dayjs.duration('PT6H3M').toISOString()).toBe('PT6H3M')
+    expect(dayjs.duration('-PT6H-3M').toISOString()).toBe('-PT6H-3M')
+    expect(dayjs.duration('PT6H-3M').toISOString()).toBe('PT6H-3M')
+    expect(dayjs.duration('-PT6H3M').toISOString()).toBe('-PT6H3M')
+  })
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
