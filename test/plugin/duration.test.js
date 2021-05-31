@@ -68,10 +68,15 @@ describe('Creating', () => {
     }).toISOString()).toBe('-PT0.001S')
   })
   it('object with units of mixed positive and negative', () => {
+    expect(dayjs.duration({ months: 6, days: 3 }).toISOString()).toBe('P6M3D')
     expect(dayjs.duration({ months: -6, days: 3 }).toISOString()).toBe('-P6M-3D')
     expect(dayjs.duration({ months: 6, days: -3 }).toISOString()).toBe('P6M-3D')
+    expect(dayjs.duration({ months: -6, days: -3 }).toISOString()).toBe('-P6M3D')
+
+    expect(dayjs.duration({ hours: 6, minutes: 3 }).toISOString()).toBe('PT6H3M')
     expect(dayjs.duration({ hours: -6, minutes: 3 }).toISOString()).toBe('-PT6H-3M')
     expect(dayjs.duration({ hours: 6, minutes: -3 }).toISOString()).toBe('PT6H-3M')
+    expect(dayjs.duration({ hours: -6, minutes: -3 }).toISOString()).toBe('-PT6H3M')
   })
 })
 
