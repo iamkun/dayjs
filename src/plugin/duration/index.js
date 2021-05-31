@@ -38,26 +38,9 @@ const roundNumber = number =>
 const absolute = number => Math.abs(number)
 const xor = (a, b) => (a && !b) || (!a && b)
 const getNumberUnitFormat = (number, unit, negativeMode) => {
-  if (!number) {
-    return {
-      negative: false,
-      format: ''
-    }
-  }
-
-  const negative = isNegative(number)
-
-  if (xor(negative, negativeMode)) {
-    return {
-      negative,
-      format: `-${absolute(number)}${unit}`
-    }
-  }
-
-  return {
-    negative,
-    format: `${absolute(number)}${unit}`
-  }
+  if (!number) return ''
+  if (xor(isNegative(number), negativeMode)) return `-${absolute(number)}${unit}`
+  return `${absolute(number)}${unit}`
 }
 
 class Duration {
@@ -177,10 +160,10 @@ class Duration {
 
     const S = getNumberUnitFormat(seconds, 'S', negativeMode)
 
-    const T = H.format || m.format || S.format ? 'T' : ''
+    const T = H || m || S ? 'T' : ''
     const P = negativeMode ? '-' : ''
 
-    const result = `${P}P${Y.format}${M.format}${D.format}${T}${H.format}${m.format}${S.format}`
+    const result = `${P}P${Y}${M}${D}${T}${H}${m}${S}`
     return result === 'P' || result === '-P' ? 'P0D' : result
   }
 
