@@ -74,8 +74,8 @@ class Duration {
       return this
     }
     if (typeof input === 'object') {
-      Object.keys(input).forEach((k) => {
-        this.$d[prettyUnit(k)] = input[k]
+      Object.keys(input).forEach((u) => {
+        this.$d[prettyUnit(u)] = input[u]
       })
       this.calMilliseconds()
       return this
@@ -225,15 +225,17 @@ class Duration {
 
   add(input, unit, isSubtract) {
     let another
-    if (unit) {
-      another = input * unitToMS[prettyUnit(unit)]
-    } else if (isDuration(input)) {
-      another = input.$ms
+    if (isDuration(input)) {
+      another = input
     } else {
-      another = wrapper(input, this).$ms
+      another = wrapper(input, this, unit)
     }
 
-    return wrapper(this.$ms + (another * (isSubtract ? -1 : 1)), this)
+    const d = {}
+    Object.keys(unitToMS).forEach((u) => {
+      d[u] = (this.$d[u] || 0) + ((another.$d[u] || 0) * (isSubtract ? -1 : 1))
+    })
+    return wrapper(d, this)
   }
 
   subtract(input, unit) {

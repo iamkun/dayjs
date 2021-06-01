@@ -223,11 +223,25 @@ describe('Milliseconds', () => {
 })
 
 describe('Add', () => {
-  const a = dayjs.duration(1, 'days')
-  const b = dayjs.duration(2, 'days')
-  expect(a.add(b).days()).toBe(3)
-  expect(a.add(1, 'days').days()).toBe(2)
-  expect(a.add({ days: 5 }).days()).toBe(6)
+  it('Add days', () => {
+    const a = dayjs.duration(1, 'days')
+    const b = dayjs.duration(2, 'days')
+    expect(a.add(b).days()).toBe(3)
+    expect(a.add(1, 'days').days()).toBe(2)
+    expect(a.add({ days: 5 }).days()).toBe(6)
+  })
+  it('Add days results over 1 month', () => {
+    const a = dayjs.duration(15, 'days')
+    const b = dayjs.duration(20, 'days')
+    expect(a.add(b).days()).toBe(35)
+    expect(a.add(b).toISOString()).toBe('P35D')
+  })
+  it('Add hours results over 1 day', () => {
+    const a = dayjs.duration(15, 'hours')
+    const b = dayjs.duration(20, 'hours')
+    expect(a.add(b).hours()).toBe(35)
+    expect(a.add(b).toISOString()).toBe('PT35H')
+  })
 })
 
 describe('Add duration to dayjs', () => {
@@ -250,9 +264,11 @@ describe('Add duration to dayjs', () => {
 })
 
 describe('Subtract', () => {
-  const a = dayjs.duration(3, 'days')
-  const b = dayjs.duration(2, 'days')
-  expect(a.subtract(b).days()).toBe(1)
+  it('Substract days', () => {
+    const a = dayjs.duration(3, 'days')
+    const b = dayjs.duration(2, 'days')
+    expect(a.subtract(b).days()).toBe(1)
+  })
 })
 
 describe('Subtract duration from dayjs', () => {
