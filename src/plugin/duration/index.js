@@ -33,6 +33,17 @@ const wrapper = (input, instance, unit) =>
 
 const prettyUnit = unit => `${$u.p(unit)}s`
 const isNegative = number => number < 0
+const isDateUnit = (unit) => {
+  switch (prettyUnit(unit)) {
+    case 'years':
+    case 'months':
+    case 'weeks':
+    case 'days':
+      return true
+    default:
+      return false
+  }
+}
 const roundNumber = number =>
   (isNegative(number) ? Math.ceil(number) : Math.floor(number))
 const absolute = number => Math.abs(number)
@@ -52,6 +63,9 @@ class Duration {
       this.parseFromMilliseconds()
     }
     if (unit) {
+      if (isDateUnit(unit)) {
+        return wrapper({ [unit]: input }, this)
+      }
       return wrapper(input * unitToMS[prettyUnit(unit)], this)
     }
     if (typeof input === 'number') {
@@ -273,11 +287,23 @@ export default (option, Dayjs, dayjs) => {
   const oldAdd = Dayjs.prototype.add
   const oldSubtract = Dayjs.prototype.subtract
   Dayjs.prototype.add = function (value, unit) {
-    if (isDuration(value)) value = value.asMilliseconds()
+    if (isDuration(value)) {
+      let d = this
+      Object.keys(value.$d).forEach((durationUnit) => {
+        d = d.add(value.$d[durationUnit], durationUnit)
+      })
+      return d
+    }
     return oldAdd.bind(this)(value, unit)
   }
   Dayjs.prototype.subtract = function (value, unit) {
-    if (isDuration(value)) value = value.asMilliseconds()
+    if (isDuration(value)) {
+      let d = this
+      Object.keys(value.$d).forEach((durationUnit) => {
+        d = d.subtract(value.$d[durationUnit], durationUnit)
+      })
+      return d
+    }
     return oldSubtract.bind(this)(value, unit)
   }
 }

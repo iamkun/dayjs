@@ -230,10 +230,23 @@ describe('Add', () => {
   expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
-test('Add duration', () => {
-  const a = dayjs('2020-10-01')
-  const days = dayjs.duration(2, 'days')
-  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+describe('Add duration to dayjs', () => {
+  it('Add months', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.add(dayjs.duration(2, 'months')).format('YYYY-MM-DD')).toBe('2020-12-01')
+    expect(a.add(dayjs.duration(3, 'months')).format('YYYY-MM-DD')).toBe('2021-01-01')
+  })
+  it('Add days', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.add(dayjs.duration(2, 'days')).format('YYYY-MM-DD')).toBe('2020-10-03')
+    expect(a.add(dayjs.duration(29, 'days')).format('YYYY-MM-DD')).toBe('2020-10-30')
+    expect(a.add(dayjs.duration(30, 'days')).format('YYYY-MM-DD')).toBe('2020-10-31')
+    expect(a.add(dayjs.duration(31, 'days')).format('YYYY-MM-DD')).toBe('2020-11-01')
+  })
+  it('Add hours', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.add(dayjs.duration(24, 'hours')).format('YYYY-MM-DD')).toBe('2020-10-02')
+  })
 })
 
 describe('Subtract', () => {
@@ -242,10 +255,20 @@ describe('Subtract', () => {
   expect(a.subtract(b).days()).toBe(1)
 })
 
-test('Subtract duration', () => {
-  const a = dayjs('2020-10-20')
-  const days = dayjs.duration(2, 'days')
-  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+describe('Subtract duration from dayjs', () => {
+  it('Subtract months', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.subtract(dayjs.duration(2, 'months')).format('YYYY-MM-DD')).toBe('2020-08-01')
+    expect(a.subtract(dayjs.duration(10, 'months')).format('YYYY-MM-DD')).toBe('2019-12-01')
+  })
+  it('Subtract days', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.subtract(dayjs.duration(2, 'days')).format('YYYY-MM-DD')).toBe('2020-09-29')
+  })
+  it('Subtract hours', () => {
+    const a = dayjs('2020-10-01')
+    expect(a.subtract(dayjs.duration(24, 'hours')).format('YYYY-MM-DD')).toBe('2020-09-30')
+  })
 })
 
 describe('Seconds', () => {
