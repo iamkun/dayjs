@@ -1,4 +1,8 @@
 import { PluginFunc } from 'dayjs'
 
-declare const plugin: PluginFunc
+declare interface PluginOptions {
+    parseTwoDigitYear?: (yearString: string) => number
+}
+
+declare const plugin: PluginFunc<PluginOptions>
 export = plugin
