@@ -29,7 +29,7 @@ it('Finland Swedish locale', () => {
     .toBe('lördag, 12. juni 2021, kl. 17.30')
   // short
   expect(dayjs('2019-03-01 12:30').locale('sv-fi').format('lll'))
-    .toBe('1. mar 2019  , kl. 12.30')
+    .toBe('1. mar 2019, kl. 12.30')
   expect(dayjs('2021-06-01 17:30').locale('sv-fi').format('llll'))
     .toBe('tis, 1. jun 2021, kl. 17.30')
 })
