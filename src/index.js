@@ -21,7 +21,7 @@ const parseLocale = (preset, object, isLocal) => {
       l = presetLower
     }
     const presetSplit = preset.split('-')
-    if (!l && presetSplit.length) {
+    if (!l && presetSplit.length > 1) {
       return parseLocale(presetSplit[0])
     }
   } else {
