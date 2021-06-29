@@ -33,9 +33,7 @@ const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFile
         const filePath = path.join(pluginDir, p)
         const targetPath = path.join(pluginDir, pluginName, `index${typeFileExt}`)
         const readFile = await promisify(fs.readFile)(filePath, 'utf8')
-        const result = readFile
-          .replace('"../index"', "'../../index'")
-          .replace(/'dayjs'/g, "'dayjs/esm'")
+        const result = readFile.replace(/'dayjs'/g, "'dayjs/esm'")
         await promisify(fs.writeFile)(targetPath, result, 'utf8')
         await promisify(fs.unlink)(filePath)
       }
