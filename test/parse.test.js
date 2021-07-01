@@ -201,4 +201,12 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d).toBe(null)
   })
+
+  // dots should not be matched, and fallback to Date
+  it('2021.01.03', () => {
+    const date = '2021.01.03'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
 })
