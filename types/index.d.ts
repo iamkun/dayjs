@@ -10,7 +10,7 @@ declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, loca
 
 declare namespace dayjs {
   interface ConfigTypeMap {
-    default: string | number | Date | Dayjs
+    default: string | number | Date | Dayjs | null | undefined
   }
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
