@@ -87,13 +87,16 @@ dayjs
   .local()
   .format() //2019-03-06T17:11:55+08:00
 dayjs.utc('2018-01-01', 'YYYY-MM-DD') // with CustomParseFormat plugin
+dayjs.utc('2018-01-01', 'YYYY-MM-DD', true) // with CustomParseFormat plugin & Using strict parsing
 ```
 
 By default, Day.js parses and displays in local time.
 
 If you want to parse or display in UTC, you can use `dayjs.utc()` instead of `dayjs()`.
 
-#### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string)`
+You may specify a boolean for the last argument to use `strict parsing`. Strict parsing requires that the format and input match exactly, including delimiters.
+
+#### dayjs.utc `dayjs.utc(dateType?: string | number | Date | Dayjs, format? string, strict?: boolean)`
 
 Returns a `Dayjs` object in UTC mode.
 

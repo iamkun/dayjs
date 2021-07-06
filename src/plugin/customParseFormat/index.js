@@ -13,6 +13,11 @@ const matchWord = /\d*[^\s\d-_:/()]+/ // Word
 
 let locale = {}
 
+let parseTwoDigitYear = function (input) {
+  input = +input
+  return input + (input > 68 ? 1900 : 2000)
+}
+
 function offsetFromString(string) {
   if (!string) return 0
   if (string === 'Z') return 0
@@ -111,8 +116,7 @@ const expressions = {
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
-    input = +input
-    this.year = input + (input > 68 ? 1900 : 2000)
+    this.year = parseTwoDigitYear(input)
   }],
   YYYY: [match4, addInput('year')],
   Z: zoneExpressions,
@@ -171,6 +175,7 @@ function makeParser(format) {
 
 const parseFormattedInput = (input, format, utc) => {
   try {
+    if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
@@ -201,6 +206,9 @@ const parseFormattedInput = (input, format, utc) => {
 
 export default (o, C, d) => {
   d.p.customParseFormat = true
+  if (o && o.parseTwoDigitYear) {
+    ({ parseTwoDigitYear } = o)
+  }
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {

@@ -10,7 +10,7 @@ declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, loca
 
 declare namespace dayjs {
   interface ConfigTypeMap {
-    default: string | number | Date | Dayjs
+    default: string | number | Date | Dayjs | null | undefined
   }
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
@@ -286,7 +286,9 @@ declare namespace dayjs {
      * const date1 = dayjs('2019-01-25')
      * const date2 = dayjs('2018-06-05')
      * date1.diff(date2) // 20214000000 default milliseconds
+     * date1.diff() // milliseconds to current time
      * ```
+     *
      * To get the difference in another unit of measurement, pass that measurement as the second argument.
      * ```
      * const date1 = dayjs('2019-01-25')
@@ -296,7 +298,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/display/difference
      */
-    diff(date: ConfigType, unit?: QUnitType | OpUnitType, float?: boolean): number
+    diff(date?: ConfigType, unit?: QUnitType | OpUnitType, float?: boolean): number
     /**
      * This returns the number of **milliseconds** since the Unix Epoch of the Day.js object.
      * ```
