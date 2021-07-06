@@ -1,4 +1,4 @@
-import { FORMAT_DEFAULT, INVALID_DATE_STRING } from '../../constant'
+import { FORMAT_DEFAULT } from '../../constant'
 
 export default (o, c, d) => { // locale needed later
   const proto = c.prototype
@@ -11,11 +11,6 @@ export default (o, c, d) => { // locale needed later
   // extend en locale here
   proto.format = function (formatStr) {
     const locale = this.$locale()
-
-    if (!this.isValid()) {
-      return locale.invalidDate || INVALID_DATE_STRING
-    }
-    
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, (match) => {
