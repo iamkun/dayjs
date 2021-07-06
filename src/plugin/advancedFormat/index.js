@@ -1,4 +1,4 @@
-import { FORMAT_DEFAULT, INVALID_DATE_STRING } from '../../constant'
+import { FORMAT_DEFAULT } from '../../constant'
 
 export default (o, c, d) => { // locale needed later
   const proto = c.prototype
@@ -13,7 +13,7 @@ export default (o, c, d) => { // locale needed later
     const locale = this.$locale()
 
     if (!this.isValid()) {
-      return locale.invalidDate || INVALID_DATE_STRING
+      return oldFormat.bind(this)(formatStr)
     }
 
     const utils = this.$utils()
