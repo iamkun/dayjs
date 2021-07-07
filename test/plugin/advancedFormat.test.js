@@ -24,6 +24,10 @@ afterEach(() => {
   MockDate.reset()
 })
 
+it('Format of invalid date', () => {
+  expect(dayjs(null).format('z').toLowerCase()).toEqual(moment(null).format('z').toLowerCase())
+})
+
 it('Format empty string', () => {
   expect(dayjs().format()).toBe(moment().format())
 })
