@@ -368,3 +368,12 @@ it('custom two-digit year parse function', () => {
   const input3 = '99-05-02'
   expect(dayjs(input3, format).year()).toBe(1899)
 })
+
+it('parse X x', () => {
+  const input = '1410715640.579'
+  const format = 'X'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '1410715640579'
+  const format2 = 'x'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+})
