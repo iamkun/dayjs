@@ -5,6 +5,7 @@ import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 
 dayjs.extend(customParseFormat)
@@ -376,4 +377,8 @@ it('parse X x', () => {
   const input2 = '1410715640579'
   const format2 = 'x'
   expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+
+  // x X starct parse requires advancedFormat plugin
+  dayjs.extend(advancedFormat)
+  expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
 })
