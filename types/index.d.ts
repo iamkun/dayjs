@@ -15,7 +15,9 @@ declare namespace dayjs {
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
 
-  export type OptionType = { locale?: string, format?: string, utc?: boolean } | string | string[]
+  export interface FormatObject { locale?: string, format?: string, utc?: boolean }
+
+  export type OptionType = FormatObject | string | string[]
 
   export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
 
