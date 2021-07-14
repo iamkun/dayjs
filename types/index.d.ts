@@ -29,7 +29,7 @@ declare namespace dayjs {
 
   export type OpUnitType = UnitType | "week" | "weeks" | 'w';
   export type QUnitType = UnitType | "quarter" | "quarters" | 'Q';
-  export type ManipulateType = UnitTypeShort | Omit<UnitTypeLong, 'date'> | 'w' | 'week' | 'quarter' | 'Q';
+  export type ManipulateType = Omit<OpUnitType, 'date' | 'dates'>;
   class Dayjs {
     constructor (config?: ConfigType)
     /**
