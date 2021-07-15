@@ -17,14 +17,19 @@ export class DateRange {
     return this.start.isValid() && this.end.isValid() && this instanceof DateRange
   }
 
+  clone() {
+    return new DateRange(this.start, this.end)
+  }
+
   isOverlap(other) {
     if (!(other instanceof DateRange)) {
-      return false
+      return other.isRange()
     }
 
     if (
       (this.start >= other.start && this.start <= other.end) ||
-      (this.end >= other.start && this.end <= other.end)
+      (this.end >= other.start && this.end <= other.end) ||
+      (this.start <= other.start && this.end >= other.end)
     ) {
       return true
     }
@@ -33,7 +38,17 @@ export class DateRange {
   }
 
   isEqual(other) {
-    return this.start.isSame(other.start) && this.end(this.isSame(other.end))
+    return this.start.isSame(other.start) && this.end.isSame(other.end)
+  }
+
+  addStartRange(number, unit) {
+    this.start = this.start.add(number, unit)
+    return this
+  }
+
+  addEndRange(number, unit) {
+    this.end = this.end.add(number, unit)
+    return this
   }
 }
 
