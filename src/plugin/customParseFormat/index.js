@@ -232,7 +232,10 @@ export default (o, C, d) => {
       this.$d = parseFormattedInput(date, format, utc)
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
-      if (isStrict && date !== this.format(format)) {
+      // use != to treat
+      // input number 1410715640579 and format string '1410715640579' equal
+      // eslint-disable-next-line eqeqeq
+      if (isStrict && date != this.format(format)) {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
