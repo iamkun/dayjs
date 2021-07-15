@@ -1,5 +1,5 @@
 
-export class DateRange {
+export class DayjsRange {
   constructor(start, end) {
     let s = start
     let e = end
@@ -14,15 +14,15 @@ export class DateRange {
   }
 
   isRange() {
-    return this.start.isValid() && this.end.isValid() && this instanceof DateRange
+    return this.start.isValid() && this.end.isValid() && this instanceof DayjsRange
   }
 
   clone() {
-    return new DateRange(this.start, this.end)
+    return new DayjsRange(this.start, this.end)
   }
 
   isOverlap(other) {
-    if (!(other instanceof DateRange)) {
+    if (!(other instanceof DayjsRange)) {
       return other.isRange()
     }
 
@@ -50,10 +50,20 @@ export class DateRange {
     this.end = this.end.add(number, unit)
     return this
   }
+
+  subtractStartRange(number, string) {
+    this.start = this.start.subtract(number, string)
+    return this
+  }
+
+  subtractEndRange(number, string) {
+    this.end = this.end.subtract(number, string)
+    return this
+  }
 }
 
 export default(o, c, d) => {
   d.range = function (start, end) {
-    return new DateRange(d(start), d(end))
+    return new DayjsRange(d(start), d(end))
   }
 }
