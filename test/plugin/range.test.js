@@ -59,24 +59,24 @@ it('range add', () => {
   const startDate = '2021-07-15 19:01:00'
   const endDate = '2021-07-16 19:00:00'
 
-  expect((dayjs.range(startDate, endDate).addStartRange(1, "d")).start).toEqual(dayjs(startDate).add(1, "d"))
-  expect((dayjs.range(startDate, endDate).addEndRange(1, "d")).end).toEqual(dayjs(endDate).add(1, "d"))
+  expect((dayjs.range(startDate, endDate).addStartRange(1, 'd')).start).toEqual(dayjs(startDate).add(1, 'd'))
+  expect((dayjs.range(startDate, endDate).addEndRange(1, 'd')).end).toEqual(dayjs(endDate).add(1, 'd'))
 })
 
 it('range clone', () => {
   const startDate = '2021-07-15 19:01:00'
   const endDate = '2021-07-16 10:00:00'
 
-  const range = dayjs.range(startDate, endDate)
-  const cloneRange = range.clone()
-  expect(range.isEqual(cloneRange)).toBe(true)
-  expect(range.addStartRange(1, "d").isEqual(cloneRange)).toBe(false)
+  const originalRange = dayjs.range(startDate, endDate)
+  const cloneRange = originalRange.clone()
+  expect(originalRange.isEqual(cloneRange)).toBe(true)
+  expect(originalRange.addStartRange(1, 'd').isEqual(cloneRange)).toBe(false)
 })
 
 it('range subtract', () => {
   const startDate = '2021-07-15 19:01:00'
   const endDate = '2021-07-16 19:00:00'
 
-  expect((dayjs.range(startDate, endDate).subtractStartRange(1, "d")).start).toEqual(dayjs(startDate).subtract(1, "d"))
-  expect((dayjs.range(startDate, endDate).subtractEndRange(1, "d")).end).toEqual(dayjs(endDate).subtract(1, "d"))
+  expect((dayjs.range(startDate, endDate).subtractStartRange(1, 'd')).start).toEqual(dayjs(startDate).subtract(1, 'd'))
+  expect((dayjs.range(startDate, endDate).subtractEndRange(1, 'd')).end).toEqual(dayjs(endDate).subtract(1, 'd'))
 })
