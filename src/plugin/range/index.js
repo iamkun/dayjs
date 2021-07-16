@@ -42,23 +42,19 @@ export class DayjsRange {
   }
 
   addStartRange(number, unit) {
-    this.start = this.start.add(number, unit)
-    return this
+    return new DayjsRange(this.start.add(number, unit), this.end)
   }
 
   addEndRange(number, unit) {
-    this.end = this.end.add(number, unit)
-    return this
+    return new DayjsRange(this.start, this.end.add(number, unit))
   }
 
   subtractStartRange(number, string) {
-    this.start = this.start.subtract(number, string)
-    return this
+    return new DayjsRange(this.start.subtract(number, string))
   }
 
   subtractEndRange(number, string) {
-    this.end = this.end.subtract(number, string)
-    return this
+    return new DayjsRange(this.start, this.end.subtract(number, string))
   }
 }
 
