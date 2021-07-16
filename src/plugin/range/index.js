@@ -23,7 +23,7 @@ export class DayjsRange {
 
   isOverlap(other) {
     if (!(other instanceof DayjsRange)) {
-      return other.isRange()
+      return false
     }
 
     if (
