@@ -14,6 +14,8 @@ const promisifyWriteFile = promisify(fs.writeFile)
 const localeNameRegex = /\/\/ (.*) \[/
 const formatName = n => n.replace(/\.js/, '').replace('-', '_')
 
+const filterEsmTypes = source => !(fs.lstatSync(source).isDirectory() && source.endsWith(`${path.sep}esm`))
+
 const localePath = path.join(__dirname, '../src/locale')
 
 async function build(option) {
@@ -62,7 +64,7 @@ async function listLocaleJson(localeArr) {
       fileName: './dayjs.min.js'
     }))
 
-    await promisify(ncp)('./types/', './')
+    await promisify(ncp)('./types/', './', { filter: filterEsmTypes })
 
     // list locales
     await listLocaleJson(locales)
