@@ -1,0 +1,7 @@
+{
+  "main": "index.js",
+  "name": "dayjs",
+  "type": "module",
+  "version": "0.0.0-development",
+  "description": "placeholder for the package.json from dayjs project root with type=module and main=index.js"
+}
