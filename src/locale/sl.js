@@ -20,17 +20,17 @@ const locale = {
   },
   relativeTime: {
     future: 'čez %s',
-    past: 'pred %s',
+    past: '%s nazaj',
     s: 'nekaj sekund',
-    m: 'minuta',
+    m: 'eno minuto',
     mm: '%d minut',
-    h: 'ura',
+    h: 'eno uro',
     hh: '%d ur',
-    d: 'dan',
+    d: 'en dan',
     dd: '%d dni',
-    M: 'mesec',
+    M: 'en mesec',
     MM: '%d mesecev',
-    y: 'leto',
+    y: 'eno leto',
     yy: '%d let'
   }
 }
