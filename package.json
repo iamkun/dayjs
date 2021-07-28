@@ -28,6 +28,10 @@
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3"
   },
+  "exports": {
+    ".": "./esm/index.js",
+    "./plugin/*": "./esm/plugin/*/index.js"
+  },
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
