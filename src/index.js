@@ -251,11 +251,12 @@ class Dayjs {
   }
 
   format(formatStr) {
-    if (!this.isValid()) return C.INVALID_DATE_STRING
+    const locale = this.$locale()
+
+    if (!this.isValid()) return locale.invalidDate || C.INVALID_DATE_STRING
 
     const str = formatStr || C.FORMAT_DEFAULT
     const zoneStr = Utils.z(this)
-    const locale = this.$locale()
     const { $H, $m, $M } = this
     const {
       weekdays, months, meridiem
