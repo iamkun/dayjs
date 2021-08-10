@@ -68,4 +68,14 @@ describe('Update locale', () => {
     expect(dayjs().format(formatString))
       .toEqual(moment().format(formatString))
   })
+
+  it('Check if it possible to update single value in case of object', () => {
+    const result = dayjs.updateLocale('zh-cn', {
+      formats: {
+        LL: '[testFormatLL]'
+      }
+    })
+    expect(result.formats.L).toEqual('YYYY/MM/DD')
+    expect(result.formats.LL).toEqual('[testFormatLL]')
+  })
 })
