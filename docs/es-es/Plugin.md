@@ -131,10 +131,13 @@ Lista de formatos añadidos:
 | `kk`    | 01-24                 | Hora, con 2 dígitos, contando desde 1                 |
 | `X`     | 1360013296            | Tiempo Unix en segundos                               |
 | `x`     | 1360013296123         | Tiempo Unix en milisegundos                           |
-| `w`     | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)              |
-| `ww`    | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)    |
-| `wo`    | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin) |
-| `gggg`  | 2017                  | Week Year (depend: weekYear plugin)                   |
+| `w`    | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)                        |
+| `ww`   | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)              |
+| `W`    | 1 2 ... 52 53         | ISO Week of year (depend: weekOfYear & isoWeek plugin)          |
+| `WW`   | 01 02 ... 52 53       | ISO Week of year, 2-digits (depend: weekOfYear & isoWeek plugin)|
+| `wo`   | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin)           |
+| `gggg` | 2017                  | Week Year (depend: weekYear plugin)                             |
+| `GGGG` | 2017                  | ISO Week Year (depend: weekYear & isoWeek plugin)               |
 
 ### LocalizedFormat
 

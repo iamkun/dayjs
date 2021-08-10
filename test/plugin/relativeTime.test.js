@@ -3,6 +3,7 @@ import moment from 'moment'
 import dayjs from '../../src'
 import * as C from '../../src/constant'
 import relativeTime from '../../src/plugin/relativeTime'
+import updateLocale from '../../src/plugin/updateLocale'
 import utc from '../../src/plugin/utc'
 import '../../src/locale/ru'
 
@@ -119,6 +120,7 @@ it('Time from now with UTC', () => {
 
 it('Custom thresholds and rounding support', () => {
   expect(dayjs().subtract(45, 'm').fromNow()).toBe('an hour ago')
+  delete relativeTime.$i // this allow plugin to be installed again
   dayjs.extend(relativeTime, {
     rounding: Math.floor,
     thresholds: [
@@ -142,4 +144,31 @@ it('Locale without relativeTime config fallback', () => {
   expect(dayjs().locale({
     name: 'test-locale'
   }).fromNow()).toEqual(expect.any(String))
+})
+
+it('Past and Future keys should support function for additional processing', () => {
+  dayjs.extend(updateLocale)
+  dayjs.updateLocale('en', {
+    relativeTime: {
+      future: input => `${input} modified`,
+      past: input => `${input} modified`,
+      s: 'just now',
+      m: ' 1 min',
+      mm: '%d min',
+      h: '1 hr',
+      hh: '%d hrs',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years'
+    }
+  })
+
+
+  const past = Date.now() - 1000
+  expect(dayjs(past).fromNow()).toEqual(' 1 min modified')
+  const future = Date.now() + 1000
+  expect(dayjs(future).fromNow()).toEqual(' 1 min modified')
 })

@@ -1,11 +1,13 @@
 import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
-import utc from '../../src/plugin/utc'
 import timezone from '../../src/plugin/timezone'
+import customParseFormat from '../../src/plugin/customParseFormat'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(customParseFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -17,6 +19,7 @@ afterEach(() => {
 
 const NY = 'America/New_York'
 const VAN = 'America/Vancouver'
+const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 
 describe('Guess', () => {
@@ -98,7 +101,9 @@ describe('Convert', () => {
       const jun = _('2014-06-01T12:00:00Z')
       const dec = _('2014-12-01T12:00:00Z')
       expect(jun.tz('America/Los_Angeles').format('ha')).toBe('5am')
+      expect(jun.tz('America/Los_Angeles').utcOffset()).toBe(-7 * 60)
       expect(dec.tz('America/Los_Angeles').format('ha')).toBe('4am')
+      expect(dec.tz('America/Los_Angeles').utcOffset()).toBe(-8 * 60)
       expect(jun.tz(NY).format('ha')).toBe('8am')
       expect(dec.tz(NY).format('ha')).toBe('7am')
       expect(jun.tz(TOKYO).format('ha')).toBe('9pm')
@@ -182,24 +187,20 @@ describe('DST, a time that never existed Fall Back', () => {
       expect(d.valueOf()).toBe(1352005199000)
     })
   })
-  it('2012-11-04 01:00:00', () => {
-    const s = '2012-11-04 01:00:00';
+  it('2012-11-04 00:59:59', () => {
+    const s = '2012-11-04 00:59:59';
     [dayjs, moment].forEach((_) => {
       const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T01:00:00-04:00')
+      expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
       expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352005200000)
+      expect(d.valueOf()).toBe(1352005199000)
     })
   })
-  it('2012-11-04 01:59:59', () => {
-    const s = '2012-11-04 01:59:59';
-    [dayjs, moment].forEach((_) => {
-      const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T01:59:59-04:00')
-      expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352008799000)
-    })
-  })
+
+  // there's no sense to test "2012-11-04 01:59:59 America/New_York"
+  // cause it's an invalid date and never exist
+  // and dayjs result it as "2012-11-04T01:59:00-05:00"
+
   it('2012-11-04 02:00:00', () => {
     const s = '2012-11-04 02:00:00';
     [dayjs, moment].forEach((_) => {
@@ -260,6 +261,14 @@ describe('set Default', () => {
   })
 })
 
+describe('keepLocalTime', () => {
+  const base = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
+  it('keepLocalTime', () => {
+    expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
+    expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
+  })
+})
+
 describe('Get offsetName', () => {
   const dtz = dayjs.tz('2012-03-11 01:59:59', NY)
   it('short', () => {
@@ -271,5 +280,29 @@ describe('Get offsetName', () => {
   it('long', () => {
     const d = dtz.offsetName('long')
     expect(d).toBe('Eastern Standard Time')
+  })
+})
+
+describe('CustomPraseFormat', () => {
+  const result = 1602786600
+  it('normal', () => {
+    expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
+  })
+  it('custom', () => {
+    expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(result)
+  })
+})
+
+describe('startOf and endOf', () => {
+  it('corrects for timezone offset in startOf', () => {
+    const originalDay = dayjs.tz('2010-01-01 00:00:00', NY)
+    const startOfDay = originalDay.startOf('day')
+    expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('corrects for timezone offset in endOf', () => {
+    const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
+    const endOfDay = originalDay.endOf('day')
+    expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
 })

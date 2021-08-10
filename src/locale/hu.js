@@ -13,17 +13,17 @@ const locale = {
   relativeTime: {
     future: '%s múlva',
     past: '%s',
-    s: 'néhány másodperc',
-    m: 'egy perc',
-    mm: '%d perc',
-    h: 'egy óra',
-    hh: '%d óra',
-    d: 'egy nap',
-    dd: '%d nap',
-    M: 'egy hónap',
-    MM: '%d hónap',
-    y: 'egy éve',
-    yy: '%d év'
+    s: (_, s, ___, isFuture) => `néhány másodperc${isFuture || s ? '' : 'e'}`,
+    m: (_, s, ___, isFuture) => `egy perc${isFuture || s ? '' : 'e'}`,
+    mm: (n, s, ___, isFuture) => `${n} perc${isFuture || s ? '' : 'e'}`,
+    h: (_, s, ___, isFuture) => `egy ${isFuture || s ? 'óra' : 'órája'}`,
+    hh: (n, s, ___, isFuture) => `${n} ${isFuture || s ? 'óra' : 'órája'}`,
+    d: (_, s, ___, isFuture) => `egy ${isFuture || s ? 'nap' : 'napja'}`,
+    dd: (n, s, ___, isFuture) => `${n} ${isFuture || s ? 'nap' : 'napja'}`,
+    M: (_, s, ___, isFuture) => `egy ${isFuture || s ? 'hónap' : 'hónapja'}`,
+    MM: (n, s, ___, isFuture) => `${n} ${isFuture || s ? 'hónap' : 'hónapja'}`,
+    y: (_, s, ___, isFuture) => `egy ${isFuture || s ? 'év' : 'éve'}`,
+    yy: (n, s, ___, isFuture) => `${n} ${isFuture || s ? 'év' : 'éve'}`
   },
   formats: {
     LT: 'H:mm',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

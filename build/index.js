@@ -35,23 +35,27 @@ async function listLocaleJson(localeArr) {
 
 (async () => {
   try {
+    /* eslint-disable no-restricted-syntax, no-await-in-loop */
+    // We use await-in-loop to make rollup run sequentially to save on RAM
     const locales = await promisifyReadDir(localePath)
-    locales.forEach((l) => {
-      build(configFactory({
+    for (const l of locales) {
+      // run builds sequentially to limit RAM usage
+      await build(configFactory({
         input: `./src/locale/${l}`,
         fileName: `./locale/${l}`,
         name: `dayjs_locale_${formatName(l)}`
       }))
-    })
+    }
 
     const plugins = await promisifyReadDir(path.join(__dirname, '../src/plugin'))
-    plugins.forEach((l) => {
-      build(configFactory({
-        input: `./src/plugin/${l}/index`,
-        fileName: `./plugin/${l}.js`,
-        name: `dayjs_plugin_${formatName(l)}`
+    for (const plugin of plugins) {
+      // run builds sequentially to limit RAM usage
+      await build(configFactory({
+        input: `./src/plugin/${plugin}/index`,
+        fileName: `./plugin/${plugin}.js`,
+        name: `dayjs_plugin_${formatName(plugin)}`
       }))
-    })
+    }
 
     build(configFactory({
       input: './src/index.js',

@@ -114,6 +114,18 @@ const tests = [
     '2010-02-14 15:25:50.125'
   ]
 ]
+
+describe('parse empty object', () => {
+  it('local', () => {
+    expect(dayjs({}).format())
+      .toBe(moment({}).format())
+  })
+  it('utc', () => {
+    expect(dayjs.utc({}).format())
+      .toBe(moment.utc({}).format())
+  })
+})
+
 it('Constructor from Object', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs(tests[i][0]).format(fmt)).toBe(tests[i][1])

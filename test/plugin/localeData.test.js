@@ -103,3 +103,17 @@ it('Locale order', () => {
   moment.locale('en')
   expect(dayjs.weekdays(true)).toEqual(moment.weekdays(true))
 })
+
+it('meridiem', () => {
+  dayjs.locale('zh-cn')
+  expect(typeof dayjs.localeData().meridiem).toEqual('function')
+  expect(typeof dayjs().localeData().meridiem).toEqual('function')
+  dayjs.locale('en')
+})
+
+it('ordinal', () => {
+  dayjs.locale('zh-cn')
+  expect(typeof dayjs.localeData().ordinal).toEqual('function')
+  expect(typeof dayjs().localeData().ordinal).toEqual('function')
+  dayjs.locale('en')
+})

@@ -1,6 +1,30 @@
 // Hebrew [he]
 import dayjs from 'dayjs'
 
+const texts = {
+  s: 'מספר שניות',
+  ss: '%d שניות',
+  m: 'דקה',
+  mm: '%d דקות',
+  h: 'שעה',
+  hh: '%d שעות',
+  hh2: 'שעתיים',
+  d: 'יום',
+  dd: '%d ימים',
+  dd2: 'יומיים',
+  M: 'חודש',
+  MM: '%d חודשים',
+  MM2: 'חודשיים',
+  y: 'שנה',
+  yy: '%d שנים',
+  yy2: 'שנתיים'
+}
+
+function relativeTimeFormatter(number, withoutSuffix, key) {
+  const text = texts[key + (number === 2 ? '2' : '')] || texts[key]
+  return text.replace('%d', number)
+}
+
 const locale = {
   name: 'he',
   weekdays: 'ראשון_שני_שלישי_רביעי_חמישי_שישי_שבת'.split('_'),
@@ -11,17 +35,17 @@ const locale = {
   relativeTime: {
     future: 'בעוד %s',
     past: 'לפני %s',
-    s: 'כמה שניות',
-    m: 'דקה',
-    mm: '%d דקות',
-    h: 'שעה',
-    hh: '%d שעות',
-    d: 'יום',
-    dd: '%d ימים',
-    M: 'חודש',
-    MM: '%d חודשים',
-    y: 'שנה',
-    yy: '%d שנים'
+    s: relativeTimeFormatter,
+    m: relativeTimeFormatter,
+    mm: relativeTimeFormatter,
+    h: relativeTimeFormatter,
+    hh: relativeTimeFormatter,
+    d: relativeTimeFormatter,
+    dd: relativeTimeFormatter,
+    M: relativeTimeFormatter,
+    MM: relativeTimeFormatter,
+    y: relativeTimeFormatter,
+    yy: relativeTimeFormatter
   },
   ordinal: n => n,
   format: {

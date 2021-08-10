@@ -1,9 +1,11 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../src'
+import timezone from '../src/plugin/timezone'
 import utc from '../src/plugin/utc'
 
 dayjs.extend(utc)
+dayjs.extend(timezone)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -61,4 +63,12 @@ it('UTC and utcOffset', () => {
   const test2 = '2000-01-01T06:31:00Z'
   expect(moment.utc(test2).utcOffset(-60).format())
     .toBe(dayjs.utc(test2).utcOffset(-60).format())
+})
+
+it('UTC diff in DST', () => {
+  // DST till 2020-10-25
+  const day1 = dayjs.utc('20201023') // in DST
+  const day2 = dayjs.utc('20201026')
+  expect(day1.diff(day2, 'd'))
+    .toBe(-3)
 })

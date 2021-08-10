@@ -1,3 +1,173 @@
+## [1.10.5](https://github.com/iamkun/dayjs/compare/v1.10.4...v1.10.5) (2021-05-26)
+
+
+### Bug Fixes
+
+* add meridiem in ar locales ([#1375](https://github.com/iamkun/dayjs/issues/1375)) ([319f616](https://github.com/iamkun/dayjs/commit/319f616e572a03b984013d04d1b3a18ffd5b1190))
+* Added Zulu support to customParseFormat ([#1359](https://github.com/iamkun/dayjs/issues/1359)) ([1138a3f](https://github.com/iamkun/dayjs/commit/1138a3f0a76592c6d72fb86c4399e133fa41e2ec))
+* fix Bengali [bn] locale monthsShort error ([a0e6c0c](https://github.com/iamkun/dayjs/commit/a0e6c0cf3e1828020dfa11432c6716990f6ed5e0))
+* fix missing types for ArraySupport plugin ([#1401](https://github.com/iamkun/dayjs/issues/1401)) ([b1abdc4](https://github.com/iamkun/dayjs/commit/b1abdc40ee6c9d18ff46c311a114e0755677ea6f))
+* fix Ukrainian [uk] locale ([#1463](https://github.com/iamkun/dayjs/issues/1463)) ([0fdac93](https://github.com/iamkun/dayjs/commit/0fdac93ff2531542301b76952be9b084b2e2dfa0))
+* hotfix for `Duration` types ([#1357](https://github.com/iamkun/dayjs/issues/1357)) ([855b7b3](https://github.com/iamkun/dayjs/commit/855b7b3d049a3903794f91db3419f167c00dabd2)), closes [#1354](https://github.com/iamkun/dayjs/issues/1354)
+* timezone plugin DST error ([#1352](https://github.com/iamkun/dayjs/issues/1352)) ([71bed15](https://github.com/iamkun/dayjs/commit/71bed155edf32bff24379930ac684fc783538d8f))
+* Update duration plugin change string to number ([#1394](https://github.com/iamkun/dayjs/issues/1394)) ([e1546d1](https://github.com/iamkun/dayjs/commit/e1546d1a0cdb97ae92cf11efe61d94707af6a3a3))
+* update Duration plugin to support no-argument ([#1400](https://github.com/iamkun/dayjs/issues/1400)) ([8d9a5ae](https://github.com/iamkun/dayjs/commit/8d9a5ae0749e1b4e76babd4deeaa3b1d9776c29b))
+* Update Finnish [fi] locale to set yearStart  ([#1378](https://github.com/iamkun/dayjs/issues/1378)) ([f3370bd](https://github.com/iamkun/dayjs/commit/f3370bda4e435118f714c8a7daf5c88cfc4b69ba))
+* update Russian [ru] locale meridiem and unit tests ([#1403](https://github.com/iamkun/dayjs/issues/1403)) ([f10f39d](https://github.com/iamkun/dayjs/commit/f10f39de7db70244a3c35e4a421090a12972457b))
+* update Russian [ru] locale yearStart config  ([#1372](https://github.com/iamkun/dayjs/issues/1372)) ([5052515](https://github.com/iamkun/dayjs/commit/5052515fe35b2444201ef8ef87220b1876a94d0a))
+* update Slovenian [sl] locale to set correct ordinal  ([#1386](https://github.com/iamkun/dayjs/issues/1386)) ([cb4f746](https://github.com/iamkun/dayjs/commit/cb4f74633b3020d6dbf19548c8cb13613dafca18))
+* update Spanish [es] locale to change month names to lowercase ([#1414](https://github.com/iamkun/dayjs/issues/1414)) ([9c20e77](https://github.com/iamkun/dayjs/commit/9c20e77caf7b1b5eccf418175203b198d4e29535))
+* update Swedish [sv] locale to set correct yearStart ([#1385](https://github.com/iamkun/dayjs/issues/1385)) ([66c5935](https://github.com/iamkun/dayjs/commit/66c59354964ef456bcd5f6152819618f44978082))
+* update UTC plugin to support string argument like +HH:mm ([#1395](https://github.com/iamkun/dayjs/issues/1395)) ([656127c](https://github.com/iamkun/dayjs/commit/656127cc44eda50923a1ac755602863fc32b9e69))
+
+## [1.10.4](https://github.com/iamkun/dayjs/compare/v1.10.3...v1.10.4) (2021-01-22)
+
+
+### Bug Fixes
+
+* Correct handling negative duration ([#1317](https://github.com/iamkun/dayjs/issues/1317)) ([3f5c085](https://github.com/iamkun/dayjs/commit/3f5c085608182472f20b84766b10949945663e44))
+* Improve `Duration` types ([#1338](https://github.com/iamkun/dayjs/issues/1338)) ([4aca4b1](https://github.com/iamkun/dayjs/commit/4aca4b1b584a15de1146d929f95c944594032f20))
+* parse a string for MMM month format with underscore delimiter ([#1349](https://github.com/iamkun/dayjs/issues/1349)) ([82ef9a3](https://github.com/iamkun/dayjs/commit/82ef9a304f06287ac0a14c4da9a7fe6152b5fec9))
+* Update Bengali [bn] locale ([#1329](https://github.com/iamkun/dayjs/issues/1329)) ([02d96ec](https://github.com/iamkun/dayjs/commit/02d96ec7189f62d6ef8987135919cbb5ceff20a6))
+* update locale Portuguese [pt] yearStart ([#1345](https://github.com/iamkun/dayjs/issues/1345)) ([5c785d5](https://github.com/iamkun/dayjs/commit/5c785d528cc08811638d7cbfc7fc158d67b32d75))
+* update Polish [pl] locale yearStart ([#1348](https://github.com/iamkun/dayjs/issues/1348)) ([e93e6b8](https://github.com/iamkun/dayjs/commit/e93e6b8ffa61036b26382f1763e3864d4a7d5df5))
+* Update Slovenian [sl] relativeTime locale ([#1333](https://github.com/iamkun/dayjs/issues/1333)) ([fe5f1d0](https://github.com/iamkun/dayjs/commit/fe5f1d0afbe57b70339e268047e6c3028ca3d59b))
+
+## [1.10.3](https://github.com/iamkun/dayjs/compare/v1.10.2...v1.10.3) (2021-01-09)
+
+
+### Bug Fixes
+
+* fix customParseFormat plugin strict mode parse meridiem bug ([#1321](https://github.com/iamkun/dayjs/issues/1321)) ([e49eeef](https://github.com/iamkun/dayjs/commit/e49eeefbe8acb36419d36ca2e7ed8bc152f73ac1))
+* fix weekYear plugin missing locale bug ([#1319](https://github.com/iamkun/dayjs/issues/1319)) ([344bdc0](https://github.com/iamkun/dayjs/commit/344bdc0eed6843edb05723dc7853a41833d88f08)), closes [#1304](https://github.com/iamkun/dayjs/issues/1304)
+* update advancedFormat plugin to add format options for iso week and weekyear ([#1309](https://github.com/iamkun/dayjs/issues/1309)) ([2c54c64](https://github.com/iamkun/dayjs/commit/2c54c6441871a175ac9b95e41e4cd075dbac10cb))
+* update devHelper to add dev warning setting locale before loading ([c5cc893](https://github.com/iamkun/dayjs/commit/c5cc89355e1e206ca72433c19c40cb528690b04f))
+* update German [de] locale yearStart ([1858df8](https://github.com/iamkun/dayjs/commit/1858df8008de56570680723df89b36a8cbc970ef)), closes [#1264](https://github.com/iamkun/dayjs/issues/1264)
+
+## [1.10.2](https://github.com/iamkun/dayjs/compare/v1.10.1...v1.10.2) (2021-01-05)
+
+
+### Bug Fixes
+
+* fix parse regex bug ([#1307](https://github.com/iamkun/dayjs/issues/1307)) ([db2b6a5](https://github.com/iamkun/dayjs/commit/db2b6a5ea8e70f9fda645d113ca33495aa96b616)), closes [#1305](https://github.com/iamkun/dayjs/issues/1305)
+* remove module entry in package.json to revert 1.10.1 change ([#1314](https://github.com/iamkun/dayjs/issues/1314)) ([824dcb8](https://github.com/iamkun/dayjs/commit/824dcb8dfcccf14f64b6a2741a00fcdfe53dcd98))
+* update devHelper add warning "passing Year as a Number will be parsed as a Unix timestamp" ([#1315](https://github.com/iamkun/dayjs/issues/1315)) ([b0dda31](https://github.com/iamkun/dayjs/commit/b0dda3139e25441ab4e7c1f4f192dee0ecce6ef8))
+
+## [1.10.1](https://github.com/iamkun/dayjs/compare/v1.10.0...v1.10.1) (2021-01-03)
+
+
+### Bug Fixes
+
+* fix typescript type error UnitTypeLongPlural ([#1302](https://github.com/iamkun/dayjs/issues/1302)) ([bfaabe4](https://github.com/iamkun/dayjs/commit/bfaabe4f398c11564eca6cda7c8aded22e1b231a)), closes [#1300](https://github.com/iamkun/dayjs/issues/1300)
+
+# [1.10.0](https://github.com/iamkun/dayjs/compare/v1.9.8...v1.10.0) (2021-01-03)
+
+
+### Bug Fixes
+
+* add ordinal to localeData plugin ([#1266](https://github.com/iamkun/dayjs/issues/1266)) ([fd229fa](https://github.com/iamkun/dayjs/commit/fd229fa5bd26bcba810e2535eb937ea8d99106c2))
+* add preParsePostFormat plugin & update Arabic [ar] locale ([#1255](https://github.com/iamkun/dayjs/issues/1255)) ([f2e4790](https://github.com/iamkun/dayjs/commit/f2e479006a9a49bc0917f8620101d40ac645f7f2))
+* add type support for plural forms of units ([#1289](https://github.com/iamkun/dayjs/issues/1289)) ([de49bb1](https://github.com/iamkun/dayjs/commit/de49bb100badfb92b9a5933cc568841f340a923f))
+* escape last period to match only milliseconds ([#1239](https://github.com/iamkun/dayjs/issues/1239)) ([#1295](https://github.com/iamkun/dayjs/issues/1295)) ([64037e6](https://github.com/iamkun/dayjs/commit/64037e6a8cf303dcfd2b954f309bd9691f87fffc))
+
+
+### Features
+
+* add ES6 Module Support, package.json module point to "esm/index.js" ([#1298](https://github.com/iamkun/dayjs/issues/1298)) ([f63375d](https://github.com/iamkun/dayjs/commit/f63375dea89becbd3bb2bb8ea7289c58c752bfed)), closes [#598](https://github.com/iamkun/dayjs/issues/598) [#313](https://github.com/iamkun/dayjs/issues/313)
+
+## [1.9.8](https://github.com/iamkun/dayjs/compare/v1.9.7...v1.9.8) (2020-12-27)
+
+
+### Bug Fixes
+
+* fix Ukrainian [uk] locale typo ([1605cc0](https://github.com/iamkun/dayjs/commit/1605cc0f6fe0e9c46a92d529bc9cd6e130432337))
+* update Hebrew [he] locale for double units ([#1287](https://github.com/iamkun/dayjs/issues/1287)) ([1c4b0da](https://github.com/iamkun/dayjs/commit/1c4b0da1468522e59dc9ee646d10dd2b31477d99))
+* update zh locale meridiem "noon" ([0e7ff3d](https://github.com/iamkun/dayjs/commit/0e7ff3dd29ca3aed85cb76dfcb8298d326e26542))
+* update zh-cn locale definition of noon  ([#1278](https://github.com/iamkun/dayjs/issues/1278)) ([d5930b9](https://github.com/iamkun/dayjs/commit/d5930b96ff884f4176ca3fcb1bc95e8f1ec75c71))
+
+## [1.9.7](https://github.com/iamkun/dayjs/compare/v1.9.6...v1.9.7) (2020-12-05)
+
+
+### Bug Fixes
+
+* add duration.format to format a Duration ([#1202](https://github.com/iamkun/dayjs/issues/1202)) ([9a859a1](https://github.com/iamkun/dayjs/commit/9a859a147ba223a1eeff0f2bb6f33d97e0ccc6c7))
+* Add function handling for relativeTime.future and relativeTime.past ([#1197](https://github.com/iamkun/dayjs/issues/1197)) ([ef1979c](https://github.com/iamkun/dayjs/commit/ef1979ce85c61fe2d759ef3c37cb6aaf2358094f))
+* avoid install installed plugin ([#1214](https://github.com/iamkun/dayjs/issues/1214)) ([a92eb6c](https://github.com/iamkun/dayjs/commit/a92eb6c4dc1437ec920e69484d52984f5921a8ea))
+* avoid memory leak after installing a plugin too many times ([b8d2e32](https://github.com/iamkun/dayjs/commit/b8d2e32a9eb59661a7ed6200daa070687becaebd))
+* fix diff bug when UTC plugin enabled ([#1201](https://github.com/iamkun/dayjs/issues/1201)) ([9544ed2](https://github.com/iamkun/dayjs/commit/9544ed2a6c466b8308d26b33a388a6737435a1f4)), closes [#1200](https://github.com/iamkun/dayjs/issues/1200)
+* fix startOf/endOf bug in timezone plugin ([#1229](https://github.com/iamkun/dayjs/issues/1229)) ([eb5fbc4](https://github.com/iamkun/dayjs/commit/eb5fbc4c7d1b62a8615d2f263b404a9515d8e15c))
+* fix utc plugin diff edge case ([#1187](https://github.com/iamkun/dayjs/issues/1187)) ([971b3d4](https://github.com/iamkun/dayjs/commit/971b3d40b4c9403165138f1034e2223cd97c3abf))
+* update customParseFormat plugin to parse 2-digit offset ([#1209](https://github.com/iamkun/dayjs/issues/1209)) ([b56936a](https://github.com/iamkun/dayjs/commit/b56936ab77b8f6289a1b77d49307b495c4bf9f91)), closes [#1205](https://github.com/iamkun/dayjs/issues/1205)
+* Update timezone plugin type definition ([#1221](https://github.com/iamkun/dayjs/issues/1221)) ([34cfb92](https://github.com/iamkun/dayjs/commit/34cfb920b9653ad44d4b31fe49e533692a3ce01b))
+
+## [1.9.6](https://github.com/iamkun/dayjs/compare/v1.9.5...v1.9.6) (2020-11-10)
+
+
+### Bug Fixes
+
+* fix customParseFormat plugin parsing date bug ([#1198](https://github.com/iamkun/dayjs/issues/1198)) ([50f05ad](https://github.com/iamkun/dayjs/commit/50f05ad3addf27827c5657ae7519514e40d9faec)), closes [#1194](https://github.com/iamkun/dayjs/issues/1194)
+* Update lv (Latvian) locale relative time ([#1192](https://github.com/iamkun/dayjs/issues/1192)) ([6d6c684](https://github.com/iamkun/dayjs/commit/6d6c6841b13ba4f7e69de92caf132a3592c5253a))
+
+## [1.9.5](https://github.com/iamkun/dayjs/compare/v1.9.4...v1.9.5) (2020-11-05)
+
+
+### Bug Fixes
+
+* customParseFormat plugin supports parsing localizedFormats  ([#1110](https://github.com/iamkun/dayjs/issues/1110)) ([402b603](https://github.com/iamkun/dayjs/commit/402b603aa3ee4199786950bc88b3fdc6b527aa35))
+* fix customParseFormat plugin parse meridiem bug ([#1169](https://github.com/iamkun/dayjs/issues/1169)) ([9e8f8d9](https://github.com/iamkun/dayjs/commit/9e8f8d96c69d557f4d267f42567c25ae9e7ab227)), closes [#1168](https://github.com/iamkun/dayjs/issues/1168)
+* fix devHelper error in umd bundle in browser ([#1165](https://github.com/iamkun/dayjs/issues/1165)) ([d11b5ee](https://github.com/iamkun/dayjs/commit/d11b5ee7dc11af671355f65ccda00f6ba42cc725))
+* fix utc plugin diff bug in DST ([#1171](https://github.com/iamkun/dayjs/issues/1171)) ([f8da3fe](https://github.com/iamkun/dayjs/commit/f8da3fe7e50c84c0502bf5be0b364910922dbd79)), closes [#1097](https://github.com/iamkun/dayjs/issues/1097) [#1021](https://github.com/iamkun/dayjs/issues/1021)
+* isoWeek plugin type ([#1177](https://github.com/iamkun/dayjs/issues/1177)) ([c3d0436](https://github.com/iamkun/dayjs/commit/c3d0436b06f74989e3a2c751a5d170f8072c4aad))
+* update localeData plugin to support meridiem ([#1174](https://github.com/iamkun/dayjs/issues/1174)) ([fdb09e4](https://github.com/iamkun/dayjs/commit/fdb09e4074cc7e8f6196846f18d3566c1f9e8fcd)), closes [#1172](https://github.com/iamkun/dayjs/issues/1172)
+* update timezone plugin parse Date instance / timestamp logic & remove useless test ([#1183](https://github.com/iamkun/dayjs/issues/1183)) ([a7f858b](https://github.com/iamkun/dayjs/commit/a7f858bb70ad81f718ba35c479e84b54eace48b2))
+
+## [1.9.4](https://github.com/iamkun/dayjs/compare/v1.9.3...v1.9.4) (2020-10-23)
+
+
+### Bug Fixes
+
+* Add descriptions to types ([#1148](https://github.com/iamkun/dayjs/issues/1148)) ([9a407a1](https://github.com/iamkun/dayjs/commit/9a407a140b089345a387d1aceab4d0d1635229c7))
+* add devHelper plugin ([#1163](https://github.com/iamkun/dayjs/issues/1163)) ([de49dc8](https://github.com/iamkun/dayjs/commit/de49dc80c83b85de4170571b64412bd60ada221b))
+* Fix Hungarian (hu) locale ([#1112](https://github.com/iamkun/dayjs/issues/1112)) ([ab13754](https://github.com/iamkun/dayjs/commit/ab13754f43c5033dacaa0eb2042dc4ab1a7a2754))
+* fix minMax plugin parsing empty array bug ([#1062](https://github.com/iamkun/dayjs/issues/1062)) ([368108b](https://github.com/iamkun/dayjs/commit/368108bc6d5cb1542f711b8eba722bd4dfaab0cd))
+* update adding/subtracting Duration from Dayjs object ([#1156](https://github.com/iamkun/dayjs/issues/1156)) ([f861aca](https://github.com/iamkun/dayjs/commit/f861acac3e83e28d3a4a96312c71119fd6b544fc))
+* update en-NZ locale to use proper ordinal formatting function ([#1143](https://github.com/iamkun/dayjs/issues/1143)) ([fcdbc58](https://github.com/iamkun/dayjs/commit/fcdbc5880710456a29b2bacf250542230bf48b99))
+* update localeData plugin type ([#1116](https://github.com/iamkun/dayjs/issues/1116)) ([ee5a4ec](https://github.com/iamkun/dayjs/commit/ee5a4ec41edddfb57d103c35182dc635c9264a10))
+* update timezone plugin to support custom parse format ([#1160](https://github.com/iamkun/dayjs/issues/1160)) ([48cbf31](https://github.com/iamkun/dayjs/commit/48cbf3118ba5427de428777c2e025896db654f2e)), closes [#1159](https://github.com/iamkun/dayjs/issues/1159)
+* update timezone plugin to support keepLocalTime ([#1161](https://github.com/iamkun/dayjs/issues/1161)) ([1d429e5](https://github.com/iamkun/dayjs/commit/1d429e5fe4467ebddcf81b43cf6f36e5e3be944c)), closes [#1149](https://github.com/iamkun/dayjs/issues/1149)
+
+## [1.9.3](https://github.com/iamkun/dayjs/compare/v1.9.2...v1.9.3) (2020-10-13)
+
+
+### Bug Fixes
+
+* fix localizedFormat export error ([#1133](https://github.com/iamkun/dayjs/issues/1133)) ([deecd6a](https://github.com/iamkun/dayjs/commit/deecd6ab8a2f4173ee7046f6b568b41fd2677531)), closes [#1132](https://github.com/iamkun/dayjs/issues/1132)
+
+## [1.9.2](https://github.com/iamkun/dayjs/compare/v1.9.1...v1.9.2) (2020-10-13)
+
+
+### Bug Fixes
+
+* add arraySupport plugin ([#1129](https://github.com/iamkun/dayjs/issues/1129)) ([be505c2](https://github.com/iamkun/dayjs/commit/be505c2c540261027342cecc55d8919a3d18d893))
+* export type of duration plugin ([#1094](https://github.com/iamkun/dayjs/issues/1094)) ([2c92e71](https://github.com/iamkun/dayjs/commit/2c92e71bf55d09601120cdf433da7a19cc8abff6))
+* Fix LocaleData plugin longDateFormat lowercase error ([#1101](https://github.com/iamkun/dayjs/issues/1101)) ([7937ccd](https://github.com/iamkun/dayjs/commit/7937ccdeac47d094a60e65ebb62a6020b81c46f4))
+* Fix objectSupport plugin bug in UTC ([#1107](https://github.com/iamkun/dayjs/issues/1107)) ([fe90bb6](https://github.com/iamkun/dayjs/commit/fe90bb6944f2ff1969ca975954d303b449dfa95b)), closes [#1105](https://github.com/iamkun/dayjs/issues/1105)
+* fix Serbian locale grammar (sr, sr-cyrl) ([#1108](https://github.com/iamkun/dayjs/issues/1108)) ([cc87eff](https://github.com/iamkun/dayjs/commit/cc87eff8b75b0d86ce0956516319d402bccae6c0))
+* Fix typo for "monday" in arabic ([#1067](https://github.com/iamkun/dayjs/issues/1067)) ([2e1e426](https://github.com/iamkun/dayjs/commit/2e1e42650124f30282dc4d710798d576b928f1c7))
+* support dayjs.add(Duration), dayjs.subtract(Duration) ([#1099](https://github.com/iamkun/dayjs/issues/1099)) ([b1a0294](https://github.com/iamkun/dayjs/commit/b1a02942c5238203aaa04ce9a074c73742324ab7))
+* update Breton [br] locale relativeTime config ([#1103](https://github.com/iamkun/dayjs/issues/1103)) ([b038bfd](https://github.com/iamkun/dayjs/commit/b038bfdb128889d677c95534d2be29cc30c9e72f))
+* update Catalan [ca] locale ordinal ([73da380](https://github.com/iamkun/dayjs/commit/73da38024c8b550bdcfbe3ff7e578e742c7aecf2))
+* update German [de] locale relativeTime config ([#1109](https://github.com/iamkun/dayjs/issues/1109)) ([f6e771b](https://github.com/iamkun/dayjs/commit/f6e771b70f93d19ebb12e6b794aa4628a1796248))
+* update localeData plugin to add longDateFormat to global localeData ([#1106](https://github.com/iamkun/dayjs/issues/1106)) ([16937d1](https://github.com/iamkun/dayjs/commit/16937d16e053b8c1d4a607622fa2fdbfd9809832))
+* Update objectSupport plugin to return current date time while parsing empty object ([f56783e](https://github.com/iamkun/dayjs/commit/f56783e14d8cf50916b015e7188b23bb6fbca839))
+
+## [1.9.1](https://github.com/iamkun/dayjs/compare/v1.9.0...v1.9.1) (2020-09-28)
+
+
+### Bug Fixes
+
+* Fix objectSupport plugin to get the correct result (zero-based month) ([#1089](https://github.com/iamkun/dayjs/issues/1089)) ([f95ac15](https://github.com/iamkun/dayjs/commit/f95ac15a4577ae5a3d1ce353872a2cd9fc454bc2))
+
 # [1.9.0](https://github.com/iamkun/dayjs/compare/v1.8.36...v1.9.0) (2020-09-28)
 
 

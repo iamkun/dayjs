@@ -1,15 +1,32 @@
 import { PluginFunc } from 'dayjs'
+import { OpUnitType, UnitTypeLongPlural } from 'dayjs';
 
 declare const plugin: PluginFunc
 export as namespace plugin;
 export = plugin
 
 declare namespace plugin {
+  /**
+   * @deprecated Please use more strict types
+   */
   type DurationInputType = string | number | object
+  /**
+   * @deprecated Please use more strict types
+   */
   type DurationAddType = number | object | Duration
+  
+  type DurationUnitsObjectType = Partial<{
+    [unit in Exclude<UnitTypeLongPlural, "dates"> | "weeks"]: number
+  }>;
+  type DurationUnitType = Exclude<OpUnitType, "date" | "dates">
+  type CreateDurationType = 
+    ((units: DurationUnitsObjectType) => Duration)
+    & ((time: number, unit?: DurationUnitType) => Duration)
+    & ((ISO_8601: string) => Duration)
+  type AddDurationType = CreateDurationType & ((duration: Duration) => Duration)
 
   interface Duration {
-    new (input: DurationInputType, unit?: string, locale?: string): Duration
+    new (input: string | number | object, unit?: string, locale?: string): Duration
 
     clone(): Duration
 
@@ -39,23 +56,33 @@ declare namespace plugin {
     years(): number
     asYears(): number
 
-    as(unit: string): number
+    as(unit: DurationUnitType): number
 
-    get(unit: string): number
+    get(unit: DurationUnitType): number
 
-    add(input: DurationAddType, unit? : string): Duration
-
-    subtract(input: DurationAddType, unit? : string): Duration
+    add: AddDurationType
+    
+    subtract: AddDurationType
 
     toJSON(): string
 
     toISOString(): string
+
+    format(formatStr?: string): string
 
     locale(locale: string): Duration
   }
 }
 
 declare module 'dayjs' {
-  export function duration(input?: plugin.DurationInputType , unit?: string): plugin.Duration
+  interface Dayjs {
+    add(duration: plugin.Duration): Dayjs
+    subtract(duration: plugin.Duration): Dayjs
+  }
+
+  /**
+   * @param time If unit is not present, time treated as number of milliseconds
+   */
+  export const duration: plugin.CreateDurationType;
   export function isDuration(d: any): d is plugin.Duration
 }

@@ -1,4 +1,4 @@
-import { t } from '../localizedFormat'
+import { t } from '../localizedFormat/utils'
 
 export default (o, c, dayjs) => { // locale needed later
   const proto = c.prototype
@@ -28,8 +28,9 @@ export default (o, c, dayjs) => { // locale needed later
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
       weekdaysShort: instance =>
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
-      longDateFormat: format => getLongDateFormat(this.$locale(), format)
-
+      longDateFormat: format => getLongDateFormat(this.$locale(), format),
+      meridiem: this.$locale().meridiem,
+      ordinal: this.$locale().ordinal
     }
   }
   proto.localeData = function () {
@@ -45,7 +46,9 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysMin: () => dayjs.weekdaysMin(),
       months: () => dayjs.months(),
       monthsShort: () => dayjs.monthsShort(),
-      longDateFormat: format => getLongDateFormat(localeObject, format)
+      longDateFormat: format => getLongDateFormat(localeObject, format),
+      meridiem: localeObject.meridiem,
+      ordinal: localeObject.ordinal
     }
   }
 
