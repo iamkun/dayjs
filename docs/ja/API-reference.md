@@ -2,9 +2,9 @@
 
 The document here **no longer** updates.
 
-Please visit our website [https://day.js.org](https://day.js.org/docs/en/parse/parse) for more  information.
+Please visit our website [https://day.js.org](https://day.js.org/docs/en/parse/parse) for more information.
 
--------------
+---
 
 <br />
 <br />
@@ -26,7 +26,7 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
 - [API Reference](#api-reference)
 - [Parsing](#parsing)
   - [Constructor `dayjs(dateType?: string | number | Date | Dayjs)`](#constructor-dayjsdatetype-string--number--date--dayjs)
-    - [ISO 8601 形式](#iso-8601-%E5%BD%A2%E5%BC%8F)
+    - [ISO 8601 形式](#iso-8601-形式)
     - [Native Javascript Date object](#native-javascript-date-object)
     - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
   - [Unix Timestamp (seconds) `.unix(value: number)`](#unix-timestamp-seconds-unixvalue-number)
@@ -69,6 +69,20 @@ Day.js は組み込みの `Date.prototype` を変更する代わりに `Dayjs` �
   - [Is a Dayjs `.isDayjs(compared: any)`](#is-a-dayjs-isdayjscompared-any)
 - [UTC](#utc)
 - [Plugin APIs](#plugin-apis)
+  - [RelativeTime](#relativetime)
+  - [IsLeapYear](#isleapyear)
+  - [WeekOfYear](#weekofyear)
+  - [WeekDay](#weekday)
+  - [IsoWeeksInYear](#isoweeksinyear)
+  - [IsSameOrAfter](#issameorafter)
+  - [IsSameOrBefore](#issameorbefore)
+  - [IsBetween](#isbetween)
+  - [QuarterOfYear](#quarterofyear)
+  - [ToArray](#toarray)
+  - [ToObject](#toobject)
+  - [MinMax](#minmax)
+  - [Calendar](#calendar)
+  - [UpdateLocale](#updatelocale)
 
 ## Parsing
 
@@ -536,6 +550,6 @@ UTC でパースや表示をしたい場合は、[`UTC`](./Plugin.md#utc)プラ�
 
 ### UpdateLocale
 
-`.updateLocale` to update a locale's properties
+`.updateLocale` でローケールののプロパティーを更新します。
 
-plugin [`UpdateLocale`](./Plugin.md#updateLocale)
+プラグイン [`UpdateLocale`](./Plugin.md#updateLocale)
