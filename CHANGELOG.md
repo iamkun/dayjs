@@ -1,3 +1,20 @@
+## [1.10.7](https://github.com/iamkun/dayjs/compare/v1.10.6...v1.10.7) (2021-09-10)
+
+
+### Bug Fixes
+
+* Add  Spanish (Mexico) [es-mx] locale ([#1614](https://github.com/iamkun/dayjs/issues/1614)) ([3393f2a](https://github.com/iamkun/dayjs/commit/3393f2ad55346d55902683a2e31c6f253d96c8c2))
+* Add Arabic (Iraq) [ar-iq] locale ([#1627](https://github.com/iamkun/dayjs/issues/1627)) ([b5a1391](https://github.com/iamkun/dayjs/commit/b5a1391011b247d08863d291542db5937b23b427))
+* add format object type to type file ([#1572](https://github.com/iamkun/dayjs/issues/1572)) ([5a79cc6](https://github.com/iamkun/dayjs/commit/5a79cc6408e825d9e123629eb44fc19c996d7751))
+* duration plugin when parsing duration from ISO string, set missing components to 0 instead of NaN ([#1611](https://github.com/iamkun/dayjs/issues/1611)) ([252585b](https://github.com/iamkun/dayjs/commit/252585b4b2bd59508150e21bb994908a9d78f9b0))
+* narrow type for `add` and `subtract` ([#1576](https://github.com/iamkun/dayjs/issues/1576)) ([1686962](https://github.com/iamkun/dayjs/commit/16869621b1a42563064dbf87f80c1ebfd74c1188))
+* update customParseFormat plugin strict x X parsing ([#1571](https://github.com/iamkun/dayjs/issues/1571)) ([08adda5](https://github.com/iamkun/dayjs/commit/08adda54edbcca38601f57841921d0f87f84e49e))
+* update Lithuanian [lt] locale spelling for single month ([#1609](https://github.com/iamkun/dayjs/issues/1609)) ([255dc54](https://github.com/iamkun/dayjs/commit/255dc54d9295de135a9037ce6ca13cae4bfd2cfb))
+* Update Norwegian Bokmål [nb] local yearStart 4 ([#1608](https://github.com/iamkun/dayjs/issues/1608)) ([7a8467c](https://github.com/iamkun/dayjs/commit/7a8467c0b7d59821f7e19d4a6973bcda8e4c19b1))
+* update plugin advancedFormat `isValid` validation ([#1566](https://github.com/iamkun/dayjs/issues/1566)) ([755fc8b](https://github.com/iamkun/dayjs/commit/755fc8bb1c532eb991459f180eee81367d12016c))
+* update Sinhalese [si] locale month name ([#1475](https://github.com/iamkun/dayjs/issues/1475)) ([63de2a8](https://github.com/iamkun/dayjs/commit/63de2a8b7dcd7e68c132c85d88572d4c9d296907))
+* update utcOffset plugin type file ([#1604](https://github.com/iamkun/dayjs/issues/1604)) ([f68e4b1](https://github.com/iamkun/dayjs/commit/f68e4b1a29fc33542f74cde10ec6d9fb045ca37e))
+
 ## [1.10.6](https://github.com/iamkun/dayjs/compare/v1.10.5...v1.10.6) (2021-07-06)
 
 
