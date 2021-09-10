@@ -5,7 +5,7 @@
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -42,9 +42,9 @@ dayjs()
 
 ## 시작해볼까요!
 
-### Documentation
+### 문서
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+더 많은 세부 사항과 API, 그리고 다른 문서를 [day.js.org](https://day.js.org/) 웹사이트에서 볼 수 있습니다.
 
 ### 설치
 

@@ -2,10 +2,12 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import badMutable from '../../src/plugin/badMutable'
+import dayOfYear from '../../src/plugin/dayOfYear'
 import weekOfYear from '../../src/plugin/weekOfYear'
 import '../../src/locale/zh-cn'
 
 dayjs.extend(badMutable)
+dayjs.extend(dayOfYear)
 dayjs.extend(weekOfYear)
 
 beforeEach(() => {
@@ -188,7 +190,14 @@ it('isAfter isBefore isSame', () => {
   expect(d.isAfter()).toBe(false)
 })
 
-it('WeekOfYear get week won"t change instance', () => {
+it('DayOfYear get day won\'t change instance', () => {
+  const d = dayjs()
+  const format = d.format()
+  d.dayOfYear()
+  expect(d.format()).toBe(format)
+})
+
+it('WeekOfYear get week won\'t change instance', () => {
   const d = dayjs()
   const format = d.format()
   d.week()

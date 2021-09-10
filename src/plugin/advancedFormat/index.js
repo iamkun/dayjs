@@ -11,6 +11,11 @@ export default (o, c, d) => { // locale needed later
   // extend en locale here
   proto.format = function (formatStr) {
     const locale = this.$locale()
+
+    if (!this.isValid()) {
+      return oldFormat.bind(this)(formatStr)
+    }
+
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
     const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, (match) => {
