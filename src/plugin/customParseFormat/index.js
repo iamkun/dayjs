@@ -248,13 +248,16 @@ export default (o, C, d) => {
         const dateWithoutTimezone = date.replace(/[+-]\d\d:?\d\d$/, '')
         const parsedDateWithoutTimezone = this.subtract(currentOffset, 'minute').subtract(parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(Z|ZZ)$/, ''))
 
+        // use != to treat
+        // input number 1410715640579 and format string '1410715640579' equal
         if (
           (
             parsedOffsetMilliseconds !== undefined
             && dateWithoutTimezone !== parsedDateWithoutTimezone
           ) || (
             parsedOffsetMilliseconds === undefined
-            && date.toString() !== this.format(format)
+            // eslint-disable-next-line eqeqeq
+            && date != this.format(format)
           )
         ) {
           this.$d = new Date('')
