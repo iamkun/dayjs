@@ -243,14 +243,19 @@ export default (o, C, d) => {
       this.$d = parsedDate
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
-      // use != to treat
-      // input number 1410715640579 and format string '1410715640579' equal
-      // eslint-disable-next-line eqeqeq
       const currentOffset = this.utcOffset()
       if (isStrict) {
+        const dateWithoutTimezone = date.replace(/[+-]\d\d:?\d\d$/, '')
+        const parsedDateWithoutTimezone = this.subtract(currentOffset, 'minute').subtract(parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(Z|ZZ)$/, ''))
+
         if (
-          (parsedOffsetMilliseconds !== undefined && date.replace(/[+-]\d\d:?\d\d$/, '') !== this.subtract(currentOffset, 'minute').subtract(parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(Z|ZZ)$/, '')))
-          || (parsedOffsetMilliseconds === undefined && date != this.format(format))
+          (
+            parsedOffsetMilliseconds !== undefined
+            && dateWithoutTimezone !== parsedDateWithoutTimezone
+          ) || (
+            parsedOffsetMilliseconds === undefined
+            && date.toString() !== this.format(format)
+          )
         ) {
           this.$d = new Date('')
         }
