@@ -10,12 +10,14 @@ declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, loca
 
 declare namespace dayjs {
   interface ConfigTypeMap {
-    default: string | number | Date | Dayjs
+    default: string | number | Date | Dayjs | null | undefined
   }
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
 
-  export type OptionType = { locale?: string, format?: string, utc?: boolean } | string | string[]
+  export interface FormatObject { locale?: string, format?: string, utc?: boolean }
+
+  export type OptionType = FormatObject | string | string[]
 
   export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
 
@@ -27,7 +29,7 @@ declare namespace dayjs {
 
   export type OpUnitType = UnitType | "week" | "weeks" | 'w';
   export type QUnitType = UnitType | "quarter" | "quarters" | 'Q';
-
+  export type ManipulateType = Omit<OpUnitType, 'date' | 'dates'>;
   class Dayjs {
     constructor (config?: ConfigType)
     /**
@@ -235,7 +237,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/manipulate/add
      */
-    add(value: number, unit?: OpUnitType): Dayjs
+    add(value: number, unit?: ManipulateType): Dayjs
     /**
      * Returns a cloned Day.js object with a specified amount of time subtracted.
      * ```
@@ -245,7 +247,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/manipulate/subtract
      */
-    subtract(value: number, unit?: OpUnitType): Dayjs
+    subtract(value: number, unit?: ManipulateType): Dayjs
     /**
      * Returns a cloned Day.js object and set it to the start of a unit of time.
      * ```
@@ -286,7 +288,9 @@ declare namespace dayjs {
      * const date1 = dayjs('2019-01-25')
      * const date2 = dayjs('2018-06-05')
      * date1.diff(date2) // 20214000000 default milliseconds
+     * date1.diff() // milliseconds to current time
      * ```
+     *
      * To get the difference in another unit of measurement, pass that measurement as the second argument.
      * ```
      * const date1 = dayjs('2019-01-25')
@@ -296,7 +300,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/display/difference
      */
-    diff(date: ConfigType, unit?: QUnitType | OpUnitType, float?: boolean): number
+    diff(date?: ConfigType, unit?: QUnitType | OpUnitType, float?: boolean): number
     /**
      * This returns the number of **milliseconds** since the Unix Epoch of the Day.js object.
      * ```
