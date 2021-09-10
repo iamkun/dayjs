@@ -175,7 +175,12 @@ function makeParser(format) {
 
 const parseFormattedInput = (input, format, utc) => {
   try {
-    if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
+    if (['x', 'X'].indexOf(format) > -1) {
+      return {
+        parsedDate: new Date((format === 'X' ? 1000 : 1) * input)
+      }
+    }
+
     const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
