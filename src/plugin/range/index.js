@@ -1,13 +1,7 @@
 
 export class DayjsRange {
   constructor(start, end) {
-    let s = start
-    let e = end
-
-const { s, e } = start > end ? { s: end, e: start } : { s: start, e: end }
-      s = end
-      e = start
-    }
+    const { s, e } = start > end ? { s: end, e: start } : { s: start, e: end }
 
     this.start = s
     this.end = e
