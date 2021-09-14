@@ -4,7 +4,7 @@ export class DayjsRange {
     let s = start
     let e = end
 
-    if (s > e) {
+const { s, e } = start > end ? { s: end, e: start } : { s: start, e: end }
       s = end
       e = start
     }
