@@ -7,8 +7,8 @@ export class DayjsRange {
     this.end = e
   }
 
-  isRange() {
-    return this.start.isValid() && this.end.isValid() && this instanceof DayjsRange
+  isValidRange() {
+    return this.start.isValid() && this.end.isValid()
   }
 
   clone() {
@@ -16,7 +16,7 @@ export class DayjsRange {
   }
 
   isOverlap(other) {
-    if (!(other instanceof DayjsRange)) {
+    if (!(other instanceof DayjsRange) || !(other.isValidRange())) {
       return false
     }
 

@@ -12,14 +12,14 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('range isRange', () => {
+it('range isValidRange', () => {
   const startDate = '2021-07-15 19:01:00'
   const endDate = '2021-07-16 10:00:00'
 
-  expect(dayjs.range(startDate, null).isRange()).toBe(false)
-  expect(dayjs.range(null, startDate).isRange()).toBe(false)
-  expect(dayjs.range(startDate, endDate).isRange()).toBe(true)
-  expect(dayjs.range(endDate, startDate).isRange()).toBe(true)
+  expect(dayjs.range(startDate, null).isValidRange()).toBe(false)
+  expect(dayjs.range(null, startDate).isValidRange()).toBe(false)
+  expect(dayjs.range(startDate, endDate).isValidRange()).toBe(true)
+  expect(dayjs.range(endDate, startDate).isValidRange()).toBe(true)
 })
 
 it('range isEqual', () => {
@@ -46,6 +46,7 @@ it('range isOverlap', () => {
   expect(dayjs.range(startDate, otherDate2).isOverlap(dayjs.range(endDate, otherDate))).toBe(true)
   expect(dayjs.range(endDate, otherDate).isOverlap(dayjs.range(startDate, otherDate2))).toBe(true)
   expect(dayjs.range(endDate, otherDate).isOverlap()).toBe(false)
+  expect(dayjs.range(startDate, endDate).isOverlap(startDate, null)).toBe(false)
 })
 
 it('range get date', () => {
