@@ -12,6 +12,7 @@ declare module 'dayjs/esm' {
       utcOffset(offset: number, keepLocalTime?: boolean): Dayjs
     }
   
-    export function utc(config?: ConfigType, format?: string, strict?: boolean): Dayjs
+    export function utc(date?: ConfigType, format?: OptionType, locale?: string, strict?: boolean): Dayjs
+    export function utc(date?: ConfigType, format?: OptionType, strict?: boolean): Dayjs
   }
 }
