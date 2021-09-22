@@ -9,4 +9,10 @@ declare module 'dayjs' {
         add(argument: object): Dayjs
         subtract(argument: object): Dayjs
     }
+
+    interface ConfigTypeMap {
+        objectSupport: {
+            [key in UnitType]?: number;
+        }
+    }
 }
