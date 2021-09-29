@@ -12,7 +12,7 @@ declare module 'dayjs' {
 
     isUTC(): boolean
 
-    utcOffset(offset: number, keepLocalTime?: boolean): Dayjs
+    utcOffset(offset: number | string, keepLocalTime?: boolean): Dayjs
   }
 
   export function utc(config?: ConfigType, format?: string, strict?: boolean): Dayjs

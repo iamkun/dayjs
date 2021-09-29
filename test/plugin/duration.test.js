@@ -76,6 +76,9 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Formatting missing components', () => {
+    expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
+  })
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')

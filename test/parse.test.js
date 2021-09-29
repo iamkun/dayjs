@@ -89,11 +89,14 @@ describe('Parse', () => {
     expect(ds.millisecond()).toEqual(ms.millisecond())
   })
 
-  it('String Other, Null and isValid', () => {
+  it('String Other, Undefined and Null and isValid', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
+    expect(dayjs(undefined).toDate()).toEqual(moment(undefined).toDate())
     expect(dayjs().isValid()).toBe(true)
+    expect(dayjs(undefined).isValid()).toBe(true)
     expect(dayjs('').isValid()).toBe(false)
+    expect(dayjs(null).isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
@@ -197,6 +200,14 @@ describe('REGEX_PARSE', () => {
   })
   it('2021-01-02T01:23:45Z (no regex match)', () => {
     const date = '2021-01-02T01:23:45Z'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  // dots should not be matched, and fallback to Date
+  it('2021.01.03', () => {
+    const date = '2021.01.03'
     const d = date.match(REGEX_PARSE)
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d).toBe(null)
