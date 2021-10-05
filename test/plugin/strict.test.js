@@ -1,0 +1,57 @@
+import dayjs from '../../src'
+import strict from '../../src/plugin/strict'
+
+dayjs.extend(strict)
+
+describe('strict', () => {
+  it('should return valid date for valid input', () => {
+    expect(dayjs('2018-02-28T12:34:56.789Z').isValid()).toBe(true)
+    expect(dayjs('2018-02-28 12:34:56:789').isValid()).toBe(true)
+    expect(dayjs('2018-02-28').isValid()).toBe(true)
+    expect(dayjs('2020-02-29T12:34:56.789Z').isValid()).toBe(true)
+    expect(dayjs('2020-02-29 12:34:56:789').isValid()).toBe(true)
+    expect(dayjs('2020-02-29').isValid()).toBe(true)
+    expect(dayjs(undefined).isValid()).toBe(true)
+    expect(dayjs().isValid()).toBe(true)
+    expect(dayjs(new Date()).isValid()).toBe(true)
+    expect(dayjs('2018-02').isValid()).toBe(true)
+
+    expect(dayjs('2018-02-28T12:34:56.789Z', { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2018-02-28 12:34:56:789', { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2018-02-28', { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2020-02-29T12:34:56.789Z', { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2020-02-29 12:34:56:789', { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2020-02-29', { utc: true }).isValid()).toBe(true)
+    expect(dayjs(undefined, { utc: true }).isValid()).toBe(true)
+    expect(dayjs(new Date(), { utc: true }).isValid()).toBe(true)
+    expect(dayjs('2018-02', { utc: true }).isValid()).toBe(true)
+  })
+
+  it('should return invalid date for invalid input', () => {
+    expect(dayjs('2018-02-29').isValid()).toBe(false)
+    expect(dayjs('2018-02-29 12:34:56:789').isValid()).toBe(false)
+    expect(dayjs(null).toString()).toBe('Invalid Date')
+    expect(dayjs('ABCD-EF-GH').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-13-25').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-00-25').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-00 00:00:00:000').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-31 00:00:00:000').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 24:00:00:000').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 23:60:00:000').toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 23:59:60:000').toString()).toBe('Invalid Date')
+    expect(dayjs('2018--14 23:59:60:000').toString()).toBe('Invalid Date')
+
+    expect(dayjs('2018-02-29', { utc: true }).isValid()).toBe(false)
+    expect(dayjs('2018-02-29 12:34:56:789', { utc: true }).isValid()).toBe(false)
+    expect(dayjs(null, { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('ABCD-EF-GH', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-13-25', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-00-25', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-00 00:00:00:000', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-31 00:00:00:000', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 24:00:00:000', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 23:60:00:000', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018-02-14 23:59:60:000', { utc: true }).toString()).toBe('Invalid Date')
+    expect(dayjs('2018--14 23:59:60:000', { utc: true }).toString()).toBe('Invalid Date')
+  })
+})
