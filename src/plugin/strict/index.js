@@ -11,24 +11,24 @@ const parseDateStrict = (cfg) => {
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(REGEX_PARSE)
     if (d) {
-      const m = d[2] - 1 || 0
+      // Destruct date properties and set month and milliseconds
+      let [_, YYYY, MM, DD, hh, mm, ss, ms] = d;
+      MM -= 1
       // Treat this condition as an invalid date
-      if (!m || m > 11 || m < 0) return new Date(NaN)
-      let daysPerMonth = DAYS_PER_MONTH[d[2] - 1]
-      if (m === 1 // If month is February increase days per month by 1 if we are in a leap year
-        && (((d[1] % 4 === 0) && (d[1] % 100 !== 0)) || (d[1] % 400 === 0))) daysPerMonth += 1
+      if (!MM || MM > 11 || MM < 0) return new Date(NaN)
+      let daysPerMonth = DAYS_PER_MONTH[MM]
+      if (MM === 1 // If month is February increase days per month by 1 if we are in a leap year
+        && (((YYYY % 4 === 0) && (YYYY % 100 !== 0)) || (YYYY % 400 === 0))) daysPerMonth += 1
       // Treat this condition as an invalid date
-      if ((!!d[3] && (d[3] > daysPerMonth || d[3] < 1))
-        || (!!d[4] && (d[4] > 23 || d[4] < 0))
-        || (!!d[5] && (d[5] > 59 || d[5] < 0))
-        || (!!d[6] && (d[6] > 59 || d[6] < 0))) return new Date(NaN)
-      const ms = (d[7] || '0').substring(0, 3)
+      if ((!!DD && (DD > daysPerMonth || DD < 1))
+        || (!!hh && (hh > 23 || hh < 0))
+        || (!!mm && (mm > 59 || mm < 0))
+        || (!!ss && (ss > 59 || ss < 0))) return new Date(NaN)
+      ms = (ms || '0').substring(0, 3)
       if (utc) {
-        return new Date(Date.UTC(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+        return new Date(Date.UTC(YYYY, MM, DD || 1, hh || 0, mm || 0, ss || 0, ms))
       }
-      return new Date(d[1], m, d[3]
-        || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+      return new Date(YYYY, MM, DD || 1, hh || 0, mm || 0, ss || 0, ms)
     }
   }
 
