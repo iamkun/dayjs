@@ -1,4 +1,3 @@
-import { REGEX_PARSE } from '../../constant'
 import U from '../../utils'
 
 const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -7,9 +6,8 @@ const parseDateStrict = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (U.u(date)) return new Date() // today
-  if (date instanceof Date) return new Date(date)
-  if (typeof date === 'string' && !/Z$/i.test(date)) {
-    const d = date.match(REGEX_PARSE)
+  if (typeof date === 'string') {
+    const d = date.match(/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d{1,3})?Z?$/)
     if (d) {
       // Destruct date properties and set month
       let [_, YYYY, MM, DD, hh, mm, ss, ms] = d;
