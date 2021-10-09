@@ -11,11 +11,11 @@ const parseDateStrict = (cfg) => {
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(REGEX_PARSE)
     if (d) {
-      // Destruct date properties and set month and milliseconds
+      // Destruct date properties and set month
       let [_, YYYY, MM, DD, hh, mm, ss, ms] = d;
       MM -= 1
       // Treat this condition as an invalid date
-      if (!MM || MM > 11 || MM < 0) return new Date(NaN)
+      if (MM > 11 || MM < 0) return new Date(NaN)
       let daysPerMonth = DAYS_PER_MONTH[MM]
       if (MM === 1 // If month is February increase days per month by 1 if we are in a leap year
         && (((YYYY % 4 === 0) && (YYYY % 100 !== 0)) || (YYYY % 400 === 0))) daysPerMonth += 1
