@@ -1,15 +1,15 @@
 import { PluginFunc, ConfigType, OpUnitType } from 'dayjs'
-import { OpUnitType, OpUnitType } from '..'
+import { Dayjs } from '..'
 
 declare const plugin: PluginFunc
 export = plugin
 
 declare module 'dayjs' { 
-    interface DayjsRange {
-      (Startdate: ConfigType, endDate: ConfigType): DayjsRange
+    class DayjsRange {
+      constructor(startDate?: ConfigType, endDate?: ConfigType)
 
-      start: Dayjs
-      end: Dayjs
+      startDate: Dayjs
+      endDate: Dayjs
 
       isRange(): boolean
       clone(): DayjsRange
@@ -21,5 +21,5 @@ declare module 'dayjs' {
       subtractEndRange(number: number, unit?: OpUnitType): DayjsRange
     }
 
-    const range: DayjsRange
+    export function range(startDate: ConfigType, endDate: ConfigType): DayjsRange
   }
