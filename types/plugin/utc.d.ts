@@ -16,4 +16,6 @@ declare module 'dayjs' {
   }
 
   export function utc(config?: ConfigType, format?: string, strict?: boolean): Dayjs
+
+  export function parseZone(config?: ConfigType): Dayjs
 }
