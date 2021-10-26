@@ -1,5 +1,6 @@
 import MockDate from 'mockdate'
-import moment from 'moment'
+// moment does not have ku-kmr yet!
+// import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 import kuKmr from '../../src/locale/ku-kmr'
@@ -42,8 +43,8 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
       .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
-      .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow())
+    //expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
+    //  .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow())
   })
 })
 
@@ -73,7 +74,7 @@ it('Kurdish (Kurmanji) locale relative time in past and future without suffix', 
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
       .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
-      .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow(true))
+    // expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
+    //  .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow(true))
   })
 })
