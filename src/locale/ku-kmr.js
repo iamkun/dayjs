@@ -29,7 +29,7 @@ function processRelativeTime(num, withoutSuffix, key) {
     y: ['salek', 'salekê'],
     yy: ['%d sal', '%d salan']
   }
-  return (withoutSuffix ? format[key][0] : format[key][1]).replace('%d', number)
+  return (withoutSuffix ? format[key][0] : format[key][1]).replace('%d', num)
 }
 function ezafeNumSuffix(num) {
   num = '%d'.replace('%d', num)
@@ -38,8 +38,8 @@ function ezafeNumSuffix(num) {
   if (
     !(ll === '12' || ll === '13') &&
     (l === '2' || l === '3' || ll === '50' || l === '70' || l === '80')
-  ){
-      return 'yê'
+  ) {
+    return 'yê'
   }
   return 'ê'
 }
@@ -51,13 +51,13 @@ const locale = {
   weekdaysMin: 'Ye_Du_Sê_Ça_Pê_În_Şe'.split('_'),
   /* According to 'Rêbera Rastnivîsînê' this should be:
   Kanûna Paşîn_..._Çirîya Pêşîn_Çirîya Paşîn_Kanûna Pêşîn
-  But the names below are more well known and handy*/
+  But the names below are more well known and handy */
   months:
     'Rêbendan_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Cotmeh_Mijdar_Berfanbar'.split('_'),
   monthsShort: 'Rêb_Sib_Ada_Nîs_Gul_Hez_Tîr_Teb_Îlo_Cot_Mij_Ber'.split('_'),
   ordinal: (num, period) => {
     const p = period.toLowerCase()
-    if (p.includes('w') || p.includes('m')){
+    if (p.includes('w') || p.includes('m')) {
       return '%d.'.replace('%d', num)
     }
 
