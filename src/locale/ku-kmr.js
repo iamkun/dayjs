@@ -13,34 +13,35 @@
 import dayjs from 'dayjs'
 
 function processRelativeTime(num, withoutSuffix, key) {
-  let format = {
+  const format = {
     s: ['çend sanîye', 'çend sanîyeyan'],
-    ss: [num + ' sanîye', num + ' sanîyeyan'],
+    ss: ['%d sanîye', '%d sanîyeyan'],
     m: ['deqîqeyek', 'deqîqeyekê'],
-    mm: [num + ' deqîqe', num + ' deqîqeyan'],
+    mm: ['%d deqîqe', '%d deqîqeyan'],
     h: ['saetek', 'saetekê'],
-    hh: [num + ' saet', num + ' saetan'],
+    hh: ['%d saet', '%d saetan'],
     d: ['rojek', 'rojekê'],
-    dd: [num + ' roj', num + ' rojan'],
+    dd: ['%d roj', '%d rojan'],
     w: ['hefteyek', 'hefteyekê'],
-    ww: [num + ' hefte', num + ' hefteyan'],
+    ww: ['%d hefte', '%d hefteyan'],
     M: ['mehek', 'mehekê'],
-    MM: [num + ' meh', num + ' mehan'],
+    MM: ['%d meh', '%d mehan'],
     y: ['salek', 'salekê'],
-    yy: [num + ' sal', num + ' salan'],
-  };
-  return withoutSuffix ? format[key][0] : format[key][1];
+    yy: ['%d sal', '%d salan']
+  }
+  return (withoutSuffix ? format[key][0] : format[key][1]).replace('%d', number)
 }
 function ezafeNumSuffix(num) {
-  num = '' + num;
-  let l = num.substring(num.length - 1),
-    ll = num.length > 1 ? num.substring(num.length - 2) : '';
+  num = '%d'.replace('%d', num)
+  const l = num.substring(num.length - 1)
+  const ll = num.length > 1 ? num.substring(num.length - 2) : ''
   if (
-    !(ll == 12 || ll == 13) &&
-    (l == '2' || l == '3' || ll == '50' || l == '70' || l == '80')
-  )
-    return 'yê';
-  return 'ê';
+    !(ll === '12' || ll === '13') &&
+    (l === '2' || l === '3' || ll === '50' || l === '70' || l === '80')
+  ){
+      return 'yê'
+  }
+  return 'ê'
 }
 
 const locale = {
@@ -49,17 +50,18 @@ const locale = {
   weekdaysShort: 'Yek_Du_Sê_Çar_Pên_În_Şem'.split('_'),
   weekdaysMin: 'Ye_Du_Sê_Ça_Pê_În_Şe'.split('_'),
   /* According to 'Rêbera Rastnivîsînê' this should be:
-  Kanûna Paşîn_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Çirîya Pêşîn_Çirîya Paşîn_Kanûna Pêşîn
+  Kanûna Paşîn_..._Çirîya Pêşîn_Çirîya Paşîn_Kanûna Pêşîn
   But the names below are more well known and handy*/
   months:
     'Rêbendan_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Cotmeh_Mijdar_Berfanbar'.split('_'),
   monthsShort: 'Rêb_Sib_Ada_Nîs_Gul_Hez_Tîr_Teb_Îlo_Cot_Mij_Ber'.split('_'),
   ordinal: (num, period) => {
-    let p = period.toLowerCase();
-    if (p.includes('w') || p.includes('m'))
-      return num + '.';
+    const p = period.toLowerCase()
+    if (p.includes('w') || p.includes('m')){
+      return '%d.'.replace('%d', num)
+    }
 
-    return num + ezafeNumSuffix(num);
+    return num + ezafeNumSuffix(num)
   },
   weekStart: 1,
   yearStart: 4,
@@ -92,12 +94,12 @@ const locale = {
     y: processRelativeTime,
     yy: processRelativeTime
   },
-  meridiem: function (hours, minutes, isLower) {
+  meridiem: (hours, minutes, isLower) => {
     if (hours < 12) {
-      return isLower ? 'bn' : 'BN';
-    } else {
-      return isLower ? 'pn' : 'PN';
+      return isLower ? 'bn' : 'BN'
     }
+
+    return isLower ? 'pn' : 'PN'
   },
   meridiemParse: /bn|BN|pn|PN/
 }
