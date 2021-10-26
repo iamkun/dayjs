@@ -29,7 +29,6 @@ function processRelativeTime(num, withoutSuffix, key) {
     y: ['salek', 'salekê'],
     yy: ['%d sal', '%d salan']
   }
-  
   return (withoutSuffix ? format[key][0] : format[key][1]).replace('%d', num)
 }
 function ezafeNumSuffix(num) {

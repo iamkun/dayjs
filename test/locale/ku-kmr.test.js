@@ -43,7 +43,7 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
       .toBe(c[2])
-    //expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
+    // expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
     //  .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow())
   })
 })
