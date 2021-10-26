@@ -2,7 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
-import '../../src/locale/ku-kmr'
+import kuKmr from '../../src/locale/ku-kmr'
 
 dayjs.extend(relativeTime)
 
@@ -40,10 +40,10 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
     [-4, 'y', 'berî 4 salan']
   ]
   cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('ku-kmr').fromNow())
+    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
       .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('ku-kmr').fromNow())
-      .toBe(moment().add(c[0], c[1]).locale('ku-kmr').fromNow())
+    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow())
+      .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow())
   })
 })
 
@@ -71,9 +71,9 @@ it('Kurdish (Kurmanji) locale relative time in past and future without suffix', 
     [-4, 'y', '4 salan']
   ]
   cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('ku-kmr').fromNow(true))
+    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
       .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('ku-kmr').fromNow(true))
-      .toBe(moment().add(c[0], c[1]).locale('ku-kmr').fromNow(true))
+    expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
+      .toBe(moment().add(c[0], c[1]).locale(kuKmr).fromNow(true))
   })
 })
