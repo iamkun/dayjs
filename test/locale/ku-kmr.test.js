@@ -49,25 +49,25 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
 
 it('Kurdish (Kurmanji) locale relative time in past and future without suffix', () => {
   const cases = [
-    [1, 's', 'çend sanîyeyan'],
+    [1, 's', 'çend sanîye'],
     [-1, 's', 'çend sanîyeyan'],
-    [1, 'm', 'deqîqeyekê'],
+    [1, 'm', 'deqîqeye'],
     [-1, 'm', 'deqîqeyekê'],
-    [1, 'h', 'saetekê'],
+    [1, 'h', 'saet'],
     [-1, 'h', 'saetekê'],
-    [1, 'd', 'rojekê'],
+    [1, 'd', 'roj'],
     [-1, 'd', 'rojekê'],
-    [2, 'd', '2 rojan'],
+    [2, 'd', '2 roj'],
     [-2, 'd', '2 rojan'],
-    [10, 'd', '10 rojan'],
+    [10, 'd', '10 roj'],
     [-10, 'd', '10 rojan'],
-    [6, 'm', '6 deqîqeyan'],
+    [6, 'm', '6 deqîqe'],
     [-6, 'm', '6 deqîqeyan'],
-    [5, 'h', '5 saetan'],
+    [5, 'h', '5 saet'],
     [-5, 'h', '5 saetan'],
-    [3, 'M', '3 mehan'],
+    [3, 'M', '3 meh'],
     [-3, 'M', '3 mehan'],
-    [4, 'y', '4 salan'],
+    [4, 'y', '4 sal'],
     [-4, 'y', '4 salan']
   ]
   cases.forEach((c) => {
