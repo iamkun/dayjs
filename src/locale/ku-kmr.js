@@ -79,19 +79,17 @@ const locale = {
     lll: 'Do MMM[.] YYYY[an] HH:mm',
     llll: 'ddd[.], Do MMM[.] YYYY[an] HH:mm'
   },
+  // ss, w, ww are not acceptable below, insert later in future
   relativeTime: {
     future: 'di %s de',
     past: 'berî %s',
     s: processRelativeTime,
-    ss: processRelativeTime,
     m: processRelativeTime,
     mm: processRelativeTime,
     h: processRelativeTime,
     hh: processRelativeTime,
     d: processRelativeTime,
     dd: processRelativeTime,
-    w: processRelativeTime,
-    ww: processRelativeTime,
     M: processRelativeTime,
     MM: processRelativeTime,
     y: processRelativeTime,
