@@ -1,5 +1,5 @@
-//! locale : Northern Kurdish [ku-kmr]
-//! authors : Mazlum Özdogan : https://github.com/mergehez
+// Northern Kurdish [ku-kmr]
+// authors : Mazlum Özdogan : https://github.com/mergehez
 
 // All rules except for month names are according to
 // the spelling rules which are defined in the book 'Rêbera Rastnivîsînê'
