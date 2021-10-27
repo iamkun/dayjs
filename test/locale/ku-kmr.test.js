@@ -17,10 +17,9 @@ afterEach(() => {
 
 
 it('Kurdish (Kurmanji) locale ordinal', () => {
-  dayjs.locale(kuKmr)
-  
-  expect(dayjs('2012-01-01').format('wo')).toBe('52.')
-  expect(dayjs('2012-01-02').format('wo')).toBe('1.')
+  expect(kuKmr.ordinal(5, 'W')).toBe('5.')
+  expect(kuKmr.ordinal(5, 'DDDo')).toBe('5ê')
+  expect(kuKmr.ordinal(3, 'DDDo')).toBe('3yê')
 })
 
 it('Kurdish (Kurmanji) locale relative time in past and future WITH suffix', () => {
