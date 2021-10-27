@@ -55,16 +55,11 @@ const locale = {
   months:
     'Rêbendan_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Cotmeh_Mijdar_Berfanbar'.split('_'),
   monthsShort: 'Rêb_Sib_Ada_Nîs_Gul_Hez_Tîr_Teb_Îlo_Cot_Mij_Ber'.split('_'),
-  ordinal: (num, period) => {
-    switch (period) {
-      case 'W':
-      case 'w':
-      case 'M':
-      case 'm':
-        return `${num}.`
-      default:
-        return `${num}${ezafeNumSuffix(num)}`
+  ordinal: (num, p) => {
+    if(p === 'W' || p === 'w' || p === 'M' || p === 'm') {
+      return `${num}.`
     }
+    return `${num}${ezafeNumSuffix(num)}`
   },
   weekStart: 1,
   yearStart: 4,

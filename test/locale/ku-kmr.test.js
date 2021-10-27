@@ -15,6 +15,14 @@ afterEach(() => {
   MockDate.reset()
 })
 
+
+it('Kurdish (Kurmanji) locale ordinal', () => {
+  dayjs.locale(kuKmr)
+  
+  expect(dayjs('2012-01-01').format('wo')).toBe('52.')
+  expect(dayjs('2012-01-02').format('wo')).toBe('1.')
+})
+
 it('Kurdish (Kurmanji) locale relative time in past and future WITH suffix', () => {
   const cases = [
     [1, 's', 'di çend sanîyeyan de'],
