@@ -15,7 +15,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () => {
+it('Kurdish (Kurmanji) locale relative time in past and future WITH suffix', () => {
   const cases = [
     [1, 's', 'di çend sanîyeyan de'],
     [-1, 's', 'berî çend sanîyeyan'],
@@ -28,7 +28,7 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
     [1, 'M', 'di mehekê de'],
     [-1, 'M', 'berî mehekê'],
     [2, 'd', 'di 2 rojan de'],
-    [-2, 'd', 'berî du rojan'],
+    [-2, 'd', 'berî 2 rojan'],
     [10, 'd', 'di 10 rojan de'],
     [-10, 'd', 'berî 10 rojan'],
     [6, 'm', 'di 6 deqîqeyan de'],
@@ -48,28 +48,28 @@ it('Kurdish (Kurmanji) locale relative time in past and future with suffix', () 
   })
 })
 
-it('Kurdish (Kurmanji) locale relative time in past and future without suffix', () => {
+it('Kurdish (Kurmanji) locale relative time in past and future WITHOUT suffix', () => {
   const cases = [
     [1, 's', 'çend sanîye'],
-    [-1, 's', 'çend sanîyeyan'],
-    [1, 'm', 'deqîqeye'],
-    [-1, 'm', 'deqîqeyekê'],
-    [1, 'h', 'saet'],
-    [-1, 'h', 'saetekê'],
-    [1, 'd', 'roj'],
-    [-1, 'd', 'rojekê'],
+    [-1, 's', 'çend sanîye'],
+    [1, 'm', 'deqîqeyek'],
+    [-1, 'm', 'deqîqeyek'],
+    [1, 'h', 'saetek'],
+    [-1, 'h', 'saetek'],
+    [1, 'd', 'rojek'],
+    [-1, 'd', 'rojek'],
     [2, 'd', '2 roj'],
-    [-2, 'd', '2 rojan'],
+    [-2, 'd', '2 roj'],
     [10, 'd', '10 roj'],
-    [-10, 'd', '10 rojan'],
+    [-10, 'd', '10 roj'],
     [6, 'm', '6 deqîqe'],
-    [-6, 'm', '6 deqîqeyan'],
+    [-6, 'm', '6 deqîqe'],
     [5, 'h', '5 saet'],
-    [-5, 'h', '5 saetan'],
+    [-5, 'h', '5 saet'],
     [3, 'M', '3 meh'],
-    [-3, 'M', '3 mehan'],
+    [-3, 'M', '3 meh'],
     [4, 'y', '4 sal'],
-    [-4, 'y', '4 salan']
+    [-4, 'y', '4 sal']
   ]
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale(kuKmr).fromNow(true))
