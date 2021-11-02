@@ -1,3 +1,22 @@
+### 提醒
+
+此处的文档将**不再**更新。
+
+请访问网站 [https://day.js.org](https://day.js.org/docs/zh-CN/plugin/plugin) 查看更多信息。
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # 插件列表
 
 插件是一些独立的程序，可以给 Day.js 增加新功能和扩展已有功能
@@ -103,14 +122,21 @@ dayjs().format('Q Do k kk X x')
 
 扩展的模版列表：
 
-| 模版 | 输出             | 简介                   |
-| ---- | ---------------- | ---------------------- |
-| `Q`  | 1-4              | 季度                   |
-| `Do` | 1st 2nd ... 31st | 带序号的月份           |
-| `k`  | 1-24             | 时：由 1 开始          |
-| `kk` | 01-24            | 时：由 1 开始，二位数  |
-| `X`  | 1360013296       | 秒为单位的 Unix 时间戳 |
-| `x`  | 1360013296123    | 毫秒单位的 Unix 时间戳 |
+| 模版   | 输出                  | 简介                                       |
+| ------ | --------------------- | ------------------------------------------ |
+| `Q`    | 1-4                   | 季度                                       |
+| `Do`   | 1st 2nd ... 31st      | 带序号的月份                               |
+| `k`    | 1-24                  | 时：由 1 开始                              |
+| `kk`   | 01-24                 | 时：由 1 开始，二位数                      |
+| `X`    | 1360013296            | 秒为单位的 Unix 时间戳                     |
+| `x`    | 1360013296123         | 毫秒单位的 Unix 时间戳                     |
+| `w`    | 1 2 ... 52 53         | 年中第几周 (依赖: weekOfYear 插件)         |
+| `ww`   | 01 02 ... 52 53       | 年中第几周，二位数 (依赖: weekOfYear 插件) |
+| `W`    | 1 2 ... 52 53         | ISO 年中第几周 (依赖: weekOfYear & isoWeek 插件)         |
+| `WW`   | 01 02 ... 52 53       | ISO 年中第几周，二位数 (依赖: weekOfYear & isoWeek 插件) |
+| `wo`   | 1st 2nd ... 52nd 53rd | 带序号的年中第几周 (依赖: weekOfYear 插件) |
+| `gggg` | 2017                  | 根据周计算的年份 (依赖: weekYear 插件)     |
+| `GGGG` | 2017                  | ISO 根据周计算的年份 (依赖: weekYear & isoWeek& isoWeek 插件)  |
 
 ### LocalizedFormat
 
@@ -290,9 +316,9 @@ dayjs('2018-06-27').week(5) // 设置周
 - WeekDay 增加了 `.weekday()` API 来获取或设置当前语言的星期。
 
 ```javascript
-import weekDay from 'dayjs/plugin/weekDay'
+import weekday from 'dayjs/plugin/weekday'
 
-dayjs.extend(weekDay)
+dayjs.extend(weekday)
 // when Monday is the first day of the week
 dayjs().weekday(-7) // last Monday
 dayjs().weekday(7) // next Monday
@@ -367,7 +393,7 @@ dayjs('2018 五月 15', 'YYYY MMMM DD', 'zh_cn')
 | `S`    | 0-9              | 毫秒 一位数                  |
 | `SS`   | 00-99            | 毫秒 两位数                  |
 | `SSS`  | 000-999          | 毫秒 三位数                  |
-| `Z`    | +5:00            | UTC 的偏移量                 |
+| `Z`    | +05:00           | UTC 的偏移量                 |
 | `ZZ`   | +0500            | UTC 的偏移量，数字前面加上 0 |
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
@@ -434,6 +460,19 @@ dayjs().calendar(null, {
   lastDay: '[昨天]', // 昨天 ( 昨天 2:30 AM )
   lastWeek: '[上] dddd', // 上周 ( Last Monday at 2:30 AM )
   sameElse: 'DD/MM/YYYY' // 其他情况 ( 7/10/2011 )
+})
+```
+
+### UpdateLocale
+
+- UpdateLocale 增加了 `.updateLocale` API 来更新语言配置的属性。
+
+```javascript
+import updateLocale from 'dayjs/plugin/updateLocale'
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  months : String[]
 })
 ```
 

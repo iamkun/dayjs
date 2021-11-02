@@ -6,8 +6,8 @@
   "types": "index.d.ts",
   "module": "esm/index.js",
   "scripts": {
-    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && npm run test-tz && jest",
-    "test-tz": "jest test/timezone.test --coverage=false",
+    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
+    "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
     "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
@@ -61,6 +61,7 @@
   ],
   "author": "iamkun",
   "license": "MIT",
+  "homepage": "https://day.js.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/iamkun/dayjs.git"
@@ -85,15 +86,15 @@
     "karma-jasmine": "^1.1.2",
     "karma-sauce-launcher": "^1.1.0",
     "mockdate": "^2.0.2",
-    "moment": "^2.22.0",
+    "moment": "2.27.0",
+    "moment-timezone": "0.5.31",
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^1.16.1",
-    "rollup": "^0.57.1",
-    "rollup-plugin-babel": "^4.0.0-beta.4",
-    "rollup-plugin-uglify": "^3.0.0",
+    "rollup": "^2.45.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^7.0.2",
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
-  },
-  "dependencies": {}
+  }
 }

@@ -1,7 +1,10 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
+import relativeTime from '../../src/plugin/relativeTime'
 import '../../src/locale/ru'
+
+dayjs.extend(relativeTime)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -22,4 +25,32 @@ it('Format Month with locale function', () => {
     expect(dayjsRU.format(testFormat2)).toEqual(momentRU.format(testFormat2))
     expect(dayjsRU.format(testFormat3)).toEqual(momentRU.format(testFormat3))
   }
+})
+
+it('RelativeTime: Time from X', () => {
+  const T = [
+    [44.4, 'second'], // a few seconds
+    [89.5, 'second'], // a minute
+    [43, 'minute'], // 44 minutes
+    [21, 'hour'], // 21 hours
+    [25, 'day'], // 25 days
+    [10, 'month'], // 2 month
+    [18, 'month'] // 2 years
+  ]
+
+  T.forEach((t) => {
+    dayjs.locale('ru')
+    moment.locale('ru')
+    expect(dayjs().from(dayjs().add(t[0], t[1])))
+      .toBe(moment().from(moment().add(t[0], t[1])))
+    expect(dayjs().from(dayjs().add(t[0], t[1]), true))
+      .toBe(moment().from(moment().add(t[0], t[1]), true))
+  })
+})
+
+it('Meridiem', () => {
+  expect(dayjs('2020-01-01 03:00:00').locale('ru').format('A')).toEqual('ночи')
+  expect(dayjs('2020-01-01 11:00:00').locale('ru').format('A')).toEqual('утра')
+  expect(dayjs('2020-01-01 16:00:00').locale('ru').format('A')).toEqual('дня')
+  expect(dayjs('2020-01-01 20:00:00').locale('ru').format('A')).toEqual('вечера')
 })

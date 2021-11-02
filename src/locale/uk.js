@@ -1,27 +1,64 @@
+// Ukrainian [uk]
 import dayjs from 'dayjs'
+
+const monthFormat = 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split('_')
+const monthStandalone = 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split('_')
+
+const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
+
+function plural(word, num) {
+  const forms = word.split('_')
+  return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]) // eslint-disable-line
+}
+function relativeTimeWithPlural(number, withoutSuffix, key) {
+  const format = {
+    ss: withoutSuffix ? 'секунда_секунди_секунд' : 'секунду_секунди_секунд',
+    mm: withoutSuffix ? 'хвилина_хвилини_хвилин' : 'хвилину_хвилини_хвилин',
+    hh: withoutSuffix ? 'година_години_годин' : 'годину_години_годин',
+    dd: 'день_дні_днів',
+    MM: 'місяць_місяці_місяців',
+    yy: 'рік_роки_років'
+  }
+  if (key === 'm') {
+    return withoutSuffix ? 'хвилина' : 'хвилину'
+  } else if (key === 'h') {
+    return withoutSuffix ? 'година' : 'годину'
+  }
+
+  return `${number} ${plural(format[key], +number)}`
+}
+
+const months = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthFormat[dayjsInstance.month()]
+  }
+  return monthStandalone[dayjsInstance.month()]
+}
+months.s = monthStandalone
+months.f = monthFormat
 
 const locale = {
   name: 'uk',
   weekdays: 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split('_'),
   weekdaysShort: 'ндл_пнд_втр_срд_чтв_птн_сбт'.split('_'),
   weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
-  months: 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split('_'),
-  monthsShort: 'сiч_лют_бер_квiт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
+  months,
+  monthsShort: 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
   weekStart: 1,
   relativeTime: {
-    future: 'через %s',
-    past: '%s назад',
+    future: 'за %s',
+    past: '%s тому',
     s: 'декілька секунд',
-    m: 'хвилина',
-    mm: '%d хвилин',
-    h: 'година',
-    hh: '%d годин',
+    m: relativeTimeWithPlural,
+    mm: relativeTimeWithPlural,
+    h: relativeTimeWithPlural,
+    hh: relativeTimeWithPlural,
     d: 'день',
-    dd: '%d днів',
+    dd: relativeTimeWithPlural,
     M: 'місяць',
-    MM: '%d місяців',
+    MM: relativeTimeWithPlural,
     y: 'рік',
-    yy: '%d роки'
+    yy: relativeTimeWithPlural
   },
   ordinal: n => n,
   formats: {

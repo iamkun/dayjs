@@ -1,7 +1,8 @@
+// English (Singapore) [en-sg]
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'en-SG',
+  name: 'en-sg',
   weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
   months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
   weekStart: 1,

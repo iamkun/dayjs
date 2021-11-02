@@ -1,6 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../src'
+import { REGEX_PARSE } from '../src/constant'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -80,11 +81,22 @@ describe('Parse', () => {
     expect(normalized.toISOString()).toEqual(expected)
   })
 
-  it('String Other, Null and isValid', () => {
+  it('parses unlimited millisecond', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const ds = dayjs(date)
+    const ms = moment(date)
+    expect(ds.valueOf()).toEqual(ms.valueOf())
+    expect(ds.millisecond()).toEqual(ms.millisecond())
+  })
+
+  it('String Other, Undefined and Null and isValid', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
+    expect(dayjs(undefined).toDate()).toEqual(moment(undefined).toDate())
     expect(dayjs().isValid()).toBe(true)
+    expect(dayjs(undefined).isValid()).toBe(true)
     expect(dayjs('').isValid()).toBe(false)
+    expect(dayjs(null).isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
@@ -124,4 +136,80 @@ it('Clone with same value', () => {
   const newBase = base.set('year', year + 1)
   const another = newBase.clone()
   expect(newBase.toString()).toBe(another.toString())
+})
+
+describe('REGEX_PARSE', () => {
+  it('2020/9/30', () => {
+    const date = '2020/9/30'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2020/9/30-2020-9-30----')
+  })
+  it('2019-03-25T06:41:00.999999999', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2019-03-25T06:41:00.999999999-2019-03-25-06-41-00-999999999')
+  })
+  it('20210102T012345', () => {
+    const date = '20210102T012345'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('20210102T012345-2021-01-02-01-23-45-')
+  })
+  it('2021-01-02T01:23', () => {
+    const date = '2021-01-02T01:23'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-01-02T01:23-2021-01-02-01-23--')
+  })
+  it('2021-01-02T01:23:45', () => {
+    const date = '2021-01-02T01:23:45'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-01-02T01:23:45-2021-01-02-01-23-45-')
+  })
+
+  it('2020-12-31T18:00:00.000-0500 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00.000-0500'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  // format used in timezone plugin utcString
+  it('2021-1-4 0:42:53:000', () => {
+    const date = '2021-1-4 0:42:53:000'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d.join('-')).toBe('2021-1-4 0:42:53:000-2021-1-4-0-42-53-000')
+  })
+
+  it('2020-12-31T18:00:00-05:00 (no regex match)', () => {
+    const date = '2020-12-31T18:00:00-05:00'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  it('2021-01-02T01:23:45-0500 (no regex match)', () => {
+    const date = '2021-01-02T01:23:45-0500'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+  it('2021-01-02T01:23:45Z (no regex match)', () => {
+    const date = '2021-01-02T01:23:45Z'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
+
+  // dots should not be matched, and fallback to Date
+  it('2021.01.03', () => {
+    const date = '2021.01.03'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
+    expect(d).toBe(null)
+  })
 })

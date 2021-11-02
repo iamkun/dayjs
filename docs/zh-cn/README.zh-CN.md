@@ -5,7 +5,7 @@
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
@@ -42,13 +42,17 @@ dayjs()
 
 ## 快速开始
 
+### 文档
+
+访问 [day.js.org](https://day.js.org/) 网站查看更详细的文档
+
 ### 安装
 
 ```console
 npm install dayjs --save
 ```
 
-📚[安装指南](./Installation.md)
+📚[安装指南](https://day.js.org/docs/zh-CN/installation/installation)
 
 ### API
 
@@ -68,7 +72,7 @@ dayjs().add(1, 'year') // 处理
 dayjs().isBefore(dayjs()) // 查询
 ```
 
-📚[API 参考](./API-reference.md)
+📚[API 参考](https://day.js.org/docs/zh-CN/parse/parse)
 
 ### 国际化 I18n
 
@@ -86,7 +90,7 @@ dayjs('2018-05-05')
   .format() // 在这个实例上使用简体中文
 ```
 
-📚[国际化 I18n](./I18n.md)
+📚[国际化 I18n](https://day.js.org/docs/zh-CN/i18n/i18n)
 
 ### 插件
 
@@ -100,7 +104,7 @@ dayjs.extend(advancedFormat) // 使用插件
 dayjs().format('Q Do k kk X x') // 使用扩展后的API
 ```
 
-📚[插件列表](./Plugin.md)
+📚[插件列表](https://day.js.org/docs/zh-CN/plugin/plugin)
 
 ## 开源协议
 

@@ -1,3 +1,4 @@
+// Sindhi [sd]
 import dayjs from 'dayjs'
 
 const locale = {

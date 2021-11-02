@@ -1,8 +1,9 @@
 import * as C from '../../constant'
 
 export default (o, c, d) => {
+  o = o || {}
   const proto = c.prototype
-  d.en.relativeTime = {
+  const relObj = {
     future: 'in %s',
     past: '%s ago',
     s: 'a few seconds',
@@ -17,9 +18,10 @@ export default (o, c, d) => {
     y: 'a year',
     yy: '%d years'
   }
-  const fromTo = (input, withoutSuffix, instance, isFrom) => {
-    const loc = instance.$locale().relativeTime
-    const T = [
+  d.en.relativeTime = relObj
+  proto.fromToBase = (input, withoutSuffix, instance, isFrom, postFormat) => {
+    const loc = instance.$locale().relativeTime || relObj
+    const T = o.thresholds || [
       { l: 's', r: 44, d: C.S },
       { l: 'm', r: 89 },
       { l: 'mm', r: 44, d: C.MIN },
@@ -35,6 +37,7 @@ export default (o, c, d) => {
     const Tl = T.length
     let result
     let out
+    let isFuture
 
     for (let i = 0; i < Tl; i += 1) {
       let t = T[i]
@@ -43,26 +46,47 @@ export default (o, c, d) => {
           ? d(input).diff(instance, t.d, true)
           : instance.diff(input, t.d, true)
       }
-      const abs = Math.round(Math.abs(result))
+      let abs = (o.rounding || Math.round)(Math.abs(result))
+      isFuture = result > 0
       if (abs <= t.r || !t.r) {
-        if (abs === 1) t = T[i - 1] // 1 minutes -> a minute
-        out = loc[t.l].replace('%d', abs)
+        if (abs <= 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute, 0 seconds -> 0 second
+        const format = loc[t.l]
+        if (postFormat) {
+          abs = postFormat(`${abs}`)
+        }
+        if (typeof format === 'string') {
+          out = format.replace('%d', abs)
+        } else {
+          out = format(abs, withoutSuffix, t.l, isFuture)
+        }
         break
       }
     }
     if (withoutSuffix) return out
-    return ((result > 0) ? loc.future : loc.past).replace('%s', out)
+    const pastOrFuture = isFuture ? loc.future : loc.past
+    if (typeof pastOrFuture === 'function') {
+      return pastOrFuture(out)
+    }
+    return pastOrFuture.replace('%s', out)
   }
+
+  function fromTo(input, withoutSuffix, instance, isFrom) {
+    return proto.fromToBase(input, withoutSuffix, instance, isFrom)
+  }
+
   proto.to = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this, true)
   }
   proto.from = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this)
   }
+
+  const makeNow = thisDay => (thisDay.$u ? d.utc() : d())
+
   proto.toNow = function (withoutSuffix) {
-    return this.to(d(), withoutSuffix)
+    return this.to(makeNow(this), withoutSuffix)
   }
   proto.fromNow = function (withoutSuffix) {
-    return this.from(d(), withoutSuffix)
+    return this.from(makeNow(this), withoutSuffix)
   }
 }

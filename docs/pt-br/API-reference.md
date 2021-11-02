@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org/docs/en/parse/parse) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## Referência da API
 
 Ao invés de modificar o `Date.prototype` nativo, o Day.js empacota o objeto nativo `Date` em um objeto `Dayjs`.
@@ -34,7 +53,7 @@ O objeto `Dayjs` é imutável, ou seja, todas as operações da API que alteram 
   - [Exibindo](#exibindo)
     - [Formatação `.format(stringWithTokens: string)`](#formatação-formatstringwithtokens-string)
       - [Lista com todos os formatos disponíveis](#lista-com-todos-os-formatos-disponíveis)
-    - [Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`](#diferença-diffcompared-dayjs-unit-string-padrão-milliseconds-float-boolean)
+    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-float-boolean)
     - [Unix Timestamp (milissegundos) `.valueOf()`](#unix-timestamp-milissegundos-valueof)
     - [Unix Timestamp (segundos) `.unix()`](#unix-timestamp-segundos-unix)
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
@@ -300,7 +319,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 | `s`     | 0-59             | Segundo                                      |
 | `ss`    | 00-59            | Segundo, com 2 dígitos                       |
 | `SSS`   | 000-999          | Milisegundo, com 3 dígitos                   |
-| `Z`     | +5:00            | Diferença do fuso horário UTC                |
+| `Z`     | +05:00           | Diferença do fuso horário UTC                |
 | `ZZ`    | +0500            | Diferença do fuso horário UTC, com 2 dígitos |
 | `A`     | AM PM            |                                              |
 | `a`     | am pm            |                                              |
@@ -308,14 +327,14 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 - Mais formatos disponíveis `Q Do k kk X x ...` no plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 - Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
-### Diferença `.diff(compared: Dayjs, unit: string (padrão: 'milliseconds'), float?: boolean)`
+### Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`
 
 Retorna um `number` indicando a diferença entre dois objetos `Dayjs` na unidade especificada.
 
 ```js
 const date1 = dayjs('2019-01-25')
 const date2 = dayjs('2018-06-05')
-date1.diff(date2) // 20214000000
+date1.diff(date2) // 20214000000 default milliseconds
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
@@ -512,3 +531,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` to display calendar time
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### UpdateLocale
+
+`.updateLocale` to update a locale's properties
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)

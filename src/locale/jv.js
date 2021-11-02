@@ -1,3 +1,4 @@
+// Javanese [jv]
 import dayjs from 'dayjs'
 
 const locale = {

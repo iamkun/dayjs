@@ -18,10 +18,21 @@ const arg3 = dayjs('2017-01-01')
 const arg4 = dayjs('Invalid Date')
 
 it('Return current time if no argument', () => {
-  expect(dayjs.max().format())
-    .toBe(dayjs().format())
-  expect(dayjs.min().format())
-    .toBe(dayjs().format())
+  expect(dayjs.max())
+    .toBe(null)
+  expect(dayjs.min())
+    .toBe(null)
+  expect(dayjs.max(null))
+    .toBe(null)
+  expect(dayjs.min(null))
+    .toBe(null)
+})
+
+it('Return current time if passing empty array', () => {
+  expect(dayjs.max([]))
+    .toBe(null)
+  expect(dayjs.min([]))
+    .toBe(null)
 })
 
 it('Compare between arguments', () => {

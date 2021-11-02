@@ -1,3 +1,4 @@
+// Tamil [ta]
 import dayjs from 'dayjs'
 
 const locale = {

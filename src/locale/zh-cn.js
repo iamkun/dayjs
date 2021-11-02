@@ -1,3 +1,4 @@
+// Chinese (China) [zh-cn]
 import dayjs from 'dayjs'
 
 const locale = {
@@ -16,6 +17,7 @@ const locale = {
     }
   },
   weekStart: 1,
+  yearStart: 4,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -42,6 +44,21 @@ const locale = {
     MM: '%d 个月',
     y: '1 年',
     yy: '%d 年'
+  },
+  meridiem: (hour, minute) => {
+    const hm = (hour * 100) + minute
+    if (hm < 600) {
+      return '凌晨'
+    } else if (hm < 900) {
+      return '早上'
+    } else if (hm < 1100) {
+      return '上午'
+    } else if (hm < 1300) {
+      return '中午'
+    } else if (hm < 1800) {
+      return '下午'
+    }
+    return '晚上'
   }
 }
 

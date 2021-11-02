@@ -139,6 +139,13 @@ it('Format ddd dd MMM with short locale', () => {
     .format('MMM'))
 })
 
+it('Format token value is 0', () => {
+  const sundayDate = '2000-01-02'
+  const sundayStr = 'd H m s'
+  expect(dayjs(sundayDate).format(sundayStr))
+    .toBe(moment(sundayDate).format(sundayStr))
+})
+
 it('Format Complex with other string - : / ', () => {
   const string = 'YY-M-D / HH:mm:ss'
   expect(dayjs().format(string)).toBe(moment().format(string))
@@ -208,6 +215,10 @@ describe('Difference', () => {
     expect(dayjs('2018-08-08').diff(dayjs('2018-09-08'), 'month')).toEqual(-1)
     expect(dayjs('2018-01-01').diff(dayjs('2018-01-01'), 'month')).toEqual(0)
   })
+
+  it('undefined edge case', () => {
+    expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
@@ -241,6 +252,9 @@ it('As Javascript Date -> toDate', () => {
 
 it('As JSON -> toJSON', () => {
   expect(dayjs().toJSON()).toBe(moment().toJSON())
+  global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
+  expect(dayjs('otherString').toJSON()).toBe(moment('otherString').toJSON())
+  expect(dayjs('otherString').toJSON()).toBe(null)
 })
 
 it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {

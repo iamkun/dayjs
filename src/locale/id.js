@@ -1,3 +1,4 @@
+// Indonesian [id]
 import dayjs from 'dayjs'
 
 const locale = {

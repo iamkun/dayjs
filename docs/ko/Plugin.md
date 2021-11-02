@@ -1,3 +1,22 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org/docs/en/plugin/plugin) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 # Plugin List
 
 플러그인은 기능을 확장하거나 새로운 기능을 추가하기 위해 Day.js에 추가할 수 있는 독립적인 모듈입니다.
@@ -104,14 +123,21 @@ dayjs().format('Q Do k kk X x')
 
 추가된 형식 목록:
 
-| Format | Output           | Description                  |
-| ------ | ---------------- | ---------------------------- |
-| `Q`    | 1-4              | 분기                         |
-| `Do`   | 1st 2nd ... 31st | 서수형식의 일자 명           |
-| `k`    | 1-24             | 시간, 1부터 시작             |
-| `kk`   | 01-24            | 시간, 2자리 표현, 1부터 시작 |
-| `X`    | 1360013296       | 유닉스 타임스템프, 초        |
-| `x`    | 1360013296123    | 유닉스 타임스탬프, 밀리 초   |
+| Format | Output                | Description                                           |
+| ------ | --------------------- | ----------------------------------------------------- |
+| `Q`    | 1-4                   | 분기                                                  |
+| `Do`   | 1st 2nd ... 31st      | 서수형식의 일자 명                                    |
+| `k`    | 1-24                  | 시간, 1부터 시작                                      |
+| `kk`   | 01-24                 | 시간, 2자리 표현, 1부터 시작                          |
+| `X`    | 1360013296            | 유닉스 타임스템프, 초                                 |
+| `x`    | 1360013296123         | 유닉스 타임스탬프, 밀리 초                            |
+| `w`    | 1 2 ... 52 53         | Week of year (depend: weekOfYear plugin)                        |
+| `ww`   | 01 02 ... 52 53       | Week of year, 2-digits (depend: weekOfYear plugin)              |
+| `W`    | 1 2 ... 52 53         | ISO Week of year (depend: weekOfYear & isoWeek plugin)          |
+| `WW`   | 01 02 ... 52 53       | ISO Week of year, 2-digits (depend: weekOfYear & isoWeek plugin)|
+| `wo`   | 1st 2nd ... 52nd 53rd | Week of year with ordinal (depend: weekOfYear plugin)           |
+| `gggg` | 2017                  | Week Year (depend: weekYear plugin)                             |
+| `GGGG` | 2017                  | ISO Week Year (depend: weekYear & isoWeek plugin)               |
 
 ### LocalizedFormat
 
@@ -288,9 +314,9 @@ dayjs('2018-06-27').week(5) // set week
 - WeekDay adds `.weekday()` API to get or set locale aware day of the week.
 
 ```javascript
-import weekDay from 'dayjs/plugin/weekDay'
+import weekday from 'dayjs/plugin/weekday'
 
-dayjs.extend(weekDay)
+dayjs.extend(weekday)
 // when Monday is the first day of the week
 dayjs().weekday(-7) // last Monday
 dayjs().weekday(7) // next Monday
@@ -365,7 +391,7 @@ dayjs('2018 5월 15', 'YYYY MMMM DD', 'ko')
 | `S`    | 0-9              | Hundreds of milliseconds, 1-digit |
 | `SS`   | 00-99            | Tens of milliseconds, 2-digits    |
 | `SSS`  | 000-999          | Milliseconds, 3-digits            |
-| `Z`    | -5:00            | Offset from UTC                   |
+| `Z`    | -05:00           | Offset from UTC                   |
 | `ZZ`   | -0500            | Compact offset from UTC, 2-digits |
 | `A`    | AM PM            | Post or ante meridiem, upper-case |
 | `a`    | am pm            | Post or ante meridiem, lower-case |
@@ -432,6 +458,19 @@ dayjs().calendar(null, {
   lastDay: '[Yesterday]', // The day before ( Yesterday at 2:30 AM )
   lastWeek: '[Last] dddd', // Last week ( Last Monday at 2:30 AM )
   sameElse: 'DD/MM/YYYY' // Everything else ( 7/10/2011 )
+})
+```
+
+### UpdateLocale
+
+- UpdateLocale adds `.updateLocale` API to update a locale's properties.
+
+```javascript
+import updateLocale from 'dayjs/plugin/updateLocale'
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  months : String[]
 })
 ```
 

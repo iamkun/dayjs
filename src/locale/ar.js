@@ -1,24 +1,68 @@
+// Arabic [ar]
 import dayjs from 'dayjs'
+
+const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
+const symbolMap = {
+  1: '١',
+  2: '٢',
+  3: '٣',
+  4: '٤',
+  5: '٥',
+  6: '٦',
+  7: '٧',
+  8: '٨',
+  9: '٩',
+  0: '٠'
+}
+
+const numberMap = {
+  '١': '1',
+  '٢': '2',
+  '٣': '3',
+  '٤': '4',
+  '٥': '5',
+  '٦': '6',
+  '٧': '7',
+  '٨': '8',
+  '٩': '9',
+  '٠': '0'
+}
 
 const locale = {
   name: 'ar',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
-  months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_'),
+  weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+  weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+  months,
+  monthsShort: months,
   weekStart: 6,
   relativeTime: {
     future: 'بعد %s',
     past: 'منذ %s',
     s: 'ثانية واحدة',
     m: 'دقيقة واحدة',
-    mm: 'دقائق %d',
+    mm: '%d دقائق',
     h: 'ساعة واحدة',
-    hh: 'ساعات %d',
+    hh: '%d ساعات',
     d: 'يوم واحد',
-    dd: 'أيام %d',
+    dd: '%d أيام',
     M: 'شهر واحد',
-    MM: 'شهرا %d',
+    MM: '%d أشهر',
     y: 'عام واحد',
-    yy: 'أعوام %d'
+    yy: '%d أعوام'
+  },
+  preparse(string) {
+    return string
+      .replace(
+        /[١٢٣٤٥٦٧٨٩٠]/g,
+        match => numberMap[match]
+      )
+      .replace(/،/g, ',')
+  },
+  postformat(string) {
+    return string
+      .replace(/\d/g, match => symbolMap[match])
+      .replace(/,/g, '،')
   },
   ordinal: n => n,
   formats: {
@@ -34,4 +78,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

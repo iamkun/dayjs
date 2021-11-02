@@ -1,3 +1,22 @@
+### 提醒
+
+此处的文档将**不再**更新。
+
+请访问网站 [https://day.js.org](https://day.js.org/docs/zh-CN/parse/parse) 查看更多信息。
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
 ## API
 
 `Dayjs` 并没有改变或覆盖 Javascript 原生的 `Date.prototype`， 而是创造了一个全新的包含 `Javascript Date` 对象的 `Dayjs` 的对象。
@@ -327,7 +346,7 @@ dayjs().format('{YYYY} MM-DDTHH:mm:ssZ[Z]') // "{2014} 09-08T08:02:17-05:00Z"
 | `s`    | 0-59             | 秒                           |
 | `ss`   | 00-59            | 秒 两位数                    |
 | `SSS`  | 000-999          | 毫秒 三位数                  |
-| `Z`    | +5:00            | UTC 的偏移量                 |
+| `Z`    | +05:00           | UTC 的偏移量                 |
 | `ZZ`   | +0500            | UTC 的偏移量，数字前面加上 0 |
 | `A`    | AM PM            |                              |
 | `a`    | am pm            |                              |
@@ -564,3 +583,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` 来显示日历时间
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### 更新语言配置
+
+`.updateLocale` 来更新语言配置的属性
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)

@@ -1,3 +1,4 @@
+// Afrikaans [af]
 import dayjs from 'dayjs'
 
 const locale = {

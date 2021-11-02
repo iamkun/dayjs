@@ -3,6 +3,7 @@
 
 # IDE
 .idea
+.vscode
 
 # npm
 node_modules
@@ -15,9 +16,10 @@ coverage
 # build
 /locale
 /plugin
-dayjs.min.js
+/dayjs.min.js
 /esm
-index.d.ts
+/index.d.ts
+locale.json
 
 #dev
 demo.js

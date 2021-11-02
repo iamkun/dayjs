@@ -1,3 +1,4 @@
+// Basque [eu]
 import dayjs from 'dayjs'
 
 const locale = {

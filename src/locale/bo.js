@@ -1,3 +1,4 @@
+// Tibetan [bo]
 import dayjs from 'dayjs'
 
 const locale = {

@@ -1,3 +1,23 @@
+### Notice
+
+The document here **no longer** updates.
+
+Please visit our website [https://day.js.org](https://day.js.org/docs/en/parse/parse) for more  information.
+
+-------------
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
 # API Reference
 
 Instead of modifying the native `Date.prototype`, Day.js creates a wrapper for the Date object, called `Dayjs` object.
@@ -6,7 +26,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
 
 - [API Reference](#api-reference)
   - [Parsing](#parsing)
-    - [Constructor `dayjs(existing?: string | number | Date | Dayjs)`](#constructor-dayjsexisting-string--number--date--dayjs)
+    - [Constructor `dayjs(dateType?: string | number | Date | Dayjs)`](#constructor-dayjsdateType-string--number--date--dayjs)
       - [ISO 8601 string](#iso-8601-string)
       - [Native Javascript Date object](#native-javascript-date-object)
       - [Unix Timestamp (milliseconds)](#unix-timestamp-milliseconds)
@@ -34,7 +54,7 @@ The `Dayjs` object is immutable, that is, all API operations that change the `Da
   - [Displaying](#displaying)
     - [Format `.format(stringWithTokens: string)`](#format-formatstringwithtokens-string)
       - [List of all available formats](#list-of-all-available-formats)
-    - [Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`](#difference-diffcompared-dayjs-unit-string-default-milliseconds-float-boolean)
+    - [Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`](#difference-diffcompared-dayjs-unit-string-float-boolean)
     - [Unix Timestamp (milliseconds) `.valueOf()`](#unix-timestamp-milliseconds-valueof)
     - [Unix Timestamp (seconds) `.unix()`](#unix-timestamp-seconds-unix)
     - [UTC offset (minutes) `.utcOffset()`](#utc-offset-minutes-utcoffset)
@@ -302,7 +322,7 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 | `s`    | 0-59             | The second                            |
 | `ss`   | 00-59            | The second, 2-digits                  |
 | `SSS`  | 000-999          | The millisecond, 3-digits             |
-| `Z`    | +5:00            | The offset from UTC                   |
+| `Z`    | +05:00           | The offset from UTC                   |
 | `ZZ`   | +0500            | The offset from UTC, 2-digits         |
 | `A`    | AM PM            |                                       |
 | `a`    | am pm            |                                       |
@@ -310,14 +330,14 @@ dayjs('2019-01-25').format('DD/MM/YYYY') // '25/01/2019'
 - More available formats `Q Do k kk X x ...` in plugin [`AdvancedFormat`](./Plugin.md#advancedformat)
 - Localized format options `L LT LTS ...` in plugin [`LocalizedFormat`](./Plugin.md#localizedFormat)
 
-### Difference `.diff(compared: Dayjs, unit: string (default: 'milliseconds'), float?: boolean)`
+### Difference `.diff(compared: Dayjs, unit?: string, float?: boolean)`
 
 Returns a `number` indicating the difference of two `Dayjs`s in the specified unit.
 
 ```js
 const date1 = dayjs('2019-01-25')
 const date2 = dayjs('2018-06-05')
-date1.diff(date2) // 20214000000
+date1.diff(date2) // 20214000000 default milliseconds
 date1.diff(date2, 'month') // 7
 date1.diff(date2, 'month', true) // 7.645161290322581
 date1.diff(date2, 'day') // 233
@@ -514,3 +534,9 @@ plugin [`MinMax`](./Plugin.md#minmax)
 `.calendar` to display calendar time
 
 plugin [`Calendar`](./Plugin.md#calendar)
+
+### UpdateLocale
+
+`.updateLocale` to update a locale's properties
+
+plugin [`UpdateLocale`](./Plugin.md#updateLocale)

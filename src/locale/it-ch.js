@@ -1,3 +1,4 @@
+// Italian (Switzerland) [it-ch]
 import dayjs from 'dayjs'
 
 const locale = {

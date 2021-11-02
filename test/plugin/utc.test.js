@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import utc from '../../src/plugin/utc'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 
@@ -54,14 +54,19 @@ describe('Parse UTC ', () => {
     expect(dayjs().utc().format()).toBe(moment().utc().format())
   })
 
-  it('Parse date string without timezome', () => {
+  it('Parse date string without timezone', () => {
     const d = '2018-09-06'
-    const d2 = '2018-09'
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
     expect(dayjs.utc(d).format()).toEqual('2018-09-06T00:00:00Z')
+    expect(dayjs(d).utc().format()).toEqual(moment(d).utc().format())
+    const d2 = '2018-09'
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
     expect(dayjs.utc(d2).format()).toEqual('2018-09-01T00:00:00Z')
-    expect(dayjs(d).utc().format()).toEqual(moment(d).utc().format())
+    expect(dayjs(d2).utc().format()).toEqual(moment(d2).utc().format())
+    const d3 = '2018'
+    expect(dayjs.utc(d3).format()).toEqual(moment.utc(d3).format())
+    expect(dayjs.utc(d3).format()).toEqual('2018-01-01T00:00:00Z')
+    expect(dayjs(d3).utc().format()).toEqual(moment(d3).utc().format())
   })
 
   it('creating with utc with timezone', () => {
@@ -71,7 +76,7 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
-  it('Parse date string without timezome', () => {
+  it('Parse date string without timezone', () => {
     const d = '2017-04-22 19:50:16'
     expect(dayjs.utc(d).format()).toEqual('2017-04-22T19:50:16Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
@@ -88,6 +93,14 @@ describe('Parse UTC ', () => {
     expect(dayjs(d).utc().format()).toEqual(moment(d).utc().format())
     expect(dayjs.utc(d).format()).toEqual('2018-09-06T19:34:28Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
+  })
+
+  it('parses unlimited millisecond in utc', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    const ds = dayjs.utc(date)
+    const ms = moment.utc(date)
+    expect(ds.valueOf()).toEqual(ms.valueOf())
+    expect(ds.millisecond()).toEqual(ms.millisecond())
   })
 })
 
@@ -213,4 +226,125 @@ describe('UTC Offset', () => {
     expect(dayjs().utcOffset()).toBe(moment().utcOffset())
     expect(dayjs().utc().utcOffset()).toBe(moment().utc().utcOffset())
   })
+
+  it('get utc offset with a number value', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(hoursOffset * 60, true)
+    const momentJS = moment(time).utc(true).utcOffset(hoursOffset, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a negative valid string value, format: HH:mm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a positive valid string value, format: HH:mm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 8
+    const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}:00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}:00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a negative valid string value, format: HHmm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = -8
+    const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with a positive valid string value, format: HHmm', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 8
+    const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}00`, true)
+    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}00`, true)
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with an invalid string value, value: random', () => {
+    const time = '2021-02-28 19:40:10'
+    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('random')
+    const momentJS = moment(time).utc(true).utcOffset('random')
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(0)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('get utc offset with an invalid string value, value: 0', () => {
+    const time = '2021-02-28 19:40:10'
+    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('+0000')
+    const momentJS = moment(time).utc(true).utcOffset('+0000')
+
+    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
+    expect(daysJS.utcOffset()).toEqual(0)
+    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+})
+
+describe('Diff', () => {
+  const d1 = '2021-06-07'
+  const d2 = '2021-06-06'
+  it('utc.diff(utc)', () => {
+    [dayjs, moment].forEach((_) => {
+      expect(_.utc(d1).diff(_.utc(d2), 'days')).toBe(1)
+      expect(_.utc(d1).diff(_.utc(d2), 'm')).toBe(1440)
+    })
+  })
+  it('default diff', () => {
+    expect(dayjs().diff()).toBeDefined()
+  })
+  it('local.diff(utc)', () => {
+    expect(dayjs(d1).diff(dayjs.utc(d2), 'days'))
+      .toBe(moment(d1).diff(moment.utc(d2), 'days'))
+    expect(dayjs(d1).diff(dayjs.utc(d2), 'm'))
+      .toBe(moment(d1).diff(moment.utc(d2), 'm'))
+  })
+  it('utc.diff(local)', () => {
+    expect(dayjs.utc(d1).diff(d2, 'days'))
+      .toBe(moment.utc(d1).diff(d2, 'days'))
+    expect(dayjs.utc(d1).diff(d2, 'm'))
+      .toBe(moment.utc(d1).diff(d2, 'm'))
+  })
+})
+
+it('utc keepLocalTime', () => {
+  const t = '2016-05-03 22:15:01'
+  const d = dayjs(t).utc(true)
+  const m = moment(t).utc(true)
+  const fd = d.format()
+  const dd = d.toDate()
+  const vd = d.valueOf()
+  const fm = m.format()
+  const dm = m.toDate()
+  const vm = m.valueOf()
+  expect(fd).toEqual(fm)
+  expect(fd).toEqual('2016-05-03T22:15:01Z')
+  expect(dd).toEqual(dm)
+  expect(vd).toEqual(vm)
+})
+
+it('utc diff undefined edge case', () => {
+  expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
 })

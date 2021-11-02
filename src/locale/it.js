@@ -1,3 +1,4 @@
+// Italian [it]
 import dayjs from 'dayjs'
 
 const locale = {
@@ -18,7 +19,7 @@ const locale = {
   },
   relativeTime: {
     future: 'tra %s',
-    past: 'da %s',
+    past: '%s fa',
     s: 'qualche secondo',
     m: 'un minuto',
     mm: '%d minuti',

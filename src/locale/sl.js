@@ -1,3 +1,4 @@
+// Slovenian [sl]
 import dayjs from 'dayjs'
 
 const locale = {
@@ -8,7 +9,7 @@ const locale = {
   weekdaysShort: 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
   monthsShort: 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split('_'),
   weekdaysMin: 'ne_po_to_sr_če_pe_so'.split('_'),
-  ordinal: n => n,
+  ordinal: n => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
@@ -16,6 +17,21 @@ const locale = {
     LL: 'D. MMMM YYYY',
     LLL: 'D. MMMM YYYY H:mm',
     LLLL: 'dddd, D. MMMM YYYY H:mm'
+  },
+  relativeTime: {
+    future: 'čez %s',
+    past: 'pred %s',
+    s: 'nekaj sekund',
+    m: 'minuta',
+    mm: '%d minut',
+    h: 'ura',
+    hh: '%d ur',
+    d: 'dan',
+    dd: '%d dni',
+    M: 'mesec',
+    MM: '%d mesecev',
+    y: 'leto',
+    yy: '%d let'
   }
 }
 

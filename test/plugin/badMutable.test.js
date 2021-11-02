@@ -2,9 +2,13 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import badMutable from '../../src/plugin/badMutable'
+import dayOfYear from '../../src/plugin/dayOfYear'
+import weekOfYear from '../../src/plugin/weekOfYear'
 import '../../src/locale/zh-cn'
 
 dayjs.extend(badMutable)
+dayjs.extend(dayOfYear)
+dayjs.extend(weekOfYear)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -162,6 +166,16 @@ it('Locale', () => {
   expect(d.format(format)).toBe(m.format(format))
 })
 
+it('Diff', () => {
+  const d = dayjs()
+  const m = moment()
+  const unit = 'year'
+  const d2 = d.clone().add(1, unit)
+  const m2 = m.clone().add(1, unit)
+  expect(d.diff(d2, unit)).toBe(-1)
+  expect(m.diff(m2, unit)).toBe(-1)
+})
+
 it('isAfter isBefore isSame', () => {
   const d = dayjs()
   const format = dayjs().format()
@@ -174,4 +188,18 @@ it('isAfter isBefore isSame', () => {
   d.isAfter(dayjs, 'month')
   expect(d.format()).toBe(format)
   expect(d.isAfter()).toBe(false)
+})
+
+it('DayOfYear get day won\'t change instance', () => {
+  const d = dayjs()
+  const format = d.format()
+  d.dayOfYear()
+  expect(d.format()).toBe(format)
+})
+
+it('WeekOfYear get week won\'t change instance', () => {
+  const d = dayjs()
+  const format = d.format()
+  d.week()
+  expect(d.format()).toBe(format)
 })
