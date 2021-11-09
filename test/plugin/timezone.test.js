@@ -54,6 +54,14 @@ describe('Parse', () => {
     expect(Tmoment.format()).toBe(result)
   })
 
+  it('parse ISO_8601 string', () => {
+    const isoString = '2020-08-07T04:00:00.000Z'
+    const dateTz = dayjs.tz(isoString, NY)
+    const MdateTz = moment.tz(isoString, NY)
+    expect(dateTz.format()).toBe('2020-08-07T00:00:00-04:00')
+    expect(dateTz.format()).toBe(MdateTz.format())
+  })
+
   it('parse and convert between timezones', () => {
     const newYork = dayjs.tz('2014-06-01 12:00', NY)
     expect(newYork.tz('America/Los_Angeles').format()).toBe('2014-06-01T09:00:00-07:00')
