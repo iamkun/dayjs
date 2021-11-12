@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import '../../src/locale/fr'
+import '../../src/locale/de'
 import '../../src/locale/ru'
 import '../../src/locale/zh-cn'
 import localeData from '../../src/plugin/localeData'
@@ -19,7 +20,7 @@ afterEach(() => {
 })
 
 describe('Instance localeData', () => {
-  ['zh-cn', 'en', 'fr'].forEach((lo) => {
+  ['zh-cn', 'en', 'fr', 'de'].forEach((lo) => {
     it(`Locale: ${lo}`, () => {
       dayjs.locale(lo)
       moment.locale(lo)
@@ -50,7 +51,7 @@ describe('Instance localeData', () => {
 
 
 it('Global localeData', () => {
-  ['zh-cn', 'en', 'fr'].forEach((lo) => {
+  ['zh-cn', 'en', 'fr', 'de'].forEach((lo) => {
     dayjs.locale(lo)
     moment.locale(lo)
     const dayjsLocaleData = dayjs.localeData()
@@ -70,7 +71,7 @@ it('Global localeData', () => {
 
 
 it('Listing the months and weekdays', () => {
-  ['zh-cn', 'en', 'fr'].forEach((lo) => {
+  ['zh-cn', 'en', 'fr', 'de'].forEach((lo) => {
     dayjs.locale(lo)
     moment.locale(lo)
     expect(dayjs.months()).toEqual(moment.months())
