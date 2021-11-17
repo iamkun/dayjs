@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ko'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -339,11 +340,41 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 01:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+    expect(dayjs(input, format2).locale('zh-cn').format(format)).toBe(date)
   })
   it('PM', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+    expect(dayjs(input, format2).locale('zh-cn').format(format2)).toBe(input)
+  })
+})
+
+describe('meridiem translation', () => {
+  const format = 'HH:mm'
+  const am = '09:00'
+  const pm = '21:00'
+  it('en', () => {
+    const formatEn = 'h:mm A'
+    const amEn = '9:00 AM'
+    const pmEn = '9:00 PM'
+    // am
+    expect(dayjs(am, format).format(formatEn)).toEqual(amEn)
+    expect(dayjs(amEn, formatEn).format(format)).toEqual(am)
+    // pm
+    expect(dayjs(pm, format).format(formatEn)).toEqual(pmEn)
+    expect(dayjs(pmEn, formatEn).format(format)).toEqual(pm)
+  })
+  it('ko', () => {
+    const formatKo = 'A h시mm분'
+    const amKo = '오전 9시00분'
+    const pmKo = '오후 9시00분'
+    // am
+    expect(dayjs(am, format).locale('ko').format(formatKo)).toEqual(amKo)
+    expect(dayjs(amKo, formatKo, 'ko').format(format)).toEqual(am)
+    // pm
+    expect(dayjs(pm, format).locale('ko').format(formatKo)).toEqual(pmKo)
+    expect(dayjs(pmKo, formatKo, 'ko').format(format)).toEqual(pm)
   })
 })
 
