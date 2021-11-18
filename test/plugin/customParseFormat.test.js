@@ -351,30 +351,17 @@ describe('meridiem locale', () => {
 })
 
 describe('meridiem translation', () => {
-  const format = 'HH:mm'
-  const am = '09:00'
-  const pm = '21:00'
-  it('en', () => {
-    const formatEn = 'h:mm A'
-    const amEn = '9:00 AM'
-    const pmEn = '9:00 PM'
-    // am
-    expect(dayjs(am, format).format(formatEn)).toEqual(amEn)
-    expect(dayjs(amEn, formatEn).format(format)).toEqual(am)
-    // pm
-    expect(dayjs(pm, format).format(formatEn)).toEqual(pmEn)
-    expect(dayjs(pmEn, formatEn).format(format)).toEqual(pm)
+  it('zh-cn', () => {
+    const tests = ['1:30 凌晨', '8:30 早上', '10:30 上午', '11:30 中午', '12:30 中午', '4:30 下午', '11:30 晚上']
+    tests.forEach(test => expect(dayjs(test, 'h:mm A', 'zh-cn', true).format('h:mm A')).toEqual(test))
   })
   it('ko', () => {
-    const formatKo = 'A h시mm분'
-    const amKo = '오전 9시00분'
-    const pmKo = '오후 9시00분'
-    // am
-    expect(dayjs(am, format).locale('ko').format(formatKo)).toEqual(amKo)
-    expect(dayjs(amKo, formatKo, 'ko').format(format)).toEqual(am)
-    // pm
-    expect(dayjs(pm, format).locale('ko').format(formatKo)).toEqual(pmKo)
-    expect(dayjs(pmKo, formatKo, 'ko').format(format)).toEqual(pm)
+    const tests = ['오전 12:00', '오전 3:30', '오후 12:00', '오후 3:30']
+    tests.forEach(test => expect(dayjs(test, 'A h:mm', 'ko', true).format('A h:mm')).toEqual(test))
+  })
+  it('ru', () => {
+    const tests = ['1:30 ночи', '11:30 утра', '12:30 дня', '9:30 вечера']
+    tests.forEach(test => expect(dayjs(test, 'h:mm A', 'ru', true).format('h:mm A')).toEqual(test))
   })
 })
 
