@@ -92,6 +92,17 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
+  const oldAdd = proto.add
+  proto.add = function (number, units) {
+    if (!this.$x || !this.$x.$timezone) {
+      return oldAdd.call(this, number, units)
+    }
+
+    const withoutTz = d(this.valueOf())
+    const addWithoutTz = oldAdd.call(withoutTz, number, units)
+    return addWithoutTz.tz(this.$x.$timezone)
+  }
+
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
@@ -99,11 +110,11 @@ export default (o, c, d) => {
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
     let ins = d(target).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
+    ins.$x.$timezone = timezone
     if (keepLocalTime) {
       const newOffset = ins.utcOffset()
       ins = ins.add(oldOffset - newOffset, MIN)
     }
-    ins.$x.$timezone = timezone
     return ins
   }
 
