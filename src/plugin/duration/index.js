@@ -8,7 +8,8 @@ import {
 } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
-const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
+const NORMALIZED_DAYS_A_MONTH = (365 / 12).toFixed(2)
+const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * NORMALIZED_DAYS_A_MONTH
 
 const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 
