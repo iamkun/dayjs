@@ -82,8 +82,8 @@ describe('Parse ISO string', () => {
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
-    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
-    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+    expect(d.asDays()).toBe(85.84) // moment 85, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.262857142857143) // moment 12.285714285714286
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
@@ -179,6 +179,19 @@ test('Add duration', () => {
   const a = dayjs('2020-10-01')
   const days = dayjs.duration(2, 'days')
   expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+})
+
+test('Add duration months', () => {
+  const a = dayjs.duration({
+    months: 11,
+    days: 0,
+    years: 0
+  })
+  const monthToAdd = dayjs.duration(1, 'months')
+  const b = a.add(monthToAdd)
+  expect(b.months()).toBe(0)
+  expect(b.years()).toBe(1)
+  expect(b.days()).toBe(0)
 })
 
 describe('Subtract', () => {
