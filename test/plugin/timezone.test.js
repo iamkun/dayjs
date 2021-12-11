@@ -75,7 +75,7 @@ describe('Convert', () => {
     const MlosAngeles = moment('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
     expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
     expect(losAngeles.format()).toBe(MlosAngeles.format())
-    expect(losAngeles.valueOf()).toBe(1401620400000)
+    expect(losAngeles.valueOf()).toBe(1401624000000)
     expect(losAngeles.valueOf()).toBe(MlosAngeles.valueOf())
     expect(losAngeles.utcOffset()).toBe(-420)
     expect(losAngeles.utcOffset()).toBe(MlosAngeles.utcOffset())
@@ -85,7 +85,7 @@ describe('Convert', () => {
     [dayjs, moment].forEach((_) => {
       const losAngeles = _('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
       expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
-      expect(losAngeles.valueOf()).toBe(1401620400000)
+      expect(losAngeles.valueOf()).toBe(1401624000000)
     })
   })
 
