@@ -480,6 +480,18 @@ dayjs.updateLocale('en', {
 })
 ```
 
+### MonthsOneIndexed
+
+- MonthsOneIndexed overrides `.month()` API to consider months 1-indexed rather than 0-indexed.
+
+```javascript
+import monthsOneIndexed from 'dayjs/plugin/monthsOneIndexed'
+dayjs.extend(monthsOneIndexed)
+
+dayjs().month(1) // January
+dayjs().month(12) // December
+```
+
 ## Customize
 
 You could build your own Day.js plugin to meet different needs.
