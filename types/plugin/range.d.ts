@@ -11,7 +11,7 @@ declare module 'dayjs' {
       startDate: Dayjs
       endDate: Dayjs
 
-      isRange(): boolean
+      isValidRange(): boolean
       clone(): DayjsRange
       isOverlap(dateRange: DayjsRange): boolean
       isEqual(dateRange: DayjsRange): boolean
