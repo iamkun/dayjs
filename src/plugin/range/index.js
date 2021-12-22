@@ -22,15 +22,11 @@ export class DayjsRange {
       return false
     }
 
-    if (
+    return (
       (this.startDate >= other.startDate && this.startDate <= other.endDate) ||
       (this.endDate >= other.startDate && this.endDate <= other.endDate) ||
       (this.startDate <= other.startDate && this.endDate >= other.endDate)
-    ) {
-      return true
-    }
-
-    return false
+    )
   }
 
   isEqual(other) {
