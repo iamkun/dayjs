@@ -44,7 +44,7 @@ dayjs()
 
 ### Documentation
 
-Voce pode Encontrar mais detalhes, API, e outras documentações no site [day.js.org](https://day.js.org/).
+Você pode encontrar mais detalhes, API, e outras documentações no site [day.js.org](https://day.js.org/).
 
 ### Instalação
 
