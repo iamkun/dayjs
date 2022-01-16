@@ -199,6 +199,12 @@ it('parse month from short string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse month from short string with small letters', () => {
+  const input = '2018 feb 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 it('parse month from string with locale in config', () => {
   const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
