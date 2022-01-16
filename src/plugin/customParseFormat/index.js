@@ -18,6 +18,17 @@ let parseTwoDigitYear = function (input) {
   return input + (input > 68 ? 1900 : 2000)
 }
 
+function getIndexInArrayCaseInsensitive(arr, value) {
+  value = value.toLowerCase()
+  for (let i = 0; i < arr.length; i += 1) {
+    if (typeof arr[i] === 'string' && arr[i].toLowerCase() === value) {
+      return i
+    }
+  }
+
+  return -1
+}
+
 function offsetFromString(string) {
   if (!string) return 0
   if (string === 'Z') return 0
@@ -99,8 +110,8 @@ const expressions = {
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
-    const monthsShort = getLocalePart('monthsShort')
-    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input) + 1
+    const monthsShort = getLocalePart('monthsShort') || months.map(_ => _.substr(0, 3))
+    const matchIndex = getIndexInArrayCaseInsensitive(monthsShort, input) + 1
     if (matchIndex < 1) {
       throw new Error()
     }
@@ -108,7 +119,7 @@ const expressions = {
   }],
   MMMM: [matchWord, function (input) {
     const months = getLocalePart('months')
-    const matchIndex = months.indexOf(input) + 1
+    const matchIndex = getIndexInArrayCaseInsensitive(months, input) + 1
     if (matchIndex < 1) {
       throw new Error()
     }
