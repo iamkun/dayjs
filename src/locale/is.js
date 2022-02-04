@@ -1,5 +1,5 @@
 // Icelandic [is]
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 const texts = {
   s: ['nokkrar sekúndur', 'nokkrar sekúndur', 'nokkrum sekúndum'],
