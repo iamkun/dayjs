@@ -9,17 +9,34 @@ declare module 'dayjs' {
 
   interface InstanceLocaleDataReturn {
     firstDayOfWeek(): number;
+
     weekdays(instance: Dayjs): string;
+    weekdays(instance: undefined): WeekdayNames;
     weekdays(): WeekdayNames;
+    weekdays(instance?: Dayjs): WeekdayNames | string;
+    
     weekdaysShort(instance: Dayjs): string;
+    weekdaysShort(instance: undefined): WeekdayNames;
     weekdaysShort(): WeekdayNames;
+    weekdaysShort(instance?: Dayjs): WeekdayNames | string;
+
     weekdaysMin(instance: Dayjs): string;
+    weekdaysMin(instance: undefined): WeekdayNames;
     weekdaysMin(): WeekdayNames;
+    weekdaysMin(instance?: Dayjs): WeekdayNames | string;
+    
     months(instance: Dayjs): string;
+    months(instance: undefined): MonthNames;
     months(): MonthNames;
+    months(instance?: Dayjs): MonthNames | string;
+    
     monthsShort(instance: Dayjs): string;
+    monthsShort(instance: undefined): MonthNames;
     monthsShort(): MonthNames;
+    monthsShort(instance?: Dayjs): MonthNames | string;
+    
     longDateFormat(format: string): string;
+    
     meridiem(hour?: number, minute?: number, isLower?: boolean): string;
   }
 
