@@ -72,3 +72,11 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('UTC date to UTC date conversion should retain time', () => {
+  expect(dayjs('2015-06-21T00:00:00.000Z')).toBe(dayjs('2015-06-21T00:00:00.000Z').tz('UTC'))
+})
+
+it('date initialized as a number should be considered UTC and following date conversion should retain time', () => {
+  expect(dayjs(1434844800000)).toBe(dayjs(1434844800000).tz('UTC'))
+})
