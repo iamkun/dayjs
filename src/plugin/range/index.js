@@ -41,12 +41,12 @@ export class DayjsRange {
     return new DayjsRange(this.startDate, this.endDate.add(number, unit))
   }
 
-  subtractStartRange(number, string) {
-    return new DayjsRange(this.startDate.subtract(number, string))
+  subtractStartRange(number, unit) {
+    return new DayjsRange(this.startDate.subtract(number, unit), this.endDate)
   }
 
-  subtractEndRange(number, string) {
-    return new DayjsRange(this.startDate, this.endDate.subtract(number, string))
+  subtractEndRange(number, unit) {
+    return new DayjsRange(this.startDate, this.endDate.subtract(number, unit))
   }
 }
 
