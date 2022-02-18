@@ -259,6 +259,19 @@ describe('set Default', () => {
     expect(tokyo.format('Z')).toBe('+09:00')
     expect(tokyo.valueOf()).toBe(1401591600000)
   })
+
+  it('setDefaultTimezone changes global default timezone', () => {
+    dayjs.tz.setDefault(NY)
+    const ny = dayjs('2014-06-01 12:00')
+    dayjs.tz.setDefault(TOKYO)
+    const tokyo = dayjs('2014-06-01 12:00')
+    expect(ny.format()).toBe('2014-06-01T12:00:00-04:00')
+    expect(ny.format('Z')).toBe('-04:00')
+    expect(ny.valueOf()).toBe(1401638400000)
+    expect(tokyo.format()).toBe('2014-06-01T12:00:00+09:00')
+    expect(tokyo.format('Z')).toBe('+09:00')
+    expect(tokyo.valueOf()).toBe(1401591600000)
+  })
 })
 
 describe('keepLocalTime', () => {
