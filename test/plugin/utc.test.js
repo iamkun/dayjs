@@ -301,6 +301,13 @@ describe('UTC Offset', () => {
     expect(daysJS.utcOffset()).toEqual(0)
     expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
   })
+
+  it('change utc offset to zero with keepLocalTime and clone it', () => {
+    const d1 = dayjs('2022-02-22 22:22:22').utcOffset(0, true)
+    const d2 = d1.clone()
+    expect(d1.valueOf()).toEqual(d2.valueOf())
+    expect(d1.format()).toEqual(d2.format())
+  })
 })
 
 describe('Diff', () => {

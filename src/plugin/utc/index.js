@@ -53,7 +53,7 @@ export default (option, Dayjs, dayjs) => {
 
   const oldInit = proto.init
   proto.init = function () {
-    if (this.$u) {
+    if (this.$u && this.$utils().u(this.$offset)) {
       const { $d } = this
       this.$y = $d.getUTCFullYear()
       this.$M = $d.getUTCMonth()
