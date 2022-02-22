@@ -308,6 +308,14 @@ describe('UTC Offset', () => {
     expect(d1.valueOf()).toEqual(d2.valueOf())
     expect(d1.format()).toEqual(d2.format())
   })
+
+  it('change utc offset continuously', () => {
+    const targetOffset = dayjs().utcOffset() + 60
+    const d1 = dayjs().utcOffset(targetOffset)
+    const d2 = d1.utcOffset(targetOffset)
+    expect(d1.valueOf()).toEqual(d2.valueOf())
+    expect(d1.format()).toEqual(d2.format())
+  })
 })
 
 describe('Diff', () => {
