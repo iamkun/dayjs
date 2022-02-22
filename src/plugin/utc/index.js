@@ -87,7 +87,7 @@ export default (option, Dayjs, dayjs) => {
       }
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    let ins = this
+    let ins = this.clone()
     if (keepLocalTime) {
       ins.$offset = offset
       ins.$u = input === 0
