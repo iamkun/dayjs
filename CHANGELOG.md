@@ -1,3 +1,10 @@
+## [1.10.8](https://github.com/iamkun/dayjs/compare/v1.10.7...v1.10.8) (2022-02-28)
+
+
+### Bug Fixes
+
+* set locale pt, pt-br correct weekdays and months ([#1697](https://github.com/iamkun/dayjs/issues/1697)) ([e019301](https://github.com/iamkun/dayjs/commit/e01930171c8235f58a114236f146086428f99569))
+
 ## [1.10.7](https://github.com/iamkun/dayjs/compare/v1.10.6...v1.10.7) (2021-09-10)
 
 
