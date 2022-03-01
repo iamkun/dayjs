@@ -18,6 +18,7 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
+  meridiem: hour => (hour < 12 ? 'پ.ن' : 'د.ن'),
   relativeTime: {
     future: 'له‌ %s',
     past: '%s',
