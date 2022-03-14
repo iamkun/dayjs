@@ -1,3 +1,23 @@
+# [1.11.0](https://github.com/iamkun/dayjs/compare/v1.10.8...v1.11.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* Add Kirundi (rn) locale ([#1793](https://github.com/iamkun/dayjs/issues/1793)) ([74e5247](https://github.com/iamkun/dayjs/commit/74e5247227a779fffde39bdfcd1ee19911496709))
+* add missing date shorthand D type definition ([#1752](https://github.com/iamkun/dayjs/issues/1752)) ([b045baf](https://github.com/iamkun/dayjs/commit/b045baf1646a81f7e4f446f355d02d5fb0ef4aa7))
+* Add relative time to Galician (gl) and fix ordinals ([#1800](https://github.com/iamkun/dayjs/issues/1800)) ([dcbf170](https://github.com/iamkun/dayjs/commit/dcbf1708400624addfbddbc71e0f6a9ac15fa961))
+* update German locales (de-at, de-ch) ([#1775](https://github.com/iamkun/dayjs/issues/1775)) ([f9055a7](https://github.com/iamkun/dayjs/commit/f9055a77bf3d84c575e5fcf99e21611138ba64d7))
+* update Icelandic [is] locale relativeTime config ([#1796](https://github.com/iamkun/dayjs/issues/1796)) ([76f9e17](https://github.com/iamkun/dayjs/commit/76f9e1756de7e99c01e471dab30ea074b9ec9629))
+* Update index.d.ts note ([#1716](https://github.com/iamkun/dayjs/issues/1716)) ([5a108ff](https://github.com/iamkun/dayjs/commit/5a108ff3159c53fd270ea7638f33c35c934d6457))
+* Update locale German [de] monthsShort ([#1746](https://github.com/iamkun/dayjs/issues/1746)) ([4a7b7d0](https://github.com/iamkun/dayjs/commit/4a7b7d07c885bb9338514c234dbb708e24e9863e))
+* update meridiem function to Kurdish (ku) locale ([#1725](https://github.com/iamkun/dayjs/issues/1725)) ([efd3904](https://github.com/iamkun/dayjs/commit/efd3904ff8cbf0a4fc064911dda76fc86b669f7b))
+* update updateLocal plugin typescript types ([#1692](https://github.com/iamkun/dayjs/issues/1692)) ([c7a3f73](https://github.com/iamkun/dayjs/commit/c7a3f73064dbb63b4d365b2ad4c792f075f4d8d8))
+
+
+### Features
+
+* Fallback to language only locale + support uppercase locales ([#1524](https://github.com/iamkun/dayjs/issues/1524)) ([9138dc2](https://github.com/iamkun/dayjs/commit/9138dc28206875372da4fb74c64716437cd11b95))
+
 ## [1.10.8](https://github.com/iamkun/dayjs/compare/v1.10.7...v1.10.8) (2022-02-28)
 
 
