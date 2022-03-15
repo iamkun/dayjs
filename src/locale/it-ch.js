@@ -21,10 +21,10 @@ const locale = {
   relativeTime: {
     future: 'tra %s',
     past: '%s fa',
-    s: 'qualche secondo',
+    s: 'alcuni secondi',
     m: 'un minuto',
     mm: '%d minuti',
-    h: 'un\' ora',
+    h: 'un\'ora',
     hh: '%d ore',
     d: 'un giorno',
     dd: '%d giorni',
