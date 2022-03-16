@@ -40,7 +40,7 @@ it('range isOverlap', () => {
 
   expect(dayjs.range(startDate, endDate).isOverlap(dayjs.range(startDate, endDate))).toBe(true)
   expect(dayjs.range(endDate, startDate).isOverlap(dayjs.range(startDate, endDate))).toBe(true)
-  expect(dayjs.range(startDate, endDate).isOverlap(dayjs.range(endDate, otherDate))).toBe(true)
+  expect(dayjs.range(startDate, endDate).isOverlap(dayjs.range(endDate, otherDate))).toBe(false)
   expect(dayjs.range(startDate, endDate).isOverlap(dayjs.range(otherDate, otherDate2))).toBe(false)
   expect(dayjs.range(startDate, otherDate).isOverlap(dayjs.range(endDate, otherDate2))).toBe(true)
   expect(dayjs.range(startDate, otherDate2).isOverlap(dayjs.range(endDate, otherDate))).toBe(true)
