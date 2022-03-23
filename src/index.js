@@ -267,7 +267,7 @@ class Dayjs {
       weekdays, months, meridiem
     } = locale
     const getShort = (arr, index, full, length) => (
-      (arr && (arr[index] || arr(this, str))) || full[index].substr(0, length)
+      (arr && (arr[index] || arr(this, str))) || full[index].slice(0, length)
     )
     const get$H = num => (
       Utils.s($H % 12 || 12, num, '0')
