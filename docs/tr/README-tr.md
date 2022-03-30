@@ -1,16 +1,17 @@
-English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md)
+Türkçe | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">Aynı modern API ile <b>2kB</b> hızlı bir Moment.js alternatifi</p>
+<br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.com/iamkun/dayjs"><img
+    <a href="https://travis-ci.org/iamkun/dayjs"><img
             src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
@@ -22,98 +23,107 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js, büyük ölçüde Moment.js uyumlu bir API ile modern tarayıcılar için tarih ve saatleri dönüştüren, doğrulayan, işleyen ve görüntüleyen minimalist bir JavaScript kütüphanesidir. Moment.js kullanıyorsanız, Day.js'i nasıl kullanacağınızı zaten biliyorsunuzdur.
 
 ```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+dayjs()
+  .startOf('month')
+  .add(1, 'day')
+  .set('year', 2018)
+  .format('YYYY-MM-DD HH:mm:ss')
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+- 🕒 Benzer Moment.js API & Kalıpları
+- 💪 Değişmez
+- 🔥 Zincirlenebilir
+- 🌐 I18n destekler
+- 📦 2kB boyutunda küçük bir kütaphane
+- 👫 Bütün tarayıcılarda desteklenir
 
 ---
 
-## Getting Started
+# Başlarken
 
-### Documentation
+### Dökümantasyon
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+Daha fazla bilgiye, API ve diğer dökümanlara [day.js.org](https://day.js.org/) websitesinden ulaşabilirsiniz.
 
-### Installation
+## Kurulum
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
+📚[Kurulum Rehberi](https://day.js.org/docs/en/installation/installation)
 
-### API
+## API
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
-
-```javascript
-dayjs('2018-08-08') // parse
-
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
-
-dayjs().set('month', 3).month() // get & set
-
-dayjs().add(1, 'year') // manipulate
-
-dayjs().isBefore(dayjs()) // query
-```
-
-📚[API Reference](https://day.js.org/docs/en/parse/parse)
-
-### I18n
-
-Day.js has great support for internationalization.
-
-But none of them will be included in your build unless you use it.
+Tarihleri ve saatleri dönüştürmek, doğrulamak, işlemek ve görüntülemek için Day.js API'larını kullanmak kolaydır.
 
 ```javascript
-import 'dayjs/locale/es' // load on demand
+dayjs('2018-08-08') // dönüştürme
 
-dayjs.locale('es') // use Spanish locale globally
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // belirli bir formatta görüntüleme
 
-dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
+dayjs()
+  .set('month', 3)
+  .month() // görüntüleme & değer atama
+
+dayjs().add(1, 'year') // değiştirme
+
+dayjs().isBefore(dayjs()) // sorgulama
 ```
-📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
 
-### Plugin
+📚[API Referansı](https://day.js.org/docs/en/parse/parse)
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+## I18n
+
+Day.js, uluslararasılaştırma için büyük desteğe sahiptir.
+
+Ancak siz kullanmadığınız sürece bunların hiçbiri yapınıza dahil edilmeyecektir.
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
+import 'dayjs/locale/es' // isteğe göre yükle
 
-dayjs.extend(advancedFormat) // use plugin
+dayjs.locale('tr') // yerel ayarı Türkçe olarak kullan
 
-dayjs().format('Q Do k kk X x') // more available formats
+dayjs('2018-05-05')
+  .locale('zh-cn')
+  .format() //belirli bir durum için Basitleştirilmiş Çince formatında görüntüleme
 ```
 
-📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
+📚[Uluslararasılaştırma](https://day.js.org/docs/en/i18n/i18n)
 
-## Sponsors
+## Eklenti
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/dayjs#sponsor)]
+Eklenti, işlevselliği genişletmek veya yeni özellikler eklemek için Day.js'e eklenebilen bağımsız bir modüldür.
+
+```javascript
+import advancedFormat from 'dayjs/plugin/advancedFormat' // isteğe göre yükle
+
+dayjs.extend(advancedFormat) // eklentiyi kullan
+
+dayjs().format('Q Do k kk X x') // diğer mevcut formatlar
+```
+
+📚[Eklenti Listesi](https://day.js.org/docs/en/plugin/plugin)
+
+## Sponsorlar
+
+Sponsor olarak bu projeye destek olun. Logonuz, web sayfanızın linki ile birlikte burada görünür. [[Sponsor Ol](https://opencollective.com/dayjs#sponsor)]
 
 <a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
 <a href="https://opencollective.com/dayjs/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/2/avatar.svg"></a>
 <a href="https://opencollective.com/dayjs/sponsor/3/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/3/avatar.svg"></a>
 
-## Contributors
+## Katkıda Bulunanlar
 
-This project exists thanks to all the people who contribute.
+Bu proje, katkıda bulunan tüm insanlar sayesinde mevcut.
 
-Please give us a 💖 star 💖 to support us. Thank you.
+Lütfen bize destek olmak için projeye 💖 yıldız 💖 verin. Teşekkürler.
 
-And thank you to all our backers! 🙏
+Ve tüm destekçilerimize teşekkür ederiz! 🙏
 
 <a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
@@ -121,6 +131,6 @@ And thank you to all our backers! 🙏
 <a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
-## License
+## Lisans
 
-Day.js is licensed under a [MIT License](./LICENSE).
+Day.js, bir [MIT Lisansı](../../LICENSE) altında lisanslanmıştır.
