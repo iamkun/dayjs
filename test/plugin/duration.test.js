@@ -193,6 +193,23 @@ test('Subtract duration', () => {
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
 })
 
+describe('Multiply', () => {
+  const a = dayjs.duration(2, 'days')
+  expect(a.multiply(2).days()).toBe(4)
+  expect(a.multiply(0.5).days()).toBe(1)
+  expect(a.multiply(0.25).days()).toBe(0)
+})
+
+test('Multiply (hours)', () => {
+  const a = dayjs.duration(24, 'hours')
+  expect(a.multiply(2).days()).toBe(2)
+  expect(a.multiply(0.5).hours()).toBe(12)
+  expect(a.multiply(0.25).hours()).toBe(6)
+  expect(a.multiply(0.1).hours()).toBe(2)
+  expect(a.multiply(0.1).format("HH:mm")).toBe("02:24")
+  expect(a.multiply(1.1).format("DD:HH:mm")).toBe("01:02:24")
+})
+
 describe('Seconds', () => {
   expect(dayjs.duration(500).seconds()).toBe(0)
   expect(dayjs.duration(1500).seconds()).toBe(1)
