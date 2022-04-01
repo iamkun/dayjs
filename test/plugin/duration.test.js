@@ -206,8 +206,8 @@ test('Multiply (hours)', () => {
   expect(a.multiply(0.5).hours()).toBe(12)
   expect(a.multiply(0.25).hours()).toBe(6)
   expect(a.multiply(0.1).hours()).toBe(2)
-  expect(a.multiply(0.1).format("HH:mm")).toBe("02:24")
-  expect(a.multiply(1.1).format("DD:HH:mm")).toBe("01:02:24")
+  expect(a.multiply(0.1).format('HH:mm')).toBe('02:24')
+  expect(a.multiply(1.1).format('DD:HH:mm')).toBe('01:02:24')
 })
 
 describe('Seconds', () => {
