@@ -217,7 +217,7 @@ class Duration {
   subtract(input, unit) {
     return this.add(input, unit, true)
   }
-  
+
   multiply(factor) {
     return wrapper(this.$ms * factor, this)
   }
