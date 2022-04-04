@@ -1,4 +1,6 @@
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+Русский | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md)
+
+<p align="center"><a href="https://day.js.org/ru/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Быстрая <b>2kB</b> альтернатива Moment.js с тем же современным API</p>
@@ -27,7 +29,7 @@
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Хорошо знакомые API и паттерны Moment.js 
+* 🕒 Хорошо знакомые API и паттерны Moment.js
 * 💪 Неизменная
 * 🔥 Цепная
 * 🌐 Поддержка интернационализации (I18n)
