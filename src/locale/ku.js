@@ -27,7 +27,7 @@ const locale = {
   weekdays: 'یەکشەممە_دووشەممە_سێشەممە_چوارشەممە_پێنجشەممە_هەینی_شەممە'.split('_'),
   weekdaysShort: 'یەکشەم_دووشەم_سێشەم_چوارشەم_پێنجشەم_هەینی_شەممە'.split('_'),
   weekStart: 6,
-  weekdaysMin: 'ی_د_س_چ_پ_ه_ش'.split('_'),
+  weekdaysMin: 'ی_د_س_چ_پ_هـ_ش'.split('_'),
   preparse(string) {
     return string
       .replace(/[١٢٣٤٥٦٧٨٩٠]/g, match => arabicToEnglishNumbersMap[match])
