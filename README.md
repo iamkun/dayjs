@@ -115,8 +115,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://github.com/projectdiscovery" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/50994705?s=52&v=4"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/sudharaka-palamakumbura" target="_blank"><img width="70" src="https://images.opencollective.com/sudharaka-palamakumbura/03b6087/avatar.png"></a>
 
 ## Contributors
 
