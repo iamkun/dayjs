@@ -101,6 +101,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. 
+
 [[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
