@@ -106,9 +106,11 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
 </a>
-<a href="https://github.com/vendure-ecommerce" target="_blank"><img style="float:left; padding-right:10px" width="70" src="https://avatars.githubusercontent.com/u/39629390?s=52&v=4"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/vendure-ecommerce" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/39629390?s=52&v=4"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/Velc" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/1551649?s=52&v=4"></a>
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/projectdiscovery" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/50994705?s=52&v=4"></a>
 <br></br>
 <a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
