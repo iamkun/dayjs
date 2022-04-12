@@ -184,8 +184,23 @@ it('parse month from string', () => {
   expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
 })
 
+it('parse month from string with small letters', () => {
+  const input = '2018 february 03'
+  const format = 'YYYY MMMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '21-december-18'
+  const format2 = 'D-MMMM-YY'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+})
+
 it('parse month from short string', () => {
   const input = '2018 Feb 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse month from short string with small letters', () => {
+  const input = '2018 feb 03'
   const format = 'YYYY MMM DD'
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
