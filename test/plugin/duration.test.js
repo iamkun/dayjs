@@ -76,6 +76,12 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Negative ISO string', () => {
+    const durationString = dayjs.duration(-1000).toISOString()
+    expect(durationString).toEqual('-PT1S')
+    const actual = dayjs.duration(durationString)
+    expect(actual.asSeconds()).toEqual(-1) // this used to fail !!! results in +1
+  })
   it('Formatting missing components', () => {
     expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
   })
