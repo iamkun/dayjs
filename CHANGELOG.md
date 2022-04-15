@@ -1,3 +1,15 @@
+## [1.11.1](https://github.com/iamkun/dayjs/compare/v1.11.0...v1.11.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* add Bengali (Bangladesh) [bn-bd] locale ([#1806](https://github.com/iamkun/dayjs/issues/1806)) ([840ed76](https://github.com/iamkun/dayjs/commit/840ed76eedc085afefc4dedd05f31d44196b63b0))
+* refactor replace deprecated String.prototype.substr() ([#1836](https://github.com/iamkun/dayjs/issues/1836)) ([627fa39](https://github.com/iamkun/dayjs/commit/627fa393e4daf83c92431162dbe18534b23fcbae))
+* Update German [de] locale, adds the abbreviations for month including a . in the end, as in September -> Sept. ([#1831](https://github.com/iamkun/dayjs/issues/1831)) ([4e2802c](https://github.com/iamkun/dayjs/commit/4e2802cc3bec2941ffb737a15fb531c90951eafe))
+* update Italian (Switzerland) [it-ch] locale relativeTime ([#1829](https://github.com/iamkun/dayjs/issues/1829)) ([8e6d11d](https://github.com/iamkun/dayjs/commit/8e6d11d053393d97bee1ba411adb2d82de1a58c4))
+* update Kurdish [ku] locale strings and formatted output contains non-standard kurdish characters ([#1848](https://github.com/iamkun/dayjs/issues/1848)) ([a597d0b](https://github.com/iamkun/dayjs/commit/a597d0b1b8dd28e626f8c59d326622088f7b51e7))
+* update locale bo [Tibetan]: corrected the orders in formats ([#1823](https://github.com/iamkun/dayjs/issues/1823)) ([e790516](https://github.com/iamkun/dayjs/commit/e79051617af6787358f6c9b5443d987b8b53a9e1))
+
 # [1.11.0](https://github.com/iamkun/dayjs/compare/v1.10.8...v1.11.0) (2022-03-14)
 
 
