@@ -100,7 +100,7 @@ const expressions = {
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
     const monthsShort = getLocalePart('monthsShort')
-    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input) + 1
+    const matchIndex = (monthsShort || months.map(_ => _.slice(0, 3))).indexOf(input) + 1
     if (matchIndex < 1) {
       throw new Error()
     }
@@ -161,7 +161,7 @@ function makeParser(format) {
         start += token.length
       } else {
         const { regex, parser } = token
-        const part = input.substr(start)
+        const part = input.slice(start)
         const match = regex.exec(part)
         const value = match[0]
         parser.call(time, value)

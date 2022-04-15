@@ -1,14 +1,65 @@
 // Kurdish [ku]
 import dayjs from 'dayjs'
 
+export const englishToArabicNumbersMap = {
+  1: '١',
+  2: '٢',
+  3: '٣',
+  4: '٤',
+  5: '٥',
+  6: '٦',
+  7: '٧',
+  8: '٨',
+  9: '٩',
+  0: '٠'
+}
+
+const arabicToEnglishNumbersMap = {
+  '١': '1',
+  '٢': '2',
+  '٣': '3',
+  '٤': '4',
+  '٥': '5',
+  '٦': '6',
+  '٧': '7',
+  '٨': '8',
+  '٩': '9',
+  '٠': '0'
+}
+
+const months = [
+  'کانوونی دووەم',
+  'شوبات',
+  'ئادار',
+  'نیسان',
+  'ئایار',
+  'حوزەیران',
+  'تەممووز',
+  'ئاب',
+  'ئەیلوول',
+  'تشرینی یەکەم',
+  'تشرینی دووەم',
+  'کانوونی یەکەم'
+]
+
 const locale = {
   name: 'ku',
-  weekdays: 'یه‌كشه‌ممه‌_دووشه‌ممه‌_سێشه‌ممه‌_چوارشه‌ممه‌_پێنجشه‌ممه‌_هه‌ینی_شه‌ممه‌'.split('_'),
-  months: 'کانونی دووەم_شوبات_ئازار_نیسان_ئایار_حوزەیران_تەمموز_ئاب_ئەیلوول_تشرینی یەكەم_تشرینی دووەم_كانونی یەکەم'.split('_'),
+  months,
+  monthsShort: months,
+  weekdays: 'یەکشەممە_دووشەممە_سێشەممە_چوارشەممە_پێنجشەممە_هەینی_شەممە'.split('_'),
+  weekdaysShort: 'یەکشەم_دووشەم_سێشەم_چوارشەم_پێنجشەم_هەینی_شەممە'.split('_'),
   weekStart: 6,
-  weekdaysShort: 'یه‌كشه‌م_دووشه‌م_سێشه‌م_چوارشه‌م_پێنجشه‌م_هه‌ینی_شه‌ممه‌'.split('_'),
-  monthsShort: 'کانونی دووەم_شوبات_ئازار_نیسان_ئایار_حوزەیران_تەمموز_ئاب_ئەیلوول_تشرینی یەكەم_تشرینی دووەم_كانونی یەکەم'.split('_'),
-  weekdaysMin: 'ی_د_س_چ_پ_ه_ش'.split('_'),
+  weekdaysMin: 'ی_د_س_چ_پ_هـ_ش'.split('_'),
+  preparse(string) {
+    return string
+      .replace(/[١٢٣٤٥٦٧٨٩٠]/g, match => arabicToEnglishNumbersMap[match])
+      .replace(/،/g, ',')
+  },
+  postformat(string) {
+    return string
+      .replace(/\d/g, match => englishToArabicNumbersMap[match])
+      .replace(/,/g, '،')
+  },
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
@@ -20,18 +71,18 @@ const locale = {
   },
   meridiem: hour => (hour < 12 ? 'پ.ن' : 'د.ن'),
   relativeTime: {
-    future: 'له‌ %s',
+    future: 'لە %s',
     past: '%s',
-    s: 'چه‌ند چركه‌یه‌ك',
-    m: 'یه‌ك خوله‌ك',
-    mm: '%d خوله‌ك',
-    h: 'یه‌ك كاتژمێر',
-    hh: '%d كاتژمێر',
-    d: 'یه‌ك ڕۆژ',
+    s: 'چەند چرکەیەک',
+    m: 'یەک خولەک',
+    mm: '%d خولەک',
+    h: 'یەک کاتژمێر',
+    hh: '%d کاتژمێر',
+    d: 'یەک ڕۆژ',
     dd: '%d ڕۆژ',
-    M: 'یه‌ك مانگ',
+    M: 'یەک مانگ',
     MM: '%d مانگ',
-    y: 'یه‌ك ساڵ',
+    y: 'یەک ساڵ',
     yy: '%d ساڵ'
   }
 }
@@ -39,4 +90,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-
