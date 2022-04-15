@@ -1,6 +1,10 @@
+import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
-import '../../src/locale/ku'
+import locale, { englishToArabicNumbersMap } from '../../src/locale/ku'
+import preParsePostFormat from '../../src/plugin/preParsePostFormat'
+
+dayjs.extend(preParsePostFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -15,6 +19,20 @@ it('Format meridiem correctly', () => {
     const dayjsKu = dayjs()
       .startOf('day')
       .add(i, 'hour')
-    expect(dayjsKu.locale('ku').format('h A')).toBe(`${i % 12 || 12} ${i < 12 ? 'پ.ن' : 'د.ن'}`)
+    const hour = (i % 12 || 12)
+      .toString()
+      .replace(/\d/g, match => englishToArabicNumbersMap[match])
+    const m = i < 12 ? 'پ.ن' : 'د.ن'
+    expect(dayjsKu.locale('ku').format('h A')).toBe(`${hour} ${m}`)
+  }
+})
+
+it('Preparse with locale function', () => {
+  for (let i = 0; i <= 7; i += 1) {
+    dayjs.locale(locale)
+    const momentKu = moment()
+      .locale('ku')
+      .add(i, 'day')
+    expect(dayjs(momentKu.format()).format()).toEqual(momentKu.format())
   }
 })
