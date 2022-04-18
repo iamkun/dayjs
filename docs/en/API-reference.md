@@ -129,10 +129,39 @@ dayjs(dayjs('2019-01-25')) // passing a Dayjs object to a constructor will also 
 
 Returns a `boolean` indicating whether the `Dayjs`'s date is valid.
 
-```js
-dayjs().isValid()
-```
+- Browser
+  - Non-strict check.
 
+    Only checks if the value can be `instanceof Date`.
+
+    ```js
+    dayjs('2022-02-31').isValid();
+    // true
+    ```
+  - Strict check.
+
+    Checks if the value can be `instanceof Date` and the date is a valid date. Format and `strict: true` must be provided.
+    ```js
+    dayjs('2022-02-31', 'YYYY-MM-DD', true).isValid();
+    // false
+    ```
+- NodeJS
+  - Non-strict check.
+
+    Only checks if the value can be `instanceof Date`.
+
+    ```js
+    dayjs('2022-02-31').isValid();
+    // true
+    ```
+  - Strict check.
+
+    Checks if the value can be `instanceof Date` and the date is a valid date. Format and `strict: true` must be provided.
+    OBS.: Depends on the `customParseFormat` plugin.
+    ```js
+    dayjs('2022-02-31', 'YYYY-MM-DD', true).isValid();
+    // false
+    ```
 ## Get and Set
 
 ### Year `.year()`
