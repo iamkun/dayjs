@@ -1,9 +1,16 @@
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md)
 
-<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
-                                                                             src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
-                                                                             alt="Day.js"></a></p>
+<p align="center">
+  <a href="https://day.js.org/" target="_blank" rel="noopener noreferrer">
+    <img width="550"
+      src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
+      alt="Day.js"
+    >
+  </a>
+</p>
+
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
@@ -17,23 +24,24 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
             src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="License"></a>
     <br>
-    <a href="https://saucelabs.com/u/dayjs">
-        <img width="750" src="https://user-images.githubusercontent.com/17680888/40040137-8e3323a6-584b-11e8-9dba-bbe577ee8a7b.png" alt="Sauce Test Status">
-    </a>
 </p>
 
 > Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
 
-```js
-dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
+```ts
+dayjs()
+  .startOf('month')
+  .add(1, 'day')
+  .set('year', 2018)
+  .format('YYYY-MM-DD HH:mm:ss')
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+- 🕒 Familiar Moment.js API & patterns
+- 💪 Immutable
+- 🔥 Chainable
+- 🌐 I18n support
+- 📦 2kb mini library
+- 👫 All browsers supported
 
 ---
 
@@ -55,7 +63,7 @@ npm install dayjs --save
 
 It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
 
-```javascript
+```ts
 dayjs('2018-08-08') // parse
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
@@ -75,20 +83,21 @@ Day.js has great support for internationalization.
 
 But none of them will be included in your build unless you use it.
 
-```javascript
+```ts
 import 'dayjs/locale/es' // load on demand
 
 dayjs.locale('es') // use Spanish locale globally
 
 dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
 ```
+
 📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
 
 ### Plugin
 
 A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
 
-```javascript
+```ts
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
 
 dayjs.extend(advancedFormat) // use plugin

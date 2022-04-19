@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ES6",
+    "lib": ["ES2019"],
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "strict": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": []
+  },
+  "include": ["src/**/*"],
+  "references": [{ "path": "./tsconfig.build.json" }]
+}
