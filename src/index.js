@@ -65,14 +65,24 @@ const parseDate = (cfg) => {
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
+      let dObj = null
+      const y = d[1]
       const m = d[2] - 1 || 0
       const ms = (d[7] || '0').substring(0, 3)
+      const dParams = [y, m, d[3] || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms]
       if (utc) {
-        return new Date(Date.UTC(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+        dObj = new Date(Date.UTC(...dParams))
+      } else {
+        dObj = new Date(...dParams)
       }
-      return new Date(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+
+      // by default the js Date maps 2-digit years 0 - 99 to 1900 – 1999
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#interpretation_of_two-digit_years
+      // and the setFullYear method could set the exact year, ex:
+      // const date = new Date(98, 1) => Sun Feb 01 1998 00:00:00
+      // date.setFullYear(98)         => Sat Feb 01 0098 00:00:00
+      dObj.setFullYear(y)
+      return dObj
     }
   }
 
