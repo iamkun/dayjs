@@ -64,6 +64,9 @@
     "utility-types": "^3.10.0",
     "vitest": "^0.9.3"
   },
+  "engines": {
+    "node": "<=14.17.0"
+  },
   "size-limit": [
     {
       "limit": "2.99 KB",
