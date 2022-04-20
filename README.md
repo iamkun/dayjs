@@ -1,6 +1,6 @@
 ## TODO
 
-- locale
+- [x] locale
 - migrate plugins
 - docs
 

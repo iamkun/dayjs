@@ -1,5 +1,6 @@
 // Chinese (China) [zh-cn]
 
+import { dayjs } from '../dayjs'
 import type { Locale } from '.'
 
 const locale: Locale = {
@@ -96,5 +97,7 @@ const locale: Locale = {
     return '晚上'
   },
 }
+
+dayjs.locale(locale, true)
 
 export default locale

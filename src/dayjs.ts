@@ -23,6 +23,10 @@ import type {
   PluginOption,
 } from './types'
 
+let globalLocale = 'en'
+const loadedLocales: Record<string, Locale> = {}
+loadedLocales[globalLocale] = en
+
 type GetterFn = {
   (value: number): Dayjs
   (): number
@@ -63,6 +67,39 @@ const parseDate = (date: Exclude<DateInput, Dayjs>) => {
   return new Date(date)
 }
 
+const parseLocale = (
+  preset?: string | Locale,
+  installOnly?: boolean,
+  newLocale?: Locale
+): string => {
+  let locale: string | undefined
+  if (!preset) {
+    return globalLocale
+  }
+
+  if (typeof preset === 'string') {
+    const presetLower = preset.toLowerCase()
+    if (loadedLocales[presetLower]) {
+      locale = presetLower
+    }
+    if (newLocale) {
+      loadedLocales[presetLower] = newLocale
+      locale = presetLower
+    }
+    const presetSplit = preset.split('-')
+    if (!locale && presetSplit.length > 1) {
+      return parseLocale(presetSplit[0])
+    }
+  } else {
+    const { name } = preset
+    loadedLocales[name] = preset
+    locale = name
+  }
+  if (!installOnly && locale) globalLocale = locale
+  return locale || (!installOnly ? globalLocale : '')
+}
+export { parseLocale as locale }
+
 export class Dayjs extends (class {} as Extend) {
   /** Date object */
   private _d: Date = new Date()
@@ -78,6 +115,8 @@ export class Dayjs extends (class {} as Extend) {
   /** Day of week */
   private _day!: number
 
+  private _locale: string
+
   year!: GetterFn
   month!: GetterFn
   date!: GetterFn
@@ -90,16 +129,17 @@ export class Dayjs extends (class {} as Extend) {
   constructor(date: Exclude<DateInput, Dayjs>, options?: ParseOptions) {
     super()
     this._options = options || {}
+    this._locale = parseLocale(this._options.locale, true)
 
     this.parse(date)
-    this.#init()
+    this._init()
   }
 
   parse(date: Exclude<DateInput, Dayjs>) {
     this._d = parseDate(date)
   }
 
-  #init() {
+  private _init() {
     this._year = this._d.getFullYear()
     this._month = this._d.getMonth()
     this._date = this._d.getDate()
@@ -174,7 +214,7 @@ export class Dayjs extends (class {} as Extend) {
       case 'second':
         return factory(pick(numbers, ['millisecond']))
       case 'week': {
-        const weekStart = en.weekStart || 0
+        const weekStart = this.$locale().weekStart || 0
         const gap =
           (this._day < weekStart ? this._day + 7 : this._day) - weekStart
         return factory({
@@ -185,6 +225,20 @@ export class Dayjs extends (class {} as Extend) {
       case 'millisecond':
         return this.clone()
     }
+  }
+
+  $locale() {
+    return loadedLocales[this._locale]
+  }
+
+  locale(): string
+  locale(preset: string | Locale, locale?: Locale): Dayjs
+  locale(preset?: string | Locale, locale?: Locale) {
+    if (!preset) return this._locale
+    const that = this.clone()
+    const nextLocaleName = parseLocale(preset, true, locale)
+    if (nextLocaleName) that._locale = nextLocaleName
+    return that
   }
 
   startOf(unit: Unit) {
@@ -268,8 +322,8 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   format(formatStr?: string) {
-    const locale = en
-    if (!this.isValid()) return /* locale.invalidDate || */ INVALID_DATE_STRING
+    const locale = this.$locale()
+    if (!this.isValid()) return locale.invalidDate || INVALID_DATE_STRING
 
     const str = formatStr || DEFAULT_FORMAT
     const zoneStr = padZoneStr(this.utcOffset())
@@ -419,5 +473,6 @@ export const dayjs: DayjsFn = (
 dayjs.isDayjs = isDayjs
 dayjs.unix = unix
 dayjs.extend = extend
+dayjs.locale = parseLocale
 
 export default dayjs

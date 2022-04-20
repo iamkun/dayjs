@@ -1,4 +1,4 @@
-import type { Dayjs, extend, isDayjs, unix } from './dayjs'
+import type { Dayjs, extend, isDayjs, locale, unix } from './dayjs'
 
 export type DateInput =
   | Dayjs
@@ -27,6 +27,7 @@ export interface DayjsFn {
   isDayjs: typeof isDayjs
   unix: typeof unix
   extend: typeof extend
+  locale: typeof locale
 }
 
 export type Plugin<T = never> = ((
