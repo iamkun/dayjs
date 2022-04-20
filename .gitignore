@@ -1,17 +1,7 @@
-# OSX
-.DS_Store
-
-# IDE
-.idea
-
-# npm
 node_modules
-
-# jest
-coverage
-
-# build
 dist
-
+coverage
+.idea
+.DS_Store
 
 play
