@@ -478,7 +478,7 @@ dayjs.updateLocale('en', {
 
 ## 自定义
 
-你可以根据需要自由的编写一个 Day.js 插件
+你可以根据需要自由地编写一个 Day.js 插件
 
 欢迎提交 PR 与大家分享你的插件
 
@@ -488,18 +488,18 @@ Day.js 插件模版
 export default (option, dayjsClass, dayjsFactory) => {
   // 扩展 dayjs() 实例
   // 例：添加 dayjs().isSameOrBefore() 实例方法
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+  dayjsClass.prototype.isSameOrBefore = function(...args) {}
 
   // 扩展 dayjs 类
   // 例：添加 dayjs.utc() 类方法
-  dayjsFactory.utc = arguments => {}
+  dayjsFactory.utc = (...args) => {}
 
   // 覆盖已存在的 API
   // 例：扩展 dayjs().format() 方法
   const oldFormat = dayjsClass.prototype.format
-  dayjsClass.prototype.format = function(arguments) {
+  dayjsClass.prototype.format = function(...args) {
     // 原始format结果
-    const result = oldFormat(arguments)
+    const result = oldFormat(...args)
     // 返回修改后结果
   }
 }

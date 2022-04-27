@@ -494,18 +494,18 @@ dayjs.updateLocale('en', {
 export default (option, dayjsClass, dayjsFactory) => {
   // dayjs() を拡張する
   // 例) dayjs().isSameOrBefore() を追加
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+  dayjsClass.prototype.isSameOrBefore = function(...args) {}
 
   // dayjs() を拡張する
   // 例) dayjs().utc() を追加
-  dayjsFactory.utc = arguments => {}
+  dayjsFactory.utc = (...args) => {}
 
   // 既存 API の上書き
   // 例) dayjs().format() を拡張
   const oldFormat = dayjsClass.prototype.format
-  dayjsClass.prototype.format = function(arguments) {
+  dayjsClass.prototype.format = function(...args) {
     // 既存のフォーマット
-    const result = oldFormat(arguments)
+    const result = oldFormat(...args)
     // 変更後のフォーマット
   }
 }

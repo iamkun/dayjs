@@ -24,7 +24,7 @@ declare namespace dayjs {
   export type UnitTypeLong = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date'
 
   export type UnitTypeLongPlural = 'milliseconds' | 'seconds' | 'minutes' | 'hours' | 'days' | 'months' | 'years' | 'dates'
-  
+
   export type UnitType = UnitTypeLong | UnitTypeLongPlural | UnitTypeShort;
 
   export type OpUnitType = UnitType | "week" | "weeks" | 'w';
@@ -80,7 +80,7 @@ declare namespace dayjs {
      *
      * Months are zero indexed, so January is month 0.
      *
-     * Accepts numbers from 0 to 11. If the range is exceeded, it will bubble up to the next year.
+     * Accept numbers from 0 to 11. If the range is exceeded, it will bubble up to the next year.
      * ```
      * dayjs().month(0)// => Dayjs
      * ```
@@ -108,7 +108,7 @@ declare namespace dayjs {
     /**
      * Get the day of the week.
      *
-     * Returns numbers from 0 (Sunday) to 6 (Saturday).
+     * Return numbers from 0 (Sunday) to 6 (Saturday).
      * ```
      * dayjs().day()// 0-6
      * ```
@@ -118,7 +118,7 @@ declare namespace dayjs {
     /**
      * Set the day of the week.
      *
-     * Accepts numbers from 0 (Sunday) to 6 (Saturday). If the range is exceeded, it will bubble up to next weeks.
+     * Accept numbers from 0 (Sunday) to 6 (Saturday). If the range is exceeded, it will bubble up to next weeks.
      * ```
      * dayjs().day(0)// => Dayjs
      * ```
@@ -136,7 +136,7 @@ declare namespace dayjs {
     /**
      * Set the hour.
      *
-     * Accepts numbers from 0 to 23. If the range is exceeded, it will bubble up to the next day.
+     * Accept numbers from 0 to 23. If the range is exceeded, it will bubble up to the next day.
      * ```
      * dayjs().hour(12)// => Dayjs
      * ```
@@ -154,7 +154,7 @@ declare namespace dayjs {
     /**
      * Set the minutes.
      *
-     * Accepts numbers from 0 to 59. If the range is exceeded, it will bubble up to the next hour.
+     * Accept numbers from 0 to 59. If the range is exceeded, it will bubble up to the next hour.
      * ```
      * dayjs().minute(59)// => Dayjs
      * ```
@@ -172,7 +172,7 @@ declare namespace dayjs {
     /**
      * Set the seconds.
      *
-     * Accepts numbers from 0 to 59. If the range is exceeded, it will bubble up to the next minutes.
+     * Accept numbers from 0 to 59. If the range is exceeded, it will bubble up to the next minutes.
      * ```
      * dayjs().second(1)// Dayjs
      * ```
@@ -189,7 +189,7 @@ declare namespace dayjs {
     /**
      * Set the milliseconds.
      *
-     * Accepts numbers from 0 to 999. If the range is exceeded, it will bubble up to the next seconds.
+     * Accept numbers from 0 to 999. If the range is exceeded, it will bubble up to the next seconds.
      * ```
      * dayjs().millisecond(1)// => Dayjs
      * ```

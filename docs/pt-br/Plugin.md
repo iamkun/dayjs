@@ -485,18 +485,18 @@ Modelo de um plugin Day.js.
 export default (option, dayjsClass, dayjsFactory) => {
   // estender dayjs()
   // ex: adicionar dayjs().isSameOrBefore()
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+  dayjsClass.prototype.isSameOrBefore = function(...args) {}
 
   // estender dayjs
   // ex: adicionar dayjs.utc()
-  dayjsFactory.utc = arguments => {}
+  dayjsFactory.utc = (...args) => {}
 
   // sobrescrever API existente
   // ex: estender dayjs().format()
   const formatoAntigo = dayjsClass.prototype.format
-  dayjsClass.prototype.format = function(arguments) {
+  dayjsClass.prototype.format = function(...args) {
     // original
-    const result = formatoAntigo(arguments)
+    const result = formatoAntigo(...args)
     // retornar modificado
   }
 }

@@ -486,18 +486,18 @@ Day.js 플러그인 템플릿
 export default (option, dayjsClass, dayjsFactory) => {
   // extend dayjs()
   // e.g. add dayjs().isSameOrBefore()
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+  dayjsClass.prototype.isSameOrBefore = function(...args) {}
 
   // extend dayjs
   // e.g. add dayjs.utc()
-  dayjsFactory.utc = arguments => {}
+  dayjsFactory.utc = (...args) => {}
 
   // overriding existing API
   // e.g. extend dayjs().format()
   const oldFormat = dayjsClass.prototype.format
-  dayjsClass.prototype.format = function(arguments) {
+  dayjsClass.prototype.format = function(...args) {
     // original format result
-    const result = oldFormat(arguments)
+    const result = oldFormat(...args)
     // return modified result
   }
 }

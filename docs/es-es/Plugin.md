@@ -485,18 +485,18 @@ Plantilla de un complemento de Day.js.
 export default (option, dayjsClass, dayjsFactory) => {
   // extensión de dayjs()
   // p.ej.: se añade dayjs().isSameOrBefore()
-  dayjsClass.prototype.isSameOrBefore = function(arguments) {}
+  dayjsClass.prototype.isSameOrBefore = function(...args) {}
 
   // extensión de dayjs
   // p.ej.: se añade dayjs.utc()
-  dayjsFactory.utc = arguments => {}
+  dayjsFactory.utc = (...args) => {}
 
   // sobrescritura de la API existente
   // p.ej.: extensión de dayjs().format()
   const oldFormat = dayjsClass.prototype.format
-  dayjsClass.prototype.format = function(arguments) {
+  dayjsClass.prototype.format = function(...args) {
     // result contiene el formato original
-    const result = oldFormat(arguments)
+    const result = oldFormat(...args)
     // se ha de devolver result modificado
   }
 }
