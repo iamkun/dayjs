@@ -34,8 +34,7 @@ export interface Locale {
   weekdaysMin?: RepeatDay
   months: RepeatMonth
   monthsShort?: RepeatMonth
-  // TODO strict type
-  ordinal?: (number: string, period: string) => string
+  ordinal?: (number: string, period?: 'W') => string
   weekStart?: number
   yearStart?: number
   formats?: Partial<Record<Format, string>>

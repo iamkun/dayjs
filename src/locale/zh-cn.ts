@@ -44,7 +44,7 @@ const locale: Locale = {
     '11月',
     '12月',
   ],
-  ordinal: (number: string, period: string) => {
+  ordinal: (number, period) => {
     switch (period) {
       case 'W':
         return `${number}周`
