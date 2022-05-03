@@ -17,6 +17,9 @@
     }
   ],
   "funding": "https://opencollective.com/dayjs",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "exports": {
