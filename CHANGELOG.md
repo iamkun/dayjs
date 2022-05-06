@@ -1,3 +1,12 @@
+## [1.11.2](https://github.com/iamkun/dayjs/compare/v1.11.1...v1.11.2) (2022-05-06)
+
+
+### Bug Fixes
+
+* add OpUnitType (week) to quarterOfYear startOf/endOf types ([#1865](https://github.com/iamkun/dayjs/issues/1865)) ([400bc3e](https://github.com/iamkun/dayjs/commit/400bc3e8915e0c58e7abbfd3a1235364b1abaf3e))
+* Fix type issue with ManipulateType ([#1864](https://github.com/iamkun/dayjs/issues/1864)) ([d033dfc](https://github.com/iamkun/dayjs/commit/d033dfcfc1d2ced39b2733898e8d85ad5984c9e9))
+* fix UTC plugin .valueOf not taking DST into account  ([#1448](https://github.com/iamkun/dayjs/issues/1448)) ([27d1c50](https://github.com/iamkun/dayjs/commit/27d1c506100ae6624f258c21cc06b24768ced733))
+
 ## [1.11.1](https://github.com/iamkun/dayjs/compare/v1.11.0...v1.11.1) (2022-04-15)
 
 
