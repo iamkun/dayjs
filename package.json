@@ -47,6 +47,9 @@
     "format": "prettier . --write",
     "test": "vitest"
   },
+  "dependencies": {
+    "utility-types": "^3.10.0"
+  },
   "devDependencies": {
     "@size-limit/file": "^7.0.8",
     "@sxzz/eslint-config-prettier": "^2.1.1",
@@ -64,7 +67,6 @@
     "size-limit": "^7.0.8",
     "ts-morph": "^14.0.0",
     "typescript": "^4.6.3",
-    "utility-types": "^3.10.0",
     "vitest": "^0.9.3"
   },
   "engines": {
