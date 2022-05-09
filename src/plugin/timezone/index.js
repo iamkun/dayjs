@@ -33,6 +33,28 @@ const getDateTimeFormat = (timezone, options = {}) => {
   return dtf
 }
 
+const localeStringifierCache = {}
+const getLocaleStringifier = (timezone) => {
+  const localeStringifier = localeStringifierCache[timezone]
+  if (localeStringifier) {
+    return localeStringifier
+  }
+
+  const newLocaleStringifier = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit'
+  })
+
+  localeStringifierCache[timezone] = newLocaleStringifier
+  return newLocaleStringifier
+}
+
+
 export default (o, c, d) => {
   let defaultTimezone
 
@@ -95,7 +117,7 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
+    const target = getLocaleStringifier(timezone).format(date)
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
     let ins = d(target).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
