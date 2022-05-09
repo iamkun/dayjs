@@ -339,6 +339,17 @@ class Dayjs {
     return this.endOf(C.M).$D
   }
 
+  weeksInMonth() {
+    let weeks = (this.daysInMonth() - (7 - this.startOf('month').day()) - (1 + this.endOf('month').day())) / 7
+    if(this.startOf('month').day() !== 0){
+      weeks++
+    }
+    if(this.endOf('month').day() !== 6){
+      weeks++
+    }
+    return weeks
+  }
+
   $locale() { // get locale object
     return Ls[this.$L]
   }

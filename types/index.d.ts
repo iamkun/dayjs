@@ -331,6 +331,13 @@ declare namespace dayjs {
      */
     daysInMonth(): number
     /**
+     * Get the number of weeks in the current month, including the incomplete weeks.
+     * ```
+     * dayjs('2022-05-01').weeksInMonth() // 5 
+     * ```
+     */
+    weeksInMonth(): number
+    /**
      * To get a copy of the native `Date` object parsed from the Day.js object use `dayjs#toDate`.
      * ```
      * dayjs('2019-01-25').toDate()// => Date
