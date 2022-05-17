@@ -330,6 +330,16 @@ describe('Array format support', () => {
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
   })
+
+  it('with Z offset in strict mode', () => {
+    const d = '2018-04-24 11:12Z'
+    const format = ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD']
+    const resultDayjs = dayjs(d, format, true)
+    const resultMoment = moment(d, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+  })
 })
 
 describe('meridiem locale', () => {
