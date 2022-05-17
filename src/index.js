@@ -40,7 +40,9 @@ const dayjs = function (date, c) {
   // eslint-disable-next-line no-nested-ternary
   const cfg = typeof c === 'object' ? c : {}
   cfg.date = date
-  cfg.args = arguments// eslint-disable-line prefer-rest-params
+  if (cfg.args === undefined) {
+    cfg.args = [...arguments] // eslint-disable-line prefer-rest-params
+  }
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
