@@ -26,7 +26,17 @@ describe('UTC with customParseFormat', () => {
     expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 
-  it('Parse date and time string with no seconds in format', () => {
+  it('Parse date and time string with single format string', () => {
+    dayjs.extend(customParseFormat)
+    const instant = dayjs.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
+    const momentInstant = moment.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
+    expect(instant.date()).toBe(2)
+    expect(instant.hour()).toBe(3)
+    expect(instant.format()).toBe('2011-02-02T03:04:05Z')
+    expect(instant.format()).toBe(momentInstant.format())
+  })
+
+  it('Parse date and time string with single format string without seconds', () => {
     const d = '2018-04-24 21:13:05'
     const resultDayjs = dayjs.utc(d, 'YYYY-MM-DD HH:mm')
     const resultMoment = moment.utc(d, 'YYYY-MM-DD HH:mm')
@@ -34,6 +44,14 @@ describe('UTC with customParseFormat', () => {
     expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2018-04-24 21:13:00')
     expect(resultMoment.isValid()).toBe(true)
     expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+  })
+
+  it('Parse date and time string with offset', () => {
+    const input = '2020-12-01T20:00:00+09:00'
+    const format = 'YYYY-MM-DD[T]HH:mm:ssZ'
+    const result = dayjs.utc(input, format)
+    expect(result.valueOf()).toBe(moment(input, format).valueOf())
+    expect(result.valueOf()).toBe(1606820400000)
   })
 
   it('Parse date and time string with 2-digit offset', () => {
@@ -73,43 +91,13 @@ describe('UTC with customParseFormat', () => {
     expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 
-  it('Parse date and time string with single format', () => {
-    dayjs.extend(customParseFormat)
-    const instant = dayjs.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
-    const momentInstant = moment.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
-    expect(instant.date()).toBe(2)
-    expect(instant.hour()).toBe(3)
-    expect(instant.format()).toBe('2011-02-02T03:04:05Z')
-    expect(instant.format()).toBe(momentInstant.format())
-  })
-
-  it('Parse date and time string with multiple formats and offset', () => {
+  it('Parse date and time string with offset and multiple formats', () => {
     const d = '2018-04-24 11:12:22+04'
     const resultDayjs = dayjs.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'])
     const resultMoment = moment.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'])
     expect(resultDayjs.isValid()).toBe(true)
     expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2018-04-24 07:12:00')
     expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
-  })
-
-  it('Parse date string with multiple formats in strict mode', () => {
-    const d = '2018-04-24 11:12Z'
-    const resultDayjs = dayjs.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'], true)
-    const resultMoment = moment.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'], true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2018-04-24 11:12:00')
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
-  })
-
-  it('Parse date string with multiple formats in strict mode as invalid', () => {
-    const d = '2018-04-24 11:12:24'
-    const resultDayjs = dayjs.utc(d, ['YYYY-MM-DD HH:mm', 'YYYY-MM-DD'], true)
-    const resultMoment = moment.utc(d, ['YYYY-MM-DD HH:mm', 'YYYY-MM-DD'], true)
-    expect(resultDayjs.isValid()).toBe(false)
-    expect(resultDayjs.valueOf()).toBe(NaN)
-    expect(resultMoment.isValid()).toBe(false)
     expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 
@@ -120,6 +108,26 @@ describe('UTC with customParseFormat', () => {
     expect(resultDayjs.isValid()).toBe(true)
     expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2018-04-24 10:22:00')
     expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+  })
+
+  it('Parse date and time string with Z offset and multiple formats in strict mode', () => {
+    const d = '2018-04-24 11:12Z'
+    const resultDayjs = dayjs.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'], true)
+    const resultMoment = moment.utc(d, ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD'], true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2018-04-24 11:12:00')
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+  })
+
+  it('Parse date and time string with multiple formats in strict mode as invalid', () => {
+    const d = '2018-04-24 11:12:24'
+    const resultDayjs = dayjs.utc(d, ['YYYY-MM-DD HH:mm', 'YYYY-MM-DD'], true)
+    const resultMoment = moment.utc(d, ['YYYY-MM-DD HH:mm', 'YYYY-MM-DD'], true)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.valueOf()).toBe(NaN)
+    expect(resultMoment.isValid()).toBe(false)
     expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 })
