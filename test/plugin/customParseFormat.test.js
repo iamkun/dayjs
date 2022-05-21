@@ -292,7 +292,26 @@ describe('month function locale', () => {
 })
 
 describe('Strict mode', () => {
+  it('Date not matching format in strict mode', () => {
+    ['10/12/2014', '10-12-2014'].forEach((input) => {
+      const format = 'YYYY-MM-DD'
+      const resultDayjs = dayjs(input, format, true)
+      const resultMoment = moment(input, format, true)
+      expect(resultMoment.isValid()).toBe(false)
+      expect(resultDayjs.isValid()).toBe(false)
+      expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+      expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+    })
   })
+  it('without locale and with meridiem', () => {
+    const input = '30/1/2020 10:59 PM'
+    const format = 'D/M/YYYY h:mm A'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.format('MM-DD-YYYY HH:mm:ss')).toBe('01-30-2020 22:59:00')
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 })
 
@@ -313,7 +332,6 @@ describe('Array format support', () => {
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
   })
-
   it('with Z offset in strict mode', () => {
     const d = '2018-04-24 11:12Z'
     const format = ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD']
