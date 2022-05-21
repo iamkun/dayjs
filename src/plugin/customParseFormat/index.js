@@ -1,4 +1,5 @@
 import { u } from '../localizedFormat/utils'
+import { daysInMonth } from './utils'
 
 const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
@@ -138,6 +139,30 @@ function correctHours(time) {
   }
 }
 
+function checkOverflow(year, month, day, hours, minutes, seconds, milliseconds) {
+  let overflow = false
+  if (month) {
+    overflow = overflow || (month < 0 || month > 12)
+  }
+  if ((day !== undefined) && (day !== null)) {
+    overflow = overflow || (day < 1 || day > daysInMonth(year, month))
+  }
+  if (hours) {
+    overflow = overflow || (hours < 0 || hours > 24 ||
+      (hours === 24 && (minutes !== 0 || seconds !== 0 || milliseconds !== 0)))
+  }
+  if (minutes) {
+    overflow = overflow || (minutes < 0 || minutes > 59)
+  }
+  if (seconds) {
+    overflow = overflow || (seconds < 0 || seconds > 59)
+  }
+  if (milliseconds) {
+    overflow = overflow || (milliseconds < 0 || milliseconds > 999)
+  }
+  return overflow
+}
+
 function makeParser(format) {
   format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
@@ -191,6 +216,7 @@ const parseFormattedInput = (input, format, utc, strict) => {
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone, strictMatch
     } = parser(input)
+    const isOverflow = checkOverflow(year, month, day, hours, minutes, seconds, milliseconds)
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
     const y = year || now.getFullYear()
@@ -203,7 +229,7 @@ const parseFormattedInput = (input, format, utc, strict) => {
     const s = seconds || 0
     const ms = milliseconds || 0
     let parsedDate = new Date('') // Invalid Date
-    if (!strict || (strict && strictMatch)) {
+    if (!strict || (strict && strictMatch && !isOverflow)) {
       if (zone) {
         parsedDate = new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
       } else if (utc) {
