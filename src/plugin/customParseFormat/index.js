@@ -195,6 +195,10 @@ function makeParser(format) {
           const value = match[0] // eslint-disable-line prefer-destructuring
           parser.call(time, value)
           input = input.replace(value, '')
+          if (match.index !== 0) {
+            time.strictMatch = false
+            start += match.index
+          }
         } else {
           time.strictMatch = false
           break
