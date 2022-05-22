@@ -391,74 +391,6 @@ it('custom two-digit year parse function', () => {
   expect(dayjs(input3, format).year()).toBe(1899)
 })
 
-// issue 1852
-describe('parse with special separator characters', () => {
-  it('Output is NaN for a specific date format', () => {
-    const input = '20 Nov, 2022'
-    const format = 'DD MMM, YYYY'
-    const locale = 'en'
-    const resultDayjs = dayjs(input, format, locale)
-    const resultMoment = moment(input, format, locale)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
-  })
-  it('parse comma separated date', () => {
-    const input = '20,11,2022'
-    const format = 'DD,MM,YYYY'
-    const resultDayjs = dayjs(input, format)
-    const resultMoment = moment(input, format)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
-  })
-  it('parse comma separated date in strict mode', () => {
-    const input = '20,11,2022'
-    const format = 'DD,MM,YYYY'
-    const resultDayjs = dayjs(input, format, true)
-    const resultMoment = moment(input, format, true)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
-  })
-  it('parse date with multi character separator', () => {
-    const input = '20---11---2022'
-    const format = 'DD-/-MM-#-YYYY'
-    const resultDayjs = dayjs(input, format)
-    const resultMoment = moment(input, format)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
-  })
-  it('parse date with multi character separator in strict mode', () => {
-    const input = '20-/-11-#-2022'
-    const format = 'DD-/-MM-#-YYYY'
-    const resultDayjs = dayjs(input, format, true)
-    const resultMoment = moment(input, format, true)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
-  })
-})
-
-it('parse X x', () => {
-  const input = '1410715640.579'
-  const format = 'X'
-  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
-  const input2 = '1410715640579'
-  const format2 = 'x'
-  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
-
-  // x X starct parse requires advancedFormat plugin
-  dayjs.extend(advancedFormat)
-  expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
-})
-
 describe('Incompatibility with moment.js', () => {
   it('Date not matching format', () => {
     ['10/12/2014', '10-12-2014'].forEach((input) => {
@@ -564,4 +496,17 @@ describe('Incompatibility with moment.js', () => {
     expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
     expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
   })
+})
+
+it('parse X x', () => {
+  const input = '1410715640.579'
+  const format = 'X'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '1410715640579'
+  const format2 = 'x'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+
+  // x X starct parse requires advancedFormat plugin
+  dayjs.extend(advancedFormat)
+  expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
 })
