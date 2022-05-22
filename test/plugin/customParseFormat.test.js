@@ -292,6 +292,16 @@ describe('month function locale', () => {
 })
 
 describe('Strict mode', () => {
+  it('Date with single digit day in strict mode', () => {
+    const input = '30/1/2020'
+    const format = 'DD/MM/YYYY'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+  })
   it('Date not matching format in strict mode', () => {
     ['10/12/2014', '10-12-2014'].forEach((input) => {
       const format = 'YYYY-MM-DD'
@@ -461,6 +471,17 @@ describe('Incompatibility with moment.js', () => {
       expect(resultMoment.format('MM-DD-YYYY')).toBe('12-20-2010')
     })
   })
+  it('Date not matching format in strict mode', () => {
+    ['10/12/2014', '10-12-2014'].forEach((input) => {
+      const format = 'YYYY-MM-DD'
+      const resultDayjs = dayjs(input, format, true)
+      const resultMoment = moment(input, format, true)
+      expect(resultMoment.isValid()).toBe(false)
+      expect(resultDayjs.isValid()).toBe(false)
+      expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+      expect(resultMoment.format('MM-DD-YYYY')).toBe('Invalid date')
+    })
+  })
   it('Incompatibility - invalid Date with overflow', () => {
     const input = '35/22/2010 99:88:77'
     const format = 'DD-MM-YYYY HH:mm:ss'
@@ -522,5 +543,25 @@ describe('Incompatibility with moment.js', () => {
     const resultMoment = moment(input, format, locale, true)
     expect(resultMoment.isValid()).toBe(false)
     expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - first match vs. longest match', () => {
+    const input = '2012-05-28 10:21:15'
+    const format = ['YYYY', 'YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-01-01 00:00:00')
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
+  })
+  it('Compatibility - first match vs. longest match in strict mode', () => {
+    const input = '2012-05-28 10:21:15'
+    const format = ['YYYY', 'YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
   })
 })
