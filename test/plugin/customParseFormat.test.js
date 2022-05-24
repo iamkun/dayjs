@@ -496,6 +496,36 @@ describe('Incompatibility with moment.js', () => {
     expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
     expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
   })
+  it('Incompatibility - time value "24:11:00"', () => {
+    const input = '01-01-2010 24:11:00'
+    const format = 'DD-MM-YYYY HH:mm:ss'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:11:00')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - time value "24:00:22"', () => {
+    const input = '01-01-2010 24:00:22'
+    const format = 'DD-MM-YYYY HH:mm:ss'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:00:22')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - time value "24:00:00.100"', () => {
+    const input = '01-01-2010 24:00:00.100'
+    const format = 'DD-MM-YYYY HH:mm:ss.SSS'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:00:00.100')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
 })
 
 it('parse X x', () => {
