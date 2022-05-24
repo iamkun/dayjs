@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node-version: [14.17.0, 16.x]
+        node-version: [14.19.0, 16.x]
       fail-fast: false
 
     runs-on: ${{ matrix.os }}
@@ -23,20 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache ~/.pnpm-store
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-pnpm-store
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-${{ matrix.node-version }}-test-
-            ${{ runner.os }}-
-
-      - name: Install pnpm
-        run: npm i -g pnpm
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
 
       - name: Install deps
         run: pnpm i --frozen-lockfile

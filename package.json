@@ -1,6 +1,7 @@
 {
   "name": "dayjs",
   "version": "2.0.0-alpha.2",
+  "packageManager": "pnpm@7.1.5",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API.",
   "keywords": [
     "dayjs",
@@ -70,7 +71,7 @@
     "vitest": "^0.9.3"
   },
   "engines": {
-    "node": ">=14.17.0"
+    "node": ">=14.19.0"
   },
   "size-limit": [
     {
