@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'vec',
-  weekdays: 'domènega_luni_marti_mèrcore_xòbia_vénare_sabo'.split('_'),
+  weekdays: 'doménega_luni_marti_mèrcore_xòbia_vénare_sabo'.split('_'),
   weekdaysShort: 'dom_lun_mar_mèr_xòb_vén_sab'.split('_'),
   weekdaysMin: 'do_lu_ma_mè_xò_vé_sa'.split('_'),
   months: 'xenàro_febràro_marso_avril_majo_xugno_lujo_agosto_setènbre_otóbre_novènbre_desènbre'.split('_'),
