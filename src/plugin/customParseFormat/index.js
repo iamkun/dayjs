@@ -9,7 +9,7 @@ const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?(\d\d)?|Z/ // +00:00 -00:00 +0000 or -0000 +00 or Z
-const matchWord = /\d*[^\s\d-_:/,()]+/ // Word
+const matchWord = /\d*[^-_:/,()\s\d]+/ // Word
 
 let locale = {}
 
