@@ -20,7 +20,7 @@ const locale = {
   relativeTime: {
     future: 'tra %s',
     past: '%s fa',
-    s: 'poucos segóndi',
+    s: 'arquanti segóndi',
     m: 'un menudo',
     mm: '%d menudi',
     h: 'na óra',
