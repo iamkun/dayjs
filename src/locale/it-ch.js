@@ -17,6 +17,21 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
+  },
+  relativeTime: {
+    future: 'tra %s',
+    past: '%s fa',
+    s: 'alcuni secondi',
+    m: 'un minuto',
+    mm: '%d minuti',
+    h: 'un\'ora',
+    hh: '%d ore',
+    d: 'un giorno',
+    dd: '%d giorni',
+    M: 'un mese',
+    MM: '%d mesi',
+    y: 'un anno',
+    yy: '%d anni'
   }
 }
 

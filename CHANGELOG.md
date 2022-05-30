@@ -1,3 +1,51 @@
+## [1.11.2](https://github.com/iamkun/dayjs/compare/v1.11.1...v1.11.2) (2022-05-06)
+
+
+### Bug Fixes
+
+* add OpUnitType (week) to quarterOfYear startOf/endOf types ([#1865](https://github.com/iamkun/dayjs/issues/1865)) ([400bc3e](https://github.com/iamkun/dayjs/commit/400bc3e8915e0c58e7abbfd3a1235364b1abaf3e))
+* Fix type issue with ManipulateType ([#1864](https://github.com/iamkun/dayjs/issues/1864)) ([d033dfc](https://github.com/iamkun/dayjs/commit/d033dfcfc1d2ced39b2733898e8d85ad5984c9e9))
+* fix UTC plugin .valueOf not taking DST into account  ([#1448](https://github.com/iamkun/dayjs/issues/1448)) ([27d1c50](https://github.com/iamkun/dayjs/commit/27d1c506100ae6624f258c21cc06b24768ced733))
+
+## [1.11.1](https://github.com/iamkun/dayjs/compare/v1.11.0...v1.11.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* add Bengali (Bangladesh) [bn-bd] locale ([#1806](https://github.com/iamkun/dayjs/issues/1806)) ([840ed76](https://github.com/iamkun/dayjs/commit/840ed76eedc085afefc4dedd05f31d44196b63b0))
+* refactor replace deprecated String.prototype.substr() ([#1836](https://github.com/iamkun/dayjs/issues/1836)) ([627fa39](https://github.com/iamkun/dayjs/commit/627fa393e4daf83c92431162dbe18534b23fcbae))
+* Update German [de] locale, adds the abbreviations for month including a . in the end, as in September -> Sept. ([#1831](https://github.com/iamkun/dayjs/issues/1831)) ([4e2802c](https://github.com/iamkun/dayjs/commit/4e2802cc3bec2941ffb737a15fb531c90951eafe))
+* update Italian (Switzerland) [it-ch] locale relativeTime ([#1829](https://github.com/iamkun/dayjs/issues/1829)) ([8e6d11d](https://github.com/iamkun/dayjs/commit/8e6d11d053393d97bee1ba411adb2d82de1a58c4))
+* update Kurdish [ku] locale strings and formatted output contains non-standard kurdish characters ([#1848](https://github.com/iamkun/dayjs/issues/1848)) ([a597d0b](https://github.com/iamkun/dayjs/commit/a597d0b1b8dd28e626f8c59d326622088f7b51e7))
+* update locale bo [Tibetan]: corrected the orders in formats ([#1823](https://github.com/iamkun/dayjs/issues/1823)) ([e790516](https://github.com/iamkun/dayjs/commit/e79051617af6787358f6c9b5443d987b8b53a9e1))
+
+# [1.11.0](https://github.com/iamkun/dayjs/compare/v1.10.8...v1.11.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* Add Kirundi (rn) locale ([#1793](https://github.com/iamkun/dayjs/issues/1793)) ([74e5247](https://github.com/iamkun/dayjs/commit/74e5247227a779fffde39bdfcd1ee19911496709))
+* add missing date shorthand D type definition ([#1752](https://github.com/iamkun/dayjs/issues/1752)) ([b045baf](https://github.com/iamkun/dayjs/commit/b045baf1646a81f7e4f446f355d02d5fb0ef4aa7))
+* Add relative time to Galician (gl) and fix ordinals ([#1800](https://github.com/iamkun/dayjs/issues/1800)) ([dcbf170](https://github.com/iamkun/dayjs/commit/dcbf1708400624addfbddbc71e0f6a9ac15fa961))
+* update German locales (de-at, de-ch) ([#1775](https://github.com/iamkun/dayjs/issues/1775)) ([f9055a7](https://github.com/iamkun/dayjs/commit/f9055a77bf3d84c575e5fcf99e21611138ba64d7))
+* update Icelandic [is] locale relativeTime config ([#1796](https://github.com/iamkun/dayjs/issues/1796)) ([76f9e17](https://github.com/iamkun/dayjs/commit/76f9e1756de7e99c01e471dab30ea074b9ec9629))
+* Update index.d.ts note ([#1716](https://github.com/iamkun/dayjs/issues/1716)) ([5a108ff](https://github.com/iamkun/dayjs/commit/5a108ff3159c53fd270ea7638f33c35c934d6457))
+* Update locale German [de] monthsShort ([#1746](https://github.com/iamkun/dayjs/issues/1746)) ([4a7b7d0](https://github.com/iamkun/dayjs/commit/4a7b7d07c885bb9338514c234dbb708e24e9863e))
+* update meridiem function to Kurdish (ku) locale ([#1725](https://github.com/iamkun/dayjs/issues/1725)) ([efd3904](https://github.com/iamkun/dayjs/commit/efd3904ff8cbf0a4fc064911dda76fc86b669f7b))
+* update updateLocal plugin typescript types ([#1692](https://github.com/iamkun/dayjs/issues/1692)) ([c7a3f73](https://github.com/iamkun/dayjs/commit/c7a3f73064dbb63b4d365b2ad4c792f075f4d8d8))
+
+
+### Features
+
+* Fallback to language only locale + support uppercase locales ([#1524](https://github.com/iamkun/dayjs/issues/1524)) ([9138dc2](https://github.com/iamkun/dayjs/commit/9138dc28206875372da4fb74c64716437cd11b95))
+
+## [1.10.8](https://github.com/iamkun/dayjs/compare/v1.10.7...v1.10.8) (2022-02-28)
+
+
+### Bug Fixes
+
+* set locale pt, pt-br correct weekdays and months ([#1697](https://github.com/iamkun/dayjs/issues/1697)) ([e019301](https://github.com/iamkun/dayjs/commit/e01930171c8235f58a114236f146086428f99569))
+
 ## [1.10.7](https://github.com/iamkun/dayjs/compare/v1.10.6...v1.10.7) (2021-09-10)
 
 

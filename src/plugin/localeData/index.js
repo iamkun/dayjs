@@ -7,7 +7,7 @@ export default (o, c, dayjs) => { // locale needed later
     const locale = ins.name ? ins : ins.$locale()
     const targetLocale = getLocalePart(locale[target])
     const fullLocale = getLocalePart(locale[full])
-    const result = targetLocale || fullLocale.map(f => f.substr(0, num))
+    const result = targetLocale || fullLocale.map(f => f.slice(0, num))
     if (!localeOrder) return result
     const { weekStart } = locale
     return result.map((_, index) => (result[(index + (weekStart || 0)) % 7]))

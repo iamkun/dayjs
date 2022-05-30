@@ -12,12 +12,17 @@ const parseLocale = (preset, object, isLocal) => {
   let l
   if (!preset) return L
   if (typeof preset === 'string') {
-    if (Ls[preset]) {
-      l = preset
+    const presetLower = preset.toLowerCase()
+    if (Ls[presetLower]) {
+      l = presetLower
     }
     if (object) {
-      Ls[preset] = object
-      l = preset
+      Ls[presetLower] = object
+      l = presetLower
+    }
+    const presetSplit = preset.split('-')
+    if (!l && presetSplit.length > 1) {
+      return parseLocale(presetSplit[0])
     }
   } else {
     const { name } = preset
@@ -262,7 +267,7 @@ class Dayjs {
       weekdays, months, meridiem
     } = locale
     const getShort = (arr, index, full, length) => (
-      (arr && (arr[index] || arr(this, str))) || full[index].substr(0, length)
+      (arr && (arr[index] || arr(this, str))) || full[index].slice(0, length)
     )
     const get$H = num => (
       Utils.s($H % 12 || 12, num, '0')

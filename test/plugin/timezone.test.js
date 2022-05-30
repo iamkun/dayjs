@@ -21,6 +21,7 @@ const NY = 'America/New_York'
 const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
+const PARIS = 'Europe/Paris'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -210,6 +211,18 @@ describe('DST, a time that never existed Fall Back', () => {
       expect(d.valueOf()).toBe(1352012400000)
     })
   })
+})
+
+it('DST valueOf', () => {
+  const day1 = '2021-11-17T09:45:00.000Z'
+  const d1 = dayjs.utc(day1).tz(PARIS)
+  const m1 = moment.tz(day1, PARIS)
+  expect(d1.valueOf()).toBe(m1.valueOf())
+
+  const day2 = '2021-05-17T09:45:00.000Z'
+  const d2 = dayjs.utc(day2).tz(PARIS)
+  const m2 = moment.tz(day2, PARIS)
+  expect(d2.valueOf()).toBe(m2.valueOf())
 })
 
 describe('set Default', () => {

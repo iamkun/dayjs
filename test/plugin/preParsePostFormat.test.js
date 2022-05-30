@@ -1,5 +1,4 @@
 import MockDate from 'mockdate'
-// import moment from 'moment'
 import dayjs from '../../src'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
 import localeData from '../../src/plugin/localeData'
@@ -51,36 +50,22 @@ const localeCustomizations = {
   ...en,
   preparse(string) {
     if (typeof string !== 'string') {
-      // console.error('preparse - Expected string, got', {
-      //   string
-      // })
       throw new Error(`preparse - Expected string, got ${typeof string}`)
     }
     try {
-      const res = string.replace(/[!@#$%^&*()]/g, match => numberMap[match])
-      // console.log('Called custom preparse', { string, res })
-      return res
+      return string.replace(/[!@#$%^&*()]/g, match => numberMap[match])
     } catch (error) {
-      const errorMsg = `Unexpected error during preparse of '${string}' - ${error}`
-      // console.error(errorMsg)
-      throw new Error(errorMsg)
+      throw new Error(`Unexpected error during preparse of '${string}' - ${error}`)
     }
   },
   postformat(string) {
     if (typeof string !== 'string') {
-      // console.error('postformat - Expected string, got', {
-      //   string
-      // })
       throw new Error(`postformat - Expected string, got ${typeof string}`)
     }
     try {
-      const res = string.replace(/\d/g, match => symbolMap[match])
-      // console.log('Called custom postformat', { string, res })
-      return res
+      return string.replace(/\d/g, match => symbolMap[match])
     } catch (error) {
-      const errorMsg = `Unexpected error during postFormat of '${string}' - ${error}`
-      // console.error(errorMsg)
-      throw new Error(errorMsg)
+      throw new Error(`Unexpected error during postFormat of '${string}' - ${error}`)
     }
   }
 }
