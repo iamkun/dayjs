@@ -45,7 +45,7 @@ const dayjs = function (date, c) {
   }
   cfg.date = date
   if (cfg.args === undefined) {
-    cfg.args = [...arguments] // eslint-disable-line prefer-rest-params
+    cfg.args = Array.prototype.slice.call(arguments) // eslint-disable-line prefer-rest-params
   }
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
