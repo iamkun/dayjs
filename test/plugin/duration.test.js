@@ -139,16 +139,7 @@ describe('Clone', () => {
 })
 
 describe('Milliseconds', () => {
-  expect(dayjs.duration(500).milliseconds()).toBe(500)
-  expect(dayjs.duration(1500).milliseconds()).toBe(500)
-  expect(dayjs.duration(15000).milliseconds()).toBe(0)
-  expect(dayjs.duration(500).asMilliseconds()).toBe(500)
-  expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
-  expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
-})
-
-describe('Milliseconds', () => {
-  describe('Positive number', () => {
+  it('Positive number', () => {
     expect(dayjs.duration(500).milliseconds()).toBe(500)
     expect(dayjs.duration(1500).milliseconds()).toBe(500)
     expect(dayjs.duration(15000).milliseconds()).toBe(0)
@@ -157,7 +148,7 @@ describe('Milliseconds', () => {
     expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
   })
 
-  describe('Negative number', () => {
+  it('Negative number', () => {
     expect(dayjs.duration(-500).milliseconds()).toBe(-500)
     expect(dayjs.duration(-1500).milliseconds()).toBe(-500)
     expect(dayjs.duration(-15000).milliseconds()).toBe(0)
