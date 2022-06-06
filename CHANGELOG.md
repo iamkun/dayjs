@@ -1,3 +1,11 @@
+## [1.11.3](https://github.com/iamkun/dayjs/compare/v1.11.2...v1.11.3) (2022-06-06)
+
+
+### Bug Fixes
+
+*  customParseFormat plugin to parse comma as a separator character ([#1913](https://github.com/iamkun/dayjs/issues/1913)) ([41b1405](https://github.com/iamkun/dayjs/commit/41b1405971e099431211ae6c2a100cd797da4427))
+* update Dutch [nl] locale ordinal ([#1908](https://github.com/iamkun/dayjs/issues/1908)) ([5da98f8](https://github.com/iamkun/dayjs/commit/5da98f8085d2d2847d79e38c795082703a14f24b))
+
 ## [1.11.2](https://github.com/iamkun/dayjs/compare/v1.11.1...v1.11.2) (2022-05-06)
 
 
