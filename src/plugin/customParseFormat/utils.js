@@ -3,7 +3,8 @@ function modMonth(n, x) {
   return ((n % x) + x) % x
 }
 
-// code duplication as we cannot use 'isLeapYear' plugin here (it is only working with Dayjs objects)
+// code duplication as we cannot use 'isLeapYear' plugin here;
+// 'isLeapYear' is only working with Dayjs objects
 function isLeapYear(year) {
   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
 }
