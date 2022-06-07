@@ -7,30 +7,48 @@ on:
     branches: [next]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
+      - name: Lint
+        run: nr lint
+
   test:
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node-version: [14.19.0, 16.x]
+        node-version: [14.19.0, 16.x, 18]
       fail-fast: false
 
-    runs-on: ${{ matrix.os }}
-
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - name: Set node ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node }}
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
+      - name: Setup
+        run: npm i -g @antfu/ni
 
-      - name: Install deps
-        run: pnpm i --frozen-lockfile
+      - name: Install
+        run: nci
 
       - name: Build
-        run: pnpm build
+        run: nr build
 
       - name: Test
-        run: pnpm test
+        run: nr test
