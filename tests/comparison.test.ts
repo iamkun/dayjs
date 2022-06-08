@@ -1,5 +1,5 @@
-import dayjs from '../src'
 import { expect, it } from 'vitest'
+import dayjs from '../src'
 
 it('is same without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))

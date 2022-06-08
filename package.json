@@ -44,7 +44,7 @@
     "build": "esno build/index.ts",
     "size": "pnpm run build && size-limit",
     "lint": "eslint . --ext .js,.ts,.json",
-    "lint:fix": "pnpm run lint -- --fix",
+    "lint:fix": "pnpm run lint --fix",
     "format": "prettier . --write",
     "test": "vitest"
   },

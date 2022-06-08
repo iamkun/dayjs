@@ -1,5 +1,5 @@
+import { describe, expect, it, vi } from 'vitest'
 import dayjs from '../src'
-import { describe, it, expect, vi } from 'vitest'
 
 describe('Is Before Is After Is Same', () => {
   const now = new Date()
