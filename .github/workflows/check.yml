@@ -19,8 +19,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies
-      run: npm install
+      run: npm install -g codecov && npm install
     - name: Run Lint
       run: npm run lint
     - name: Run tests
-      run: npm test
+      run: npm test && codecov 
