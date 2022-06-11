@@ -34,7 +34,7 @@ const locale = {
     yy: '%d ans'
   },
   ordinal: (n) => {
-    const o = n === 1 ? 'er' : ''
+    const o = n === 1 ? 'er' : 'e'
     return `${n}${o}`
   }
 }
