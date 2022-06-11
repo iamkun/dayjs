@@ -3,8 +3,7 @@ on:
   push:
     branches: [ master, dev ]
   pull_request:
-    types:
-      - opened
+    branches: [dev]
 jobs:
   check:
     runs-on: ubuntu-latest
