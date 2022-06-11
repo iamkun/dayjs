@@ -1,0 +1,27 @@
+name: Lint & Unit Test
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    types:
+      - opened
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm install
+    - name: Run Lint
+      run: npm run lint
+    - name: Run tests
+      run: npm test
