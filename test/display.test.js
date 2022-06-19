@@ -24,6 +24,9 @@ it('Format invalid date', () => {
 it('Format Year YY YYYY', () => {
   expect(dayjs().format('YY')).toBe(moment().format('YY'))
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
+  const timeWithThreeDigitYear = '0200-05-02T01:00:00.000'
+  expect(dayjs(timeWithThreeDigitYear).format('YYYY')).toBe(moment(timeWithThreeDigitYear).format('YYYY'))
+  expect(dayjs(timeWithThreeDigitYear).format('YY')).toBe(moment(timeWithThreeDigitYear).format('YY'))
 })
 
 it('Format Month M MM MMM MMMM', () => {
