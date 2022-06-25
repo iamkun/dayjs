@@ -1,6 +1,6 @@
 /// <reference path="./locale/index.d.ts" />
 
-export = dayjs;
+export default dayjs;
 
 declare function dayjs (date?: dayjs.ConfigType): dayjs.Dayjs
 
