@@ -18,6 +18,21 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
+  },
+  relativeTime: {
+    future: 'بعد %s',
+    past: 'منذ %s',
+    s: 'ثانية واحدة',
+    m: 'دقيقة واحدة',
+    mm: '%d دقائق',
+    h: 'ساعة واحدة',
+    hh: '%d ساعات',
+    d: 'يوم واحد',
+    dd: '%d أيام',
+    M: 'شهر واحد',
+    MM: '%d أشهر',
+    y: 'عام واحد',
+    yy: '%d أعوام'
   }
 }
 
