@@ -6,6 +6,7 @@ import '../../src/locale/ar-ly'
 
 dayjs.extend(relativeTime)
 dayjs.extend(preParsePostFormat)
+const locale = 'ar-ly'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -41,9 +42,15 @@ it('Arabic (Lybia) locale relative time in past and future with suffix', () => {
     [-4, 'y', 'منذ 4 أعوام']
   ]
 
-  const locale = 'ar-ly'
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale(locale).fromNow())
       .toBe(c[2])
   })
+})
+
+it('Meridiem', () => {
+  expect(dayjs('2020-01-01 03:00:00').locale('ar-ly').format('A')).toEqual('ص')
+  expect(dayjs('2020-01-01 11:00:00').locale('ar-ly').format('A')).toEqual('ص')
+  expect(dayjs('2020-01-01 16:00:00').locale('ar-ly').format('A')).toEqual('م')
+  expect(dayjs('2020-01-01 20:00:00').locale('ar-ly').format('A')).toEqual('م')
 })
