@@ -16,3 +16,14 @@ export const REGEX_PARSE =
   /^(\d{4})[/-]?(\d{1,2})?[/-]?(\d{0,2})[\sTt]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/
 export const REGEX_FORMAT =
   /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g
+
+export const UNIT_YEAR = 'year'
+export const UNIT_MONTH = 'month'
+export const UNIT_QUARTER = 'quarter'
+export const UNIT_WEEK = 'week'
+export const UNIT_DAY = 'day'
+export const UNIT_DATE = 'date'
+export const UNIT_HOUR = 'hour'
+export const UNIT_MINUTE = 'minute'
+export const UNIT_SECOND = 'second'
+export const UNIT_MILLISECOND = 'millisecond'

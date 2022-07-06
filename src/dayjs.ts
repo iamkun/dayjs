@@ -1,14 +1,33 @@
 import {
   DEFAULT_FORMAT,
   INVALID_DATE_STRING,
+  MILLISECONDS_A_DAY,
   MILLISECONDS_A_HOUR,
   MILLISECONDS_A_MINUTE,
   MILLISECONDS_A_SECOND,
+  MILLISECONDS_A_WEEK,
   REGEX_FORMAT,
   REGEX_PARSE,
+  UNIT_DATE,
+  UNIT_DAY,
+  UNIT_HOUR,
+  UNIT_MILLISECOND,
+  UNIT_MINUTE,
+  UNIT_MONTH,
+  UNIT_QUARTER,
+  UNIT_SECOND,
+  UNIT_WEEK,
+  UNIT_YEAR,
 } from './constants'
 import { normalize as normalizeUnit } from './units'
-import { cloneDate, isEmptyObject, padZoneStr, pick } from './utils'
+import {
+  absFloor,
+  cloneDate,
+  isEmptyObject,
+  monthDiff,
+  padZoneStr,
+  pick,
+} from './utils'
 import en from './locale/en'
 import type { GetUnit, Unit, UnitBase } from './units'
 
@@ -178,51 +197,76 @@ export class Dayjs extends (class {} as Extend) {
       )
 
     const numbers = isStartOf
-      ? { month: 0, date: 1, hour: 0, minute: 0, second: 0, millisecond: 0 }
+      ? {
+          [UNIT_MONTH]: 0,
+          [UNIT_DATE]: 1,
+          [UNIT_HOUR]: 0,
+          [UNIT_MINUTE]: 0,
+          [UNIT_SECOND]: 0,
+          [UNIT_MILLISECOND]: 0,
+        }
       : {
-          month: 11,
-          date: 31,
-          hour: 23,
-          minute: 59,
-          second: 59,
-          millisecond: 999,
+          [UNIT_MONTH]: 11,
+          [UNIT_DATE]: 31,
+          [UNIT_HOUR]: 23,
+          [UNIT_MINUTE]: 59,
+          [UNIT_SECOND]: 59,
+          [UNIT_MILLISECOND]: 999,
         }
 
     const normalizedUnit = normalizeUnit(unit)
     switch (normalizedUnit) {
-      case 'year':
+      case UNIT_YEAR:
         return factory(numbers)
-      case 'month':
+      case UNIT_MONTH:
         return factory(
           isStartOf
-            ? pick(numbers, ['date', 'hour', 'minute', 'second', 'millisecond'])
+            ? pick(numbers, [
+                UNIT_DATE,
+                UNIT_HOUR,
+                UNIT_MINUTE,
+                UNIT_SECOND,
+                UNIT_MILLISECOND,
+              ])
             : {
                 month: this._month + 1,
                 date: 0,
-                ...pick(numbers, ['hour', 'minute', 'second', 'millisecond']),
+                ...pick(numbers, [
+                  UNIT_HOUR,
+                  UNIT_MINUTE,
+                  UNIT_SECOND,
+                  UNIT_MILLISECOND,
+                ]),
               }
         )
-      case 'date':
-      case 'day':
+      case UNIT_DATE:
+      case UNIT_DAY:
         return factory(
-          pick(numbers, ['hour', 'minute', 'second', 'millisecond'])
+          pick(numbers, [UNIT_HOUR, UNIT_MINUTE, UNIT_SECOND, UNIT_MILLISECOND])
         )
-      case 'hour':
-        return factory(pick(numbers, ['minute', 'second', 'millisecond']))
-      case 'minute':
-        return factory(pick(numbers, ['second', 'millisecond']))
-      case 'second':
-        return factory(pick(numbers, ['millisecond']))
-      case 'week': {
+      case UNIT_HOUR:
+        return factory(
+          pick(numbers, [UNIT_MINUTE, UNIT_SECOND, UNIT_MILLISECOND])
+        )
+      case UNIT_MINUTE:
+        return factory(pick(numbers, [UNIT_SECOND, UNIT_MILLISECOND]))
+      case UNIT_SECOND:
+        return factory(pick(numbers, [UNIT_MILLISECOND]))
+      case UNIT_WEEK: {
         const weekStart = this.$locale().weekStart || 0
         const gap =
           (this._day < weekStart ? this._day + 7 : this._day) - weekStart
         return factory({
           date: isStartOf ? this._date - gap : this._date + (6 - gap),
-          ...pick(numbers, ['hour', 'minute', 'second', 'millisecond']),
+          ...pick(numbers, [
+            UNIT_HOUR,
+            UNIT_MINUTE,
+            UNIT_SECOND,
+            UNIT_MILLISECOND,
+          ]),
         })
       }
-      case 'millisecond':
+      case UNIT_MILLISECOND:
         return this.clone()
     }
   }
@@ -249,16 +293,16 @@ export class Dayjs extends (class {} as Extend) {
     return this._startEndOf(unit, false)
   }
 
-  isSame(that?: DateInput, unit: Unit = 'millisecond') {
+  isSame(that?: DateInput, unit: Unit = UNIT_MILLISECOND) {
     const other = dayjs(that)
     return this.startOf(unit) <= other && other <= this.endOf(unit)
   }
 
-  isAfter(that?: DateInput, unit: Unit = 'millisecond') {
+  isAfter(that?: DateInput, unit: Unit = UNIT_MILLISECOND) {
     return dayjs(that) < this.startOf(unit)
   }
 
-  isBefore(that?: DateInput, unit: Unit = 'millisecond') {
+  isBefore(that?: DateInput, unit: Unit = UNIT_MILLISECOND) {
     return this.endOf(unit) < dayjs(that)
   }
 
@@ -272,21 +316,21 @@ export class Dayjs extends (class {} as Extend) {
 
   set(unit: UnitBase | 'day', value: number) {
     const methods = {
-      year: 'setFullYear',
-      month: 'setMonth',
-      date: 'setDate',
-      hour: 'setHours',
-      minute: 'setMinutes',
-      second: 'setSeconds',
-      millisecond: 'setMilliseconds',
-      day: 'setDate',
+      [UNIT_YEAR]: 'setFullYear',
+      [UNIT_MONTH]: 'setMonth',
+      [UNIT_DATE]: 'setDate',
+      [UNIT_DAY]: 'setDate',
+      [UNIT_HOUR]: 'setHours',
+      [UNIT_MINUTE]: 'setMinutes',
+      [UNIT_SECOND]: 'setSeconds',
+      [UNIT_MILLISECOND]: 'setMilliseconds',
     } as const
     const method = methods[unit]
     if (!method) return this
 
     const date = cloneDate(this._d)
-    const val = unit === 'day' ? this._date + (value - this._day) : value
-    if (unit === 'month' || unit === 'year') {
+    const val = unit === UNIT_DAY ? this._date + (value - this._day) : value
+    if (unit === UNIT_MONTH || unit === UNIT_YEAR) {
       date.setDate(1)
       date[method](val)
       date.setDate(Math.min(this._date, dayjs(date).daysInMonth()))
@@ -296,7 +340,7 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   daysInMonth() {
-    return this.endOf('month').date()
+    return this.endOf(UNIT_MONTH).date()
   }
 
   toDate() {
@@ -383,13 +427,13 @@ export class Dayjs extends (class {} as Extend) {
     const factory = (n: number) =>
       this.date(this.date() + Math.round(n * number))
 
-    if (normalizedUnit === 'month') {
-      return this.set('month', this._month + number)
-    } else if (normalizedUnit === 'year') {
-      return this.set('year', this._year + number)
-    } else if (normalizedUnit === 'day') {
+    if (normalizedUnit === UNIT_MONTH) {
+      return this.set(UNIT_MONTH, this._month + number)
+    } else if (normalizedUnit === UNIT_YEAR) {
+      return this.set(UNIT_YEAR, this._year + number)
+    } else if (normalizedUnit === UNIT_DAY) {
       return factory(1)
-    } else if (normalizedUnit === 'week') {
+    } else if (normalizedUnit === UNIT_WEEK) {
       return factory(7)
     }
 
@@ -406,6 +450,33 @@ export class Dayjs extends (class {} as Extend) {
 
   subtract(number: number, unit: Exclude<Unit, GetUnit<'D'>>) {
     return this.add(number * -1, unit)
+  }
+
+  diff(
+    input: DateInput,
+    units: Exclude<Unit, GetUnit<'D' | 'ms'>>,
+    float: boolean
+  ) {
+    const normalizedUnit = normalizeUnit(units)
+    const that = dayjs(input)
+    const zoneDelta =
+      (that.utcOffset() - this.utcOffset()) * MILLISECONDS_A_MINUTE
+    const diff = +this - +that
+    let result = monthDiff(this, that)
+
+    result =
+      {
+        [UNIT_YEAR]: result / 12,
+        [UNIT_MONTH]: result,
+        [UNIT_QUARTER]: result / 3,
+        [UNIT_WEEK]: (diff - zoneDelta) / MILLISECONDS_A_WEEK,
+        [UNIT_DAY]: (diff - zoneDelta) / MILLISECONDS_A_DAY,
+        [UNIT_HOUR]: diff / MILLISECONDS_A_HOUR,
+        [UNIT_MINUTE]: diff / MILLISECONDS_A_MINUTE,
+        [UNIT_SECOND]: diff / MILLISECONDS_A_SECOND,
+      }[normalizedUnit] || diff // milliseconds
+
+    return float ? result : absFloor(result)
   }
 }
 
@@ -424,14 +495,14 @@ const getterOrSetter = (unit: UnitBase | 'day') => {
 
 ;(
   [
-    'year',
-    'month',
-    'date',
-    'hour',
-    'minute',
-    'second',
-    'millisecond',
-    'day',
+    UNIT_YEAR,
+    UNIT_MONTH,
+    UNIT_DATE,
+    UNIT_DAY,
+    UNIT_HOUR,
+    UNIT_MINUTE,
+    UNIT_SECOND,
+    UNIT_MILLISECOND,
   ] as const
 ).forEach((unit) => (Dayjs.prototype[unit] = getterOrSetter(unit)))
 

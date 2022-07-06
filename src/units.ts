@@ -1,4 +1,15 @@
 import { mutable } from './utils'
+import {
+  UNIT_DATE,
+  UNIT_DAY,
+  UNIT_HOUR,
+  UNIT_MILLISECOND,
+  UNIT_MINUTE,
+  UNIT_MONTH,
+  UNIT_SECOND,
+  UNIT_WEEK,
+  UNIT_YEAR,
+} from './constants'
 import type { PickByValue } from 'utility-types'
 
 export type UnitBase =
@@ -11,18 +22,18 @@ export type UnitBase =
   | 'millisecond'
 
 export const units = mutable({
-  y: 'year',
-  M: 'month',
-  D: 'date',
-  h: 'hour',
-  m: 'minute',
-  s: 'second',
-  ms: 'millisecond',
+  y: UNIT_YEAR,
+  M: UNIT_MONTH,
+  D: UNIT_DATE,
+  h: UNIT_HOUR,
+  m: UNIT_MINUTE,
+  s: UNIT_SECOND,
+  ms: UNIT_MILLISECOND,
 
   /** Day of week */
-  d: 'day',
+  d: UNIT_DAY,
   /** Week of year */
-  w: 'week',
+  w: UNIT_WEEK,
 } as const)
 export type UnitMap = typeof units
 export type UnitShort = keyof UnitMap
