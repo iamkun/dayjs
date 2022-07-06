@@ -1,5 +1,6 @@
 import {
   DEFAULT_FORMAT,
+  GETTER_SETTER_METHODS,
   INVALID_DATE_STRING,
   MILLISECONDS_A_DAY,
   MILLISECONDS_A_HOUR,
@@ -159,14 +160,18 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   private _init() {
-    this._year = this._d.getFullYear()
-    this._month = this._d.getMonth()
-    this._date = this._d.getDate()
-    this._hour = this._d.getHours()
-    this._minute = this._d.getMinutes()
-    this._second = this._d.getSeconds()
-    this._millisecond = this._d.getMilliseconds()
-    this._day = this._d.getDay()
+    for (const unit of [
+      UNIT_YEAR,
+      UNIT_MONTH,
+      UNIT_DATE,
+      UNIT_HOUR,
+      UNIT_MINUTE,
+      UNIT_SECOND,
+      UNIT_MILLISECOND,
+      UNIT_DAY,
+    ] as const) {
+      this[`_${unit}`] = this._d[`get${GETTER_SETTER_METHODS[unit]}`]()
+    }
   }
 
   valueOf() {
@@ -315,26 +320,16 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   set(unit: UnitBase | 'day', value: number) {
-    const methods = {
-      [UNIT_YEAR]: 'setFullYear',
-      [UNIT_MONTH]: 'setMonth',
-      [UNIT_DATE]: 'setDate',
-      [UNIT_DAY]: 'setDate',
-      [UNIT_HOUR]: 'setHours',
-      [UNIT_MINUTE]: 'setMinutes',
-      [UNIT_SECOND]: 'setSeconds',
-      [UNIT_MILLISECOND]: 'setMilliseconds',
-    } as const
-    const method = methods[unit]
+    const method = GETTER_SETTER_METHODS[unit]
     if (!method) return this
 
     const date = cloneDate(this._d)
     const val = unit === UNIT_DAY ? this._date + (value - this._day) : value
     if (unit === UNIT_MONTH || unit === UNIT_YEAR) {
       date.setDate(1)
-      date[method](val)
+      date[`set${method}`](val)
       date.setDate(Math.min(this._date, dayjs(date).daysInMonth()))
-    } else if (method) date[method](val)
+    } else if (method) date[`set${method}`](val)
 
     return dayjs(date)
   }

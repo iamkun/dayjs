@@ -1,3 +1,4 @@
+import { UNIT_MONTH } from './constants'
 import type { Dayjs } from './dayjs'
 import type { Mutable } from 'utility-types'
 
@@ -30,9 +31,9 @@ export const monthDiff = (a: Dayjs, b: Dayjs): number => {
   // function from moment.js in order to keep the same result
   if (a.date() < b.date()) return -monthDiff(b, a)
   const wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month())
-  const anchor = +a.clone().add(wholeMonthDiff, 'month')
+  const anchor = +a.clone().add(wholeMonthDiff, UNIT_MONTH)
   const c = +b - anchor < 0
-  const anchor2 = +a.clone().add(wholeMonthDiff + (c ? -1 : 1), 'month')
+  const anchor2 = +a.clone().add(wholeMonthDiff + (c ? -1 : 1), UNIT_MONTH)
   return +(
     -(
       wholeMonthDiff +

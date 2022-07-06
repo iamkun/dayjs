@@ -27,3 +27,14 @@ export const UNIT_HOUR = 'hour'
 export const UNIT_MINUTE = 'minute'
 export const UNIT_SECOND = 'second'
 export const UNIT_MILLISECOND = 'millisecond'
+
+export const GETTER_SETTER_METHODS = {
+  [UNIT_YEAR]: 'FullYear',
+  [UNIT_MONTH]: 'Month',
+  [UNIT_DATE]: 'Date',
+  [UNIT_DAY]: 'Date',
+  [UNIT_HOUR]: 'Hours',
+  [UNIT_MINUTE]: 'Minutes',
+  [UNIT_SECOND]: 'Seconds',
+  [UNIT_MILLISECOND]: 'Milliseconds',
+} as const
