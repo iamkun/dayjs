@@ -1,10 +1,12 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { readFile, writeFile } from 'fs/promises'
 import { build } from 'esbuild'
 import glob from 'fast-glob'
 import { Project } from 'ts-morph'
 import consola from 'consola'
 import chalk from 'chalk'
+import { minify } from 'terser'
 import { pascalCase } from './utils.mjs'
 import type { BuildOptions } from 'esbuild'
 
@@ -115,6 +117,15 @@ async function genDts() {
   await project.emit({ emitOnlyDtsFiles: true })
 }
 
+async function minifyBundle() {
+  const files = await glob(['dist/*.min.?(m)js'], { absolute: true })
+  for (const filename of files) {
+    const contents = await readFile(filename, 'utf-8')
+    const code = await minify(contents, {})
+    await writeFile(filename, code.code!, 'utf-8')
+  }
+}
+
 await Promise.all([
   buildEntry(true),
   buildEntry(false),
@@ -122,5 +133,7 @@ await Promise.all([
   buildSubModule(true),
   genDts(),
 ])
+
+await minifyBundle()
 
 consola.success(chalk.green('Build success'))
