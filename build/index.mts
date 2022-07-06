@@ -1,11 +1,12 @@
 import path from 'path'
+import { fileURLToPath } from 'url'
 import { build } from 'esbuild'
 import glob from 'fast-glob'
 import { Project } from 'ts-morph'
-import { pascalCase } from './utils'
+import { pascalCase } from './utils.mjs'
 import type { BuildOptions } from 'esbuild'
 
-const pathRoot = path.resolve(__dirname, '..')
+const pathRoot = path.resolve(fileURLToPath(import.meta.url), '../..')
 const pathSrc = path.resolve(pathRoot, 'src')
 const pathOutput = path.resolve(pathRoot, 'dist')
 

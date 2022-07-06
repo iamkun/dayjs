@@ -41,7 +41,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "esno build/index.ts",
+    "build": "tsx build/index.mts",
     "size": "pnpm run build && size-limit",
     "lint": "eslint . --ext .js,.ts,.json",
     "lint:fix": "pnpm run lint --fix",
@@ -60,14 +60,14 @@
     "esbuild": "^0.14.36",
     "eslint": "^8.13.0",
     "eslint-define-config": "^1.3.0",
-    "esno": "^0.14.1",
     "fast-glob": "^3.2.11",
     "moment": "^2.29.3",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "size-limit": "^7.0.8",
     "ts-morph": "^14.0.0",
-    "typescript": "^4.6.3",
+    "tsx": "^3.7.1",
+    "typescript": "^4.7.4",
     "vitest": "^0.9.3"
   },
   "engines": {

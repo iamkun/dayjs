@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "composite": true,
-    "target": "ES2019",
-    "module": "ES6",
-    "lib": ["ES2019"],
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020"],
     "baseUrl": ".",
     "strict": true,
     "declaration": true,
