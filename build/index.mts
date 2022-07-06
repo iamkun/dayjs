@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url'
 import { readFile, writeFile } from 'fs/promises'
 import { build } from 'esbuild'
 import glob from 'fast-glob'
-import { Project } from 'ts-morph'
 import consola from 'consola'
 import chalk from 'chalk'
 import { minify } from 'terser'
@@ -110,16 +109,6 @@ async function buildSubModule(minify: boolean) {
   )
 }
 
-async function genDts() {
-  const project = new Project({
-    compilerOptions: {
-      emitDeclarationOnly: true,
-    },
-    tsConfigFilePath: path.resolve(pathRoot, 'tsconfig.json'),
-  })
-  await project.emit({ emitOnlyDtsFiles: true })
-}
-
 async function minifyBundle() {
   const files = await glob(['dist/*.min.?(m)js'], { absolute: true })
   for (const filename of files) {
@@ -134,7 +123,6 @@ await Promise.all([
   buildEntry(false),
   buildSubModule(false),
   buildSubModule(true),
-  genDts(),
 ])
 
 await minifyBundle()
