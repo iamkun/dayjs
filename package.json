@@ -48,7 +48,11 @@
     "lint": "eslint . --ext .js,.ts,.md,.json",
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier . --write",
-    "test": "vitest"
+    "test": "vitest",
+    "typecheck": "run-p typecheck:*",
+    "typecheck:src": "tsc --noEmit -p tsconfig.src.json --composite false",
+    "typecheck:test": "tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false"
   },
   "dependencies": {
     "utility-types": "^3.10.0"

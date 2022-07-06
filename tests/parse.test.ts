@@ -154,14 +154,14 @@ it('Clone with same value', () => {
 describe('REGEX_PARSE', () => {
   it('2020/9/30', () => {
     const date = '2020/9/30'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe('2020/9/30-2020-9-30----')
   })
 
   it('2019-03-25T06:41:00.999999999', () => {
     const date = '2019-03-25T06:41:00.999999999'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe(
       '2019-03-25T06:41:00.999999999-2019-03-25-06-41-00-999999999'
@@ -170,21 +170,21 @@ describe('REGEX_PARSE', () => {
 
   it('20210102T012345', () => {
     const date = '20210102T012345'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe('20210102T012345-2021-01-02-01-23-45-')
   })
 
   it('2021-01-02T01:23', () => {
     const date = '2021-01-02T01:23'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe('2021-01-02T01:23-2021-01-02-01-23--')
   })
 
   it('2021-01-02T01:23:45', () => {
     const date = '2021-01-02T01:23:45'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe('2021-01-02T01:23:45-2021-01-02-01-23-45-')
   })
@@ -199,7 +199,7 @@ describe('REGEX_PARSE', () => {
   // format used in timezone plugin utcString
   it('2021-1-4 0:42:53:000', () => {
     const date = '2021-1-4 0:42:53:000'
-    const d = date.match(REGEX_PARSE)
+    const d = date.match(REGEX_PARSE)!
     expectSameResult((dayjs) => dayjs(date))
     expect(d.join('-')).toBe('2021-1-4 0:42:53:000-2021-1-4-0-42-53-000')
   })

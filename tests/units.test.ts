@@ -17,7 +17,7 @@ describe('units', () => {
     expect(normalize('ms')).toBe('millisecond')
     // @ts-expect-error
     expect(normalize()).toBe('')
-
+    // @ts-expect-error
     expect(normalize(null)).toMatchInlineSnapshot('""')
     // @ts-expect-error
     expect(normalize('error')).toMatchInlineSnapshot('"error"')

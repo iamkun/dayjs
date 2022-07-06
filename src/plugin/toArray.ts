@@ -1,4 +1,5 @@
 import type { Dayjs, Plugin } from '..'
+
 declare module '../types' {
   export interface Extend {
     toArray: typeof toArray

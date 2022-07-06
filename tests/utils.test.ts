@@ -27,6 +27,7 @@ describe('utils', () => {
 
     // @ts-expect-error
     expect(pick(obj, ['no-exist-key'])).toMatchInlineSnapshot('{}')
+    // @ts-expect-error
     expect(() => pick(obj, undefined)).toThrowError()
   })
 

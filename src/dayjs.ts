@@ -525,7 +525,7 @@ export const extend = <P extends Plugin<any>>(
   return dayjs
 }
 
-export const dayjs: DayjsFn = (
+export const dayjs = ((
   date?: DateInput,
   format?: FormatOption,
   locale?: string | boolean,
@@ -543,7 +543,7 @@ export const dayjs: DayjsFn = (
     strict,
   }
   return new Dayjs(date, options)
-}
+}) as DayjsFn
 dayjs.isDayjs = isDayjs
 dayjs.unix = unix
 dayjs.extend = extend
