@@ -32,7 +32,7 @@ export const GETTER_SETTER_METHODS = {
   [UNIT_YEAR]: 'FullYear',
   [UNIT_MONTH]: 'Month',
   [UNIT_DATE]: 'Date',
-  [UNIT_DAY]: 'Date',
+  [UNIT_DAY]: 'Day',
   [UNIT_HOUR]: 'Hours',
   [UNIT_MINUTE]: 'Minutes',
   [UNIT_SECOND]: 'Seconds',

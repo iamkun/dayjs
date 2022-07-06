@@ -320,16 +320,24 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   set(unit: UnitBase | 'day', value: number) {
-    const method = GETTER_SETTER_METHODS[unit]
+    let method = GETTER_SETTER_METHODS[unit]
     if (!method) return this
 
     const date = cloneDate(this._d)
-    const val = unit === UNIT_DAY ? this._date + (value - this._day) : value
+
+    // If unit is day, we need to calculate and set the date
+    if (method === 'Day') {
+      method = 'Date'
+      value = this._date + (value - this._day)
+    }
+
     if (unit === UNIT_MONTH || unit === UNIT_YEAR) {
       date.setDate(1)
-      date[`set${method}`](val)
+      date[`set${method}`](value)
       date.setDate(Math.min(this._date, dayjs(date).daysInMonth()))
-    } else if (method) date[`set${method}`](val)
+    } else if (method) {
+      date[`set${method}`](value)
+    }
 
     return dayjs(date)
   }
