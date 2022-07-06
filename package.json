@@ -71,6 +71,7 @@
     "ts-morph": "^14.0.0",
     "tsx": "^3.7.1",
     "typescript": "^4.7.4",
+    "unplugin-ast": "^0.4.0",
     "vitest": "^0.9.3"
   },
   "engines": {

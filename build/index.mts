@@ -7,6 +7,8 @@ import { Project } from 'ts-morph'
 import consola from 'consola'
 import chalk from 'chalk'
 import { minify } from 'terser'
+import AST from 'unplugin-ast/esbuild'
+import { RemoveWrapperFunction } from 'unplugin-ast/resolvers'
 import { pascalCase } from './utils.mjs'
 import type { BuildOptions } from 'esbuild'
 
@@ -34,6 +36,7 @@ async function buildEntry(minify: boolean) {
     bundle: true,
     minify,
     target,
+    plugins: [AST({ transformer: [RemoveWrapperFunction(['mutable'])] })],
   }
 
   await Promise.all([
