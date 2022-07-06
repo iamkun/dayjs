@@ -44,7 +44,7 @@
     "build": "pnpm run clean && run-p build:src build:dts",
     "build:src": "tsx build/index.mts",
     "build:dts": "tsc --emitDeclarationOnly",
-    "size": "pnpm run build && size-limit",
+    "size": "pnpm run build:src && size-limit",
     "lint": "eslint . --ext .js,.ts,.md,.json",
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier . --write",
