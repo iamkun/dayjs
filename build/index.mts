@@ -8,7 +8,7 @@ import consola from 'consola'
 import chalk from 'chalk'
 import { minify } from 'terser'
 import AST from 'unplugin-ast/esbuild'
-import { RemoveWrapperFunction } from 'unplugin-ast/resolvers'
+import { RemoveWrapperFunction } from 'unplugin-ast/transformers'
 import { pascalCase } from './utils.mjs'
 import type { BuildOptions } from 'esbuild'
 
