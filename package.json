@@ -7,8 +7,12 @@
     "dayjs",
     "date"
   ],
-  "homepage": "https://day.js.org",
   "license": "MIT",
+  "homepage": "https://day.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamkun/dayjs.git"
+  },
   "author": "iamkun",
   "contributors": [
     {
@@ -35,10 +39,6 @@
   },
   "unpkg": "./dist/index.iife.min.js",
   "jsdelivr": "./dist/index.iife.min.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iamkun/dayjs.git"
-  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "pnpm run clean && run-p build:src build:dts",
