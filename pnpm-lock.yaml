@@ -9,6 +9,8 @@ importers:
       '@sxzz/eslint-config-ts': ^2.1.1
       '@types/node': '*'
       c8: ^7.11.2
+      chalk: ^5.0.1
+      consola: ^2.15.3
       esbuild: ^0.14.36
       eslint: ^8.13.0
       eslint-define-config: ^1.3.0
@@ -30,6 +32,8 @@ importers:
       '@sxzz/eslint-config-ts': 2.1.1_rnu4jypy7o2rmzgwaq2ddxen4a
       '@types/node': 17.0.25
       c8: 7.11.2
+      chalk: 5.0.1
+      consola: 2.15.3
       esbuild: 0.14.36
       eslint: 8.13.0
       eslint-define-config: 1.3.0
@@ -592,6 +596,11 @@ packages:
       supports-color: 7.2.0
     dev: true
 
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: true
+
   /character-entities-legacy/1.1.4:
     resolution: {integrity: sha512-3Xnr+7ZFS1uxeiUDvV02wQ+QDbc55o97tIV5zHScSPJpcLm/r0DFPcoY3tYRp+VZukxuMeKgXYmsXQHO05zQeA==}
     dev: true
@@ -675,6 +684,10 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    dev: true
+
+  /consola/2.15.3:
+    resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==}
     dev: true
 
   /convert-source-map/1.8.0:

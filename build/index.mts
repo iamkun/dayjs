@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url'
 import { build } from 'esbuild'
 import glob from 'fast-glob'
 import { Project } from 'ts-morph'
+import consola from 'consola'
+import chalk from 'chalk'
 import { pascalCase } from './utils.mjs'
 import type { BuildOptions } from 'esbuild'
 
@@ -113,10 +115,12 @@ async function genDts() {
   await project.emit({ emitOnlyDtsFiles: true })
 }
 
-Promise.all([
+await Promise.all([
   buildEntry(true),
   buildEntry(false),
   buildSubModule(false),
   buildSubModule(true),
   genDts(),
 ])
+
+consola.success(chalk.green('Build success'))
