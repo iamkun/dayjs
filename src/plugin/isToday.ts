@@ -1,15 +1,15 @@
 import type { Dayjs, Plugin } from '..'
 
-export type isTodayType = () => boolean
+export type IsToday = () => boolean
 
 declare module '../types' {
   export interface Extend {
-    isToday: isTodayType
+    isToday: IsToday
   }
 }
 
 const plugin: Plugin = (cls, fn) => {
-  const isToday: isTodayType = function (this: Dayjs): boolean {
+  const isToday: IsToday = function (this: Dayjs): boolean {
     const comparisonTemplate = 'YYYY-MM-DD'
     const now = fn()
     return this.format(comparisonTemplate) === now.format(comparisonTemplate)
