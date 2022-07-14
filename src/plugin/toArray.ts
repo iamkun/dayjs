@@ -20,5 +20,7 @@ function toArray(
   ]
 }
 
-const plugin: Plugin = (cls) => (cls.prototype.toArray = toArray)
+const plugin: Plugin = (cls) => {
+  cls.prototype.toArray = toArray
+}
 export default plugin
