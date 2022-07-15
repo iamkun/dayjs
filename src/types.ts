@@ -22,10 +22,24 @@ export interface ParseOptions {
   strict?: boolean
 }
 
+export interface DateParts {
+  year: number
+  month: number
+  date: number
+  hour: number
+  minute: number
+  second: number
+  millisecond: number
+}
+
+export interface DatePartsWithLocale extends DateParts {
+  locale?: string // TODO is the type 'string' correct?
+}
+
 export interface DayjsFn {
   (
     date?: DateInput,
-    format?: FormatOption,
+    format?: FormatOption | ParseOptions,
     locale?: boolean,
     strict?: boolean
   ): Dayjs
