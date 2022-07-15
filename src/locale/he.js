@@ -71,6 +71,13 @@ const locale = {
     ll: 'D MMM YYYY',
     lll: 'D MMM YYYY HH:mm',
     llll: 'ddd, D MMM YYYY HH:mm'
+  },
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 18) {
+      return 'בוקר טוב%s' // (4:00 - 17:59)
+    }
+    return 'ערב טוב%s'
   }
 }
 

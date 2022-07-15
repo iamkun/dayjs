@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 function plural(n) {
   return (n > 1) && (n < 5) && (~~(n / 10) !== 1) // eslint-disable-line
 }
-/* eslint-disable */ 
+/* eslint-disable */
 function translate(number, withoutSuffix, key, isFuture) {
   const result = `${number} `
   switch (key) {
@@ -81,6 +81,20 @@ const locale = {
     MM: translate,
     y: translate,
     yy: translate
+  },
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 8) {
+      return 'Dobré jitro%s' // (4:00 - 7:59)
+    } else if (hour >= 8 && hour < 12) {
+      return 'Dobré dopoledne%s' // (8:00 - 11:59)
+    } else if (hour >= 12 && hour < 18) {
+      if (hour === 12 && i.minute() === 0) {
+        return 'Dobré poledne%s' // (12:00)
+      }
+      return 'Dobré odpoledne%s' // (12:01 - 17:59)
+    }
+    return 'Dobrý večer%s'
   }
 }
 

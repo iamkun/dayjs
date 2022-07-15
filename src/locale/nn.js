@@ -32,6 +32,15 @@ const locale = {
     LL: 'D. MMMM YYYY',
     LLL: 'D. MMMM YYYY [kl.] H:mm',
     LLLL: 'dddd D. MMMM YYYY [kl.] HH:mm'
+  },
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 12) {
+      return 'God morgen%s' // (4:00 - 11:59)
+    } else if (hour >= 12 && hour < 17) {
+      return 'God dag%s' // (12:00 - 16:59)
+    }
+    return 'God kveld%s'
   }
 }
 

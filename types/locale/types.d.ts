@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 declare interface ILocale {
   name: string
   weekdays?: string[]
@@ -30,4 +32,5 @@ declare interface ILocale {
     y: string
     yy: string
   }>
+  greet: (i: dayjs.Dayjs) => string
 }

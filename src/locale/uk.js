@@ -68,6 +68,15 @@ const locale = {
     LL: 'D MMMM YYYY р.',
     LLL: 'D MMMM YYYY р., HH:mm',
     LLLL: 'dddd, D MMMM YYYY р., HH:mm'
+  },
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 12) {
+      return 'Доброго ранку%s' // (4:00 - 11:59)
+    } else if (hour >= 12 && hour < 18) {
+      return 'Добрий день%s' // (12:00 - 17:59)
+    }
+    return 'Добрий вечір%s'
   }
 }
 

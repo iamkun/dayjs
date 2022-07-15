@@ -45,7 +45,16 @@ const locale = {
     y: 'godina',
     yy: '%d godine'
   },
-  ordinal: n => `${n}.`
+  ordinal: n => `${n}.`,
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 10) {
+      return 'Dobro jutro%s' // (4:00 - 9:59)
+    } else if (hour >= 10 && hour < 20) {
+      return 'Dobar dan%s' // (10:00 - 19:59)
+    }
+    return 'Dobra večer%s'
+  }
 }
 
 dayjs.locale(locale, null, true)
