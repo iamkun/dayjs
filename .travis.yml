@@ -1,11 +1,9 @@
 language: node_js
-dist: focal
 cache:
   directories:
     - ~/.npm
     - node_modules
 node_js:
-  - '18'
   - '16'
   - '14'
   - '12'
