@@ -1,4 +1,5 @@
 language: node_js
+dist: focal
 cache:
   directories:
     - ~/.npm
