@@ -368,7 +368,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/manipulate/utc-offset
      */
-    utcOffset(): number
+    utcOffset(offsetToSet?: number): number | Dayjs
     /**
      * This indicates whether the Day.js object is before the other supplied date-time.
      * ```
