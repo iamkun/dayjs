@@ -309,9 +309,9 @@ class Dayjs {
   }
 
   utcOffset() {
-    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // On Firefox 24 Date#getTimezoneOffset returns a floating point.
     // https://github.com/moment/moment/pull/1871
-    return -Math.round(this.$d.getTimezoneOffset() / 15) * 15
+    return -Math.round(this.$d.getTimezoneOffset())
   }
 
   diff(input, units, float) {
