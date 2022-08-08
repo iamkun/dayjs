@@ -9,6 +9,15 @@ const typeToPos = {
   second: 5
 }
 
+const dateTimeFormatDefaults = {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+}
+
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
 const dtfCache = {}
@@ -18,14 +27,9 @@ const getDateTimeFormat = (timezone, options = {}) => {
   let dtf = dtfCache[key]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
+      ...dateTimeFormatDefaults,
       hour12: false,
       timeZone: timezone,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
       timeZoneName
     })
     dtfCache[key] = dtf
@@ -35,23 +39,15 @@ const getDateTimeFormat = (timezone, options = {}) => {
 
 const localeStringifierCache = {}
 const getLocaleStringifier = (timezone) => {
-  const localeStringifier = localeStringifierCache[timezone]
-  if (localeStringifier) {
-    return localeStringifier
+  let localeStringifier = localeStringifierCache[timezone]
+  if(!localeStringifier) {
+    localeStringifier = new Intl.DateTimeFormat('en-US', {
+      ...dateTimeFormatDefaults,
+      timeZone: timezone,
+    })
+    localeStringifierCache[timezone] = localeStringifier
   }
-
-  const newLocaleStringifier = new Intl.DateTimeFormat('en-US', {
-    timeZone: timezone,
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit'
-  })
-
-  localeStringifierCache[timezone] = newLocaleStringifier
-  return newLocaleStringifier
+  return localeStringifier
 }
 
 export default (o, c, d) => {
@@ -116,7 +112,7 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = getDateTimeFormat(timezone).format(date)
+    const target = getLocaleStringifier(timezone).format(date)
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
     let ins = d(target).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
