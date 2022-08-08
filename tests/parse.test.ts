@@ -76,14 +76,6 @@ describe('Parse', () => {
     expectSameResult((dayjs) => dayjs(() => '2018-01-01'))
     expectSameResult((dayjs) => dayjs(Number.POSITIVE_INFINITY))
     expectSameResult((dayjs) => dayjs(Number.NaN))
-    expectSameResult((dayjs) => dayjs([2018, 5, 1, 13, 52, 44])) // Arrays with time part
-  })
-
-  it('parses Arrays with date part', () => {
-    expectSameResult((dayjs) => {
-      const d = dayjs([2018, 5, 1])
-      return d.add(d.utcOffset(), 'minutes')
-    })
   })
 
   it('String Other, Undefined and Null and isValid', () => {
@@ -216,6 +208,7 @@ describe('REGEX_PARSE', () => {
     expectSameResult((dayjs) => dayjs(date))
     expect(d).toBe(null)
   })
+
   it('2021-01-02T01:23:45Z (no regex match)', () => {
     const date = '2021-01-02T01:23:45Z'
     const d = date.match(REGEX_PARSE)
@@ -229,5 +222,39 @@ describe('REGEX_PARSE', () => {
     const d = date.match(REGEX_PARSE)
     expectSameResult((dayjs) => dayjs(date))
     expect(d).toBe(null)
+  })
+})
+
+describe('ArraySupport', () => {
+  beforeEach(() => {
+    vi.setSystemTime(new Date())
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  it('parses empty Array', () => {
+    expectSameResult((dayjs) => dayjs([]))
+  })
+
+  it('parses Array with year', () => {
+    expectSameResult((dayjs) => dayjs([2018]))
+  })
+
+  it('parses Array with year and month', () => {
+    expectSameResult((dayjs) => dayjs([2018, 5]))
+  })
+
+  it('parses Array with date part', () => {
+    expectSameResult((dayjs) => dayjs([2018, 5, 1]))
+  })
+
+  it('parses Array with time part', () => {
+    expectSameResult((dayjs) => dayjs([2018, 5, 1, 13, 52, 44]))
+  })
+
+  it('parses Array with all parts', () => {
+    expectSameResult((dayjs) => dayjs([2018, 5, 1, 13, 14, 15, 99]))
   })
 })
