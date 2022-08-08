@@ -4,6 +4,10 @@
 - migrate plugins
 - docs
 
+## Changes
+
+- Plugin 'ArraySupport' is now part of 'dayjs core', as it is used by Dayjs.\_startEndOf.
+
 ---
 
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md)
