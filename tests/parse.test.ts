@@ -92,17 +92,16 @@ describe('Parse', () => {
   })
 
   it('String Other, Undefined and Null and isValid', () => {
+    const oldConsoleWarn = global.console.warn
     global.console.warn = vi.fn() // moment.js otherString will throw warn
 
     expectSameResult((dayjs) => dayjs('otherString'))
     expectSameResult((dayjs) => dayjs(undefined))
+    expectSameResult((dayjs) => dayjs(null))
 
-    expectSameResult((dayjs) => dayjs())
-    expectSameResult((dayjs) => dayjs(undefined))
-    expectSameResult((dayjs) => dayjs(''))
-    expectSameResult((dayjs) => dayjs(null))
-    expectSameResult((dayjs) => dayjs('otherString'))
-    expectSameResult((dayjs) => dayjs(null))
+    global.console.warn = oldConsoleWarn
+
+    expect(dayjs('').isValid()).toBe(false)
   })
 
   it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
