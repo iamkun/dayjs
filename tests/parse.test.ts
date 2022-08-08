@@ -86,11 +86,6 @@ describe('Parse', () => {
     })
   })
 
-  it('parses unlimited millisecond', () => {
-    const date = '2019-03-25T06:41:00.999999999'
-    expectSameResult((dayjs) => dayjs(date))
-  })
-
   it('String Other, Undefined and Null and isValid', () => {
     const oldConsoleWarn = global.console.warn
     global.console.warn = vi.fn() // moment.js otherString will throw warn
@@ -102,6 +97,11 @@ describe('Parse', () => {
     global.console.warn = oldConsoleWarn
 
     expect(dayjs('').isValid()).toBe(false)
+  })
+
+  it('parses unlimited millisecond', () => {
+    const date = '2019-03-25T06:41:00.999999999'
+    expectSameResult((dayjs) => dayjs(date))
   })
 
   it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
