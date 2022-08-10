@@ -4,7 +4,6 @@ cache:
     - ~/.npm
     - node_modules
 node_js:
-  - '18'
   - '16'
   - '14'
   - '12'
