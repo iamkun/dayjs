@@ -1,3 +1,15 @@
+## [1.11.4](https://github.com/iamkun/dayjs/compare/v1.11.3...v1.11.4) (2022-07-19)
+
+
+### Bug Fixes
+
+* correct past property in ku (kurdish) locale ([#1916](https://github.com/iamkun/dayjs/issues/1916)) ([74e82b9](https://github.com/iamkun/dayjs/commit/74e82b9da5ec8b90361fc27ac7c8b63faf354502))
+* fix French [fr] local ordinal ([#1932](https://github.com/iamkun/dayjs/issues/1932)) ([8f09834](https://github.com/iamkun/dayjs/commit/8f09834a88b8e7f8353c6e7473d4711596890a8c))
+* fix objectSupport plugin ConfigTypeMap type ([#1441](https://github.com/iamkun/dayjs/issues/1441)) ([#1990](https://github.com/iamkun/dayjs/issues/1990)) ([fd51fe4](https://github.com/iamkun/dayjs/commit/fd51fe4f7fa799d8c598343e71fa59299ec4cf93))
+* fix type error to add ordianl property in InstanceLocaleDataReturn and GlobalLocaleDataReturn types ([#1931](https://github.com/iamkun/dayjs/issues/1931)) ([526f0ae](https://github.com/iamkun/dayjs/commit/526f0ae549ffbeeb9ef1099ca23964791fc59743))
+* update locale ar-* meridiem function ([#1954](https://github.com/iamkun/dayjs/issues/1954)) ([3d31611](https://github.com/iamkun/dayjs/commit/3d316117f04362d31f4e8bd349620b8414ce5d0c))
+* zh-tw / zh-hk locale ordinal error ([#1976](https://github.com/iamkun/dayjs/issues/1976)) ([0a1bd08](https://github.com/iamkun/dayjs/commit/0a1bd08e736be7d4e378aaca280caa6543f8066d))
+
 ## [1.11.3](https://github.com/iamkun/dayjs/compare/v1.11.2...v1.11.3) (2022-06-06)
 
 
