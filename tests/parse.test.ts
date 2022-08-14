@@ -5,6 +5,7 @@ import { expectSameResult } from './_util'
 
 describe('Parse', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 
@@ -227,6 +228,7 @@ describe('REGEX_PARSE', () => {
 
 describe('ArraySupport', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 

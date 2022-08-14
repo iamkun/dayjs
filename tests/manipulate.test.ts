@@ -47,6 +47,7 @@ describe('StartOf / EndOf', () => {
   ] as const
 
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 

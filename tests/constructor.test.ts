@@ -3,6 +3,7 @@ import { Dayjs, dayjs, unix } from '../src'
 
 describe('dayjs constructor', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 
@@ -62,6 +63,7 @@ describe('dayjs constructor', () => {
   it('creates valid date from Date object', () => {
     const basicDateObject = new Date()
     expect(basicDateObject instanceof Date).toBeTruthy()
+
     const newDate = dayjs(basicDateObject)
     expect(newDate instanceof Dayjs).toBeTruthy()
     expect(newDate.isValid()).toBeTruthy()
