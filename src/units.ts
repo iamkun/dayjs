@@ -12,6 +12,7 @@ import {
 } from './constants'
 import type { PickByValue } from 'utility-types'
 
+// unit names without 'day of week'
 export type UnitBase =
   | 'year'
   | 'month'
@@ -21,19 +22,17 @@ export type UnitBase =
   | 'second'
   | 'millisecond'
 
+// Units for parsing and formatting
 export const units = mutable({
   y: UNIT_YEAR,
   M: UNIT_MONTH,
-  D: UNIT_DATE,
+  D: UNIT_DATE, // day of month
   h: UNIT_HOUR,
   m: UNIT_MINUTE,
   s: UNIT_SECOND,
   ms: UNIT_MILLISECOND,
-
-  /** Day of week */
-  d: UNIT_DAY,
-  /** Week of year */
-  w: UNIT_WEEK,
+  d: UNIT_DAY, // day of week
+  w: UNIT_WEEK, // Week of year
 } as const)
 export type UnitMap = typeof units
 export type UnitShort = keyof UnitMap

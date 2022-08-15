@@ -127,24 +127,23 @@ export class Dayjs extends (class {} as Extend) {
 
   private _year!: number
   private _month!: number
-  private _date!: number
+  private _date!: number // day of month
   private _hour!: number
   private _minute!: number
   private _second!: number
   private _millisecond!: number
-  /** Day of week */
-  private _day!: number
+  private _day!: number // day of week
 
   private _locale: string
 
   year!: GetterFn
   month!: GetterFn
-  date!: GetterFn
+  date!: GetterFn // day of month
   hour!: GetterFn
   minute!: GetterFn
   second!: GetterFn
   millisecond!: GetterFn
-  day!: GetterFn
+  day!: GetterFn // day of week
 
   constructor(date: Exclude<DateInput, Dayjs>, options?: ParseOptions) {
     super()
@@ -325,9 +324,9 @@ export class Dayjs extends (class {} as Extend) {
 
     const date = cloneDate(this._d)
 
-    // If unit is day, we need to calculate and set the date
+    // If unit is day (of week), we need to calculate and set the date (day of month)
     if (method === 'Day') {
-      method = 'Date'
+      method = 'Date' // day of month
       value = this._date + (value - this._day)
     }
 
