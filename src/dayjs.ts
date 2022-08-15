@@ -30,7 +30,13 @@ import {
   pick,
 } from './utils'
 import en from './locale/en'
-import type { GetUnit, Unit, UnitBase } from './units'
+import type {
+  GetUnit,
+  Unit,
+  UnitBase,
+  UnitBaseAddSubDiff,
+  UnitBaseGetSet,
+} from './units'
 
 import type { Locale } from './locale'
 import type {
@@ -314,11 +320,11 @@ export class Dayjs extends (class {} as Extend) {
     return new Dayjs(this._d, this._options)
   }
 
-  get(unit: UnitBase | 'day') {
+  get(unit: UnitBaseGetSet) {
     return this[`_${unit}` as const]
   }
 
-  set(unit: UnitBase | 'day', value: number) {
+  set(unit: UnitBaseGetSet, value: number) {
     let method = GETTER_SETTER_METHODS[unit]
     if (!method) return this
 
@@ -424,7 +430,7 @@ export class Dayjs extends (class {} as Extend) {
     ) // 'ZZ'
   }
 
-  add(number: number, unit: Exclude<Unit, GetUnit<'D'>>) {
+  add(number: number, unit: UnitBaseAddSubDiff) {
     const normalizedUnit = normalizeUnit(unit)
     const factory = (n: number) =>
       this.date(this.date() + Math.round(n * number))
@@ -450,7 +456,7 @@ export class Dayjs extends (class {} as Extend) {
     return new Dayjs(nextTimeStamp, this._options)
   }
 
-  subtract(number: number, unit: Exclude<Unit, GetUnit<'D'>>) {
+  subtract(number: number, unit: UnitBaseAddSubDiff) {
     return this.add(number * -1, unit)
   }
 
@@ -482,7 +488,7 @@ export class Dayjs extends (class {} as Extend) {
   }
 }
 
-const getterOrSetter = (unit: UnitBase | 'day') => {
+const getterOrSetter = (unit: UnitBaseGetSet) => {
   function fn(value: number): Dayjs
   function fn(): number
   function fn(this: Dayjs, value?: number): number | Dayjs {

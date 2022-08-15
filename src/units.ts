@@ -12,7 +12,7 @@ import {
 } from './constants'
 import type { PickByValue } from 'utility-types'
 
-// unit names without 'day of week'
+// unit names without 'day of week' for parsing / formatting
 export type UnitBase =
   | 'year'
   | 'month'
@@ -68,3 +68,9 @@ export const normalize = <T extends Unit>(unit: T): UnitLonger<T> => {
     (unit?.toLowerCase()?.replace(/s$/, '') as UnitLonger<T>) ?? ''
   return normalizedUnit
 }
+
+// unit names for add / subtract / diff
+export type UnitBaseAddSubDiff = Exclude<Unit, GetUnit<'D'>>
+
+// unit names for get / set
+export type UnitBaseGetSet = UnitBase | 'day'
