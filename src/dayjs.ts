@@ -23,6 +23,7 @@ import {
 import { normalize as normalizeUnit } from './units'
 import {
   absFloor,
+  absRound,
   cloneDate,
   isEmptyObject,
   monthDiff,
@@ -432,17 +433,17 @@ export class Dayjs extends (class {} as Extend) {
 
   add(number: number, unit: UnitBaseAddSubDiff) {
     const normalizedUnit = normalizeUnit(unit)
-    const factory = (n: number) =>
-      this.date(this.date() + Math.round(n * number))
+    const addRoundedToDays = (n: number) =>
+      this.date(this.date() + absRound(n * number))
 
-    if (normalizedUnit === UNIT_MONTH) {
-      return this.set(UNIT_MONTH, this._month + number)
-    } else if (normalizedUnit === UNIT_YEAR) {
-      return this.set(UNIT_YEAR, this._year + number)
+    if (normalizedUnit === UNIT_YEAR) {
+      return this.set(UNIT_MONTH, this._month + absRound(number * 12))
+    } else if (normalizedUnit === UNIT_MONTH) {
+      return this.set(UNIT_MONTH, this._month + absRound(number))
     } else if (normalizedUnit === UNIT_DAY) {
-      return factory(1)
+      return this.set(UNIT_DATE, this._date + absRound(number))
     } else if (normalizedUnit === UNIT_WEEK) {
-      return factory(7)
+      return addRoundedToDays(7)
     }
 
     const steps: Record<typeof normalizedUnit, number> = {
