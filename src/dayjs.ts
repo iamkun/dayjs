@@ -59,22 +59,31 @@ type GetterFn = {
   (): number
 }
 
+const parseArrayToDate = (dateArray: number[]) => {
+  const dateArrayTuple: [
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+  ] = [0, 0, 1, 0, 0, 0, 0]
+  dateArray.forEach((value, index) => {
+    if (value !== undefined) {
+      dateArrayTuple[index] = value
+    }
+  })
+  return new Date(...dateArrayTuple)
+}
+
 const parseDate = (date: Exclude<DateInput, Dayjs>) => {
   if (date instanceof Date) return cloneDate(date)
   // null is invalid
   else if (date === null) return new Date(Number.NaN)
   else if (date === undefined) return new Date()
   else if (isEmptyObject(date)) return new Date()
-  else if (Array.isArray(date))
-    return new Date(
-      date[0],
-      date[1] !== undefined ? date[1] : null,
-      date[2],
-      date[3],
-      date[4],
-      date[5],
-      date[6]
-    )
+  else if (Array.isArray(date)) return parseArrayToDate(date)
   else if (typeof date === 'string' && !/z$/i.test(date)) {
     const d = date.match(REGEX_PARSE)
     if (d) {
