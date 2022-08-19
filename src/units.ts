@@ -73,4 +73,4 @@ export const normalize = <T extends Unit>(unit: T): UnitLonger<T> => {
 export type UnitBaseAddSubDiff = Exclude<Unit, GetUnit<'D'>>
 
 // unit names for get / set
-export type UnitBaseGetSet = UnitBase | 'day'
+export type UnitBaseGetSet = Exclude<Unit, GetUnit<'w'>>

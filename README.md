@@ -7,6 +7,10 @@
 ## Changes
 
 - Plugin 'ArraySupport' is now part of 'dayjs core', as it is used by Dayjs.\_startEndOf.
+- Make Get / Set behave like 'moment':
+  - accessing get / set with unit string (e.g. "`dayjs().get('year')`") takes short form of units too (allowed values are 'y', 'M', 'D', 'h', 'm', 's', 'ms').
+  - unlike 'moment': Day of Week is accessible by name ('D' / 'day') too.
+  - unlike 'moment': the **unit names are case sensitive**.
 
 ---
 

@@ -331,11 +331,13 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   get(unit: UnitBaseGetSet) {
-    return this[`_${unit}` as const]
+    const normalizedUnit = normalizeUnit(unit)
+    return this[`_${normalizedUnit}` as const]
   }
 
   set(unit: UnitBaseGetSet, value: number) {
-    let method = GETTER_SETTER_METHODS[unit]
+    const normalizedUnit = normalizeUnit(unit)
+    let method = GETTER_SETTER_METHODS[normalizedUnit]
     if (!method) return this
 
     const date = cloneDate(this._d)
@@ -511,6 +513,7 @@ const getterOrSetter = (unit: UnitBaseGetSet) => {
   return fn
 }
 
+// set getter- / setter-functions to class
 ;(
   [
     UNIT_YEAR,
