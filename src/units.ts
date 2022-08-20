@@ -12,16 +12,6 @@ import {
 } from './constants'
 import type { PickByValue } from 'utility-types'
 
-// unit names without 'day of week' for parsing / formatting
-export type UnitBase =
-  | 'year'
-  | 'month'
-  | 'date'
-  | 'hour'
-  | 'minute'
-  | 'second'
-  | 'millisecond'
-
 // Units for parsing and formatting
 export const units = mutable({
   y: UNIT_YEAR,
@@ -32,17 +22,21 @@ export const units = mutable({
   s: UNIT_SECOND,
   ms: UNIT_MILLISECOND,
   d: UNIT_DAY, // day of week
-  w: UNIT_WEEK, // Week of year
+  w: UNIT_WEEK, // week of year
 } as const)
 export type UnitMap = typeof units
 export type UnitShort = keyof UnitMap
 export type UnitLong = UnitMap[UnitShort]
 export type GetUnit<K extends UnitShort> = K | `${UnitMap[K]}${'' | 's'}`
+
 export type Unit = GetUnit<UnitShort>
 export type GetShortByLong<T extends UnitLong> = keyof PickByValue<UnitMap, T>
 
 export const unitsShort = Object.keys(units) as UnitShort[]
 export const unitsLong = Object.values(units) as UnitLong[]
+
+// unit names without 'day of week' and 'week of year' for 'Dayjs._startEndOf'
+export type UnitBase = Exclude<UnitLong, typeof UNIT_WEEK | typeof UNIT_DAY>
 
 type RemovePlural<T extends Unit> = T extends `${infer U}s` ? U : T
 export type UnitShorter<U extends Unit> = U extends UnitShort
