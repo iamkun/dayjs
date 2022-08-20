@@ -3,6 +3,7 @@
 - [x] locale
 - migrate plugins
 - docs
+  - unix(number) and dayjs.unix(number)
 
 ## Changes
 
