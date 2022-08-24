@@ -473,8 +473,8 @@ export class Dayjs extends (class {} as Extend) {
 
   diff(
     input: DateInput,
-    units: Exclude<Unit, GetUnit<'D' | 'ms'>>,
-    float: boolean
+    units: Exclude<Unit, GetUnit<'D'>> = 'ms',
+    float = false
   ) {
     const normalizedUnit = normalizeUnit(units)
     const that = dayjs(input)
@@ -493,6 +493,7 @@ export class Dayjs extends (class {} as Extend) {
         [UNIT_HOUR]: diff / MILLISECONDS_A_HOUR,
         [UNIT_MINUTE]: diff / MILLISECONDS_A_MINUTE,
         [UNIT_SECOND]: diff / MILLISECONDS_A_SECOND,
+        [UNIT_MILLISECOND]: diff,
       }[normalizedUnit] || diff // milliseconds
 
     return float ? result : absFloor(result)
