@@ -45,6 +45,7 @@ import type {
   DayjsFn,
   Extend,
   FormatOption,
+  GetterFn,
   ParseOptions,
   Plugin,
   PluginOption,
@@ -53,11 +54,6 @@ import type {
 let globalLocale = 'en'
 const loadedLocales: Record<string, Locale> = {}
 loadedLocales[globalLocale] = en
-
-type GetterFn = {
-  (value: number): Dayjs
-  (): number
-}
 
 const parseArrayToDate = (dateArray: number[]) => {
   const dateArrayTuple: [
