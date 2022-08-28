@@ -437,17 +437,17 @@ export class Dayjs extends (class {} as Extend) {
     ) // 'ZZ'
   }
 
-  add(number: number, unit: UnitBaseAddSubDiff) {
+  add(value: number, unit: UnitBaseAddSubDiff) {
     const normalizedUnit = normalizeUnit(unit)
     const addRoundedToDays = (n: number) =>
-      this.date(this.date() + absRound(n * number))
+      this.date(this.date() + absRound(n * value))
 
     if (normalizedUnit === UNIT_YEAR) {
-      return this.set(UNIT_MONTH, this._month + absRound(number * 12))
+      return this.set(UNIT_MONTH, this._month + absRound(value * 12))
     } else if (normalizedUnit === UNIT_MONTH) {
-      return this.set(UNIT_MONTH, this._month + absRound(number))
+      return this.set(UNIT_MONTH, this._month + absRound(value))
     } else if (normalizedUnit === UNIT_DAY) {
-      return this.set(UNIT_DATE, this._date + absRound(number))
+      return this.set(UNIT_DATE, this._date + absRound(value))
     } else if (normalizedUnit === UNIT_WEEK) {
       return addRoundedToDays(7)
     }
@@ -459,12 +459,12 @@ export class Dayjs extends (class {} as Extend) {
       millisecond: 1,
     }
     const step = steps[normalizedUnit]
-    const nextTimeStamp = this.valueOf() + number * step
+    const nextTimeStamp = this.valueOf() + value * step
     return new Dayjs(nextTimeStamp, this._options)
   }
 
-  subtract(number: number, unit: UnitBaseAddSubDiff) {
-    return this.add(number * -1, unit)
+  subtract(value: number, unit: UnitBaseAddSubDiff) {
+    return this.add(value * -1, unit)
   }
 
   diff(
