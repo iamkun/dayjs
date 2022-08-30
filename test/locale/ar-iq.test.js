@@ -1,7 +1,7 @@
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
-import locale from '../../src/locale/ar-iq'
+import locale, { englishToArabicNumbersMap } from '../../src/locale/ar-iq'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
 
 dayjs.extend(relativeTime)
@@ -24,8 +24,10 @@ it('Meridiem', () => {
 })
 
 it('Preparse with locale function', () => {
-  for (let i = 0; i <= 7; i += 1) {
-    dayjs.locale(locale)
-    expect(dayjs(1500000000000).format('DD/MM/YYYY, hh:mm')).toEqual('١٤/٠٧/٢٠١٧، ٠٥:٤٠')
-  }
+  dayjs.locale(locale)
+  const dateWithARLocale = dayjs().format('DD/MM/YYYY, hh:mm')
+
+  dayjs.locale('en')
+  const dateWithENLocale = dayjs().format('DD/MM/YYYY, hh:mm')
+  expect(dateWithARLocale).toEqual(dateWithENLocale.replace(/\d/g, match => englishToArabicNumbersMap[match]).replace(/,/g, '،'))
 })
