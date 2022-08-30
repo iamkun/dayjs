@@ -1,11 +1,11 @@
-import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
-import '../../src/locale/ru'
 import locale from '../../src/locale/ar-iq'
+import preParsePostFormat from '../../src/plugin/preParsePostFormat'
 
 dayjs.extend(relativeTime)
+dayjs.extend(preParsePostFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -26,9 +26,6 @@ it('Meridiem', () => {
 it('Preparse with locale function', () => {
   for (let i = 0; i <= 7; i += 1) {
     dayjs.locale(locale)
-    const momentArIq = moment()
-      .locale('ar-iq')
-      .add(i, 'day')
-    expect(dayjs(momentArIq.format()).format()).toEqual(momentArIq.format())
+    expect(dayjs(1500000000000).format('DD/MM/YYYY, hh:mm')).toEqual('١٤/٠٧/٢٠١٧، ٠٥:٤٠')
   }
 })
