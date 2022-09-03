@@ -10,6 +10,7 @@ describe('units', () => {
     expect(normalize('D')).toBe('date')
     expect(normalize('d')).toBe('day')
     expect(normalize('M')).toBe('month')
+    expect(normalize('Q')).toBe('quarter')
     expect(normalize('y')).toBe('year')
     expect(normalize('h')).toBe('hour')
     expect(normalize('m')).toBe('minute')

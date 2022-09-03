@@ -14,6 +14,9 @@ const locale: Locale = {
     'Vrydag',
     'Saterdag',
   ],
+  weekdaysShort: ['Son', 'Maa', 'Din', 'Woe', 'Don', 'Vry', 'Sat'],
+  weekdaysMin: ['So', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Sa'],
+  weekStart: 1,
   months: [
     'Januarie',
     'Februarie',
@@ -28,8 +31,6 @@ const locale: Locale = {
     'November',
     'Desember',
   ],
-  weekStart: 1,
-  weekdaysShort: ['Son', 'Maa', 'Din', 'Woe', 'Don', 'Vry', 'Sat'],
   monthsShort: [
     'Jan',
     'Feb',
@@ -44,7 +45,6 @@ const locale: Locale = {
     'Nov',
     'Des',
   ],
-  weekdaysMin: ['So', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Sa'],
   ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
