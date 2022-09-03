@@ -4,6 +4,7 @@ import dayjs from '../src'
 import '../src/locale/ja'
 import '../src/locale/th'
 import { expectSame } from './_util'
+import type { UnitBaseAddSubDiff } from '../src/units'
 
 beforeEach(() => {
   vi.useFakeTimers()
@@ -199,6 +200,7 @@ describe('Diff', () => {
     'days',
     'weeks',
     'months',
+    'quarters',
     'years',
   ] as const
   test.each(allDiffUnits)('diff -> unit "%s"', (unit) => {
@@ -236,6 +238,24 @@ describe('Diff', () => {
 
   test('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
+  })
+})
+
+describe.each([
+  { unitName: 'Q' as UnitBaseAddSubDiff },
+  { unitName: 'quarter' as UnitBaseAddSubDiff },
+  { unitName: 'quarters' as UnitBaseAddSubDiff },
+])('Diff for quarter using unit $unitName', ({ unitName }) => {
+  test('gets diff between 2 dates as quarters using unit "$unitName"', () => {
+    expectSame((dayjs) =>
+      dayjs('2019-01-25').diff(dayjs('2018-06-05'), unitName)
+    )
+  })
+
+  test('gets diff between 2 dates as quarters with decimals using unit "$unitName"', () => {
+    expectSame((dayjs) =>
+      dayjs('2019-01-25').diff(dayjs('2018-06-05'), unitName, true)
+    )
   })
 })
 

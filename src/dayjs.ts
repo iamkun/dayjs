@@ -234,6 +234,30 @@ export class Dayjs extends (class {} as Extend) {
     switch (normalizedUnit) {
       case UNIT_YEAR:
         return factory(numbers)
+      case UNIT_QUARTER:
+        return factory(
+          isStartOf
+            ? {
+                month: Math.floor(this._month / 3) * 3,
+                ...pick(numbers, [
+                  UNIT_DATE,
+                  UNIT_HOUR,
+                  UNIT_MINUTE,
+                  UNIT_SECOND,
+                  UNIT_MILLISECOND,
+                ]),
+              }
+            : {
+                month: Math.floor(this._month / 3) * 3 + 3,
+                date: 0,
+                ...pick(numbers, [
+                  UNIT_HOUR,
+                  UNIT_MINUTE,
+                  UNIT_SECOND,
+                  UNIT_MILLISECOND,
+                ]),
+              }
+        )
       case UNIT_MONTH:
         return factory(
           isStartOf
@@ -444,6 +468,8 @@ export class Dayjs extends (class {} as Extend) {
 
     if (normalizedUnit === UNIT_YEAR) {
       return this.set(UNIT_MONTH, this._month + absRound(value * 12))
+    } else if (normalizedUnit === UNIT_QUARTER) {
+      return this.set(UNIT_MONTH, this._month + absRound(value * 3))
     } else if (normalizedUnit === UNIT_MONTH) {
       return this.set(UNIT_MONTH, this._month + absRound(value))
     } else if (normalizedUnit === UNIT_DAY) {

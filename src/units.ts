@@ -6,6 +6,7 @@ import {
   UNIT_MILLISECOND,
   UNIT_MINUTE,
   UNIT_MONTH,
+  UNIT_QUARTER,
   UNIT_SECOND,
   UNIT_WEEK,
   UNIT_YEAR,
@@ -17,6 +18,7 @@ export const units = mutable({
   y: UNIT_YEAR,
   M: UNIT_MONTH,
   D: UNIT_DATE, // day of month
+  Q: UNIT_QUARTER, // quarter of year
   h: UNIT_HOUR,
   m: UNIT_MINUTE,
   s: UNIT_SECOND,
@@ -67,4 +69,4 @@ export const normalize = <T extends Unit>(unit: T): UnitLonger<T> => {
 export type UnitBaseAddSubDiff = Exclude<Unit, GetUnit<'D'>>
 
 // unit names for get / set
-export type UnitBaseGetSet = Exclude<Unit, GetUnit<'w'>>
+export type UnitBaseGetSet = Exclude<Unit, GetUnit<'w' | 'Q'>>
