@@ -5,14 +5,17 @@ import {
   UNIT_HOUR,
   UNIT_MINUTE,
   UNIT_MONTH,
+  UNIT_QUARTER,
   UNIT_SECOND,
   UNIT_WEEK,
   UNIT_YEAR,
 } from '../src/constants'
 import { expectSameResult } from './_util'
+import type { UnitBaseAddSubDiff } from '../src/units'
 
 const unitsShort = [
   { unit: 'y' },
+  { unit: 'Q' },
   { unit: 'M' },
   { unit: 'd' },
   { unit: 'h' },
@@ -23,6 +26,7 @@ const unitsShort = [
 ] as const
 const unitsLong = [
   { unit: 'year' },
+  { unit: 'quarter' },
   { unit: 'month' },
   { unit: 'day' },
   { unit: 'hour' },
@@ -37,6 +41,7 @@ const testValuesDecimal = [0, 0.25, 0.5, 0.75, 1] as const
 describe('StartOf / EndOf', () => {
   const units = [
     UNIT_YEAR,
+    UNIT_QUARTER,
     UNIT_MONTH,
     UNIT_DAY,
     UNIT_DATE,
@@ -62,6 +67,36 @@ describe('StartOf / EndOf', () => {
   test.each(units)('get EndOf "%s" for current date', (unit) => {
     expectSameResult((dayjs) => dayjs().endOf(unit))
   })
+})
+
+describe.each([
+  { unitName: 'Q' as UnitBaseAddSubDiff },
+  { unitName: 'quarter' as UnitBaseAddSubDiff },
+  { unitName: 'quarters' as UnitBaseAddSubDiff },
+])('StartOf / EndOf quarter using unit $unitName', ({ unitName }) => {
+  test.each([
+    '2013-02-11T00:00:00.000',
+    '2013-06-21T00:00:00.000',
+    '2013-08-31T00:00:00.000',
+    '2013-11-09T00:00:00.000',
+  ])(
+    'gets start of quarter date for "%s" using unit "$unitName"',
+    (dateString) => {
+      expectSameResult((dayjs) => dayjs(dateString).startOf(unitName))
+    }
+  )
+
+  test.each([
+    '2013-02-11T00:00:00.000',
+    '2013-06-21T00:00:00.000',
+    '2013-08-31T00:00:00.000',
+    '2013-11-09T00:00:00.000',
+  ])(
+    'gets end of quarter date for "%s" using unit "$unitName"',
+    (dateString) => {
+      expectSameResult((dayjs) => dayjs(dateString).endOf(unitName))
+    }
+  )
 })
 
 describe.each(unitsShort)(
