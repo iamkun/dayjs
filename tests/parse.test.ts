@@ -124,7 +124,7 @@ test('should parse from Date object', () => {
 })
 
 test('should parse from Dayjs instance', () => {
-  expectSameResult((dayjs) => dayjs(dayjs()))
+  expectSameResult((dayjs) => dayjs(dayjs('2022-08-23T23:45:14.987')))
 })
 
 test('Clone not affect each other', () => {
