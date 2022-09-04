@@ -20,7 +20,7 @@ describe.each([{ locale: 'en' }, { locale: 'en-gb' }])(
     })
 
     test.each(['2022-07-14T14:59:09+08:00', '2022-12-31T10:59:09+08:00'])(
-      'Gets week of year for "%s"',
+      'Gets week of year for date "%s"',
       (dateString) => {
         dayjs.locale(locale)
         expectSame((dayjs) => dayjs(dateString).week())
@@ -35,20 +35,19 @@ describe.each([{ locale: 'en' }, { locale: 'en-gb' }])(
         expectSameResult((dayjs) => dayjs().week(-1 * weekNumber))
       }
     )
+
+    test.each([
+      '2020-12-31',
+      '2018-12-30',
+      '2018-12-31',
+      '2019-12-29',
+      '2019-12-30',
+      '2017-12-31',
+      '2016-01-01',
+      '2016-01-04',
+    ])('Gets week of year for edge case "%s"', (dateString) => {
+      dayjs.locale(locale)
+      expectSame((dayjs) => dayjs(dateString).week())
+    })
   }
 )
-
-describe('Week of year with locale edge cases', () => {
-  test.each([
-    '2020-12-31',
-    '2018-12-30',
-    '2018-12-31',
-    '2019-12-29',
-    '2019-12-30',
-    '2017-12-31',
-    '2016-01-01',
-    '2016-01-04',
-  ])('Edge case "%s"', (dateString) => {
-    expectSame((dayjs) => dayjs(dateString).week())
-  })
-})
