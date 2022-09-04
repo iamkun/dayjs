@@ -8,6 +8,7 @@ dayjs.extend(toArray)
 
 describe('Plugin toArray', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 

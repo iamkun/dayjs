@@ -10,6 +10,12 @@ export type DateInput =
   | undefined
   | object
 export type FormatOption = string | string[]
+
+export type GetterFn = {
+  (value: number): Dayjs
+  (): number
+}
+
 export interface ParseOptions {
   format?: FormatOption
   locale?: string

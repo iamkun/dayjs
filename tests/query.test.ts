@@ -8,6 +8,7 @@ describe('Is Before Is After Is Same', () => {
   const dayC = dayA.clone().subtract(1, 'day')
 
   it('Compare to dayjs object', () => {
+    vi.useFakeTimers()
     vi.setSystemTime(now)
     expect(dayA.isSame(dayjs())).toBe(true)
     expect(dayA.isSame()).toBe(true)
@@ -21,6 +22,7 @@ describe('Is Before Is After Is Same', () => {
   })
 
   it('No value', () => {
+    vi.useFakeTimers()
     vi.setSystemTime(now)
     expect(dayA.isSame()).toBe(true)
     vi.useRealTimers()

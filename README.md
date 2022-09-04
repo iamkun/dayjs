@@ -3,6 +3,16 @@
 - [x] locale
 - migrate plugins
 - docs
+  - unix(number) and dayjs.unix(number)
+
+## Changes
+
+- Plugin 'ArraySupport' is now part of 'dayjs core', as it is used by Dayjs.\_startEndOf.
+- Make Get / Set behave like 'moment':
+  - accessing get / set with unit string (e.g. "`dayjs().get('year')`") takes short form of units too (allowed values are 'y', 'M', 'D', 'h', 'm', 's', 'ms').
+  - unlike 'moment': Day of Week is accessible by name ('D' / 'day') too.
+  - unlike 'moment': the **unit names are case sensitive**.
+  - make utcOffset() behave like 'moment' (rounding away only the fractional part of the minutes - i.e. the seconds - and not the minutes to a quarter of an hour).
 
 ---
 
