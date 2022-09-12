@@ -310,12 +310,36 @@ describe('startOf and endOf', () => {
   it('corrects for timezone offset in startOf', () => {
     const originalDay = dayjs.tz('2010-01-01 00:00:00', NY)
     const startOfDay = originalDay.startOf('day')
+    expect(startOfDay.date()).toBe(1)
+    expect(startOfDay.hour()).toBe(0)
+    expect(startOfDay.toISOString()).toEqual(originalDay.toISOString())
+    expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('corrects for timezone offset in startOf when UTC', () => {
+    const originalDay = dayjs.tz('2010-01-01 00:00:00', 'UTC')
+    const startOfDay = originalDay.startOf('day')
+    expect(startOfDay.date()).toBe(1)
+    expect(startOfDay.hour()).toBe(0)
+    expect(startOfDay.toISOString()).toEqual(originalDay.toISOString())
     expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
 
   it('corrects for timezone offset in endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
+    expect(endOfDay.date()).toBe(31)
+    expect(endOfDay.hour()).toBe(23)
+    expect(endOfDay.toISOString()).toEqual(originalDay.toISOString())
+    expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('corrects for timezone offset in endOf when UTC', () => {
+    const originalDay = dayjs.tz('2009-12-31 23:59:59.999', 'UTC')
+    const endOfDay = originalDay.endOf('day')
+    expect(endOfDay.date()).toBe(31)
+    expect(endOfDay.hour()).toBe(23)
+    expect(endOfDay.toISOString()).toEqual(originalDay.toISOString())
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
 })

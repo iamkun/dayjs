@@ -122,7 +122,7 @@ export default (o, c, d) => {
 
     const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'))
     const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
-    return startOfWithoutTz.tz(this.$x.$timezone, true)
+    return d.tz(startOfWithoutTz.format('YYYY-MM-DD HH:mm:ss:SSS'), this.$x.$timezone)
   }
 
   d.tz = function (input, arg1, arg2) {
