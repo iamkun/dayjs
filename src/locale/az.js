@@ -32,10 +32,9 @@ const locale = {
     y: 'bir il',
     yy: '%d il'
   },
-  ordinal: n => n
+  ordinal: (n) => n
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
-

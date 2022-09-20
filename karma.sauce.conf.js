@@ -81,7 +81,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'dayjs.min.js',
+      'index.js',
       'test/*spec.js'
     ],
     reporters: ['dots', 'saucelabs'],

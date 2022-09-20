@@ -6,8 +6,8 @@
 <p align="center">Moment.js와 호환되는 API를 가진 경량 라이브러리 (<b>2kB</b>)</p>
 <br>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://unpkg.com/dayjs"><img
+            src="https://img.badgesize.io/https://unpkg.com/dayjs?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>

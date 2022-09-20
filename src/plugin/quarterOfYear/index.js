@@ -27,8 +27,8 @@ export default (o, c) => {
     if (unit === Q) {
       const quarter = this.quarter() - 1
       return isStartOf ? this.month(quarter * 3)
-        .startOf(M).startOf(D) :
-        this.month((quarter * 3) + 2).endOf(M).endOf(D)
+        .startOf(M).startOf(D)
+        : this.month((quarter * 3) + 2).endOf(M).endOf(D)
     }
     return oldStartOf.bind(this)(units, startOf)
   }

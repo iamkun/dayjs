@@ -1,4 +1,4 @@
-import { PluginFunc } from 'dayjs'
+import { PluginFunc } from '..'
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin

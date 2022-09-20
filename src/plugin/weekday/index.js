@@ -10,4 +10,3 @@ export default (o, c) => {
     return this.subtract(weekday, 'day').add(input, 'day')
   }
 }
-

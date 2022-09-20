@@ -18,9 +18,9 @@ const locale = {
     const lastDigit = n % 10
     if (lastDigit === 1) {
       return `${n}-ви`
-    } else if (lastDigit === 2) {
+    } if (lastDigit === 2) {
       return `${n}-ри`
-    } else if (lastDigit === 7 || lastDigit === 8) {
+    } if (lastDigit === 7 || lastDigit === 8) {
       return `${n}-ми`
     }
 

@@ -25,4 +25,3 @@ export default (o, c, d) => {
     return sortBy('isBefore', args)
   }
 }
-

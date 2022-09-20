@@ -254,27 +254,32 @@ test('is between hour', () => {
   const mCopy = dayjs(m)
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 5, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 9, 9, 10)), 'hour'
+    dayjs(new Date(2011, 1, 2, 3, 9, 9, 10)),
+    'hour'
   ))
     .toBe(false, 'hour match')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 1, 59, 59, 999)),
-    dayjs(new Date(2011, 1, 2, 4, 0, 0, 0)), 'hours'
+    dayjs(new Date(2011, 1, 2, 4, 0, 0, 0)),
+    'hours'
   ))
     .toBe(true, 'plural should work')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 2, 59, 59, 999)),
-    dayjs(new Date(2011, 1, 2, 4, 0, 0, 0)), 'hour'
+    dayjs(new Date(2011, 1, 2, 4, 0, 0, 0)),
+    'hour'
   ))
     .toBe(true, 'hour is between')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)), 'hour'
+    dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)),
+    'hour'
   ))
     .toBe(false, 'hour is earlier')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)), 'hour'
+    dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)),
+    'hour'
   ))
     .toBe(false, 'hour is later')
   expect(m.isBetween(m, 'hour'))
@@ -288,27 +293,32 @@ test('is between minute', () => {
   const mCopy = dayjs(m)
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 9, 10)), 'minute'
+    dayjs(new Date(2011, 1, 2, 3, 4, 9, 10)),
+    'minute'
   ))
     .toBe(false, 'minute match')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 3, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 5, 9, 10)), 'minutes'
+    dayjs(new Date(2011, 1, 2, 3, 5, 9, 10)),
+    'minutes'
   ))
     .toBe(true, 'plural should work')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 3, 59, 999)),
-    dayjs(new Date(2011, 1, 2, 3, 5, 0, 0)), 'minute'
+    dayjs(new Date(2011, 1, 2, 3, 5, 0, 0)),
+    'minute'
   ))
     .toBe(true, 'minute is between')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 5, 0, 0)),
-    dayjs(new Date(2011, 1, 2, 3, 8, 9, 10)), 'minute'
+    dayjs(new Date(2011, 1, 2, 3, 8, 9, 10)),
+    'minute'
   ))
     .toBe(false, 'minute is earlier')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 2, 9, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 3, 59, 999)), 'minute'
+    dayjs(new Date(2011, 1, 2, 3, 3, 59, 999)),
+    'minute'
   ))
     .toBe(false, 'minute is later')
   expect(m.isBetween(m, 'minute'))
@@ -322,27 +332,32 @@ test('is between second', () => {
   const mCopy = dayjs(m)
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 5, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 5, 10)), 'second'
+    dayjs(new Date(2011, 1, 2, 3, 4, 5, 10)),
+    'second'
   ))
     .toBe(false, 'second match')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 4, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 6, 10)), 'seconds'
+    dayjs(new Date(2011, 1, 2, 3, 4, 6, 10)),
+    'seconds'
   ))
     .toBe(true, 'plural should work')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 4, 999)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 6, 0)), 'second'
+    dayjs(new Date(2011, 1, 2, 3, 4, 6, 0)),
+    'second'
   ))
     .toBe(true, 'second is between')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 6, 0)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 7, 10)), 'second'
+    dayjs(new Date(2011, 1, 2, 3, 4, 7, 10)),
+    'second'
   ))
     .toBe(false, 'second is earlier')
   expect(m.isBetween(
     dayjs(new Date(2011, 1, 2, 3, 4, 3, 10)),
-    dayjs(new Date(2011, 1, 2, 3, 4, 4, 999)), 'second'
+    dayjs(new Date(2011, 1, 2, 3, 4, 4, 999)),
+    'second'
   ))
     .toBe(false, 'second is later')
   expect(m.isBetween(m, 'second')).toBe(false, 'same moments are not between the same second')

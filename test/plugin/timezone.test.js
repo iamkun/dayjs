@@ -29,7 +29,6 @@ describe('Guess', () => {
   })
 })
 
-
 describe('Parse', () => {
   it('parse target time string', () => {
     const newYork = dayjs.tz('2014-06-01 12:00', NY)
@@ -121,7 +120,6 @@ describe('Convert', () => {
     })
   })
 })
-
 
 describe('DST, a time that never existed Spring Forward', () => {
   // 11 March 2012, 02:00:00 clocks were

@@ -6,7 +6,7 @@ let L = 'en' // global locale
 const Ls = {} // global loaded locale
 Ls[L] = en
 
-const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
+const isDayjs = (d) => d instanceof Dayjs // eslint-disable-line no-use-before-define
 
 const parseLocale = (preset, object, isLocal) => {
   let l
@@ -44,13 +44,12 @@ const dayjs = function (date, c) {
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 
-const wrapper = (date, instance) =>
-  dayjs(date, {
-    locale: instance.$L,
-    utc: instance.$u,
-    x: instance.$x,
-    $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
-  })
+const wrapper = (date, instance) => dayjs(date, {
+  locale: instance.$L,
+  utc: instance.$u,
+  x: instance.$x,
+  $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
+})
 
 const Utils = U // for plugin use
 Utils.l = parseLocale
@@ -143,8 +142,8 @@ class Dayjs {
     const isStartOf = !Utils.u(startOf) ? startOf : true
     const unit = Utils.p(units)
     const instanceFactory = (d, m) => {
-      const ins = Utils.w(this.$u ?
-        Date.UTC(this.$y, m, d) : new Date(this.$y, m, d), this)
+      const ins = Utils.w(this.$u
+        ? Date.UTC(this.$y, m, d) : new Date(this.$y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
@@ -159,11 +158,11 @@ class Dayjs {
     const utcPad = `set${this.$u ? 'UTC' : ''}`
     switch (unit) {
       case C.Y:
-        return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11)
+        return isStartOf ? instanceFactory(1, 0)
+          : instanceFactory(31, 11)
       case C.M:
-        return isStartOf ? instanceFactory(1, $M) :
-          instanceFactory(0, $M + 1)
+        return isStartOf ? instanceFactory(1, $M)
+          : instanceFactory(0, $M + 1)
       case C.W: {
         const weekStart = this.$locale().weekStart || 0
         const gap = ($W < weekStart ? $W + 7 : $W) - weekStart
@@ -269,7 +268,7 @@ class Dayjs {
     const getShort = (arr, index, full, length) => (
       (arr && (arr[index] || arr(this, str))) || full[index].slice(0, length)
     )
-    const get$H = num => (
+    const get$H = (num) => (
       Utils.s($H % 12 || 12, num, '0')
     )
 
@@ -404,7 +403,7 @@ dayjs.locale = parseLocale
 
 dayjs.isDayjs = isDayjs
 
-dayjs.unix = timestamp => (
+dayjs.unix = (timestamp) => (
   dayjs(timestamp * 1e3)
 )
 

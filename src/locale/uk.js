@@ -21,7 +21,7 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
   }
   if (key === 'm') {
     return withoutSuffix ? 'хвилина' : 'хвилину'
-  } else if (key === 'h') {
+  } if (key === 'h') {
     return withoutSuffix ? 'година' : 'годину'
   }
 
@@ -60,7 +60,7 @@ const locale = {
     y: 'рік',
     yy: relativeTimeWithPlural
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -74,4 +74,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

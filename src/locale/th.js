@@ -31,10 +31,9 @@ const locale = {
     y: '1 ปี',
     yy: '%d ปี'
   },
-  ordinal: n => `${n}.`
+  ordinal: (n) => `${n}.`
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
-

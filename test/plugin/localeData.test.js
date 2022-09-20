@@ -48,7 +48,6 @@ describe('Instance localeData', () => {
   moment.locale('en')
 })
 
-
 it('Global localeData', () => {
   ['zh-cn', 'en', 'fr'].forEach((lo) => {
     dayjs.locale(lo)
@@ -67,7 +66,6 @@ it('Global localeData', () => {
     })
   })
 })
-
 
 it('Listing the months and weekdays', () => {
   ['zh-cn', 'en', 'fr'].forEach((lo) => {

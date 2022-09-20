@@ -1,8 +1,8 @@
-import { PluginFunc } from 'dayjs'
+import { PluginFunc } from '..'
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin
 
-declare module 'dayjs' {
+declare module '..' {
   export function updateLocale(localeName: string, customConfig: Record<string, unknown>): Record<string, unknown>
 }

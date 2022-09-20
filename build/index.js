@@ -1,9 +1,9 @@
 const rollup = require('rollup')
-const configFactory = require('./rollup.config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
 const { ncp } = require('ncp')
+const configFactory = require('./rollup.config')
 
 const { promisify } = util
 
@@ -12,7 +12,7 @@ const promisifyReadFile = promisify(fs.readFile)
 const promisifyWriteFile = promisify(fs.writeFile)
 
 const localeNameRegex = /\/\/ (.*) \[/
-const formatName = n => n.replace(/\.js/, '').replace('-', '_')
+const formatName = (n) => n.replace(/\.js/, '').replace('-', '_')
 
 const localePath = path.join(__dirname, '../src/locale')
 
@@ -30,7 +30,7 @@ async function listLocaleJson(localeArr) {
       name: localeData.match(localeNameRegex)[1]
     })
   }))
-  promisifyWriteFile(path.join(__dirname, '../locale.json'), JSON.stringify(localeListArr), 'utf8')
+  promisifyWriteFile(path.join(__dirname, '../dist/locale.json'), JSON.stringify(localeListArr), 'utf8')
 }
 
 (async () => {
@@ -42,7 +42,7 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/locale/${l}`,
-        fileName: `./locale/${l}`,
+        fileName: `./dist/locale/${l}`,
         name: `dayjs_locale_${formatName(l)}`
       }))
     }
@@ -52,17 +52,17 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/plugin/${plugin}/index`,
-        fileName: `./plugin/${plugin}.js`,
+        fileName: `./dist/plugin/${plugin}.js`,
         name: `dayjs_plugin_${formatName(plugin)}`
       }))
     }
 
     build(configFactory({
       input: './src/index.js',
-      fileName: './dayjs.min.js'
+      fileName: './dist/index.js'
     }))
 
-    await promisify(ncp)('./types/', './')
+    await promisify(ncp)('./types/', './dist/')
 
     // list locales
     await listLocaleJson(locales)

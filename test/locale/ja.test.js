@@ -42,4 +42,3 @@ it('Finnish locale relative time in past and future', () => {
   expect(dayjs().add(-10, 'd').locale('ja').fromNow(true))
     .toBe(moment().add(-10, 'd').locale('ja').fromNow(true))
 })
-

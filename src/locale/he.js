@@ -47,7 +47,7 @@ const locale = {
     y: relativeTimeFormatter,
     yy: relativeTimeFormatter
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   format: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',

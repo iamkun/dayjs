@@ -1,10 +1,10 @@
-import { PluginFunc } from 'dayjs'
+import { PluginFunc } from '..'
 
-declare module 'dayjs' {
+declare module '..' {
   interface ConfigTypeMap {
     arraySupport: [number?, number?, number?, number?, number?, number?, number?]
   }
 }
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin

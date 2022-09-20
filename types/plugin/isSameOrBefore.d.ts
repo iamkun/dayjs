@@ -1,9 +1,9 @@
-import { PluginFunc, ConfigType, OpUnitType } from 'dayjs'
+import { PluginFunc, ConfigType, OpUnitType } from '..'
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin
 
-declare module 'dayjs' {
+declare module '..' {
   interface Dayjs {
     isSameOrBefore(date: ConfigType, unit?: OpUnitType): boolean
   }

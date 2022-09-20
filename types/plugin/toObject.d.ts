@@ -1,7 +1,7 @@
-import { PluginFunc } from 'dayjs'
+import { PluginFunc } from '..'
 
 declare const plugin: PluginFunc
-export = plugin
+export default plugin
 
 interface DayjsObject {
   years: number
@@ -13,7 +13,7 @@ interface DayjsObject {
   milliseconds: number
 }
 
-declare module 'dayjs' {
+declare module '..' {
   interface Dayjs {
     toObject(): DayjsObject
   }

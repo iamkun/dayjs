@@ -3,4 +3,3 @@ export default (o, c, f) => {
     return f.isDayjs(input)
   }
 }
-

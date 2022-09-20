@@ -14,7 +14,6 @@ afterEach(() => {
 
 global.console.warn = jest.genMockFunction()
 
-
 it('Warning: passing Year as a Number will be parsed as a Unix timestamp', () => {
   const consoleSpy = jest.spyOn(console, 'warn')
   dayjs(2020)

@@ -81,7 +81,7 @@ export default (o, c, d) => {
     return fromTo(input, withoutSuffix, this)
   }
 
-  const makeNow = thisDay => (thisDay.$u ? d.utc() : d())
+  const makeNow = (thisDay) => (thisDay.$u ? d.utc() : d())
 
   proto.toNow = function (withoutSuffix) {
     return this.to(makeNow(this), withoutSuffix)

@@ -48,7 +48,6 @@ it('isoWeek of year', () => {
   expect(dayjs().isoWeek(1).isoWeek()).toBe(1)
   expect(dayjs().isoWeek(27).isoWeek()).toBe(27)
 
-
   expect(dayjs('20191223').isoWeekYear()).toBe(2019)
   expect(dayjs('20191223').isoWeek()).toBe(52)
   expect(dayjs('20191224').isoWeekYear()).toBe(2019)
@@ -83,7 +82,6 @@ it('isoWeek of year', () => {
   expect(dayjs('20200106').isoWeek()).toBe(2)
   expect(dayjs('20200107').isoWeekYear()).toBe(2020)
   expect(dayjs('20200107').isoWeek()).toBe(2)
-
 
   expect(dayjs('20201223').isoWeekYear()).toBe(2020)
   expect(dayjs('20201223').isoWeek()).toBe(52)
@@ -126,7 +124,6 @@ it('isoWeek of year', () => {
   expect(dayjs('20210110').isoWeekYear()).toBe(2021)
   expect(dayjs('20210110').isoWeek()).toBe(1)
 })
-
 
 it('utc mode', () => {
   // Wednesday, 1 January 2020 00:00:00 UTC

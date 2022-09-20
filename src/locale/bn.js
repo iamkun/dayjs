@@ -35,12 +35,12 @@ const locale = {
   monthsShort: 'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split('_'),
   weekdaysMin: 'রবি_সোম_মঙ্গ_বুধ_বৃহঃ_শুক্র_শনি'.split('_'),
   preparse(string) {
-    return string.replace(/[১২৩৪৫৬৭৮৯০]/g, match => numberMap[match])
+    return string.replace(/[১২৩৪৫৬৭৮৯০]/g, (match) => numberMap[match])
   },
   postformat(string) {
-    return string.replace(/\d/g, match => symbolMap[match])
+    return string.replace(/\d/g, (match) => symbolMap[match])
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'A h:mm সময়',
     LTS: 'A h:mm:ss সময়',

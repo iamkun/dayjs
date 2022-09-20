@@ -58,7 +58,7 @@ const locale = {
   monthsShort: 'jan_feb_mar_apr_máj_jún_júl_aug_sep_okt_nov_dec'.split('_'),
   weekStart: 1,
   yearStart: 4,
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',

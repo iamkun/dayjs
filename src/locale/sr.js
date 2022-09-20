@@ -60,7 +60,7 @@ const locale = {
     y: translator.relativeTimeFormatter,
     yy: translator.relativeTimeFormatter
   },
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',

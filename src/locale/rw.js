@@ -28,7 +28,7 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
-  ordinal: n => n
+  ordinal: (n) => n
 }
 
 dayjs.locale(locale, null, true)

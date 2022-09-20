@@ -208,7 +208,6 @@ describe('UTC and local', () => {
   })
 })
 
-
 describe('UTC with customParseFormat', () => {
   it('Custom Parse Format', () => {
     dayjs.extend(customParseFormat)
