@@ -10,7 +10,7 @@ export const englishToKurdishNumbersMap = {
   8: '٨',
   9: '٩',
   0: '٠'
-};
+}
 
 const kurdishToEnglishNumbersMap = {
   '١': '1',
@@ -23,28 +23,49 @@ const kurdishToEnglishNumbersMap = {
   '٨': '8',
   '٩': '9',
   '٠': '0'
-};
+}
 
-const months = ["کانونا دووێ", "شوبات", "ئادار", "نیسان", "گولان", "حزیران", "تیرمەه", "تەباخ", "ئەیلول", "چریا ئێکێ", "چریا دووێ", "كانونا ئێکێ"];
-const weekdays = ["ئێکشەمب", "دووشه‌مب", "سێشه‌مب", "چارشه‌مب", "پێنجشه‌مب", "جومعە", "شه‌مبی‌"];
+const months = [
+  'کانونا دووێ',
+  'شوبات',
+  'ئادار',
+  'نیسان',
+  'گولان',
+  'حزیران',
+  'تیرمەه',
+  'تەباخ',
+  'ئەیلول',
+  'چریا ئێکێ',
+  'چریا دووێ',
+  'كانونا ئێکێ'
+]
+const weekdays = [
+  'ئێکشەمب',
+  'دووشه‌مب',
+  'سێشه‌مب',
+  'چارشه‌مب',
+  'پێنجشه‌مب',
+  'جومعە',
+  'شه‌مبی‌'
+]
 
 const locale = {
-  name: "ku-ba",
+  name: 'ku-ba',
   months,
   monthsShort: months,
   weekdays,
   weekdaysShort: weekdays,
   weekStart: 6,
-  weekdaysMin: "ئ_د_س_چ_پ_ج_ش".split('_'),
+  weekdaysMin: 'ئ_د_س_چ_پ_ج_ش'.split('_'),
   preparse(string) {
     return string
       .replace(/[١٢٣٤٥٦٧٨٩٠]/g, match => kurdishToEnglishNumbersMap[match])
-      .replace(/،/g, ',');
+      .replace(/،/g, ',')
   },
   postformat(string) {
     return string
       .replace(/\d/g, match => englishToKurdishNumbersMap[match])
-      .replace(/,/g, '،');
+      .replace(/,/g, '،')
   },
   ordinal: n => n,
   formats: {
@@ -56,39 +77,39 @@ const locale = {
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
   meridiem: (hour) => {
-    if (hour > 6 && hour <= 12) return "ی سپێدێ";
-    if (hour > 12 && hour <= 15) return "ی نیڤرو";
-    if (hour > 15 && hour <= 18) return "ی ئێڤارێ";
-    if (hour > 18 && hour <= 24) return "ی شەڤێ";
-    if (hour > 0 && hour <= 6) return "ی سپێدێ";
+    if (hour > 6 && hour <= 12) return 'ی سپێدێ'
+    if (hour > 12 && hour <= 15) return 'ی نیڤرو'
+    if (hour > 15 && hour <= 18) return 'ی ئێڤارێ'
+    if (hour > 18 && hour <= 24) return 'ی شەڤێ'
+    if (hour > 0 && hour <= 6) return 'ی سپێدێ'
+    return ''
   },
   relativeTime: {
-    future: "ل‌ %s",
-    past: "%s",
-    s: "چه‌ند چركه‌هه‌ک",
-    m: "ئێک خوله‌ك",
-    mm: "%d خوله‌ك",
-    h: "ئێک كاتژمێر",
-    hh: "%d كاتژمێر",
-    d: "ئێک ڕوژ",
-    dd: "%d ڕوژ",
-    M: "ئێک هەیڤ",
-    MM: "%d هەیڤ",
-    y: "ئێک ساڵ",
-    yy: "%d ساڵ",
+    future: 'ل‌ %s',
+    past: '%s',
+    s: 'چه‌ند چركه‌هه‌ک',
+    m: 'ئێک خوله‌ك',
+    mm: '%d خوله‌ك',
+    h: 'ئێک كاتژمێر',
+    hh: '%d كاتژمێر',
+    d: 'ئێک ڕوژ',
+    dd: '%d ڕوژ',
+    M: 'ئێک هەیڤ',
+    MM: '%d هەیڤ',
+    y: 'ئێک ساڵ',
+    yy: '%d ساڵ'
   },
 
   calendar: {
-    sameDay: "[ئەڤڕو] h:mm A",
-    nextDay: "[سباهی] h:mm A",
-    nextWeek: "dddd h:mm A",
-    sameElse: "YYYY/MM/DD",
-    lastDay: "[دوهی] HH:mm",
-    lastWeek: "[حەفتیا بەرێ] dddd h:mm A",
-  },
+    sameDay: '[ئەڤڕو] h:mm A',
+    nextDay: '[سباهی] h:mm A',
+    nextWeek: 'dddd h:mm A',
+    sameElse: 'YYYY/MM/DD',
+    lastDay: '[دوهی] HH:mm',
+    lastWeek: '[حەفتیا بەرێ] dddd h:mm A'
+  }
+}
 
-};
+dayjs.locale(locale, null, true)
 
-dayjs.locale(locale, null, true);
-
-export default locale;
+export default locale
