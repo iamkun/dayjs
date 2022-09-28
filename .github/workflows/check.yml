@@ -7,20 +7,30 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+
     strategy:
+      fail-fast: false
       matrix:
-        node: [12, 14, 16, 18]
+        node: [14.19, 16, 18]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: pnpm
+
       - name: Install dependencies
-        run: npm install -g codecov && npm install
+        run: pnpm install -g codecov && pnpm install
+
       - name: Run Lint
-        run: npm run lint
+        run: pnpm run lint
+
       - name: Run tests
-        run: npm test && codecov
+        run: pnpm test && codecov

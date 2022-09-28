@@ -1,6 +1,7 @@
 {
   "name": "dayjs",
   "version": "0.0.0-development",
+  "packageManager": "pnpm@7.12.2",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "keywords": [
     "dayjs",

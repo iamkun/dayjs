@@ -29,7 +29,7 @@ specifiers:
   moment-timezone: 0.5.31
   ncp: ^2.0.0
   pre-commit: ^1.2.2
-  prettier: ^1.16.1
+  prettier: ^2.7.1
   rollup: ^2.79.1
   rollup-plugin-babel: ^4.4.0
   rollup-plugin-terser: ^7.0.2
@@ -65,7 +65,7 @@ devDependencies:
   moment-timezone: 0.5.31
   ncp: 2.0.0
   pre-commit: 1.2.2
-  prettier: 1.19.1
+  prettier: 2.7.1
   rollup: 2.79.1
   rollup-plugin-babel: 4.4.0_vy4anxjpv2s44kyfi2kxqu576u
   rollup-plugin-terser: 7.0.2_rollup@2.79.1
@@ -8291,12 +8291,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
-    dev: true
-
-  /prettier/1.19.1:
-    resolution: {integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==}
-    engines: {node: '>=4'}
-    hasBin: true
     dev: true
 
   /prettier/2.7.1:
