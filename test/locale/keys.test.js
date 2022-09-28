@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/no-unused-vars: ['warn', { ignoreRestSiblings: true }] */
 
-import fs from 'node:fs'
-import path from 'node:path'
+import fs from 'fs'
+import path from 'path'
 import dayjs from '../../src'
 
 const localeDir = '../../src/locale'

@@ -1,5 +1,5 @@
-import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'path'
+import { fileURLToPath } from 'url'
 import { rollup } from 'rollup'
 import fg from 'fast-glob'
 import Alias from '@rollup/plugin-alias'

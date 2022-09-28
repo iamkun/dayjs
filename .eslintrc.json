@@ -11,7 +11,8 @@
   "rules": {
     "unicorn/better-regex": "off",
     "eslint-comments/no-unlimited-disable": "off",
-    "@typescript-eslint/triple-slash-reference": "off"
+    "@typescript-eslint/triple-slash-reference": "off",
+    "unicorn/prefer-node-protocol": "off"
   },
   "overrides": [
     {
