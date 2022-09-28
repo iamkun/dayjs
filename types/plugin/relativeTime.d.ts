@@ -1,4 +1,4 @@
-import { PluginFunc, ConfigType } from '..'
+import type { PluginFunc } from '..'
 
 declare interface RelativeTimeThreshold {
   l: string

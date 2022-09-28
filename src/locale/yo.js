@@ -4,7 +4,10 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'yo',
   weekdays: 'Àìkú_Ajé_Ìsẹ́gun_Ọjọ́rú_Ọjọ́bọ_Ẹtì_Àbámẹ́ta'.split('_'),
-  months: 'Sẹ́rẹ́_Èrèlè_Ẹrẹ̀nà_Ìgbé_Èbibi_Òkùdu_Agẹmo_Ògún_Owewe_Ọ̀wàrà_Bélú_Ọ̀pẹ̀̀'.split('_'),
+  months:
+    'Sẹ́rẹ́_Èrèlè_Ẹrẹ̀nà_Ìgbé_Èbibi_Òkùdu_Agẹmo_Ògún_Owewe_Ọ̀wàrà_Bélú_Ọ̀pẹ̀̀'.split(
+      '_'
+    ),
   weekStart: 1,
   weekdaysShort: 'Àìk_Ajé_Ìsẹ́_Ọjr_Ọjb_Ẹtì_Àbá'.split('_'),
   monthsShort: 'Sẹ́r_Èrl_Ẹrn_Ìgb_Èbi_Òkù_Agẹ_Ògú_Owe_Ọ̀wà_Bél_Ọ̀pẹ̀̀'.split('_'),
@@ -16,7 +19,7 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY h:mm A',
-    LLLL: 'dddd, D MMMM YYYY h:mm A'
+    LLLL: 'dddd, D MMMM YYYY h:mm A',
   },
   relativeTime: {
     future: 'ní %s',
@@ -31,8 +34,8 @@ const locale = {
     M: 'osù kan',
     MM: 'osù %d',
     y: 'ọdún kan',
-    yy: 'ọdún %d'
-  }
+    yy: 'ọdún %d',
+  },
 }
 
 dayjs.locale(locale, null, true)

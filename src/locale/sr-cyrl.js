@@ -12,10 +12,14 @@ const translator = {
     M: ['један месец', 'једног месеца'],
     MM: ['%d месец', '%d месеца', '%d месеци'],
     y: ['једну годину', 'једне године'],
-    yy: ['%d годину', '%d године', '%d година']
+    yy: ['%d годину', '%d године', '%d година'],
   },
   correctGrammarCase(number, wordKey) {
-    if (number % 10 >= 1 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20)) {
+    if (
+      number % 10 >= 1 &&
+      number % 10 <= 4 &&
+      (number % 100 < 10 || number % 100 >= 20)
+    ) {
       return number % 10 === 1 ? wordKey[0] : wordKey[1]
     }
     return wordKey[2]
@@ -31,10 +35,11 @@ const translator = {
 
     const word = translator.correctGrammarCase(number, wordKey)
     // Nominativ
-    if (key === 'yy' && withoutSuffix && word === '%d годину') return `${number} година`
+    if (key === 'yy' && withoutSuffix && word === '%d годину')
+      return `${number} година`
 
     return word.replace('%d', number)
-  }
+  },
 }
 
 const locale = {
@@ -42,8 +47,13 @@ const locale = {
   weekdays: 'Недеља_Понедељак_Уторак_Среда_Четвртак_Петак_Субота'.split('_'),
   weekdaysShort: 'Нед._Пон._Уто._Сре._Чет._Пет._Суб.'.split('_'),
   weekdaysMin: 'не_по_ут_ср_че_пе_су'.split('_'),
-  months: 'Јануар_Фебруар_Март_Април_Мај_Јун_Јул_Август_Септембар_Октобар_Новембар_Децембар'.split('_'),
-  monthsShort: 'Јан._Феб._Мар._Апр._Мај_Јун_Јул_Авг._Сеп._Окт._Нов._Дец.'.split('_'),
+  months:
+    'Јануар_Фебруар_Март_Април_Мај_Јун_Јул_Август_Септембар_Октобар_Новембар_Децембар'.split(
+      '_'
+    ),
+  monthsShort: 'Јан._Феб._Мар._Апр._Мај_Јун_Јул_Авг._Сеп._Окт._Нов._Дец.'.split(
+    '_'
+  ),
   weekStart: 1,
   relativeTime: {
     future: 'за %s',
@@ -58,7 +68,7 @@ const locale = {
     M: translator.relativeTimeFormatter,
     MM: translator.relativeTimeFormatter,
     y: translator.relativeTimeFormatter,
-    yy: translator.relativeTimeFormatter
+    yy: translator.relativeTimeFormatter,
   },
   ordinal: (n) => `${n}.`,
   formats: {
@@ -67,8 +77,8 @@ const locale = {
     L: 'D. M. YYYY.',
     LL: 'D. MMMM YYYY.',
     LLL: 'D. MMMM YYYY. H:mm',
-    LLLL: 'dddd, D. MMMM YYYY. H:mm'
-  }
+    LLLL: 'dddd, D. MMMM YYYY. H:mm',
+  },
 }
 
 dayjs.locale(locale, null, true)

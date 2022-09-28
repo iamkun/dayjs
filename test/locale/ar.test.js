@@ -40,13 +40,10 @@ it('Preparse with locale function', () => {
 })
 
 it('RelativeTime: Time from X gets formatted', () => {
-  const T = [
-    [44.4, 'second', 'منذ ثانية واحدة']
-  ]
+  const T = [[44.4, 'second', 'منذ ثانية واحدة']]
 
   T.forEach((t) => {
     dayjs.locale('ar')
-    expect(dayjs().from(dayjs().add(t[0], t[1])))
-      .toBe(t[2])
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(t[2])
   })
 })

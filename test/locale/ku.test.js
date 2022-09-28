@@ -16,9 +16,7 @@ afterEach(() => {
 
 it('Format meridiem correctly', () => {
   for (let i = 0; i <= 23; i += 1) {
-    const dayjsKu = dayjs()
-      .startOf('day')
-      .add(i, 'hour')
+    const dayjsKu = dayjs().startOf('day').add(i, 'hour')
     const hour = (i % 12 || 12)
       .toString()
       .replace(/\d/g, (match) => englishToArabicNumbersMap[match])
@@ -30,9 +28,7 @@ it('Format meridiem correctly', () => {
 it('Preparse with locale function', () => {
   for (let i = 0; i <= 7; i += 1) {
     dayjs.locale(locale)
-    const momentKu = moment()
-      .locale('ku')
-      .add(i, 'day')
+    const momentKu = moment().locale('ku').add(i, 'day')
     expect(dayjs(momentKu.format()).format()).toEqual(momentKu.format())
   }
 })

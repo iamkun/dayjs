@@ -6,19 +6,19 @@ Our open source community strives to be nice, welcoming and professional. Instan
 
 ## Style
 
-* Day.js is written in ES6.
-* We use ESLint to check our code. You can use `npm run lint` before submitting a pull request.
-* Please use semantic commit message.
+- Day.js is written in ES6.
+- We use ESLint to check our code. You can use `npm run lint` before submitting a pull request.
+- Please use semantic commit message.
 
 ## Bugs
 
-* Before submitting a bug report, search the issues for similar tickets. Your issue may have already been discussed and resolved. 
-* Feel free to add a comment to an existing issue, even if it's closed.
-* Be thorough in your title and report, don't leave out important details.
-* English, please.
+- Before submitting a bug report, search the issues for similar tickets. Your issue may have already been discussed and resolved.
+- Feel free to add a comment to an existing issue, even if it's closed.
+- Be thorough in your title and report, don't leave out important details.
+- English, please.
 
 ## Tests
 
-* Feel free to create a new `test/*.test.js` file if none of the existing test files suits your test case.
-* Help us keeping 100% test coverage :D.
-* You can use `npm run test` before submitting a pull request.
+- Feel free to create a new `test/*.test.js` file if none of the existing test files suits your test case.
+- Help us keeping 100% test coverage :D.
+- You can use `npm run test` before submitting a pull request.

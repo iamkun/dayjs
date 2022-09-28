@@ -1,10 +1,17 @@
 // Lithuanian [lt]
 import dayjs from 'dayjs'
 
-const monthFormat = 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split('_')
-const monthStandalone = 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_')
+const monthFormat =
+  'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split(
+    '_'
+  )
+const monthStandalone =
+  'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split(
+    '_'
+  )
 // eslint-disable-next-line no-useless-escape
-const MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?|MMMM?(\[[^\[\]]*\]|\s)+D[oD]?/
+const MONTHS_IN_FORMAT =
+  /D[oD]?(\[[^[\]]*\]|\s)+MMMM?|MMMM?(\[[^[\]]*\]|\s)+D[oD]?/
 
 const months = (dayjsInstance, format) => {
   if (MONTHS_IN_FORMAT.test(format)) {
@@ -17,7 +24,10 @@ months.f = monthFormat
 
 const locale = {
   name: 'lt',
-  weekdays: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_'),
+  weekdays:
+    'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split(
+      '_'
+    ),
   weekdaysShort: 'sek_pir_ant_tre_ket_pen_šeš'.split('_'),
   weekdaysMin: 's_p_a_t_k_pn_š'.split('_'),
   months,
@@ -37,7 +47,7 @@ const locale = {
     M: 'mėnesį',
     MM: '%d mėnesius',
     y: 'metus',
-    yy: '%d metus'
+    yy: '%d metus',
   },
   format: {
     LT: 'HH:mm',
@@ -49,7 +59,7 @@ const locale = {
     l: 'YYYY-MM-DD',
     ll: 'YYYY [m.] MMMM D [d.]',
     lll: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
-    llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]'
+    llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]',
   },
   formats: {
     LT: 'HH:mm',
@@ -61,8 +71,8 @@ const locale = {
     l: 'YYYY-MM-DD',
     ll: 'YYYY [m.] MMMM D [d.]',
     lll: 'YYYY [m.] MMMM D [d.], HH:mm [val.]',
-    llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]'
-  }
+    llll: 'YYYY [m.] MMMM D [d.], ddd, HH:mm [val.]',
+  },
 }
 
 dayjs.locale(locale, null, true)

@@ -4,7 +4,10 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'mk',
   weekdays: 'недела_понеделник_вторник_среда_четврток_петок_сабота'.split('_'),
-  months: 'јануари_февруари_март_април_мај_јуни_јули_август_септември_октомври_ноември_декември'.split('_'),
+  months:
+    'јануари_февруари_март_април_мај_јуни_јули_август_септември_октомври_ноември_декември'.split(
+      '_'
+    ),
   weekStart: 1,
   weekdaysShort: 'нед_пон_вто_сре_чет_пет_саб'.split('_'),
   monthsShort: 'јан_фев_мар_апр_мај_јун_јул_авг_сеп_окт_ное_дек'.split('_'),
@@ -16,7 +19,7 @@ const locale = {
     L: 'D.MM.YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY H:mm',
-    LLLL: 'dddd, D MMMM YYYY H:mm'
+    LLLL: 'dddd, D MMMM YYYY H:mm',
   },
   relativeTime: {
     future: 'после %s',
@@ -31,8 +34,8 @@ const locale = {
     M: 'месец',
     MM: '%d месеци',
     y: 'година',
-    yy: '%d години'
-  }
+    yy: '%d години',
+  },
 }
 
 dayjs.locale(locale, null, true)

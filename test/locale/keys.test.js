@@ -1,5 +1,7 @@
-import fs from 'fs'
-import path from 'path'
+/* eslint @typescript-eslint/no-unused-vars: ['warn', { ignoreRestSiblings: true }] */
+
+import fs from 'node:fs'
+import path from 'node:path'
 import dayjs from '../../src'
 
 const localeDir = '../../src/locale'
@@ -7,16 +9,15 @@ const Locale = []
 const localeNameRegex = /\/\/ (.*) \[/
 
 // load all locales from locale dir
-fs.readdirSync(path.join(__dirname, localeDir))
-  .forEach((file) => {
-    const fPath = path.join(__dirname, localeDir, file)
-    Locale.push({
-      name: file,
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      content: require(fPath).default,
-      file: fs.readFileSync(fPath, 'utf-8')
-    })
+fs.readdirSync(path.join(__dirname, localeDir)).forEach((file) => {
+  const fPath = path.join(__dirname, localeDir, file)
+  Locale.push({
+    name: file,
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    content: require(fPath).default,
+    file: fs.readFileSync(fPath, 'utf-8'),
   })
+})
 
 Locale.forEach((locale) => {
   it(`Locale keys for ${locale.content.name}`, () => {
@@ -32,7 +33,7 @@ Locale.forEach((locale) => {
       weekdaysMin,
       weekStart,
       yearStart,
-      meridiem
+      meridiem,
     } = locale.content
     // comments required
     const commentsMatchResult = locale.file.match(localeNameRegex)
@@ -66,7 +67,8 @@ Locale.forEach((locale) => {
       }
     }
     // function pass date return string or number or null
-    if (name !== 'en') { // en ordinal set in advancedFormat
+    if (name !== 'en') {
+      // en ordinal set in advancedFormat
       for (let i = 1; i <= 31; i += 1) {
         expect(ordinal(i)).toEqual(expect.anything())
       }
@@ -87,14 +89,16 @@ Locale.forEach((locale) => {
         llll,
         ...remainingFormats
       } = formats
-      expect(formats).toEqual(expect.objectContaining({
-        L: expect.any(String),
-        LL: expect.any(String),
-        LLL: expect.any(String),
-        LLLL: expect.any(String),
-        LT: expect.any(String),
-        LTS: expect.any(String)
-      }))
+      expect(formats).toEqual(
+        expect.objectContaining({
+          L: expect.any(String),
+          LL: expect.any(String),
+          LLL: expect.any(String),
+          LLLL: expect.any(String),
+          LT: expect.any(String),
+          LTS: expect.any(String),
+        })
+      )
       expect(Object.keys(remainingFormats).length).toEqual(0)
       if (l) expect(l).toEqual(expect.any(String))
       if (ll) expect(ll).toEqual(expect.any(String))
@@ -102,9 +106,23 @@ Locale.forEach((locale) => {
       if (llll) expect(llll).toEqual(expect.any(String))
     }
     if (relativeTime) {
-      expect(Object.keys(relativeTime).sort()).toEqual(['d', 'dd', 'future', 'h', 'hh', 'm', 'mm', 'M', 'MM',
-        'past', 's', 'y', 'yy']
-        .sort())
+      expect(Object.keys(relativeTime).sort()).toEqual(
+        [
+          'd',
+          'dd',
+          'future',
+          'h',
+          'hh',
+          'm',
+          'mm',
+          'M',
+          'MM',
+          'past',
+          's',
+          'y',
+          'yy',
+        ].sort()
+      )
     }
 
     if (meridiem) {

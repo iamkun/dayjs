@@ -65,9 +65,7 @@ dayjs('2018-08-08') // パース
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // 表示
 
-dayjs()
-  .set('month', 3)
-  .month() // get & set
+dayjs().set('month', 3).month() // get & set
 
 dayjs().add(1, 'year') // 操作
 
@@ -87,9 +85,7 @@ import 'dayjs/locale/es' // 必要に応じて読み込み
 
 dayjs.locale('es') // スペイン語をグローバルロケールとして適用
 
-dayjs('2018-05-05')
-  .locale('zh-cn')
-  .format() // 簡体字中国語を特定のインスタンスにのみ適用
+dayjs('2018-05-05').locale('zh-cn').format() // 簡体字中国語を特定のインスタンスにのみ適用
 ```
 
 📚[国際化](https://day.js.org/docs/en/i18n/i18n)

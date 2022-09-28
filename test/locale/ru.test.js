@@ -35,16 +35,18 @@ it('RelativeTime: Time from X', () => {
     [21, 'hour'], // 21 hours
     [25, 'day'], // 25 days
     [10, 'month'], // 2 month
-    [18, 'month'] // 2 years
+    [18, 'month'], // 2 years
   ]
 
   T.forEach((t) => {
     dayjs.locale('ru')
     moment.locale('ru')
-    expect(dayjs().from(dayjs().add(t[0], t[1])))
-      .toBe(moment().from(moment().add(t[0], t[1])))
-    expect(dayjs().from(dayjs().add(t[0], t[1]), true))
-      .toBe(moment().from(moment().add(t[0], t[1]), true))
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(
+      moment().from(moment().add(t[0], t[1]))
+    )
+    expect(dayjs().from(dayjs().add(t[0], t[1]), true)).toBe(
+      moment().from(moment().add(t[0], t[1]), true)
+    )
   })
 })
 
@@ -52,5 +54,7 @@ it('Meridiem', () => {
   expect(dayjs('2020-01-01 03:00:00').locale('ru').format('A')).toEqual('ночи')
   expect(dayjs('2020-01-01 11:00:00').locale('ru').format('A')).toEqual('утра')
   expect(dayjs('2020-01-01 16:00:00').locale('ru').format('A')).toEqual('дня')
-  expect(dayjs('2020-01-01 20:00:00').locale('ru').format('A')).toEqual('вечера')
+  expect(dayjs('2020-01-01 20:00:00').locale('ru').format('A')).toEqual(
+    'вечера'
+  )
 })

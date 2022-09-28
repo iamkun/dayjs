@@ -48,15 +48,17 @@ it('RelativeTime: Time from X', () => {
     [1, 'year'], // a year
     [2, 'year'], // 2 year
     [5, 'year'], // 5 year
-    [18, 'month'] // 2 years
+    [18, 'month'], // 2 years
   ]
 
   T.forEach((t) => {
     dayjs.locale('pl')
     moment.locale('pl')
-    expect(dayjs().from(dayjs().add(t[0], t[1])))
-      .toBe(moment().from(moment().add(t[0], t[1])))
-    expect(dayjs().from(dayjs().add(t[0], t[1]), true))
-      .toBe(moment().from(moment().add(t[0], t[1]), true))
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(
+      moment().from(moment().add(t[0], t[1]))
+    )
+    expect(dayjs().from(dayjs().add(t[0], t[1]), true)).toBe(
+      moment().from(moment().add(t[0], t[1]), true)
+    )
   })
 })

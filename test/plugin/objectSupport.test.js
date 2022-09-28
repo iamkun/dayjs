@@ -32,33 +32,31 @@ const tests = [
   [{ year: 2010, month: 1, date: 12 }, '2010-02-12 00:00:00.000'],
   [
     {
-      hour: 15, minute: 25, second: 50, millisecond: 125
+      hour: 15,
+      minute: 25,
+      second: 50,
+      millisecond: 125,
     },
     `${currentYear}-${currentMonth}-${currentDate} 15:25:50.125`,
-    `${currentUTCYear}-${currentUTCMonth}-${currentUTCDate} 15:25:50.125`],
-  [
-    {
-      year: 2010, month: 1, day: 12, hours: 1
-    },
-    '2010-02-12 01:00:00.000'
+    `${currentUTCYear}-${currentUTCMonth}-${currentUTCDate} 15:25:50.125`,
   ],
   [
     {
-      year: 2010, month: 1, date: 12, hours: 1
+      year: 2010,
+      month: 1,
+      day: 12,
+      hours: 1,
     },
-    '2010-02-12 01:00:00.000'
+    '2010-02-12 01:00:00.000',
   ],
   [
     {
-      year: 2010, month: 1, day: 12, hours: 1, minutes: 1
+      year: 2010,
+      month: 1,
+      date: 12,
+      hours: 1,
     },
-    '2010-02-12 01:01:00.000'
-  ],
-  [
-    {
-      year: 2010, month: 1, date: 12, hours: 1, minutes: 1
-    },
-    '2010-02-12 01:01:00.000'
+    '2010-02-12 01:00:00.000',
   ],
   [
     {
@@ -67,9 +65,18 @@ const tests = [
       day: 12,
       hours: 1,
       minutes: 1,
-      seconds: 1
     },
-    '2010-02-12 01:01:01.000'
+    '2010-02-12 01:01:00.000',
+  ],
+  [
+    {
+      year: 2010,
+      month: 1,
+      date: 12,
+      hours: 1,
+      minutes: 1,
+    },
+    '2010-02-12 01:01:00.000',
   ],
   [
     {
@@ -79,9 +86,20 @@ const tests = [
       hours: 1,
       minutes: 1,
       seconds: 1,
-      milliseconds: 1
     },
-    '2010-02-12 01:01:01.001'
+    '2010-02-12 01:01:01.000',
+  ],
+  [
+    {
+      year: 2010,
+      month: 1,
+      day: 12,
+      hours: 1,
+      minutes: 1,
+      seconds: 1,
+      milliseconds: 1,
+    },
+    '2010-02-12 01:01:01.001',
   ],
   [
     {
@@ -91,9 +109,9 @@ const tests = [
       hours: 15,
       minutes: 25,
       seconds: 50,
-      milliseconds: 125
+      milliseconds: 125,
     },
-    '2010-02-14 15:25:50.125'
+    '2010-02-14 15:25:50.125',
   ],
   [
     {
@@ -103,46 +121,52 @@ const tests = [
       hour: 15,
       minute: 25,
       second: 50,
-      millisecond: 125
+      millisecond: 125,
     },
-    '2010-02-14 15:25:50.125'
+    '2010-02-14 15:25:50.125',
   ],
   [
     {
-      y: 2010, M: 1, d: 14, h: 15, m: 25, s: 50, ms: 125
+      y: 2010,
+      M: 1,
+      d: 14,
+      h: 15,
+      m: 25,
+      s: 50,
+      ms: 125,
     },
-    '2010-02-14 15:25:50.125'
-  ]
+    '2010-02-14 15:25:50.125',
+  ],
 ]
 
 describe('parse empty object', () => {
   it('local', () => {
-    expect(dayjs({}).format())
-      .toBe(moment({}).format())
+    expect(dayjs({}).format()).toBe(moment({}).format())
   })
   it('utc', () => {
-    expect(dayjs.utc({}).format())
-      .toBe(moment.utc({}).format())
+    expect(dayjs.utc({}).format()).toBe(moment.utc({}).format())
   })
 })
 
 it('Constructor from Object', () => {
-  for (let i = 0; i < tests.length; i += 1) {
-    expect(dayjs(tests[i][0]).format(fmt)).toBe(tests[i][1])
-    expect(moment(tests[i][0]).format(fmt)).toBe(tests[i][1])
+  for (const test_ of tests) {
+    expect(dayjs(test_[0]).format(fmt)).toBe(test_[1])
+    expect(moment(test_[0]).format(fmt)).toBe(test_[1])
   }
 })
 
 it('Constructor from Object UTC', () => {
-  for (let i = 0; i < tests.length; i += 1) {
-    const result = tests[i][2] || tests[i][1]
-    expect(dayjs.utc(tests[i][0]).format(fmt)).toBe(result)
-    expect(moment.utc(tests[i][0]).format(fmt)).toBe(result)
+  for (const test_ of tests) {
+    const result = test_[2] || test_[1]
+    expect(dayjs.utc(test_[0]).format(fmt)).toBe(result)
+    expect(moment.utc(test_[0]).format(fmt)).toBe(result)
   }
 })
 it('Set from Object', () => {
-  for (let i = 0; i < tests.length; i += 1) {
-    expect(dayjs(now).set(tests[i][0]).format(fmt)).toBe(moment(now).set(tests[i][0]).format(fmt))
+  for (const test_ of tests) {
+    expect(dayjs(now).set(test_[0]).format(fmt)).toBe(
+      moment(now).set(test_[0]).format(fmt)
+    )
   }
 })
 
@@ -154,7 +178,7 @@ it('add short reverse args', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
   expect(a.add({ ms: 50 }).millisecond()).toBe(550)
   expect(a.add({ s: 1 }).second()).toBe(9)
@@ -173,7 +197,7 @@ it('add short reverse args', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
   expect(aM.clone().add({ ms: 50 }).millisecond()).toBe(550)
   expect(aM.clone().add({ s: 1 }).second()).toBe(9)
@@ -206,7 +230,7 @@ it('add long reverse args', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add({ milliseconds: 50 }).millisecond()).toBe(550)
@@ -228,7 +252,7 @@ it('add long singular reverse args', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add({ millisecond: 50 }).millisecond()).toBe(550)
@@ -250,7 +274,7 @@ it('add string long', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add(50, 'millisecond').millisecond()).toBe(550)
@@ -272,7 +296,7 @@ it('add string long singular', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add(50, 'milliseconds').millisecond()).toBe(550)
@@ -294,7 +318,7 @@ it('add string short', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add(50, 'ms').millisecond()).toBe(550)
@@ -316,7 +340,7 @@ it('add strings string short', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add('50', 'ms').millisecond()).toBe(550)
@@ -338,7 +362,7 @@ it('add no string with milliseconds default', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
 
   expect(a.add(50).millisecond()).toBe(550)
@@ -352,7 +376,7 @@ it('subtract strings string short', () => {
     hour: 6,
     minute: 7,
     second: 8,
-    millisecond: 500
+    millisecond: 500,
   })
   expect(a.subtract('50', 'ms').millisecond()).toBe(450)
   expect(a.subtract('1', 's').second()).toBe(7)
@@ -380,7 +404,13 @@ it('add decimal values of days and months', () => {
   expect(dayjs([2016, 4, 3]).subtract(1.6, 'months').month()).toBe(1)
   expect(dayjs([2016, 4, 3]).subtract(-1.6, 'months').month()).toBe(4)
   expect(dayjs([2016, 12, 31]).subtract(-1.6, 'months').month()).toBe(0)
-  expect(dayjs([2016, 1, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-01-01')
-  expect(dayjs([2016, 7, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-07-01')
-  expect(dayjs([2016, 1, 1]).add(1.1, 'quarters').format('YYYY-MM-DD')).toBe('2016-04-01')
+  expect(dayjs([2016, 1, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe(
+    '2017-01-01'
+  )
+  expect(dayjs([2016, 7, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe(
+    '2017-07-01'
+  )
+  expect(dayjs([2016, 1, 1]).add(1.1, 'quarters').format('YYYY-MM-DD')).toBe(
+    '2016-04-01'
+  )
 })

@@ -1,10 +1,15 @@
-import { PluginFunc, ConfigType, OpUnitType } from '..'
+import type { PluginFunc } from '..'
 
 declare const plugin: PluginFunc
 export default plugin
 
 declare module '..' {
   interface Dayjs {
-    isBetween(a: ConfigType, b: ConfigType, c?: OpUnitType | null, d?: '()' | '[]' | '[)' | '(]'): boolean
+    isBetween(
+      a: ConfigType,
+      b: ConfigType,
+      c?: OpUnitType | null,
+      d?: '()' | '[]' | '[)' | '(]'
+    ): boolean
   }
 }

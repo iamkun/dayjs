@@ -1,4 +1,4 @@
-import { PluginFunc, UnitType, ConfigType } from '..'
+import type { PluginFunc } from '..'
 
 declare const plugin: PluginFunc
 export default plugin

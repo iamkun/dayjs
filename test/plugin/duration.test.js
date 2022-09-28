@@ -37,47 +37,67 @@ describe('Creating', () => {
     expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('-PT3H40M13S')
   })
   it('object with float', () => {
-    expect(dayjs.duration({
-      seconds: 1,
-      minutes: 2,
-      hours: 3,
-      days: 4,
-      months: 6,
-      years: 7
-    }).toISOString()).toBe('P7Y6M4DT3H2M1S')
+    expect(
+      dayjs
+        .duration({
+          seconds: 1,
+          minutes: 2,
+          hours: 3,
+          days: 4,
+          months: 6,
+          years: 7,
+        })
+        .toISOString()
+    ).toBe('P7Y6M4DT3H2M1S')
   })
   it('object with weeks and float', () => {
-    expect(dayjs.duration({
-      seconds: 1.1,
-      minutes: 2,
-      hours: 3,
-      days: 4,
-      weeks: 5,
-      months: 6,
-      years: 7
-    }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
+    expect(
+      dayjs
+        .duration({
+          seconds: 1.1,
+          minutes: 2,
+          hours: 3,
+          days: 4,
+          weeks: 5,
+          months: 6,
+          years: 7,
+        })
+        .toISOString()
+    ).toBe('P7Y6M39DT3H2M1.1S')
   })
   it('object with millisecond', () => {
-    expect(dayjs.duration({
-      ms: 1
-    }).toISOString()).toBe('PT0.001S')
+    expect(
+      dayjs
+        .duration({
+          ms: 1,
+        })
+        .toISOString()
+    ).toBe('PT0.001S')
   })
   it('object with negative millisecond', () => {
-    expect(dayjs.duration({
-      ms: -1
-    }).toISOString()).toBe('-PT0.001S')
+    expect(
+      dayjs
+        .duration({
+          ms: -1,
+        })
+        .toISOString()
+    ).toBe('-PT0.001S')
   })
 })
 
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
-    expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
+    expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe(
+      'P7Y6M4DT3H2M1S'
+    )
   })
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
   it('Formatting missing components', () => {
-    expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
+    expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe(
+      '0000-00-00T01:00:00'
+    )
   })
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
@@ -99,9 +119,11 @@ it('Is duration', () => {
 })
 
 it('toJSON', () => {
-  expect(JSON.stringify({
-    postDuration: dayjs.duration(5, 'minutes')
-  })).toBe('{"postDuration":"PT5M"}')
+  expect(
+    JSON.stringify({
+      postDuration: dayjs.duration(5, 'minutes'),
+    })
+  ).toBe('{"postDuration":"PT5M"}')
 })
 
 describe('Humanize', () => {
@@ -115,8 +137,12 @@ describe('Humanize', () => {
 
   it('Locale', () => {
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
-    expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
-    expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe('en un minuto')
+    expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe(
+      'dans une minute'
+    )
+    expect(dayjs.duration(1, 'minutes').locale('es').humanize(true)).toBe(
+      'en un minuto'
+    )
   })
   it('Global Locale', () => {
     dayjs.locale('en')
@@ -246,15 +272,20 @@ describe('prettyUnit', () => {
   expect(d.toISOString()).toBe('PT2S')
   expect(d.as('seconds')).toBe(2)
   expect(d.get('s')).toBe(2)
-  expect(dayjs.duration({
-    M: 12,
-    m: 12
-  }).toISOString()).toBe('P12MT12M')
+  expect(
+    dayjs
+      .duration({
+        M: 12,
+        m: 12,
+      })
+      .toISOString()
+  ).toBe('P12MT12M')
 })
 
 describe('Format', () => {
   test('no formatStr', () => {
-    const d = dayjs.duration(15, 'seconds')
+    const d = dayjs
+      .duration(15, 'seconds')
       .add(13, 'hours')
       .add(35, 'minutes')
       .add(16, 'days')
@@ -264,14 +295,16 @@ describe('Format', () => {
   })
 
   test('with formatStr for all tokens', () => {
-    const d = dayjs.duration(1, 'seconds')
+    const d = dayjs
+      .duration(1, 'seconds')
       .add(8, 'hours')
       .add(5, 'minutes')
       .add(6, 'days')
       .add(9, 'months')
       .add(2, 'years')
       .add(10, 'milliseconds')
-    expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
-      .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
+    expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS')).toBe(
+      '2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010'
+    )
   })
 })

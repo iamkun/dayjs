@@ -1,9 +1,7 @@
 module.exports = {
   env: {
     test: {
-      presets: [
-        '@babel/preset-env'
-      ]
+      presets: ['@babel/preset-env'],
     },
     build: {
       presets: [
@@ -11,10 +9,10 @@ module.exports = {
           '@babel/preset-env',
           {
             modules: false,
-            loose: true
-          }
-        ]
-      ]
-    }
-  }
+            loose: true,
+          },
+        ],
+      ],
+    },
+  },
 }

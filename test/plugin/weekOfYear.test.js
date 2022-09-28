@@ -44,12 +44,11 @@ describe('Week of year with locale edges', () => {
     '2019-12-29',
     '2019-12-30',
     '2016-01-01',
-    '2016-01-04'
+    '2016-01-04',
   ]
   testCases.forEach((t) => {
     it(`Edges ${t}`, () => {
-      expect(dayjs(t).week())
-        .toBe(moment(t).week())
+      expect(dayjs(t).week()).toBe(moment(t).week())
     })
   })
 })

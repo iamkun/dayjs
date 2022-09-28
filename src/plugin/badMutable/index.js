@@ -1,4 +1,5 @@
-export default (o, c) => { // locale needed later
+export default (o, c) => {
+  // locale needed later
   const proto = c.prototype
   proto.$g = function (input, get, set) {
     if (this.$utils().u(input)) return this[get]

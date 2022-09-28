@@ -30,17 +30,29 @@ it('get isoWeekYear', () => {
 
 it('startOf/endOf isoWeek', () => {
   const ISOWEEK = 'isoWeek'
-  expect(dayjs().startOf(ISOWEEK).valueOf()).toBe(moment().startOf(ISOWEEK).valueOf())
-  expect(dayjs().endOf(ISOWEEK).valueOf()).toBe(moment().endOf(ISOWEEK).valueOf())
+  expect(dayjs().startOf(ISOWEEK).valueOf()).toBe(
+    moment().startOf(ISOWEEK).valueOf()
+  )
+  expect(dayjs().endOf(ISOWEEK).valueOf()).toBe(
+    moment().endOf(ISOWEEK).valueOf()
+  )
 })
 
 it('isoWeekday', () => {
   expect(dayjs().isoWeekday()).toBe(moment().isoWeekday())
-  expect(dayjs('20200301').isoWeekday(1).valueOf()).toBe(moment('20200301').isoWeekday(1).valueOf()) // Sunday this.day() -> 0
+  expect(dayjs('20200301').isoWeekday(1).valueOf()).toBe(
+    moment('20200301').isoWeekday(1).valueOf()
+  ) // Sunday this.day() -> 0
   for (let i = 0; i < 7; i += 1) {
-    expect(dayjs().add(i, 'day').isoWeekday()).toBe(moment().add(i, 'day').isoWeekday())
-    expect(dayjs().isoWeekday(i).valueOf()).toBe(moment().isoWeekday(i).valueOf())
-    expect(dayjs().add(1, 'day').isoWeekday(i).valueOf()).toBe(moment().add(1, 'day').isoWeekday(i).valueOf())
+    expect(dayjs().add(i, 'day').isoWeekday()).toBe(
+      moment().add(i, 'day').isoWeekday()
+    )
+    expect(dayjs().isoWeekday(i).valueOf()).toBe(
+      moment().isoWeekday(i).valueOf()
+    )
+    expect(dayjs().add(1, 'day').isoWeekday(i).valueOf()).toBe(
+      moment().add(1, 'day').isoWeekday(i).valueOf()
+    )
   }
 })
 

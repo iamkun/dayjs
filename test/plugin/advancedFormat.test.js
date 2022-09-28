@@ -26,7 +26,9 @@ afterEach(() => {
 })
 
 it('Format of invalid date', () => {
-  expect(dayjs(null).format('z').toLowerCase()).toEqual(moment(null).format('z').toLowerCase())
+  expect(dayjs(null).format('z').toLowerCase()).toEqual(
+    moment(null).format('z').toLowerCase()
+  )
 })
 
 it('Format empty string', () => {
@@ -53,7 +55,9 @@ it('Format Day of Month Do 1 - 31', () => {
   d = '2018-05-04 00:00:00.000'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
   d = '2018-05-08 00:00:00.000'
-  expect(dayjs(d).locale('nl').format('Do')).toBe(moment(d).locale('nl').format('Do'))
+  expect(dayjs(d).locale('nl').format('Do')).toBe(
+    moment(d).locale('nl').format('Do')
+  )
   d = '2018-05-11'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
   d = '2018-05-12'
@@ -61,7 +65,9 @@ it('Format Day of Month Do 1 - 31', () => {
   d = '2018-05-13'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
   d = '2018-05-19 00:00:00.000'
-  expect(dayjs(d).locale('nl').format('Do')).toBe(moment(d).locale('nl').format('Do'))
+  expect(dayjs(d).locale('nl').format('Do')).toBe(
+    moment(d).locale('nl').format('Do')
+  )
   d = '2018-05-22'
   expect(dayjs(d).format('Do')).toBe(moment(d).format('Do'))
 })
@@ -89,15 +95,17 @@ it('Format Hour k kk 24-hour 1 - 24', () => {
 it('Format Week of Year wo', () => {
   const d = '2018-12-01'
   expect(dayjs(d).format('wo')).toBe(moment(d).format('wo'))
-  expect(dayjs(d).locale('zh-cn').format('wo'))
-    .toBe(moment(d).locale('zh-cn').format('wo'))
+  expect(dayjs(d).locale('zh-cn').format('wo')).toBe(
+    moment(d).locale('zh-cn').format('wo')
+  )
 })
 
 it('Format Week of Year wo', () => {
   const d = '2018-12-01'
   expect(dayjs(d).format('wo')).toBe(moment(d).format('wo'))
-  expect(dayjs(d).locale('zh-cn').format('wo'))
-    .toBe(moment(d).locale('zh-cn').format('wo'))
+  expect(dayjs(d).locale('zh-cn').format('wo')).toBe(
+    moment(d).locale('zh-cn').format('wo')
+  )
 })
 
 it('Format Week Year gggg', () => {

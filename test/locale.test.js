@@ -14,36 +14,28 @@ afterEach(() => {
 const format = 'dddd D, MMMM'
 const NOT_SUPPORTED_LOCALE_STRING = 'not_supported_locale_string'
 
-it('Uses spanish locale through constructor', () => { // not recommend
-  expect(dayjs('2018-4-28', { locale: es })
-    .format(format))
-    .toBe('sábado 28, abril')
+it('Uses spanish locale through constructor', () => {
+  // not recommend
+  expect(dayjs('2018-4-28', { locale: es }).format(format)).toBe(
+    'sábado 28, abril'
+  )
 })
 
 it('set locale for one instance only', () => {
-  expect(dayjs('2018-4-28')
-    .format(format))
-    .toBe('Saturday 28, April')
+  expect(dayjs('2018-4-28').format(format)).toBe('Saturday 28, April')
 
-  expect(dayjs('2018-4-28')
-    .locale(es).format(format))
-    .toBe('sábado 28, abril')
+  expect(dayjs('2018-4-28').locale(es).format(format)).toBe('sábado 28, abril')
 
-  expect(dayjs('2018-4-28')
-    .format(format))
-    .toBe('Saturday 28, April')
+  expect(dayjs('2018-4-28').format(format)).toBe('Saturday 28, April')
 })
 
 it('set global locale', () => {
   dayjs.locale('en')
-  expect(dayjs('2018-4-28').format(format))
-    .toBe('Saturday 28, April')
+  expect(dayjs('2018-4-28').format(format)).toBe('Saturday 28, April')
   dayjs.locale(es)
-  expect(dayjs('2018-4-28').format(format))
-    .toBe('sábado 28, abril')
+  expect(dayjs('2018-4-28').format(format)).toBe('sábado 28, abril')
   dayjs.locale('en')
-  expect(dayjs('2018-4-28').format(format))
-    .toBe('Saturday 28, April')
+  expect(dayjs('2018-4-28').format(format)).toBe('Saturday 28, April')
 })
 
 it('get instance locale name', () => {
@@ -60,56 +52,45 @@ it('get instance locale name', () => {
 it('immutable instance locale', () => {
   dayjs.locale('en')
   const origin = dayjs('2018-4-28')
-  expect(origin.format(format))
-    .toBe('Saturday 28, April')
-  expect(origin.locale('es').format(format))
-    .toBe('sábado 28, abril')
+  expect(origin.format(format)).toBe('Saturday 28, April')
+  expect(origin.locale('es').format(format)).toBe('sábado 28, abril')
   const changed = origin.locale('es')
-  expect(changed.format(format))
-    .toBe('sábado 28, abril')
-  expect(origin.format(format))
-    .toBe('Saturday 28, April')
+  expect(changed.format(format)).toBe('sábado 28, abril')
+  expect(origin.format(format)).toBe('Saturday 28, April')
 })
 
 it('User custom locale', () => {
-  expect(dayjs('2018-4-28')
-    .locale('xx', {
-      weekdays: Array(7).fill('week'),
-      months: Array(12).fill('month')
-    })
-    .format(format))
-    .toBe('week 28, month')
+  expect(
+    dayjs('2018-4-28')
+      .locale('xx', {
+        weekdays: Array.from({ length: 7 }).fill('week'),
+        months: Array.from({ length: 12 }).fill('month'),
+      })
+      .format(format)
+  ).toBe('week 28, month')
 })
 
 describe('Instance locale inheritance', () => {
   const esDayjs = dayjs('2018-4-28').locale(es)
 
   it('Clone', () => {
-    expect(esDayjs.clone().format(format))
-      .toBe('sábado 28, abril')
-    expect(dayjs(esDayjs).format(format))
-      .toBe('sábado 28, abril')
+    expect(esDayjs.clone().format(format)).toBe('sábado 28, abril')
+    expect(dayjs(esDayjs).format(format)).toBe('sábado 28, abril')
   })
 
   it('StartOf EndOf', () => {
-    expect(esDayjs.startOf('year').format(format))
-      .toBe('lunes 1, enero')
-    expect(esDayjs.endOf('day').format(format))
-      .toBe('sábado 28, abril')
+    expect(esDayjs.startOf('year').format(format)).toBe('lunes 1, enero')
+    expect(esDayjs.endOf('day').format(format)).toBe('sábado 28, abril')
   })
 
   it('Set', () => {
-    expect(esDayjs.set('year', 2017).format(format))
-      .toBe('viernes 28, abril')
+    expect(esDayjs.set('year', 2017).format(format)).toBe('viernes 28, abril')
   })
 
   it('Add', () => {
-    expect(esDayjs.add(1, 'year').format(format))
-      .toBe('domingo 28, abril')
-    expect(esDayjs.add(1, 'month').format(format))
-      .toBe('lunes 28, mayo')
-    expect(esDayjs.add(1, 'minute').format(format))
-      .toBe('sábado 28, abril')
+    expect(esDayjs.add(1, 'year').format(format)).toBe('domingo 28, abril')
+    expect(esDayjs.add(1, 'month').format(format)).toBe('lunes 28, mayo')
+    expect(esDayjs.add(1, 'minute').format(format)).toBe('sábado 28, abril')
   })
 
   it('dayjs.locale() returns locale name', () => {

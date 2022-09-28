@@ -36,7 +36,9 @@ it('parse string for MMM month format', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
   const input2 = '21-Dec-18'
   const format2 = 'D-MMM-YY'
-  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  expect(dayjs(input2, format2).valueOf()).toBe(
+    moment(input2, format2).valueOf()
+  )
 })
 
 it('parse string January (getMonth() = 0)', () => {
@@ -76,15 +78,27 @@ it('recognizes noon in small letters', () => {
 })
 
 describe('parse localizedFormats', () => {
-  ['zh-cn', 'ru', 'uk', 'en'].forEach((lo) => {
+  ;['zh-cn', 'ru', 'uk', 'en'].forEach((lo) => {
     it(`Locale: ${lo}`, () => {
       const input = '2018-05-02 01:02:03.004'
       dayjs.locale(lo)
       moment.locale(lo)
-      const longDateFormats = ['LT', 'LTS', 'L', 'LL', 'l', 'll', 'lll', 'l LT', 'LL [l] LTS'] // TODO: fix LLL, LLLL and llll
+      const longDateFormats = [
+        'LT',
+        'LTS',
+        'L',
+        'LL',
+        'l',
+        'll',
+        'lll',
+        'l LT',
+        'LL [l] LTS',
+      ] // TODO: fix LLL, LLLL and llll
       longDateFormats.forEach((f) => {
         const localizedInput = moment(input).format(f)
-        expect(dayjs(localizedInput, f).valueOf()).toBe(moment(localizedInput, f).valueOf())
+        expect(dayjs(localizedInput, f).valueOf()).toBe(
+          moment(localizedInput, f).valueOf()
+        )
       })
     })
   })
@@ -150,7 +164,9 @@ describe('parse YYYY / YYYY-MM only', () => {
     expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
     const input2 = '2001'
     const format2 = 'YYYY'
-    expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+    expect(dayjs(input2, format2).valueOf()).toBe(
+      moment(input2, format2).valueOf()
+    )
   })
   it('YYYY-MM', () => {
     const input = '2001-01 +08:00'
@@ -158,7 +174,9 @@ describe('parse YYYY / YYYY-MM only', () => {
     expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
     const input2 = '2001-01'
     const format2 = 'YYYY-MM'
-    expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+    expect(dayjs(input2, format2).valueOf()).toBe(
+      moment(input2, format2).valueOf()
+    )
   })
 })
 
@@ -171,8 +189,9 @@ it('parse hh:mm:ss but only one digit', () => {
 it('fails with an invalid format', () => {
   const input = '2018-05-02 12:00 PM'
   const format = 'C'
-  expect(dayjs(input, format).format().toLowerCase())
-    .toBe(moment(input, format).format().toLowerCase())
+  expect(dayjs(input, format).format().toLowerCase()).toBe(
+    moment(input, format).format().toLowerCase()
+  )
 })
 
 it('parse month from string', () => {
@@ -181,7 +200,9 @@ it('parse month from string', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
   const input2 = '21-December-18'
   const format2 = 'D-MMMM-YY'
-  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  expect(dayjs(input2, format2).valueOf()).toBe(
+    moment(input2, format2).valueOf()
+  )
 })
 
 it('parse month from short string', () => {
@@ -194,26 +215,34 @@ it('parse month from string with locale in config', () => {
   const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
 
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(
+    moment(input, format, 'uk').valueOf()
+  )
 })
 
 it('parse month from short string with locale in config', () => {
   const input = '2018 трав 03'
   const format = 'YYYY MMM DD'
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(
+    moment(input, format, 'uk').valueOf()
+  )
 })
 
 it('parse month from short string with locale in argument', () => {
   const input = '2018 трав 03'
   const format = 'YYYY MMM DD'
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(
+    moment(input, format, 'uk').valueOf()
+  )
 })
 
 it('parse month from string with locale in argument', () => {
   const input = '2018 лютий 03'
   const format = 'YYYY MMMM DD'
 
-  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(
+    moment(input, format, 'uk').valueOf()
+  )
 })
 
 it('return Invalid Date when parse corrupt string', () => {
@@ -233,12 +262,18 @@ it('YYYY-MM set 1st day of the month', () => {
 })
 
 it('Invalid Dates', () => {
-  expect(dayjs('10/12/2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
-  expect(dayjs('10-12-2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
+  expect(dayjs('10/12/2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe(
+    'Invalid Date'
+  )
+  expect(dayjs('10-12-2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe(
+    'Invalid Date'
+  )
 })
 
 it('Valid Date', () => {
-  expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('10-12-2014')
+  expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe(
+    '10-12-2014'
+  )
 })
 
 it('correctly parse month from string after changing locale globally', () => {
@@ -264,21 +299,19 @@ it('correctly parse ordinal', () => {
   const inputZHCN = '7日 三月 2019'
   const format = 'Do MMMM YYYY'
   const displayFormatWithLocale = 'MMMM dddd'
-  expect(dayjs(input, format).valueOf())
-    .toBe(moment(input, format).valueOf())
-  expect(dayjs(input2, format).valueOf())
-    .toBe(moment(input2, format).valueOf())
-  expect(dayjs(inputFalse, format).valueOf())
-    .toBe(moment(inputFalse, format).valueOf())
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  expect(dayjs(input2, format).valueOf()).toBe(moment(input2, format).valueOf())
+  expect(dayjs(inputFalse, format).valueOf()).toBe(
+    moment(inputFalse, format).valueOf()
+  )
 
   const dayjsCN = dayjs(inputZHCN, format, 'zh-cn')
   const momentCN = moment(inputZHCN, format, 'zh-cn')
-  expect(dayjsCN.valueOf())
-    .toBe(momentCN.valueOf())
-  expect(dayjsCN.format(displayFormatWithLocale))
-    .toBe(momentCN.format(displayFormatWithLocale))
-  expect(dayjsCN.locale())
-    .toBe(momentCN.locale())
+  expect(dayjsCN.valueOf()).toBe(momentCN.valueOf())
+  expect(dayjsCN.format(displayFormatWithLocale)).toBe(
+    momentCN.format(displayFormatWithLocale)
+  )
+  expect(dayjsCN.locale()).toBe(momentCN.locale())
 })
 
 describe('month function locale', () => {
@@ -286,13 +319,19 @@ describe('month function locale', () => {
     const input = '08 мая 2020'
     const input2 = '08 май 2020'
     const format = 'DD MMMM YYYY'
-    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
-    expect(dayjs(input2, format, 'ru').valueOf()).toBe(moment(input2, format, 'ru').valueOf())
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(
+      moment(input, format, 'ru').valueOf()
+    )
+    expect(dayjs(input2, format, 'ru').valueOf()).toBe(
+      moment(input2, format, 'ru').valueOf()
+    )
   })
   it('MMM', () => {
     const input = '08 февр. 2020'
     const format = 'DD MMM YYYY'
-    expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
+    expect(dayjs(input, format, 'ru').valueOf()).toBe(
+      moment(input, format, 'ru').valueOf()
+    )
   })
 })
 
@@ -303,7 +342,9 @@ describe('Strict mode', () => {
     expect(dayjs(input, format).isValid()).toBe(true)
     expect(dayjs(input, format, true).isValid()).toBe(false)
     expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
-    expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
+    expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(
+      true
+    )
   })
   it('with locale', () => {
     const input = '2018 三月 99'
@@ -328,7 +369,9 @@ describe('Array format support', () => {
   it('with locale', () => {
     const input = '2018 三月 12'
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
-    expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+    expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(
+      input
+    )
   })
 })
 
@@ -353,13 +396,15 @@ it('parse a string for MMM month format with underscore delimiter', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
   const input2 = '21_Jan_2021_123523'
   const format2 = 'DD_MMM_YYYY_hhmmss'
-  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  expect(dayjs(input2, format2).valueOf()).toBe(
+    moment(input2, format2).valueOf()
+  )
 })
 
 it('custom two-digit year parse function', () => {
   delete customParseFormat.$i // this allow plugin to be installed again
   dayjs.extend(customParseFormat, {
-    parseTwoDigitYear: (yearString) => (+yearString) + 1800
+    parseTwoDigitYear: (yearString) => +yearString + 1800,
   })
   const format = 'YY-MM-DD'
   const input = '00-05-02'
@@ -431,9 +476,13 @@ it('parse X x', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
   const input2 = '1410715640579'
   const format2 = 'x'
-  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+  expect(dayjs(input2, format2).valueOf()).toBe(
+    moment(input2, format2).valueOf()
+  )
 
   // x X starct parse requires advancedFormat plugin
   dayjs.extend(advancedFormat)
-  expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
+  expect(dayjs(input2, format2, true).valueOf()).toBe(
+    moment(input2, format2, true).valueOf()
+  )
 })

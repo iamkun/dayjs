@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb-base",
+  "extends": ["@sxzz/eslint-config-ts", "@sxzz/eslint-config-prettier"],
   "plugins": ["jest"],
   "env": {
     "jest/globals": true
@@ -8,23 +8,21 @@
     "window": true,
     "dayjs": true
   },
-  "parserOptions": {
-    "ecmaVersion": "latest"
-  },
   "rules": {
-    "semi": [2, "never"],
-    "comma-dangle": ["error", "never"],
-    "no-param-reassign": [0],
-    "func-names": [0],
-    "import/no-extraneous-dependencies": [0],
-    "import/no-unresolved": [
-      2,
-      {
-        "ignore": ["dayjs"]
+    "unicorn/better-regex": "off",
+    "eslint-comments/no-unlimited-disable": "off",
+    "@typescript-eslint/triple-slash-reference": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/**"],
+      "rules": {
+        "unicorn/prefer-includes": "off",
+        "unicorn/no-for-loop": "off",
+        "unicorn/prefer-number-properties": "off",
+        "unicorn/no-instanceof-array": "off",
+        "unicorn/explicit-length-check": "off"
       }
-    ],
-    "import/extensions": [2, "never"],
-    "implicit-arrow-linebreak": "off",
-    "no-constructor-return": "off"
-  }
+    }
+  ]
 }

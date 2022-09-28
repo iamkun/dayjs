@@ -12,7 +12,7 @@ const texts = {
   M: ['ein Monat', 'einem Monat'],
   MM: ['%d Monate', '%d Monaten'],
   y: ['ein Jahr', 'einem Jahr'],
-  yy: ['%d Jahre', '%d Jahren']
+  yy: ['%d Jahre', '%d Jahren'],
 }
 
 function relativeTimeFormatter(number, withoutSuffix, key) {
@@ -25,11 +25,17 @@ function relativeTimeFormatter(number, withoutSuffix, key) {
 
 const locale = {
   name: 'de-ch',
-  weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
+  weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+    '_'
+  ),
   weekdaysShort: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
   weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
-  months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
-  monthsShort: 'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
+  months:
+    'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
+      '_'
+    ),
+  monthsShort:
+    'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
   ordinal: (n) => `${n}.`,
   weekStart: 1,
   formats: {
@@ -38,7 +44,7 @@ const locale = {
     L: 'DD.MM.YYYY',
     LL: 'D. MMMM YYYY',
     LLL: 'D. MMMM YYYY HH:mm',
-    LLLL: 'dddd, D. MMMM YYYY HH:mm'
+    LLLL: 'dddd, D. MMMM YYYY HH:mm',
   },
   relativeTime: {
     future: 'in %s',
@@ -53,8 +59,8 @@ const locale = {
     M: relativeTimeFormatter,
     MM: relativeTimeFormatter,
     y: relativeTimeFormatter,
-    yy: relativeTimeFormatter
-  }
+    yy: relativeTimeFormatter,
+  },
 }
 
 dayjs.locale(locale, null, true)

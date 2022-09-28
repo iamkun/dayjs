@@ -12,7 +12,7 @@ export default (o, c) => {
     'months',
     'quarters',
     'years',
-    'dates'
+    'dates',
   ]
 
   pluralAliases.forEach((alias) => {

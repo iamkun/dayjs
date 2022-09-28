@@ -65,9 +65,7 @@ dayjs('2018-08-08') // analiza
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // da formato
 
-dayjs()
-  .set('month', 3)
-  .month() // get & set
+dayjs().set('month', 3).month() // get & set
 
 dayjs().add(1, 'year') // manipula
 
@@ -87,9 +85,7 @@ import 'dayjs/locale/es' // carga bajo demanda
 
 dayjs.locale('es') // usar la configuración regional española globalmente
 
-dayjs('2018-05-05')
-  .locale('zh-cn')
-  .format() // usar el chino simplificado en una instancia concreta
+dayjs('2018-05-05').locale('zh-cn').format() // usar el chino simplificado en una instancia concreta
 ```
 
 📚[Internacionalización](https://day.js.org/docs/en/i18n/i18n)

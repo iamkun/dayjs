@@ -11,7 +11,7 @@ const locales = [
   { locale: 'en', expectedDate: '12/25/2019' },
   { locale: 'en-gb', expectedDate: '25/12/2019' },
   { locale: 'en-in', expectedDate: '25/12/2019' },
-  { locale: 'en-tt', expectedDate: '25/12/2019' }
+  { locale: 'en-tt', expectedDate: '25/12/2019' },
 ]
 
 describe('English date formats', () => {

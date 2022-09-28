@@ -8,7 +8,7 @@ export default (o, c) => {
       hours: this.$H,
       minutes: this.$m,
       seconds: this.$s,
-      milliseconds: this.$ms
+      milliseconds: this.$ms,
     }
   }
 }

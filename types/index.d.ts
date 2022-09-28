@@ -42,7 +42,8 @@ export type OpUnitType = UnitType | 'week' | 'weeks' | 'w'
 export type QUnitType = UnitType | 'quarter' | 'quarters' | 'Q'
 export type ManipulateType = Exclude<OpUnitType, 'date' | 'dates'>
 export declare interface Dayjs {
-  constructor(config?: ConfigType)
+  // eslint-disable-next-line @typescript-eslint/no-misused-new
+  new (config?: ConfigType): Dayjs
   /**
    * All Day.js objects are immutable. Still, `dayjs#clone` can create a clone of the current object if you need one.
    * ```

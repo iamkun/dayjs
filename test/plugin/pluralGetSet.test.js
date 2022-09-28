@@ -68,48 +68,70 @@ it('Seconds', () => {
 it('Milliseconds', () => {
   expect(dayjs().get('milliseconds')).toBe(moment().get('milliseconds'))
   expect(dayjs().milliseconds()).toBe(moment().milliseconds())
-  expect(dayjs().milliseconds(0).valueOf()).toBe(moment().milliseconds(0).valueOf())
-  expect(dayjs().milliseconds(1).valueOf()).toBe(moment().milliseconds(1).valueOf())
+  expect(dayjs().milliseconds(0).valueOf()).toBe(
+    moment().milliseconds(0).valueOf()
+  )
+  expect(dayjs().milliseconds(1).valueOf()).toBe(
+    moment().milliseconds(1).valueOf()
+  )
 })
 
 it('Set Dates', () => {
   expect(dayjs().date(30).valueOf()).toBe(moment().dates(30).valueOf())
-  expect(dayjs().set('dates', 30).valueOf()).toBe(moment().set('dates', 30).valueOf())
+  expect(dayjs().set('dates', 30).valueOf()).toBe(
+    moment().set('dates', 30).valueOf()
+  )
 })
 
 it('Set Days of Week', () => {
   expect(dayjs().days(0).valueOf()).toBe(moment().days(0).valueOf())
-  expect(dayjs().set('days', 0).valueOf()).toBe(moment().set('days', 0).valueOf())
+  expect(dayjs().set('days', 0).valueOf()).toBe(
+    moment().set('days', 0).valueOf()
+  )
 })
 
 it('Set Months', () => {
   expect(dayjs().months(11).valueOf()).toBe(moment().months(11).valueOf())
-  expect(dayjs().set('months', 11).valueOf()).toBe(moment().set('months', 11).valueOf())
+  expect(dayjs().set('months', 11).valueOf()).toBe(
+    moment().set('months', 11).valueOf()
+  )
 })
 
 it('Set Years', () => {
   expect(dayjs().years(2008).valueOf()).toBe(moment().year(2008).valueOf())
-  expect(dayjs().set('years', 2008).valueOf()).toBe(moment().set('years', 2008).valueOf())
+  expect(dayjs().set('years', 2008).valueOf()).toBe(
+    moment().set('years', 2008).valueOf()
+  )
 })
 
 it('Set Hours', () => {
-  expect(dayjs().set('hours', 6).valueOf()).toBe(moment().set('hours', 6).valueOf())
+  expect(dayjs().set('hours', 6).valueOf()).toBe(
+    moment().set('hours', 6).valueOf()
+  )
   expect(dayjs().hours(6).valueOf()).toBe(moment().hours(6).valueOf())
 })
 
 it('Set Minutes', () => {
   expect(dayjs().minutes(59).valueOf()).toBe(moment().minutes(59).valueOf())
-  expect(dayjs().set('minutes', 59).valueOf()).toBe(moment().set('minutes', 59).valueOf())
+  expect(dayjs().set('minutes', 59).valueOf()).toBe(
+    moment().set('minutes', 59).valueOf()
+  )
 })
 
 it('Set Seconds', () => {
   expect(dayjs().seconds(59).valueOf()).toBe(moment().seconds(59).valueOf())
-  expect(dayjs().set('second', 59).valueOf()).toBe(moment().set('second', 59).valueOf())
+  expect(dayjs().set('second', 59).valueOf()).toBe(
+    moment().set('second', 59).valueOf()
+  )
 })
 
 it('Set Milliseconds', () => {
-  expect(dayjs().milliseconds(999).valueOf()).toBe(moment().milliseconds(999).valueOf())
-  expect(dayjs().set('millisecond', 999).valueOf()).toBe(moment().set('millisecond', 999).valueOf())
+  expect(dayjs().milliseconds(999).valueOf()).toBe(
+    moment().milliseconds(999).valueOf()
+  )
+  expect(dayjs().set('millisecond', 999).valueOf()).toBe(
+    moment().set('millisecond', 999).valueOf()
+  )
 })
 
 it('Set Month and Year in last day of month', () => {

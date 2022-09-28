@@ -1,10 +1,10 @@
-import { Q, M, D } from '../../constant'
+import { D, M, Q } from '../../constant'
 
 export default (o, c) => {
   const proto = c.prototype
   proto.quarter = function (quarter) {
     if (!this.$utils().u(quarter)) {
-      return this.month((this.month() % 3) + ((quarter - 1) * 3))
+      return this.month((this.month() % 3) + (quarter - 1) * 3)
     }
     return Math.ceil((this.month() + 1) / 3)
   }
@@ -26,9 +26,13 @@ export default (o, c) => {
     const unit = utils.p(units)
     if (unit === Q) {
       const quarter = this.quarter() - 1
-      return isStartOf ? this.month(quarter * 3)
-        .startOf(M).startOf(D)
-        : this.month((quarter * 3) + 2).endOf(M).endOf(D)
+      return isStartOf
+        ? this.month(quarter * 3)
+            .startOf(M)
+            .startOf(D)
+        : this.month(quarter * 3 + 2)
+            .endOf(M)
+            .endOf(D)
     }
     return oldStartOf.bind(this)(units, startOf)
   }

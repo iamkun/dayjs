@@ -65,9 +65,7 @@ dayjs('2018-08-08') // 解析
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // 展示
 
-dayjs()
-  .set('month', 3)
-  .month() // 获取
+dayjs().set('month', 3).month() // 获取
 
 dayjs().add(1, 'year') // 处理
 
@@ -87,9 +85,7 @@ import 'dayjs/locale/es' // 按需加载
 
 dayjs.locale('es') // 全局使用西班牙语
 
-dayjs('2018-05-05')
-  .locale('zh-cn')
-  .format() // 在这个实例上使用简体中文
+dayjs('2018-05-05').locale('zh-cn').format() // 在这个实例上使用简体中文
 ```
 
 📚[国际化 I18n](https://day.js.org/docs/zh-CN/i18n/i18n)

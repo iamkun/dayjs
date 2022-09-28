@@ -1,8 +1,16 @@
-import { PluginFunc } from '..'
+import type { PluginFunc } from '..'
 
 declare module '..' {
   interface ConfigTypeMap {
-    arraySupport: [number?, number?, number?, number?, number?, number?, number?]
+    arraySupport: [
+      number?,
+      number?,
+      number?,
+      number?,
+      number?,
+      number?,
+      number?
+    ]
   }
 }
 

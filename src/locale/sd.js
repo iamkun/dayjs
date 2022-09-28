@@ -4,10 +4,16 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'sd',
   weekdays: 'آچر_سومر_اڱارو_اربع_خميس_جمع_ڇنڇر'.split('_'),
-  months: 'جنوري_فيبروري_مارچ_اپريل_مئي_جون_جولاءِ_آگسٽ_سيپٽمبر_آڪٽوبر_نومبر_ڊسمبر'.split('_'),
+  months:
+    'جنوري_فيبروري_مارچ_اپريل_مئي_جون_جولاءِ_آگسٽ_سيپٽمبر_آڪٽوبر_نومبر_ڊسمبر'.split(
+      '_'
+    ),
   weekStart: 1,
   weekdaysShort: 'آچر_سومر_اڱارو_اربع_خميس_جمع_ڇنڇر'.split('_'),
-  monthsShort: 'جنوري_فيبروري_مارچ_اپريل_مئي_جون_جولاءِ_آگسٽ_سيپٽمبر_آڪٽوبر_نومبر_ڊسمبر'.split('_'),
+  monthsShort:
+    'جنوري_فيبروري_مارچ_اپريل_مئي_جون_جولاءِ_آگسٽ_سيپٽمبر_آڪٽوبر_نومبر_ڊسمبر'.split(
+      '_'
+    ),
   weekdaysMin: 'آچر_سومر_اڱارو_اربع_خميس_جمع_ڇنڇر'.split('_'),
   ordinal: (n) => n,
   formats: {
@@ -16,7 +22,7 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd، D MMMM YYYY HH:mm'
+    LLLL: 'dddd، D MMMM YYYY HH:mm',
   },
   relativeTime: {
     future: '%s پوء',
@@ -31,8 +37,8 @@ const locale = {
     M: 'هڪ مهينو',
     MM: '%d مهينا',
     y: 'هڪ سال',
-    yy: '%d سال'
-  }
+    yy: '%d سال',
+  },
 }
 
 dayjs.locale(locale, null, true)

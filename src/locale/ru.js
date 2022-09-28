@@ -1,17 +1,29 @@
 // Russian [ru]
 import dayjs from 'dayjs'
 
-const monthFormat = 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_')
-const monthStandalone = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_')
+const monthFormat =
+  'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split(
+    '_'
+  )
+const monthStandalone =
+  'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
+    '_'
+  )
 
-const monthShortFormat = 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_')
-const monthShortStandalone = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
+const monthShortFormat =
+  'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_')
+const monthShortStandalone =
+  'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
 
 const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
 
 function plural(word, num) {
   const forms = word.split('_')
-  return num % 10 === 1 && num % 100 !== 11 ? forms[0] : (num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) ? forms[1] : forms[2]) // eslint-disable-line
+  return num % 10 === 1 && num % 100 !== 11
+    ? forms[0]
+    : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
+    ? forms[1]
+    : forms[2] // eslint-disable-line
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
   const format = {
@@ -19,7 +31,7 @@ function relativeTimeWithPlural(number, withoutSuffix, key) {
     hh: 'час_часа_часов',
     dd: 'день_дня_дней',
     MM: 'месяц_месяца_месяцев',
-    yy: 'год_года_лет'
+    yy: 'год_года_лет',
   }
   if (key === 'm') {
     return withoutSuffix ? 'минута' : 'минуту'
@@ -47,7 +59,8 @@ monthsShort.f = monthShortFormat
 
 const locale = {
   name: 'ru',
-  weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
+  weekdays:
+    'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
   weekdaysShort: 'вск_пнд_втр_срд_чтв_птн_сбт'.split('_'),
   weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
   months,
@@ -60,7 +73,7 @@ const locale = {
     L: 'DD.MM.YYYY',
     LL: 'D MMMM YYYY г.',
     LLL: 'D MMMM YYYY г., H:mm',
-    LLLL: 'dddd, D MMMM YYYY г., H:mm'
+    LLLL: 'dddd, D MMMM YYYY г., H:mm',
   },
   relativeTime: {
     future: 'через %s',
@@ -75,19 +88,21 @@ const locale = {
     M: 'месяц',
     MM: relativeTimeWithPlural,
     y: 'год',
-    yy: relativeTimeWithPlural
+    yy: relativeTimeWithPlural,
   },
   ordinal: (n) => n,
   meridiem: (hour) => {
     if (hour < 4) {
       return 'ночи'
-    } if (hour < 12) {
+    }
+    if (hour < 12) {
       return 'утра'
-    } if (hour < 17) {
+    }
+    if (hour < 17) {
       return 'дня'
     }
     return 'вечера'
-  }
+  },
 }
 
 dayjs.locale(locale, null, true)

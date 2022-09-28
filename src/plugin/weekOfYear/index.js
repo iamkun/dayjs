@@ -1,6 +1,4 @@
-import {
-  MS, Y, D, W
-} from '../../constant'
+import { D, MS, W, Y } from '../../constant'
 
 export default (o, c, d) => {
   const proto = c.prototype

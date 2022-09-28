@@ -32,7 +32,7 @@ it('RelativeTime: Time from X', () => {
     [1, 'year'], // a year
     [2, 'year'], // 2 year
     [5, 'year'], // 5 year
-    [18, 'month'] // 2 years
+    [18, 'month'], // 2 years
   ]
 
   T.forEach((t) => {
@@ -42,11 +42,10 @@ it('RelativeTime: Time from X', () => {
     const momentDay = moment()
     const dayjsCompare = dayjs().add(t[0], t[1])
     const momentCompare = moment().add(t[0], t[1])
-    expect(dayjsDay.from(dayjsCompare))
-      .toBe(momentDay.from(momentCompare))
-    expect(dayjsDay.to(dayjsCompare))
-      .toBe(momentDay.to(momentCompare))
-    expect(dayjsDay.from(dayjsCompare, true))
-      .toBe(momentDay.from(momentCompare, true))
+    expect(dayjsDay.from(dayjsCompare)).toBe(momentDay.from(momentCompare))
+    expect(dayjsDay.to(dayjsCompare)).toBe(momentDay.to(momentCompare))
+    expect(dayjsDay.from(dayjsCompare, true)).toBe(
+      momentDay.from(momentCompare, true)
+    )
   })
 })

@@ -16,7 +16,7 @@ export default (o, c, d) => {
     M: 'a month',
     MM: '%d months',
     y: 'a year',
-    yy: '%d years'
+    yy: '%d years',
   }
   d.en.relativeTime = relObj
   proto.fromToBase = (input, withoutSuffix, instance, isFrom, postFormat) => {
@@ -32,7 +32,7 @@ export default (o, c, d) => {
       { l: 'M', r: 45 },
       { l: 'MM', r: 10, d: C.M },
       { l: 'y', r: 17 },
-      { l: 'yy', d: C.Y }
+      { l: 'yy', d: C.Y },
     ]
     const Tl = T.length
     let result

@@ -29,16 +29,16 @@ it('Finnish locale relative time in past and future', () => {
     [3, 'M', '3ヶ月後'],
     [-3, 'M', '3ヶ月前'],
     [4, 'y', '4年後'],
-    [-4, 'y', '4年前']
+    [-4, 'y', '4年前'],
   ]
   cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('ja').fromNow())
-      .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('ja').fromNow())
-      .toBe(moment().add(c[0], c[1]).locale('ja').fromNow())
+    expect(dayjs().add(c[0], c[1]).locale('ja').fromNow()).toBe(c[2])
+    expect(dayjs().add(c[0], c[1]).locale('ja').fromNow()).toBe(
+      moment().add(c[0], c[1]).locale('ja').fromNow()
+    )
   })
-  expect(dayjs().add(-10, 'd').locale('ja').fromNow(true))
-    .toBe('10日')
-  expect(dayjs().add(-10, 'd').locale('ja').fromNow(true))
-    .toBe(moment().add(-10, 'd').locale('ja').fromNow(true))
+  expect(dayjs().add(-10, 'd').locale('ja').fromNow(true)).toBe('10日')
+  expect(dayjs().add(-10, 'd').locale('ja').fromNow(true)).toBe(
+    moment().add(-10, 'd').locale('ja').fromNow(true)
+  )
 })

@@ -56,8 +56,12 @@ describe('Parse', () => {
 
   it('parse and convert between timezones', () => {
     const newYork = dayjs.tz('2014-06-01 12:00', NY)
-    expect(newYork.tz('America/Los_Angeles').format()).toBe('2014-06-01T09:00:00-07:00')
-    expect(newYork.tz('Europe/London').format()).toBe('2014-06-01T17:00:00+01:00')
+    expect(newYork.tz('America/Los_Angeles').format()).toBe(
+      '2014-06-01T09:00:00-07:00'
+    )
+    expect(newYork.tz('Europe/London').format()).toBe(
+      '2014-06-01T17:00:00+01:00'
+    )
   })
 
   it('preserve milliseconds', () => {
@@ -82,7 +86,7 @@ describe('Convert', () => {
   })
 
   it('convert to target time', () => {
-    [dayjs, moment].forEach((_) => {
+    ;[dayjs, moment].forEach((_) => {
       const losAngeles = _('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
       expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
       expect(losAngeles.valueOf()).toBe(1401624000000)
@@ -97,7 +101,7 @@ describe('Convert', () => {
   })
 
   it('DST', () => {
-    [dayjs, moment].forEach((_) => {
+    ;[dayjs, moment].forEach((_) => {
       const jun = _('2014-06-01T12:00:00Z')
       const dec = _('2014-12-01T12:00:00Z')
       expect(jun.tz('America/Los_Angeles').format('ha')).toBe('5am')
@@ -114,7 +118,7 @@ describe('Convert', () => {
   })
 
   it('format Z', () => {
-    [dayjs, moment].forEach((_) => {
+    ;[dayjs, moment].forEach((_) => {
       const t = _('2020-08-06T03:48:10.258Z').tz(TOKYO)
       expect(t.format('Z')).toBe('+09:00')
     })
@@ -178,8 +182,8 @@ describe('DST, a time that never existed Fall Back', () => {
   // In the fall, at the end of DST
 
   it('2012-11-04 00:59:59', () => {
-    const s = '2012-11-04 00:59:59';
-    [dayjs, moment].forEach((_) => {
+    const s = '2012-11-04 00:59:59'
+    ;[dayjs, moment].forEach((_) => {
       const d = _.tz(s, NY)
       expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
       expect(d.utcOffset()).toBe(-240)
@@ -187,8 +191,8 @@ describe('DST, a time that never existed Fall Back', () => {
     })
   })
   it('2012-11-04 00:59:59', () => {
-    const s = '2012-11-04 00:59:59';
-    [dayjs, moment].forEach((_) => {
+    const s = '2012-11-04 00:59:59'
+    ;[dayjs, moment].forEach((_) => {
       const d = _.tz(s, NY)
       expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
       expect(d.utcOffset()).toBe(-240)
@@ -201,8 +205,8 @@ describe('DST, a time that never existed Fall Back', () => {
   // and dayjs result it as "2012-11-04T01:59:00-05:00"
 
   it('2012-11-04 02:00:00', () => {
-    const s = '2012-11-04 02:00:00';
-    [dayjs, moment].forEach((_) => {
+    const s = '2012-11-04 02:00:00'
+    ;[dayjs, moment].forEach((_) => {
       const d = _.tz(s, NY)
       expect(d.format()).toBe('2012-11-04T02:00:00-05:00')
       expect(d.utcOffset()).toBe(-300)
@@ -239,8 +243,12 @@ describe('set Default', () => {
     const LOCAL_TZ = dayjs.tz.guess()
     const dateStr = '2014-06-01 12:00'
     dayjs.tz.setDefault()
-    expect(dayjs(dateStr).tz().valueOf()).toBe(dayjs(dateStr).tz(LOCAL_TZ).valueOf())
-    expect(dayjs.tz(dateStr).valueOf()).toBe(dayjs.tz(dateStr, LOCAL_TZ).valueOf())
+    expect(dayjs(dateStr).tz().valueOf()).toBe(
+      dayjs(dateStr).tz(LOCAL_TZ).valueOf()
+    )
+    expect(dayjs.tz(dateStr).valueOf()).toBe(
+      dayjs.tz(dateStr, LOCAL_TZ).valueOf()
+    )
   })
 
   it('change default timezone', () => {
@@ -276,7 +284,9 @@ describe('keepLocalTime', () => {
   const base = dayjs.tz('2013-11-18 11:55', 'America/Toronto')
   it('keepLocalTime', () => {
     expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
-    expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
+    expect(base.tz('Europe/Berlin', true).format()).toBe(
+      '2013-11-18T11:55:00+01:00'
+    )
   })
 })
 
@@ -300,7 +310,9 @@ describe('CustomPraseFormat', () => {
     expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
   })
   it('custom', () => {
-    expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(result)
+    expect(dayjs.tz('10/15/2020 12:30', 'MM/DD/YYYY HH:mm', DEN).unix()).toBe(
+      result
+    )
   })
 })
 

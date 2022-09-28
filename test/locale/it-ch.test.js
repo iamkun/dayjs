@@ -29,11 +29,21 @@ describe('Italian formats in Switzerland', () => {
       const testFormat3 = 'MMMM'
       const testFormat4 = 'MMM'
       const testFormat5 = 'L'
-      expect(dayjsWithLocale.format(testFormat1)).toEqual(momentWithLocale.format(testFormat1))
-      expect(dayjsWithLocale.format(testFormat2)).toEqual(momentWithLocale.format(testFormat2))
-      expect(dayjsWithLocale.format(testFormat3)).toEqual(momentWithLocale.format(testFormat3))
-      expect(dayjsWithLocale.format(testFormat4)).toEqual(momentWithLocale.format(testFormat4))
-      expect(dayjsWithLocale.format(testFormat5)).toEqual(momentWithLocale.format(testFormat5))
+      expect(dayjsWithLocale.format(testFormat1)).toEqual(
+        momentWithLocale.format(testFormat1)
+      )
+      expect(dayjsWithLocale.format(testFormat2)).toEqual(
+        momentWithLocale.format(testFormat2)
+      )
+      expect(dayjsWithLocale.format(testFormat3)).toEqual(
+        momentWithLocale.format(testFormat3)
+      )
+      expect(dayjsWithLocale.format(testFormat4)).toEqual(
+        momentWithLocale.format(testFormat4)
+      )
+      expect(dayjsWithLocale.format(testFormat5)).toEqual(
+        momentWithLocale.format(testFormat5)
+      )
     }
   })
 
@@ -56,14 +66,16 @@ describe('Italian formats in Switzerland', () => {
       [1, 'year'], // a year
       [2, 'year'], // 2 year
       [5, 'year'], // 5 year
-      [18, 'month'] // 2 years
+      [18, 'month'], // 2 years
     ]
 
     T.forEach((t) => {
-      expect(dayjs().from(dayjs().add(t[0], t[1])))
-        .toBe(moment().from(moment().add(t[0], t[1])))
-      expect(dayjs().from(dayjs().add(t[0], t[1]), true))
-        .toBe(moment().from(moment().add(t[0], t[1]), true))
+      expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(
+        moment().from(moment().add(t[0], t[1]))
+      )
+      expect(dayjs().from(dayjs().add(t[0], t[1]), true)).toBe(
+        moment().from(moment().add(t[0], t[1]), true)
+      )
     })
   })
 })

@@ -3,8 +3,14 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'fo',
-  weekdays: 'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split('_'),
-  months: 'januar_februar_mars_apríl_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
+  weekdays:
+    'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split(
+      '_'
+    ),
+  months:
+    'januar_februar_mars_apríl_mai_juni_juli_august_september_oktober_november_desember'.split(
+      '_'
+    ),
   weekStart: 1,
   weekdaysShort: 'sun_mán_týs_mik_hós_frí_ley'.split('_'),
   monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
@@ -16,7 +22,7 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D. MMMM, YYYY HH:mm'
+    LLLL: 'dddd D. MMMM, YYYY HH:mm',
   },
   relativeTime: {
     future: 'um %s',
@@ -31,8 +37,8 @@ const locale = {
     M: 'ein mánaður',
     MM: '%d mánaðir',
     y: 'eitt ár',
-    yy: '%d ár'
-  }
+    yy: '%d ár',
+  },
 }
 
 dayjs.locale(locale, null, true)

@@ -1,5 +1,5 @@
 import { FORMAT_DEFAULT } from '../../constant'
-import { u, englishFormats } from './utils'
+import { englishFormats, u } from './utils'
 
 export default (o, c, d) => {
   const proto = c.prototype

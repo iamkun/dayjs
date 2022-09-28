@@ -47,6 +47,7 @@ dayjs()
 ### Documentação
 
 Você pode encontrar mais detalhes sobre a API e também a documentação completa em [day.js.org](https://day.js.org/).
+
 ### Instalação
 
 ```console
@@ -64,9 +65,7 @@ dayjs('2018-08-08') // converte
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // formata
 
-dayjs()
-  .set('month', 3)
-  .month() // get & set
+dayjs().set('month', 3).month() // get & set
 
 dayjs().add(1, 'year') // manipula
 
@@ -86,9 +85,7 @@ import 'dayjs/locale/es' // carregar sob demanda
 
 dayjs.locale('es') // usar locale espanhol globalmente
 
-dayjs('2018-05-05')
-  .locale('pt-br')
-  .format() // usar locale em português brasileiro em uma instância específica
+dayjs('2018-05-05').locale('pt-br').format() // usar locale em português brasileiro em uma instância específica
 ```
 
 📚[Internacionalização](https://day.js.org/docs/en/i18n/i18n)

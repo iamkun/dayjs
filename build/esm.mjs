@@ -1,33 +1,35 @@
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { rollup } from 'rollup'
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
 import fg from 'fast-glob'
 import Alias from '@rollup/plugin-alias'
 import NodeResolve from '@rollup/plugin-node-resolve'
 
 const pathRoot = resolve(fileURLToPath(import.meta.url), '../..')
-const pathSrc = resolve(pathRoot, 'src');
-(async () => {
+const pathSrc = resolve(pathRoot, 'src')
+;(async () => {
   const entries = await fg(['index.js', 'locale/*.js', 'plugin/*/*.js'], {
     cwd: pathSrc,
-    absolute: true
+    absolute: true,
   })
   const bundle = await rollup({
     input: entries,
     plugins: [
       Alias({
         entries: {
-          dayjs: resolve(pathSrc, 'index.js')
-        }
+          dayjs: resolve(pathSrc, 'index.js'),
+        },
       }),
-      NodeResolve()
-    ]
+      NodeResolve(),
+    ],
   })
   await bundle.write({
     dir: resolve(pathRoot, 'dist'),
     entryFileNames(chunk) {
       if (chunk.facadeModuleId) {
-        const pluginMatches = chunk.facadeModuleId.match(/src\/plugin\/(.+?)\/index\.js/)
+        const pluginMatches = chunk.facadeModuleId.match(
+          /src\/plugin\/(.+?)\/index\.js/
+        )
         if (pluginMatches && pluginMatches[1]) {
           return `plugin/${pluginMatches[1]}.mjs`
         }
@@ -39,6 +41,6 @@ const pathSrc = resolve(pathRoot, 'src');
 
       return '[name].mjs'
     },
-    chunkFileNames: '[name].mjs'
+    chunkFileNames: '[name].mjs',
   })
 })()

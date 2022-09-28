@@ -20,12 +20,8 @@ afterEach(() => {
 
 it('Format Month with locale function', () => {
   for (let i = 0; i <= 7; i += 1) {
-    const dayjsBN = dayjs()
-      .locale('bn-bd')
-      .add(i, 'day')
-    const momentBN = moment()
-      .locale('bn-bd')
-      .add(i, 'day')
+    const dayjsBN = dayjs().locale('bn-bd').add(i, 'day')
+    const momentBN = moment().locale('bn-bd').add(i, 'day')
     const testFormat1 = 'DD MMMM YYYY MMM'
     const testFormat2 = 'MMMM'
     const testFormat3 = 'MMM'
@@ -37,10 +33,8 @@ it('Format Month with locale function', () => {
 
 it('Month short', () => {
   const date = '2021-02-01T05:54:32.005Z'
-  const dayjsBN = dayjs(date)
-    .locale('bn-bd')
-  const momentBN = moment(date)
-    .locale('bn-bd')
+  const dayjsBN = dayjs(date).locale('bn-bd')
+  const momentBN = moment(date).locale('bn-bd')
   const testFormat1 = 'DD MMMM YYYY MMM'
   expect(dayjsBN.format(testFormat1)).toEqual(momentBN.format(testFormat1))
 })
@@ -48,9 +42,7 @@ it('Month short', () => {
 it('Preparse with locale function', () => {
   for (let i = 0; i <= 7; i += 1) {
     dayjs.locale('bn-bd')
-    const momentBN = moment()
-      .locale('bn-bd')
-      .add(i, 'day')
+    const momentBN = moment().locale('bn-bd').add(i, 'day')
     expect(dayjs(momentBN.format()).format()).toEqual(momentBN.format())
   }
 })
@@ -68,14 +60,17 @@ it('RelativeTime: Time from X', () => {
     [2, 'month'], // 2 months
     [10, 'month'], // 10 months
     [18, 'month'], // 2 years
-    [15, 'year'] // 15 years
+    [15, 'year'], // 15 years
   ]
 
   T.forEach((t) => {
     dayjs.locale('bn-bd')
     moment.locale('bn-bd')
-    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(moment().from(moment().add(t[0], t[1])))
-    expect(dayjs().from(dayjs().add(t[0], t[1]), true))
-      .toBe(moment().from(moment().add(t[0], t[1]), true))
+    expect(dayjs().from(dayjs().add(t[0], t[1]))).toBe(
+      moment().from(moment().add(t[0], t[1]))
+    )
+    expect(dayjs().from(dayjs().add(t[0], t[1]), true)).toBe(
+      moment().from(moment().add(t[0], t[1]), true)
+    )
   })
 })

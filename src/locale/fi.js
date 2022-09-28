@@ -14,7 +14,10 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     MM: '%d kuukautta',
     y: 'vuosi',
     yy: '%d vuotta',
-    numbers: 'nolla_yksi_kaksi_kolme_neljä_viisi_kuusi_seitsemän_kahdeksan_yhdeksän'.split('_')
+    numbers:
+      'nolla_yksi_kaksi_kolme_neljä_viisi_kuusi_seitsemän_kahdeksan_yhdeksän'.split(
+        '_'
+      ),
   }
   const future = {
     s: 'muutaman sekunnin',
@@ -28,9 +31,12 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
     MM: '%d kuukauden',
     y: 'vuoden',
     yy: '%d vuoden',
-    numbers: 'nollan_yhden_kahden_kolmen_neljän_viiden_kuuden_seitsemän_kahdeksan_yhdeksän'.split('_')
+    numbers:
+      'nollan_yhden_kahden_kolmen_neljän_viiden_kuuden_seitsemän_kahdeksan_yhdeksän'.split(
+        '_'
+      ),
   }
-  const words = (isFuture && !withoutSuffix) ? future : past
+  const words = isFuture && !withoutSuffix ? future : past
   const result = words[key]
   if (number < 10) {
     return result.replace('%d', words.numbers[number])
@@ -40,11 +46,20 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
 
 const locale = {
   name: 'fi', // Finnish
-  weekdays: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split('_'), // Note weekdays are not capitalized in Finnish
+  weekdays:
+    'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split(
+      '_'
+    ), // Note weekdays are not capitalized in Finnish
   weekdaysShort: 'su_ma_ti_ke_to_pe_la'.split('_'), // There is no short form of weekdays in Finnish except this 2 letter format so it is used for both 'weekdaysShort' and 'weekdaysMin'
   weekdaysMin: 'su_ma_ti_ke_to_pe_la'.split('_'),
-  months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split('_'), // Note month names are not capitalized in Finnish
-  monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split('_'),
+  months:
+    'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split(
+      '_'
+    ), // Note month names are not capitalized in Finnish
+  monthsShort:
+    'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split(
+      '_'
+    ),
   ordinal: (n) => `${n}.`,
   weekStart: 1,
   yearStart: 4,
@@ -61,7 +76,7 @@ const locale = {
     M: relativeTimeFormatter,
     MM: relativeTimeFormatter,
     y: relativeTimeFormatter,
-    yy: relativeTimeFormatter
+    yy: relativeTimeFormatter,
   },
   formats: {
     LT: 'HH.mm',
@@ -73,8 +88,8 @@ const locale = {
     l: 'D.M.YYYY',
     ll: 'D. MMM YYYY',
     lll: 'D. MMM YYYY, [klo] HH.mm',
-    llll: 'ddd, D. MMM YYYY, [klo] HH.mm'
-  }
+    llll: 'ddd, D. MMM YYYY, [klo] HH.mm',
+  },
 }
 
 dayjs.locale(locale, null, true)

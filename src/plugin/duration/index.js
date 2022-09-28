@@ -4,13 +4,14 @@ import {
   MILLISECONDS_A_MINUTE,
   MILLISECONDS_A_SECOND,
   MILLISECONDS_A_WEEK,
-  REGEX_FORMAT
+  REGEX_FORMAT,
 } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
 
-const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+const durationRegex =
+  /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
@@ -20,7 +21,7 @@ const unitToMS = {
   minutes: MILLISECONDS_A_MINUTE,
   seconds: MILLISECONDS_A_SECOND,
   milliseconds: 1,
-  weeks: MILLISECONDS_A_WEEK
+  weeks: MILLISECONDS_A_WEEK,
 }
 
 const isDuration = (d) => d instanceof Duration // eslint-disable-line no-use-before-define
@@ -30,30 +31,32 @@ let $u
 
 // eslint-disable-line no-use-before-define
 // eslint-disable-next-line no-use-before-define
-const wrapper = (input, instance, unit) => new Duration(input, unit, instance.$l)
+const wrapper = (input, instance, unit) =>
+  new Duration(input, unit, instance.$l)
 
 const prettyUnit = (unit) => `${$u.p(unit)}s`
 const isNegative = (number) => number < 0
-const roundNumber = (number) => (isNegative(number) ? Math.ceil(number) : Math.floor(number))
+const roundNumber = (number) =>
+  isNegative(number) ? Math.ceil(number) : Math.floor(number)
 const absolute = (number) => Math.abs(number)
 const getNumberUnitFormat = (number, unit) => {
   if (!number) {
     return {
       negative: false,
-      format: ''
+      format: '',
     }
   }
 
   if (isNegative(number)) {
     return {
       negative: true,
-      format: `${absolute(number)}${unit}`
+      format: `${absolute(number)}${unit}`,
     }
   }
 
   return {
     negative: false,
-    format: `${number}${unit}`
+    format: `${number}${unit}`,
   }
 }
 
@@ -84,15 +87,17 @@ class Duration {
       const d = input.match(durationRegex)
       if (d) {
         const properties = d.slice(2)
-        const numberD = properties.map((value) => (value != null ? Number(value) : 0));
-        [
+        const numberD = properties.map((value) =>
+          value != null ? Number(value) : 0
+        )
+        ;[
           this.$d.years,
           this.$d.months,
           this.$d.weeks,
           this.$d.days,
           this.$d.hours,
           this.$d.minutes,
-          this.$d.seconds
+          this.$d.seconds,
         ] = numberD
         this.calMilliseconds()
         return this
@@ -102,9 +107,10 @@ class Duration {
   }
 
   calMilliseconds() {
-    this.$ms = Object.keys(this.$d).reduce((total, unit) => (
-      total + ((this.$d[unit] || 0) * (unitToMS[unit]))
-    ), 0)
+    this.$ms = Object.keys(this.$d).reduce(
+      (total, unit) => total + (this.$d[unit] || 0) * unitToMS[unit],
+      0
+    )
   }
 
   parseFromMilliseconds() {
@@ -144,12 +150,13 @@ class Duration {
 
     const S = getNumberUnitFormat(seconds, 'S')
 
-    const negativeMode = Y.negative
-      || M.negative
-      || D.negative
-      || H.negative
-      || m.negative
-      || S.negative
+    const negativeMode =
+      Y.negative ||
+      M.negative ||
+      D.negative ||
+      H.negative ||
+      m.negative ||
+      S.negative
 
     const T = H.format || m.format || S.format ? 'T' : ''
     const P = negativeMode ? '-' : ''
@@ -178,13 +185,16 @@ class Duration {
       mm: $u.s(this.$d.minutes, 2, '0'),
       s: this.$d.seconds,
       ss: $u.s(this.$d.seconds, 2, '0'),
-      SSS: $u.s(this.$d.milliseconds, 3, '0')
+      SSS: $u.s(this.$d.milliseconds, 3, '0'),
     }
-    return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
+    return str.replace(
+      REGEX_FORMAT,
+      (match, $1) => $1 || String(matches[match])
+    )
   }
 
   as(unit) {
-    return this.$ms / (unitToMS[prettyUnit(unit)])
+    return this.$ms / unitToMS[prettyUnit(unit)]
   }
 
   get(unit) {
@@ -210,7 +220,7 @@ class Duration {
       another = wrapper(input, this).$ms
     }
 
-    return wrapper(this.$ms + (another * (isSubtract ? -1 : 1)), this)
+    return wrapper(this.$ms + another * (isSubtract ? -1 : 1), this)
   }
 
   subtract(input, unit) {
@@ -228,43 +238,72 @@ class Duration {
   }
 
   humanize(withSuffix) {
-    return $d()
-      .add(this.$ms, 'ms')
-      .locale(this.$l)
-      .fromNow(!withSuffix)
+    return $d().add(this.$ms, 'ms').locale(this.$l).fromNow(!withSuffix)
   }
 
-  milliseconds() { return this.get('milliseconds') }
+  milliseconds() {
+    return this.get('milliseconds')
+  }
 
-  asMilliseconds() { return this.as('milliseconds') }
+  asMilliseconds() {
+    return this.as('milliseconds')
+  }
 
-  seconds() { return this.get('seconds') }
+  seconds() {
+    return this.get('seconds')
+  }
 
-  asSeconds() { return this.as('seconds') }
+  asSeconds() {
+    return this.as('seconds')
+  }
 
-  minutes() { return this.get('minutes') }
+  minutes() {
+    return this.get('minutes')
+  }
 
-  asMinutes() { return this.as('minutes') }
+  asMinutes() {
+    return this.as('minutes')
+  }
 
-  hours() { return this.get('hours') }
+  hours() {
+    return this.get('hours')
+  }
 
-  asHours() { return this.as('hours') }
+  asHours() {
+    return this.as('hours')
+  }
 
-  days() { return this.get('days') }
+  days() {
+    return this.get('days')
+  }
 
-  asDays() { return this.as('days') }
+  asDays() {
+    return this.as('days')
+  }
 
-  weeks() { return this.get('weeks') }
+  weeks() {
+    return this.get('weeks')
+  }
 
-  asWeeks() { return this.as('weeks') }
+  asWeeks() {
+    return this.as('weeks')
+  }
 
-  months() { return this.get('months') }
+  months() {
+    return this.get('months')
+  }
 
-  asMonths() { return this.as('months') }
+  asMonths() {
+    return this.as('months')
+  }
 
-  years() { return this.get('years') }
+  years() {
+    return this.get('years')
+  }
 
-  asYears() { return this.as('years') }
+  asYears() {
+    return this.as('years')
+  }
 }
 
 export default (option, Dayjs, dayjs) => {

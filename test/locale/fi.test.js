@@ -29,16 +29,16 @@ it('Finnish locale relative time in past and future', () => {
     [3, 'M', 'kolmen kuukauden päästä'],
     [-3, 'M', 'kolme kuukautta sitten'],
     [4, 'y', 'neljän vuoden päästä'],
-    [-4, 'y', 'neljä vuotta sitten']
+    [-4, 'y', 'neljä vuotta sitten'],
   ]
   cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('fi').fromNow())
-      .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('fi').fromNow())
-      .toBe(moment().add(c[0], c[1]).locale('fi').fromNow())
+    expect(dayjs().add(c[0], c[1]).locale('fi').fromNow()).toBe(c[2])
+    expect(dayjs().add(c[0], c[1]).locale('fi').fromNow()).toBe(
+      moment().add(c[0], c[1]).locale('fi').fromNow()
+    )
   })
-  expect(dayjs().add(-10, 'd').locale('fi').fromNow(true))
-    .toBe('10 päivää')
-  expect(dayjs().add(-10, 'd').locale('fi').fromNow(true))
-    .toBe(moment().add(-10, 'd').locale('fi').fromNow(true))
+  expect(dayjs().add(-10, 'd').locale('fi').fromNow(true)).toBe('10 päivää')
+  expect(dayjs().add(-10, 'd').locale('fi').fromNow(true)).toBe(
+    moment().add(-10, 'd').locale('fi').fromNow(true)
+  )
 })

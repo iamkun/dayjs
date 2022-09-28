@@ -1,7 +1,10 @@
 export default (o, c, dayjs) => {
   const proto = c.prototype
-  const isObject = (obj) => !(obj instanceof Date) && !(obj instanceof Array)
-        && !proto.$utils().u(obj) && (obj.constructor.name === 'Object')
+  const isObject = (obj) =>
+    !(obj instanceof Date) &&
+    !(obj instanceof Array) &&
+    !proto.$utils().u(obj) &&
+    obj.constructor.name === 'Object'
   const prettyUnit = (u) => {
     const unit = proto.$utils().p(u)
     return unit === 'date' ? 'day' : unit
@@ -17,9 +20,9 @@ export default (o, c, dayjs) => {
       Object.keys(date).forEach((k) => {
         $d[prettyUnit(k)] = date[k]
       })
-      const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.date() : 1)
+      const d = $d.day || (!$d.year && !($d.month >= 0) ? now.date() : 1)
       const y = $d.year || now.year()
-      const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.month() : 0)// eslint-disable-line no-nested-ternary,max-len
+      const M = $d.month >= 0 ? $d.month : !$d.year && !$d.day ? now.month() : 0 // eslint-disable-line no-nested-ternary,max-len
       const h = $d.hour || 0
       const m = $d.minute || 0
       const s = $d.second || 0
@@ -44,6 +47,7 @@ export default (o, c, dayjs) => {
 
   const callObject = function (call, argument, string, offset = 1) {
     const keys = Object.keys(argument)
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let chain = this
     keys.forEach((key) => {
       chain = call.bind(chain)(argument[key] * offset, key)
@@ -54,9 +58,13 @@ export default (o, c, dayjs) => {
   proto.set = function (unit, value) {
     value = value === undefined ? unit : value
     if (unit.constructor.name === 'Object') {
-      return callObject.bind(this)(function (i, s) {
-        return oldSet.bind(this)(s, i)
-      }, value, unit)
+      return callObject.bind(this)(
+        function (i, s) {
+          return oldSet.bind(this)(s, i)
+        },
+        value,
+        unit
+      )
     }
     return oldSet.bind(this)(unit, value)
   }

@@ -19,7 +19,7 @@ const locale = {
     l: 'YYYY/MM/DD',
     ll: 'YYYY年M月D日',
     lll: 'YYYY年M月D日 HH:mm',
-    llll: 'YYYY年M月D日(ddd) HH:mm'
+    llll: 'YYYY年M月D日(ddd) HH:mm',
   },
   meridiem: (hour) => (hour < 12 ? '午前' : '午後'),
   relativeTime: {
@@ -35,8 +35,8 @@ const locale = {
     M: '1ヶ月',
     MM: '%dヶ月',
     y: '1年',
-    yy: '%d年'
-  }
+    yy: '%d年',
+  },
 }
 
 dayjs.locale(locale, null, true)

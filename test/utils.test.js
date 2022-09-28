@@ -34,7 +34,7 @@ it('PadZoneStr', () => {
   expect(padZoneStr(instance)).toBe('+10:00')
   instance.utcOffset = () => 10 * 60 * -1
   expect(padZoneStr(instance)).toBe('-10:00')
-  instance.utcOffset = () => ((-5 * 60) - 30) * -1
+  instance.utcOffset = () => (-5 * 60 - 30) * -1
   expect(padZoneStr(instance)).toBe('+05:30')
 })
 

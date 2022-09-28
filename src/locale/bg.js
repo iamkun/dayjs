@@ -6,7 +6,10 @@ const locale = {
   weekdays: 'неделя_понеделник_вторник_сряда_четвъртък_петък_събота'.split('_'),
   weekdaysShort: 'нед_пон_вто_сря_чет_пет_съб'.split('_'),
   weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
-  months: 'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split('_'),
+  months:
+    'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split(
+      '_'
+    ),
   monthsShort: 'янр_фев_мар_апр_май_юни_юли_авг_сеп_окт_ное_дек'.split('_'),
   weekStart: 1,
   ordinal: (n) => {
@@ -18,9 +21,11 @@ const locale = {
     const lastDigit = n % 10
     if (lastDigit === 1) {
       return `${n}-ви`
-    } if (lastDigit === 2) {
+    }
+    if (lastDigit === 2) {
       return `${n}-ри`
-    } if (lastDigit === 7 || lastDigit === 8) {
+    }
+    if (lastDigit === 7 || lastDigit === 8) {
       return `${n}-ми`
     }
 
@@ -32,7 +37,7 @@ const locale = {
     L: 'D.MM.YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY H:mm',
-    LLLL: 'dddd, D MMMM YYYY H:mm'
+    LLLL: 'dddd, D MMMM YYYY H:mm',
   },
   relativeTime: {
     future: 'след %s',
@@ -47,8 +52,8 @@ const locale = {
     M: 'месец',
     MM: '%d месеца',
     y: 'година',
-    yy: '%d години'
-  }
+    yy: '%d години',
+  },
 }
 
 dayjs.locale(locale, null, true)

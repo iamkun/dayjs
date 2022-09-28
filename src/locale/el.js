@@ -6,7 +6,10 @@ const locale = {
   weekdays: 'Κυριακή_Δευτέρα_Τρίτη_Τετάρτη_Πέμπτη_Παρασκευή_Σάββατο'.split('_'),
   weekdaysShort: 'Κυρ_Δευ_Τρι_Τετ_Πεμ_Παρ_Σαβ'.split('_'),
   weekdaysMin: 'Κυ_Δε_Τρ_Τε_Πε_Πα_Σα'.split('_'),
-  months: 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split('_'),
+  months:
+    'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
+      '_'
+    ),
   monthsShort: 'Ιαν_Φεβ_Μαρ_Απρ_Μαι_Ιουν_Ιουλ_Αυγ_Σεπτ_Οκτ_Νοε_Δεκ'.split('_'),
   ordinal: (n) => n,
   weekStart: 1,
@@ -23,7 +26,7 @@ const locale = {
     M: 'ένα μήνα',
     MM: '%d μήνες',
     y: 'ένα χρόνο',
-    yy: '%d χρόνια'
+    yy: '%d χρόνια',
   },
   formats: {
     LT: 'h:mm A',
@@ -31,8 +34,8 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY h:mm A',
-    LLLL: 'dddd, D MMMM YYYY h:mm A'
-  }
+    LLLL: 'dddd, D MMMM YYYY h:mm A',
+  },
 }
 
 dayjs.locale(locale, null, true)

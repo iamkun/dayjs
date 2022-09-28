@@ -4,10 +4,16 @@ import dayjs from 'dayjs'
 const locale = {
   name: 'ar-ma',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
-  months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split('_'),
+  months:
+    'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+      '_'
+    ),
   weekStart: 6,
   weekdaysShort: 'احد_إثنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
-  monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split('_'),
+  monthsShort:
+    'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+      '_'
+    ),
   weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
   ordinal: (n) => n,
   formats: {
@@ -16,7 +22,7 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
+    LLLL: 'dddd D MMMM YYYY HH:mm',
   },
   meridiem: (hour) => (hour > 12 ? 'م' : 'ص'),
   relativeTime: {
@@ -32,8 +38,8 @@ const locale = {
     M: 'شهر',
     MM: '%d أشهر',
     y: 'سنة',
-    yy: '%d سنوات'
-  }
+    yy: '%d سنوات',
+  },
 }
 
 dayjs.locale(locale, null, true)

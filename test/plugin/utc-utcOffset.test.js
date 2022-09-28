@@ -14,13 +14,19 @@ afterEach(() => {
 })
 
 it('Set utcOffset -> Get utcOffset', () => {
-  expect(dayjs().utcOffset(540).utcOffset()).toBe(moment().utcOffset(540).utcOffset())
+  expect(dayjs().utcOffset(540).utcOffset()).toBe(
+    moment().utcOffset(540).utcOffset()
+  )
   expect(dayjs().utcOffset(540).format()).toBe(moment().utcOffset(540).format())
   expect(dayjs().utcOffset(60).format()).toBe(moment().utcOffset(60).format())
   expect(dayjs().utcOffset(8).format()).toBe(moment().utcOffset(8).format())
 
-  expect(dayjs().utcOffset(-540).utcOffset()).toBe(moment().utcOffset(-540).utcOffset())
-  expect(dayjs().utcOffset(-540).format()).toBe(moment().utcOffset(-540).format())
+  expect(dayjs().utcOffset(-540).utcOffset()).toBe(
+    moment().utcOffset(-540).utcOffset()
+  )
+  expect(dayjs().utcOffset(-540).format()).toBe(
+    moment().utcOffset(-540).format()
+  )
 
   expect(dayjs().utcOffset(-60).format()).toBe(moment().utcOffset(-60).format())
   expect(dayjs().utcOffset(-8).format()).toBe(moment().utcOffset(-8).format())
@@ -60,19 +66,25 @@ it('utcOffset(0) enable utc mode', () => {
 
 it('utcOffset keepLocalTime', () => {
   const d = '2000-01-01T06:00:00Z'
-  expect(dayjs.utc(d).utcOffset(5, true).format())
-    .toBe(moment.utc(d).utcOffset(5, true).format())
-  expect(dayjs.utc(d).utcOffset(0, true).format())
-    .toBe(moment.utc(d).utcOffset(0, true).format())
-  expect(dayjs.utc(d).utcOffset(-5, true).format())
-    .toBe(moment.utc(d).utcOffset(-5, true).format())
+  expect(dayjs.utc(d).utcOffset(5, true).format()).toBe(
+    moment.utc(d).utcOffset(5, true).format()
+  )
+  expect(dayjs.utc(d).utcOffset(0, true).format()).toBe(
+    moment.utc(d).utcOffset(0, true).format()
+  )
+  expect(dayjs.utc(d).utcOffset(-5, true).format()).toBe(
+    moment.utc(d).utcOffset(-5, true).format()
+  )
   const d2 = '2016-01-01 00:00:00'
-  expect(dayjs(d2).utcOffset(0, true).format())
-    .toBe(moment(d2).utcOffset(0, true).format())
-  expect(dayjs(d2).utcOffset(-5, true).format())
-    .toBe(moment(d2).utcOffset(-5, true).format())
-  expect(dayjs(d2).utcOffset(5, true).format())
-    .toBe(moment(d2).utcOffset(5, true).format())
+  expect(dayjs(d2).utcOffset(0, true).format()).toBe(
+    moment(d2).utcOffset(0, true).format()
+  )
+  expect(dayjs(d2).utcOffset(-5, true).format()).toBe(
+    moment(d2).utcOffset(-5, true).format()
+  )
+  expect(dayjs(d2).utcOffset(5, true).format()).toBe(
+    moment(d2).utcOffset(5, true).format()
+  )
 })
 
 test('UTC mode', () => {
@@ -119,33 +131,27 @@ test('keep hours when adding month in offset mode', () => {
 
 test('utc costrustor', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0).getTime()
-  expect(moment(d).utc().utcOffset(480).valueOf())
-    .toBe(dayjs(d).utc().utcOffset(480).valueOf())
+  expect(moment(d).utc().utcOffset(480).valueOf()).toBe(
+    dayjs(d).utc().utcOffset(480).valueOf()
+  )
 
-  expect(moment(d).utc().local()
-    .utcOffset(480)
-    .valueOf())
-    .toBe(dayjs(d).utc().local()
-      .utcOffset(480)
-      .valueOf())
+  expect(moment(d).utc().local().utcOffset(480).valueOf()).toBe(
+    dayjs(d).utc().local().utcOffset(480).valueOf()
+  )
 })
 
 test('utc startOf', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0, 0).getTime()
-  expect(moment(d).utc().utcOffset(480).endOf('day')
-    .valueOf())
-    .toBe(dayjs(d).utc().utcOffset(480).endOf('day')
-      .valueOf())
+  expect(moment(d).utc().utcOffset(480).endOf('day').valueOf()).toBe(
+    dayjs(d).utc().utcOffset(480).endOf('day').valueOf()
+  )
 
-  expect(moment(d).utc().utcOffset(480).endOf('day')
-    .valueOf())
-    .toBe(dayjs(d).utc().utcOffset(480).endOf('day')
-      .valueOf())
+  expect(moment(d).utc().utcOffset(480).endOf('day').valueOf()).toBe(
+    dayjs(d).utc().utcOffset(480).endOf('day').valueOf()
+  )
   const d2 = '2017-07-20T11:00:00+00:00'
   const d2d = dayjs(d2).utcOffset(-12).startOf('day').valueOf()
   const d2m = moment(d2).utcOffset(-12).startOf('day').valueOf()
-  expect(d2d)
-    .toBe(d2m)
-  expect(d2d)
-    .toBe(1500465600000)
+  expect(d2d).toBe(d2m)
+  expect(d2d).toBe(1500465600000)
 })

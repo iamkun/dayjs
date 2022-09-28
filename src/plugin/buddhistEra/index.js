@@ -1,6 +1,7 @@
 import { FORMAT_DEFAULT } from '../../constant'
 
-export default (o, c) => { // locale needed later
+export default (o, c) => {
+  // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   // extend en locale here

@@ -3,8 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'mt',
-  weekdays: 'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split('_'),
-  months: 'Jannar_Frar_Marzu_April_Mejju_Ġunju_Lulju_Awwissu_Settembru_Ottubru_Novembru_Diċembru'.split('_'),
+  weekdays:
+    'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split('_'),
+  months:
+    'Jannar_Frar_Marzu_April_Mejju_Ġunju_Lulju_Awwissu_Settembru_Ottubru_Novembru_Diċembru'.split(
+      '_'
+    ),
   weekStart: 1,
   weekdaysShort: 'Ħad_Tne_Tli_Erb_Ħam_Ġim_Sib'.split('_'),
   monthsShort: 'Jan_Fra_Mar_Apr_Mej_Ġun_Lul_Aww_Set_Ott_Nov_Diċ'.split('_'),
@@ -16,7 +20,7 @@ const locale = {
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd, D MMMM YYYY HH:mm'
+    LLLL: 'dddd, D MMMM YYYY HH:mm',
   },
   relativeTime: {
     future: 'f’ %s',
@@ -31,8 +35,8 @@ const locale = {
     M: 'xahar',
     MM: '%d xhur',
     y: 'sena',
-    yy: '%d sni'
-  }
+    yy: '%d sni',
+  },
 }
 
 dayjs.locale(locale, null, true)

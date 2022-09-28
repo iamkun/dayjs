@@ -26,26 +26,27 @@ it('get QuarterOfYear', () => {
 
 it('set QuarterOfYear', () => {
   const d1 = '2013-01-01T00:00:00.000'
-  expect(dayjs(d1).quarter(2).format())
-    .toBe(moment(d1).quarter(2).format())
+  expect(dayjs(d1).quarter(2).format()).toBe(moment(d1).quarter(2).format())
   const d2 = '2013-02-05T05:06:07.000'
-  expect(dayjs(d2).quarter(2).format())
-    .toBe(moment(d2).quarter(2).format())
+  expect(dayjs(d2).quarter(2).format()).toBe(moment(d2).quarter(2).format())
   const d3 = '2018-11-25T05:06:07.000'
-  expect(dayjs(d3).quarter(3).format())
-    .toBe(moment(d3).quarter(3).format())
+  expect(dayjs(d3).quarter(3).format()).toBe(moment(d3).quarter(3).format())
 })
 
 it('add subtract quarter', () => {
-  expect(dayjs().add(2, 'quarter').format())
-    .toBe(moment().add(2, 'quarter').format())
-  expect(dayjs().subtract(2, 'quarter').format())
-    .toBe(moment().subtract(2, 'quarter').format())
+  expect(dayjs().add(2, 'quarter').format()).toBe(
+    moment().add(2, 'quarter').format()
+  )
+  expect(dayjs().subtract(2, 'quarter').format()).toBe(
+    moment().subtract(2, 'quarter').format()
+  )
 })
 
 it('startOf endOf quarter', () => {
-  expect(dayjs().startOf('quarter').format())
-    .toBe(moment().startOf('quarter').format())
-  expect(dayjs().endOf('quarter').format())
-    .toBe(moment().endOf('quarter').format())
+  expect(dayjs().startOf('quarter').format()).toBe(
+    moment().startOf('quarter').format()
+  )
+  expect(dayjs().endOf('quarter').format()).toBe(
+    moment().endOf('quarter').format()
+  )
 })

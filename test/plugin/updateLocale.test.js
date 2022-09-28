@@ -17,13 +17,14 @@ afterEach(() => {
 })
 
 const newLocale = {
-  months: new Array(12).fill('testMonth'),
-  formats: { // formats for dayjs and longDateFormat for momentjs
-    LT: '[testFormat]'
+  months: Array.from({ length: 12 }).fill('testMonth'),
+  formats: {
+    // formats for dayjs and longDateFormat for momentjs
+    LT: '[testFormat]',
   },
   longDateFormat: {
-    LT: '[testFormat]'
-  }
+    LT: '[testFormat]',
+  },
 }
 
 const formatString = 'MMMM LT'
@@ -31,10 +32,8 @@ const formatString = 'MMMM LT'
 describe('Update locale', () => {
   it('Invalid argument', () => {
     const result = dayjs.updateLocale('InvalidLocaleName', {})
-    expect(result)
-      .toEqual(undefined)
-    expect(dayjs().format(formatString))
-      .toEqual(moment().format(formatString))
+    expect(result).toEqual(undefined)
+    expect(dayjs().format(formatString)).toEqual(moment().format(formatString))
   })
 
   it('Return value', () => {
@@ -50,11 +49,9 @@ describe('Update locale', () => {
     moment.updateLocale('en', newLocale)
     dayjs.updateLocale('en', newLocale)
 
-    expect(dayjs().format(formatString))
-      .toEqual('testMonth testFormat')
+    expect(dayjs().format(formatString)).toEqual('testMonth testFormat')
 
-    expect(dayjs().format(formatString))
-      .toEqual(moment().format(formatString))
+    expect(dayjs().format(formatString)).toEqual(moment().format(formatString))
   })
 
   it('Update imported zh-cn locale', () => {
@@ -62,11 +59,9 @@ describe('Update locale', () => {
     dayjs.updateLocale('zh-cn', newLocale)
     dayjs.locale('zh-cn')
     moment.locale('zh-cn')
-    expect(dayjs().format(formatString))
-      .toEqual('testMonth testFormat')
+    expect(dayjs().format(formatString)).toEqual('testMonth testFormat')
 
-    expect(dayjs().format(formatString))
-      .toEqual(moment().format(formatString))
+    expect(dayjs().format(formatString)).toEqual(moment().format(formatString))
   })
 
   it('Update invalid date string', () => {

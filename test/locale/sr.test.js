@@ -42,7 +42,7 @@ it('Serbian locale relative time in past and future', () => {
     [-1, 'y', 'pre jedne godine', 'jedna godina'],
     [4, 'y', 'za 4 godine', '4 godine'],
     [5, 'y', 'za 5 godina', '5 godina'],
-    [21, 'y', 'za 21 godinu', '21 godina']
+    [21, 'y', 'za 21 godinu', '21 godina'],
   ]
 
   cases.forEach((c) => {

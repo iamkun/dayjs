@@ -10,8 +10,10 @@ function offsetFromString(value = '') {
     return null
   }
 
-  const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT) || ['-', 0, 0]
-  const totalOffsetInMinutes = (+hoursOffset * 60) + (+minutesOffset)
+  const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(
+    REGEX_OFFSET_HOURS_MINUTES_FORMAT
+  ) || ['-', 0, 0]
+  const totalOffsetInMinutes = +hoursOffset * 60 + +minutesOffset
 
   if (totalOffsetInMinutes === 0) {
     return 0
@@ -86,6 +88,7 @@ export default (option, Dayjs, dayjs) => {
       }
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let ins = this
     if (keepLocalTime) {
       ins.$offset = offset
@@ -94,7 +97,8 @@ export default (option, Dayjs, dayjs) => {
     }
     if (input !== 0) {
       const localTimezoneOffset = this.$u
-        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+        ? this.toDate().getTimezoneOffset()
+        : -1 * this.utcOffset()
       ins = this.local().add(offset + localTimezoneOffset, MIN)
       ins.$offset = offset
       ins.$x.$localOffset = localTimezoneOffset
@@ -113,8 +117,9 @@ export default (option, Dayjs, dayjs) => {
 
   proto.valueOf = function () {
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset()) : 0
-    return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
+      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset())
+      : 0
+    return this.$d.valueOf() - addedOffset * MILLISECONDS_A_MINUTE
   }
 
   proto.isUTC = function () {

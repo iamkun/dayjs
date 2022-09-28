@@ -25,76 +25,78 @@ it('ReferenceTime', () => {
     {
       name: 'nextDay',
       date: '2015-01-14T11:23:55.000Z',
-      result: 'Tomorrow'
+      result: 'Tomorrow',
     },
     {
       name: 'sameDay',
       date: '2015-01-15T11:23:55.000Z',
-      result: 'Today'
+      result: 'Today',
     },
     {
       name: 'nextWeek',
       date: '2015-01-09T11:23:55.000Z',
-      result: 'Thursday'
+      result: 'Thursday',
     },
     {
       name: 'lastDay',
       date: '2015-01-16T11:23:55.000Z',
-      result: 'Yesterday'
+      result: 'Yesterday',
     },
     {
       name: 'lastWeek',
       date: '2015-01-21T11:23:55.000Z',
-      result: 'Last'
+      result: 'Last',
     },
     {
       name: 'sameElse',
       date: '2015-01-01T11:23:55.000Z',
-      result: '01/15/2015'
+      result: '01/15/2015',
     },
     {
       name: 'sameElse',
       date: '2015-02-21T11:23:55.000Z',
-      result: '01/15/2015'
-    }
+      result: '01/15/2015',
+    },
   ]
   dates.forEach((d) => {
     const dayjsResult = dayjs(now).calendar(d.date)
     const momentjsResult = moment(now).calendar(d.date)
-    expect(dayjsResult)
-      .toEqual(momentjsResult)
-    expect(dayjsResult.indexOf(d.result) > -1)
-      .toBe(true)
+    expect(dayjsResult).toEqual(momentjsResult)
+    expect(dayjsResult.includes(d.result)).toBe(true)
   })
 })
 
 it('Custom format', () => {
   const format = {
     sameDay: '[sameDay]',
-    sameElse: '[sameElse]'
+    sameElse: '[sameElse]',
   }
-  expect(dayjs().calendar(null, format)).toEqual(moment().calendar(null, format))
+  expect(dayjs().calendar(null, format)).toEqual(
+    moment().calendar(null, format)
+  )
   const now = '2015-01-15T14:21:22.000Z'
   const nextDayWithoutFormat = '2015-01-14T11:23:55.000Z'
-  expect(dayjs(now).calendar(nextDayWithoutFormat, format))
-    .toEqual(moment(now).calendar(nextDayWithoutFormat, format))
+  expect(dayjs(now).calendar(nextDayWithoutFormat, format)).toEqual(
+    moment(now).calendar(nextDayWithoutFormat, format)
+  )
 })
 
 it('Custom callback', () => {
   const callbacks = {
     sameDay: jest.fn(),
-    sameElse: jest.fn()
+    sameElse: jest.fn(),
   }
   const now = '2015-01-15T14:21:22.000Z'
   const nextDayWithoutFormat = '2015-01-14T11:23:55.000Z'
-  expect(dayjs(now).calendar(nextDayWithoutFormat, callbacks))
-    .toEqual(moment(now).calendar(nextDayWithoutFormat, callbacks))
+  expect(dayjs(now).calendar(nextDayWithoutFormat, callbacks)).toEqual(
+    moment(now).calendar(nextDayWithoutFormat, callbacks)
+  )
 })
 
 it('Calls callback', () => {
   const callbacks = {
     sameDay: jest.fn(),
-    sameElse: jest.fn()
+    sameElse: jest.fn(),
   }
   dayjs().calendar(null, callbacks)
   expect(callbacks.sameElse).not.toBeCalled()
@@ -103,13 +105,13 @@ it('Calls callback', () => {
 
 it('callback is a function with the scope of the current moment', () => {
   const callbacks = {
-    sameDay: jest.fn()
+    sameDay: jest.fn(),
   }
   expect(dayjs().calendar(null, callbacks)).toEqual(callbacks.sameDay())
   const callbacks2 = {
     sameDay: function cb() {
       return this
-    }
+    },
   }
   const result = dayjs().calendar(null, callbacks2)
   expect(result.format).not.toBeUndefined()
@@ -118,7 +120,7 @@ it('callback is a function with the scope of the current moment', () => {
 
 it('callback is a function and first argument a moment that depicts now', () => {
   const callbacks = {
-    sameDay: jest.fn()
+    sameDay: jest.fn(),
   }
   const now = dayjs()
   dayjs(now).calendar(now, callbacks)
@@ -133,9 +135,8 @@ it('set global calendar in locale file', () => {
     nextWeek: '[下]ddddHH:mm',
     lastDay: '[昨天]HH:mm',
     lastWeek: '[上]ddddHH:mm',
-    sameElse: 'YYYY/MM/DD'
+    sameElse: 'YYYY/MM/DD',
   }
   dayjs.locale(zhCn)
-  expect(dayjs(now).calendar())
-    .toEqual(moment(now).locale('zh-cn').calendar())
+  expect(dayjs(now).calendar()).toEqual(moment(now).locale('zh-cn').calendar())
 })

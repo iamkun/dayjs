@@ -2,11 +2,11 @@ import MockDate from 'mockdate'
 import dayjs from '../src'
 
 const testPlugin = (o, c, d) => {
-  c.prototype.newApi = () => ('hello world')
-  d.newFunc = () => ('hi world')
+  c.prototype.newApi = () => 'hello world'
+  d.newFunc = () => 'hi world'
 }
 const testPluginWithConfig = (o, c) => {
-  c.prototype.newApiWithConfig = () => (`hello world ${o || ''}`)
+  c.prototype.newApiWithConfig = () => `hello world ${o || ''}`
 }
 
 dayjs.extend(testPlugin)

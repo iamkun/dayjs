@@ -190,14 +190,14 @@ it('isAfter isBefore isSame', () => {
   expect(d.isAfter()).toBe(false)
 })
 
-it('DayOfYear get day won\'t change instance', () => {
+it("DayOfYear get day won't change instance", () => {
   const d = dayjs()
   const format = d.format()
   d.dayOfYear()
   expect(d.format()).toBe(format)
 })
 
-it('WeekOfYear get week won\'t change instance', () => {
+it("WeekOfYear get week won't change instance", () => {
   const d = dayjs()
   const format = d.format()
   d.week()

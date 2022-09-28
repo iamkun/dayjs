@@ -12,7 +12,7 @@ export default (o, c, d) => {
     return yearFirstDay.add(addDiffDays, D)
   }
 
-  const getCurrentWeekThursday = (ins) => ins.add((4 - ins.isoWeekday()), D)
+  const getCurrentWeekThursday = (ins) => ins.add(4 - ins.isoWeekday(), D)
 
   const proto = c.prototype
 
@@ -43,8 +43,9 @@ export default (o, c, d) => {
     const isStartOf = !utils.u(startOf) ? startOf : true
     const unit = utils.p(units)
     if (unit === isoWeekPrettyUnit) {
-      return isStartOf ? this.date(this.date() - (this.isoWeekday() - 1)).startOf('day')
-        : this.date((this.date() - 1 - (this.isoWeekday() - 1)) + 7).endOf('day')
+      return isStartOf
+        ? this.date(this.date() - (this.isoWeekday() - 1)).startOf('day')
+        : this.date(this.date() - 1 - (this.isoWeekday() - 1) + 7).endOf('day')
     }
     return oldStartOf.bind(this)(units, startOf)
   }

@@ -1,7 +1,10 @@
 // Arabic [ar]
 import dayjs from 'dayjs'
 
-const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
+const months =
+  'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+    '_'
+  )
 const symbolMap = {
   1: '١',
   2: '٢',
@@ -12,7 +15,7 @@ const symbolMap = {
   7: '٧',
   8: '٨',
   9: '٩',
-  0: '٠'
+  0: '٠',
 }
 
 const numberMap = {
@@ -25,7 +28,7 @@ const numberMap = {
   '٧': '7',
   '٨': '8',
   '٩': '9',
-  '٠': '0'
+  '٠': '0',
 }
 
 const locale = {
@@ -49,20 +52,15 @@ const locale = {
     M: 'شهر واحد',
     MM: '%d أشهر',
     y: 'عام واحد',
-    yy: '%d أعوام'
+    yy: '%d أعوام',
   },
   preparse(string) {
     return string
-      .replace(
-        /[١٢٣٤٥٦٧٨٩٠]/g,
-        (match) => numberMap[match]
-      )
+      .replace(/[١٢٣٤٥٦٧٨٩٠]/g, (match) => numberMap[match])
       .replace(/،/g, ',')
   },
   postformat(string) {
-    return string
-      .replace(/\d/g, (match) => symbolMap[match])
-      .replace(/,/g, '،')
+    return string.replace(/\d/g, (match) => symbolMap[match]).replace(/,/g, '،')
   },
   ordinal: (n) => n,
   formats: {
@@ -71,8 +69,8 @@ const locale = {
     L: 'D/‏M/‏YYYY',
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd D MMMM YYYY HH:mm'
-  }
+    LLLL: 'dddd D MMMM YYYY HH:mm',
+  },
 }
 
 dayjs.locale(locale, null, true)

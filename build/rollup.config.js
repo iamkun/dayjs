@@ -6,24 +6,22 @@ module.exports = (config) => {
   return {
     input: {
       input,
-      external: [
-        'dayjs'
-      ],
+      external: ['dayjs'],
       plugins: [
         babel({
-          exclude: 'node_modules/**'
+          exclude: 'node_modules/**',
         }),
-        terser()
-      ]
+        terser(),
+      ],
     },
     output: {
       file: fileName,
       format: 'umd',
       name: name || 'dayjs',
       globals: {
-        dayjs: 'dayjs'
+        dayjs: 'dayjs',
       },
-      compact: true
-    }
+      compact: true,
+    },
   }
 }
