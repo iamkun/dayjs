@@ -117,7 +117,7 @@ test('keep hours when adding month in offset mode', () => {
   expect(dm8.add(-2, 'month').hour()).toBe(6)
 })
 
-test('utc costrustor', () => {
+test('utc costructor', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0).getTime()
   expect(moment(d).utc().utcOffset(480).valueOf())
     .toBe(dayjs(d).utc().utcOffset(480).valueOf())
