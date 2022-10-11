@@ -89,6 +89,14 @@ export default (option, Dayjs, dayjs) => {
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     let ins = this.clone()
     if (keepLocalTime) {
+      if (ins.$u) {
+        // Make ins.add set the cached values without utc mode;
+        // this fixes issue with wrong output of format() after
+        // using .utcOffset(offset, true)
+        ins.$u = false
+        const tzOffset = ins.$d.getTimezoneOffset()
+        ins = ins.add(tzOffset, 'minute')
+      }
       ins.$offset = offset
       ins.$u = input === 0
       return ins
