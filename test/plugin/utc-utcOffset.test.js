@@ -13,7 +13,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-it('Set utcOffset -> Get utcOffset', () => {
+test('Set utcOffset -> Get utcOffset', () => {
   expect(dayjs().utcOffset(540).utcOffset()).toBe(moment().utcOffset(540).utcOffset())
   expect(dayjs().utcOffset(540).format()).toBe(moment().utcOffset(540).format())
   expect(dayjs().utcOffset(60).format()).toBe(moment().utcOffset(60).format())
@@ -26,7 +26,7 @@ it('Set utcOffset -> Get utcOffset', () => {
   expect(dayjs().utcOffset(-8).format()).toBe(moment().utcOffset(-8).format())
 })
 
-it('valueOf, toDate, toString, toISOString should be the same as original', () => {
+test('valueOf, toDate, toString, toISOString should be the same as original', () => {
   const d = dayjs()
   const du = dayjs().utcOffset(9)
   const mu = moment().utcOffset(9)
@@ -38,7 +38,7 @@ it('valueOf, toDate, toString, toISOString should be the same as original', () =
   expect(d.toString()).toEqual(d.toString())
 })
 
-it('clone', () => {
+test('clone', () => {
   const du = dayjs().utcOffset(9)
   const duClone = du.clone()
   expect(du.valueOf()).toBe(duClone.valueOf())
@@ -46,14 +46,14 @@ it('clone', () => {
   expect(du.utcOffset()).toBe(duClone.utcOffset())
 })
 
-it('immutable', () => {
+test('immutable', () => {
   const d = dayjs()
   const du = d.utcOffset(d.utcOffset() + 1)
   expect(d.utcOffset()).not.toBe(du.utcOffset())
   expect(d.format()).not.toBe(du.format())
 })
 
-it('utcOffset(0) enable utc mode', () => {
+test('utcOffset(0) enable utc mode', () => {
   expect(dayjs().utcOffset(0).format()).toBe(moment().utcOffset(0).format())
   expect(dayjs().utcOffset(0).isUTC()).toBeTruthy()
 })
