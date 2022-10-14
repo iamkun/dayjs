@@ -10,7 +10,7 @@ const padZoneStr = (instance) => {
   const negMinutes = -instance.utcOffset()
   const minutes = Math.abs(negMinutes)
   const hourOffset = Math.floor(minutes / 60)
-  const minuteOffset = minutes % 60
+  const minuteOffset = Math.trunc(minutes % 60) // If timezone offset contains seconds
   return `${negMinutes <= 0 ? '+' : '-'}${padStart(hourOffset, 2, '0')}:${padStart(minuteOffset, 2, '0')}`
 }
 
