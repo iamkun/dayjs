@@ -20,7 +20,7 @@
   ],
   "size-limit": [
     {
-      "limit": "2.99 KB",
+      "limit": "2.999 KB",
       "path": "dayjs.min.js"
     }
   ],
@@ -72,6 +72,7 @@
     "@babel/core": "^7.19.3",
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.4",
+    "@size-limit/preset-small-lib": "^8.1.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^29.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -95,7 +96,6 @@
     "rollup": "^2.45.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-terser": "^7.0.2",
-    "size-limit": "^0.18.0",
     "typescript": "^4.8.4"
   }
 }
