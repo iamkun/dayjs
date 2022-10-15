@@ -24,7 +24,7 @@ const locale = {
     y: 'бір жыл',
     yy: '%d жыл'
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

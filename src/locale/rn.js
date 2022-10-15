@@ -9,7 +9,7 @@ const locale = {
   months: 'Nzero_Ruhuhuma_Ntwarante_Ndamukiza_Rusama_Ruhenshi_Mukakaro_Myandagaro_Nyakanga_Gitugutu_Munyonyo_Kigarama'.split('_'),
   monthsShort: 'Nzer_Ruhuh_Ntwar_Ndam_Rus_Ruhen_Muk_Myand_Nyak_Git_Muny_Kig'.split('_'),
   weekStart: 1,
-  ordinal: n => n,
+  ordinal: (n) => n,
   relativeTime: {
     future: 'mu %s',
     past: '%s',

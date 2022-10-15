@@ -12,4 +12,3 @@ export default (o, c, d) => {
     return oldFormat.call(this, result)
   }
 }
-

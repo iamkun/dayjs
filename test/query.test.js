@@ -9,7 +9,6 @@ afterEach(() => {
   MockDate.reset()
 })
 
-
 describe('Is Before Is After Is Same', () => {
   it('Compare to dayjs object', () => {
     const dayA = dayjs()

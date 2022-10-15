@@ -1,9 +1,9 @@
 const rollup = require('rollup')
-const configFactory = require('./rollup.config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
 const { ncp } = require('ncp')
+const configFactory = require('./rollup.config')
 
 const { promisify } = util
 
@@ -12,7 +12,7 @@ const promisifyReadFile = promisify(fs.readFile)
 const promisifyWriteFile = promisify(fs.writeFile)
 
 const localeNameRegex = /\/\/ (.*) \[/
-const formatName = n => n.replace(/\.js/, '').replace('-', '_')
+const formatName = (n) => n.replace(/\.js/, '').replace('-', '_')
 
 const localePath = path.join(__dirname, '../src/locale')
 

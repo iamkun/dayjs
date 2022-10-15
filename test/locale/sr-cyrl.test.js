@@ -51,4 +51,3 @@ it('Serbian cyrillic locale relative time in past and future', () => {
     // TODO: compare to momentjs once logic and grammar are fixed there
   })
 })
-

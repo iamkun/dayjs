@@ -20,7 +20,6 @@ describe('Italian formats in Switzerland', () => {
     MockDate.reset()
   })
 
-
   it('Format month with locale function', () => {
     for (let i = 0; i <= 7; i += 1) {
       const dayjsWithLocale = dayjs().add(i, 'day')
@@ -59,7 +58,6 @@ describe('Italian formats in Switzerland', () => {
       [5, 'year'], // 5 year
       [18, 'month'] // 2 years
     ]
-
 
     T.forEach((t) => {
       expect(dayjs().from(dayjs().add(t[0], t[1])))

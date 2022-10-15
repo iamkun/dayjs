@@ -159,7 +159,6 @@ test('is same with invalid moments', () => {
   expect(dayjs('2018-01-01').isSame(dayjs(null))).toBe(false, 'invalid moments are not considered equal')
 })
 
-
 // isAfter()
 
 test('is after year', () => {
@@ -308,7 +307,6 @@ test('is after millisecond', () => {
   expect(+m).toEqual(+mCopy, 'isAfter millisecond should not change moment')
 })
 
-
 test('is after without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
@@ -347,7 +345,7 @@ test('is after invalid', () => {
 
 // isBefore()
 
-test('is after without units', () => {
+test('is before without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2012, 3, 2, 3, 5, 5, 10)))).toBe(true, 'year is later')

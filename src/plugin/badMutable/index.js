@@ -50,4 +50,3 @@ export default (o, c) => { // locale needed later
     return oldIsAfter.bind(this.clone())(that, units)
   }
 }
-

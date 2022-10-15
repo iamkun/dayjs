@@ -4,8 +4,7 @@ export default (option, dayjsClass) => {
   dayjsClass.prototype.parse = function (cfg) {
     if (typeof cfg.date === 'string') {
       const locale = this.$locale()
-      cfg.date =
-        locale && locale.preparse ? locale.preparse(cfg.date) : cfg.date
+      cfg.date = locale && locale.preparse ? locale.preparse(cfg.date) : cfg.date
     }
     // original parse result
     return oldParse.bind(this)(cfg)

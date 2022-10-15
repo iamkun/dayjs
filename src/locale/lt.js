@@ -22,7 +22,7 @@ const locale = {
   weekdaysMin: 's_p_a_t_k_pn_š'.split('_'),
   months,
   monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   relativeTime: {
     future: 'už %s',

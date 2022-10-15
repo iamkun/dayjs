@@ -150,8 +150,8 @@ it('Past and Future keys should support function for additional processing', () 
   dayjs.extend(updateLocale)
   dayjs.updateLocale('en', {
     relativeTime: {
-      future: input => `${input} modified`,
-      past: input => `${input} modified`,
+      future: (input) => `${input} modified`,
+      past: (input) => `${input} modified`,
       s: 'just now',
       m: ' 1 min',
       mm: '%d min',
@@ -165,7 +165,6 @@ it('Past and Future keys should support function for additional processing', () 
       yy: '%d years'
     }
   })
-
 
   const past = Date.now() - 1000
   expect(dayjs(past).fromNow()).toEqual(' 1 min modified')

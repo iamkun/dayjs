@@ -41,7 +41,6 @@ describe('StartOf EndOf', () => {
   })
 })
 
-
 it('Add Time days', () => {
   expect(dayjs().add(1, 'ms').valueOf()).toBe(moment().add(1, 'ms').valueOf())
   expect(dayjs().add(1, 'milliseconds').valueOf()).toBe(moment().add(1, 'milliseconds').valueOf())

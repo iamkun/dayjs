@@ -52,15 +52,15 @@ const locale = {
   weekdaysMin: 'ی_د_س_چ_پ_هـ_ش'.split('_'),
   preparse(string) {
     return string
-      .replace(/[١٢٣٤٥٦٧٨٩٠]/g, match => arabicToEnglishNumbersMap[match])
+      .replace(/[١٢٣٤٥٦٧٨٩٠]/g, (match) => arabicToEnglishNumbersMap[match])
       .replace(/،/g, ',')
   },
   postformat(string) {
     return string
-      .replace(/\d/g, match => englishToArabicNumbersMap[match])
+      .replace(/\d/g, (match) => englishToArabicNumbersMap[match])
       .replace(/,/g, '،')
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -69,7 +69,7 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
-  meridiem: hour => (hour < 12 ? 'پ.ن' : 'د.ن'),
+  meridiem: (hour) => (hour < 12 ? 'پ.ن' : 'د.ن'),
   relativeTime: {
     future: 'لە %s',
     past: 'لەمەوپێش %s',

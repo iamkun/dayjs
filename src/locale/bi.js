@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'San_Man_Tus_Wen_Tos_Frae_Sar'.split('_'),
   monthsShort: 'Jan_Feb_Maj_Epr_Mai_Jun_Jul_Oki_Sep_Okt_Nov_Dis'.split('_'),
   weekdaysMin: 'San_Ma_Tu_We_To_Fr_Sar'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'h:mm A',
     LTS: 'h:mm:ss A',

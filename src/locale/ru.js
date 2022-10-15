@@ -77,13 +77,13 @@ const locale = {
     y: 'год',
     yy: relativeTimeWithPlural
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   meridiem: (hour) => {
     if (hour < 4) {
       return 'ночи'
-    } else if (hour < 12) {
+    } if (hour < 12) {
       return 'утра'
-    } else if (hour < 17) {
+    } if (hour < 17) {
       return 'дня'
     }
     return 'вечера'
@@ -93,4 +93,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

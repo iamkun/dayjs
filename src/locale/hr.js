@@ -45,7 +45,7 @@ const locale = {
     y: 'godina',
     yy: '%d godine'
   },
-  ordinal: n => `${n}.`
+  ordinal: (n) => `${n}.`
 }
 
 dayjs.locale(locale, null, true)
