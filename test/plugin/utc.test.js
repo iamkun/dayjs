@@ -208,7 +208,6 @@ describe('UTC and local', () => {
   })
 })
 
-
 describe('UTC with customParseFormat', () => {
   it('Custom Parse Format', () => {
     dayjs.extend(customParseFormat)
@@ -227,26 +226,484 @@ describe('UTC Offset', () => {
     expect(dayjs().utc().utcOffset()).toBe(moment().utc().utcOffset())
   })
 
-  it('get utc offset with a number value', () => {
+  it('"dayjs(time).utc().utcOffset" for offset "8"', () => {
     const time = '2021-02-28 19:40:10'
-    const hoursOffset = -8
-    const daysJS = dayjs(time).utc().utcOffset(hoursOffset, true)
-    const momentJS = moment(time).utc().utcOffset(hoursOffset, true)
+    const hoursOffset = 8
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
 
-    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
-    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
-    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "0"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 0
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "+04:30"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+04:30'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "+00:00"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+00:00'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for illegal offset "04:30"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '04:30'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
   })
 
-  it('get utc offset with a number value and utc "keepLocalTime"', () => {
-    const time = '2021-02-28 19:40:10'
-    const hoursOffset = -8
-    const daysJS = dayjs(time).utc(true).utcOffset(hoursOffset, true)
-    const momentJS = moment(time).utc(true).utcOffset(hoursOffset, true)
+  it('"dayjs(time).utc().utcOffset" for offset "8" - time string with offset', () => {
+    const time = '2021-02-28T19:40:10+03:30'
+    const hoursOffset = 8
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
 
-    expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
-    expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
-    expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "8" - time string with z', () => {
+    const time = '2021-02-28T19:40:10Z'
+    const hoursOffset = 8
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+
+  it('"dayjs.utc(time).utcOffset" for offset "8"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 8
+    const dayjsAsUtc = dayjs.utc(time)
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment.utc(time)
+    const momentOffset = moment.utc(time).utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment.utc(time).utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs.utc(time).utcOffset" for offset "0"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = 0
+    const dayjsAsUtc = dayjs.utc(time)
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment.utc(time)
+    const momentOffset = moment.utc(time).utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment.utc(time).utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs.utc(time).utcOffset" for offset "+04:30"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+04:30'
+    const dayjsAsUtc = dayjs.utc(time)
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment.utc(time)
+    const momentOffset = moment.utc(time).utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment.utc(time).utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs.utc(time).utcOffset" for offset "+00:00"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+00:00'
+    const dayjsAsUtc = dayjs.utc(time)
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment.utc(time)
+    const momentOffset = moment.utc(time).utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment.utc(time).utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset ""', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = ''
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "+"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "+12"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+12'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(false)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(false)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+
+  it('"dayjs.utc(time).utcOffset" for illegal offset "04:30"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '04:30'
+    const dayjsAsUtc = dayjs.utc(time)
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment.utc(time)
+    const momentOffset = moment.utc(time).utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment.utc(time).utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset ""', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = ''
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
+  })
+  it('"dayjs(time).utc().utcOffset" for offset "+abcd"', () => {
+    const time = '2021-02-28 19:40:10'
+    const hoursOffset = '+abcd'
+    const dayjsAsUtc = dayjs(time).utc()
+    const dayjsOffset = dayjsAsUtc.utcOffset(hoursOffset)
+    const dayjsOffsetKeepLocalTime = dayjsAsUtc.utcOffset(hoursOffset, true)
+    const momentAsUtc = moment(time).utc()
+    const momentOffset = moment(time).utc().utcOffset(hoursOffset)
+    const momentOffsetKeepLocalTime = moment(time).utc().utcOffset(hoursOffset, true)
+
+    expect(dayjsAsUtc.isUTC()).toBe(true)
+    expect(dayjsAsUtc.isUTC()).toBe(momentAsUtc.isUTC())
+    expect(dayjsAsUtc.valueOf()).toBe(momentAsUtc.valueOf())
+    expect(dayjsAsUtc.toISOString()).toBe(momentAsUtc.toISOString())
+    expect(dayjsAsUtc.format()).toBe(momentAsUtc.format())
+
+    expect(dayjsOffset.isUTC()).toBe(true)
+    expect(dayjsOffset.isUTC()).toBe(momentOffset.isUTC())
+    expect(dayjsOffset.valueOf()).toBe(momentOffset.valueOf())
+    expect(dayjsOffset.toISOString()).toBe(momentOffset.toISOString())
+    expect(dayjsOffset.format()).toBe(momentOffset.format())
+
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(true)
+    expect(dayjsOffsetKeepLocalTime.isUTC()).toBe(momentOffsetKeepLocalTime.isUTC())
+    expect(dayjsOffsetKeepLocalTime.valueOf()).toBe(momentOffsetKeepLocalTime.valueOf())
+    expect(dayjsOffsetKeepLocalTime.toISOString()).toBe(momentOffsetKeepLocalTime.toISOString())
+    expect(dayjsOffsetKeepLocalTime.format()).toBe(momentOffsetKeepLocalTime.format())
   })
 
   it('get utc offset with a negative valid string value, format: HH:mm', () => {
