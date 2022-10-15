@@ -3,14 +3,14 @@ import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
 const REGEX_VALID_OFFSET_FORMAT = /[+-]\d\d(?::?\d\d)?/g
 const REGEX_OFFSET_HOURS_MINUTES_FORMAT = /([+-]|\d\d)/g
 
-function offsetFromString(value = '') {
+function offsetFromString(value) {
   const offset = value.match(REGEX_VALID_OFFSET_FORMAT)
 
   if (!offset) {
     return null
   }
 
-  const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT) || ['-', 0, 0]
+  const [indicator, hoursOffset, minutesOffset = 0] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT)
   const totalOffsetInMinutes = (+hoursOffset * 60) + (+minutesOffset)
 
   if (totalOffsetInMinutes === 0) {
@@ -19,7 +19,6 @@ function offsetFromString(value = '') {
 
   return indicator === '+' ? totalOffsetInMinutes : -totalOffsetInMinutes
 }
-
 
 export default (option, Dayjs, dayjs) => {
   const proto = Dayjs.prototype
