@@ -41,6 +41,7 @@ test('valueOf, toDate, toString, toISOString should be the same as original', ()
 test('clone', () => {
   const du = dayjs().utcOffset(9)
   const duClone = du.clone()
+  expect(du).not.toBe(duClone)
   expect(du.valueOf()).toBe(duClone.valueOf())
   expect(du.format()).toBe(duClone.format())
   expect(du.utcOffset()).toBe(duClone.utcOffset())
@@ -126,14 +127,14 @@ test('keep hours when adding month in offset mode', () => {
 
 test('utc costructor', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0).getTime()
-  expect(moment(d).utc().utcOffset(480).valueOf())
-    .toBe(dayjs(d).utc().utcOffset(480).valueOf())
-
-  expect(moment(d).utc().local()
-    .utcOffset(480)
+  expect(moment(d).utc().utcOffset(480)
     .valueOf())
-    .toBe(dayjs(d).utc().local()
-      .utcOffset(480)
+    .toBe(dayjs(d).utc().utcOffset(480)
+      .valueOf())
+
+  expect(moment(d).utc().local().utcOffset(480)
+    .valueOf())
+    .toBe(dayjs(d).utc().local().utcOffset(480)
       .valueOf())
 })
 
