@@ -34,19 +34,15 @@ const testArrs = [
 ]
 
 describe('parse array local', () => {
-  testArrs.forEach((testArr) => {
-    it(testArr, () => {
-      expect(dayjs(testArr).format())
-        .toBe(moment(testArr).format())
-    })
+  it.each([0, 1, 2, 3])('test case testArrs[%i]"', (index) => {
+    expect(dayjs(testArrs[index]).format())
+      .toBe(moment(testArrs[index]).format())
   })
 })
 
 describe('parse array utc', () => {
-  testArrs.forEach((testArr) => {
-    it(testArr, () => {
-      expect(dayjs.utc(testArr).format())
-        .toBe(moment.utc(testArr).format())
-    })
+  it.each([0, 1, 2, 3])('test case testArrs[%i]" with utc', (index) => {
+    expect(dayjs.utc(testArrs[index]).format())
+      .toBe(moment.utc(testArrs[index]).format())
   })
 })

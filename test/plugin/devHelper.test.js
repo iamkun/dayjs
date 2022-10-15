@@ -12,7 +12,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-global.console.warn = jest.genMockFunction()
+global.console.warn = jest.fn()
 
 
 it('Warning: passing Year as a Number will be parsed as a Unix timestamp', () => {
