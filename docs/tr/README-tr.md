@@ -65,9 +65,7 @@ dayjs('2018-08-08') // dönüştürme
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // belirli bir formatta görüntüleme
 
-dayjs()
-  .set('month', 3)
-  .month() // görüntüleme & değer atama
+dayjs().set('month', 3).month() // görüntüleme & değer atama
 
 dayjs().add(1, 'year') // değiştirme
 
@@ -87,9 +85,7 @@ import 'dayjs/locale/es' // isteğe göre yükle
 
 dayjs.locale('tr') // yerel ayarı Türkçe olarak kullan
 
-dayjs('2018-05-05')
-  .locale('zh-cn')
-  .format() //belirli bir durum için Basitleştirilmiş Çince formatında görüntüleme
+dayjs('2018-05-05').locale('zh-cn').format() //belirli bir durum için Basitleştirilmiş Çince formatında görüntüleme
 ```
 
 📚[Uluslararasılaştırma](https://day.js.org/docs/en/i18n/i18n)
