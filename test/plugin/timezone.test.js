@@ -650,3 +650,226 @@ describe('issue 1860 - setting month in UTC timezone', () => {
     expectDayjsEqualsMoment(dayjsDateUTCWithMonth, momentDateUTCWithMonth)
   })
 })
+describe('set default timezone', () => {
+  beforeEach(() => {
+    MockDate.set(new Date())
+  })
+
+  afterEach(() => {
+    MockDate.reset()
+    dayjs.tz.setDefault()
+    moment.tz.setDefault()
+  })
+
+  it('with "NYC" - dayjs("2022-12-03T20:14:43") should return correct date', () => {
+    dayjs.tz.setDefault(NY)
+    moment.tz.setDefault(NY)
+
+    const dateValue = '2022-12-03T20:14:43'
+    const dayjsDate = dayjs.tz(dateValue)
+    const momentDate = moment(dateValue)
+
+    expect(dayjsDate.format()).toBe('2022-12-03T20:14:43-05:00')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('with "NYC" - dayjs(0) should return correct date', () => {
+    dayjs.tz.setDefault(NY)
+    moment.tz.setDefault(NY)
+
+    const dateValue = 0
+    const dayjsDate = dayjs.tz(dateValue)
+    const momentDate = moment(dateValue)
+
+    expect(dayjsDate.format()).toBe('1969-12-31T19:00:00-05:00')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('with "UTC" - dayjs(0) should return correct date', () => {
+    dayjs.tz.setDefault(UTC)
+    moment.tz.setDefault(UTC)
+
+    const dateValue = 0
+    const dayjsDate = dayjs.tz(dateValue)
+    const momentDate = moment(dateValue)
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:00:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('with "UTC" - dayjs(0).add(0, "minutes") should return correct date', () => {
+    dayjs.tz.setDefault('UTC')
+    moment.tz.setDefault('UTC')
+
+    const dateValue = 0
+    const dayjsDate = dayjs.tz(dateValue).add(0, 'minutes')
+    const momentDate = moment(dateValue).add(0, 'minutes')
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:00:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+})
+
+describe('issue 2037 about parse with "add"', () => {
+  it('tz(0, "UTC") should return correct date', () => {
+    const dayjsDate = dayjs.tz(0, 'UTC')
+    const momentDate = moment.tz(0, 'UTC')
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:00:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('tz(60000, "UTC") should return correct date', () => {
+    const dayjsDate = dayjs.tz(60000, 'UTC')
+    const momentDate = moment.tz(60000, 'UTC')
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:01:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs.tz("1970-01-01T00:00:00" ,"UTC") should return same value as moment', () => {
+    const dateValue = '1970-01-01T00:00:00'
+    const tz = UTC
+    const dayjsDate = dayjs.tz(dateValue, tz)
+    const momentDate = moment.tz(dateValue, tz)
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('tz(0, "UTC").add(0, "minutes") should return correct date', () => {
+    const dayjsDate = dayjs.tz(0, 'UTC').add(0, 'minutes')
+    const momentDate = moment.tz(0, 'UTC').add(0, 'minutes')
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:00:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('tz(0, "UTC").add(1, "minutes") should return correct date', () => {
+    const dayjsDate = dayjs.tz(0, 'UTC').add(1, 'minutes')
+    const momentDate = moment.tz(0, 'UTC').add(1, 'minutes')
+
+    expect(dayjsDate.format()).toBe('1970-01-01T00:01:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs.tz("1970-01-01T00:00:00" ,"UTC") with "+ 0min" should return correct date', () => {
+    const dateValue = '1970-01-01T00:00:00'
+    const tz = UTC
+    const dayjsDateAdded = dayjs.tz(dateValue, tz).add(0, 'minutes')
+    const momentDateAdded = moment.tz(dateValue, tz).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDateAdded, momentDateAdded)
+  })
+
+  it('dayjs(0).tz("UTC") with "+ 0min" should return correct date', () => {
+    const dayjsDate = dayjs(0).tz(UTC).add(0, 'minutes')
+    const momentDate = moment(0).tz(UTC).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs(60000).tz("UTC") with "+ 0min" should return correct date', () => {
+    const dayjsDate = dayjs(60000).tz(UTC).add(0, 'minutes')
+    const momentDate = moment(60000).tz(UTC).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  // Another timezone with offset '0'
+  it('dayjs(0).tz("GMT", true) of "+ 0min" should return correct date', () => {
+    const keepLocalTime = true
+    const dayjsDate = dayjs(0).tz(GMT, keepLocalTime).add(0, 'minutes')
+    const momentDate = moment(0).tz(GMT, keepLocalTime).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs.tz(0, "America/New_York") with "+ 0min" should return correct date', () => {
+    const dateValue = 0
+    const dayjsDateAdded = dayjs.tz(dateValue, NY).add(0, 'minutes')
+    const momentDateAdded = moment.tz(dateValue, NY).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDateAdded, momentDateAdded)
+  })
+
+  it('dayjs.tz("1970-01-01T00:00:00" ,"America/New_York") with "+ 0min" should return correct date', () => {
+    const dateValue = '1970-01-01T00:00:00'
+    const dayjsDateAdded = dayjs.tz(dateValue, NY).add(0, 'minutes')
+    const momentDateAdded = moment.tz(dateValue, NY).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDateAdded, momentDateAdded)
+  })
+})
+
+describe('issue 2037 about convert with "add"', () => {
+  it('dayjs(0).tz("UTC") with "+ 0min" should return correct date', () => {
+    const dayjsDate = dayjs(0).tz(UTC).add(0, 'minutes')
+    const momentDate = moment.tz(0, UTC).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs(0).tz("America/New_York") with "+ 0min" should return correct date', () => {
+    const dayjsDate = dayjs(0).tz(NY).add(0, 'minutes')
+    const momentDate = moment.tz(0, NY).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs(60000).tz("UTC") with "+ 0min" should return correct date', () => {
+    const dateValue = 60000
+    const dayjsDate = dayjs(dateValue).tz(UTC).add(0, 'minutes')
+    const momentDate = moment.tz(dateValue, UTC).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+
+  it('dayjs(60000).tz("America/New_York") with "+ 0min" should return correct date', () => {
+    const dateValue = 60000
+    const dayjsDate = dayjs(dateValue).tz(NY).add(0, 'minutes')
+    const momentDate = moment.tz(dateValue, NY).add(0, 'minutes')
+
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+  })
+})
+
+describe('issue 1860 - setting month in UTC timezone', () => {
+  beforeEach(() => {
+    MockDate.set(new Date())
+    dayjs.tz.setDefault('CDT')
+    moment.tz.setDefault('CDT')
+  })
+
+  afterEach(() => {
+    MockDate.reset()
+  })
+
+  it('setting month using timezone "America/Godthab" should return correct date', () => {
+    const dateValue = '2022-04-19T03:00:00-02:00'
+    const tz = 'America/Godthab'
+    const dayjsDate = dayjs(dateValue).tz(tz)
+    const dayjsDateWithMonth = dayjs(dayjsDate).month(3)
+    const momentDate = moment(dateValue).tz(tz)
+    const momentDateWithMonth = moment(dateValue).tz(tz).month(3)
+
+    expect(dayjsDateWithMonth.format()).toBe('2022-04-19T03:00:00-02:00')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+    expectDayjsEqualsMoment(dayjsDateWithMonth, momentDateWithMonth)
+  })
+
+  it('setting month using timezone "GMT" should return correct date', () => {
+    const dateValue = '2022-04-19T03:00:00-02:00'
+    const tz = GMT
+    const dayjsDate = dayjs(dateValue).tz(tz)
+    const dayjsDateUTC = dayjs(dayjsDate).tz(GMT)
+    const dayjsDateUTCWithMonth = dayjs(dayjsDateUTC).month(3)
+    const momentDate = moment(dateValue).tz(tz)
+    const momentDateUTC = moment(moment(dateValue).tz(tz)).tz(GMT)
+    const momentDateUTCWithMonth = moment(moment(dateValue).tz(tz)).tz(GMT).month(3)
+
+    expect(dayjsDateUTCWithMonth.format()).toBe('2022-04-19T05:00:00Z')
+    expectDayjsEqualsMoment(dayjsDate, momentDate)
+    expectDayjsEqualsMoment(dayjsDateUTC, momentDateUTC)
+    expectDayjsEqualsMoment(dayjsDateUTCWithMonth, momentDateUTCWithMonth)
+  })
+})
