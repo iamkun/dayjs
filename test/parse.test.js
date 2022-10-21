@@ -52,6 +52,16 @@ describe('Parse', () => {
     expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
   })
 
+  it('String ISO 8601 date, time and positive 2 digit zone offset', () => {
+    const time = '2018-04-04T16:01:02.300+03'
+    expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
+  })
+
+  it('String ISO 8601 date, time and negative 2 digit zone offset', () => {
+    const time = '2018-04-04T16:01:02.300-03'
+    expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
+  })
+
   it('String ISO 8601 date and time without separators', () => {
     const time = '20180404T160102'
     expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
