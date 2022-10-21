@@ -1,3 +1,11 @@
+## [1.11.6](https://github.com/iamkun/dayjs/compare/v1.11.5...v1.11.6) (2022-10-21)
+
+
+### Bug Fixes
+
+* add BigIntSupport plugin ([#2087](https://github.com/iamkun/dayjs/issues/2087)) ([f6dce48](https://github.com/iamkun/dayjs/commit/f6dce48a9e39677718b087867d9fd901d5078155))
+* Fix objectSupport collides with Duration plugin - issue [#2027](https://github.com/iamkun/dayjs/issues/2027) ([#2038](https://github.com/iamkun/dayjs/issues/2038)) ([c9370ea](https://github.com/iamkun/dayjs/commit/c9370ea96bf420439ee7eaa4146e8ed643160312))
+
 ## [1.11.5](https://github.com/iamkun/dayjs/compare/v1.11.4...v1.11.5) (2022-08-12)
 
 
