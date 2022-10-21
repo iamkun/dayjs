@@ -41,17 +41,30 @@ describe('Parse', () => {
     expect(newYork.valueOf()).toBe(MnewYork.valueOf())
   })
 
-  it('parse timestamp, js Date, Day.js object', () => {
+  it('parse timestamp (js Date)', () => {
     const d = new Date('2020-08-07T12:00-07:00')
     const result = '2020-08-07T12:00:00-07:00'
     const TjsDate = dayjs.tz(d, VAN)
-    const Tdayjs = dayjs.tz(dayjs(d), VAN)
-    const Timestamp = dayjs.tz(d.getTime(), VAN)
-    const Tmoment = moment.tz(d, VAN)
+    const TjsDateMoment = moment.tz(d, VAN)
+
     expect(TjsDate.format()).toBe(result)
-    expect(Tdayjs.format()).toBe(result)
+    expect(TjsDate.format()).toBe(TjsDateMoment.format())
+  })
+
+  it('parse timestamp (js Date.getTime)', () => {
+    const d = new Date('2020-08-07T12:00-07:00')
+    const result = '2020-08-07T12:00:00-07:00'
+
+    const Timestamp = dayjs.tz(d.getTime(), VAN)
     expect(Timestamp.format()).toBe(result)
-    expect(Tmoment.format()).toBe(result)
+  })
+
+  it('parse timestamp (Day.js object)', () => {
+    const d = new Date('2020-08-07T12:00-07:00')
+    const result = '2020-08-07T12:00:00-07:00'
+
+    const Tdayjs = dayjs.tz(dayjs(d), VAN)
+    expect(Tdayjs.format()).toBe(result)
   })
 
   it('parse and convert between timezones', () => {
