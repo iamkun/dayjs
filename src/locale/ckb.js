@@ -1,4 +1,4 @@
-// Kurdish [ku]
+// Central Kurdish [ckb]
 import dayjs from 'dayjs'
 
 export const englishToArabicNumbersMap = {
@@ -71,8 +71,8 @@ const locale = {
   },
   meridiem: hour => (hour < 12 ? 'پ.ن' : 'د.ن'),
   relativeTime: {
-    future: 'لە %s',
-    past: 'لەمەوپێش %s',
+    future: 'لە %sـدا',
+    past: '%s لەمەوپێش',
     s: 'چەند چرکەیەک',
     m: 'یەک خولەک',
     mm: '%d خولەک',
