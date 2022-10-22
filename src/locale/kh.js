@@ -1,18 +1,18 @@
 import dayjs from 'dayjs'
 
 const locale = {
-  name: 'en-nz',
-  weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+  name: 'kh',
+  weekdays: 'ថ្ងៃអាទិត្យ_ថ្ងៃច័ន្ទ_ថ្ងៃអង្គារ_ថ្ងៃពុធ_ថ្ងៃព្រហស្បតិ៍_ថ្ងៃសុក្រ_ថ្ងៃសៅរ៍'.split(
     '_'
   ),
   months:
-    'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+    'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
       '_'
     ),
   weekStart: 1,
-  weekdaysShort: 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
-  monthsShort: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
-  weekdaysMin: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+  weekdaysShort: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
+  monthsShort: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
+  weekdaysMin: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
   ordinal: (n) => {
     const s = ['th', 'st', 'nd', 'rd']
     const v = n % 100
@@ -28,33 +28,33 @@ const locale = {
   },
   relativeTime: {
     future: 'in %s',
-    past: '%s ago',
-    s: 'a few seconds',
-    m: 'a minute',
-    mm: '%d minutes',
-    h: 'an hour',
-    hh: '%d hours',
-    d: 'a day',
-    dd: '%d days',
-    M: 'a month',
-    MM: '%d months',
-    y: 'a year',
-    yy: '%d years',
+    past: '%s មកហើយ',
+    s: 'ពីរបីវិនាទី',
+    m: 'មួយនាទី',
+    mm: '%d នាទី',
+    h: 'មួយម៉ោង',
+    hh: '%d ម៉ោង',
+    d: 'មួយថ្ងៃ',
+    dd: '%d ថ្ងៃ',
+    M: 'មួយខែ',
+    MM: '%d ខែ',
+    y: 'មួយឆ្នាំ',
+    yy: '%d ឆ្នាំ',
   },
 meridiem: (hour, minute) => {
     const hm = hour * 100 + minute
     if (hm < 600) {
-      return 'Mid Night'
+      return 'កណ្តាលអធ្រាត្រ'
     } else if (hm < 900) {
-      return 'Morning'
+      return 'ពេលព្រឹក'
     } else if (hm < 1100) {
-      return 'Morning'
+      return 'ពេលព្រឹក'
     } else if (hm < 1300) {
-      return 'Afternoon'
+      return 'ពេលរសៀល'
     } else if (hm < 1800) {
-      return 'Evening'
+      return 'ពេលល្ងាច'
     }
-    return 'Night'
+    return 'ពេលយប់'
   },
 }
 
