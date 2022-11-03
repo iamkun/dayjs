@@ -12,7 +12,7 @@ const typeToPos = {
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
 const dtfCache = {}
-const getDateTimeFormat = (timezone, options = {}) => {
+const getDateTimeFormat = (timezone, options) => {
   const timeZoneName = options.timeZoneName || 'short'
   const key = `${timezone}|${timeZoneName}`
   let dtf = dtfCache[key]
