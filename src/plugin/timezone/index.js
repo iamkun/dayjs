@@ -97,8 +97,14 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
-    let ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
-      .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
+    // FF24 problem does no longer exist in utcOffset(); see pr #2016
+    const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
+    if (offset === 0) {
+      return this.utc(keepLocalTime)
+    }
+    let ins = d(target)
+      .$set(MS, this.$ms)
+      .utcOffset(offset, true)
     if (keepLocalTime) {
       const newOffset = ins.utcOffset()
       ins = ins.add(oldOffset - newOffset, MIN)
