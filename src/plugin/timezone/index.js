@@ -97,8 +97,7 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
-    // FF24 problem does no longer exist in utcOffset(); see pr #2016
-    const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
+    const offset = -date.getTimezoneOffset() - diff
     if (offset === 0) {
       return this.utc(keepLocalTime)
     }
@@ -134,10 +133,13 @@ export default (o, c, d) => {
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
-    const previousOffset = tzOffset(+d(), timezone)
-    if (typeof input !== 'string') {
-      // timestamp number || js Date || Day.js
-      return d(input).tz(timezone)
+    const previousOffset = tzOffset(+d(input, parseFormat), timezone)
+    // To differentiate date only string (e.g. yy-mm-dd) from date string with negative
+    // 2-digit offset (hour offset zz, e.g. yy-mm-zz) we require at least 8 characters
+    // before offset (i.e. yy-mm-dd-zz)
+    if ((typeof input !== 'string') || /.{8,}[+-]\d\d:?(\d\d)?$|Z$/i.test(input)) {
+      // timestamp number || js Date || Day.js || input string with offset (e.g. -03:00)
+      return d(input, parseFormat).tz(timezone)
     }
     const localTs = d.utc(input, parseFormat).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
