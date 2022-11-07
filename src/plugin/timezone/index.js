@@ -98,7 +98,7 @@ export default (o, c, d) => {
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
     let ins = d(target).$set(MS, this.$ms)
-      .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
+      .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true).locale(this.$L)
     if (keepLocalTime) {
       const newOffset = ins.utcOffset()
       ins = ins.add(oldOffset - newOffset, MIN)
