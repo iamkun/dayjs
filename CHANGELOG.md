@@ -1,3 +1,11 @@
+## [1.11.5](https://github.com/iamkun/dayjs/compare/v1.11.4...v1.11.5) (2022-08-12)
+
+
+### Bug Fixes
+
+* ordinal for nl not working ([#2011](https://github.com/iamkun/dayjs/issues/2011)) ([c93c85e](https://github.com/iamkun/dayjs/commit/c93c85eaa11564a1aae2d823480a417812c01bf4))
+* wrong ordinal for french locale ([#2010](https://github.com/iamkun/dayjs/issues/2010)) ([dd192a7](https://github.com/iamkun/dayjs/commit/dd192a72fc5d26ce56481e89b0c1ccf5f939be0c))
+
 ## [1.11.4](https://github.com/iamkun/dayjs/compare/v1.11.3...v1.11.4) (2022-07-19)
 
 
