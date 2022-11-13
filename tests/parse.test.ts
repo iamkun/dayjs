@@ -124,7 +124,7 @@ test('should parse from Date object', () => {
 })
 
 test('should parse from Dayjs instance', () => {
-  expectSameResult((dayjs) => dayjs(dayjs()))
+  expectSameResult((dayjs) => dayjs(dayjs('2022-08-28T14:15:16.987')))
 })
 
 test('Clone not affect each other', () => {
@@ -226,7 +226,7 @@ describe('REGEX_PARSE', () => {
   })
 })
 
-describe('Parse array (ArraySupport)', () => {
+describe('Parse array', () => {
   const testArray = [
     { dateArray: [] },
     { dateArray: [2018] },

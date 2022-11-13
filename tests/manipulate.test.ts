@@ -55,11 +55,11 @@ describe('StartOf / EndOf', () => {
     vi.useRealTimers()
   })
 
-  test.each(units)('get StartOf "%s" for current date', (unit) => {
+  test.each(units)('get startOf "%s" for current date', (unit) => {
     expectSameResult((dayjs) => dayjs().startOf(unit))
   })
 
-  test.each(units)('get EndOf "%s" for current date', (unit) => {
+  test.each(units)('get sndOf "%s" for current date', (unit) => {
     expectSameResult((dayjs) => dayjs().endOf(unit))
   })
 })

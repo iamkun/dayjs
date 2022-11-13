@@ -21,7 +21,7 @@ export const expectSameResult = (
   if (d.isValid()) {
     expect(d.toISOString()).toBe(m.toISOString())
     expect(d.valueOf()).toBe(m.valueOf())
-    expect(d.millisecond()).toBe(m.millisecond())
+    expect(Math.abs(d.millisecond() - m.millisecond())).toBeLessThanOrEqual(1)
     expect(d.toDate()).toEqual(m.toDate())
     expect(d.toJSON()).toEqual(m.toJSON())
     expect(d.format()).toBe(m.format()) // not recommend

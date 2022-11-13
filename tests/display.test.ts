@@ -21,7 +21,6 @@ test('Format no formatStr', () => {
 test.each(['', 'otherString'])(
   'Format invalid date created from "%s"',
   (value) => {
-    // TODO cannot suppress the 'Deprecation warning' written bey by moment.js to stderr
     expect(dayjs(value).format()).toBe('Invalid Date')
   }
 )
@@ -275,11 +274,27 @@ test('As Javascript Date -> toDate', () => {
 
 test('As JSON -> toJSON', () => {
   expectSame((dayjs) => dayjs().toJSON())
-
-  // TODO cannot suppress the 'Deprecation warning' written bey by moment.js to stderr
   expect(dayjs('otherString').toJSON()).toBe(null)
 })
 
-test('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
-  expectSame((dayjs) => dayjs().toISOString())
+describe('toString', () => {
+  test('should convert date to long date string', () => {
+    const dateAsString = dayjs('2021-02-03T12:13:14.543Z').toString()
+    expect(dateAsString).toBe('Wed, 03 Feb 2021 12:13:14 GMT')
+  })
+})
+
+describe('toISOString', () => {
+  test('should convert date to a long date string', () => {
+    const dateAsString = dayjs('2021-02-03 12:13:14.543Z').toISOString()
+    expect(dateAsString).toBe('2021-02-03T12:13:14.543Z')
+  })
+
+  test.each([
+    '2021-02-03 12:13:14.543Z',
+    '2021-06-21T01:02:03.456+01:00',
+    '2021-11-13T15:26:37.890Z',
+  ])('should convert "%s" to a string', (dateString) => {
+    expectSame((dayjs) => dayjs(dateString).toISOString())
+  })
 })
