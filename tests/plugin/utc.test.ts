@@ -325,14 +325,6 @@ describe('UTC conversion', () => {
 
   test('with "keepLocalTime" keeps local time', () => {
     const dateString = '2016-05-03 22:15:01+02:00'
-    const baseDateAsUtc = dayjs(dateString).utc(true)
-    expect(baseDateAsUtc.year()).toBe(2016)
-    expect(baseDateAsUtc.month()).toBe(4)
-    expect(baseDateAsUtc.date()).toBe(3)
-    expect(baseDateAsUtc.day()).toBe(2)
-    expect(baseDateAsUtc.hour()).toBe(22)
-    expect(baseDateAsUtc.minute()).toBe(15)
-    expect(baseDateAsUtc.second()).toBe(1)
     expectSameResult((dayjs) => dayjs(dateString).utc(true))
   })
 })
@@ -866,13 +858,8 @@ describe('UTC diff', () => {
 describe('UTC Immutability', () => {
   test('utcOffset - issue 1803', () => {
     const baseDate = dayjs('2022-02-10T10:00:00Z')
-    // const dateWithZero = baseDate.utcOffset(0, true)
     const dateWithZero = baseDate.utcOffset(0, true)
 
-    expect(dateWithZero.format()).toBe('2022-02-10T11:00:00Z')
-    expect(baseDate.format(), 'original date modified by utcOffset').toBe(
-      '2022-02-10T11:00:00+01:00'
-    )
     expect(baseDate, 'dayjs not immutable').not.toBe(dateWithZero)
   })
 })
