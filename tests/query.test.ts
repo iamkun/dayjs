@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import dayjs from '../src'
 
 describe('Is Before Is After Is Same', () => {
@@ -7,7 +7,8 @@ describe('Is Before Is After Is Same', () => {
   const dayB = dayA.clone().add(1, 'day')
   const dayC = dayA.clone().subtract(1, 'day')
 
-  it('Compare to dayjs object', () => {
+  test('Compare to dayjs object', () => {
+    vi.useFakeTimers()
     vi.setSystemTime(now)
     expect(dayA.isSame(dayjs())).toBe(true)
     expect(dayA.isSame()).toBe(true)
@@ -20,7 +21,8 @@ describe('Is Before Is After Is Same', () => {
     expect(dayC.isBefore()).toBe(true)
   })
 
-  it('No value', () => {
+  test('No value', () => {
+    vi.useFakeTimers()
     vi.setSystemTime(now)
     expect(dayA.isSame()).toBe(true)
     vi.useRealTimers()
@@ -29,7 +31,7 @@ describe('Is Before Is After Is Same', () => {
     expect(dayC.isBefore()).toBe(true)
   })
 
-  it('With string', () => {
+  test('With string', () => {
     const dayD = dayjs()
     expect(dayD.isSame('20180101')).toBe(false)
     expect(dayD.isAfter('20180101')).toBe(true)

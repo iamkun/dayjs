@@ -1,7 +1,7 @@
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 import dayjs from '../src'
 
-it('is same without units', () => {
+test('is same without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
 
@@ -24,7 +24,7 @@ it('is same without units', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same year', () => {
+test('is same year', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 5, 6, 7, 8, 9, 10)), 'year')).toBe(true)
@@ -42,7 +42,7 @@ it('is same year', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same month', () => {
+test('is same month', () => {
   const m = dayjs(new Date(2011, 2, 3, 4, 5, 6, 7))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 2, 6, 7, 8, 9, 10)), 'month')).toBe(true)
@@ -67,7 +67,7 @@ it('is same month', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same day', () => {
+test('is same day', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)), 'day')).toBe(true)
@@ -87,7 +87,7 @@ it('is same day', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same hour', () => {
+test('is same hour', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 1, 2, 3, 8, 9, 10)), 'hour')).toBe(true)
@@ -108,7 +108,7 @@ it('is same hour', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same minute', () => {
+test('is same minute', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 1, 2, 3, 4, 9, 10)), 'minute')).toBe(
@@ -146,7 +146,7 @@ it('is same minute', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same second', () => {
+test('is same second', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSame(dayjs(new Date(2011, 1, 2, 3, 4, 5, 10)), 'second')).toBe(
@@ -187,7 +187,7 @@ it('is same second', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same millisecond', () => {
+test('is same millisecond', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(
@@ -242,14 +242,14 @@ it('is same millisecond', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is same with invalid moments', () => {
+test('is same with invalid moments', () => {
   expect(dayjs(null).isSame(dayjs('2018-01-01'))).toBe(false)
   expect(dayjs('2018-01-01').isSame(dayjs(null))).toBe(false)
 })
 
 // isAfter()
 
-it('is after year', () => {
+test('is after year', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 5, 6, 7, 8, 9, 10)), 'year')).toBe(
@@ -277,7 +277,7 @@ it('is after year', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after month', () => {
+test('is after month', () => {
   const m = dayjs(new Date(2011, 2, 3, 4, 5, 6, 7))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 2, 6, 7, 8, 9, 10)), 'month')).toBe(
@@ -317,7 +317,7 @@ it('is after month', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after day', () => {
+test('is after day', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 3, 2, 7, 8, 9, 10)), 'day')).toBe(false)
@@ -341,7 +341,7 @@ it('is after day', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after hour', () => {
+test('is after hour', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 3, 2, 3, 8, 9, 10)), 'hour')).toBe(
@@ -380,7 +380,7 @@ it('is after hour', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after minute', () => {
+test('is after minute', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 3, 2, 3, 4, 9, 10)), 'minute')).toBe(
@@ -435,7 +435,7 @@ it('is after minute', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after second', () => {
+test('is after second', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)), 'second')).toBe(
@@ -496,7 +496,7 @@ it('is after second', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after millisecond', () => {
+test('is after millisecond', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(
@@ -551,7 +551,7 @@ it('is after millisecond', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after without units', () => {
+test('is after without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isAfter(dayjs(new Date(2012, 3, 2, 3, 5, 5, 10)))).toBe(false)
@@ -573,7 +573,7 @@ it('is after without units', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is after invalid', () => {
+test('is after invalid', () => {
   const m = dayjs()
   const invalid = dayjs(null)
   expect(m.isAfter(invalid)).toBe(false)
@@ -589,7 +589,7 @@ it('is after invalid', () => {
 
 // isBefore()
 
-it('is after without units', () => {
+test('is after without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2012, 3, 2, 3, 5, 5, 10)))).toBe(true)
@@ -611,7 +611,7 @@ it('is after without units', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before year', () => {
+test('is before year', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 5, 6, 7, 8, 9, 10)), 'year')).toBe(
@@ -643,7 +643,7 @@ it('is before year', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before month', () => {
+test('is before month', () => {
   const m = dayjs(new Date(2011, 2, 3, 4, 5, 6, 7))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 2, 6, 7, 8, 9, 10)), 'month')).toBe(
@@ -683,7 +683,7 @@ it('is before month', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before day', () => {
+test('is before day', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 3, 2, 7, 8, 9, 10)), 'day')).toBe(
@@ -719,7 +719,7 @@ it('is before day', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before hour', () => {
+test('is before hour', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 3, 2, 3, 8, 9, 10)), 'hour')).toBe(
@@ -766,7 +766,7 @@ it('is before hour', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before minute', () => {
+test('is before minute', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 3, 2, 3, 4, 9, 10)), 'minute')).toBe(
@@ -821,7 +821,7 @@ it('is before minute', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before second', () => {
+test('is before second', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)), 'second')).toBe(
@@ -882,7 +882,7 @@ it('is before second', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before millisecond', () => {
+test('is before millisecond', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(
@@ -937,7 +937,7 @@ it('is before millisecond', () => {
   expect(+m).toEqual(+mCopy)
 })
 
-it('is before invalid', () => {
+test('is before invalid', () => {
   const m = dayjs()
   const invalid = dayjs(null)
   expect(m.isBefore(invalid)).toBe(false)

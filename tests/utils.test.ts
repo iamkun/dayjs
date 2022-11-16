@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import {
   cloneDate,
   isEmptyObject,
@@ -8,7 +8,7 @@ import {
 } from '../src/utils'
 
 describe('utils', () => {
-  it('mutable should work', () => {
+  test('mutable should work', () => {
     const obj = { a: 'b' }
     expect(mutable(obj)).toBe(obj)
 
@@ -16,7 +16,7 @@ describe('utils', () => {
     expect(mutable(bool)).toBe(bool)
   })
 
-  it('pick should work', () => {
+  test('pick should work', () => {
     const obj = { a: 1, b: 2, c: 3 }
     expect(pick(obj, ['a', 'b'])).toMatchInlineSnapshot(`
       {
@@ -31,7 +31,7 @@ describe('utils', () => {
     expect(() => pick(obj, undefined)).toThrowError()
   })
 
-  it('cloneDate should work', () => {
+  test('cloneDate should work', () => {
     const date = new Date()
     const newDate = cloneDate(date)
 
@@ -42,7 +42,7 @@ describe('utils', () => {
     expect(newDate.valueOf()).toBe(date.valueOf())
   })
 
-  it('isEmptyObject should work', () => {
+  test('isEmptyObject should work', () => {
     expect(isEmptyObject({})).toBe(true)
     expect(isEmptyObject({ [Symbol()]: true })).toBe(true)
 
@@ -52,7 +52,7 @@ describe('utils', () => {
     expect(isEmptyObject(null)).toBe(false)
   })
 
-  it('padZoneStr should work', () => {
+  test('padZoneStr should work', () => {
     expect(padZoneStr(10)).toMatchInlineSnapshot('"+00:10"')
     expect(padZoneStr(-1234)).toMatchInlineSnapshot('"-20:34"')
     expect(padZoneStr(-3601)).toMatchInlineSnapshot('"-60:01"')

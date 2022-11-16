@@ -11,8 +11,10 @@ declare module '../types' {
 const plugin: Plugin = (cls, fn) => {
   const isYesterday: IsYesterday = function (this: Dayjs): boolean {
     const comparisonTemplate = 'YYYY-MM-DD'
-    const now = fn()
-    return this.format(comparisonTemplate) === now.format(comparisonTemplate)
+    const yesterday = fn().subtract(1, 'day')
+    return (
+      this.format(comparisonTemplate) === yesterday.format(comparisonTemplate)
+    )
   }
 
   cls.prototype.isYesterday = isYesterday

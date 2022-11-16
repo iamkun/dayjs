@@ -16,6 +16,8 @@ const locale: Locale = {
   ],
   weekdaysShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
   weekdaysMin: ['日', '一', '二', '三', '四', '五', '六'],
+  weekStart: 1,
+  yearStart: 4,
   months: [
     '一月',
     '二月',
@@ -52,8 +54,6 @@ const locale: Locale = {
         return `${number}日`
     }
   },
-  weekStart: 1,
-  yearStart: 4,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',

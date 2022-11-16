@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { normalize, units, unitsLong, unitsShort } from '../src/units'
 
 describe('units', () => {
-  it('normalize should work', () => {
+  test('normalize should work', () => {
     // @ts-expect-error
     expect(normalize('Days')).toBe('day')
     expect(normalize('days')).toBe('day')
@@ -25,7 +25,7 @@ describe('units', () => {
     expect(() => normalize(false)).toThrowError()
   })
 
-  it('units should be correct', () => {
+  test('units should be correct', () => {
     expect(units).is.a('object')
     expect(Object.keys(units).length).greaterThan(0)
     expect(unitsShort.length).toBe(Object.keys(units).length)
