@@ -1,5 +1,5 @@
 const babel = require('@rollup/plugin-babel')
-const { terser } = require('rollup-plugin-terser')
+const terser = require('@rollup/plugin-terser')
 
 module.exports = (config) => {
   const { input, fileName, name } = config

@@ -73,7 +73,8 @@
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.4",
     "@rollup/plugin-babel": "^6.0.0",
-    "@size-limit/preset-small-lib": "^8.1.0",
+    "@rollup/plugin-terser": "^0.1.0",
+    "@size-limit/file": "^8.1.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^29.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -94,8 +95,7 @@
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",
     "prettier": "^2.7.1",
-    "rollup": "^2.79.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "rollup": "^3.3.0",
     "typescript": "^4.8.4"
   }
 }
