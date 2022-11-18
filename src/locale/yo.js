@@ -9,7 +9,7 @@ const locale = {
   weekdaysShort: 'Àìk_Ajé_Ìsẹ́_Ọjr_Ọjb_Ẹtì_Àbá'.split('_'),
   monthsShort: 'Sẹ́r_Èrl_Ẹrn_Ìgb_Èbi_Òkù_Agẹ_Ògú_Owe_Ọ̀wà_Bél_Ọ̀pẹ̀̀'.split('_'),
   weekdaysMin: 'Àì_Aj_Ìs_Ọr_Ọb_Ẹt_Àb'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'h:mm A',
     LTS: 'h:mm:ss A',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

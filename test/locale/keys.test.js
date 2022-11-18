@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 import fs from 'fs'
 import path from 'path'
 import dayjs from '../../src'

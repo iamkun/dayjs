@@ -8,7 +8,7 @@ const locale = {
   weekdaysShort: 'ஞாயிறு_திங்கள்_செவ்வாய்_புதன்_வியாழன்_வெள்ளி_சனி'.split('_'),
   monthsShort: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split('_'),
   weekdaysMin: 'ஞா_தி_செ_பு_வி_வெ_ச'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -37,4 +37,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

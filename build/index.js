@@ -1,9 +1,9 @@
 const rollup = require('rollup')
-const configFactory = require('./rollup.config')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
 const { ncp } = require('ncp')
+const configFactory = require('./rollup.config')
 
 const { promisify } = util
 
@@ -12,9 +12,13 @@ const promisifyReadFile = promisify(fs.readFile)
 const promisifyWriteFile = promisify(fs.writeFile)
 
 const localeNameRegex = /\/\/ (.*) \[/
-const formatName = n => n.replace(/\.js/, '').replace('-', '_')
+const formatName = (n) => n.replace(/\.js/, '').replace('-', '_')
 
 const localePath = path.join(__dirname, '../src/locale')
+
+const localesWithNamedExports = [
+  'ku.js'
+]
 
 async function build(option) {
   const bundle = await rollup.rollup(option.input)
@@ -40,10 +44,15 @@ async function listLocaleJson(localeArr) {
     const locales = await promisifyReadDir(localePath)
     for (const l of locales) {
       // run builds sequentially to limit RAM usage
+      let outputExports
+      if (localesWithNamedExports.includes(l)) {
+        outputExports = 'named' // Disable warning for default imports
+      }
       await build(configFactory({
         input: `./src/locale/${l}`,
         fileName: `./locale/${l}`,
-        name: `dayjs_locale_${formatName(l)}`
+        name: `dayjs_locale_${formatName(l)}`,
+        outputExports
       }))
     }
 

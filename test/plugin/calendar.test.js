@@ -97,8 +97,8 @@ it('Calls callback', () => {
     sameElse: jest.fn()
   }
   dayjs().calendar(null, callbacks)
-  expect(callbacks.sameElse).not.toBeCalled()
-  expect(callbacks.sameDay).toBeCalled()
+  expect(callbacks.sameElse).not.toHaveBeenCalled()
+  expect(callbacks.sameDay).toHaveBeenCalled()
 })
 
 it('callback is a function with the scope of the current moment', () => {
@@ -122,7 +122,7 @@ it('callback is a function and first argument a moment that depicts now', () => 
   }
   const now = dayjs()
   dayjs(now).calendar(now, callbacks)
-  expect(callbacks.sameDay).toBeCalledWith(now)
+  expect(callbacks.sameDay).toHaveBeenCalledWith(now)
 })
 
 it('set global calendar in locale file', () => {

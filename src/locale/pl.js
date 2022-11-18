@@ -44,7 +44,7 @@ const locale = {
   weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
   months,
   monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
-  ordinal: n => `${n}.`,
+  ordinal: (n) => `${n}.`,
   weekStart: 1,
   yearStart: 4,
   relativeTime: {

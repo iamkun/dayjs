@@ -4,4 +4,3 @@ export default (o, c) => {
     return ((this.$y % 4 === 0) && (this.$y % 100 !== 0)) || (this.$y % 400 === 0)
   }
 }
-

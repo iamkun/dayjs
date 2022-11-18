@@ -23,7 +23,7 @@ const locale = {
     y: 'एक वर्ष',
     yy: '%d वर्ष'
   },
-  ordinal: n => `${n}`.replace(/\d/g, i => '०१२३४५६७८९'[i]),
+  ordinal: (n) => `${n}`.replace(/\d/g, (i) => '०१२३४५६७८९'[i]),
   formats: {
     LT: 'Aको h:mm बजे',
     LTS: 'Aको h:mm:ss बजे',

@@ -55,16 +55,16 @@ const locale = {
     return string
       .replace(
         /[١٢٣٤٥٦٧٨٩٠]/g,
-        match => numberMap[match]
+        (match) => numberMap[match]
       )
       .replace(/،/g, ',')
   },
   postformat(string) {
     return string
-      .replace(/\d/g, match => symbolMap[match])
+      .replace(/\d/g, (match) => symbolMap[match])
       .replace(/,/g, '،')
   },
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',

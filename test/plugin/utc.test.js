@@ -48,7 +48,7 @@ describe('UTC Get', () => {
   })
 })
 
-describe('Parse UTC ', () => {
+describe('Parse UTC', () => {
   it('Parse Now', () => {
     expect(dayjs.utc().format()).toBe(moment.utc().format())
     expect(dayjs().utc().format()).toBe(moment().utc().format())
@@ -76,7 +76,7 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
-  it('Parse date string without timezone', () => {
+  it('Parse date and time string without timezone', () => {
     const d = '2017-04-22 19:50:16'
     expect(dayjs.utc(d).format()).toEqual('2017-04-22T19:50:16Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
@@ -191,13 +191,14 @@ describe('UTC and local', () => {
 
   const localAnainDay = utcDay.local()
   it('local', () => {
+    let resultDate = 2
+    let resultDay = 3
     if (localAnainDay.utcOffset() < -180) {
-      expect(localAnainDay.date()).toBe(1)
-      expect(localAnainDay.day()).toBe(2)
-    } else {
-      expect(localAnainDay.date()).toBe(2)
-      expect(localAnainDay.day()).toBe(3)
+      resultDate = 1
+      resultDay = 2
     }
+    expect(localAnainDay.date()).toBe(resultDate)
+    expect(localAnainDay.day()).toBe(resultDay)
   })
 
   const offset = Math.floor(localAnainDay.utcOffset() / 60)
@@ -207,7 +208,6 @@ describe('UTC and local', () => {
     expect(dayjs().utc().utcOffset()).toBe(0)
   })
 })
-
 
 describe('UTC with customParseFormat', () => {
   it('Custom Parse Format', () => {

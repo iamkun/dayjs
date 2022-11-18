@@ -7,6 +7,7 @@ import '../../src/locale/zh-cn'
 
 dayjs.extend(updateLocale)
 dayjs.extend(localizedFormat)
+const warnBackup = global.console.warn
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -14,6 +15,7 @@ beforeEach(() => {
 
 afterEach(() => {
   MockDate.reset()
+  global.console.warn = warnBackup
 })
 
 const newLocale = {
@@ -70,6 +72,7 @@ describe('Update locale', () => {
   })
 
   it('Update invalid date string', () => {
+    global.console.warn = jest.fn()// moment.js otherString will throw warn
     const locale = 'en'
     const localeSetting = { invalidDate: 'bad date' }
     dayjs.updateLocale(locale, localeSetting)

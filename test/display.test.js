@@ -146,7 +146,7 @@ it('Format token value is 0', () => {
     .toBe(moment(sundayDate).format(sundayStr))
 })
 
-it('Format Complex with other string - : / ', () => {
+it('Format Complex with other string - : /', () => {
   const string = 'YY-M-D / HH:mm:ss'
   expect(dayjs().format(string)).toBe(moment().format(string))
 })
@@ -177,7 +177,7 @@ describe('Difference', () => {
     expect(dayjsA.diff(dayjsB)).toBe(momentA.diff(momentB))
   })
 
-  it('diff -> in seconds, minutes, hours, days, weeks, months, quarters, years ', () => {
+  it('diff -> in seconds, minutes, hours, days, weeks, months, quarters, years', () => {
     const dayjsA = dayjs()
     const dayjsB = dayjs().add(1000, 'days')
     const dayjsC = dayjs().subtract(1000, 'days')
@@ -252,7 +252,7 @@ it('As Javascript Date -> toDate', () => {
 
 it('As JSON -> toJSON', () => {
   expect(dayjs().toJSON()).toBe(moment().toJSON())
-  global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
+  global.console.warn = jest.fn()// moment.js otherString will throw warn
   expect(dayjs('otherString').toJSON()).toBe(moment('otherString').toJSON())
   expect(dayjs('otherString').toJSON()).toBe(null)
 })

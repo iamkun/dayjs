@@ -1,9 +1,11 @@
-const babel = require('rollup-plugin-babel')
-const { terser } = require('rollup-plugin-terser')
+const babel = require('@rollup/plugin-babel')
+const terser = require('@rollup/plugin-terser')
 
 module.exports = (config) => {
-  const { input, fileName, name } = config
-  return {
+  const {
+    input, fileName, name, outputExports
+  } = config
+  const rollupConfig = {
     input: {
       input,
       external: [
@@ -11,7 +13,8 @@ module.exports = (config) => {
       ],
       plugins: [
         babel({
-          exclude: 'node_modules/**'
+          exclude: 'node_modules/**',
+          babelHelpers: 'bundled'
         }),
         terser()
       ]
@@ -26,4 +29,8 @@ module.exports = (config) => {
       compact: true
     }
   }
+  if (outputExports !== undefined) {
+    rollupConfig.output.exports = outputExports
+  }
+  return rollupConfig
 }

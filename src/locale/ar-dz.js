@@ -8,7 +8,7 @@ const locale = {
   weekdaysShort: 'احد_اثنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
   monthsShort: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_'),
   weekdaysMin: 'أح_إث_ثلا_أر_خم_جم_سب'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
@@ -17,7 +17,7 @@ const locale = {
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd D MMMM YYYY HH:mm'
   },
-  meridiem: hour => (hour > 12 ? 'م' : 'ص'),
+  meridiem: (hour) => (hour > 12 ? 'م' : 'ص'),
   relativeTime: {
     future: 'في %s',
     past: 'منذ %s',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

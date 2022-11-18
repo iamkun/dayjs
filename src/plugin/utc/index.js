@@ -20,7 +20,6 @@ function offsetFromString(value = '') {
   return indicator === '+' ? totalOffsetInMinutes : -totalOffsetInMinutes
 }
 
-
 export default (option, Dayjs, dayjs) => {
   const proto = Dayjs.prototype
   dayjs.utc = function (date) {

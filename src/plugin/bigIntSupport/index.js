@@ -1,5 +1,5 @@
 // eslint-disable-next-line valid-typeof
-const isBigInt = num => typeof num === 'bigint'
+const isBigInt = (num) => typeof num === 'bigint'
 export default (o, c, dayjs) => {
   const proto = c.prototype
   const parseDate = (cfg) => {
@@ -15,7 +15,6 @@ export default (o, c, dayjs) => {
     cfg.date = parseDate.bind(this)(cfg)
     oldParse.bind(this)(cfg)
   }
-
 
   const oldUnix = dayjs.unix
   dayjs.unix = function (timestamp) {

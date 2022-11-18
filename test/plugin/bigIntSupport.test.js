@@ -27,4 +27,3 @@ it('Parse BigInt ts and tsms', () => {
   expect(dayjs.unix(ts).valueOf()).toBe(momentTs.valueOf())
   expect(dayjs.unix(tsBig).valueOf()).toBe(dayjs.unix(tsBig).valueOf())
 })
-

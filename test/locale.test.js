@@ -123,7 +123,6 @@ describe('Instance locale inheritance', () => {
   })
 })
 
-
 it('Not supported locale string fallback to previous one (instance)', () => {
   const D = dayjs()
   expect(D.locale()).toBe('en')

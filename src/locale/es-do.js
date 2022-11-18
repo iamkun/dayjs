@@ -24,7 +24,7 @@ const locale = {
     y: 'un año',
     yy: '%d años'
   },
-  ordinal: n => `${n}º`,
+  ordinal: (n) => `${n}º`,
   formats: {
     LT: 'h:mm A',
     LTS: 'h:mm:ss A',
@@ -38,4 +38,3 @@ const locale = {
 dayjs.locale(locale, null, true)
 
 export default locale
-

@@ -32,7 +32,7 @@ const locale = {
     y: 'bir yıl',
     yy: '%d yıl'
   },
-  ordinal: n => `${n}.`
+  ordinal: (n) => `${n}.`
 }
 
 dayjs.locale(locale, null, true)

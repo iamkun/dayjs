@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: 'Do_2ª_3ª_4ª_5ª_6ª_Sa'.split('_'),
   months: 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split('_'),
   monthsShort: 'jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez'.split('_'),
-  ordinal: n => `${n}º`,
+  ordinal: (n) => `${n}º`,
   weekStart: 1,
   yearStart: 4,
   formats: {

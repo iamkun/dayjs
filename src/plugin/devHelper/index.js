@@ -28,4 +28,3 @@ export default (o, c, d) => {
     }
   }
 }
-

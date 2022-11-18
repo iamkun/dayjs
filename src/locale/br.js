@@ -51,7 +51,7 @@ const locale = {
   weekdaysShort: 'Sul_Lun_Meu_Mer_Yao_Gwe_Sad'.split('_'),
   monthsShort: 'Gen_Cʼhwe_Meu_Ebr_Mae_Eve_Gou_Eos_Gwe_Her_Du_Ker'.split('_'),
   weekdaysMin: 'Su_Lu_Me_Mer_Ya_Gw_Sa'.split('_'),
-  ordinal: n => n,
+  ordinal: (n) => n,
   formats: {
     LT: 'h[e]mm A',
     LTS: 'h[e]mm:ss A',
@@ -75,7 +75,7 @@ const locale = {
     y: 'ur bloaz',
     yy: specialMutationForYears
   },
-  meridiem: hour => (hour < 12 ? 'a.m.' : 'g.m.') // a-raok merenn | goude merenn
+  meridiem: (hour) => (hour < 12 ? 'a.m.' : 'g.m.') // a-raok merenn | goude merenn
 }
 
 dayjs.locale(locale, null, true)
