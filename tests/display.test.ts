@@ -21,7 +21,6 @@ test('Format no formatStr', () => {
 test.each(['', 'otherString'])(
   'Format invalid date created from "%s"',
   (value) => {
-    // TODO cannot suppress the 'Deprecation warning' written bey by moment.js to stderr
     expect(dayjs(value).format()).toBe('Invalid Date')
   }
 )
@@ -275,8 +274,6 @@ test('As Javascript Date -> toDate', () => {
 
 test('As JSON -> toJSON', () => {
   expectSame((dayjs) => dayjs().toJSON())
-
-  // TODO cannot suppress the 'Deprecation warning' written bey by moment.js to stderr
   expect(dayjs('otherString').toJSON()).toBe(null)
 })
 
