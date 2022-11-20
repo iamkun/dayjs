@@ -16,7 +16,6 @@ const locale: Locale = {
   ],
   weekdaysShort: ['Son', 'Maa', 'Din', 'Woe', 'Don', 'Vry', 'Sat'],
   weekdaysMin: ['So', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Sa'],
-  weekStart: 1,
   months: [
     'Januarie',
     'Februarie',
@@ -46,6 +45,7 @@ const locale: Locale = {
     'Des',
   ],
   ordinal: (n) => n,
+  weekStart: 1,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
