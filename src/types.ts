@@ -1,3 +1,4 @@
+import type { Locale } from './locale'
 import type { Dayjs, extend, isDayjs, locale, unix } from './dayjs'
 
 export type DateInput =
@@ -10,9 +11,15 @@ export type DateInput =
   | undefined
   | object
 export type FormatOption = string | string[]
+
+export type GetterFn = {
+  (value: number): Dayjs
+  (): number
+}
+
 export interface ParseOptions {
   format?: FormatOption
-  locale?: string
+  locale?: string | Locale
   strict?: boolean
 }
 
@@ -20,7 +27,7 @@ export interface DayjsFn {
   (
     date?: DateInput,
     format?: FormatOption,
-    locale?: boolean,
+    locale?: string | Locale | boolean,
     strict?: boolean
   ): Dayjs
   (date?: DateInput, format?: FormatOption, strict?: boolean): Dayjs
@@ -28,6 +35,8 @@ export interface DayjsFn {
   unix: typeof unix
   extend: typeof extend
   locale: typeof locale
+  en: Locale
+  loadedLocales: Record<string, Locale>
 }
 
 export type Plugin<T = never> = ((
