@@ -45,6 +45,14 @@ const locale: Locale = {
   ],
   weekStart: 1,
   ordinal: (n) => n,
+  formats: {
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
+    L: 'DD/MM/YYYY',
+    LL: 'D MMMM YYYY',
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd, D MMMM YYYY HH:mm',
+  },
   relativeTime: {
     future: 'mu %s',
     past: '%s',
@@ -59,14 +67,6 @@ const locale: Locale = {
     MM: '%d amezi',
     y: 'umwaka',
     yy: '%d imyaka',
-  },
-  formats: {
-    LT: 'HH:mm',
-    LTS: 'HH:mm:ss',
-    L: 'DD/MM/YYYY',
-    LL: 'D MMMM YYYY',
-    LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd, D MMMM YYYY HH:mm',
   },
 }
 

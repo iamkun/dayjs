@@ -1,100 +1,119 @@
 import moment from 'moment'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import dayjs from '../src'
 import { expectSame } from './_util'
 
-describe('Getter and setter', () => {
+describe('Getter', () => {
   const date = new Date()
 
-  it('Year', () => {
+  test('Year', () => {
+    expectSame((dayjs) => dayjs(date).get('y'))
     expectSame((dayjs) => dayjs(date).get('year'))
     expectSame((dayjs) => dayjs(date).year())
     expectSame((dayjs) => dayjs(date).year(0).valueOf())
     expectSame((dayjs) => dayjs(date).year(2000).valueOf())
   })
 
-  it('Month', () => {
+  test('Month', () => {
     expectSame((dayjs) => dayjs(date).get('month'))
     expectSame((dayjs) => dayjs(date).month())
     expectSame((dayjs) => dayjs(date).month(0).valueOf())
     expectSame((dayjs) => dayjs(date).month(1).valueOf())
   })
 
-  it('Day of Week', () => {
-    expectSame((dayjs) => dayjs(date).get('day'))
-    expectSame((dayjs) => dayjs(date).day())
-    expectSame((dayjs) => dayjs(date).day(0).format())
-    expectSame((dayjs) => dayjs(date).day(1).format())
-  })
-
-  it('Date', () => {
+  test('Day of month', () => {
+    expectSame((dayjs) => dayjs(date).get('D'))
     expectSame((dayjs) => dayjs(date).get('date'))
     expectSame((dayjs) => dayjs(date).date())
     expectSame((dayjs) => dayjs(date).date(0).valueOf())
     expectSame((dayjs) => dayjs(date).date(1).valueOf())
   })
 
-  it('Hour', () => {
+  test('Day of Week', () => {
+    expectSame((dayjs) => dayjs(date).get('d'))
+    expectSame((dayjs) => dayjs(date).get('day'))
+    expectSame((dayjs) => dayjs(date).day())
+    expectSame((dayjs) => dayjs(date).day(0).format())
+    expectSame((dayjs) => dayjs(date).day(1).format())
+  })
+
+  test('Hour', () => {
+    expectSame((dayjs) => dayjs(date).get('h'))
     expectSame((dayjs) => dayjs(date).get('hour'))
     expectSame((dayjs) => dayjs(date).hour())
     expectSame((dayjs) => dayjs(date).hour(0).valueOf())
     expectSame((dayjs) => dayjs(date).hour(1).valueOf())
   })
 
-  it('Minute', () => {
+  test('Minute', () => {
+    expectSame((dayjs) => dayjs(date).get('m'))
     expectSame((dayjs) => dayjs(date).get('minute'))
     expectSame((dayjs) => dayjs(date).minute())
     expectSame((dayjs) => dayjs(date).minute(0).valueOf())
     expectSame((dayjs) => dayjs(date).minute(1).valueOf())
   })
 
-  it('Second', () => {
+  test('Second', () => {
+    expectSame((dayjs) => dayjs(date).get('s'))
     expectSame((dayjs) => dayjs(date).get('second'))
     expectSame((dayjs) => dayjs(date).second())
     expectSame((dayjs) => dayjs(date).second(0).valueOf())
     expectSame((dayjs) => dayjs(date).second(1).valueOf())
   })
 
-  it('Millisecond', () => {
+  test('Millisecond', () => {
+    expectSame((dayjs) => dayjs(date).get('ms'))
     expectSame((dayjs) => dayjs(date).get('millisecond'))
     expectSame((dayjs) => dayjs(date).millisecond())
     expectSame((dayjs) => dayjs(date).millisecond(0).valueOf())
     expectSame((dayjs) => dayjs(date).millisecond(1).valueOf())
   })
+})
 
-  it('Set Day', () => {
-    expectSame((dayjs) => dayjs(date).set('date', 30).valueOf())
-  })
+describe('Setter', () => {
+  const date = new Date()
 
-  it('Set Day of Week', () => {
-    expectSame((dayjs) => dayjs(date).set('day', 0).valueOf())
-  })
-
-  it('Set Month', () => {
-    expectSame((dayjs) => dayjs(date).set('month', 11).valueOf())
-  })
-
-  it('Set Year', () => {
+  test('Set Year', () => {
+    expectSame((dayjs) => dayjs(date).set('y', 2008).valueOf())
     expectSame((dayjs) => dayjs(date).set('year', 2008).valueOf())
   })
 
-  it('Set Hour', () => {
+  test('Set Month', () => {
+    expectSame((dayjs) => dayjs(date).set('M', 11).valueOf())
+    expectSame((dayjs) => dayjs(date).set('month', 11).valueOf())
+  })
+
+  test('Set Day of month', () => {
+    expectSame((dayjs) => dayjs(date).set('D', 30).valueOf())
+    expectSame((dayjs) => dayjs(date).set('date', 30).valueOf())
+  })
+
+  test('Set Day of Week', () => {
+    expectSame((dayjs) => dayjs(date).set('d', 0).valueOf())
+    expectSame((dayjs) => dayjs(date).set('day', 0).valueOf())
+  })
+
+  test('Set Hour', () => {
+    expectSame((dayjs) => dayjs(date).set('h', 6).valueOf())
     expectSame((dayjs) => dayjs(date).set('hour', 6).valueOf())
   })
 
-  it('Set Minute', () => {
+  test('Set Minute', () => {
+    expectSame((dayjs) => dayjs(date).set('m', 59).valueOf())
     expectSame((dayjs) => dayjs(date).set('minute', 59).valueOf())
   })
 
-  it('Set Second', () => {
+  test('Set Second', () => {
+    expectSame((dayjs) => dayjs(date).set('s', 59).valueOf())
     expectSame((dayjs) => dayjs(date).set('second', 59).valueOf())
   })
 
-  it('Set Millisecond', () => {
+  test('Set Millisecond', () => {
+    expectSame((dayjs) => dayjs(date).set('ms', 999).valueOf())
     expectSame((dayjs) => dayjs(date).set('millisecond', 999).valueOf())
   })
 
-  it('Set Month and Year in last day of month', () => {
+  test('Set Month and Year in last day of month', () => {
     // 2011-07-31 -> 2011-02-28
     const origin = dayjs('2011-07-31T14:48:00.000Z')
     const setMonth = origin.set('month', 1)
@@ -109,7 +128,7 @@ describe('Getter and setter', () => {
     expect(setYear.date()).toBe(28)
   })
 
-  it('Set Unknown String', () => {
+  test('Set Unknown String', () => {
     expectSame((dayjs) => {
       // @ts-expect-error
       const newDate = dayjs(date).set('Unknown String', 1)
@@ -117,7 +136,7 @@ describe('Getter and setter', () => {
     })
   })
 
-  it('Immutable Set', () => {
+  test('Immutable Set', () => {
     const dayjsA = dayjs(date)
     const dayjsB = dayjsA.set('year', 2011)
     const momentA = moment()

@@ -23,6 +23,7 @@ import {
 import { normalize as normalizeUnit } from './units'
 import {
   absFloor,
+  absRound,
   cloneDate,
   isEmptyObject,
   monthDiff,
@@ -30,14 +31,21 @@ import {
   pick,
 } from './utils'
 import en from './locale/en'
-import type { GetUnit, Unit, UnitBase } from './units'
+import type {
+  GetUnit,
+  Unit,
+  UnitBase,
+  UnitBaseAddSubDiff,
+  UnitBaseGetSet,
+} from './units'
 
-import type { Locale } from './locale'
+import type { DayNames, Locale, MonthNames, MonthNamesFunction } from './locale'
 import type {
   DateInput,
   DayjsFn,
   Extend,
   FormatOption,
+  GetterFn,
   ParseOptions,
   Plugin,
   PluginOption,
@@ -47,9 +55,22 @@ let globalLocale = 'en'
 const loadedLocales: Record<string, Locale> = {}
 loadedLocales[globalLocale] = en
 
-type GetterFn = {
-  (value: number): Dayjs
-  (): number
+const parseArrayToDate = (dateArray: number[]) => {
+  const dateArrayTuple: [
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+  ] = [0, 0, 1, 0, 0, 0, 0]
+  dateArray.forEach((value, index) => {
+    if (value !== undefined) {
+      dateArrayTuple[index] = value
+    }
+  })
+  return new Date(...dateArrayTuple)
 }
 
 const parseDate = (date: Exclude<DateInput, Dayjs>) => {
@@ -58,16 +79,7 @@ const parseDate = (date: Exclude<DateInput, Dayjs>) => {
   else if (date === null) return new Date(Number.NaN)
   else if (date === undefined) return new Date()
   else if (isEmptyObject(date)) return new Date()
-  else if (Array.isArray(date))
-    return new Date(
-      date[0],
-      date[1],
-      date[2],
-      date[3],
-      date[4],
-      date[5],
-      date[6]
-    )
+  else if (Array.isArray(date)) return parseArrayToDate(date)
   else if (typeof date === 'string' && !/z$/i.test(date)) {
     const d = date.match(REGEX_PARSE)
     if (d) {
@@ -127,24 +139,23 @@ export class Dayjs extends (class {} as Extend) {
 
   private _year!: number
   private _month!: number
-  private _date!: number
+  private _date!: number // day of month
   private _hour!: number
   private _minute!: number
   private _second!: number
   private _millisecond!: number
-  /** Day of week */
-  private _day!: number
+  private _day!: number // day of week
 
   private _locale: string
 
   year!: GetterFn
   month!: GetterFn
-  date!: GetterFn
+  date!: GetterFn // day of month
   hour!: GetterFn
   minute!: GetterFn
   second!: GetterFn
   millisecond!: GetterFn
-  day!: GetterFn
+  day!: GetterFn // day of week
 
   constructor(date: Exclude<DateInput, Dayjs>, options?: ParseOptions) {
     super()
@@ -258,7 +269,7 @@ export class Dayjs extends (class {} as Extend) {
       case UNIT_SECOND:
         return factory(pick(numbers, [UNIT_MILLISECOND]))
       case UNIT_WEEK: {
-        const weekStart = this.$locale().weekStart || 0
+        const weekStart = this.loadedLocale().weekStart || 0
         const gap =
           (this._day < weekStart ? this._day + 7 : this._day) - weekStart
         return factory({
@@ -276,8 +287,8 @@ export class Dayjs extends (class {} as Extend) {
     }
   }
 
-  $locale() {
-    return loadedLocales[this._locale]
+  loadedLocale() {
+    return loadedLocales[this._locale] || loadedLocales[globalLocale]
   }
 
   locale(): string
@@ -286,7 +297,10 @@ export class Dayjs extends (class {} as Extend) {
     if (!preset) return this._locale
     const that = this.clone()
     const nextLocaleName = parseLocale(preset, true, locale)
-    if (nextLocaleName) that._locale = nextLocaleName
+    if (nextLocaleName) {
+      that._locale = nextLocaleName
+      this._options.locale = nextLocaleName
+    }
     return that
   }
 
@@ -315,19 +329,21 @@ export class Dayjs extends (class {} as Extend) {
     return new Dayjs(this._d, this._options)
   }
 
-  get(unit: UnitBase | 'day') {
-    return this[`_${unit}` as const]
+  get(unit: UnitBaseGetSet) {
+    const normalizedUnit = normalizeUnit(unit)
+    return this[`_${normalizedUnit}` as const]
   }
 
-  set(unit: UnitBase | 'day', value: number) {
-    let method = GETTER_SETTER_METHODS[unit]
+  set(unit: UnitBaseGetSet, value: number) {
+    const normalizedUnit = normalizeUnit(unit)
+    let method = GETTER_SETTER_METHODS[normalizedUnit]
     if (!method) return this
 
     const date = cloneDate(this._d)
 
-    // If unit is day, we need to calculate and set the date
+    // If unit is day (of week), we need to calculate and set the date (day of month)
     if (method === 'Day') {
-      method = 'Date'
+      method = 'Date' // day of month
       value = this._date + (value - this._day)
     }
 
@@ -339,7 +355,7 @@ export class Dayjs extends (class {} as Extend) {
       date[`set${method}`](value)
     }
 
-    return dayjs(date)
+    return new Dayjs(date, this._options)
   }
 
   daysInMonth() {
@@ -363,25 +379,40 @@ export class Dayjs extends (class {} as Extend) {
   }
 
   utcOffset() {
-    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
-    // https://github.com/moment/moment/pull/1871
-    return -Math.round(this._d.getTimezoneOffset() / 15) * 15
+    // Remove fractional part (seconds) from offset (just like moment.js does)
+    return -Math.round(this._d.getTimezoneOffset())
   }
 
   format(formatStr?: string) {
-    const locale = this.$locale()
+    const locale = this.loadedLocale()
     if (!this.isValid()) return locale.invalidDate || INVALID_DATE_STRING
 
     const str = formatStr || DEFAULT_FORMAT
     const zoneStr = padZoneStr(this.utcOffset())
 
     const { weekdays, months } = locale
-    const getShort = (
-      arr: string[] | undefined,
+    const getShort = function (
+      this: Dayjs,
+      arr: DayNames | MonthNames | MonthNamesFunction | undefined,
       index: number,
-      full?: string[],
+      full?: DayNames | MonthNames | MonthNamesFunction,
       length?: number
-    ) => arr?.[index] || full?.[index].slice(0, Math.max(0, length ?? 0))
+    ) {
+      let result = ''
+      if (arr) {
+        result = Array.isArray(arr)
+          ? arr[index]
+          : (arr as MonthNamesFunction).bind(this)(str)
+      }
+      if (result === '' && full !== undefined) {
+        result = Array.isArray(full)
+          ? full[index].slice(0, Math.max(0, length ?? 0))
+          : (full as MonthNamesFunction)
+              .bind(this)(str)
+              .slice(0, Math.max(0, length ?? 0))
+      }
+      return result
+    }
 
     const getHour = (num: number) =>
       `${this._hour % 12 || 12}`.padStart(num, '0')
@@ -397,13 +428,13 @@ export class Dayjs extends (class {} as Extend) {
       YYYY: this._year,
       M: this._month + 1,
       MM: `${this._month + 1}`.padStart(2, '0'),
-      MMM: getShort(locale.monthsShort, this._month, months, 3),
-      MMMM: getShort(months, this._month),
+      MMM: getShort.bind(this)(locale.monthsShort, this._month, months, 3),
+      MMMM: getShort.bind(this)(months, this._month),
       D: this._date,
       DD: `${this._date}`.padStart(2, '0'),
       d: String(this._day),
-      dd: getShort(locale.weekdaysMin, this._day, weekdays, 2),
-      ddd: getShort(locale.weekdaysShort, this._day, weekdays, 3),
+      dd: getShort.bind(this)(locale.weekdaysMin, this._day, weekdays, 2),
+      ddd: getShort.bind(this)(locale.weekdaysShort, this._day, weekdays, 3),
       dddd: weekdays[this._day],
       H: String(this._hour),
       HH: `${this._hour}`.padStart(2, '0'),
@@ -425,19 +456,19 @@ export class Dayjs extends (class {} as Extend) {
     ) // 'ZZ'
   }
 
-  add(number: number, unit: Exclude<Unit, GetUnit<'D'>>) {
+  add(value: number, unit: UnitBaseAddSubDiff) {
     const normalizedUnit = normalizeUnit(unit)
-    const factory = (n: number) =>
-      this.date(this.date() + Math.round(n * number))
+    const addRoundedToDays = (n: number) =>
+      this.date(this.date() + absRound(n * value))
 
-    if (normalizedUnit === UNIT_MONTH) {
-      return this.set(UNIT_MONTH, this._month + number)
-    } else if (normalizedUnit === UNIT_YEAR) {
-      return this.set(UNIT_YEAR, this._year + number)
+    if (normalizedUnit === UNIT_YEAR) {
+      return this.set(UNIT_MONTH, this._month + absRound(value * 12))
+    } else if (normalizedUnit === UNIT_MONTH) {
+      return this.set(UNIT_MONTH, this._month + absRound(value))
     } else if (normalizedUnit === UNIT_DAY) {
-      return factory(1)
+      return this.set(UNIT_DATE, this._date + absRound(value))
     } else if (normalizedUnit === UNIT_WEEK) {
-      return factory(7)
+      return addRoundedToDays(7)
     }
 
     const steps: Record<typeof normalizedUnit, number> = {
@@ -447,18 +478,18 @@ export class Dayjs extends (class {} as Extend) {
       millisecond: 1,
     }
     const step = steps[normalizedUnit]
-    const nextTimeStamp = this.valueOf() + number * step
+    const nextTimeStamp = this.valueOf() + value * step
     return new Dayjs(nextTimeStamp, this._options)
   }
 
-  subtract(number: number, unit: Exclude<Unit, GetUnit<'D'>>) {
-    return this.add(number * -1, unit)
+  subtract(value: number, unit: UnitBaseAddSubDiff) {
+    return this.add(value * -1, unit)
   }
 
   diff(
     input: DateInput,
-    units: Exclude<Unit, GetUnit<'D' | 'ms'>>,
-    float: boolean
+    units: Exclude<Unit, GetUnit<'D'>> = 'ms',
+    float = false
   ) {
     const normalizedUnit = normalizeUnit(units)
     const that = dayjs(input)
@@ -477,13 +508,14 @@ export class Dayjs extends (class {} as Extend) {
         [UNIT_HOUR]: diff / MILLISECONDS_A_HOUR,
         [UNIT_MINUTE]: diff / MILLISECONDS_A_MINUTE,
         [UNIT_SECOND]: diff / MILLISECONDS_A_SECOND,
+        [UNIT_MILLISECOND]: diff,
       }[normalizedUnit] || diff // milliseconds
 
     return float ? result : absFloor(result)
   }
 }
 
-const getterOrSetter = (unit: UnitBase | 'day') => {
+const getterOrSetter = (unit: UnitBaseGetSet) => {
   function fn(value: number): Dayjs
   function fn(): number
   function fn(this: Dayjs, value?: number): number | Dayjs {
@@ -496,6 +528,7 @@ const getterOrSetter = (unit: UnitBase | 'day') => {
   return fn
 }
 
+// add getter- / setter-functions to class
 ;(
   [
     UNIT_YEAR,
@@ -528,7 +561,7 @@ export const extend = <P extends Plugin<any>>(
 export const dayjs = ((
   date?: DateInput,
   format?: FormatOption,
-  locale?: string | boolean,
+  locale?: Locale | boolean,
   strict?: boolean
 ) => {
   if (isDayjs(date)) return date
@@ -548,5 +581,7 @@ dayjs.isDayjs = isDayjs
 dayjs.unix = unix
 dayjs.extend = extend
 dayjs.locale = parseLocale
+dayjs.en = loadedLocales[globalLocale]
+dayjs.loadedLocales = loadedLocales
 
 export default dayjs
