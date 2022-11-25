@@ -8,7 +8,14 @@ const locale = {
   weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
   weekdaysShort: '週日_週一_週二_週三_週四_週五_週六'.split('_'),
   weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
-  ordinal: n => `${n}日`,
+  ordinal: (number, period) => {
+    switch (period) {
+      case 'W':
+        return `${number}週`
+      default:
+        return `${number}日`
+    }
+  },
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
