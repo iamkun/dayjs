@@ -7,6 +7,7 @@ dayjs.extend(isToday)
 
 describe('Plugin isToday', () => {
   beforeEach(() => {
+    vi.useFakeTimers()
     vi.setSystemTime(new Date())
   })
 
