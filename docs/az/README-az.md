@@ -106,7 +106,7 @@ dayjs.extend(advancedFormat) // plagini işlət
 dayjs().format('Q Do k kk X x') // diğər mövcut formalar
 ```
 
-📚[Plagin Siayhısı](https://day.js.org/docs/en/plugin/plugin)
+📚[Plagin Siyahısı](https://day.js.org/docs/en/plugin/plugin)
 
 ## Sponsorlar
 
