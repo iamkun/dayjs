@@ -1,6 +1,32 @@
 // Persian [fa]
 import dayjs from 'dayjs'
 
+const symbolMap = {
+  1: "١",
+  2: "٢",
+  3: "٣",
+  4: "۴",
+  5: "۵",
+  6: "۶",
+  7: "٧",
+  8: "٨",
+  9: "٩",
+  0: "۰"
+}
+
+const numberMap = {
+  "١": "1",
+  "٢": "2",
+  "٣": "3",
+  "۴": "4",
+  "۵": "5",
+  "۶": "6",
+  "٧": "7",
+  "٨": "8",
+  "٩": "9",
+  "۰": "0"
+}
+
 const locale = {
   name: 'fa',
   weekdays: 'یک‌شنبه_دوشنبه_سه‌شنبه_چهارشنبه_پنج‌شنبه_جمعه_شنبه'.split('_'),
@@ -10,6 +36,19 @@ const locale = {
   months: 'فروردین_اردیبهشت_خرداد_تیر_مرداد_شهریور_مهر_آبان_آذر_دی_بهمن_اسفند'.split('_'),
   monthsShort: 'فرو_ارد_خرد_تیر_مرد_شهر_مهر_آبا_آذر_دی_بهم_اسف'.split('_'),
   ordinal: n => n,
+  preparse(string) {
+    return string
+      .replace(
+        /[۱۲۳۴۵۶۷۸۹۰]/g,
+        match => numberMap[match]
+      )
+      .replace(/،/g, ',')
+  },
+  postformat(string) {
+    return string
+      .replace(/\d/g, match => symbolMap[match])
+      .replace(/,/g, '،')
+  },
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
