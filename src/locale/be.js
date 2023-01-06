@@ -42,9 +42,9 @@ const locale = {
   weekdays: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
   months,
   weekStart: 1,
-  weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
+  weekdaysShort: 'нд_пн_аў_ср_чц_пт_сб'.split('_'),
   monthsShort: 'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split('_'),
-  weekdaysMin: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
+  weekdaysMin: 'нд_пн_аў_ср_чц_пт_сб'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
