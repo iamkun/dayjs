@@ -1,7 +1,15 @@
 /// <reference path="../../types/locale/index.d.ts" />
 
+import {PluginFunc, locale, unix, extend} from '../index'
 import dayjs = require('dayjs');
 
-export default dayjs;
+interface DayjsStatic extends dayjs {
+  locale: typeof locale
+  unix: typeof unix
+  extend: typeof extend
+}
 
-export {PluginFunc} from '../index'
+export default DayjsStatic
+
+export {PluginFunc, locale, unix, extend}
+
