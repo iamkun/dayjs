@@ -7,7 +7,7 @@ dayjs.extend(pluralGetSet)
 const warnBackup = global.console.warn
 beforeEach(() => {
   MockDate.set(new Date())
-  global.console.warn = jest.genMockFunction()
+  global.console.warn = jest.fn()
   // moment.js .years, .dates, .months will throw warn
 })
 
