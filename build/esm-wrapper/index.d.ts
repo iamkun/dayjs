@@ -1,4 +1,4 @@
-/// <reference path="../../types/locale/index.d.ts" />
+/// <reference path="../types/locale/index.d.ts" />
 
 import {PluginFunc, locale, unix, extend} from '../index'
 import dayjs = require('dayjs');
