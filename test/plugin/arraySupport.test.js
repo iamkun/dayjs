@@ -35,7 +35,7 @@ const testArrs = [
 
 describe('parse array local', () => {
   testArrs.forEach((testArr) => {
-    it(testArr, () => {
+    it(testArr.join(', '), () => {
       expect(dayjs(testArr).format())
         .toBe(moment(testArr).format())
     })
@@ -44,7 +44,7 @@ describe('parse array local', () => {
 
 describe('parse array utc', () => {
   testArrs.forEach((testArr) => {
-    it(testArr, () => {
+    it(testArr.join(', '), () => {
       expect(dayjs.utc(testArr).format())
         .toBe(moment.utc(testArr).format())
     })
