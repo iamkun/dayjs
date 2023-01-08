@@ -24,11 +24,6 @@
       "path": "dayjs.min.js"
     }
   ],
-  "exports": {
-    "./*": {
-      "import": "./*"
-    }
-  },
   "jest": {
     "roots": [
       "test"
