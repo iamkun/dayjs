@@ -11,5 +11,5 @@ interface DayjsStatic extends dayjs {
 
 export default DayjsStatic
 
-export {PluginFunc, locale, unix, extend}
+export {PluginFunc}
 
