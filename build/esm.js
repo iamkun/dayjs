@@ -1,4 +1,3 @@
-const fs = require('fs')
 const fsp = require('fs/promises')
 const path = require('path')
 const util = require('util')
@@ -12,14 +11,17 @@ const pluginDir = path.join(process.env.PWD, 'esm/plugin')
 const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFileExt}`)
 
 
-function* walk(dir) {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const d of fs.opendirSync(dir)) {
-    const entry = path.join(dir, d.name)
-    if (d.isDirectory()) {
-      yield walk(entry)
-    } else if (d.isFile()) {
-      yield entry
+async function walk(dir, callback) {
+  const files = await fsp.readdir(dir)
+
+  /* eslint-disable no-restricted-syntax, no-await-in-loop */
+  for (const file of files) {
+    const filepath = path.join(dir, file)
+    const stats = await fsp.stat(filepath)
+    if (stats.isDirectory()) {
+      await walk(filepath, callback)
+    } else if (stats.isFile()) {
+      await callback(filepath, stats)
     }
   }
 }
@@ -57,12 +59,11 @@ function* walk(dir) {
     })
       .map(f => f()))
 
-    /* eslint-disable no-restricted-syntax, no-await-in-loop */
-    for (const p of walk('./esm/')) {
+    await walk('./esm/', async (p) => {
       if (p.endsWith('.js')) {
         await fsp.rename(p, p.replace(/\.js$/g, '.mjs'))
       }
-    }
+    })
     await promisify(ncp)(path.join(__dirname, 'esm-wrapper/'), './esm')
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
