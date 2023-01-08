@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fsp = require('fs/promises')
 const path = require('path')
 const util = require('util')
 const { ncp } = require('ncp')
@@ -8,36 +9,61 @@ const { promisify } = util
 const typeFileExt = '.d.ts'
 const localeDir = path.join(process.env.PWD, 'esm/locale')
 const pluginDir = path.join(process.env.PWD, 'esm/plugin')
-const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFileExt}`);
+const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFileExt}`)
+
+
+function* walk(dir) {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const d of fs.opendirSync(dir)) {
+    const entry = path.join(dir, d.name)
+    if (d.isDirectory()) {
+      yield walk(entry)
+    } else if (d.isFile()) {
+      yield entry
+    }
+  }
+}
+
 
 (async () => {
   try {
-    const readLocaleDir = await promisify(fs.readdir)(localeDir)
-    readLocaleDir.forEach(async (l) => {
+    const readLocaleDir = await fsp.readdir(localeDir)
+    await Promise.all(readLocaleDir.map(l => async () => {
       const filePath = path.join(localeDir, l)
-      const readFile = await promisify(fs.readFile)(filePath, 'utf8')
-      const result = readFile.replace("'dayjs'", "'../index'")
-      await promisify(fs.writeFile)(filePath, result, 'utf8')
+      const readFile = await fsp.readFile(filePath, 'utf8')
+      const result = readFile.replace('\'dayjs\'', '\'../index\'')
+      await fsp.writeFile(filePath, result, 'utf8')
     })
+      .map(f => f()))
 
     await promisify(ncp)('./types/', './esm')
 
-    const readLocaleFile = await promisify(fs.readFile)(localeTypePath, 'utf8')
-    const localResult = readLocaleFile.replace("'dayjs", "'dayjs/esm")
-    await promisify(fs.writeFile)(localeTypePath, localResult, 'utf8')
+    const readLocaleFile = await fsp.readFile(localeTypePath, 'utf8')
+    const localResult = readLocaleFile.replace('\'dayjs', '\'dayjs/esm')
+    await fsp.writeFile(localeTypePath, localResult, 'utf8')
 
-    const readPluginDir = await promisify(fs.readdir)(pluginDir)
-    readPluginDir.forEach(async (p) => {
+    const readPluginDir = await fsp.readdir(pluginDir)
+
+    await Promise.all(readPluginDir.map(p => async () => {
       if (p.includes(typeFileExt)) {
         const pluginName = p.replace(typeFileExt, '')
         const filePath = path.join(pluginDir, p)
         const targetPath = path.join(pluginDir, pluginName, `index${typeFileExt}`)
-        const readFile = await promisify(fs.readFile)(filePath, 'utf8')
-        const result = readFile.replace(/'dayjs'/g, "'dayjs/esm'")
-        await promisify(fs.writeFile)(targetPath, result, 'utf8')
-        await promisify(fs.unlink)(filePath)
+        const readFile = await fsp.readFile(filePath, 'utf8')
+        const result = readFile.replace(/'dayjs'/g, '\'dayjs/esm\'')
+        await fsp.writeFile(targetPath, result, 'utf8')
+        await fsp.unlink(filePath)
       }
     })
+      .map(f => f()))
+
+    /* eslint-disable no-restricted-syntax, no-await-in-loop */
+    for (const p of walk('./esm/')) {
+      if (p.endsWith('.js')) {
+        await fsp.rename(p, p.replace(/\.js$/g, '.mjs'))
+      }
+    }
+    await promisify(ncp)(path.join(__dirname, 'esm-wrapper/'), './esm')
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
   }
