@@ -33,7 +33,7 @@ async function walk(dir, callback) {
     await Promise.all(readLocaleDir.map(l => async () => {
       const filePath = path.join(localeDir, l)
       const readFile = await fsp.readFile(filePath, 'utf8')
-      const result = readFile.replace('\'dayjs\'', '\'../index\'')
+      const result = readFile.replace("'dayjs'", "'../index'")
       await fsp.writeFile(filePath, result, 'utf8')
     })
       .map(f => f()))
@@ -41,7 +41,7 @@ async function walk(dir, callback) {
     await promisify(ncp)('./types/', './esm')
 
     const readLocaleFile = await fsp.readFile(localeTypePath, 'utf8')
-    const localResult = readLocaleFile.replace('\'dayjs', '\'dayjs/esm')
+    const localResult = readLocaleFile.replace("'dayjs", "'dayjs/esm")
     await fsp.writeFile(localeTypePath, localResult, 'utf8')
 
     const readPluginDir = await fsp.readdir(pluginDir)
