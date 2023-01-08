@@ -3,3 +3,5 @@
 import dayjs = require('dayjs');
 
 export default dayjs;
+
+export {PluginFunc} from '../index'
