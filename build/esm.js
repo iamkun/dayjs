@@ -62,6 +62,9 @@ async function walk(dir, callback) {
     await walk('./esm/', async (p) => {
       if (p.endsWith('.js')) {
         await fsp.rename(p, p.replace(/\.js$/g, '.mjs'))
+      } else if (p.endsWith(typeFileExt)) {
+        const content = await fsp.readFile(p, 'utf8')
+        await fsp.writeFile(p, content.replaceAll('export = ', 'export default '))
       }
     })
     await promisify(ncp)(path.join(__dirname, 'esm-wrapper/'), './esm')
