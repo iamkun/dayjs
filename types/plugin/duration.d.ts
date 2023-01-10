@@ -23,6 +23,7 @@ declare namespace plugin {
     ((units: DurationUnitsObjectType) => Duration)
     & ((time: number, unit?: DurationUnitType) => Duration)
     & ((ISO_8601: string) => Duration)
+    & ((TimeSpan: string) => Duration)
   type AddDurationType = CreateDurationType & ((duration: Duration) => Duration)
 
   interface Duration {
