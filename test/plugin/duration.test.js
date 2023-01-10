@@ -22,6 +22,7 @@ describe('Creating', () => {
     expect(dayjs.duration().asMilliseconds()).toBe(0)
   })
   it('milliseconds', () => {
+    expect(dayjs.duration(691199999, 'ms').toISOString()).toBe('P7DT23H59M59.999S')
     expect(dayjs.duration(1, 'ms').toISOString()).toBe('PT0.001S')
     expect(dayjs.duration(100).toISOString()).toBe('PT0.1S')
     expect(dayjs.duration(1000).toISOString()).toBe('PT1S')
@@ -45,6 +46,13 @@ describe('Creating', () => {
       months: 6,
       years: 7
     }).toISOString()).toBe('P7Y6M4DT3H2M1S')
+    expect(dayjs.duration({
+      milliseconds: 999,
+      seconds: 59,
+      minutes: 59,
+      hours: 23,
+      days: 7
+    }).toISOString()).toBe('P7DT23H59M59.999S')
   })
   it('object with weeks and float', () => {
     expect(dayjs.duration({
@@ -66,6 +74,13 @@ describe('Creating', () => {
     expect(dayjs.duration({
       ms: -1
     }).toISOString()).toBe('-PT0.001S')
+  })
+  it('string ASP.NET style TimeSpan', () => {
+    expect(dayjs.duration('23:59').asMilliseconds()).toBe(86340000)
+    expect(dayjs.duration('23:59:59').asMilliseconds()).toBe(86399000)
+    expect(dayjs.duration('23:59:59.999').asMilliseconds()).toBe(86399999)
+    expect(dayjs.duration('7.23:59:59.999').asMilliseconds()).toBe(691199999)
+    expect(dayjs.duration('7 23:59:59.999').asMilliseconds()).toBe(691199999)
   })
 })
 
