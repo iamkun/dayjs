@@ -82,20 +82,6 @@ class Duration {
     }
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
-      const regex = [
-        /^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$/gm,
-        /^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,3})$/gm,
-        /^([0-9]{1,2}(.| )[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}.[0-9]{1,3})$/gm,
-        /^([0-9]{1,2}:[0-9]{1,2})$/gm
-      ]
-
-      let t = []
-
-      regex.forEach((re) => {
-        const r = input.match(re)
-        if (r) t = r[0].match(/[0-9]{1,}/g)
-      })
-
       if (d) {
         const properties = d.slice(2)
         const numberD = properties.map(value => (value != null ? Number(value) : 0));
@@ -110,46 +96,6 @@ class Duration {
         ] = numberD
         this.calMilliseconds()
         return this
-      } else if (t.length > 0) {
-        t = t.map(value => (value != null ? Number(value) : 0))
-
-        // eslint-disable-next-line default-case
-        switch (t.length) {
-          case 2:
-            [
-              this.$d.hours,
-              this.$d.minutes
-            ] = t
-            this.calMilliseconds()
-            return this
-          case 3:
-            [
-              this.$d.hours,
-              this.$d.minutes,
-              this.$d.seconds
-            ] = t
-            this.calMilliseconds()
-            return this
-          case 4:
-            [
-              this.$d.hours,
-              this.$d.minutes,
-              this.$d.seconds,
-              this.$d.milliseconds
-            ] = t
-            this.calMilliseconds()
-            return this
-          case 5:
-            [
-              this.$d.days,
-              this.$d.hours,
-              this.$d.minutes,
-              this.$d.seconds,
-              this.$d.milliseconds
-            ] = t
-            this.calMilliseconds()
-            return this
-        }
       }
     }
     return this
