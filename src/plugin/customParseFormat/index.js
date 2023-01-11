@@ -227,18 +227,39 @@ export default (o, C, d) => {
         locale = d.Ls[pl]
       }
 
-      const value = matchWord.exec(date)
+      const value = /\d*[^-_:/,()\s\d+]+/.exec(date)
       if (value) {
-        const rValue = value[0].charAt(0).toLocaleUpperCase() + value[0].slice(1)
         const months = getLocalePart('months')
         const monthsShort = getLocalePart('monthsShort')
 
-        const containsValue = (
-          months.includes(rValue) ||
-          (monthsShort || months.map(_ => _.slice(0, 3))).includes(rValue)
-        )
+        const reValue = new RegExp(`^${value[0].toLowerCase()}$`)
 
-        if (containsValue) date = date.replace(value, rValue)
+        let idxValueMonths
+        let idxValueShortMonths
+
+        months.forEach((_, idx) => {
+          const s = reValue.exec(_.toLowerCase().slice(0, 3))
+          const l = reValue.exec(_.toLowerCase())
+          if (l) idxValueMonths = idx
+          if (s) idxValueShortMonths = idx
+        })
+
+        if (monthsShort) {
+          monthsShort.forEach((_, idx) => {
+            const l = reValue.exec(_.toLowerCase())
+            if (l) idxValueShortMonths = idx
+          })
+        }
+
+        if (idxValueMonths !== undefined) {
+          date = date.replace(value[0], months[idxValueMonths])
+        } else if (idxValueShortMonths !== undefined) {
+          if (monthsShort) {
+            date = date.replace(value[0], monthsShort[idxValueShortMonths])
+          } else {
+            date = date.replace(value[0], months[idxValueShortMonths].slice(0, 3))
+          }
+        }
       }
 
       this.$d = parseFormattedInput(date, format, utc)
