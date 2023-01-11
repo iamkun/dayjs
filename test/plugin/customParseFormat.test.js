@@ -304,6 +304,7 @@ describe('Strict mode', () => {
     expect(dayjs(input, format, true).isValid()).toBe(false)
     expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
     expect(dayjs('2020-jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
+    expect(dayjs('2020-jan-01', 'YYYY-MMM-DD').isValid()).toBe(true)
     expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
   })
   it('with locale', () => {
@@ -311,6 +312,7 @@ describe('Strict mode', () => {
     const format = 'YYYY MMMM DD'
     expect(dayjs(input, format, 'zh-cn').isValid()).toBe(true)
     expect(dayjs('2020-февр.-01', 'YYYY-MMM-DD', 'ru').isValid()).toBe(true)
+    expect(dayjs('2020-jan-01', 'YYYY-MMM-DD', ['en']).isValid()).toBe(true)
     expect(dayjs('2020-jan-01', 'YYYY-MMM-DD', 'en').isValid()).toBe(true)
     expect(dayjs(input, format, 'zh-cn', true).isValid()).toBe(false)
   })

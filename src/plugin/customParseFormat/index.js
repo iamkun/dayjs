@@ -248,7 +248,6 @@ export default (o, C, d) => {
       // input number 1410715640579 and format string '1410715640579' equal
       // eslint-disable-next-line eqeqeq
       if (isStrict && date != this.format(format)) {
-        // console.log('Date("")', isStrict, date, this.format(format))
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
@@ -258,7 +257,6 @@ export default (o, C, d) => {
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
         const result = d.apply(this, args)
-        console.log(result, result.isValid())
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
