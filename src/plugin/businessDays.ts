@@ -1,5 +1,5 @@
 import { abs, absFloor } from '../utils'
-import { UNIT_DAY, UNIT_MONTH, UNIT_WEEK } from './../constants'
+import { UNIT_DAY, UNIT_HOUR, UNIT_MONTH, UNIT_WEEK } from './../constants'
 import { normalize } from './../units'
 
 import type { Unit } from './../units'
@@ -7,13 +7,15 @@ import type { Dayjs, Plugin } from '..'
 
 declare module '../types' {
   export interface Extend {
-    isBusinessDay: () => boolean | undefined
+    isBusinessDay: () => boolean
     addBusinessDay: SetterFn
     subtractBusinessDay: SetterFn
     nextBusinessDay: () => Dayjs
     previousBusinessDay: () => Dayjs
     lastBusinessDayOf: () => Dayjs
     firstBusinessDayOf: () => Dayjs
+    businessDaysInMonth: () => Dayjs[]
+    businessDaysInMonthByWeek: () => Dayjs[][]
   }
 }
 
@@ -52,13 +54,12 @@ function $add(this: Dayjs, value: number): Dayjs {
     nbrDayAdd -= absFloor(nbrDayAdd / 5) * 5
   }
 
-  // NOTE: Probably not the best solution, but it works
-  const res = this.add(nbrWeekAdd, UNIT_WEEK)
+  return this.add(nbrWeekAdd, UNIT_WEEK)
     .day(idxThisDay)
     .add(nbrDayAdd, UNIT_DAY)
-  return res
 }
 
+// REWORK: This function is not working properly i think or i'm missing something
 function $subtract(this: Dayjs, value: number): Dayjs {
   let restBusinessDay =
     idxBusinessDays.length - (idxBusinessDays.length - this.day()) - 1
@@ -93,7 +94,7 @@ function $subtract(this: Dayjs, value: number): Dayjs {
     nbrDayAdd -= absFloor(nbrDayAdd / 5) * 5
   }
 
-  // NOTE: Probably not the best solution, but it works
+  // NOTE: Probably not the best solution, but it works.
   const res = this.subtract(nbrWeekAdd, UNIT_WEEK)
     .day(idxThisDay)
     .subtract(nbrDayAdd, UNIT_DAY)
@@ -110,22 +111,23 @@ function businessDay(this: Dayjs, value: number, unit?: Unit) {
   if (unit === undefined) {
     if (v > 0) return $add.call(this, v)
     if (v < 0) return $subtract.call(this, abs(v))
-  }
+  } else {
+    const u = normalize(unit)
 
-  const u = normalize(unit)
+    if (v > 0) {
+      if (u === UNIT_DAY) return $add.call(this, v)
+      if (u === UNIT_WEEK) return $add.call(this, v * 5)
+    }
 
-  if (v > 0) {
-    if (u === UNIT_DAY) return $add.call(this, v)
-    if (u === UNIT_WEEK) return $add.call(this, v * 5)
-  }
-
-  if (v < 0) {
-    if (u === UNIT_DAY) return $subtract.call(this, abs(v))
-    if (u === UNIT_WEEK) return $subtract.call(this, abs(v) * 5)
+    if (v < 0) {
+      if (u === UNIT_DAY) return $subtract.call(this, abs(v))
+      if (u === UNIT_WEEK) return $subtract.call(this, abs(v) * 5)
+    }
   }
 }
 
-const plugin: Plugin = (cls, _fn) => {
+const plugin: Plugin = (cls) => {
+  // (cls: DayjsClass, fn: DayjsFn)
   const proto = cls.prototype
 
   proto.isBusinessDay = function (this: Dayjs) {
@@ -164,6 +166,43 @@ const plugin: Plugin = (cls, _fn) => {
   proto.firstBusinessDayOf = function (this: Dayjs, unit?: Unit) {
     const fm = this.startOf(unit || UNIT_MONTH)
     return fm.isBusinessDay() ? fm : fm.nextBusinessDay()
+  }
+
+  proto.businessDaysInMonth = function (this: Dayjs) {
+    let start = this.startOf(UNIT_MONTH).hour(this.hour())
+    let end = this.endOf(UNIT_MONTH).hour(this.hour())
+    if (!start.isBusinessDay()) start = start.nextBusinessDay()
+    if (!end.isBusinessDay()) end = end.previousBusinessDay()
+
+    const arr = []
+    let current = start
+
+    while (current.month() === end.month()) {
+      arr.push(current)
+      current = current.nextBusinessDay()
+    }
+
+    return arr
+  }
+
+  proto.businessDaysInMonthByWeek = function (this: Dayjs) {
+    const days = this.businessDaysInMonth()
+    const arr: Dayjs[][] = []
+
+    let lastDate: Dayjs | undefined,
+      idxWeek = 0
+
+    days.forEach((day) => {
+      if (!lastDate) arr.push([day])
+      else if (lastDate.day() + 1 === day.day()) arr[idxWeek].push(day)
+      else {
+        arr.push([day])
+        idxWeek += 1
+      }
+      lastDate = day
+    })
+
+    return arr
   }
 }
 export default plugin
