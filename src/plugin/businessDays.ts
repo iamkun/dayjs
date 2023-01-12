@@ -15,7 +15,7 @@ declare module '../types' {
     lastBusinessDayOf: () => Dayjs
     firstBusinessDayOf: () => Dayjs
     businessDaysInMonth: () => Dayjs[]
-    businessDaysInMonthByWeek: () => Dayjs[][]
+    businessDaysInMonthGroupByWeek: () => Dayjs[][]
   }
 }
 
@@ -185,7 +185,7 @@ const plugin: Plugin = (cls) => {
     return arr
   }
 
-  proto.businessDaysInMonthByWeek = function (this: Dayjs) {
+  proto.businessDaysInMonthGroupByWeek = function (this: Dayjs) {
     const days = this.businessDaysInMonth()
     const arr: Dayjs[][] = []
 

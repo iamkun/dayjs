@@ -332,7 +332,7 @@ describe('Plugin businessDays', () => {
       ]
 
       expect(
-        dayjs(new Date(2023, 2, 10, 3)).businessDaysInMonthByWeek()
+        dayjs(new Date(2023, 2, 10, 3)).businessDaysInMonthGroupByWeek()
       ).toEqual(data)
     })
 

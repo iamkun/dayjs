@@ -2,7 +2,7 @@ import { describe } from 'vitest'
 import dayjs from '../../src'
 import businessDays from '../../src/plugin/businessDays'
 import { defaultBenchmark } from '../_utils'
-import { UNIT_DAY, UNIT_WEEK } from '../../src/constants'
+import { UNIT_DAY } from '../../src/constants'
 
 dayjs.extend(businessDays)
 
@@ -197,7 +197,7 @@ describe('Plugin businessDays', () => {
       dayjs(new Date(2023, 0, 10, 3)).businessDaysInMonth()
     })
     defaultBenchmark('should get business days in month group by week', () => {
-      dayjs(new Date(2023, 0, 10, 3)).businessDaysInMonthByWeek()
+      dayjs(new Date(2023, 0, 10, 3)).businessDaysInMonthGroupByWeek()
     })
   })
 })
