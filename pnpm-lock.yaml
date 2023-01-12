@@ -8,7 +8,7 @@ importers:
       '@sxzz/eslint-config-prettier': ^2.2.2
       '@sxzz/eslint-config-ts': ^2.2.2
       '@types/node': '*'
-      c8: ^7.11.3
+      '@vitest/coverage-c8': ^0.27.1
       chalk: ^5.0.1
       consola: ^2.15.3
       esbuild: ^0.14.48
@@ -33,7 +33,7 @@ importers:
       '@sxzz/eslint-config-prettier': 2.2.2_eslint@8.19.0
       '@sxzz/eslint-config-ts': 2.2.2_eslint@8.19.0
       '@types/node': 18.0.3
-      c8: 7.11.3
+      '@vitest/coverage-c8': 0.27.1_terser@5.14.1
       chalk: 5.0.1
       consola: 2.15.3
       esbuild: 0.14.48
@@ -649,6 +649,25 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@vitest/coverage-c8/0.27.1_terser@5.14.1:
+    resolution: {integrity: sha512-/9VTGDIAp4hv8PBawfyijxhkiyucfOxFRRP+7kzy3Dj0wONy1Mc2MBoPmiH4aZVc0LViQqecrQLs8JVGt42keA==}
+    dependencies:
+      c8: 7.12.0
+      vitest: 0.27.1_terser@5.14.1
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - happy-dom
+      - jsdom
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+    dev: true
+
   /acorn-jsx/5.3.2_acorn@8.7.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -781,8 +800,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /c8/7.11.3:
-    resolution: {integrity: sha512-6YBmsaNmqRm9OS3ZbIiL2EZgi1+Xc4O24jL3vMYGE6idixYuGdy76rIfIdltSKDj9DpLNrcXSonUTR1miBD0wA==}
+  /c8/7.12.0:
+    resolution: {integrity: sha512-CtgQrHOkyxr5koX1wEUmN/5cfDa2ckbHRA4Gy5LAL0zaCFtVWJS5++n+w4/sr2GWGerBxgTjpKeDclk/Qk6W/A==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:

@@ -16,16 +16,17 @@ export type FormatOption = string | string[]
 
 export type GetterFn = {
   (value: number): Dayjs
-  (): Dayjs | number
+  (): Dayjs
+  (): number
 }
 
 export type SetterFn = {
-  (value: number, unit: Exclude<Unit, GetUnit<'D'>>): Dayjs
+  (value: number, unit: Unit): Dayjs
   (value: number): Dayjs
 }
 
 export type AccessorFn = {
-  (value: number, unit: Exclude<Unit, GetUnit<'D'>>): Dayjs
+  (value: number, unit: Unit): Dayjs
   (value: number): Dayjs
   (): number
 }
