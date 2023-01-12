@@ -49,6 +49,8 @@
     "lint:fix": "pnpm run lint --fix",
     "format": "prettier . --write",
     "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "bench": "vitest bench",
     "typecheck": "run-p typecheck:*",
     "typecheck:src": "tsc --noEmit -p tsconfig.src.json --composite false",
     "typecheck:test": "tsc --noEmit -p tsconfig.vitest.json --composite false",
@@ -78,7 +80,7 @@
     "tsx": "^3.7.1",
     "typescript": "^4.7.4",
     "unplugin-ast": "^0.5.2",
-    "vitest": "^0.17.0"
+    "vitest": "^0.27.1"
   },
   "engines": {
     "node": ">=14.19.0"
