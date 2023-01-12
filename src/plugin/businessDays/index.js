@@ -54,11 +54,19 @@ export default (_, c, d) => {
   proto.addBusinessDays = function (n, u) {
     if (n <= 0) return this
 
+    const forWeek = (n, t) => {
+      let res
+      for (let i = 0; i < n; i++) {
+        res = (res || t).$addBusinessDays(5)
+      }
+      return res
+    }
+
     switch (prettyUnit(u)) {
       case D:
         return this.$addBusinessDays(n)
       case W:
-        return this.$addBusinessDays(5 * n)
+        return forWeek(n, this)
       default:
         return this.$addBusinessDays(n)
     }
@@ -105,11 +113,19 @@ export default (_, c, d) => {
   proto.subtractBusinessDays = function (n, u) {
     if (n <= 0) return this
 
+    const forWeek = (n, t) => {
+      let res
+      for (let i = 0; i < n; i++) {
+        res = (res || t).subtractBusinessDays(5)
+      }
+      return res
+    }
+
     switch (prettyUnit(u)) {
       case D:
         return this.$subtractBusinessDays(n)
       case W:
-        return this.$subtractBusinessDays(5 * n)
+        return forWeek(n, this)
       default:
         return this.$subtractBusinessDays(n)
     }

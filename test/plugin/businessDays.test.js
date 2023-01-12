@@ -183,6 +183,9 @@ test('Subtract business days (week)', () => {
   expect(dayjs(new Date(2023, 0, 13, 3)).isSame(dayjs(new Date(2023, 0, 20, 3)).subtractBusinessDays(1, 'w'))).toBe(true, 'Subtract 2 business days match')
   expect(dayjs(new Date(2023, 0, 16, 3)).isSame(dayjs(new Date(2023, 0, 21, 3)).subtractBusinessDays(1, 'w'))).toBe(true, 'Subtract 5 business days match')
 
+  console.log(dayjs(new Date(2023, 0, 23, 3)).subtractBusinessDays(2, 'w'))
+  expect(dayjs(new Date(2023, 0, 9, 3)).isSame(dayjs(new Date(2023, 0, 23, 3)).subtractBusinessDays(2, 'w'))).toBe(true, 'Subtract 0 business days match')
+
   // Specific
   expect(dayjs(new Date(2023, 0, 25, 3, 4, 5, 20)).isSame(dayjs(new Date(2023, 1, 1, 3, 4, 5, 20)).subtractBusinessDays(1, 'w'))).toBe(true, 'Month change backward')
   expect(dayjs(new Date(2022, 11, 26, 3, 4, 5, 20)).isSame(dayjs(new Date(2023, 0, 1, 3, 4, 5, 20)).subtractBusinessDays(1, 'w'))).toBe(true, 'Year change backward')
