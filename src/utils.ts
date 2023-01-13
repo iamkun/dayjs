@@ -42,7 +42,7 @@ export const monthDiff = (a: Dayjs, b: Dayjs): number => {
   )
 }
 
-export const absFloor = (n: number) =>
+export const absFloor = (n: number): number =>
   n < 0 ? Math.ceil(n) || 0 : Math.floor(n)
 
 export const abs = (n: number) => (n < 0 ? Math.abs(n) : n)

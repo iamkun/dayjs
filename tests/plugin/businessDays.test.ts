@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import dayjs from '../../src'
 import businessDays from '../../src/plugin/businessDays'
-import { UNIT_DAY } from './../../src/constants'
+import { UNIT_DAY, UNIT_WEEK } from './../../src/constants'
 
 dayjs.extend(businessDays)
 
 describe('Plugin businessDays', () => {
-  describe('isBusinessDay', () => {
+  describe('is business day', () => {
     it('should return true for business days', () => {
       expect(dayjs(new Date(2023, 0, 9)).isBusinessDay()).toBeTruthy()
       expect(dayjs(new Date(2023, 0, 10)).isBusinessDay()).toBeTruthy()
@@ -70,6 +70,11 @@ describe('Plugin businessDays', () => {
           .addBusinessDay(20)
           .isSame(dayjs(new Date(2023, 1, 6)), UNIT_DAY)
       ).toBeTruthy()
+      expect(
+        dayjs(new Date(2023, 0, 9))
+          .addBusinessDay(-20)
+          .isSame(dayjs(new Date(2023, 1, 6)), UNIT_DAY)
+      ).toBeTruthy()
     })
 
     it('should subtract days', () => {
@@ -125,6 +130,11 @@ describe('Plugin businessDays', () => {
           .subtractBusinessDay(10)
           .isSame(dayjs(new Date(2022, 11, 26)), UNIT_DAY)
       ).toBeTruthy()
+      expect(
+        dayjs(new Date(2023, 0, 9))
+          .subtractBusinessDay(-10)
+          .isSame(dayjs(new Date(2022, 11, 26)), UNIT_DAY)
+      ).toBeTruthy()
     })
 
     it('should add weeks', () => {
@@ -153,6 +163,13 @@ describe('Plugin businessDays', () => {
           .addBusinessDay(5, 'week')
           .isSame(dayjs(new Date(2023, 1, 13)), UNIT_DAY)
       ).toBeTruthy()
+
+      // Special case
+      expect(
+        dayjs(new Date(2023, 0, 9))
+          .addBusinessDay(-4, UNIT_WEEK)
+          .isSame(dayjs(new Date(2023, 1, 6)), UNIT_DAY)
+      ).toBeTruthy()
     })
 
     it('should subtract weeks', () => {
@@ -180,6 +197,13 @@ describe('Plugin businessDays', () => {
         dayjs(new Date(2023, 0, 13))
           .subtractBusinessDay(5, 'week')
           .isSame(dayjs(new Date(2022, 11, 9)), UNIT_DAY)
+      ).toBeTruthy()
+
+      // Special case
+      expect(
+        dayjs(new Date(2023, 0, 9))
+          .subtractBusinessDay(-2, UNIT_WEEK)
+          .isSame(dayjs(new Date(2022, 11, 26)), UNIT_DAY)
       ).toBeTruthy()
     })
 
@@ -338,6 +362,133 @@ describe('Plugin businessDays', () => {
 
     it('should get nothing', () => {
       expect(dayjs(null).businessDaysInMonth()).toEqual([])
+    })
+  })
+
+  describe('holiday', () => {
+    it('should get nothing', () => {
+      expect(dayjs().getHolidays()).toEqual({})
+      expect(dayjs(null).getHolidays()).toEqual({})
+      dayjs.setHoliday(null)
+      expect(dayjs().getHolidays()).toEqual({})
+      dayjs.setHoliday([])
+      expect(dayjs().getHolidays()).toEqual({})
+    })
+
+    it('should get holiday', () => {
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 1)),
+        name: 'New Year',
+      })
+      expect(Object.keys(dayjs().getHolidays()).length).toEqual(1)
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2022, 11, 31)),
+          name: 'Before New Year',
+        },
+      ])
+      expect(Object.keys(dayjs().getHolidays()).length).toEqual(2)
+      dayjs.clearHoliday()
+      expect(Object.keys(dayjs().getHolidays()).length).toEqual(0)
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 1)),
+        name: 'New Year',
+        repeat: 10,
+      })
+      expect(Object.keys(dayjs().getHolidays()).length).toEqual(10)
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 1)),
+          name: 'New Year',
+          repeat: 10,
+        },
+      ])
+      expect(Object.keys(dayjs().getHolidays()).length).toEqual(10)
+      dayjs.clearHoliday()
+    })
+
+    it('is holiday', () => {
+      expect(dayjs(new Date(2023, 0, 1)).isHoliday()).toBeFalsy()
+      expect(dayjs(new Date(2023, 0, 2)).isHoliday()).toBeFalsy()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 1)),
+          name: 'New Year',
+        },
+      ])
+
+      expect(dayjs(new Date(2023, 0, 1)).isBusinessDay()).toBeFalsy()
+      expect(dayjs(new Date(2023, 0, 1)).isHoliday()).toBeTruthy()
+      expect(dayjs(new Date(2023, 0, 2)).isHoliday()).toBeFalsy()
+      dayjs.clearHoliday()
+      expect(dayjs(new Date(2023, 0, 1)).isBusinessDay()).toBeFalsy()
+    })
+
+    it('should get business days', () => {
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 13)),
+        name: 'Why not',
+      })
+
+      expect(
+        dayjs(new Date(2023, 0, 12))
+          .addBusinessDay(1)
+          .isSame(new Date(2023, 0, 16))
+      ).toBeTruthy()
+      expect(
+        dayjs(new Date(2023, 0, 16))
+          .subtractBusinessDay(1)
+          .isSame(new Date(2023, 0, 12))
+      ).toBeTruthy()
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 16)),
+        name: 'Why not, again',
+      })
+
+      expect(
+        dayjs(new Date(2023, 0, 12))
+          .addBusinessDay(1)
+          .isSame(new Date(2023, 0, 16))
+      ).toBeFalsy()
+      expect(
+        dayjs(new Date(2023, 0, 16))
+          .subtractBusinessDay(1)
+          .isSame(new Date(2023, 0, 12))
+      ).toBeTruthy()
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 16)),
+        name: 'VACATION',
+        repeat: 10,
+        repeatUnit: UNIT_DAY,
+      })
+      expect(
+        dayjs(new Date(2023, 0, 13))
+          .addBusinessDay(1)
+          .isSame(new Date(2023, 0, 30))
+      ).toBeTruthy()
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 16)),
+          name: 'VACATION',
+          repeat: 10,
+          repeatUnit: UNIT_DAY,
+        },
+      ])
+      expect(
+        dayjs(new Date(2023, 0, 13))
+          .addBusinessDay(1)
+          .isSame(new Date(2023, 0, 30))
+      ).toBeTruthy()
+      dayjs.clearHoliday()
     })
   })
 })

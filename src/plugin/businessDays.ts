@@ -1,21 +1,48 @@
-import { abs, absFloor } from '../utils'
-import { UNIT_DAY, UNIT_HOUR, UNIT_MONTH, UNIT_WEEK } from './../constants'
-import { normalize } from './../units'
+// This plugin is based on the work of https://github.com/soar-tech & https://github.com/eduolalo
 
-import type { Unit } from './../units'
+import { abs, absFloor } from '../utils'
+import { UNIT_DAY, UNIT_MONTH, UNIT_WEEK, UNIT_YEAR } from './../constants'
+import { normalize } from './../units'
 import type { Dayjs, Plugin } from '..'
+import type { GetUnit, Unit } from './../units'
+
+export type holiday = {
+  date: Dayjs
+  name: string
+  repeat?: number
+  repeatUnit?: Exclude<Unit, GetUnit<'D'>>
+}
+
+export type optsHoliday = {
+  [key: string]: holiday
+}
 
 declare module '../types' {
-  export interface Extend {
-    isBusinessDay: () => boolean
-    addBusinessDay: SetterFn
-    subtractBusinessDay: SetterFn
-    nextBusinessDay: () => Dayjs
-    previousBusinessDay: () => Dayjs
-    lastBusinessDayOf: () => Dayjs
-    firstBusinessDayOf: () => Dayjs
-    businessDaysInMonth: () => Dayjs[]
-    businessDaysInMonthGroupByWeek: () => Dayjs[][]
+  export interface DayjsFn {
+    setHoliday: (holiday: holiday[] | holiday) => void
+    clearHoliday(): void
+  }
+}
+
+declare module '../dayjs' {
+  export interface Dayjs {
+    // var
+    _holiday: optsHoliday
+
+    // business day
+    isBusinessDay(): boolean
+    addBusinessDay(value: number, unit?: Unit): Dayjs
+    subtractBusinessDay(value: number, unit?: Unit): Dayjs
+    nextBusinessDay(): Dayjs
+    previousBusinessDay(): Dayjs
+    lastBusinessDayOf(): Dayjs
+    firstBusinessDayOf(): Dayjs
+    businessDaysInMonth(): Dayjs[]
+    businessDaysInMonthGroupByWeek(): Dayjs[][]
+
+    // holiday
+    isHoliday(): boolean
+    getHolidays(): optsHoliday
   }
 }
 
@@ -103,41 +130,118 @@ function $subtract(this: Dayjs, value: number): Dayjs {
     : res
 }
 
-function businessDay(this: Dayjs, value: number, unit?: Unit) {
+function businessDay(this: Dayjs, value: number, unit: Unit) {
   //  value is not 0
 
   const v = absFloor(value)
+  let res = undefined
 
-  if (unit === undefined) {
-    if (v > 0) return $add.call(this, v)
-    if (v < 0) return $subtract.call(this, abs(v))
-  } else {
-    const u = normalize(unit)
+  if (v > 0) {
+    if (unit === UNIT_DAY) res = $add.call(this, v)
+    if (unit === UNIT_WEEK) res = $add.call(this, v * 5)
+  }
 
-    if (v > 0) {
-      if (u === UNIT_DAY) return $add.call(this, v)
-      if (u === UNIT_WEEK) return $add.call(this, v * 5)
-    }
+  if (v < 0) {
+    if (unit === UNIT_DAY) res = $subtract.call(this, abs(v))
+    if (unit === UNIT_WEEK) res = $subtract.call(this, abs(v) * 5)
+  }
 
-    if (v < 0) {
-      if (u === UNIT_DAY) return $subtract.call(this, abs(v))
-      if (u === UNIT_WEEK) return $subtract.call(this, abs(v) * 5)
-    }
+  while (res !== undefined && res.isHoliday()) {
+    if (v > 0) res = res.nextBusinessDay()
+    if (v < 0) res = res.previousBusinessDay()
+  }
+
+  return res
+}
+
+function $setHoliday(old: optsHoliday, key: string, value: holiday) {
+  return {
+    ...old,
+    [key]: value,
   }
 }
 
-const plugin: Plugin = (cls) => {
+const plugin: Plugin = (cls, fn) => {
   // (cls: DayjsClass, fn: DayjsFn)
   const proto = cls.prototype
+  // global var
+  proto._holiday = proto._holiday || {}
 
+  // global function
+  fn.setHoliday = function (this: Dayjs, holiday: holiday[] | holiday) {
+    if (Array.isArray(holiday) && holiday.length > 0) {
+      holiday.forEach((h) => {
+        if (!h.repeat)
+          proto._holiday = $setHoliday(
+            proto._holiday,
+            h.date.format('YYYY-MM-DD'),
+            h
+          )
+        else {
+          for (let i = 0, l = h.repeat; i < l; i++) {
+            if (!h.repeatUnit) h.repeatUnit = UNIT_YEAR
+
+            proto._holiday = $setHoliday(
+              proto._holiday,
+              h.repeatUnit === UNIT_DAY || h.repeatUnit === UNIT_MONTH
+                ? h.date.addBusinessDay(i, h.repeatUnit).format('YYYY-MM-DD')
+                : h.date.add(i, h.repeatUnit).format('YYYY-MM-DD'),
+              {
+                ...h,
+                date: h.date.add(i, h.repeatUnit),
+              }
+            )
+          }
+        }
+      })
+    } else if (holiday && !Array.isArray(holiday))
+      if (!holiday.repeat)
+        proto._holiday = $setHoliday(
+          proto._holiday,
+          holiday.date.format('YYYY-MM-DD'),
+          holiday
+        )
+      else {
+        for (let i = 0, l = holiday.repeat; i < l; i++) {
+          if (!holiday.repeatUnit) holiday.repeatUnit = UNIT_YEAR
+
+          proto._holiday = $setHoliday(
+            proto._holiday,
+            holiday.repeatUnit === UNIT_DAY || holiday.repeatUnit === UNIT_MONTH
+              ? holiday.date
+                .addBusinessDay(i, holiday.repeatUnit)
+                .format('YYYY-MM-DD')
+              : holiday.date.add(i, holiday.repeatUnit).format('YYYY-MM-DD'),
+            {
+              ...holiday,
+              date: holiday.date.add(i, holiday.repeatUnit),
+            }
+          )
+        }
+      }
+  }
+
+  fn.clearHoliday = function (this: Dayjs) {
+    proto._holiday = {}
+  }
+
+  // Business day
   proto.isBusinessDay = function (this: Dayjs) {
-    return idxBusinessDays.includes(this.day())
+    return idxBusinessDays.includes(this.day()) && !this.isHoliday()
   }
 
   proto.addBusinessDay = function (this: Dayjs, value?: number, unit?: Unit) {
-    if (value === undefined || absFloor(value) === 0) return this
-    if (unit === undefined) return businessDay.call(this, value) as Dayjs
-    return businessDay.call(this, value, unit) as Dayjs
+    /* NOTE:
+      1.  !(absFloor(value=undefined) => NaN, absFloor(value=0) => 0) => true, 
+          but ts doesn't know that apparently, so we obligate to check if value is not undefined and not 0
+
+      2.  uncovered branch (l.241), but it's not possible to reach it, because if value is 0 `!value` will be true and we will return `this`
+    */
+    if (!value) return this
+    // if (!absFloor(value)) return this
+    const u: Unit = unit ? normalize(unit) : UNIT_DAY
+
+    return businessDay.call(this, abs(value), u) as Dayjs
   }
 
   proto.subtractBusinessDay = function (
@@ -145,9 +249,17 @@ const plugin: Plugin = (cls) => {
     value?: number,
     unit?: Unit
   ) {
-    if (value === undefined || absFloor(value) === 0) return this
-    if (unit === undefined) return businessDay.call(this, -value) as Dayjs
-    return businessDay.call(this, -value, unit) as Dayjs
+    /* NOTE:
+      1.  !(absFloor(value=undefined) => NaN, absFloor(value=0) => 0) => true, 
+          but ts doesn't know that apparently, so we obligate to check if value is not undefined and not 0
+
+      2.  uncovered branch (l.241), but it's not possible to reach it, because if value is 0 `!value` will be true and we will return `this`
+    */
+    if (!value) return this
+    // if (!absFloor(value)) return this
+    const u: Unit = unit ? normalize(unit) : UNIT_DAY
+
+    return businessDay.call(this, -abs(value), u) as Dayjs
   }
 
   proto.nextBusinessDay = function (this: Dayjs) {
@@ -203,6 +315,15 @@ const plugin: Plugin = (cls) => {
     })
 
     return arr
+  }
+
+  // holidays
+  proto.getHolidays = function (this: Dayjs) {
+    return proto._holiday
+  }
+
+  proto.isHoliday = function (this: Dayjs) {
+    return !!this.getHolidays()[this.format('YYYY-MM-DD')]
   }
 }
 export default plugin

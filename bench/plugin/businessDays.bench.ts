@@ -200,4 +200,119 @@ describe('Plugin businessDays', () => {
       dayjs(new Date(2023, 0, 10, 3)).businessDaysInMonthGroupByWeek()
     })
   })
+
+  describe('holiday', () => {
+    defaultBenchmark('should get nothing', () => {
+      dayjs().getHolidays()
+      dayjs(null).getHolidays()
+      dayjs.setHoliday(null)
+      dayjs().getHolidays()
+      dayjs.setHoliday([])
+      dayjs().getHolidays()
+    })
+
+    defaultBenchmark('should get holiday', () => {
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 1)),
+        name: 'New Year',
+      })
+      Object.keys(dayjs().getHolidays()).length
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2022, 11, 31)),
+          name: 'Before New Year',
+        },
+      ])
+      Object.keys(dayjs().getHolidays()).length
+      dayjs.clearHoliday()
+      Object.keys(dayjs().getHolidays()).length
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 1)),
+        name: 'New Year',
+        repeat: 10,
+      })
+      Object.keys(dayjs().getHolidays()).length
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 1)),
+          name: 'New Year',
+          repeat: 10,
+        },
+      ])
+      Object.keys(dayjs().getHolidays()).length
+      dayjs.clearHoliday()
+    })
+
+    defaultBenchmark('is holiday', () => {
+      dayjs(new Date(2023, 0, 1)).isHoliday()
+      dayjs(new Date(2023, 0, 2)).isHoliday()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 1)),
+          name: 'New Year',
+        },
+      ])
+
+      dayjs(new Date(2023, 0, 1)).isBusinessDay()
+      dayjs(new Date(2023, 0, 1)).isHoliday()
+      dayjs(new Date(2023, 0, 2)).isHoliday()
+      dayjs.clearHoliday()
+      dayjs(new Date(2023, 0, 1)).isBusinessDay()
+    })
+
+    defaultBenchmark('should get business days', () => {
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 13)),
+        name: 'Why not',
+      })
+
+      dayjs(new Date(2023, 0, 12))
+        .addBusinessDay(1)
+        .isSame(new Date(2023, 0, 16))
+      dayjs(new Date(2023, 0, 16))
+        .subtractBusinessDay(1)
+        .isSame(new Date(2023, 0, 12))
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 16)),
+        name: 'Why not, again',
+      })
+
+      dayjs(new Date(2023, 0, 12))
+        .addBusinessDay(1)
+        .isSame(new Date(2023, 0, 16))
+      dayjs(new Date(2023, 0, 16))
+        .subtractBusinessDay(1)
+        .isSame(new Date(2023, 0, 12))
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday({
+        date: dayjs(new Date(2023, 0, 16)),
+        name: 'VACATION',
+        repeat: 10,
+        repeatUnit: UNIT_DAY,
+      })
+      dayjs(new Date(2023, 0, 13))
+        .addBusinessDay(1)
+        .isSame(new Date(2023, 0, 30))
+      dayjs.clearHoliday()
+
+      dayjs.setHoliday([
+        {
+          date: dayjs(new Date(2023, 0, 16)),
+          name: 'VACATION',
+          repeat: 10,
+          repeatUnit: UNIT_DAY,
+        },
+      ])
+      dayjs(new Date(2023, 0, 13))
+        .addBusinessDay(1)
+        .isSame(new Date(2023, 0, 30))
+      dayjs.clearHoliday()
+    })
+  })
 })
