@@ -1,4 +1,5 @@
 import type { Dayjs, extend, isDayjs, locale, unix } from './dayjs'
+import type { GetUnit, Unit } from './units'
 
 export type DateInput =
   | Dayjs
@@ -9,7 +10,27 @@ export type DateInput =
   | null
   | undefined
   | object
+
+export type DateOutput = Date | string | number | number[]
 export type FormatOption = string | string[]
+
+export type GetterFn = {
+  (value: number): Dayjs
+  (): Dayjs
+  (): number
+}
+
+export type SetterFn = {
+  (value: number, unit: Unit): Dayjs
+  (value: number): Dayjs
+}
+
+export type AccessorFn = {
+  (value: number, unit: Unit): Dayjs
+  (value: number): Dayjs
+  (): number
+}
+
 export interface ParseOptions {
   format?: FormatOption
   locale?: string
@@ -45,5 +66,5 @@ export type PluginOption<T extends Plugin<any>> = T extends Plugin<infer O>
 
 export interface Extend {
   // eslint-disable-next-line @typescript-eslint/no-misused-new
-  new (): Extend
+  new(): Extend
 }
