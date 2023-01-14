@@ -1,5 +1,6 @@
 // Kirundi [rn]
 
+import { dayjs } from '../dayjs'
 import type { Locale } from '.'
 
 const locale: Locale = {
@@ -44,7 +45,6 @@ const locale: Locale = {
     'Kig',
   ],
   weekStart: 1,
-  ordinal: (n) => n,
   relativeTime: {
     future: 'mu %s',
     past: '%s',
@@ -69,5 +69,7 @@ const locale: Locale = {
     LLLL: 'dddd, D MMMM YYYY HH:mm',
   },
 }
+
+dayjs.locale(locale, true)
 
 export default locale
