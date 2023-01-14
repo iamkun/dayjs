@@ -26,6 +26,14 @@ type Relative =
   | 'y'
   | 'yy'
 
+// plugin/relativeTime (not yet implemented) need this type for relativeTime => Record<Relative, string | ()>
+// type RelativeTimeFormatFn = (
+//   number: number,
+//   withoutSuffix?: boolean,
+//   key?: string,
+//   isFuture?: boolean
+// ) => string
+
 // TODO add comment
 export interface Locale {
   name: string
