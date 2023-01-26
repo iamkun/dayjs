@@ -19,7 +19,7 @@ const locale = {
   },
   relativeTime: {
     future: '%s შემდეგ',
-    past: '%s წინ',
+    past: '%sს წინ',
     s: 'წამი',
     m: 'წუთი',
     mm: '%d წუთი',
