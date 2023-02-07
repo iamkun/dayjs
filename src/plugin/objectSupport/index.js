@@ -1,3 +1,5 @@
+import { UNITS } from '../../constant'
+
 export default (o, c, dayjs) => {
   const proto = c.prototype
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array)
@@ -8,28 +10,32 @@ export default (o, c, dayjs) => {
   }
   const parseDate = (cfg) => {
     const { date, utc } = cfg
-    const $d = {}
-    if (isObject(date)) {
-      if (!Object.keys(date).length) {
-        return new Date()
-      }
-      const now = utc ? dayjs.utc() : dayjs()
-      Object.keys(date).forEach((k) => {
-        $d[prettyUnit(k)] = date[k]
-      })
-      const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.date() : 1)
-      const y = $d.year || now.year()
-      const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.month() : 0)// eslint-disable-line no-nested-ternary,max-len
-      const h = $d.hour || 0
-      const m = $d.minute || 0
-      const s = $d.second || 0
-      const ms = $d.millisecond || 0
-      if (utc) {
-        return new Date(Date.UTC(y, M, d, h, m, s, ms))
-      }
-      return new Date(y, M, d, h, m, s, ms)
+    if (!isObject(date)) {
+      return date
     }
-    return date
+    const rawUnits = Object.keys(date)
+    if (!rawUnits.length) {
+      return new Date()
+    }
+    const $d = {}
+    rawUnits.forEach((rawUnit) => {
+      $d[prettyUnit(rawUnit)] = date[rawUnit]
+    })
+    if (Object.keys($d).some(unit => !UNITS.includes(unit))) {
+      return date
+    }
+    const now = utc ? dayjs.utc() : dayjs()
+    const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.date() : 1)
+    const y = $d.year || now.year()
+    const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.month() : 0) // eslint-disable-line no-nested-ternary,max-len
+    const h = $d.hour || 0
+    const m = $d.minute || 0
+    const s = $d.second || 0
+    const ms = $d.millisecond || 0
+    if (utc) {
+      return new Date(Date.UTC(y, M, d, h, m, s, ms))
+    }
+    return new Date(y, M, d, h, m, s, ms)
   }
 
   const oldParse = proto.parse

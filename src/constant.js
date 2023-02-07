@@ -20,6 +20,7 @@ export const M = 'month'
 export const Q = 'quarter'
 export const Y = 'year'
 export const DATE = 'date'
+export const UNITS = [MS, S, MIN, H, D, W, M, Q, Y, DATE]
 
 export const FORMAT_DEFAULT = 'YYYY-MM-DDTHH:mm:ssZ'
 

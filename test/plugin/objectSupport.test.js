@@ -126,6 +126,11 @@ describe('parse empty object', () => {
   })
 })
 
+it('rejects objects with invalid units', () => {
+  expect(dayjs({ invalidUnit: 42 }).isValid()).toBe(false)
+  expect(dayjs({ year: 2000, nonExistingUnit: 42 }).isValid()).toBe(false)
+})
+
 it('Constructor from Object', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs(tests[i][0]).format(fmt)).toBe(tests[i][1])
