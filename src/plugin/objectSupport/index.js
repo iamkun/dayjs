@@ -1,4 +1,6 @@
-import { UNITS } from '../../constant'
+import { D, Y, M, H, MIN, S, MS, DATE } from '../../constant'
+
+const UNITS = [D, Y, M, H, MIN, S, MS]
 
 export default (o, c, dayjs) => {
   const proto = c.prototype
@@ -6,7 +8,7 @@ export default (o, c, dayjs) => {
         && !proto.$utils().u(obj) && (obj.constructor.name === 'Object')
   const prettyUnit = (u) => {
     const unit = proto.$utils().p(u)
-    return unit === 'date' ? 'day' : unit
+    return unit === DATE ? D : unit
   }
   const parseDate = (cfg) => {
     const { date, utc } = cfg
@@ -25,17 +27,17 @@ export default (o, c, dayjs) => {
       return date
     }
     const now = utc ? dayjs.utc() : dayjs()
-    const d = $d.day || ((!$d.year && !($d.month >= 0)) ? now.date() : 1)
-    const y = $d.year || now.year()
-    const M = $d.month >= 0 ? $d.month : ((!$d.year && !$d.day) ? now.month() : 0) // eslint-disable-line no-nested-ternary,max-len
-    const h = $d.hour || 0
-    const m = $d.minute || 0
-    const s = $d.second || 0
-    const ms = $d.millisecond || 0
+    const d = $d[D] || ((!$d[Y] && !($d[M] >= 0)) ? now.date() : 1)
+    const y = $d[Y] || now.year()
+    const m = $d[M] >= 0 ? $d[M] : ((!$d[Y] && !$d[D]) ? now.month() : 0) // eslint-disable-line no-nested-ternary,max-len
+    const h = $d[H] || 0
+    const min = $d[MIN] || 0
+    const s = $d[S] || 0
+    const ms = $d[MS] || 0
     if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
+      return new Date(Date.UTC(y, m, d, h, min, s, ms))
     }
-    return new Date(y, M, d, h, m, s, ms)
+    return new Date(y, m, d, h, min, s, ms)
   }
 
   const oldParse = proto.parse
