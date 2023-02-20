@@ -97,7 +97,7 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const targetDate = d(target, 'M/D/YYYY H:mm:ss A')
-    const diff = Math.round(this.diff(targetDate, 'ms') / 1000 / 60)
+    const diff = Math.round(this.diff(targetDate) / 1000 / 60)
     let ins = d(target).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
     if (keepLocalTime) {
