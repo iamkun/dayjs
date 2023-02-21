@@ -319,18 +319,20 @@ class Dayjs {
     const that = dayjs(input)
     const zoneDelta = (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
     const diff = this - that
-    let result = Utils.m(this, that)
+    const getMonth = () => Utils.m(this, that)
 
-    result = {
-      [C.Y]: result / 12,
-      [C.M]: result,
-      [C.Q]: result / 3,
-      [C.W]: (diff - zoneDelta) / C.MILLISECONDS_A_WEEK,
-      [C.D]: (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
-      [C.H]: diff / C.MILLISECONDS_A_HOUR,
-      [C.MIN]: diff / C.MILLISECONDS_A_MINUTE,
-      [C.S]: diff / C.MILLISECONDS_A_SECOND
-    }[unit] || diff // milliseconds
+    let result = {
+      [C.Y]: () => getMonth() / 12,
+      [C.M]: () => getMonth(),
+      [C.Q]: () => getMonth() / 3,
+      [C.W]: () => (diff - zoneDelta) / C.MILLISECONDS_A_WEEK,
+      [C.D]: () => (diff - zoneDelta) / C.MILLISECONDS_A_DAY,
+      [C.H]: () => diff / C.MILLISECONDS_A_HOUR,
+      [C.MIN]: () => diff / C.MILLISECONDS_A_MINUTE,
+      [C.S]: () => diff / C.MILLISECONDS_A_SECOND
+    }[unit] || (() => diff) // milliseconds
+
+    result = result()
 
     return float ? result : Utils.a(result)
   }
