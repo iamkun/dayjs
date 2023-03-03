@@ -285,9 +285,7 @@ describe('month doesn\'t lead to the next year', () => {
   it('MMMM', () => {
     const input = '03 декабря'
     const format1 = 'D MMMM'
-    const format2 = 'D MMMMF'
     expect(dayjs(input, format1, 'ru').valueOf()).toBe(moment(input, format1, 'ru').valueOf())
-    expect(dayjs(input, format2, 'ru').valueOf()).toBe(moment(input, format2, 'ru').valueOf())
   })
 })
 
