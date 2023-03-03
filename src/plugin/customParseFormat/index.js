@@ -13,6 +13,14 @@ const matchWord = /\d*[^-_:/,()\s\d]+/ // Word
 
 let locale = {}
 
+const getMonth = (matchIndex) => {
+  if (matchIndex !== 12 && matchIndex % 12 === 0) {
+    return 12
+  }
+
+  return matchIndex % 12 || matchIndex
+}
+
 let parseTwoDigitYear = function (input) {
   input = +input
   return input + (input > 68 ? 1900 : 2000)
@@ -104,7 +112,7 @@ const expressions = {
     if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = getMonth(matchIndex)
   }],
   MMMM: [matchWord, function (input) {
     const months = getLocalePart('months')
@@ -112,7 +120,7 @@ const expressions = {
     if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = getMonth(matchIndex)
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
