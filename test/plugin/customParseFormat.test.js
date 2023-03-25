@@ -143,6 +143,24 @@ it('parse HH:mm:ss but only one digit', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse HH:mm:ss.SSS', () => {
+  const input = '00:27:21.123'
+  const format = 'HH:mm:ss.SSS'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss.SS', () => {
+  const input = '00:27:21.12'
+  const format = 'HH:mm:ss.SS'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss.S', () => {
+  const input = '00:27:21.1'
+  const format = 'HH:mm:ss.S'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 describe('parse YYYY / YYYY-MM only', () => {
   it('YYYY', () => {
     const input = '2001 +08:00'
