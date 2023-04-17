@@ -67,6 +67,9 @@ describe('Creating', () => {
       ms: -1
     }).toISOString()).toBe('-PT0.001S')
   })
+  it('convert to milliseconds', () => {
+    expect(+dayjs.duration(100)).toBe(100)
+  })
 })
 
 describe('Parse ISO string', () => {
