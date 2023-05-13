@@ -2,40 +2,51 @@
   "name": "dayjs",
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamkun/dayjs.git"
+  },
+  "homepage": "https://day.js.org",
+  "author": "iamkun",
+  "keywords": [
+    "dayjs",
+    "date",
+    "time",
+    "immutable",
+    "moment"
+  ],
   "main": "dayjs.min.js",
-  "types": "index.d.ts",
   "scripts": {
-    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
-    "test-tz": "date && jest test/timezone.test --coverage=false",
-    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
-    "prettier": "prettier --write \"docs/**/*.md\"",
     "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
+    "lint": "./node_modules/.bin/eslint src/* test/* build/*",
+    "prettier": "prettier --write \"docs/**/*.md\"",
     "sauce": "npx karma start karma.sauce.conf.js",
-    "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit && gzip-size dayjs.min.js"
+    "size": "size-limit && gzip-size dayjs.min.js",
+    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
+    "test-tz": "date && jest test/timezone.test --coverage=false",
+    "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3"
   },
-  "pre-commit": [
-    "lint"
-  ],
-  "size-limit": [
-    {
-      "limit": "2.99 KB",
-      "path": "dayjs.min.js"
-    }
-  ],
+  "exports": {
+    ".": "./esm/index.js",
+    "./plugin/*": "./esm/plugin/*/index.js"
+  },
   "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*"
+    ],
+    "coverageDirectory": "./coverage/",
     "roots": [
       "test"
     ],
     "testRegex": "test/(.*?/)?.*test.js$",
-    "testURL": "http://localhost",
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*"
-    ]
+    "testURL": "http://localhost"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "release": {
     "prepare": [
       {
@@ -51,20 +62,13 @@
       ]
     ]
   },
-  "keywords": [
-    "dayjs",
-    "date",
-    "time",
-    "immutable",
-    "moment"
+  "size-limit": [
+    {
+      "limit": "2.99 KB",
+      "path": "dayjs.min.js"
+    }
   ],
-  "author": "iamkun",
-  "license": "MIT",
-  "homepage": "https://day.js.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iamkun/dayjs.git"
-  },
+  "types": "index.d.ts",
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
@@ -89,7 +93,7 @@
     "moment-timezone": "0.5.31",
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.16.1",
+    "prettier": "^2.0.0",
     "rollup": "^2.45.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-terser": "^7.0.2",
