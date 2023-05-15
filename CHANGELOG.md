@@ -1,3 +1,11 @@
+## [1.11.7](https://github.com/iamkun/dayjs/compare/v1.11.6...v1.11.7) (2022-12-06)
+
+
+### Bug Fixes
+
+* Add locale (zh-tw) meridiem ([#2149](https://github.com/iamkun/dayjs/issues/2149)) ([1e9ba76](https://github.com/iamkun/dayjs/commit/1e9ba761ff4e3f2759106dfe1aa9054d5826451c))
+* update fa locale ([#2151](https://github.com/iamkun/dayjs/issues/2151)) ([1c26732](https://github.com/iamkun/dayjs/commit/1c267321a1a01b4947e1482bac67d67ebc7c3dfa))
+
 ## [1.11.6](https://github.com/iamkun/dayjs/compare/v1.11.5...v1.11.6) (2022-10-21)
 
 
