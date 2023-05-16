@@ -8,7 +8,13 @@ const locale = {
   weekStart: 1,
   weekdaysShort: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
   monthsShort: 'Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12'.split('_'),
-  weekdaysMin: 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+  // H is the abbreviation for Hai - Monday
+  // B is the abbreviation for Ba - Tuesday
+  // T is the abbreviation for Tư - Wednesday
+  // N is the abbreviation for Năm - Thursday
+  // S is the abbreviation for Sáu - Friday
+  // B is the abbreviation for Bảy - Saturday
+  weekdaysMin: 'CN_H_B_T_N_S_B'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
