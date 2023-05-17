@@ -213,6 +213,18 @@ describe('DST, a time that never existed Fall Back', () => {
   })
 })
 
+it('2023-10-29T01:00:00.000Z Europe/Amsterdam', () => {
+  const tz = 'Europe/Amsterdam'
+
+  expect(dayjs('2023-10-29T00:00:00.000Z').tz(tz).utcOffset()).toBe(120)
+  expect(dayjs('2023-10-29T02:00:00.000Z').tz(tz).utcOffset()).toBe(60)
+
+  expect(moment('2023-10-29T00:59:59.000Z').tz('Europe/Amsterdam').utcOffset()).toBe(120)
+  expect(moment('2023-10-29T01:00:00.000Z').tz('Europe/Amsterdam').utcOffset()).toBe(60)
+
+  expect(dayjs('2023-10-29T01:00:00.000Z').tz(tz).utcOffset()).toBe(60)
+})
+
 it('DST valueOf', () => {
   const day1 = '2021-11-17T09:45:00.000Z'
   const d1 = dayjs.utc(day1).tz(PARIS)
