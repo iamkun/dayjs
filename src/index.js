@@ -278,34 +278,63 @@ class Dayjs {
       return isLowercase ? m.toLowerCase() : m
     })
 
-    const matches = {
-      YY: String(this.$y).slice(-2),
-      YYYY: this.$y,
-      M: $M + 1,
-      MM: Utils.s($M + 1, 2, '0'),
-      MMM: getShort(locale.monthsShort, $M, months, 3),
-      MMMM: getShort(months, $M),
-      D: this.$D,
-      DD: Utils.s(this.$D, 2, '0'),
-      d: String(this.$W),
-      dd: getShort(locale.weekdaysMin, this.$W, weekdays, 2),
-      ddd: getShort(locale.weekdaysShort, this.$W, weekdays, 3),
-      dddd: weekdays[this.$W],
-      H: String($H),
-      HH: Utils.s($H, 2, '0'),
-      h: get$H(1),
-      hh: get$H(2),
-      a: meridiemFunc($H, $m, true),
-      A: meridiemFunc($H, $m, false),
-      m: String($m),
-      mm: Utils.s($m, 2, '0'),
-      s: String(this.$s),
-      ss: Utils.s(this.$s, 2, '0'),
-      SSS: Utils.s(this.$ms, 3, '0'),
-      Z: zoneStr // 'ZZ' logic below
+    const matches = (match) => {
+      switch (match) {
+        case 'YY':
+          return String(this.$y).slice(-2)
+        case 'YYYY':
+          return String(this.$y)
+        case 'M':
+          return $M + 1
+        case 'MM':
+          return Utils.s($M + 1, 2, '0')
+        case 'MMM':
+          return getShort(locale.monthsShort, $M, months, 3)
+        case 'MMMM':
+          return getShort(months, $M)
+        case 'D':
+          return this.$D
+        case 'DD':
+          return Utils.s(this.$D, 2, '0')
+        case 'd':
+          return String(this.$W)
+        case 'dd':
+          return getShort(locale.weekdaysMin, this.$W, weekdays, 2)
+        case 'ddd':
+          return getShort(locale.weekdaysShort, this.$W, weekdays, 3)
+        case 'dddd':
+          return weekdays[this.$W]
+        case 'H':
+          return String($H)
+        case 'HH':
+          return Utils.s($H, 2, '0')
+        case 'h':
+          return get$H(1)
+        case 'hh':
+          return get$H(2)
+        case 'a':
+          return meridiemFunc($H, $m, true)
+        case 'A':
+          return meridiemFunc($H, $m, false)
+        case 'm':
+          return String($m)
+        case 'mm':
+          return Utils.s($m, 2, '0')
+        case 's':
+          return String(this.$s)
+        case 'ss':
+          return Utils.s(this.$s, 2, '0')
+        case 'SSS':
+          return Utils.s(this.$ms, 3, '0')
+        case 'Z':
+          return zoneStr // 'ZZ' logic below
+        default:
+          break
+      }
+      return null
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches[match] || zoneStr.replace(':', '')) // 'ZZ'
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match) || zoneStr.replace(':', '')) // 'ZZ'
   }
 
   utcOffset() {
