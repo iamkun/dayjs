@@ -30,6 +30,8 @@ jobs:
           node-version: "lts/*" # semantic-release requires Node >= 18
       - name: Install dependencies
         run: npm clean-install
+      - name: Build
+        run: npm run build && npm run babel
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
       - name: Release
