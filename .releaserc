@@ -1,0 +1,16 @@
+{
+  "branches": ["master"],
+  "prepare": [
+    {
+      "path": "@semantic-release/changelog"
+    },
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md"
+        ]
+      }
+    ]
+  ]
+}
