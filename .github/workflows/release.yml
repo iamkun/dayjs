@@ -1,9 +1,9 @@
 name: Release
 on:
   workflow_run:
-    workflows: ["Lint & Unit Test"]
+    workflows: ['Lint & Unit Test']
     branches: [master]
-    types: 
+    types:
       - completed
 
 permissions:
@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   release:
+    env: # temporary workaround for "Error: error:0308010C:digital envelope routines::unsupported" in Node lts / 18
+      NODE_OPTIONS: --openssl-legacy-provider
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Release
     runs-on: ubuntu-latest
@@ -27,7 +29,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "lts/*" # semantic-release requires Node >= 18
+          node-version: 'lts/*' # semantic-release requires Node >= 18
       - name: Install dependencies
         run: npm clean-install
       - name: Build
