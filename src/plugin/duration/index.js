@@ -235,6 +235,10 @@ class Duration {
       .fromNow(!withSuffix)
   }
 
+  valueOf() {
+    return this.asMilliseconds()
+  }
+
   milliseconds() { return this.get('milliseconds') }
   asMilliseconds() { return this.as('milliseconds') }
   seconds() { return this.get('seconds') }

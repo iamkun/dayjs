@@ -49,6 +49,13 @@ test('is same or after without units', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter second should not change moment')
 })
 
+test('is same or after without date', () => {
+  const past = dayjs().subtract(1, 'day')
+  const future = dayjs().add(1, 'day')
+  expect(past.isSameOrAfter()).toBe(false, 'past is before now')
+  expect(future.isSameOrAfter()).toBe(true, 'future is not before now')
+})
+
 test('is same or after month', () => {
   const m = dayjs(new Date(2011, 2, 3, 4, 5, 6, 7))
   const mCopy = dayjs(m)

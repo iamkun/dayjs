@@ -36,21 +36,6 @@
       "src/**/*"
     ]
   },
-  "release": {
-    "prepare": [
-      {
-        "path": "@semantic-release/changelog"
-      },
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "CHANGELOG.md"
-          ]
-        }
-      ]
-    ]
-  },
   "keywords": [
     "dayjs",
     "date",
