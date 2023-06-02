@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   release:
+    env: 
+      GITHUB_TRIGGER_REF: ${{ github.event.workflow_run.head_branch }} # For workflow_run the GITHUB_REF is the default branch, as mentioned in the docs 
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Release
     runs-on: ubuntu-latest
@@ -24,6 +26,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          ref: ${{ env.GITHUB_TRIGGER_REF }}
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -40,4 +43,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm install -g @semantic-release/changelog @semantic-release/git  semantic-release && semantic-release --debug && echo release success
+        run: |
+          npm install -g @semantic-release/changelog @semantic-release/git semantic-release 
+          GITHUB_REF=${{ env.GITHUB_TRIGGER_REF }} semantic-release
+          echo release success
+          curl -s ${{ secrets.GITEE_SYNC_URL }}
