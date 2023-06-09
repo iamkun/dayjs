@@ -1,12 +1,20 @@
 export default (o, c, d) => {
   const sortBy = (method, dates) => {
-    if (!dates || !dates.length || !dates[0] || (dates.length === 1 && !dates[0].length)) {
+    if (
+      !dates ||
+      !dates.length ||
+      (dates.length === 1 && !dates[0]) ||
+      (dates.length === 1 && Array.isArray(dates[0]) && !dates[0].length)
+    ) {
       return null
     }
     if (dates.length === 1 && dates[0].length > 0) {
       [dates] = dates
     }
-    let result
+    while (dates.indexOf(null) !== -1) {
+      dates.forEach((date, index) => (!date ? dates.splice(index, 1) : null))
+    }
+    let result;
     [result] = dates
     for (let i = 1; i < dates.length; i += 1) {
       if (!dates[i].isValid() || dates[i][method](result)) {
