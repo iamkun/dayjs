@@ -384,3 +384,10 @@ it('add decimal values of days and months', () => {
   expect(dayjs([2016, 7, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-07-01')
   expect(dayjs([2016, 1, 1]).add(1.1, 'quarters').format('YYYY-MM-DD')).toBe('2016-04-01')
 })
+
+it('issue 2135 - constructor with null', () => {
+  const dayjsDate = dayjs(null)
+  const momentDate = moment(null)
+  expect(dayjsDate.isValid()).toBe(momentDate.isValid())
+  expect(dayjsDate.format(fmt).toLowerCase()).toBe(momentDate.format(fmt).toLowerCase())
+})
