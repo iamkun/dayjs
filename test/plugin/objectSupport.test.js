@@ -140,6 +140,12 @@ it('Constructor from Object UTC', () => {
     expect(moment.utc(tests[i][0]).format(fmt)).toBe(result)
   }
 })
+
+it('Constructor from null should return Invalid Date', () => {
+  expect(dayjs(null).isValid()).toBe(false)
+  expect(moment(null).isValid()).toBe(false)
+})
+
 it('Set from Object', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs(now).set(tests[i][0]).format(fmt)).toBe(moment(now).set(tests[i][0]).format(fmt))
