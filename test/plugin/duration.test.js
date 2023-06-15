@@ -142,79 +142,179 @@ describe('Clone', () => {
 })
 
 describe('Milliseconds', () => {
-  expect(dayjs.duration(500).milliseconds()).toBe(500)
-  expect(dayjs.duration(1500).milliseconds()).toBe(500)
-  expect(dayjs.duration(15000).milliseconds()).toBe(0)
-  expect(dayjs.duration(500).asMilliseconds()).toBe(500)
-  expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
-  expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
-})
-
-describe('Milliseconds', () => {
   describe('Positive number', () => {
-    expect(dayjs.duration(500).milliseconds()).toBe(500)
-    expect(dayjs.duration(1500).milliseconds()).toBe(500)
-    expect(dayjs.duration(15000).milliseconds()).toBe(0)
-    expect(dayjs.duration(500).asMilliseconds()).toBe(500)
-    expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
-    expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+    it('milliseconds', () => {
+      expect(dayjs.duration(500).milliseconds()).toBe(500)
+      expect(dayjs.duration(999).milliseconds()).toBe(999)
+      expect(dayjs.duration(1000).milliseconds()).toBe(0)
+      expect(dayjs.duration({ seconds: 1, milliseconds: 500 }).milliseconds()).toBe(500)
+      expect(dayjs.duration({ seconds: 15 }).milliseconds()).toBe(0)
+    })
+
+    it('asMilliseconds', () => {
+      expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+      expect(dayjs.duration(999).asMilliseconds()).toBe(999)
+      expect(dayjs.duration(1000).asMilliseconds()).toBe(1000)
+      expect(dayjs.duration({ seconds: 1, milliseconds: 500 }).asMilliseconds()).toBe(1500)
+      expect(dayjs.duration({ seconds: 15 }).asMilliseconds()).toBe(15000)
+    })
   })
 
   describe('Negative number', () => {
-    expect(dayjs.duration(-500).milliseconds()).toBe(-500)
-    expect(dayjs.duration(-1500).milliseconds()).toBe(-500)
-    expect(dayjs.duration(-15000).milliseconds()).toBe(0)
-    expect(dayjs.duration(-500).asMilliseconds()).toBe(-500)
-    expect(dayjs.duration(-1500).asMilliseconds()).toBe(-1500)
-    expect(dayjs.duration(-15000).asMilliseconds()).toBe(-15000)
+    it('milliseconds', () => {
+      expect(dayjs.duration(-500).milliseconds()).toBe(-500)
+      expect(dayjs.duration(-999).milliseconds()).toBe(-999)
+      expect(dayjs.duration(-1000).milliseconds()).toBe(0)
+      expect(dayjs.duration({ seconds: -1, milliseconds: -500 }).milliseconds()).toBe(-500)
+      expect(dayjs.duration({ seconds: -15 }).milliseconds()).toBe(0)
+    })
+
+    it('asMilliseconds', () => {
+      expect(dayjs.duration(-500).asMilliseconds()).toBe(-500)
+      expect(dayjs.duration(-999).asMilliseconds()).toBe(-999)
+      expect(dayjs.duration(-1000).asMilliseconds()).toBe(-1000)
+      expect(dayjs.duration({ seconds: -1, milliseconds: -500 }).asMilliseconds()).toBe(-1500)
+      expect(dayjs.duration({ seconds: -15 }).asMilliseconds()).toBe(-15000)
+    })
   })
 })
 
-describe('Add', () => {
-  const a = dayjs.duration(1, 'days')
-  const b = dayjs.duration(2, 'days')
-  expect(a.add(b).days()).toBe(3)
-  expect(a.add(1, 'days').days()).toBe(2)
-  expect(a.add({ days: 5 }).days()).toBe(6)
-})
-
-test('Add duration', () => {
-  const a = dayjs('2020-10-01')
-  const days = dayjs.duration(2, 'days')
-  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
-})
-
-describe('Subtract', () => {
-  const a = dayjs.duration(3, 'days')
-  const b = dayjs.duration(2, 'days')
-  expect(a.subtract(b).days()).toBe(1)
-})
-
-test('Subtract duration', () => {
-  const a = dayjs('2020-10-20')
-  const days = dayjs.duration(2, 'days')
-  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
-})
-
 describe('Seconds', () => {
-  expect(dayjs.duration(500).seconds()).toBe(0)
-  expect(dayjs.duration(1500).seconds()).toBe(1)
-  expect(dayjs.duration(15000).seconds()).toBe(15)
-  expect(dayjs.duration(61000).seconds()).toBe(1) // 1 minute 1 second
-  expect(dayjs.duration(500).asSeconds()).toBe(0.5)
-  expect(dayjs.duration(1500).asSeconds()).toBe(1.5)
-  expect(dayjs.duration(15000).asSeconds()).toBe(15)
+  describe('Positive number', () => {
+    it('seconds', () => {
+      expect(dayjs.duration(500).seconds()).toBe(0)
+      expect(dayjs.duration({ seconds: 1 }).seconds()).toBe(1)
+      expect(dayjs.duration({ seconds: 1, milliseconds: 500 }).seconds()).toBe(1)
+      expect(dayjs.duration({ seconds: 15 }).seconds()).toBe(15)
+      expect(dayjs.duration({ seconds: 59 }).seconds()).toBe(59)
+      expect(dayjs.duration({ seconds: 60 }).seconds()).toBe(0)
+      expect(dayjs.duration({ minutes: 1, seconds: 1 }).seconds()).toBe(1)
+    })
+
+    it('asSeconds', () => {
+      expect(dayjs.duration(500).asSeconds()).toBe(0.5)
+      expect(dayjs.duration({ seconds: 1 }).asSeconds()).toBe(1)
+      expect(dayjs.duration({ seconds: 1, milliseconds: 500 }).asSeconds()).toBe(1.5)
+      expect(dayjs.duration({ seconds: 15 }).asSeconds()).toBe(15)
+      expect(dayjs.duration({ seconds: 59 }).asSeconds()).toBe(59)
+      expect(dayjs.duration({ seconds: 60 }).asSeconds()).toBe(60)
+      expect(dayjs.duration({ minutes: 1, seconds: 1 }).asSeconds()).toBe(61)
+    })
+  })
+
+  describe('Negative number', () => {
+    it('seconds', () => {
+      expect(dayjs.duration(-500).seconds()).toBe(0)
+      expect(dayjs.duration({ seconds: -1 }).seconds()).toBe(-1)
+      expect(dayjs.duration({ seconds: -1, milliseconds: -500 }).seconds()).toBe(-1)
+      expect(dayjs.duration({ seconds: -15 }).seconds()).toBe(-15)
+      expect(dayjs.duration({ seconds: -59 }).seconds()).toBe(-59)
+      expect(dayjs.duration({ seconds: -60 }).seconds()).toBe(0)
+      expect(dayjs.duration({ minutes: -1, seconds: -1 }).seconds()).toBe(-1)
+    })
+
+    it('asSeconds', () => {
+      expect(dayjs.duration(-500).asSeconds()).toBe(-0.5)
+      expect(dayjs.duration({ seconds: -1 }).asSeconds()).toBe(-1)
+      expect(dayjs.duration({ seconds: -1, milliseconds: -500 }).asSeconds()).toBe(-1.5)
+      expect(dayjs.duration({ seconds: -15 }).asSeconds()).toBe(-15)
+      expect(dayjs.duration({ seconds: -59 }).asSeconds()).toBe(-59)
+      expect(dayjs.duration({ seconds: -60 }).asSeconds()).toBe(-60)
+      expect(dayjs.duration({ minutes: -1, seconds: -1 }).asSeconds()).toBe(-61)
+    })
+  })
 })
 
 describe('Minutes', () => {
-  expect(dayjs.duration(100000).minutes()).toBe(1)
-  expect(dayjs.duration(61000).minutes()).toBe(1) // 1 minute 1 second
-  expect(dayjs.duration(100000).asMinutes().toFixed(2)).toBe('1.67')
+  describe('Positive number', () => {
+    it('minutes', () => {
+      expect(dayjs.duration(500).minutes()).toBe(0)
+      expect(dayjs.duration({ minutes: 1 }).minutes()).toBe(1)
+      expect(dayjs.duration({ minutes: 1, seconds: 30 }).minutes()).toBe(1)
+      expect(dayjs.duration({ minutes: 15 }).minutes()).toBe(15)
+      expect(dayjs.duration({ minutes: 59 }).minutes()).toBe(59)
+      expect(dayjs.duration({ minutes: 60 }).minutes()).toBe(0)
+      expect(dayjs.duration({ minutes: 1, seconds: 1 }).minutes()).toBe(1)
+    })
+
+    it('asMinutes', () => {
+      expect(dayjs.duration(500).asMinutes()).toBe(0.008333333333333333)
+      expect(dayjs.duration({ minutes: 1 }).asMinutes()).toBe(1)
+      expect(dayjs.duration({ minutes: 1, seconds: 30 }).asMinutes()).toBe(1.5)
+      expect(dayjs.duration({ minutes: 15 }).asMinutes()).toBe(15)
+      expect(dayjs.duration({ minutes: 59 }).asMinutes()).toBe(59)
+      expect(dayjs.duration({ minutes: 60 }).asMinutes()).toBe(60)
+      expect(dayjs.duration({ minutes: 1, seconds: 1 }).asMinutes().toFixed(2)).toBe('1.02')
+    })
+  })
+
+  describe('Negative number', () => {
+    it('seconds', () => {
+      expect(dayjs.duration(-500).minutes()).toBe(0)
+      expect(dayjs.duration({ minutes: -1 }).minutes()).toBe(-1)
+      expect(dayjs.duration({ minutes: -1, seconds: -30 }).minutes()).toBe(-1)
+      expect(dayjs.duration({ minutes: -15 }).minutes()).toBe(-15)
+      expect(dayjs.duration({ minutes: -59 }).minutes()).toBe(-59)
+      expect(dayjs.duration({ minutes: -60 }).minutes()).toBe(0)
+      expect(dayjs.duration({ minutes: -1, seconds: -1 }).minutes()).toBe(-1)
+    })
+
+    it('asSeconds', () => {
+      expect(dayjs.duration(-500).asMinutes()).toBe(-0.008333333333333333)
+      expect(dayjs.duration({ minutes: -1 }).asMinutes()).toBe(-1)
+      expect(dayjs.duration({ minutes: -1, seconds: -30 }).asMinutes()).toBe(-1.5)
+      expect(dayjs.duration({ minutes: -15 }).asMinutes()).toBe(-15)
+      expect(dayjs.duration({ minutes: -59 }).asMinutes()).toBe(-59)
+      expect(dayjs.duration({ minutes: -60 }).asMinutes()).toBe(-60)
+      expect(dayjs.duration({ minutes: -1, seconds: -1 }).asMinutes().toFixed(2)).toBe('-1.02')
+    })
+  })
 })
 
 describe('Hours', () => {
-  expect(dayjs.duration(10000000).hours()).toBe(2)
-  expect(dayjs.duration(10000000).asHours().toFixed(2)).toBe('2.78')
+  describe('Positive number', () => {
+    it('hours', () => {
+      expect(dayjs.duration(500).hours()).toBe(0)
+      expect(dayjs.duration({ hours: 1 }).hours()).toBe(1)
+      expect(dayjs.duration({ hours: 1, minutes: 30 }).hours()).toBe(1)
+      expect(dayjs.duration({ hours: 12 }).hours()).toBe(12)
+      expect(dayjs.duration({ hours: 23 }).hours()).toBe(23)
+      expect(dayjs.duration({ hours: 24 }).hours()).toBe(0)
+      expect(dayjs.duration({ hours: 1, minutes: 1 }).hours()).toBe(1)
+    })
+
+    it('asMinutes', () => {
+      expect(dayjs.duration(500).asHours()).toBe(0.0001388888888888889)
+      expect(dayjs.duration({ hours: 1 }).asHours()).toBe(1)
+      expect(dayjs.duration({ hours: 1, minutes: 30 }).asHours()).toBe(1.5)
+      expect(dayjs.duration({ hours: 12 }).asHours()).toBe(12)
+      expect(dayjs.duration({ hours: 23 }).asHours()).toBe(23)
+      expect(dayjs.duration({ hours: 24 }).asHours()).toBe(24)
+      expect(dayjs.duration({ hours: 1, minutes: 1 }).asHours().toFixed(2)).toBe('1.02')
+    })
+  })
+
+  describe('Negative number', () => {
+    it('seconds', () => {
+      expect(dayjs.duration(-500).hours()).toBe(0)
+      expect(dayjs.duration({ hours: -1 }).hours()).toBe(-1)
+      expect(dayjs.duration({ hours: -1, minutes: -30 }).hours()).toBe(-1)
+      expect(dayjs.duration({ hours: -12 }).hours()).toBe(-12)
+      expect(dayjs.duration({ hours: -23 }).hours()).toBe(-23)
+      expect(dayjs.duration({ hours: -24 }).hours()).toBe(0)
+      expect(dayjs.duration({ hours: -1, minutes: -1 }).hours()).toBe(-1)
+    })
+
+    it('asSeconds', () => {
+      expect(dayjs.duration(-500).asHours()).toBe(-0.0001388888888888889)
+      expect(dayjs.duration({ hours: -1 }).asHours()).toBe(-1)
+      expect(dayjs.duration({ hours: -1, minutes: -30 }).asHours()).toBe(-1.5)
+      expect(dayjs.duration({ hours: -12 }).asHours()).toBe(-12)
+      expect(dayjs.duration({ hours: -23 }).asHours()).toBe(-23)
+      expect(dayjs.duration({ hours: -24 }).asHours()).toBe(-24)
+      expect(dayjs.duration({ hours: -1, minutes: -1 }).asHours().toFixed(2)).toBe('-1.02')
+    })
+  })
 })
 
 describe('Days', () => {
@@ -242,6 +342,32 @@ describe('Month', () => {
 describe('Years', () => {
   expect(dayjs.duration(100000000000).years()).toBe(3)
   expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.17')
+})
+
+describe('Add', () => {
+  const a = dayjs.duration(1, 'days')
+  const b = dayjs.duration(2, 'days')
+  expect(a.add(b).days()).toBe(3)
+  expect(a.add(1, 'days').days()).toBe(2)
+  expect(a.add({ days: 5 }).days()).toBe(6)
+})
+
+test('Add duration', () => {
+  const a = dayjs('2020-10-01')
+  const days = dayjs.duration(2, 'days')
+  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+})
+
+describe('Subtract', () => {
+  const a = dayjs.duration(3, 'days')
+  const b = dayjs.duration(2, 'days')
+  expect(a.subtract(b).days()).toBe(1)
+})
+
+test('Subtract duration', () => {
+  const a = dayjs('2020-10-20')
+  const days = dayjs.duration(2, 'days')
+  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
 })
 
 describe('prettyUnit', () => {
@@ -276,5 +402,11 @@ describe('Format', () => {
       .add(10, 'milliseconds')
     expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
+  })
+})
+
+describe('ISSUE', () => {
+  it('Issue #2329, duration.minutes() not guaranteed to be in [0, 60)', () => {
+    expect(dayjs.duration({ minutes: 359 }).minutes()).toBe(59)
   })
 })

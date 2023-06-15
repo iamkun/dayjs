@@ -189,15 +189,21 @@ class Duration {
   }
 
   get(unit) {
-    let base = this.$ms
     const pUnit = prettyUnit(unit)
+    let base = roundNumber(this.$ms / unitToMS[pUnit])
+
     if (pUnit === 'milliseconds') {
       base %= 1000
-    } else if (pUnit === 'weeks') {
-      base = roundNumber(base / unitToMS[pUnit])
-    } else {
-      base = this.$d[pUnit]
+    } else if (pUnit === 'seconds' || pUnit === 'minutes') {
+      base %= 60
+    } else if (pUnit === 'hours') {
+      base %= 24
+    } else if (pUnit === 'days') {
+      base %= 7
+    } else if (pUnit === 'months') {
+      base %= 12
     }
+
     return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
   }
 
