@@ -257,6 +257,24 @@ class Duration {
   asYears() { return this.as('years') }
 }
 
+const addDuration = (date, duration) =>
+  date.add(duration.years(), 'year')
+    .add(duration.months(), 'month')
+    .add(duration.days(), 'day')
+    .add(duration.hours(), 'hour')
+    .add(duration.minutes(), 'minute')
+    .add(duration.seconds(), 'second')
+    .add(duration.milliseconds(), 'millisecond')
+
+const subtractDuration = (date, duration) =>
+  date.subtract(duration.years(), 'year')
+    .subtract(duration.months(), 'month')
+    .subtract(duration.days(), 'day')
+    .subtract(duration.hours(), 'hour')
+    .subtract(duration.minutes(), 'minute')
+    .subtract(duration.seconds(), 'second')
+    .subtract(duration.milliseconds(), 'millisecond')
+
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
   $u = dayjs().$utils()
@@ -268,12 +286,20 @@ export default (option, Dayjs, dayjs) => {
 
   const oldAdd = Dayjs.prototype.add
   const oldSubtract = Dayjs.prototype.subtract
+
   Dayjs.prototype.add = function (value, unit) {
-    if (isDuration(value)) value = value.asMilliseconds()
+    if (isDuration(value)) {
+      return addDuration(this, value)
+    }
+
     return oldAdd.bind(this)(value, unit)
   }
+
   Dayjs.prototype.subtract = function (value, unit) {
-    if (isDuration(value)) value = value.asMilliseconds()
+    if (isDuration(value)) {
+      return subtractDuration(this, value)
+    }
+
     return oldSubtract.bind(this)(value, unit)
   }
 }

@@ -184,6 +184,12 @@ test('Add duration', () => {
   expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
 })
 
+test('Add duration month', () => {
+  const a = dayjs('2023-02-01')
+  const days = dayjs.duration(1, 'month')
+  expect(a.add(days).format('YYYY-MM-DD')).toBe('2023-03-01')
+})
+
 describe('Subtract', () => {
   const a = dayjs.duration(3, 'days')
   const b = dayjs.duration(2, 'days')
@@ -194,6 +200,12 @@ test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+})
+
+test('Subtract duration month', () => {
+  const a = dayjs('2023-03-01')
+  const days = dayjs.duration(1, 'month')
+  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2023-02-01')
 })
 
 describe('Seconds', () => {
