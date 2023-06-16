@@ -5,7 +5,7 @@
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">אלטרנטיבה מהירה ששוקלת רק <b>2kB</b> ל-Moment.js עם אותן יכולות מודרניות</p>
+<p align="center">אלטרנטיבה מהירה ל-Moment.js ששוקלת רק <b>2kB</b> עם אותן יכולות מודרניות</p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
@@ -118,7 +118,7 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 
 </div>
 
-📚[רשימת תופסים](https://day.js.org/docs/en/plugin/plugin)
+📚[רשימת תוספים](https://day.js.org/docs/en/plugin/plugin)
 
 ## ספונסרים 
 תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן. 
