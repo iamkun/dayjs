@@ -390,3 +390,11 @@ it('add decimal values of days and months', () => {
   expect(dayjs([2016, 7, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-07-01')
   expect(dayjs([2016, 1, 1]).add(1.1, 'quarters').format('YYYY-MM-DD')).toBe('2016-04-01')
 })
+
+it('returns valid date on undefined', () => {
+  expect(dayjs().isValid()).toBe(true)
+})
+
+it('returns invalid date on null', () => {
+  expect(dayjs(null).isValid()).toBe(false)
+})
