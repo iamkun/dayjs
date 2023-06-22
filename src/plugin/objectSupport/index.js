@@ -1,7 +1,7 @@
 export default (o, c, dayjs) => {
   const proto = c.prototype
   const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array)
-        && !proto.$utils().u(obj) && (obj.constructor.name === 'Object')
+        && !proto.$utils().u(obj) && obj !== null && (obj.constructor.name === 'Object')
   const prettyUnit = (u) => {
     const unit = proto.$utils().p(u)
     return unit === 'date' ? 'day' : unit
