@@ -229,6 +229,8 @@ describe('Minutes', () => {
   describe('Positive number', () => {
     it('minutes', () => {
       expect(dayjs.duration(500).minutes()).toBe(0)
+      expect(dayjs.duration(100000).minutes()).toBe(1)
+      expect(dayjs.duration(61000).minutes()).toBe(1) // 1 minute 1 second
       expect(dayjs.duration({ minutes: 1 }).minutes()).toBe(1)
       expect(dayjs.duration({ minutes: 1, seconds: 30 }).minutes()).toBe(1)
       expect(dayjs.duration({ minutes: 15 }).minutes()).toBe(15)
@@ -239,6 +241,7 @@ describe('Minutes', () => {
 
     it('asMinutes', () => {
       expect(dayjs.duration(500).asMinutes()).toBe(0.008333333333333333)
+      expect(dayjs.duration(100000).asMinutes().toFixed(2)).toBe('1.67')
       expect(dayjs.duration({ minutes: 1 }).asMinutes()).toBe(1)
       expect(dayjs.duration({ minutes: 1, seconds: 30 }).asMinutes()).toBe(1.5)
       expect(dayjs.duration({ minutes: 15 }).asMinutes()).toBe(15)
@@ -249,7 +252,7 @@ describe('Minutes', () => {
   })
 
   describe('Negative number', () => {
-    it('seconds', () => {
+    it('minutes', () => {
       expect(dayjs.duration(-500).minutes()).toBe(0)
       expect(dayjs.duration({ minutes: -1 }).minutes()).toBe(-1)
       expect(dayjs.duration({ minutes: -1, seconds: -30 }).minutes()).toBe(-1)
@@ -259,7 +262,7 @@ describe('Minutes', () => {
       expect(dayjs.duration({ minutes: -1, seconds: -1 }).minutes()).toBe(-1)
     })
 
-    it('asSeconds', () => {
+    it('asMinutes', () => {
       expect(dayjs.duration(-500).asMinutes()).toBe(-0.008333333333333333)
       expect(dayjs.duration({ minutes: -1 }).asMinutes()).toBe(-1)
       expect(dayjs.duration({ minutes: -1, seconds: -30 }).asMinutes()).toBe(-1.5)
@@ -275,6 +278,7 @@ describe('Hours', () => {
   describe('Positive number', () => {
     it('hours', () => {
       expect(dayjs.duration(500).hours()).toBe(0)
+      expect(dayjs.duration(10000000).hours()).toBe(2)
       expect(dayjs.duration({ hours: 1 }).hours()).toBe(1)
       expect(dayjs.duration({ hours: 1, minutes: 30 }).hours()).toBe(1)
       expect(dayjs.duration({ hours: 12 }).hours()).toBe(12)
@@ -283,8 +287,9 @@ describe('Hours', () => {
       expect(dayjs.duration({ hours: 1, minutes: 1 }).hours()).toBe(1)
     })
 
-    it('asMinutes', () => {
+    it('asHours', () => {
       expect(dayjs.duration(500).asHours()).toBe(0.0001388888888888889)
+      expect(dayjs.duration(10000000).asHours().toFixed(2)).toBe('2.78')
       expect(dayjs.duration({ hours: 1 }).asHours()).toBe(1)
       expect(dayjs.duration({ hours: 1, minutes: 30 }).asHours()).toBe(1.5)
       expect(dayjs.duration({ hours: 12 }).asHours()).toBe(12)
