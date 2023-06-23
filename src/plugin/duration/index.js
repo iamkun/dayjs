@@ -257,23 +257,14 @@ class Duration {
   asYears() { return this.as('years') }
 }
 
-const addDuration = (date, duration) =>
-  date.add(duration.years(), 'year')
-    .add(duration.months(), 'month')
-    .add(duration.days(), 'day')
-    .add(duration.hours(), 'hour')
-    .add(duration.minutes(), 'minute')
-    .add(duration.seconds(), 'second')
-    .add(duration.milliseconds(), 'millisecond')
-
-const subtractDuration = (date, duration) =>
-  date.subtract(duration.years(), 'year')
-    .subtract(duration.months(), 'month')
-    .subtract(duration.days(), 'day')
-    .subtract(duration.hours(), 'hour')
-    .subtract(duration.minutes(), 'minute')
-    .subtract(duration.seconds(), 'second')
-    .subtract(duration.milliseconds(), 'millisecond')
+const manipulateDuration = (date, duration, k) =>
+  date.add(duration.years() * k, 'year')
+    .add(duration.months() * k, 'month')
+    .add(duration.days() * k, 'day')
+    .add(duration.hours() * k, 'hour')
+    .add(duration.minutes() * k, 'minute')
+    .add(duration.seconds() * k, 'second')
+    .add(duration.milliseconds() * k, 'millisecond')
 
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
@@ -289,7 +280,7 @@ export default (option, Dayjs, dayjs) => {
 
   Dayjs.prototype.add = function (value, unit) {
     if (isDuration(value)) {
-      return addDuration(this, value)
+      return manipulateDuration(this, value, 1)
     }
 
     return oldAdd.bind(this)(value, unit)
@@ -297,7 +288,7 @@ export default (option, Dayjs, dayjs) => {
 
   Dayjs.prototype.subtract = function (value, unit) {
     if (isDuration(value)) {
-      return subtractDuration(this, value)
+      return manipulateDuration(this, value, -1)
     }
 
     return oldSubtract.bind(this)(value, unit)
