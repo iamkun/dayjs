@@ -11,9 +11,7 @@ export default (o, c, d) => {
     if (dates.length === 1 && dates[0].length > 0) {
       [dates] = dates
     }
-    while (dates.indexOf(null) !== -1) {
-      dates.forEach((date, index) => (!date ? dates.splice(index, 1) : null))
-    }
+    dates = dates.filter(date => date)
     let result;
     [result] = dates
     for (let i = 1; i < dates.length; i += 1) {
