@@ -182,12 +182,10 @@ test('Add duration', () => {
   const a = dayjs('2020-10-01')
   const days = dayjs.duration(2, 'days')
   expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
-})
 
-test('Add duration month', () => {
-  const a = dayjs('2023-02-01')
-  const days = dayjs.duration(1, 'month')
-  expect(a.add(days).format('YYYY-MM-DD')).toBe('2023-03-01')
+  const b = dayjs('2023-02-01 00:00:00')
+  const p = dayjs.duration('P1Y1M1DT1H1M1S')
+  expect(b.add(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2024-03-02 01:01:01')
 })
 
 describe('Subtract', () => {
@@ -200,12 +198,10 @@ test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
-})
 
-test('Subtract duration month', () => {
-  const a = dayjs('2023-03-01')
-  const days = dayjs.duration(1, 'month')
-  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2023-02-01')
+  const b = dayjs('2023-03-02 02:02:02')
+  const p = dayjs.duration('P1Y1M1DT1H1M1S')
+  expect(b.subtract(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2022-02-01 01:01:01')
 })
 
 describe('Seconds', () => {
