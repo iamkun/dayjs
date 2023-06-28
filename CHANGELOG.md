@@ -1,3 +1,37 @@
+## [1.11.8](https://github.com/iamkun/dayjs/compare/v1.11.7...v1.11.8) (2023-06-02)
+
+
+### Bug Fixes
+
+* .format add padding to 'YYYY' ([#2231](https://github.com/iamkun/dayjs/issues/2231)) ([00c223b](https://github.com/iamkun/dayjs/commit/00c223b7e92970d07557133994fcb225a6d4c960))
+* Added .valueOf method to Duration class ([#2226](https://github.com/iamkun/dayjs/issues/2226)) ([9b4fcfd](https://github.com/iamkun/dayjs/commit/9b4fcfde35b39693894be1821b6c7222fac98657))
+* timezone type mark `date` parameter as optional ([#2222](https://github.com/iamkun/dayjs/issues/2222)) ([b87aa0e](https://github.com/iamkun/dayjs/commit/b87aa0ed9a748c478a66ef48230cd1d6350d7b8a))
+* type file first parameter date is optional in isSame(), isBefore(), isAfter() ([#2272](https://github.com/iamkun/dayjs/issues/2272)) ([4d56f3e](https://github.com/iamkun/dayjs/commit/4d56f3eb2b3770879d60f824590bf1b32f237d47))
+
+## [1.11.7](https://github.com/iamkun/dayjs/compare/v1.11.6...v1.11.7) (2022-12-06)
+
+
+### Bug Fixes
+
+* Add locale (zh-tw) meridiem ([#2149](https://github.com/iamkun/dayjs/issues/2149)) ([1e9ba76](https://github.com/iamkun/dayjs/commit/1e9ba761ff4e3f2759106dfe1aa9054d5826451c))
+* update fa locale ([#2151](https://github.com/iamkun/dayjs/issues/2151)) ([1c26732](https://github.com/iamkun/dayjs/commit/1c267321a1a01b4947e1482bac67d67ebc7c3dfa))
+
+## [1.11.6](https://github.com/iamkun/dayjs/compare/v1.11.5...v1.11.6) (2022-10-21)
+
+
+### Bug Fixes
+
+* add BigIntSupport plugin ([#2087](https://github.com/iamkun/dayjs/issues/2087)) ([f6dce48](https://github.com/iamkun/dayjs/commit/f6dce48a9e39677718b087867d9fd901d5078155))
+* Fix objectSupport collides with Duration plugin - issue [#2027](https://github.com/iamkun/dayjs/issues/2027) ([#2038](https://github.com/iamkun/dayjs/issues/2038)) ([c9370ea](https://github.com/iamkun/dayjs/commit/c9370ea96bf420439ee7eaa4146e8ed643160312))
+
+## [1.11.5](https://github.com/iamkun/dayjs/compare/v1.11.4...v1.11.5) (2022-08-12)
+
+
+### Bug Fixes
+
+* ordinal for nl not working ([#2011](https://github.com/iamkun/dayjs/issues/2011)) ([c93c85e](https://github.com/iamkun/dayjs/commit/c93c85eaa11564a1aae2d823480a417812c01bf4))
+* wrong ordinal for french locale ([#2010](https://github.com/iamkun/dayjs/issues/2010)) ([dd192a7](https://github.com/iamkun/dayjs/commit/dd192a72fc5d26ce56481e89b0c1ccf5f939be0c))
+
 ## [1.11.4](https://github.com/iamkun/dayjs/compare/v1.11.3...v1.11.4) (2022-07-19)
 
 

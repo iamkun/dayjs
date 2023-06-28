@@ -1,0 +1,50 @@
+name: Release
+on:
+  workflow_run:
+    workflows: ['Lint & Unit Test']
+    branches: [master]
+    types:
+      - completed
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  release:
+    env: 
+      GITHUB_TRIGGER_REF: ${{ github.event.workflow_run.head_branch }} # For workflow_run the GITHUB_REF is the default branch, as mentioned in the docs 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ env.GITHUB_TRIGGER_REF }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*' # semantic-release requires Node >= 18
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Build
+        env: # temporary workaround for "Error: error:0308010C:digital envelope routines::unsupported" in Node lts / 18
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: npm run build && npm run babel
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm install -g @semantic-release/changelog @semantic-release/git semantic-release 
+          GITHUB_REF=${{ env.GITHUB_TRIGGER_REF }} semantic-release
+          echo release success
+          curl -s ${{ secrets.GITEE_SYNC_URL }}
