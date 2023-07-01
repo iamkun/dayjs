@@ -1,3 +1,17 @@
+## [1.11.9](https://github.com/iamkun/dayjs/compare/v1.11.8...v1.11.9) (2023-07-01)
+
+
+### Bug Fixes
+
+* Add null to min and max plugin return type ([#2355](https://github.com/iamkun/dayjs/issues/2355)) ([62d9042](https://github.com/iamkun/dayjs/commit/62d9042eb84b78d78324694ccbeaad1679d37e68))
+* check if null passed to objectSupport parser ([#2175](https://github.com/iamkun/dayjs/issues/2175)) ([013968f](https://github.com/iamkun/dayjs/commit/013968f609c32e2269df69b4dd1feb2e8e1e035a))
+* dayjs.diff improve performance ([#2244](https://github.com/iamkun/dayjs/issues/2244)) ([33c80e1](https://github.com/iamkun/dayjs/commit/33c80e14cf14f70ceb4f54639e266cd70a3c3996))
+* dayjs(null) throws error, not return dayjs object as invalid date ([#2334](https://github.com/iamkun/dayjs/issues/2334)) ([c79e2f5](https://github.com/iamkun/dayjs/commit/c79e2f5d03eef5660b1f13385b69c0c9668d2f98))
+* objectSupport plugin causes an error when null is passed to dayjs function (closes [#2277](https://github.com/iamkun/dayjs/issues/2277)) ([#2342](https://github.com/iamkun/dayjs/issues/2342)) ([89bf31c](https://github.com/iamkun/dayjs/commit/89bf31ce0a36dcfc892029dc019d85d3654cf5fb))
+* Optimize format method ([#2313](https://github.com/iamkun/dayjs/issues/2313)) ([1fe1b1d](https://github.com/iamkun/dayjs/commit/1fe1b1d9a214d3b8c9f267b432801424a493f1c4))
+* update Duration plugin add/subtract take into account days in month ([#2337](https://github.com/iamkun/dayjs/issues/2337)) ([3b1060f](https://github.com/iamkun/dayjs/commit/3b1060f92183ab3a3c49289c2d87fbdd34c1eacc))
+* update MinMax plugin 1. ignore the 'null' in args 2. return the only one arg ([#2330](https://github.com/iamkun/dayjs/issues/2330)) ([3c2c6ee](https://github.com/iamkun/dayjs/commit/3c2c6ee4db00bbb43a7a3bb0b56bc0d0f03daddc))
+
 ## [1.11.8](https://github.com/iamkun/dayjs/compare/v1.11.7...v1.11.8) (2023-06-02)
 
 
