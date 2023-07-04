@@ -139,7 +139,7 @@ class Duration {
 
     let seconds = this.$d.seconds || 0
     if (this.$d.milliseconds) {
-      seconds += this.$d.milliseconds / 1000
+      seconds += Math.round(this.$d.milliseconds) / 1000
     }
 
     const S = getNumberUnitFormat(seconds, 'S')
