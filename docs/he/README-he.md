@@ -1,11 +1,11 @@
+<div dir="rtl">
 
-English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [Azərbaycan dili](./docs/az/README-az.md) | [සිංහල](./docs/si/README-si.md)
-
+עברית | [English](../../README.md)  | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">אלטרנטיבה מהירה ל-Moment.js ששוקלת רק <b>2kB</b> עם אותן יכולות מודרניות</p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
             src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
@@ -24,87 +24,107 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js היא ספרייה מינימלסטית לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות לדפדפנים מודרנים עם תאימות גבוהה ל-API של Moment.js. אם השתמשתם ב-Moment.js, אתם כבר יודעים את Day.js 
+
+<div dir="ltr">
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+</div>
+
+* 🕒 תבניות ו-API זהים ל-Moment.js
+* 💪 אינו ניתן לשינוי
+* 🔥 ניתן לשרשור
+* 🌐 תמיכה ב-I18n
+* 📦 ספרייה קטנטנה 2kb
+* 👫 נתמכת בכל הדפדפנים
 
 ---
 
-## Getting Started
+## צעדים ראשונים 
 
-### Documentation
+### דוקומנטצייה 
+באתר [day.js.org](https://day.js.org/) ניתן למצוא פרטים נוספים, API, ותיעודים נוספים.
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
 
-### Installation
+### התקנה 
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
+📚[מדריך התקנה](https://day.js.org/docs/en/installation/installation)
 
 ### API
+מאוד קל להשתמש ב-Day.js לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות. 
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
+<div dir="ltr">
+
 
 ```javascript
-dayjs('2018-08-08') // parse
+dayjs('2018-08-08') // פענוח
 
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // הצגה
 
-dayjs().set('month', 3).month() // get & set
+dayjs().set('month', 3).month() // קבלה והגדרה
 
-dayjs().add(1, 'year') // manipulate
+dayjs().add(1, 'year') // מניפולציה
 
-dayjs().isBefore(dayjs()) // query
+dayjs().isBefore(dayjs()) // שאילתה
 ```
 
-📚[API Reference](https://day.js.org/docs/en/parse/parse)
+</div>
+
+📚[תיעודי API](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
+ל-Day.js יש תמיכה מצוינית בבינלאומיות.
 
-Day.js has great support for internationalization.
+אבל אף אחד מהם לא יכלל בקובץ הסופי אלא אם כן יתבצע בהם שימוש.
 
-But none of them will be included in your build unless you use it.
+<div dir="ltr">
 
-```javascript
-import 'dayjs/locale/es' // load on demand
-
-dayjs.locale('es') // use Spanish locale globally
-
-dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
-```
-📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
-
-### Plugin
-
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
+import 'dayjs/locale/es' // טעינה לפי הצורך
 
-dayjs.extend(advancedFormat) // use plugin
+dayjs.locale('es') // הגדרה לשימוש בספרדית באופן גלובלאלי
 
-dayjs().format('Q Do k kk X x') // more available formats
+dayjs('2018-05-05').locale('zh-cn').format() // הגדרה לשימוש בסינית פשוטה למופע ספיציפי בלבד
 ```
 
-📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
+</div>
 
-## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. 
+📚[בינלאומיות](https://day.js.org/docs/en/i18n/i18n)
 
-[[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
+### תוסף
+
+תוסף הוא מודל בלתי-תלוי הניתן להוספה ל-Day.js להרחבה או להוספה של פונקציות.
+
+
+<div dir="ltr">
+
+
+```javascript
+import advancedFormat from 'dayjs/plugin/advancedFormat' //  טעינה לפי הצורך
+
+dayjs.extend(advancedFormat) // שימוש בתוסף
+
+dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
+```
+
+</div>
+
+📚[רשימת תוספים](https://day.js.org/docs/en/plugin/plugin)
+
+## ספונסרים 
+תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן. 
+
+
+[[תמיכה דרך Github](https://github.com/sponsors/iamkun/)] [[תמיכה דרך OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
 <a href="https://toyokumo.co.jp" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
@@ -130,13 +150,13 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
 
-## Contributors
+## תורמים 
 
-This project exists thanks to all the people who contribute.
+פרויקט זה קיים הודות לכל האנשים שתמכו בו.
 
-Please give us a 💖 star 💖 to support us. Thank you.
+תנו לנו 💖 כוכב 💖 כדי לתמוך בנו. תודה רבה.
 
-And thank you to all our backers! 🙏
+ותודה רבה לכל התומכים שלנו! 🙏
 
 <a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
@@ -145,6 +165,7 @@ And thank you to all our backers! 🙏
 <br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
-## License
+## רישיון 
 
-Day.js is licensed under a [MIT License](./LICENSE).
+Day.js מורשה לשימוש עם [רישיון MIT](./LICENSE).
+</div>
