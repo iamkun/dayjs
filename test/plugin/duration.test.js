@@ -70,6 +70,13 @@ describe('Creating', () => {
   it('convert to milliseconds', () => {
     expect(+dayjs.duration(100)).toBe(100)
   })
+  it('handles rounding to millisecond precision', () => {
+    expect(dayjs.duration(2 / 3).toISOString()).toBe('PT0.001S')
+  })
+  it('should handle round with millisecond precision when negative', () => {
+    expect(dayjs.duration(1000.5).toISOString()).toBe('PT1.001S')
+    expect(dayjs.duration(-1000.5).toISOString()).toBe('-PT1S')
+  })
 })
 
 describe('Parse ISO string', () => {
