@@ -92,8 +92,9 @@ describe('Parse ISO string', () => {
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
-    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
-    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+    expect(d.asDays()).toBe(85.83333333333333) // moment 86, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.261904761904763) // moment 12.285714285714286
+    expect(d.asMonths()).toBe(2.8219178082191783) // moment 2.8213721020965523
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
