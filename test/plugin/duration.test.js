@@ -186,6 +186,12 @@ describe('Add', () => {
   expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
+describe('Add to a dayjs()', () => {
+  const a = dayjs()
+  const b = dayjs.duration({ hours: 7, minutes: 10 })
+  expect(a.add(b)).toEqual(a.add(7, 'hours').add(10, 'minutes'))
+})
+
 test('Add duration', () => {
   const a = dayjs('2020-10-01')
   const days = dayjs.duration(2, 'days')
