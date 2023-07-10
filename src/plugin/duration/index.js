@@ -198,7 +198,7 @@ class Duration {
     } else {
       base = this.$d[pUnit]
     }
-    return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
+    return !base ? 0 : base // a === 0 will be true on both 0 and -0
   }
 
   add(input, unit, isSubtract) {
