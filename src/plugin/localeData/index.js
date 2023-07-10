@@ -30,6 +30,7 @@ export default (o, c, dayjs) => { // locale needed later
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
       longDateFormat: format => getLongDateFormat(this.$locale(), format),
       meridiem: this.$locale().meridiem,
+      relativeTime: this.$locale().relativeTime,
       ordinal: this.$locale().ordinal
     }
   }
@@ -48,6 +49,7 @@ export default (o, c, dayjs) => { // locale needed later
       monthsShort: () => dayjs.monthsShort(),
       longDateFormat: format => getLongDateFormat(localeObject, format),
       meridiem: localeObject.meridiem,
+      relativeTime: localeObject.relativeTime,
       ordinal: localeObject.ordinal
     }
   }

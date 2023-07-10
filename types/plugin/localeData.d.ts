@@ -16,6 +16,21 @@ declare module 'dayjs' {
     monthsShort(instance?: Dayjs): MonthNames;
     longDateFormat(format: string): string;
     meridiem(hour?: number, minute?: number, isLower?: boolean): string;
+    relativeTime: Partial<{
+      future: string
+      past: string
+      s: string
+      m: string
+      mm: string
+      h: string
+      hh: string
+      d: string
+      dd: string
+      M: string
+      MM: string
+      y: string
+      yy: string
+    }>
     ordinal(n: number): string
   }
 
@@ -28,6 +43,21 @@ declare module 'dayjs' {
     monthsShort(): MonthNames;
     longDateFormat(format: string): string;
     meridiem(hour?: number, minute?: number, isLower?: boolean): string;
+    relativeTime: Partial<{
+      future: string
+      past: string
+      s: string
+      m: string
+      mm: string
+      h: string
+      hh: string
+      d: string
+      dd: string
+      M: string
+      MM: string
+      y: string
+      yy: string
+    }>
     ordinal(n: number): string
   }
 

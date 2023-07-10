@@ -111,6 +111,13 @@ it('meridiem', () => {
   dayjs.locale('en')
 })
 
+it('relativeTime', () => {
+  dayjs.locale('zh-cn')
+  expect(typeof dayjs.localeData().relativeTime).toEqual('object')
+  expect(typeof dayjs().localeData().relativeTime).toEqual('object')
+  dayjs.locale('en')
+})
+
 it('ordinal', () => {
   dayjs.locale('zh-cn')
   expect(typeof dayjs.localeData().ordinal).toEqual('function')
