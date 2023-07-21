@@ -6,7 +6,10 @@ let L = 'en' // global locale
 const Ls = {} // global loaded locale
 Ls[L] = en
 
-const isDayjs = d => d instanceof Dayjs // eslint-disable-line no-use-before-define
+const IS_DAYJS = '$isDayjsObject'
+
+// eslint-disable-next-line no-use-before-define
+const isDayjs = d => d instanceof Dayjs || !!((d || {})[IS_DAYJS])
 
 const parseLocale = (preset, object, isLocal) => {
   let l
@@ -72,7 +75,7 @@ const parseDate = (cfg) => {
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
       }
       return new Date(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+        || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
 
@@ -83,6 +86,7 @@ class Dayjs {
   constructor(cfg) {
     this.$L = parseLocale(cfg.locale, null, true)
     this.parse(cfg) // for plugin
+    this[IS_DAYJS] = true
   }
 
   parse(cfg) {
