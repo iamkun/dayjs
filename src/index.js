@@ -9,7 +9,7 @@ Ls[L] = en
 const IS_DAYJS = '$isDayjsObject'
 
 // eslint-disable-next-line no-use-before-define
-const isDayjs = d => d instanceof Dayjs || (d && d[IS_DAYJS])
+const isDayjs = d => d instanceof Dayjs || !!(d && d[IS_DAYJS])
 
 const parseLocale = (preset, object, isLocal) => {
   let l
