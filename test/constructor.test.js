@@ -22,4 +22,5 @@ it('$isDayjsObject', () => {
 
 it('does not break isDayjs', () => {
   expect(dayjs.isDayjs(dayjs())).toBeTruthy()
+  expect(dayjs.isDayjs(new Date())).toBeFalsy()
 })
