@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
+import zh from '../../src/locale/zh'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -296,7 +297,7 @@ describe('Get offsetName', () => {
   })
 })
 
-describe('CustomPraseFormat', () => {
+describe('CustomParseFormat', () => {
   const result = 1602786600
   it('normal', () => {
     expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
@@ -317,5 +318,13 @@ describe('startOf and endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+})
+
+describe('keep locale', () => {
+  it('should copy locale from the original dayjs object', () => {
+    const dayjsWithLocale = dayjs('2022-11-07', { locale: zh }).tz(TOKYO)
+    expect(dayjsWithLocale.locale()).toEqual('zh')
+    expect(dayjsWithLocale.format('MMM')).toEqual('11月')
   })
 })
