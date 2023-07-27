@@ -1,14 +1,14 @@
-// Uzbek [uz]
+// Uzbek Latin [uz]
 import dayjs from 'dayjs'
 
 const locale = {
   name: 'uz',
-  weekdays: 'Якшанба_Душанба_Сешанба_Чоршанба_Пайшанба_Жума_Шанба'.split('_'),
-  months: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split('_'),
+  weekdays: 'Yakshanba_Dushanba_Seshanba_Chorshanba_Payshanba_Juma_Shanba'.split('_'),
+  months: 'Yanvar_Fevral_Mart_Aprel_May_Iyun_Iyul_Avgust_Sentabr_Oktabr_Noyabr_Dekabr'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'Якш_Душ_Сеш_Чор_Пай_Жум_Шан'.split('_'),
-  monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
-  weekdaysMin: 'Як_Ду_Се_Чо_Па_Жу_Ша'.split('_'),
+  weekdaysShort: 'Yak_Dush_Sesh_Chor_Pay_Jum_Shan'.split('_'),
+  monthsShort: 'Yan_Fev_Mar_Apr_May_Iyun_Iyul_Avg_Sen_Okt_Noy_Dek'.split('_'),
+  weekdaysMin: 'Ya_Du_Se_Cho_Pa_Ju_Sha'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
@@ -19,23 +19,32 @@ const locale = {
     LLLL: 'D MMMM YYYY, dddd HH:mm'
   },
   relativeTime: {
-    future: 'Якин %s ичида',
-    past: 'Бир неча %s олдин',
-    s: 'фурсат',
-    m: 'бир дакика',
-    mm: '%d дакика',
-    h: 'бир соат',
-    hh: '%d соат',
-    d: 'бир кун',
-    dd: '%d кун',
-    M: 'бир ой',
-    MM: '%d ой',
-    y: 'бир йил',
-    yy: '%d йил'
+    future: 'Yaqin %s ichida',
+    past: 'Bir necha %s oldin',
+    s: 'soniya',
+    m: 'bir daqiqa',
+    mm: '%d daqiqa',
+    h: 'bir soat',
+    hh: '%d soat',
+    d: 'bir kun',
+    dd: '%d kun',
+    M: 'bir oy',
+    MM: '%d oy',
+    y: 'bir yil',
+    yy: '%d yil'
+  },
+  meridiem: (hour) => {
+    if (hour < 4) {
+      return 'ertalab' // ночи
+    } else if (hour < 12) {
+      return 'ertalab' // утра
+    } else if (hour < 17) {
+      return 'soat' // дня
+    }
+    return 'kechki' // вечера
   }
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
-
