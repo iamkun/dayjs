@@ -77,6 +77,15 @@ describe('Creating', () => {
     expect(dayjs.duration(1000.5).toISOString()).toBe('PT1.001S')
     expect(dayjs.duration(-1000.5).toISOString()).toBe('-PT1S')
   })
+  it('should handle floating point rounding errors', () => {
+    // An example of this is when adding 2 to 0.812 seconds, which is how
+    // the seconds component is calculated in .toISOString().
+    // > 2 + 0.812
+    // 2.8120000000000003
+    expect(dayjs.duration(-2812).toISOString()).toBe('-PT2.812S') // was -PT2.8120000000000003S
+    expect(dayjs.duration(3121632.27382247).toISOString()).toBe('PT52M1.632S') // was PT52M1.6320000000000001S
+    expect(dayjs.duration(7647826.525774224).toISOString()).toBe('PT2H7M27.827S') // was PT2H7M27.826999999999998S
+  })
 })
 
 describe('Parse ISO string', () => {
