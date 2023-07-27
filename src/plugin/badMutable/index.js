@@ -11,14 +11,14 @@ export default (o, c) => { // locale needed later
 
   const oldStartOf = proto.startOf
   proto.startOf = function (units, startOf) {
-    this.$d = oldStartOf.bind(this)(units, startOf).toDate()
+    this.$d = oldStartOf.bind(this)(units, startOf).$d
     this.init()
     return this
   }
 
   const oldAdd = proto.add
   proto.add = function (number, units) {
-    this.$d = oldAdd.bind(this)(number, units).toDate()
+    this.$d = oldAdd.bind(this)(number, units).$d
     this.init()
     return this
   }

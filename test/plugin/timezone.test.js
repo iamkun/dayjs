@@ -4,10 +4,12 @@ import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
+import badMutable from '../../src/plugin/badMutable'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(customParseFormat)
+dayjs.extend(badMutable)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -313,9 +315,21 @@ describe('startOf and endOf', () => {
     expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
 
+  it('corrects for timezone offset in startOf with format', () => {
+    const dateStr = '2010-01-01 00:00:00'
+    const originalDay = dayjs.tz(dateStr, NY)
+    expect(originalDay.startOf('day').format('YYYY-MM-DD HH:mm:ss')).toEqual(dateStr)
+  })
+
   it('corrects for timezone offset in endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('corrects for timezone offset in endOf with format', () => {
+    const dateStr = '2009-12-31 23:59:59.999'
+    const originalDay = dayjs.tz(dateStr, NY)
+    expect(originalDay.endOf('day').format('YYYY-MM-DD HH:mm:ss.SSS')).toEqual(dateStr)
   })
 })
