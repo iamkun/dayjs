@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 function plural(n) {
   return (n % 10 < 5) && (n % 10 > 1) && ((~~(n / 10) % 10) !== 1) // eslint-disable-line
 }
-/* eslint-disable */ 
+/* eslint-disable */
 function translate(number, withoutSuffix, key) {
   const result = `${number} `
   switch (key) {
@@ -69,6 +69,13 @@ const locale = {
     LL: 'D MMMM YYYY',
     LLL: 'D MMMM YYYY HH:mm',
     LLLL: 'dddd, D MMMM YYYY HH:mm'
+  },
+  greet: (i) => {
+    const hour = i.hour()
+    if (hour >= 4 && hour < 18) {
+      return 'Dzień dobry%s' // (4:00 - 17:59)
+    }
+    return 'Dobry wieczór%s'
   }
 }
 
