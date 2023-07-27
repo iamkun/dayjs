@@ -22,6 +22,7 @@ const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 const PARIS = 'Europe/Paris'
+const UTC = 'Etc/UTC'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -95,6 +96,15 @@ describe('Convert', () => {
     const MlosAngelesInUTC = moment('2014-06-01T05:00:00-07:00').tz('UTC')
     expect(losAngelesInUTC.format()).toBe('2014-06-01T12:00:00Z')
     expect(losAngelesInUTC.format()).toBe(MlosAngelesInUTC.format())
+  })
+
+  // Prompted by issue #1813 (<https://github.com/iamkun/dayjs/issues/1813>):
+  it('converts between timezones with a locale specified', () => {
+    const testDateTime = dayjs('2021-01-01T00:00:00-05:00')
+    expect(testDateTime.tz(UTC).locale('en').format())
+      .toBe('2021-01-01T05:00:00Z')
+    expect(testDateTime.tz(UTC, true).locale('en').format())
+      .toBe('2021-01-01T00:00:00Z')
   })
 
   it('DST', () => {

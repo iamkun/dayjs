@@ -1,4 +1,4 @@
-import { MIN, MS } from '../../constant'
+import { MS } from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -93,16 +93,13 @@ export default (o, c, d) => {
   const proto = c.prototype
 
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
-    const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
-    let ins = d(target).$set(MS, this.$ms)
-      .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
-    if (keepLocalTime) {
-      const newOffset = ins.utcOffset()
-      ins = ins.add(oldOffset - newOffset, MIN)
-    }
+    const ins = d(this).utc(keepLocalTime).$set(MS, this.$ms).utcOffset(
+      (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff,
+      keepLocalTime
+    )
     ins.$x.$timezone = timezone
     return ins
   }
@@ -122,7 +119,7 @@ export default (o, c, d) => {
 
     const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'))
     const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
-    return startOfWithoutTz.tz(this.$x.$timezone, true)
+    return startOfWithoutTz.tz(this.$x.$timezone)
   }
 
   d.tz = function (input, arg1, arg2) {
