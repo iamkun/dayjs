@@ -311,11 +311,27 @@ describe('startOf and endOf', () => {
     const originalDay = dayjs.tz('2010-01-01 00:00:00', NY)
     const startOfDay = originalDay.startOf('day')
     expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
+    expect(startOfDay.format()).toEqual(originalDay.format())
   })
 
   it('corrects for timezone offset in endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+    expect(endOfDay.format()).toEqual(originalDay.format())
+  })
+
+  it('corrects for +00:00 timezone offset in startOf', () => {
+    const originalDay = dayjs.tz('2021-05-10 00:00:00', 'UTC')
+    const startOfDay = originalDay.startOf('day')
+    expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
+    expect(startOfDay.format()).toEqual(originalDay.format())
+  })
+
+  it('corrects for +00:00 timezone offset in endOf', () => {
+    const originalDay = dayjs.tz('2021-05-10 23:59:59.999', 'UTC')
+    const endOfDay = originalDay.endOf('day')
+    expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+    expect(endOfDay.format()).toEqual(originalDay.format())
   })
 })
