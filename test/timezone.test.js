@@ -3,6 +3,7 @@ import moment from 'moment'
 import dayjs from '../src'
 import timezone from '../src/plugin/timezone'
 import utc from '../src/plugin/utc'
+import '../src/locale/en'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -79,4 +80,13 @@ it('UTC diff in DST', () => {
   const day2 = dayjs.utc('20201026')
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
+})
+
+it('TZ with Locale', () => {
+  const test1 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Seoul').locale('en')
+  expect(test1.hour()).toBe(9)
+  const test2 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Hong_Kong').locale('en')
+  expect(test2.hour()).toBe(8)
+  const test3 = dayjs('2000-01-01T09:00:00+09:00').tz('Etc/UTC').locale('en')
+  expect(test3.hour()).toBe(0)
 })
