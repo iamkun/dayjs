@@ -55,7 +55,7 @@ describe('Creating', () => {
       weeks: 5,
       months: 6,
       years: 7
-    }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
+    }).toISOString()).toBe('P7Y7M11DT3H2M1.1S') // P7Y7M11DT3H2M1.1S
   })
   it('object with millisecond', () => {
     expect(dayjs.duration({
@@ -77,7 +77,7 @@ describe('Parse ISO string', () => {
     expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
   })
   it('Part ISO string', () => {
-    expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
+    expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('P4M3DT17H46M40S')
   })
   it('Formatting missing components', () => {
     expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
@@ -85,8 +85,8 @@ describe('Parse ISO string', () => {
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
-    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
-    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+    expect(d.asDays()).toBe(81) // moment 85, count 2M as 56 days
+    expect(d.asWeeks()).toBe(11.571428571428571) // moment 12.285714285714286
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
@@ -340,13 +340,14 @@ describe('Weeks', () => {
 })
 
 describe('Month', () => {
-  expect(dayjs.duration(10000000000).months()).toBe(3)
+  expect(dayjs.duration(10000000000).months()).toBe(4)
+  expect(dayjs.duration(7257600000).asMonths()).toBe(3)
   expect(dayjs.duration({ months: 3 }).asMonths()).toBe(3)
 })
 
 describe('Years', () => {
   expect(dayjs.duration(100000000000).years()).toBe(3)
-  expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.17')
+  expect(dayjs.duration(100000000000).asYears().toFixed(2)).toBe('3.44')
 })
 
 describe('Add', () => {
@@ -383,7 +384,7 @@ describe('prettyUnit', () => {
   expect(dayjs.duration({
     M: 12,
     m: 12
-  }).toISOString()).toBe('P12MT12M')
+  }).toISOString()).toBe('P1YT12M')
 })
 
 describe('Format', () => {

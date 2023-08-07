@@ -7,20 +7,20 @@ import {
   REGEX_FORMAT
 } from '../../constant'
 
-const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
-const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
+const MILLISECONDS_A_MONTH = MILLISECONDS_A_WEEK * 4
+const MILLISECONDS_A_YEAR = MILLISECONDS_A_MONTH * 12
 
 const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
   months: MILLISECONDS_A_MONTH,
+  weeks: MILLISECONDS_A_WEEK,
   days: MILLISECONDS_A_DAY,
   hours: MILLISECONDS_A_HOUR,
   minutes: MILLISECONDS_A_MINUTE,
   seconds: MILLISECONDS_A_SECOND,
-  milliseconds: 1,
-  weeks: MILLISECONDS_A_WEEK
+  milliseconds: 1
 }
 
 const isDuration = d => d instanceof Duration // eslint-disable-line no-use-before-define
@@ -34,7 +34,7 @@ const wrapper = (input, instance, unit) =>
 const prettyUnit = unit => `${$u.p(unit)}s`
 const isNegative = number => number < 0
 const roundNumber = number =>
-  (isNegative(number) ? Math.ceil(number) : Math.floor(number))
+  isNegative(number) ? Math.ceil(number) : Math.floor(number)
 const absolute = number => Math.abs(number)
 const getNumberUnitFormat = (number, unit) => {
   if (!number) {
@@ -61,6 +61,7 @@ class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
     this.$l = locale
+
     if (input === undefined) {
       this.$ms = 0
       this.parseFromMilliseconds()
@@ -71,40 +72,51 @@ class Duration {
     if (typeof input === 'number') {
       this.$ms = input
       this.parseFromMilliseconds()
-      return this
     }
     if (typeof input === 'object') {
-      Object.keys(input).forEach((k) => {
-        this.$d[prettyUnit(k)] = input[k]
+      const obj = {
+        years: 0,
+        months: 0,
+        weeks: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0
+      }
+      Object.keys(input).forEach(k => {
+        obj[prettyUnit(k)] = input[k] || 0
       })
-      this.calMilliseconds()
-      return this
+      this.calMilliseconds(obj)
     }
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
       if (d) {
         const properties = d.slice(2)
-        const numberD = properties.map(value => (value != null ? Number(value) : 0));
-        [
-          this.$d.years,
-          this.$d.months,
-          this.$d.weeks,
-          this.$d.days,
-          this.$d.hours,
-          this.$d.minutes,
-          this.$d.seconds
-        ] = numberD
-        this.calMilliseconds()
-        return this
+        const numberD = properties.map(value =>
+          value != null ? Number(value) : 0
+        )
+        this.calMilliseconds({
+          years: numberD[0],
+          months: numberD[1],
+          weeks: numberD[2],
+          days: numberD[3],
+          hours: numberD[4],
+          minutes: numberD[5],
+          seconds: numberD[6]
+        })
       }
     }
     return this
   }
 
-  calMilliseconds() {
-    this.$ms = Object.keys(this.$d).reduce((total, unit) => (
-      total + ((this.$d[unit] || 0) * (unitToMS[unit]))
-    ), 0)
+  calMilliseconds(obj) {
+    this.$ms = Object.keys(obj).reduce(
+      (total, unit) => total + ((obj[unit] || 0) * unitToMS[unit]),
+      0
+    )
+
+    this.parseFromMilliseconds()
   }
 
   parseFromMilliseconds() {
@@ -113,6 +125,8 @@ class Duration {
     $ms %= MILLISECONDS_A_YEAR
     this.$d.months = roundNumber($ms / MILLISECONDS_A_MONTH)
     $ms %= MILLISECONDS_A_MONTH
+    this.$d.weeks = roundNumber($ms / MILLISECONDS_A_WEEK)
+    $ms %= MILLISECONDS_A_WEEK
     this.$d.days = roundNumber($ms / MILLISECONDS_A_DAY)
     $ms %= MILLISECONDS_A_DAY
     this.$d.hours = roundNumber($ms / MILLISECONDS_A_HOUR)
@@ -122,15 +136,18 @@ class Duration {
     this.$d.seconds = roundNumber($ms / MILLISECONDS_A_SECOND)
     $ms %= MILLISECONDS_A_SECOND
     this.$d.milliseconds = $ms
+
+    return this
   }
 
   toISOString() {
     const Y = getNumberUnitFormat(this.$d.years, 'Y')
-    const M = getNumberUnitFormat(this.$d.months, 'M')
+    const M = getNumberUnitFormat(+this.$d.months || 0, 'M')
 
     let days = +this.$d.days || 0
-    if (this.$d.weeks) {
-      days += this.$d.weeks * 7
+    const weeks = +this.$d.weeks || 0
+    if (weeks) {
+      days += weeks * 7
     }
 
     const D = getNumberUnitFormat(days, 'D')
@@ -156,56 +173,45 @@ class Duration {
     const P = negativeMode ? '-' : ''
 
     const result = `${P}P${Y.format}${M.format}${D.format}${T}${H.format}${m.format}${S.format}`
+
     return result === 'P' || result === '-P' ? 'P0D' : result
   }
 
-  toJSON() {
-    return this.toISOString()
-  }
+  toJSON() { return this.toISOString() }
 
   format(formatStr) {
     const str = formatStr || 'YYYY-MM-DDTHH:mm:ss'
-    const matches = {
-      Y: this.$d.years,
-      YY: $u.s(this.$d.years, 2, '0'),
-      YYYY: $u.s(this.$d.years, 4, '0'),
-      M: this.$d.months,
-      MM: $u.s(this.$d.months, 2, '0'),
-      D: this.$d.days,
-      DD: $u.s(this.$d.days, 2, '0'),
-      H: this.$d.hours,
-      HH: $u.s(this.$d.hours, 2, '0'),
-      m: this.$d.minutes,
-      mm: $u.s(this.$d.minutes, 2, '0'),
-      s: this.$d.seconds,
-      ss: $u.s(this.$d.seconds, 2, '0'),
-      SSS: $u.s(this.$d.milliseconds, 3, '0')
-    }
-    return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
-  }
 
-  as(unit) {
-    return this.$ms / (unitToMS[prettyUnit(unit)])
-  }
-
-  get(unit) {
-    const pUnit = prettyUnit(unit)
-    let base = roundNumber(this.$ms / unitToMS[pUnit])
-
-    if (pUnit === 'milliseconds') {
-      base %= 1000
-    } else if (pUnit === 'seconds' || pUnit === 'minutes') {
-      base %= 60
-    } else if (pUnit === 'hours') {
-      base %= 24
-    } else if (pUnit === 'days') {
-      base %= 7
-    } else if (pUnit === 'months') {
-      base %= 12
+    let days = +this.$d.days || 0
+    const weeks = +this.$d.weeks || 0
+    if (weeks) {
+      days += weeks * 7
     }
 
-    return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
+    return str.replace(
+      REGEX_FORMAT,
+      (match, $1) => $1 || String({
+        Y: this.$d.years,
+        YY: $u.s(this.$d.years, 2, '0'),
+        YYYY: $u.s(this.$d.years, 4, '0'),
+        M: this.$d.months,
+        MM: $u.s(this.$d.months, 2, '0'),
+        D: days,
+        DD: $u.s(days, 2, '0'),
+        H: this.$d.hours,
+        HH: $u.s(this.$d.hours, 2, '0'),
+        m: this.$d.minutes,
+        mm: $u.s(this.$d.minutes, 2, '0'),
+        s: this.$d.seconds,
+        ss: $u.s(this.$d.seconds, 2, '0'),
+        SSS: $u.s(this.$d.milliseconds, 3, '0')
+      }[match])
+    )
   }
+
+  as(unit) { return (this.$ms / unitToMS[prettyUnit(unit)]) || 0 }
+
+  get(unit) { return this.$d[prettyUnit(unit)] || 0 }
 
   add(input, unit, isSubtract) {
     let another
@@ -217,7 +223,7 @@ class Duration {
       another = wrapper(input, this).$ms
     }
 
-    return wrapper(this.$ms + (another * (isSubtract ? -1 : 1)), this)
+    return wrapper(this.$ms + another * (isSubtract ? -1 : 1), this)
   }
 
   subtract(input, unit) {
