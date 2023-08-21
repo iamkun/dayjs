@@ -17,10 +17,10 @@ declare module 'dayjs' {
 
     endOf(unit: QUnitType | OpUnitType): Dayjs
 
-    isSame(date: ConfigType, unit?: QUnitType): boolean
+    isSame(date?: ConfigType, unit?: QUnitType): boolean
 
-    isBefore(date: ConfigType, unit?: QUnitType): boolean
+    isBefore(date?: ConfigType, unit?: QUnitType): boolean
 
-    isAfter(date: ConfigType, unit?: QUnitType): boolean
+    isAfter(date?: ConfigType, unit?: QUnitType): boolean
   }
 }
