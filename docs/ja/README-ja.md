@@ -1,4 +1,4 @@
-日本語 | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)
+日本語 | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)| [עברית](../he/README-he.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -44,9 +44,9 @@ dayjs()
 
 ## はじめに
 
-### Documentation
+### ドキュメント
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+詳細、API、その他のドキュメントについては、[day.js.org](https://day.js.org/) のウェブサイトを参照してください。
 
 ### インストール
 
