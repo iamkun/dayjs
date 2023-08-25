@@ -26,7 +26,7 @@ const locale = {
     l: 'YYYY/M/D',
     ll: 'YYYY年M月D日',
     lll: 'YYYY年M月D日 HH:mm',
-    llll: 'YYYY年M月D日dddd HH:mm',
+    llll: 'YYYY年M月D日dddd HH:mm'
   },
   relativeTime: {
     future: '%s內',
