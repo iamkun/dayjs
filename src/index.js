@@ -300,6 +300,8 @@ class Dayjs {
           return this.$D
         case 'DD':
           return Utils.s(this.$D, 2, '0')
+        case 'Do':
+          return Utils.n(Utils.s(this.$D, 2, '0'))
         case 'd':
           return String(this.$W)
         case 'dd':

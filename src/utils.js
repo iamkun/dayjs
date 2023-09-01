@@ -45,11 +45,28 @@ const prettyUnit = (u) => {
 
 const isUndefined = s => s === undefined
 
+const nthNumber = (number) => {
+  if (number > 3 && number < 21) return 'th'
+  switch (number % 10) {
+    case 1:
+      return 'st'
+    case 2:
+      return 'nd'
+    case 3:
+      return 'rd'
+    default:
+      return 'th'
+  }
+}
+
+const getNthForDays = days => days + nthNumber(days)
+
 export default {
   s: padStart,
   z: padZoneStr,
   m: monthDiff,
   a: absFloor,
   p: prettyUnit,
-  u: isUndefined
+  u: isUndefined,
+  n: getNthForDays
 }
