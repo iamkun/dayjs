@@ -108,6 +108,9 @@ dayjs().format('Q Do k kk X x') // ahora tenemos más formatos disponibles
 
 📚[Lista de complementos](https://day.js.org/docs/en/plugin/plugin)
 
+### Tendencia de Uso
+[Tendencia de uso de Day.js y Moment.js](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## Patrocinadores
 
 Apoya a este proyecto convirtiéndote en un patrocinador. Tu logo aparecerá aquí, enlazado a tu sitio web. [[Conviértete en un patrocinador](https://opencollective.com/dayjs#sponsor)]
