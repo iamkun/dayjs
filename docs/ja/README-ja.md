@@ -108,6 +108,10 @@ dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 
 📚[プラグインリスト](https://day.js.org/docs/en/plugin/plugin)
 
+### 使用トレンド
+
+[Day.jsとMoment.jsの使用トレンド](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## ライセンス
 
 Day.js は [MIT License](../../LICENSE) のもとで利用を許諾します。
