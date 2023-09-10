@@ -108,6 +108,9 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[플러그인 목록](https://day.js.org/docs/en/plugin/plugin)
 
+### 사용 트렌드
+[Day.js와 Moment.js의 사용 트렌드](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## License
 
 Day.js는 [MIT License](./LICENSE)를 사용합니다.
