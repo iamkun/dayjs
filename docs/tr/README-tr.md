@@ -108,6 +108,9 @@ dayjs().format('Q Do k kk X x') // diğer mevcut formatlar
 
 📚[Eklenti Listesi](https://day.js.org/docs/en/plugin/plugin)
 
+### Kullanım Trendi
+[Day.js ve Moment.js Kullanım Trendi](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## Sponsorlar
 
 Sponsor olarak bu projeye destek olun. Logonuz, web sayfanızın linki ile birlikte burada görünür. [[Sponsor Ol](https://opencollective.com/dayjs#sponsor)]
