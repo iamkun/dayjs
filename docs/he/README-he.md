@@ -120,6 +120,9 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 
 📚[רשימת תוספים](https://day.js.org/docs/en/plugin/plugin)
 
+### מגמת השימוש
+[מגמת השימוש של Day.js ו-Moment.js](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## ספונסרים 
 תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן. 
 
