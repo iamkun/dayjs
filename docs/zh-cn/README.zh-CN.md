@@ -108,6 +108,10 @@ dayjs().format('Q Do k kk X x') // 使用扩展后的API
 
 📚[插件列表](https://day.js.org/docs/zh-CN/plugin/plugin)
 
+### 使用量趋势
+
+[Day.js和Moment.js使用量趋势](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## 开源协议
 
 Day.js 遵循 [MIT 开源协议](../../LICENSE).
