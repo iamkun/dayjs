@@ -2,7 +2,7 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
-                                                                             alt="Day.js"></a></p>
+                                                                             alt="Day.js" /></a></p>
 <p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
@@ -41,7 +41,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 ### Documentation
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+You can find more details, API, and other docs on [day.js.org](https://day.js.org/) website.
 
 ### Installation
 
@@ -82,6 +82,7 @@ dayjs.locale('es') // use Spanish locale globally
 
 dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
 ```
+
 📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
 
 ### Plugin
@@ -100,7 +101,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 ## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. 
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
 
 [[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
