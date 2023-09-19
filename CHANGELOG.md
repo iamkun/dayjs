@@ -1,3 +1,21 @@
+## [1.11.10](https://github.com/iamkun/dayjs/compare/v1.11.9...v1.11.10) (2023-09-19)
+
+
+### Bug Fixes
+
+* Add Korean Day of Month with ordinal ([#2395](https://github.com/iamkun/dayjs/issues/2395)) ([dd55ee2](https://github.com/iamkun/dayjs/commit/dd55ee2aadd1009242235e47d558bbf028827896))
+* change back fa locale to the Gregorian calendar equivalent ([#2411](https://github.com/iamkun/dayjs/issues/2411)) ([95e9458](https://github.com/iamkun/dayjs/commit/95e9458b221fe35e59ee4a160a5db247313a68fb))
+* duration plugin - MILLISECONDS_A_MONTH const calculation ([#2362](https://github.com/iamkun/dayjs/issues/2362)) ([f0a0b54](https://github.com/iamkun/dayjs/commit/f0a0b546b074b3b511c2319a1ce83d412894b91f))
+* duration plugin getter get result  0 instead of undefined ([#2369](https://github.com/iamkun/dayjs/issues/2369)) ([061aa7e](https://github.com/iamkun/dayjs/commit/061aa7ed6c31696974665fc9b11a74d30841ebed))
+* fix isDayjs check logic ([#2383](https://github.com/iamkun/dayjs/issues/2383)) ([5f3f878](https://github.com/iamkun/dayjs/commit/5f3f8786c796cd432fe6bcb6966a810daea89203))
+* fix timezone plugin to get correct locale setting ([#2420](https://github.com/iamkun/dayjs/issues/2420)) ([4f45012](https://github.com/iamkun/dayjs/commit/4f4501256fa1bc72128aae1d841bbd782df86aed))
+* **locale:** add meridiem in `ar` locale ([#2418](https://github.com/iamkun/dayjs/issues/2418)) ([361be5c](https://github.com/iamkun/dayjs/commit/361be5c7c628614ee833d710acbe154a598b904d))
+* round durations to millisecond precision for ISO string ([#2367](https://github.com/iamkun/dayjs/issues/2367)) ([890a17a](https://github.com/iamkun/dayjs/commit/890a17a8d8ddd43c7c8b806e3afc7b27f3288d27))
+* sub-second precisions need to be rounded at the seconds field to avoid adding floats ([#2377](https://github.com/iamkun/dayjs/issues/2377)) ([a9d7d03](https://github.com/iamkun/dayjs/commit/a9d7d0398d22ebd4bfc3812ca0134a97606d54d9))
+* update $x logic to avoid plugin error ([#2429](https://github.com/iamkun/dayjs/issues/2429)) ([2254635](https://github.com/iamkun/dayjs/commit/22546357f30924fcff3b3ffa14fd04be21f97a5e))
+* Update Slovenian locale for relative time ([#2396](https://github.com/iamkun/dayjs/issues/2396)) ([5470a15](https://github.com/iamkun/dayjs/commit/5470a15e437fac803797363063b24f3ba3bd5299))
+* update uzbek language translation ([#2327](https://github.com/iamkun/dayjs/issues/2327)) ([0a91056](https://github.com/iamkun/dayjs/commit/0a910564d76dc7c128da8e0d85d8e11ebdb5660b))
+
 ## [1.11.9](https://github.com/iamkun/dayjs/compare/v1.11.8...v1.11.9) (2023-07-01)
 
 
