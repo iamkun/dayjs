@@ -318,4 +318,15 @@ describe('startOf and endOf', () => {
     const endOfDay = originalDay.endOf('day')
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
+
+  it('preserves locality when tz is called', () => {
+    const tzWithoutLocality = dayjs.tz('2023-02-17 00:00:00', NY)
+    const tzWithLocality = dayjs.tz('2023-02-17 00:00:00', NY).locale({
+      name: 'locale_test',
+      weekStart: 3
+    })
+
+    expect(tzWithoutLocality.startOf('week').format('YYYY-MM-DD')).toEqual('2023-02-12')
+    expect(tzWithLocality.startOf('week').format('YYYY-MM-DD')).toEqual('2023-02-15')
+  })
 })

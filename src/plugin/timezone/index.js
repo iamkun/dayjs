@@ -105,7 +105,7 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = parseParts(getDateTimeFormat(timezone).formatToParts(date))
     const diff = Math.round((date - target) / 1000 / 60)
-    let ins = d(target).$set(MS, this.$ms)
+    let ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
     if (keepLocalTime) {
       const newOffset = ins.utcOffset()
@@ -128,7 +128,7 @@ export default (o, c, d) => {
       return oldStartOf.call(this, units, startOf)
     }
 
-    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'))
+    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
     const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
     return startOfWithoutTz.tz(this.$x.$timezone, true)
   }
