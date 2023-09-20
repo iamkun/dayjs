@@ -24,8 +24,8 @@ const unitToMS = {
 
 const isDuration = d => d instanceof Duration // eslint-disable-line no-use-before-define
 
-let $d = null
-let $u = null
+let $d
+let $u
 
 const wrapper = (input, instance, unit) =>
   new Duration(input, unit, instance.$l) // eslint-disable-line no-use-before-define
