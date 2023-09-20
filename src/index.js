@@ -86,12 +86,12 @@ class Dayjs {
   constructor(cfg) {
     this.$L = parseLocale(cfg.locale, null, true)
     this.parse(cfg) // for plugin
+    this.$x = this.$x || cfg.x || {}
     this[IS_DAYJS] = true
   }
 
   parse(cfg) {
     this.$d = parseDate(cfg)
-    this.$x = cfg.x || {}
     this.init()
   }
 
