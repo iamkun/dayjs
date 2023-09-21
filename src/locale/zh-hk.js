@@ -22,7 +22,11 @@ const locale = {
     L: 'YYYY/MM/DD',
     LL: 'YYYY年M月D日',
     LLL: 'YYYY年M月D日 HH:mm',
-    LLLL: 'YYYY年M月D日dddd HH:mm'
+    LLLL: 'YYYY年M月D日dddd HH:mm',
+    l: 'YYYY/M/D',
+    ll: 'YYYY年M月D日',
+    lll: 'YYYY年M月D日 HH:mm',
+    llll: 'YYYY年M月D日dddd HH:mm'
   },
   relativeTime: {
     future: '%s內',
@@ -38,6 +42,21 @@ const locale = {
     MM: '%d 個月',
     y: '一年',
     yy: '%d 年'
+  },
+  meridiem: (hour, minute) => {
+    const hm = (hour * 100) + minute
+    if (hm < 600) {
+      return '凌晨'
+    } else if (hm < 900) {
+      return '早上'
+    } else if (hm < 1100) {
+      return '上午'
+    } else if (hm < 1300) {
+      return '中午'
+    } else if (hm < 1800) {
+      return '下午'
+    }
+    return '晚上'
   }
 }
 
