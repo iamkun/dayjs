@@ -10,8 +10,8 @@
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.com/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -100,7 +100,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 ## අනුග්‍රාහකයින්
 
-අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත. 
+අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත.
 
 [[ගිට්හබ් හරහා අනුග්‍රාහකයෙකු වන්න](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රාහකයෙකු වන්න](https://opencollective.com/dayjs#sponsor)]
 
