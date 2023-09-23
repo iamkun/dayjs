@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
+import MockDate from 'mockdate'
 import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import utc from '../../src/plugin/utc'
@@ -7,6 +8,8 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.tz.setDefault('UTC')
 
+const ACR = 'Africa/Accra'
+const VAN = 'America/Vancouver'
 const LDN = 'Europe/London'
 
 function expectDayjsEqualsMoment(dayjsDate, momentDate) {
@@ -215,4 +218,56 @@ it('dayjs.tz("2023-06-22T10:21:32", "CET") should return correct date', () => {
   expect(dayjsDate.format()).toBe('2023-06-22T10:21:32+02:00')
   expect(dayjsDate.isUTC()).toBeFalsy()
   expectDayjsEqualsMoment(dayjsDate, momentDate)
+})
+
+// offsetName and timezone name
+it('should keep timezone name for "America/Vancouver" with "+ 0min"', () => {
+  const dateString = '2023-01-22T10:21:32'
+  const timeBefore = dayjs.tz(dateString, VAN)
+  const timezoneNameBefore = timeBefore.offsetName('long')
+
+  expect(timezoneNameBefore).toBe('Pacific Standard Time')
+  expect(timeBefore.$x.$timezone).toBe('America/Vancouver')
+
+  const momentDateAfter = moment.tz(dateString, VAN).add(0, 'minutes')
+  const timeAfter = timeBefore.add(0, 'minutes')
+  const timezoneNameAfter = timeAfter.offsetName('long')
+
+  expect(timezoneNameAfter).toBe('Pacific Standard Time')
+  expect(timeAfter.$x.$timezone).toBe('America/Vancouver')
+  expectDayjsEqualsMoment(timeAfter, momentDateAfter)
+})
+
+it('should keep timezone name for "Africa/Accra" with "+ 0min"', () => {
+  const dateString = '2023-01-22T10:21:32'
+  const timeBefore = dayjs.tz(dateString, ACR)
+  const timezoneNameBefore = timeBefore.offsetName('long')
+
+  expect(timezoneNameBefore).toBe('Greenwich Mean Time')
+  expect(timeBefore.$x.$timezone).toBe('Africa/Accra')
+
+  const momentDateAfter = moment.tz(dateString, ACR).add(0, 'minutes')
+  const timeAfter = timeBefore.add(0, 'minutes')
+  const timezoneNameAfter = timeAfter.offsetName('long')
+
+  expect(timezoneNameAfter).toBe('Greenwich Mean Time')
+  expect(timeAfter.$x.$timezone).toBe('Africa/Accra')
+  expectDayjsEqualsMoment(timeAfter, momentDateAfter)
+})
+
+it('should keep timezone name for "Africa/Accra" with "+ 1min"', () => {
+  const dateString = '2023-01-22T10:21:32'
+  const timeBefore = dayjs.tz(dateString, ACR)
+  const timezoneNameBefore = timeBefore.offsetName('long')
+
+  expect(timezoneNameBefore).toBe('Greenwich Mean Time')
+  expect(timeBefore.$x.$timezone).toBe('Africa/Accra')
+
+  const momentDateAfter = moment.tz(dateString, ACR).add(1, 'minutes')
+  const timeAfter = timeBefore.add(1, 'minutes')
+  const timezoneNameAfter = timeAfter.offsetName('long')
+
+  expect(timezoneNameAfter).toBe('Greenwich Mean Time')
+  expect(timeAfter.$x.$timezone).toBe('Africa/Accra')
+  expectDayjsEqualsMoment(timeAfter, momentDateAfter)
 })
