@@ -1,5 +1,4 @@
 import moment from 'moment-timezone'
-import MockDate from 'mockdate'
 import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import utc from '../../src/plugin/utc'
