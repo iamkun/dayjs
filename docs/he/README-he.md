@@ -124,7 +124,8 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 
 [מגמת השימוש של Day.js ו-Moment.js](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
 
-![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)
+[![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
 ## ספונסרים 
 תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן. 
 

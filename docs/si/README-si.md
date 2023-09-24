@@ -102,7 +102,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 [Day.js සහ Moment.js භාවිතා ප්‍රසූතිය](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
 
-![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)
+[![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
 
 ## අනුග්‍රාහකයින්
 
