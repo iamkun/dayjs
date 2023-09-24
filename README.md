@@ -102,6 +102,8 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 [Usage Trend of Day.js and Moment.js](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
 
+![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)
+
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. 
