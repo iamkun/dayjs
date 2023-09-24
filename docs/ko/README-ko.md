@@ -23,7 +23,7 @@
     </a>
 </p>
 
-> Day.js는 Moment.js와 호환되는 대부분의 API를 사용하며, 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력하는 경량 JavaScript 라이브러리입니다. Moment.js를 사용하고 있다면, Day.js는 껌입니다.
+> Day.js는 대부분의 API가 Moment.js와 호환되며 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력을 간편하게 처리하는 경량 JavaScript 라이브러리 입니다. Moment.js를 사용해본 경험이 있다면, Day.js도 쉽게 사용하실 수 있습니다.
 
 ```js
 dayjs()
@@ -46,7 +46,7 @@ dayjs()
 
 ### 문서
 
-더 많은 세부 사항과 API, 그리고 다른 문서를 [day.js.org](https://day.js.org/) 웹사이트에서 볼 수 있습니다.
+더 많은 세부 사항과 API 및 다른 문서는 [day.js.org](https://day.js.org/) 웹사이트에서 확인하실 수 있습니다.
 
 ### 설치
 
@@ -58,7 +58,7 @@ npm install dayjs --save
 
 ### API
 
-Day.js API를 사용해서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력을 쉽게 할 수 있습니다.
+Day.js API를 사용하여 날짜와 시간의 구문 분석, 검증, 조작, 출력을 간편하게 처리할 수 있습니다.
 
 ```javascript
 dayjs('2018-08-08') // parse
@@ -78,9 +78,9 @@ dayjs().isBefore(dayjs()) // query
 
 ### I18n
 
-Day.js는 국제화에 대해 많은 지원을 합니다.
+Day.js는 국제화에 대한 많은 지원을 제공하고 있습니다.
 
-그러나 그것을 사용하지 않는다면, 그 누구도 당신의 빌드에 포함되지 않습니다.
+하지만 이 기능을 사용하지 않는 경우, 빌드에 포함되지 않습니다.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -96,7 +96,7 @@ dayjs('2018-05-05')
 
 ### Plugin
 
-플러그인은 기능을 확장하거나 새로운 기능을 추가하기 위해 Day.js에 추가할 수 있는 독립적인 모듈입니다.
+플러그인은 Day.js의 기능을 확장하거나 새로운 기능을 도입하기 위한 독립적인 모듈입니다.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
