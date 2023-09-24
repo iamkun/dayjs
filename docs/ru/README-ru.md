@@ -99,7 +99,10 @@ dayjs().format('Q Do k kk X x') // больше доступных формат�
 📚[Список плагинов](https://day.js.org/docs/ru/plugin/plugin)
 
 ### Тенденция использования
+
 [Тенденция использования Day.js и Moment.js](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
+
+![image](https://github.com/cwtuan/dayjs/assets/3455798/53b27039-54c3-49ae-a4cc-862b63498a47)
 
 ## Спонсоры
 
