@@ -123,7 +123,7 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 ### מגמת השימוש
 
 <a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://github.com/iamkun/dayjs/assets/3455798/c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
 </a>
 
 ## ספונסרים 
