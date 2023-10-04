@@ -309,3 +309,64 @@ describe('Format', () => {
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
 })
+
+describe('Parse ASP.NET style time spans', () => {
+  it('Full ASP.NET style string', () => {
+    const d = dayjs.duration('2.01:01:01.100')
+    expect(d.toISOString()).toBe('P2DT1H1M1.1S')
+
+    expect(d.days()).toBe(2)
+    expect(d.hours()).toBe(1)
+    expect(d.minutes()).toBe(1)
+    expect(d.seconds()).toBe(1)
+    expect(d.milliseconds()).toBe(100)
+  })
+
+  it('Full ASP.NET style string with space separator for days', () => {
+    const d = dayjs.duration('2 01:01:01.100')
+    expect(d.toISOString()).toBe('P2DT1H1M1.1S')
+
+    expect(d.days()).toBe(2)
+    expect(d.hours()).toBe(1)
+    expect(d.minutes()).toBe(1)
+    expect(d.seconds()).toBe(1)
+    expect(d.milliseconds()).toBe(100)
+  })
+
+  it('Hours, minutes', () => {
+    const d = dayjs.duration('01:01')
+    expect(d.toISOString()).toBe('PT1H1M')
+
+    expect(d.days()).toBe(0)
+    expect(d.hours()).toBe(1)
+    expect(d.minutes()).toBe(1)
+    expect(d.seconds()).toBe(0)
+    expect(d.milliseconds()).toBe(0)
+  })
+
+  it('Hours, minutes, seconds', () => {
+    const d = dayjs.duration('01:01:02')
+    expect(d.toISOString()).toBe('PT1H1M2S')
+
+    expect(d.days()).toBe(0)
+    expect(d.hours()).toBe(1)
+    expect(d.minutes()).toBe(1)
+    expect(d.seconds()).toBe(2)
+    expect(d.milliseconds()).toBe(0)
+  })
+
+  it('Hours, minutes, seconds, milliseconds', () => {
+    const d = dayjs.duration('01:01:02.999')
+    expect(d.toISOString()).toBe('PT1H1M2.999S')
+
+    expect(d.days()).toBe(0)
+    expect(d.hours()).toBe(1)
+    expect(d.minutes()).toBe(1)
+    expect(d.seconds()).toBe(2)
+    expect(d.milliseconds()).toBe(999)
+  })
+
+  it('Invalid ISO string', () => {
+    expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
+  })
+})
