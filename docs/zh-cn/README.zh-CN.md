@@ -110,9 +110,9 @@ dayjs().format('Q Do k kk X x') // 使用扩展后的API
 
 ### 使用量趋势
 
-[Day.js和Moment.js使用量趋势](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
-
-![image](https://github.com/iamkun/dayjs/assets/3455798/c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e)
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://github.com/iamkun/dayjs/assets/3455798/c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e">
+</a>
 
 ## 开源协议
 

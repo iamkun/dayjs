@@ -110,9 +110,9 @@ dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 
 ### 使用トレンド
 
-[Day.jsとMoment.jsの使用トレンド](https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS)
-
-![image](https://github.com/iamkun/dayjs/assets/3455798/c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e)
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://github.com/iamkun/dayjs/assets/3455798/c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e">
+</a>
 
 ## ライセンス
 
