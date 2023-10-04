@@ -108,6 +108,12 @@ dayjs().format('Q Do k kk X x') // 多様なフォーマットが利用可能に
 
 📚[プラグインリスト](https://day.js.org/docs/en/plugin/plugin)
 
+### 使用トレンド
+
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
+</a>
+
 ## ライセンス
 
 Day.js は [MIT License](../../LICENSE) のもとで利用を許諾します。
