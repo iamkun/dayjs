@@ -80,3 +80,44 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('startOf("month") returns correct value with active Timezone', () => {
+  // 2023-08-01T00:00:00Z
+  const initial = 1692050400000
+  const month1 = dayjs.utc(initial).startOf('month')
+  const month2 = dayjs(initial).tz('UTC').startOf('month')
+  const month3 = dayjs(initial).tz('Africa/Abidjan').startOf('month')
+  // 2023-08-01T00:00:00+02:00
+  const month4 = dayjs(initial).tz('Europe/Berlin').startOf('month')
+  // 2023-08-01T00:00:00-05:00
+  const month5 = dayjs(initial).tz('America/Cancun').startOf('month')
+
+  expect(month1.format()).toEqual('2023-08-01T00:00:00Z')
+  expect(month2.format()).toEqual('2023-08-01T00:00:00Z')
+  expect(month3.format()).toEqual('2023-08-01T00:00:00Z')
+  expect(month4.format()).toEqual('2023-08-01T00:00:00+02:00')
+  expect(month5.format()).toEqual('2023-08-01T00:00:00-05:00')
+})
+
+it('startOf("day") returns correct value with active Timezone', () => {
+  // initial date = 2023-08-15T12:00:00Z
+  const initial = 1692100800000
+  // should return the same day
+  const day1 = dayjs(initial).tz('UTC').startOf('day')
+  const day2 = dayjs(initial).tz('Africa/Abidjan').startOf('day')
+  const day3 = dayjs(initial).tz('Europe/Berlin').startOf('day')
+  const day4 = dayjs(initial).tz('America/Cancun').startOf('day')
+
+  expect(day1.format()).toEqual('2023-08-15T00:00:00Z')
+  expect(day2.format()).toEqual('2023-08-15T00:00:00Z')
+  expect(day3.format()).toEqual('2023-08-15T00:00:00+02:00')
+  expect(day4.format()).toEqual('2023-08-15T00:00:00-05:00')
+
+  // switching days when hours are close to the timezone-offset
+  const day5 = dayjs(initial).hour(23).tz('Europe/Berlin').startOf('day') // 2023-08-15T23:00:00Z
+  const day6 = dayjs(initial).hour(4).tz('America/Cancun').startOf('day') // 2023-08-15T04:00:00Z
+
+
+  expect(day5.format()).toEqual('2023-08-16T00:00:00+02:00')
+  expect(day6.format()).toEqual('2023-08-14T00:00:00-05:00')
+})
