@@ -77,6 +77,15 @@ describe('Creating', () => {
     expect(dayjs.duration(1000.5).toISOString()).toBe('PT1.001S')
     expect(dayjs.duration(-1000.5).toISOString()).toBe('-PT1S')
   })
+  it('should handle floating point rounding errors', () => {
+    // An example of this is when adding 2 to 0.812 seconds, which is how
+    // the seconds component is calculated in .toISOString().
+    // > 2 + 0.812
+    // 2.8120000000000003
+    expect(dayjs.duration(-2812).toISOString()).toBe('-PT2.812S') // was -PT2.8120000000000003S
+    expect(dayjs.duration(3121632.27382247).toISOString()).toBe('PT52M1.632S') // was PT52M1.6320000000000001S
+    expect(dayjs.duration(7647826.525774224).toISOString()).toBe('PT2H7M27.827S') // was PT2H7M27.826999999999998S
+  })
 })
 
 describe('Parse ISO string', () => {
@@ -92,8 +101,9 @@ describe('Parse ISO string', () => {
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
-    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
-    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+    expect(d.asDays()).toBe(85.83333333333333) // moment 86, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.261904761904763) // moment 12.285714285714286
+    expect(d.asMonths()).toBe(2.8219178082191783) // moment 2.8213721020965523
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
@@ -183,6 +193,12 @@ describe('Add', () => {
   expect(a.add(b).days()).toBe(3)
   expect(a.add(1, 'days').days()).toBe(2)
   expect(a.add({ days: 5 }).days()).toBe(6)
+})
+
+describe('Add to a dayjs()', () => {
+  const a = dayjs()
+  const b = dayjs.duration({ hours: 7, minutes: 10 })
+  expect(a.add(b)).toEqual(a.add(7, 'hours').add(10, 'minutes'))
 })
 
 test('Add duration', () => {

@@ -8,7 +8,7 @@ import {
 } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
-const MILLISECONDS_A_MONTH = MILLISECONDS_A_DAY * 30
+const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
 const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 
@@ -139,7 +139,8 @@ class Duration {
 
     let seconds = this.$d.seconds || 0
     if (this.$d.milliseconds) {
-      seconds += Math.round(this.$d.milliseconds) / 1000
+      seconds += this.$d.milliseconds / 1000
+      seconds = Math.round(seconds * 1000) / 1000
     }
 
     const S = getNumberUnitFormat(seconds, 'S')
@@ -198,7 +199,7 @@ class Duration {
     } else {
       base = this.$d[pUnit]
     }
-    return base === 0 ? 0 : base // a === 0 will be true on both 0 and -0
+    return base || 0 // a === 0 will be true on both 0 and -0
   }
 
   add(input, unit, isSubtract) {
