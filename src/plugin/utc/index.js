@@ -96,7 +96,7 @@ export default (option, Dayjs, dayjs) => {
     if (input !== 0) {
       const localTimezoneOffset = this.$u
         ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
-      ins = this.local().add(offset + localTimezoneOffset, MIN)
+      ins = this.add(offset + localTimezoneOffset, MIN)
       ins.$offset = offset
       ins.$x.$localOffset = localTimezoneOffset
     } else {
