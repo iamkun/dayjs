@@ -87,21 +87,25 @@ export default (option, Dayjs, dayjs) => {
       }
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    let ins = this
+
+    if (offset === 0) {
+      return this.utc(keepLocalTime)
+    }
+
+    let ins = this.clone()
+
     if (keepLocalTime) {
       ins.$offset = offset
-      ins.$u = input === 0
+      ins.$u = false
       return ins
     }
-    if (input !== 0) {
-      const localTimezoneOffset = this.$u
-        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
-      ins = this.local().add(offset + localTimezoneOffset, MIN)
-      ins.$offset = offset
-      ins.$x.$localOffset = localTimezoneOffset
-    } else {
-      ins = this.utc()
-    }
+
+    const localTimezoneOffset = this.$u
+      ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+    ins = this.local().add(offset + localTimezoneOffset, MIN)
+    ins.$offset = offset
+    ins.$x.$localOffset = localTimezoneOffset
+    
     return ins
   }
 
