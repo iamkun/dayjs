@@ -131,7 +131,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/vendure-ecommerce" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/39629390?s=52&v=4"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/docbot" target="_blank"><img width="70" src="https://images.opencollective.com/docbot/457761e/logo.png"></a>
+<a href="https://opencollective.com/anonstories" target="_blank"><img width="70" src="https://images.opencollective.com/anonstories/7e826c0/avatar/256.png"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
 
