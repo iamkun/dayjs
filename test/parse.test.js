@@ -100,6 +100,20 @@ describe('Parse', () => {
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
+
+  describe('Handles an invalid date in the same way that moment.js does', () => {
+    it('returns null for invalid date', () => {
+      expect(JSON.stringify({ date: dayjs('invalid') })).toEqual(JSON.stringify({ date: null }))
+    })
+
+    it('returns string "Invalid Date" when calling toString', () => {
+      expect(JSON.stringify({ date: dayjs('invalid').toString() })).toEqual(JSON.stringify({ date: 'Invalid Date' }))
+    })
+
+    it('returns null when calling toISOString', () => {
+      expect(JSON.stringify({ date: dayjs('invalid').toISOString() })).toEqual(JSON.stringify({ date: null }))
+    })
+  })
 })
 
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
