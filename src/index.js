@@ -50,7 +50,7 @@ const dayjs = function (date, c) {
 const wrapper = (date, instance) =>
   dayjs(date, {
     locale: instance.$L,
-    utc: instance.$u,
+    utc: instance.$offset !== 0 && instance.$u,
     x: instance.$x,
     $offset: instance.$offset // todo: refactor; do not use this.$offset in you code
   })
