@@ -47,6 +47,7 @@ dayjs()
 ### Documentação
 
 Você pode encontrar mais detalhes sobre a API e também a documentação completa em [day.js.org](https://day.js.org/).
+
 ### Instalação
 
 ```console
