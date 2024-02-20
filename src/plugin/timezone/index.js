@@ -14,10 +14,11 @@ const typeToPos = {
 const dtfCache = {}
 const getDateTimeFormat = (timezone, options = {}) => {
   const timeZoneName = options.timeZoneName || 'short'
-  const key = `${timezone}|${timeZoneName}`
+  const locale = options.locale || 'en-US'
+  const key = `${timezone}|${timeZoneName}|${locale}`
   let dtf = dtfCache[key]
   if (!dtf) {
-    dtf = new Intl.DateTimeFormat('en-US', {
+    dtf = new Intl.DateTimeFormat(locale, {
       hour12: false,
       timeZone: timezone,
       year: 'numeric',
@@ -110,7 +111,7 @@ export default (o, c, d) => {
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
-    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
+    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type, locale: this.$L }).find(m => m.type.toLowerCase() === 'timezonename')
     return result && result.value
   }
 
