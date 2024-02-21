@@ -139,6 +139,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://bestkru.com/" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/anonstories" target="_blank"><img width="70" src="https://images.opencollective.com/anonstories/7e826c0/avatar/256.png"></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
