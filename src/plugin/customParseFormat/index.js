@@ -175,7 +175,12 @@ function makeParser(format) {
 
 const parseFormattedInput = (input, format, utc) => {
   try {
-    if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
+    if (['x', 'X'].indexOf(format) > -1) {
+      return {
+        parsedDate: new Date((format === 'X' ? 1000 : 1) * input)
+      }
+    }
+
     const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone
@@ -192,14 +197,24 @@ const parseFormattedInput = (input, format, utc) => {
     const s = seconds || 0
     const ms = milliseconds || 0
     if (zone) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+      const parsedOffsetMilliseconds = zone.offset * 60 * 1000
+      return {
+        parsedOffsetMilliseconds,
+        parsedDate: new Date(Date.UTC(y, M, d, h, m, s, ms + parsedOffsetMilliseconds))
+      }
     }
     if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
+      return {
+        parsedDate: new Date(Date.UTC(y, M, d, h, m, s, ms))
+      }
     }
-    return new Date(y, M, d, h, m, s, ms)
+    return {
+      parsedDate: new Date(y, M, d, h, m, s, ms)
+    }
   } catch (e) {
-    return new Date('') // Invalid Date
+    return {
+      parsedDate: new Date('') // Invalid Date
+    }
   }
 }
 
@@ -229,14 +244,29 @@ export default (o, C, d) => {
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
       }
-      this.$d = parseFormattedInput(date, format, utc)
+      const { parsedDate, parsedOffsetMilliseconds } = parseFormattedInput(date, format, utc)
+      this.$d = parsedDate
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
-      // use != to treat
-      // input number 1410715640579 and format string '1410715640579' equal
-      // eslint-disable-next-line eqeqeq
-      if (isStrict && date != this.format(format)) {
-        this.$d = new Date('')
+      const currentOffset = this.utcOffset()
+      if (isStrict) {
+        const dateWithoutTimezone = date.replace(/[+-]\d\d:?\d\d$/, '')
+        const parsedDateWithoutTimezone = this.subtract(currentOffset, 'minute').subtract(parsedOffsetMilliseconds, 'millisecond').format(format.replace(/(Z|ZZ)$/, ''))
+
+        // use != to treat
+        // input number 1410715640579 and format string '1410715640579' equal
+        if (
+          (
+            parsedOffsetMilliseconds !== undefined
+            && dateWithoutTimezone !== parsedDateWithoutTimezone
+          ) || (
+            parsedOffsetMilliseconds === undefined
+            // eslint-disable-next-line eqeqeq
+            && date != this.format(format)
+          )
+        ) {
+          this.$d = new Date('')
+        }
       }
       // reset global locale to make parallel unit test
       locale = {}
