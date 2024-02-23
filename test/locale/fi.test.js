@@ -18,18 +18,18 @@ it('Finnish locale relative time in past and future', () => {
   const cases = [
     [1, 'd', 'päivän päästä'],
     [-1, 'd', 'päivä sitten'],
-    [2, 'd', 'kahden päivän päästä'],
-    [-2, 'd', 'kaksi päivää sitten'],
+    [2, 'd', '2 päivän päästä'],
+    [-2, 'd', '2 päivää sitten'],
     [10, 'd', '10 päivän päästä'],
     [-10, 'd', '10 päivää sitten'],
-    [6, 'm', 'kuuden minuutin päästä'],
-    [-6, 'm', 'kuusi minuuttia sitten'],
-    [5, 'h', 'viiden tunnin päästä'],
-    [-5, 'h', 'viisi tuntia sitten'],
-    [3, 'M', 'kolmen kuukauden päästä'],
-    [-3, 'M', 'kolme kuukautta sitten'],
-    [4, 'y', 'neljän vuoden päästä'],
-    [-4, 'y', 'neljä vuotta sitten']
+    [6, 'm', '6 minuutin päästä'],
+    [-6, 'm', '6 minuuttia sitten'],
+    [5, 'h', '5 tunnin päästä'],
+    [-5, 'h', '5 tuntia sitten'],
+    [3, 'M', '3 kuukauden päästä'],
+    [-3, 'M', '3 kuukautta sitten'],
+    [4, 'y', '4 vuoden päästä'],
+    [-4, 'y', '4 vuotta sitten']
   ]
   cases.forEach((c) => {
     expect(dayjs().add(c[0], c[1]).locale('fi').fromNow())
