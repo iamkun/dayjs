@@ -1,4 +1,5 @@
 import { u } from '../localizedFormat/utils'
+import { daysInMonth } from './utils'
 
 const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
@@ -138,6 +139,30 @@ function correctHours(time) {
   }
 }
 
+function checkOverflow(year, month, day, hours, minutes, seconds, milliseconds) {
+  let overflow = false
+  if (month) {
+    overflow = overflow || (month < 0 || month > 12)
+  }
+  if ((day !== undefined) && (day !== null)) {
+    overflow = overflow || (day < 1 || day > daysInMonth(year, month))
+  }
+  if (hours) {
+    overflow = overflow || (hours < 0 || hours > 24 ||
+      (hours === 24 && (minutes !== 0 || seconds !== 0 || milliseconds !== 0)))
+  }
+  if (minutes) {
+    overflow = overflow || (minutes < 0 || minutes > 59)
+  }
+  if (seconds) {
+    overflow = overflow || (seconds < 0 || seconds > 59)
+  }
+  if (milliseconds) {
+    overflow = overflow || (milliseconds < 0 || milliseconds > 999)
+  }
+  return overflow
+}
+
 function makeParser(format) {
   format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
@@ -154,32 +179,48 @@ function makeParser(format) {
     }
   }
   return function (input) {
-    const time = {}
-    for (let i = 0, start = 0; i < length; i += 1) {
+    const time = { strictMatch: true }
+    let start = 0
+    for (let i = 0; i < length; i += 1) {
       const token = array[i]
       if (typeof token === 'string') {
+        const separator = input.slice(start, start + token.length)
+        time.strictMatch = time.strictMatch && (separator === token)
         start += token.length
       } else {
         const { regex, parser } = token
         const part = input.slice(start)
         const match = regex.exec(part)
-        const value = match[0]
-        parser.call(time, value)
-        input = input.replace(value, '')
+        if (match !== null) {
+          const value = match[0] // eslint-disable-line prefer-destructuring
+          parser.call(time, value)
+          input = input.replace(value, '')
+          if (match.index !== 0) {
+            time.strictMatch = false
+            start += match.index
+          }
+        } else {
+          time.strictMatch = false
+          break
+        }
       }
+    }
+    if (start < input.length) {
+      time.strictMatch = false
     }
     correctHours(time)
     return time
   }
 }
 
-const parseFormattedInput = (input, format, utc) => {
+const parseFormattedInput = (input, format, utc, strict) => {
   try {
     if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
     const {
-      year, month, day, hours, minutes, seconds, milliseconds, zone
+      year, month, day, hours, minutes, seconds, milliseconds, zone, strictMatch
     } = parser(input)
+    const isOverflow = checkOverflow(year, month, day, hours, minutes, seconds, milliseconds)
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
     const y = year || now.getFullYear()
@@ -191,18 +232,21 @@ const parseFormattedInput = (input, format, utc) => {
     const m = minutes || 0
     const s = seconds || 0
     const ms = milliseconds || 0
-    if (zone) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+    let parsedDate = new Date('') // Invalid Date
+    if (!strict || (strict && strictMatch && !isOverflow)) {
+      if (zone) {
+        parsedDate = new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+      } else if (utc) {
+        parsedDate = new Date(Date.UTC(y, M, d, h, m, s, ms))
+      } else {
+        parsedDate = new Date(y, M, d, h, m, s, ms)
+      }
     }
-    if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
-    }
-    return new Date(y, M, d, h, m, s, ms)
+    return parsedDate
   } catch (e) {
     return new Date('') // Invalid Date
   }
 }
-
 
 export default (o, C, d) => {
   d.p.customParseFormat = true
@@ -229,22 +273,16 @@ export default (o, C, d) => {
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
       }
-      this.$d = parseFormattedInput(date, format, utc)
+      this.$d = parseFormattedInput(date, format, utc, isStrict)
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
-      // use != to treat
-      // input number 1410715640579 and format string '1410715640579' equal
-      // eslint-disable-next-line eqeqeq
-      if (isStrict && date != this.format(format)) {
-        this.$d = new Date('')
-      }
       // reset global locale to make parallel unit test
       locale = {}
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
-        const result = d.apply(this, args)
+        const result = d.apply(this, [date, cfg])
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L

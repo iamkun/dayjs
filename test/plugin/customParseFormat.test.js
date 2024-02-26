@@ -143,6 +143,24 @@ it('parse HH:mm:ss but only one digit', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse HH:mm:ss.SSS', () => {
+  const input = '00:27:21.123'
+  const format = 'HH:mm:ss.SSS'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss.SS', () => {
+  const input = '00:27:21.12'
+  const format = 'HH:mm:ss.SS'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
+it('parse HH:mm:ss.S', () => {
+  const input = '00:27:21.1'
+  const format = 'HH:mm:ss.S'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+})
+
 describe('parse YYYY / YYYY-MM only', () => {
   it('YYYY', () => {
     const input = '2001 +08:00'
@@ -232,11 +250,6 @@ it('YYYY-MM set 1st day of the month', () => {
   expect(dayjs('2019-02', 'YYYY-MM').format('YYYY-MM-DD')).toBe('2019-02-01')
 })
 
-it('Invalid Dates', () => {
-  expect(dayjs('10/12/2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
-  expect(dayjs('10-12-2014', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('Invalid Date')
-})
-
 it('Valid Date', () => {
   expect(dayjs('2014/10/12', 'YYYY-MM-DD').format('MM-DD-YYYY')).toBe('10-12-2014')
 })
@@ -297,19 +310,36 @@ describe('month function locale', () => {
 })
 
 describe('Strict mode', () => {
-  it('without locale', () => {
-    const input = '1970-00-00'
-    const format = 'YYYY-MM-DD'
-    expect(dayjs(input, format).isValid()).toBe(true)
-    expect(dayjs(input, format, true).isValid()).toBe(false)
-    expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
-    expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
+  it('Date with single digit day in strict mode', () => {
+    const input = '30/1/2020'
+    const format = 'DD/MM/YYYY'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
-  it('with locale', () => {
-    const input = '2018 三月 99'
-    const format = 'YYYY MMMM DD'
-    expect(dayjs(input, format, 'zh-cn').isValid()).toBe(true)
-    expect(dayjs(input, format, 'zh-cn', true).isValid()).toBe(false)
+  it('Date not matching format in strict mode', () => {
+    ['10/12/2014', '10-12-2014'].forEach((input) => {
+      const format = 'YYYY-MM-DD'
+      const resultDayjs = dayjs(input, format, true)
+      const resultMoment = moment(input, format, true)
+      expect(resultMoment.isValid()).toBe(false)
+      expect(resultDayjs.isValid()).toBe(false)
+      expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+      expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+    })
+  })
+  it('without locale and with meridiem', () => {
+    const input = '30/1/2020 10:59 PM'
+    const format = 'D/M/YYYY h:mm A'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.format('MM-DD-YYYY HH:mm:ss')).toBe('01-30-2020 22:59:00')
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 })
 
@@ -329,6 +359,15 @@ describe('Array format support', () => {
     const input = '2018 三月 12'
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+  })
+  it('with Z offset in strict mode', () => {
+    const d = '2018-04-24 11:12Z'
+    const format = ['YYYY-MM-DD HH:mmZ', 'YYYY-MM-DD']
+    const resultDayjs = dayjs(d, format, true)
+    const resultMoment = moment(d, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
   })
 })
 
@@ -370,58 +409,140 @@ it('custom two-digit year parse function', () => {
   expect(dayjs(input3, format).year()).toBe(1899)
 })
 
-// issue 1852
-describe('parse with special separator characters', () => {
-  it('Output is NaN for a specific date format', () => {
-    const input = '20 Nov, 2022'
-    const format = 'DD MMM, YYYY'
-    const locale = 'en'
+describe('Incompatibility with moment.js', () => {
+  it('Date not matching format', () => {
+    ['10/12/2014', '10-12-2014'].forEach((input) => {
+      const format = 'YYYY-MM-DD'
+      const resultDayjs = dayjs(input, format)
+      const resultMoment = moment(input, format)
+      expect(resultMoment.isValid()).toBe(true)
+      expect(resultDayjs.isValid()).toBe(true)
+      expect(resultDayjs.format('MM-DD-YYYY')).toBe('01-01-2014')
+      expect(resultMoment.format('MM-DD-YYYY')).toBe('12-20-2010')
+    })
+  })
+  it('Date not matching format in strict mode', () => {
+    ['10/12/2014', '10-12-2014'].forEach((input) => {
+      const format = 'YYYY-MM-DD'
+      const resultDayjs = dayjs(input, format, true)
+      const resultMoment = moment(input, format, true)
+      expect(resultMoment.isValid()).toBe(false)
+      expect(resultDayjs.isValid()).toBe(false)
+      expect(resultDayjs.format('MM-DD-YYYY')).toBe('Invalid Date')
+      expect(resultMoment.format('MM-DD-YYYY')).toBe('Invalid date')
+    })
+  })
+  it('Incompatibility - invalid Date with overflow', () => {
+    const input = '35/22/2010 99:88:77'
+    const format = 'DD-MM-YYYY HH:mm:ss'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('08-11-2011 04:29:17')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Compatibility - invalid Date with overflow in strict mode', () => {
+    const input = '35/22/2010 99:88:77'
+    const format = 'DD-MM-YYYY HH:mm:ss'
+    const resultDayjs = dayjs(input, format, true)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.format(format)).toBe('Invalid Date')
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - invalid Date (0 value) with overflow', () => {
+    const input = '1970-00-00'
+    const format = 'YYYY-MM-DD'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('1970-01-01 00:00:00')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('Invalid date')
+  })
+  it('Compatibility - invalid Date (0 value) with overflow in strict mode', () => {
+    const input = '1970-00-00'
+    const format = 'YYYY-MM-DD'
+    const resultDayjs = dayjs(input, format, true)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('Invalid Date')
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('Invalid date')
+  })
+  it('Incompatibility - invalid Date with overflow and locale', () => {
+    const input = '2018 三月 99'
+    const format = 'YYYY MMMM DD'
+    const locale = 'zh-cn'
     const resultDayjs = dayjs(input, format, locale)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('2018 六月 07')
     const resultMoment = moment(input, format, locale)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
   })
-  it('parse comma separated date', () => {
-    const input = '20,11,2022'
-    const format = 'DD,MM,YYYY'
+  it('Compatibility - invalid Date with overflow and locale in strict mode', () => {
+    const input = '2018 三月 99'
+    const format = 'YYYY MMMM DD'
+    const locale = 'zh-cn'
+    const resultDayjs = dayjs(input, format, locale, true)
+    expect(resultDayjs.isValid()).toBe(false)
+    expect(resultDayjs.format(format)).toBe('Invalid Date')
+    const resultMoment = moment(input, format, locale, true)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - first match vs. longest match', () => {
+    const input = '2012-05-28 10:21:15'
+    const format = ['YYYY', 'YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']
     const resultDayjs = dayjs(input, format)
     const resultMoment = moment(input, format)
     expect(resultMoment.isValid()).toBe(true)
     expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-01-01 00:00:00')
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
   })
-  it('parse comma separated date in strict mode', () => {
-    const input = '20,11,2022'
-    const format = 'DD,MM,YYYY'
+  it('Compatibility - first match vs. longest match in strict mode', () => {
+    const input = '2012-05-28 10:21:15'
+    const format = ['YYYY', 'YYYY-MM-DD', 'YYYY-MM-DD HH:mm:ss']
     const resultDayjs = dayjs(input, format, true)
     const resultMoment = moment(input, format, true)
     expect(resultMoment.isValid()).toBe(true)
     expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultDayjs.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
+    expect(resultMoment.format('YYYY-MM-DD HH:mm:ss')).toBe('2012-05-28 10:21:15')
   })
-  it('parse date with multi character separator', () => {
-    const input = '20---11---2022'
-    const format = 'DD-/-MM-#-YYYY'
+  it('Incompatibility - time value "24:11:00"', () => {
+    const input = '01-01-2010 24:11:00'
+    const format = 'DD-MM-YYYY HH:mm:ss'
     const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:11:00')
     const resultMoment = moment(input, format)
-    expect(resultMoment.isValid()).toBe(true)
-    expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
   })
-  it('parse date with multi character separator in strict mode', () => {
-    const input = '20-/-11-#-2022'
-    const format = 'DD-/-MM-#-YYYY'
-    const resultDayjs = dayjs(input, format, true)
-    const resultMoment = moment(input, format, true)
-    expect(resultMoment.isValid()).toBe(true)
+  it('Incompatibility - time value "24:00:22"', () => {
+    const input = '01-01-2010 24:00:22'
+    const format = 'DD-MM-YYYY HH:mm:ss'
+    const resultDayjs = dayjs(input, format)
     expect(resultDayjs.isValid()).toBe(true)
-    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
-    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:00:22')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
+  })
+  it('Incompatibility - time value "24:00:00.100"', () => {
+    const input = '01-01-2010 24:00:00.100'
+    const format = 'DD-MM-YYYY HH:mm:ss.SSS'
+    const resultDayjs = dayjs(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format(format)).toBe('02-01-2010 00:00:00.100')
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(false)
+    expect(resultMoment.format(format)).toBe('Invalid date')
   })
 })
 
