@@ -296,7 +296,7 @@ describe('Get offsetName', () => {
   })
 })
 
-describe('CustomPraseFormat', () => {
+describe('CustomParseFormat', () => {
   const result = 1602786600
   it('normal', () => {
     expect(dayjs.tz('2020/10/15 12:30', DEN).unix()).toBe(result)
