@@ -89,8 +89,11 @@ export default (option, Dayjs, dayjs) => {
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     let ins = this
     if (keepLocalTime) {
+      const localTimezoneOffset = this.$u
+        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
       ins.$offset = offset
       ins.$u = input === 0
+      ins.$x.$localOffset = localTimezoneOffset
       return ins
     }
     if (input !== 0) {
