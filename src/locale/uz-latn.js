@@ -20,7 +20,7 @@ const locale = {
   },
   relativeTime: {
     future: 'Yaqin %s ichida',
-    past: 'Bir necha %s oldin',
+    past: '%s oldin',
     s: 'soniya',
     m: 'bir daqiqa',
     mm: '%d daqiqa',

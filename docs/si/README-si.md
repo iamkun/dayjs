@@ -1,4 +1,4 @@
-සිංහල | [English](../../README.md) | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md)
+සිංහල | [English](../../README.md) | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md)| [עברית](./docs/he/README-he.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
@@ -10,8 +10,8 @@
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.com/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -98,9 +98,15 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[ දිගු ලේඛනය](https://day.js.org/docs/en/plugin/plugin)
 
+### භාවිත ප්‍රමාණයේ ප්‍රසූතිය
+
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
+</a>
+
 ## අනුග්‍රාහකයින්
 
-අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත. 
+අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත.
 
 [[ගිට්හබ් හරහා අනුග්‍රාහකයෙකු වන්න](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රාහකයෙකු වන්න](https://opencollective.com/dayjs#sponsor)]
 
