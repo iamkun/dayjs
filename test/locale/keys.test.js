@@ -95,7 +95,7 @@ Locale.forEach((locale) => {
         LT: expect.any(String),
         LTS: expect.any(String)
       }))
-      expect(Object.keys(remainingFormats).length).toEqual(0)
+      expect(Object.keys(remainingFormats)).toHaveLength(0)
       if (l) expect(l).toEqual(expect.any(String))
       if (ll) expect(ll).toEqual(expect.any(String))
       if (lll) expect(lll).toEqual(expect.any(String))
