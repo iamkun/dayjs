@@ -9,7 +9,7 @@ const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?(\d\d)?|Z/ // +00:00 -00:00 +0000 or -0000 +00 or Z
-const matchWord = /\d*[^-_:/,()\s\d]+/ // Word
+const matchWord = /\d*[^-_:/.,()\s\d]+/ // Word
 
 let locale = {}
 
@@ -99,7 +99,10 @@ const expressions = {
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
-    const monthsShort = getLocalePart('monthsShort')
+    let monthsShort = getLocalePart('monthsShort')
+    if (monthsShort) {
+      monthsShort = [...monthsShort].map(item => item.replace(/\.$/, ''))
+    }
     const matchIndex = (monthsShort || months.map(_ => _.slice(0, 3))).indexOf(input) + 1
     if (matchIndex < 1) {
       throw new Error()
