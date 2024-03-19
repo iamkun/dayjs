@@ -43,16 +43,18 @@ const getLocalePart = (name) => {
     part.indexOf ? part : part.s.concat(part.f)
   )
 }
-const meridiemMatch = (input, isLowerCase) => {
+const meridiemMatch = (input, isLowerCase, hour = 0) => {
   let isAfternoon
-  const { meridiem } = locale
+  const { meridiemHour, meridiem } = locale
   if (!meridiem) {
     isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
+  } else if (meridiemHour) {
+    isAfternoon = meridiemHour(hour, input) >= 12
   } else {
     for (let i = 1; i <= 24; i += 1) {
       // todo: fix input === meridiem(i, 0, isLowerCase)
       if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
-        isAfternoon = i > 12
+        isAfternoon = i >= 12
         break
       }
     }
@@ -61,10 +63,10 @@ const meridiemMatch = (input, isLowerCase) => {
 }
 const expressions = {
   A: [matchWord, function (input) {
-    this.afternoon = meridiemMatch(input, false)
+    this.afternoon = meridiemMatch(input, false, this.hours)
   }],
   a: [matchWord, function (input) {
-    this.afternoon = meridiemMatch(input, true)
+    this.afternoon = meridiemMatch(input, true, this.hours)
   }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
