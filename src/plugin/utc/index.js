@@ -2,6 +2,7 @@ import { MILLISECONDS_A_MINUTE, MIN } from '../../constant'
 
 const REGEX_VALID_OFFSET_FORMAT = /[+-]\d\d(?::?\d\d)?/g
 const REGEX_OFFSET_HOURS_MINUTES_FORMAT = /([+-]|\d\d)/g
+const REGEX_TIMEZONE_OFFSET_FORMAT = /([+-])(\d\d):(\d\d)|(Z)/g
 
 function offsetFromString(value = '') {
   const offset = value.match(REGEX_VALID_OFFSET_FORMAT)
@@ -26,6 +27,31 @@ export default (option, Dayjs, dayjs) => {
   dayjs.utc = function (date) {
     const cfg = { date, utc: true, args: arguments } // eslint-disable-line prefer-rest-params
     return new Dayjs(cfg) // eslint-disable-line no-use-before-define
+  }
+
+  dayjs.parseZone = function (date) {
+    let ins = dayjs(date, { ...date })
+    if (!ins || typeof date !== 'string') {
+      return ins
+    }
+
+    const match = date.match(REGEX_TIMEZONE_OFFSET_FORMAT)
+    if (!match) {
+      ins.$u = true
+      return ins
+    }
+
+    const offset = match[0] === 'Z' ? 0 : offsetFromString(match[0])
+    const localTimezoneOffset = ins.toDate().getTimezoneOffset()
+    ins = ins.local().add(offset + localTimezoneOffset, MIN)
+    ins.$offset = offset
+    ins.$x.$localOffset = localTimezoneOffset
+
+    if (offset === 0) {
+      ins.$u = true
+    }
+
+    return ins
   }
 
   proto.utc = function (keepLocalTime) {
