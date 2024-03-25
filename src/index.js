@@ -113,7 +113,12 @@ class Dayjs {
   }
 
   isValid() {
-    return !(this.$d.toString() === C.INVALID_DATE_STRING)
+    switch (this.$D !== this.$d.getDate()) {
+      case true:
+        return !(this.$d.toString() === C.INVALID_DATE_STRING)
+      default:
+        return false
+    }
   }
 
   isSame(that, units) {
