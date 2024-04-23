@@ -12,23 +12,26 @@ const typeToPos = {
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
 const dtfCache = {}
-const getDateTimeFormat = (timezone, options = {}) => {
-  const timeZoneName = options.timeZoneName || 'short'
-  const key = `${timezone}|${timeZoneName}`
-  let dtf = dtfCache[key]
+const getDateTimeFormat = (timeZone) => {
+  /* Long output is always correct whatever the timezone.
+  *  and whatever the locale, en-US / en-GB etc...
+  *  We will extract the short version ourself
+  */
+  let dtf = dtfCache[timeZone]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
       hour12: false,
-      timeZone: timezone,
+      timeZone,
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      timeZoneName
+      timeZoneName: 'long'
     })
-    dtfCache[key] = dtf
+
+    dtfCache[timeZone] = dtf
   }
   return dtf
 }
@@ -36,9 +39,9 @@ const getDateTimeFormat = (timezone, options = {}) => {
 export default (o, c, d) => {
   let defaultTimezone
 
-  const makeFormatParts = (timestamp, timezone, options = {}) => {
+  const makeFormatParts = (timestamp, timezone) => {
     const date = new Date(timestamp)
-    const dtf = getDateTimeFormat(timezone, options)
+    const dtf = getDateTimeFormat(timezone)
     return dtf.formatToParts(date)
   }
 
@@ -107,11 +110,21 @@ export default (o, c, d) => {
     return ins
   }
 
-  proto.offsetName = function (type) {
+  proto.offsetName = function (type = 'short') {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
+    const cachedOffsetName = this.$x.$offsetName || {}
+    const cacheKey = `${zone}-${type}}`
+    if (cachedOffsetName[cacheKey]) {
+      return cachedOffsetName[cacheKey]
+    }
     const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
-    return result && result.value
+    if (type === 'short') {
+      result.value = result.value.split(' ').map(v => v[0]).join('')
+    }
+    cachedOffsetName[cacheKey] = result.value
+    this.$x.$offsetName = cachedOffsetName
+    return result.value
   }
 
   const oldStartOf = proto.startOf
