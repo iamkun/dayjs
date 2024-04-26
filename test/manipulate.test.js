@@ -81,3 +81,10 @@ it('Add and subtract with negative years', () => {
   expect(dayjs('-2006').add(1, 'y').format('YYYY')).toBe(dayjs('-2005').format('YYYY'))
   expect(dayjs('-2006').subtract(1, 'y').format('YYYY')).toBe(dayjs('-2007').format('YYYY'))
 })
+
+it('Compare date with negative years', () => {
+  expect(dayjs('-2006').isAfter(dayjs('-2007'))).toBeTruthy()
+  expect(dayjs('-2006').isBefore(dayjs('-2005'))).toBeTruthy()
+  expect(dayjs('-2006').isSame('-2006')).toBeTruthy()
+})
+
