@@ -78,8 +78,14 @@ const parseDate = (cfg) => {
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
+  const newDate = new Date(date)
+  const fullYear = newDate.getFullYear()
 
-  return new Date(date) // everything else
+  if (typeof date === 'string' && date.indexOf(`-${fullYear}`) !== -1) {
+    return dayjs(newDate).subtract(fullYear * 2, 'year').toDate()
+  }
+
+  return newDate // everything else
 }
 
 class Dayjs {

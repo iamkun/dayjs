@@ -212,4 +212,15 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d).toBe(null)
   })
+
+  it('Parse negative year', () => {
+    const date = '-2021/01/03'
+    const date2 = '01/03/-2021'
+    const date3 = '01-03--2021'
+    const d = date.match(REGEX_PARSE)
+    expect(dayjs(date).format('YYYY-MM-DD')).toBe('-2021-01-03')
+    expect(dayjs(date2).format('YYYY-MM-DD')).toBe('Invalid Date')
+    expect(dayjs(date3).format('YYYY-MM-DD')).toBe('Invalid Date')
+    expect(d).toBe(null)
+  })
 })
