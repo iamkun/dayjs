@@ -74,3 +74,10 @@ it('Add Time with decimal', () => {
 it('Subtract Time days', () => {
   expect(dayjs().subtract(1, 'days').valueOf()).toBe(moment().subtract(1, 'days').valueOf())
 })
+
+it('Add and subtract with negative years', () => {
+  expect(dayjs('-2006').add(1, 'y')).toEqual(dayjs('-2005'))
+  expect(dayjs('-2006').subtract(1, 'y')).toEqual(dayjs('-2007'))
+  expect(dayjs('-2006').add(1, 'y').format('YYYY')).toBe(dayjs('-2005').format('YYYY'))
+  expect(dayjs('-2006').subtract(1, 'y').format('YYYY')).toBe(dayjs('-2007').format('YYYY'))
+})
