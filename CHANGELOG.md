@@ -1,3 +1,13 @@
+## [1.11.11](https://github.com/iamkun/dayjs/compare/v1.11.10...v1.11.11) (2024-04-28)
+
+
+### Bug Fixes
+
+* day of week type literal ([#2630](https://github.com/iamkun/dayjs/issues/2630)) ([f68d73e](https://github.com/iamkun/dayjs/commit/f68d73efe562fdedd9e288ecb0ce6565e602f507))
+* improve locale "zh-hk" format and meridiem ([#2419](https://github.com/iamkun/dayjs/issues/2419)) ([a947a51](https://github.com/iamkun/dayjs/commit/a947a5171aad5695eaf593bc95fe073de0f0894a))
+* Update 'da' locale to match correct first week of year ([#2592](https://github.com/iamkun/dayjs/issues/2592)) ([44b0936](https://github.com/iamkun/dayjs/commit/44b0936ad709212b63e48672d8b9c225e2c3b830))
+* update locale Bulgarian monthsShort Jan ([#2538](https://github.com/iamkun/dayjs/issues/2538)) ([f0c9a41](https://github.com/iamkun/dayjs/commit/f0c9a41c6ec91528f3790e442b0c5dff15a4e640))
+
 ## [1.11.10](https://github.com/iamkun/dayjs/compare/v1.11.9...v1.11.10) (2023-09-19)
 
 
