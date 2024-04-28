@@ -70,6 +70,7 @@ describe('Update locale', () => {
   })
 
   it('Update invalid date string', () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
     const locale = 'en'
     const localeSetting = { invalidDate: 'bad date' }
     dayjs.updateLocale(locale, localeSetting)
@@ -78,5 +79,6 @@ describe('Update locale', () => {
     moment.locale(locale)
     expect(dayjs('').format()).toBe(moment('').format())
     expect(dayjs('otherString').format()).toBe(moment('otherString').format())
+    warn.mockReset()
   })
 })
