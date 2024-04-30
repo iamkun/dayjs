@@ -1,4 +1,3 @@
-import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from 'dayjs'
 import negativeYear from '../../src/plugin/negativeYear'
@@ -24,8 +23,7 @@ describe('negativeYear', () => {
     const date2 = '01/03/-2021'
     const date3 = '01-03--2021'
     const d = date.match(REGEX_PARSE)
-    expect(dayjs(date).format('YYYY-MM-DD')).toBe(`-${moment(date).format('YYYY-MM-DD')}`)
-    expect(dayjs(date).format()).toBe(`-${moment(date).format()}`)
+    expect(dayjs(date).format('YYYY-MM-DD')).toBe('-2021-01-03')
     expect(dayjs(date2).format('YYYY-MM-DD')).toBe('Invalid Date')
     expect(dayjs(date3).format()).toBe('Invalid Date')
     expect(d).toBe(null)

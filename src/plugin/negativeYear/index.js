@@ -3,7 +3,6 @@ export default (_, c, dayjs) => {
 
   const parseDate = (cfg) => {
     const { date } = cfg
-    if (!date) return new Date()
     const newDate = new Date(date)
     const fullYear = newDate.getFullYear()
     if (typeof date === 'string' && date.indexOf(`-${fullYear}`) !== -1) {
