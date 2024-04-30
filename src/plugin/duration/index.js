@@ -113,6 +113,8 @@ class Duration {
     $ms %= MILLISECONDS_A_YEAR
     this.$d.months = roundNumber($ms / MILLISECONDS_A_MONTH)
     $ms %= MILLISECONDS_A_MONTH
+    this.$d.weeks = roundNumber($ms / MILLISECONDS_A_WEEK)
+    $ms %= MILLISECONDS_A_WEEK
     this.$d.days = roundNumber($ms / MILLISECONDS_A_DAY)
     $ms %= MILLISECONDS_A_DAY
     this.$d.hours = roundNumber($ms / MILLISECONDS_A_HOUR)
@@ -128,10 +130,7 @@ class Duration {
     const Y = getNumberUnitFormat(this.$d.years, 'Y')
     const M = getNumberUnitFormat(this.$d.months, 'M')
 
-    let days = +this.$d.days || 0
-    if (this.$d.weeks) {
-      days += this.$d.weeks * 7
-    }
+    const days = this.getTotalDays()
 
     const D = getNumberUnitFormat(days, 'D')
     const H = getNumberUnitFormat(this.$d.hours, 'H')
@@ -166,14 +165,17 @@ class Duration {
 
   format(formatStr) {
     const str = formatStr || 'YYYY-MM-DDTHH:mm:ss'
+
+    const days = this.getTotalDays()
+
     const matches = {
       Y: this.$d.years,
       YY: $u.s(this.$d.years, 2, '0'),
       YYYY: $u.s(this.$d.years, 4, '0'),
       M: this.$d.months,
       MM: $u.s(this.$d.months, 2, '0'),
-      D: this.$d.days,
-      DD: $u.s(this.$d.days, 2, '0'),
+      D: days,
+      DD: $u.s(days, 2, '0'),
       H: this.$d.hours,
       HH: $u.s(this.$d.hours, 2, '0'),
       m: this.$d.minutes,
@@ -185,6 +187,14 @@ class Duration {
     return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
   }
 
+  getTotalDays() {
+    let days = +this.$d.days || 0
+    if (this.$d.weeks) {
+      days += this.$d.weeks * 7
+    }
+    return days
+  }
+
   as(unit) {
     return this.$ms / (unitToMS[prettyUnit(unit)])
   }
@@ -194,8 +204,6 @@ class Duration {
     const pUnit = prettyUnit(unit)
     if (pUnit === 'milliseconds') {
       base %= 1000
-    } else if (pUnit === 'weeks') {
-      base = roundNumber(base / unitToMS[pUnit])
     } else {
       base = this.$d[pUnit]
     }
@@ -261,6 +269,7 @@ class Duration {
 const manipulateDuration = (date, duration, k) =>
   date.add(duration.years() * k, 'y')
     .add(duration.months() * k, 'M')
+    .add(duration.weeks() * k, 'w')
     .add(duration.days() * k, 'd')
     .add(duration.hours() * k, 'h')
     .add(duration.minutes() * k, 'm')
