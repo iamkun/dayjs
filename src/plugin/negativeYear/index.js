@@ -8,7 +8,7 @@ export default (_, c, dayjs) => {
     if (typeof date === 'string' && date.indexOf(`-${fullYear}`) !== -1) {
       return dayjs(newDate).subtract(fullYear * 2, 'year').toDate()
     }
-    return newDate
+    return date
   }
 
   const oldParse = proto.parse
