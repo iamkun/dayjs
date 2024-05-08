@@ -40,7 +40,7 @@ months.f = monthFormat
 const locale = {
   name: 'uk',
   weekdays: 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split('_'),
-  weekdaysShort: 'ндл_пнд_втр_срд_чтв_птн_сбт'.split('_'),
+  weekdaysShort: 'нед_пон_вів_сер_чет_пят_суб'.split('_'),
   weekdaysMin: 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
   months,
   monthsShort: 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
