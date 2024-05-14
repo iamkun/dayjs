@@ -15,14 +15,17 @@ function plural(word, num) {
 }
 function relativeTimeWithPlural(number, withoutSuffix, key) {
   const format = {
+    ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
     mm: withoutSuffix ? 'хвіліна_хвіліны_хвілін' : 'хвіліну_хвіліны_хвілін',
-    hh: 'гадзіна_гадзіны_гадзін',
+    hh: withoutSuffix ? 'гадзіна_гадзіны_гадзін' : 'гадзіну_гадзіны_гадзін',
     dd: 'дзень_дня_дзён',
     MM: 'месяц_месяца_месяцаў',
     yy: 'год_гады_гадоў'
   }
   if (key === 'm') {
     return withoutSuffix ? 'хвіліна' : 'хвіліну'
+  }  else if (key === 'h') {
+    return withoutSuffix ? 'гадзіна' : 'гадзіну'
   }
 
   return `${number} ${plural(format[key], +number)}`
@@ -49,8 +52,8 @@ monthsShort.f = monthShortFormat
 const locale = {
   name: 'be',
   weekdays: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
-  weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
-  weekdaysMin: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
+  weekdaysShort: 'няд_пнд_аўт_сер_чцв_пят_суб'.split('_'),
+  weekdaysMin: 'нд_пн_аў_ср_чц_пт_сб'.split('_'),
   months,
   monthsShort,
   weekStart: 1,
@@ -69,7 +72,7 @@ const locale = {
     s: 'некалькі секунд',
     m: relativeTimeWithPlural,
     mm: relativeTimeWithPlural,
-    h: 'гадзіна',
+    h: relativeTimeWithPlural,
     hh: relativeTimeWithPlural,
     d: 'дзень',
     dd: relativeTimeWithPlural,
