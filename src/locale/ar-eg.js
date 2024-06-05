@@ -3,32 +3,6 @@ import dayjs from 'dayjs'
 
 const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
 
-const symbolMap = {
-  1: '١',
-  2: '٢',
-  3: '٣',
-  4: '٤',
-  5: '٥',
-  6: '٦',
-  7: '٧',
-  8: '٨',
-  9: '٩',
-  0: '٠'
-}
-
-const numberMap = {
-  '١': '1',
-  '٢': '2',
-  '٣': '3',
-  '٤': '4',
-  '٥': '5',
-  '٦': '6',
-  '٧': '7',
-  '٨': '8',
-  '٩': '9',
-  '٠': '0'
-}
-
 const locale = {
   name: 'ar',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -37,7 +11,6 @@ const locale = {
   months,
   monthsShort: months,
   weekStart: 6,
-  meridiem: hour => (hour > 12 ? 'م' : 'ص'),
   relativeTime: {
     future: 'بعد %s',
     past: 'منذ %s',
@@ -52,19 +25,6 @@ const locale = {
     MM: '%d أشهر',
     y: 'عام واحد',
     yy: '%d أعوام'
-  },
-  preparse(string) {
-    return string
-      .replace(
-        /[١٢٣٤٥٦٧٨٩٠]/g,
-        match => numberMap[match]
-      )
-      .replace(/،/g, ',')
-  },
-  postformat(string) {
-    return string
-      .replace(/\d/g, match => symbolMap[match])
-      .replace(/,/g, '،')
   },
   ordinal: n => n,
   formats: {
