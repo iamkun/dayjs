@@ -19,6 +19,9 @@ it('Format no formatStr', () => {
 it('Format invalid date', () => {
   expect(dayjs('').format()).toBe(new Date('').toString())
   expect(dayjs('otherString').format()).toBe(new Date('otherString').toString())
+  expect(dayjs('-1996/3/2').format()).toBe('Invalid Date')
+  expect(dayjs('1996/-3/2').format()).toBe('Invalid Date')
+  expect(dayjs('3/2/-1996').format()).toBe('Invalid Date')
 })
 
 it('Format Year YY YYYY', () => {
