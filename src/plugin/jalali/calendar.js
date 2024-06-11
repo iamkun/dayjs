@@ -1,11 +1,3 @@
-/* eslint-disable */
-/*
- JavaScript functions for the Fourmilab Calendar Converter
- by John Walker  --  September, MIM
- http://www.fourmilab.ch/documents/calendar/
- This program is in the public domain.
- */
-
 /*  MOD  --  Modulus function which works for non-integers.  */
 const $floor = Math.floor
 function mod(a, b) {
@@ -32,7 +24,7 @@ function g2j(year, month, day) {
     $floor((year - 1) / 400) +
     $floor((((367 * month) - 362) / 12) +
       ((month <= 2) ? 0 :
-          (lg(year) ? -1 : -2)
+        (lg(year) ? -1 : -2)
       ) +
       day)
 }
@@ -68,8 +60,8 @@ function j2g(jd) {
   }
   yearday = wjd - g2j(year, 1, 1)
   leapadj = ((wjd < g2j(year, 3, 1)) ? 0
-      :
-      (lg(year) ? 1 : 2)
+    :
+    (lg(year) ? 1 : 2)
   )
   let month = $floor((((yearday + leapadj) * 12) + 373) / 367),
     day = (wjd - g2j(year, month, 1)) + 1
@@ -90,8 +82,8 @@ function p2j(year, month, day) {
 
   return day +
     ((month <= 7) ?
-        ((month - 1) * 31) :
-        (((month - 1) * 30) + 6)
+      ((month - 1) * 31) :
+      (((month - 1) * 30) + 6)
     ) +
     $floor(((epyear * 682) - 110) / 2816) +
     (epyear - 1) * 365 +
