@@ -6,13 +6,13 @@ import * as C from './constant'
 export default (o, Dayjs, dayjs) => {
   const proto = Dayjs.prototype
   const U = proto.$utils()
-  const $isJalali = (v) => v.$C === 'jalali'
+  const $isJalali = v => v.$C === 'jalali'
   const $prettyUnit = U.prettyUnit || U.p
   const $isUndefined = U.isUndefined || U.u
   const $padStart = U.padStart || U.s
   const $monthDiff = U.monthDiff || U.m
   const $absFloor = U.absFloor || U.a
-  const wrapperOfTruth = (action) => function (...args) {
+  const wrapperOfTruth = action => function (...args) {
     const unsure = action.bind(this)(...args)
     unsure.$C = this.$C
     if (unsure.isJalali()) {
