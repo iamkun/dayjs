@@ -219,6 +219,10 @@ class Duration {
     return this.add(input, unit, true)
   }
 
+  multiply(factor) {
+    return wrapper(this.$ms * factor, this)
+  }
+
   locale(l) {
     const that = this.clone()
     that.$l = l
