@@ -43,6 +43,17 @@ const locale = {
     y: '1 年',
     yy: '%d 年'
   },
+  meridiemHour: (hour, meridiem) => {
+    if (hour === 12) {
+      hour = 0
+    }
+    if (meridiem.indexOf('中午') > -1) {
+      return hour >= 11 ? hour : hour + 12
+    } else if (meridiem.indexOf('下午') > -1 || meridiem.indexOf('晚上') > -1) {
+      return hour + 12
+    }
+    return hour
+  },
   meridiem: (hour, minute) => {
     const hm = (hour * 100) + minute
     if (hm < 600) {
