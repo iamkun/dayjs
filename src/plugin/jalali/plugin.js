@@ -138,6 +138,55 @@ export default (o, Dayjs, dayjs) => {
     }
   }
 
+  proto.isValid = function () {
+    return !(this.$d.toString() === C.INVALID_DATE_STRING)
+  }
+
+  proto.isSame = function (that, units) {
+    const other = dayjs(that)
+    return this.startOf(units) <= other && other <= this.endOf(units)
+  }
+
+  proto.isAfter = function (that, units) {
+    return dayjs(that) < this.startOf(units)
+  }
+
+  proto.isBefore = function (that, units) {
+    return this.endOf(units) < dayjs(that)
+  }
+
+  proto.unix = function () {
+    return Math.floor(this.valueOf() / 1000)
+  }
+
+  proto.valueOf = function () {
+    return this.$d.getTime()
+  }
+
+  proto.get = function (unit) {
+    return this[U.p(unit)]()
+  }
+
+  proto.subtract = function (number, string) {
+    return this.add(number * -1, string)
+  }
+
+  proto.toDate = function () {
+    return new Date(this.valueOf())
+  }
+
+  proto.toJSON = function () {
+    return this.isValid() ? this.toISOString() : null
+  }
+
+  proto.toISOString = function () {
+    return this.$d.toISOString()
+  }
+
+  proto.toString = function () {
+    return this.$d.toUTCString()
+  }
+
   proto.$set = function (units, int) {
     if (!$isJalali(this)) {
       return old$Set.bind(this)(units, int)
