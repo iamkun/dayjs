@@ -1,8 +1,11 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
-import '../../src/locale/zh-cn'
-import '../../src/locale/fa'
+// import '../../src/locale/zh-cn'
+// import '../../src/locale/fa'
+import jalali from '../../src/plugin/jalali'
+
+dayjs.extend(jalali)
 
 beforeEach(() => {
   const m = moment()

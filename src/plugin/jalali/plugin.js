@@ -1,5 +1,4 @@
-import fa from 'dayjs/esm/locale/fa'
-
+import fa from '../../locale/fa'
 import jdate from './calendar'
 import * as C from './constant'
 
