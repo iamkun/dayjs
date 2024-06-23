@@ -41,9 +41,15 @@ const dayjs = function (date, c) {
     return date.clone()
   }
   // eslint-disable-next-line no-nested-ternary
-  const cfg = typeof c === 'object' ? c : {}
+  let cfg = {}
+  if ((typeof c === 'object') && !Array.isArray(c)) {
+    // clone c (contains cfg object)
+    cfg = JSON.parse(JSON.stringify(c))
+  }
   cfg.date = date
-  cfg.args = arguments// eslint-disable-line prefer-rest-params
+  if (cfg.args === undefined) {
+    cfg.args = Array.prototype.slice.call(arguments) // eslint-disable-line prefer-rest-params
+  }
   return new Dayjs(cfg) // eslint-disable-line no-use-before-define
 }
 

@@ -347,7 +347,7 @@ test('is after invalid', () => {
 
 // isBefore()
 
-test('is after without units', () => {
+test('is before without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isBefore(dayjs(new Date(2012, 3, 2, 3, 5, 5, 10)))).toBe(true, 'year is later')
