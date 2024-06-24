@@ -80,3 +80,32 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('clone retains date and timezone for timezone with offset', () => {
+  const instance = dayjs('2022-01-01T03:00:00.000Z').tz('Europe/Amsterdam')
+  const another = instance.clone()
+  expect(another.format()).toEqual(instance.format())
+})
+
+it('clone retains date and timezone for timezone with offset', () => {
+  const instance = dayjs.tz('2022-01-01T03:00:00.000Z', 'Europe/Amsterdam')
+  const another = instance.clone()
+  expect(another.format()).toEqual(instance.format())
+})
+
+it('clone retains date and timezone for timezone without offset', () => {
+  const instance = dayjs('2022-01-01T03:00:00.000Z').tz('Europe/London')
+  const another = instance.clone()
+  expect(another.format()).toEqual(instance.format())
+  // This test would fail before in the following way:
+  // Expected value to equal:
+  //   "2022-01-01T03:00:00Z"
+  // Received:
+  //   "2021-12-31T14:00:00Z"
+})
+
+it('clone retains date and timezone for timezone without offset', () => {
+  const instance = dayjs.tz('2022-01-01T03:00:00.000Z', 'Europe/London')
+  const another = instance.clone()
+  expect(another.format()).toEqual(instance.format())
+})
