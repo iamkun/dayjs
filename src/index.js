@@ -19,8 +19,11 @@ const parseLocale = (preset, object, isLocal) => {
     if (Ls[presetLower]) {
       l = presetLower
     }
-    if (object) {
-      Ls[presetLower] = object
+    if (object && typeof object === 'object' && !Array.isArray(object)) {
+      Ls[presetLower] = {
+        ...(Ls[presetLower] || {}),
+        ...object
+      }
       l = presetLower
     }
     const presetSplit = preset.split('-')
