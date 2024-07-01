@@ -56,7 +56,7 @@ it('Format meridiem with locale function', () => {
     const hour = dayjs()
       .startOf('day')
       .add(i, 'hour')
-    const meridiem = i > 12 ? 'م' : 'ص'
+    const meridiem = i >= 12 ? 'م' : 'ص'
     expect(hour.locale('ar').format('A')).toBe(`${meridiem}`)
   }
 })
