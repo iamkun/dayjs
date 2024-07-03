@@ -15,6 +15,15 @@ afterEach(() => {
   MockDate.reset()
 })
 
+it('Parse timezones', () => {
+  expect(dayjs('2021-07-07').tz('Europe/London').startOf('week').format('HH:mm')).toBe('00:00')
+  expect(dayjs('2021-12-12').tz('Europe/London').startOf('week').format('HH:mm')).toBe('00:00')
+
+  expect(dayjs('2013-11-18 11:00').tz('Europe/London').add(-300, 'minute').valueOf()).toBe(dayjs('2013-11-18 11:00').add(-300, 'minute').valueOf())
+  expect(dayjs('2013-11-18 11:00').tz('Europe/London').format('HH:mm')).toBe('16:00')
+  expect(dayjs('2013-11-18 11:00').tz('Europe/London').add(-300, 'minute').format('HH:mm')).toBe('11:00')
+})
+
 it('Add Time days (DST)', () => {
   // change timezone before running test
   // New Zealand (-720)
