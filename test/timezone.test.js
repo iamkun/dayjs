@@ -3,7 +3,6 @@ import moment from 'moment'
 import dayjs from '../src'
 import timezone from '../src/plugin/timezone'
 import utc from '../src/plugin/utc'
-import '../src/locale/en'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
