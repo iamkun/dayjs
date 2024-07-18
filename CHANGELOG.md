@@ -7,7 +7,7 @@
 * add UTC support to negativeYear plugin ([#2692](https://github.com/iamkun/dayjs/issues/2692)) ([f3ef705](https://github.com/iamkun/dayjs/commit/f3ef705613af83333fe132b470896a65e12f31b0))
 * Fix zero offset issue when use tz with locale ([#2532](https://github.com/iamkun/dayjs/issues/2532)) ([d0e6738](https://github.com/iamkun/dayjs/commit/d0e6738a66e1b65d3706aad2f9168ebb43d4f887))
 * Improve typing for min/max plugin ([#2573](https://github.com/iamkun/dayjs/issues/2573)) ([4fbe94a](https://github.com/iamkun/dayjs/commit/4fbe94aaba8c815a42cf4d23dabac918ec50e68c))
-* timezone plugin currect parse UTC tz ([#2693](https://github.com/iamkun/dayjs/issues/2693)) ([b575c81](https://github.com/iamkun/dayjs/commit/b575c81a8c9c85c7a0baf6f608a12f9d3ba95bd1))
+* timezone plugin correct parse UTC tz ([#2693](https://github.com/iamkun/dayjs/issues/2693)) ([b575c81](https://github.com/iamkun/dayjs/commit/b575c81a8c9c85c7a0baf6f608a12f9d3ba95bd1))
 
 ## [1.11.11](https://github.com/iamkun/dayjs/compare/v1.11.10...v1.11.11) (2024-04-28)
 
