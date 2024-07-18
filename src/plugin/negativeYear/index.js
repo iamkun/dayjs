@@ -2,10 +2,16 @@ export default (_, c, dayjs) => {
   const proto = c.prototype
 
   const parseDate = (cfg) => {
-    const { date } = cfg
+    const { date, utc } = cfg
     if (typeof date === 'string' && date.charAt(0) === '-') {
-      const newDate = new Date(date.slice(1))
-      const fullYear = newDate.getFullYear()
+      const normalData = date.slice(1)
+      let newDate = dayjs(normalData)
+      if (utc) {
+        newDate = dayjs.utc(normalData)
+      } else {
+        newDate = dayjs(normalData)
+      }
+      const fullYear = newDate.year()
       if (date.indexOf(`-${fullYear}`) !== -1) {
         return dayjs(newDate).subtract(fullYear * 2, 'year').toDate()
       }
