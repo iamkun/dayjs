@@ -33,6 +33,14 @@ const getDateTimeFormat = (timezone, options = {}) => {
   return dtf
 }
 
+function parseParts(parts) {
+  const objParts = parts.reduce((obj, part) => ({
+    ...obj,
+    [part.type]: part.value,
+  }), {})
+  return new Date(objParts.year, objParts.month - 1, objParts.day, objParts.hour, objParts.minute, objParts.second)
+}
+
 export default (o, c, d) => {
   let defaultTimezone
 
@@ -95,8 +103,8 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
+    const target = parseParts(getDateTimeFormat(timezone).formatToParts(date))
+    const diff = Math.round((date - target) / 1000 / 60)
     let ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
       .utcOffset((-Math.round(date.getTimezoneOffset() / 15) * 15) - diff, true)
     if (keepLocalTime) {
