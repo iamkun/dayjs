@@ -75,6 +75,15 @@ it('utcOffset keepLocalTime', () => {
     .toBe(moment(d2).utcOffset(5, true).format())
 })
 
+it('utcOffset keepLocalTime does not manipulate instance', () => {
+  const d = '2000-01-01T06:00:00Z'
+  const ins = dayjs.utc(d)
+  const fm = ins.format()
+  ins.utcOffset(5, true)
+  const fm2 = ins.format()
+  expect(fm2).toBe(fm)
+})
+
 test('UTC mode', () => {
   const d = dayjs.utc('2000-01-01T06:00:00Z')
   expect(d.isUTC()).toBeTruthy()
