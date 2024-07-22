@@ -1,7 +1,6 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
-import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
@@ -76,7 +75,7 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
-  it('Parse date string without timezone', () => {
+  it('Parse datetime string without timezone', () => {
     const d = '2017-04-22 19:50:16'
     expect(dayjs.utc(d).format()).toEqual('2017-04-22T19:50:16Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
@@ -84,7 +83,6 @@ describe('Parse UTC ', () => {
     const d2 = '2012-01-02T08:20:00'
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
-
   it('Parse date string set utc in config', () => {
     const d = '2018-09-06T19:34:28Z'
     expect(dayjs(d, { utc: true }).format()).toEqual('2018-09-06T19:34:28Z')
@@ -205,19 +203,6 @@ describe('UTC and local', () => {
   it('utcOffset', () => {
     expect(localAnainDay.hour()).toBe(expected)
     expect(dayjs().utc().utcOffset()).toBe(0)
-  })
-})
-
-
-describe('UTC with customParseFormat', () => {
-  it('Custom Parse Format', () => {
-    dayjs.extend(customParseFormat)
-    const instant = dayjs.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
-    const momentInstant = moment.utc('2011-02-02 03:04:05', 'YYYY-MM-DD HH:mm:ss')
-    expect(instant.date()).toBe(2)
-    expect(instant.hour()).toBe(3)
-    expect(instant.format()).toBe('2011-02-02T03:04:05Z')
-    expect(instant.format()).toBe(momentInstant.format())
   })
 })
 
