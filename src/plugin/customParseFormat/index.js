@@ -212,11 +212,8 @@ export default (o, C, d) => {
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {
-    const {
-      date,
-      utc,
-      args
-    } = cfg
+    let { date } = cfg
+    const { utc, args } = cfg
     this.$u = utc
     const format = args[1]
     if (typeof format === 'string') {
@@ -229,6 +226,42 @@ export default (o, C, d) => {
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
       }
+
+      const value = /\d*[^-_:/,()\s\d+]+/.exec(date)
+      if (value) {
+        const months = getLocalePart('months')
+        const monthsShort = getLocalePart('monthsShort')
+
+        const reValue = new RegExp(`^${value[0].toLowerCase()}$`)
+
+        let idxValueMonths
+        let idxValueShortMonths
+
+        months.forEach((_, idx) => {
+          const s = reValue.exec(_.toLowerCase().slice(0, 3))
+          const l = reValue.exec(_.toLowerCase())
+          if (l) idxValueMonths = idx
+          if (s) idxValueShortMonths = idx
+        })
+
+        if (monthsShort) {
+          monthsShort.forEach((_, idx) => {
+            const l = reValue.exec(_.toLowerCase())
+            if (l) idxValueShortMonths = idx
+          })
+        }
+
+        if (idxValueMonths !== undefined) {
+          date = date.replace(value[0], months[idxValueMonths])
+        } else if (idxValueShortMonths !== undefined) {
+          if (monthsShort) {
+            date = date.replace(value[0], monthsShort[idxValueShortMonths])
+          } else {
+            date = date.replace(value[0], months[idxValueShortMonths].slice(0, 3))
+          }
+        }
+      }
+
       this.$d = parseFormattedInput(date, format, utc)
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
