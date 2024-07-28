@@ -73,7 +73,7 @@ dayjs().isBefore(dayjs()) // query
 
 Day.js offre une excellente prise en charge de l'internationalisation.
 
-Mais aucun d'entre eu ne sera inclus dans votre construction si vous ne l'utilisez pas.
+Mais aucun d'entre eux ne sera inclus dans votre construction si vous ne les utilisez pas.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -87,7 +87,7 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 
 ### Plugin
 
-Un plugin est un module indépendant qui peut être ajouté à Day.js pour en étendre les fonctionnalités ou en ajouter de nuovelles.
+Un plugin est un module indépendant qui peut être ajouté à Day.js pour étendre ses fonctionnalités ou en ajouter de nouvelles.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
