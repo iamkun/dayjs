@@ -47,4 +47,6 @@ jobs:
           npm install -g @semantic-release/changelog @semantic-release/git semantic-release 
           GITHUB_REF=${{ env.GITHUB_TRIGGER_REF }} semantic-release
           echo release success
+      - name: Notify
+        run: |
           curl -s ${{ secrets.GITEE_SYNC_URL }}
