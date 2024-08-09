@@ -437,3 +437,15 @@ it('parse X x', () => {
   dayjs.extend(advancedFormat)
   expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
 })
+
+it('parse Q, [Q]', () => {
+  const input1 = '2024-Q1'
+  const input2 = '2024-Q2'
+  const input3 = '2024-Q3'
+  const input4 = '2024-Q4'
+  const format = 'YYYY-[Q]Q'
+  expect(dayjs(input1, format).valueOf()).toBe(moment(input1, format).valueOf())
+  expect(dayjs(input2, format).valueOf()).toBe(moment(input2, format).valueOf())
+  expect(dayjs(input3, format).valueOf()).toBe(moment(input3, format).valueOf())
+  expect(dayjs(input4, format).valueOf()).toBe(moment(input4, format).valueOf())
+})

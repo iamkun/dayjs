@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -65,6 +65,9 @@ const expressions = {
   }],
   a: [matchWord, function (input) {
     this.afternoon = meridiemMatch(input, true)
+  }],
+  Q: [match1, function (input) {
+    this.month = ((input - 1) * 3) + 1
   }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
@@ -224,7 +227,7 @@ export default (o, C, d) => {
       const isStrictWithLocale = args[3] === true
       const isStrict = isStrictWithoutLocale || isStrictWithLocale
       let pl = args[2]
-      if (isStrictWithLocale) [,, pl] = args
+      if (isStrictWithLocale) [, , pl] = args
       locale = this.$locale()
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
