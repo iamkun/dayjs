@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -66,6 +66,9 @@ const expressions = {
   a: [matchWord, function (input) {
     this.afternoon = meridiemMatch(input, true)
   }],
+  Q: [match1, function (input) {
+    this.month = ((input - 1) * 3) + 1
+  }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
   }],
@@ -95,6 +98,8 @@ const expressions = {
       }
     }
   }],
+  w: [match1to2, addInput('week')],
+  ww: [match2, addInput('week')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
@@ -173,12 +178,12 @@ function makeParser(format) {
   }
 }
 
-const parseFormattedInput = (input, format, utc) => {
+const parseFormattedInput = (input, format, utc, dayjs) => {
   try {
     if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
     const {
-      year, month, day, hours, minutes, seconds, milliseconds, zone
+      year, month, day, hours, minutes, seconds, milliseconds, zone, week
     } = parser(input)
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
@@ -197,7 +202,12 @@ const parseFormattedInput = (input, format, utc) => {
     if (utc) {
       return new Date(Date.UTC(y, M, d, h, m, s, ms))
     }
-    return new Date(y, M, d, h, m, s, ms)
+    let newDate
+    newDate = new Date(y, M, d, h, m, s, ms)
+    if (week) {
+      newDate = dayjs(newDate).week(week).toDate()
+    }
+    return newDate
   } catch (e) {
     return new Date('') // Invalid Date
   }
@@ -224,12 +234,12 @@ export default (o, C, d) => {
       const isStrictWithLocale = args[3] === true
       const isStrict = isStrictWithoutLocale || isStrictWithLocale
       let pl = args[2]
-      if (isStrictWithLocale) [,, pl] = args
+      if (isStrictWithLocale) [, , pl] = args
       locale = this.$locale()
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
       }
-      this.$d = parseFormattedInput(date, format, utc)
+      this.$d = parseFormattedInput(date, format, utc, d)
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
       // use != to treat
