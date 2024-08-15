@@ -8,10 +8,12 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import isoWeek from '../../src/plugin/isoWeek'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
 dayjs.extend(weekOfYear) // test parse w, ww
+dayjs.extend(isoWeek) // test parse W, WW
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -452,14 +454,17 @@ it('parse Q, [Q]', () => {
   expect(dayjs(input4, format).valueOf()).toBe(moment(input4, format).valueOf())
 })
 
-it('parse w, ww, WW', () => {
+it('parse w, ww, W, WW', () => {
   const input = '2024-w1'
   const format1 = 'YYYY-[w]w'
   expect(dayjs(input, format1).format(format1)).toBe(input)
   const input2 = '2024-w32'
   const format2 = 'YYYY-[w]ww'
-  expect(dayjs(input2, format2).format(format1)).toBe(input2)
-  const input3 = '2024-w33'
-  const format3 = 'YYYY-[w]WW'
-  expect(dayjs(input3, format3).format(format1)).toBe(input3)
+  expect(dayjs(input2, format2).format(format2)).toBe(input2)
+  const input3 = '2024-w1'
+  const format3 = 'YYYY-[w]W'
+  expect(dayjs(input3, format3).format(format3)).toBe(input3)
+  const input4 = '2024-w33'
+  const format4 = 'YYYY-[w]WW'
+  expect(dayjs(input4, format4).format(format4)).toBe(input4)
 })

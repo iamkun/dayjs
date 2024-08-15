@@ -100,6 +100,7 @@ const expressions = {
   }],
   w: [match1to2, addInput('week')],
   ww: [match2, addInput('week')],
+  W: [match1to2, addInput('week')],
   WW: [match2, addInput('week')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
