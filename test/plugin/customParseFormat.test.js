@@ -452,11 +452,14 @@ it('parse Q, [Q]', () => {
   expect(dayjs(input4, format).valueOf()).toBe(moment(input4, format).valueOf())
 })
 
-it('parse w, ww', () => {
+it('parse w, ww, WW', () => {
   const input = '2024-w1'
   const format1 = 'YYYY-[w]w'
   expect(dayjs(input, format1).format(format1)).toBe(input)
   const input2 = '2024-w32'
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
+  const input3 = '2024-w33'
+  const format3 = 'YYYY-[w]WW'
+  expect(dayjs(input3, format3).format(format1)).toBe(input3)
 })
