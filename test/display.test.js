@@ -261,6 +261,11 @@ it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
 })
 
+it('As null -> null', () => {
+  expect(dayjs(null).toISOString()).toBe(moment(null).toISOString())
+  expect(dayjs(null).toISOString()).toBe(null)
+})
+
 it('Year 1 formatted with YYYY should pad with zeroes', () => {
   const date = new Date(1, 0, 1)
   date.setUTCFullYear(1) // Required because 0-99 are parsed as 19xx in JS: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#year
