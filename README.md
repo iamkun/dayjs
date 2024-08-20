@@ -127,6 +127,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.honrev.com" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/b3203350-34c1-4637-b8b1-d9b8bab346d3">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/alan-eu" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/18175329?s=52&v=4">
 </a>
@@ -141,6 +145,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://route4me.com/" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/3fbc86c5-98a9-49c2-beae-1969026fcd76" alt="Route Optimizer and Route Planner Software">
 </a>
 
 
