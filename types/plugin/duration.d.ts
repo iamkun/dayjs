@@ -30,6 +30,8 @@ declare namespace plugin {
 
     clone(): Duration
 
+    normalize(): Duration
+
     humanize(withSuffix?: boolean): string
 
     milliseconds(): number

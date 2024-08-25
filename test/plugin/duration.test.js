@@ -309,3 +309,34 @@ describe('Format', () => {
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
 })
+
+describe('Normalize units', () => {
+  [
+    ['PT60S', 'PT1M'],
+    ['PT120M', 'PT2H'],
+    ['PT24H', 'P1D'],
+    ['P30DT10H', 'P1M'],
+    ['P31D', 'P1MT14H'],
+    ['P12M', 'P1Y'],
+
+    ['PT0.5M', 'PT30S'],
+    ['PT0.5H', 'PT30M'],
+    ['P0.5D', 'PT12H'],
+    ['P0.5M', 'P15DT5H'],
+    ['P0.5Y', 'P6M'],
+
+    ['P1Y13M25DT25H61M65S', 'P2Y1M26DT2H2M5S']
+  ].forEach(([input, output]) => {
+    test(`Normalize ${input} to ${output}`, () => {
+      const normalized = dayjs.duration(input).normalize()
+
+      expect(normalized.toISOString()).toBe(output)
+    })
+
+    test(`Clone ${input} to ${output}`, () => {
+      const cloned = dayjs.duration(input).clone()
+
+      expect(cloned.toISOString()).toBe(output)
+    })
+  })
+})
