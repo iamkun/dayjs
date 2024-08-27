@@ -26,12 +26,12 @@ const locale = {
     yy: '%d years'
   },
   formats: {
-    LT: 'HH:mm',
-    LTS: 'HH:mm:ss',
+    LT: 'h:mm A',
+    LTS: 'h:mm:ss A',
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
-    LLL: 'D MMMM YYYY HH:mm',
-    LLLL: 'dddd, D MMMM YYYY HH:mm'
+    LLL: 'D MMMM YYYY h:mm A',
+    LLLL: 'dddd, D MMMM YYYY h:mm A'
   },
   ordinal: (n) => {
     const s = ['th', 'st', 'nd', 'rd']
