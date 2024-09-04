@@ -119,12 +119,16 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/sight-and-sound-ministries" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/232316426-cb99b4cf-0ccb-4e73-a6ce-e16dba6aadf4.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://chudovo.com/" target="_blank">
   <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.ratrav.com" target="_blank">
+  <img width="70" src="https://images.opencollective.com/ratrav/8bad59c/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://opencollective.com/sight-sound" target="_blank">
+  <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.honrev.com" target="_blank">
