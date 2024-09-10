@@ -37,11 +37,11 @@ const locale = {
     m: 'minuta',
     mm: '%d minuta',
     h: 'sat',
-    hh: '%d sati',
+    hh: '%d sata',
     d: 'dan',
     dd: '%d dana',
     M: 'mjesec',
-    MM: '%d mjeseci',
+    MM: '%d mjeseca',
     y: 'godina',
     yy: '%d godine'
   },
