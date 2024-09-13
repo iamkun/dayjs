@@ -151,8 +151,8 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/handsontable" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/8068250?s=200&v=4">
+<a href="https://handsontable.com/docs/react-data-grid/?utm_source=Dayjs_GH&utm_medium=sponsorship&utm_campaign=library_sponsorship_2024" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/b752d677-fe8e-4089-960f-084ef1459582">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://route4me.com/" target="_blank">
