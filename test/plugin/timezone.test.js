@@ -308,7 +308,7 @@ describe('CustomPraseFormat', () => {
 
 describe('startOf and endOf', () => {
   it('corrects for timezone offset in startOf', () => {
-    const originalDay = dayjs.tz('2010-01-01 00:00:00', NY)
+    const originalDay = dayjs.tz('2009-12-31 00:00:00', NY)
     const startOfDay = originalDay.startOf('day')
     expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
