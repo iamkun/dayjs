@@ -10,3 +10,7 @@ dayjs().format('YYYY-MM-DD')
 
 // locale
 dayjs().locale('zh-cn').format()
+
+// add
+dayjs().add(1, 'year').format()
+
