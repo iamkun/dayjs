@@ -12,7 +12,7 @@ const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
 const durationRegexWeeks = /^([-+])?P([-+]?[\d,.]*W)$/
 const durationRegexYmd = /^([-+])?P([-+]?[\d,.]*Y)?([-+]?[\d,.]*M)?([-+]?[\d,.]*D)?T([-+]?[\d,.]*H)?([-+]?[\d,.]*M)?([-+]?[\d,.]*S)?$/
-const durationRegex = `(${WEEKS_FORMAT.source})|(${YMD_FORMAT.source})`
+const durationRegex = `(${durationRegexWeeks.source})|(${durationRegexYmd.source})`
 
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
