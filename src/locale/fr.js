@@ -36,6 +36,14 @@ const locale = {
   ordinal: (n) => {
     const o = n === 1 ? 'er' : ''
     return `${n}${o}`
+  },
+  calendar: {
+    sameDay: "[aujourd'hui à] H:mm",
+    nextDay: "[demain à] H:mm",
+    nextWeek: "dddd [prochain]",
+    lastDay: "[hier à] H:mm",
+    lastWeek: "dddd [dernier]",
+    sameElse: "YYYY-MM-DD",
   }
 }
 
