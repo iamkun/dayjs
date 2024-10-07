@@ -102,6 +102,10 @@ class Duration {
   }
 
   calMilliseconds() {
+    if (this.$d.weeks) {
+      this.$d.days = (this.$d.days || 0) + (this.$d.weeks * 7)
+      this.$d.weeks = 0
+    }
     this.$ms = Object.keys(this.$d).reduce((total, unit) => (
       total + ((this.$d[unit] || 0) * (unitToMS[unit]))
     ), 0)
