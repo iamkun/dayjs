@@ -73,6 +73,12 @@ it('UTC and utcOffset', () => {
   expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
 })
 
+it('To ISO string with and without timezone', () => {
+  const date = '2023-12-12T07:14:24.917Z'
+  expect(dayjs(date).toISOString(true)).toBe(moment(date).toISOString(true))
+  expect(dayjs(date).toISOString(false)).toBe(moment(date).toISOString(false))
+})
+
 it('UTC diff in DST', () => {
   // DST till 2020-10-25
   const day1 = dayjs.utc('20201023') // in DST
