@@ -1,14 +1,14 @@
-English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md) | [עברית](./docs/he/README-he.md)
+Swahili | [English](../../README.md) | [Kireno](../pt-br/README-pt-br.md) | [Kichina](../zh-cn/README.zh-CN.md) | [Kijapani](../ja/README-ja.md) | [Kikorea](../ko/README-ko.md) | [Kihispania](../es-es/README-es-es.md) | [Kirusi](../ru/README-ru.md) | [Kituruki](../tr/README-tr.md) | [Sinhala](../si/README-si.md) | [Kiebrania](../he/README-he.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js" /></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+<p align="center">Fast <b>2kB</b> mbadala wa Moment.js ukiwa na API zinazofanana na za kisasa</p>
 <p align="center">
     <a href="https://bundlephobia.com/package/dayjs"><img
             src="https://img.shields.io/bundlephobia/minzip/dayjs?style=flat-square&color=%2345cc11"
             alt="Gzip Size"></a>
-    <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
+             <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
     <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
             src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
@@ -22,58 +22,57 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js ni Maktaba ya JavaScript ya minimalist ambayo inachanganua, kuthibitisha, kudhibiti, na kuonyesha tarehe na nyakati kwa vivinjari vya kisasa na API inayofanana sana na Moment.js. Ikiwa unatumia Moment.js, tayari unajua jinsi ya kutumia Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+* 🕒 Michoro na API maarufu za Moment.js
+* 💪 Hazibadiliki
+* 🔥 Zinaunganishwa
+* 🌐 Zinaruhusu I18n
+* 📦 Maktaba ndogo ya 2kb
+* 👫 Browser zote zinaruhusu
 
 ---
 
-## Getting Started
+## Kuanza
 
-### Documentation
+### Nyaraka
 
-You can find more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+Unaweza kutafuta maelekezo zaidi ya  API na nyaraka zingine kupitia tovuti ya [day.js.org](https://day.js.org/).
 
-### Installation
+### Kusakinisha
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
+📚[Maelekezo ya Kusakinisha](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
+Ni rahisi kutumia Day.js kupitisha, kuhakiki, kubadili na kuonesha tarehe na mda.
 
 ```javascript
-dayjs('2018-08-08') // parse
+dayjs('2018-08-08') // changanua
 
 dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
 
-dayjs().set('month', 3).month() // get & set
-
+dayjs().set('month', 3).month() // chukua na weka
 dayjs().add(1, 'year') // manipulate
 
 dayjs().isBefore(dayjs()) // query
 ```
 
-📚[API Reference](https://day.js.org/docs/en/parse/parse)
+📚[Maelekezo Ya API](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
-Day.js has great support for internationalization.
+Day.js ina ruhusu kwa internalization.
 
-But none of them will be included in your build unless you use it.
+Lakini hakuna hata moja ambayo itawekwa katika utengezaji endapo utatumia.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -85,31 +84,31 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 
 📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
 
-### Plugin
+### Zana
 
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
+Zana ya Kujumuisha ni moduli inayojitegemea ambayo inaweza ikaweka katika Day.js ili kuweza kuongeza uwezo au kuongeza sifa.
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // Upakiaji kwa Mahitaji
 
-dayjs.extend(advancedFormat) // use plugin
+dayjs.extend(advancedFormat) // tumia plugin
 
-dayjs().format('Q Do k kk X x') // more available formats
+dayjs().format('Q Do k kk X x') // njia zaidi zilizopo
 ```
 
-📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
+📚[Idadi Ya Plugin](https://day.js.org/docs/en/plugin/plugin)
 
-### Usage Trend
+### Trend Zinazoweza Tumika
 
 <a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
   <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
 </a>
 
-## Sponsors
+## Wafadhili
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
+Toa mchango wako kwa huu mradi kwa kuwa mfadhili. Nembo yako itaonekana hapa pamoja na link ya kwenda kwenye tovuti yako.
 
-[[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
+[[Kuwa mfadhili kupitia GitHub](https://github.com/sponsors/iamkun/)] [[Kuwa mfadhili kupitia OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
 <a href="https://toyokumo.co.jp" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
@@ -119,20 +118,16 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://opencollective.com/sight-and-sound-ministries" target="_blank">
+  <img width="70" src="https://user-images.githubusercontent.com/17680888/232316426-cb99b4cf-0ccb-4e73-a6ce-e16dba6aadf4.png">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://chudovo.com/" target="_blank">
   <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.ratrav.com" target="_blank">
-  <img width="70" src="https://images.opencollective.com/ratrav/8bad59c/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/sight-sound" target="_blank">
-  <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.honrev.com" target="_blank">
-  <img width="70" src="https://github.com/user-attachments/assets/b3203350-34c1-4637-b8b1-d9b8bab346d3">
+<a href="https://github.com/alan-eu" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/18175329?s=52&v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
@@ -146,23 +141,15 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://bestkru.com/" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
 </a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://handsontable.com/docs/react-data-grid/?utm_source=Dayjs_GH&utm_medium=sponsorship&utm_campaign=library_sponsorship" target="_blank">
-  <img width="70" src="https://github.com/user-attachments/assets/426c3476-dc34-44d1-a904-ed58dbd20dd6">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://route4me.com/" target="_blank">
-  <img width="70" src="https://github.com/user-attachments/assets/3fbc86c5-98a9-49c2-beae-1969026fcd76" alt="Route Optimizer and Route Planner Software">
-</a>
 
 
-## Contributors
+## Wachangiaji
 
-This project exists thanks to all the people who contribute.
+Huu mradi umefika hapa ulipo hapa shukrani ziende kwa watu wote wanao changia.
 
-Please give us a 💖 star 💖 to support us. Thank you.
+Tafadhali tupe 💖 nyota/maua 💖 kutuunga mkono sisi.Ahsante.
 
-And thank you to all our backers! 🙏
+Na ahsante kwa wafadhili wote! 🙏
 
 <a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
@@ -171,6 +158,6 @@ And thank you to all our backers! 🙏
 <br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
-## License
+## Leseni
 
-Day.js is licensed under a [MIT License](./LICENSE).
+Day.js ipo chini ya kibali cha [leseni ya MTI](./LICENSE).
