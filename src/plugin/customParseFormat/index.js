@@ -143,7 +143,7 @@ function correctHours(time) {
   }
 }
 
-function makeParser(format) {
+function makeParser(format, dayjs) {
   format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
@@ -158,7 +158,8 @@ function makeParser(format) {
       array[i] = token.replace(/^\[|\]$/g, '')
     }
   }
-  return function (input) {
+  return function (incomingInput) {
+    let input = typeof incomingInput === 'string' ? incomingInput : dayjs(incomingInput).format()
     const time = {}
     for (let i = 0, start = 0; i < length; i += 1) {
       const token = array[i]
@@ -181,7 +182,7 @@ function makeParser(format) {
 const parseFormattedInput = (input, format, utc, dayjs) => {
   try {
     if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
-    const parser = makeParser(format)
+    const parser = makeParser(format, dayjs)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone, week
     } = parser(input)
