@@ -123,7 +123,7 @@ export default (option, Dayjs, dayjs) => {
   }
 
   proto.toISOString = function () {
-    return this.toDate().toISOString()
+    return this.isValid() ? this.toDate().toISOString() : null
   }
 
   proto.toString = function () {
