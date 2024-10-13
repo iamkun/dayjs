@@ -5,7 +5,16 @@ export default (option, Dayjs, dayjs) => {
     if (!localeConfig) return
     const customConfigKeys = customConfig ? Object.keys(customConfig) : []
     customConfigKeys.forEach((c) => {
-      localeConfig[c] = customConfig[c]
+      const originConfig = localeConfig[c]
+      const customOriginConfig = customConfig[c]
+      if (originConfig !== null && typeof originConfig === 'object' && typeof customOriginConfig === 'object') {
+        localeConfig[c] = {
+          ...originConfig,
+          ...customOriginConfig
+        }
+      } else {
+        localeConfig[c] = customOriginConfig
+      }
     })
     return localeConfig // eslint-disable-line consistent-return
   }
