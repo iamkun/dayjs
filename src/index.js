@@ -60,6 +60,14 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
+const hasNegativeDateComponent = (dateStr) => {
+  // Regular expression to match any part of the date that starts with a hyphen followed by digits
+  const negativeDatePattern = /(^-|\/-|--|\/-\d{2}|\d{2}\/-\d{2}\/|\d{4}\/-\d{2}|\/-\d{2}\/)/
+
+  // Test the date string against the pattern
+  return negativeDatePattern.test(dateStr)
+}
+
 const parseDate = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
@@ -77,6 +85,8 @@ const parseDate = (cfg) => {
       return new Date(d[1], m, d[3]
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
+
+    if (hasNegativeDateComponent(date)) return new Date(NaN)
   }
 
   return new Date(date) // everything else
