@@ -89,8 +89,16 @@ export default (option, Dayjs, dayjs) => {
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     let ins = this
     if (keepLocalTime) {
+      const isUTCBefore = !!ins.$u
       ins.$offset = offset
       ins.$u = input === 0
+      if (isUTCBefore) {
+        return ins
+      }
+      if (ins.$u && offset === 0) {
+        // notUTC to UTC and keep localTime , should offset
+        return ins.add(oldUtcOffset.call(ins), MIN)
+      }
       return ins
     }
     if (input !== 0) {

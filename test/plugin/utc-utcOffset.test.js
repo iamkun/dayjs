@@ -13,6 +13,21 @@ afterEach(() => {
   MockDate.reset()
 })
 
+it('utcOffset return clone object', () => {
+  const original = dayjs()
+  const clone = original.utcOffset(0, true)
+  expect(original !== clone).toBeTruthy()
+})
+
+it('add minute after 0 utcOffset', () => {
+  const du = dayjs().add(1, 'minute').utcOffset(0, true)
+  const mu = moment().add(1, 'minute').utcOffset(0, true)
+  const duu = dayjs().utcOffset(0, true).add(1, 'minute')
+  const muu = moment().utcOffset(0, true).add(1, 'minute')
+  expect(duu.format()).toEqual(mu.format())
+  expect(du.format()).toEqual(muu.format())
+})
+
 it('Set utcOffset -> Get utcOffset', () => {
   expect(dayjs().utcOffset(540).utcOffset()).toBe(moment().utcOffset(540).utcOffset())
   expect(dayjs().utcOffset(540).format()).toBe(moment().utcOffset(540).format())
