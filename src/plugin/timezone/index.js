@@ -1,13 +1,6 @@
 import { INVALID_DATE_STRING, MILLISECONDS_A_MINUTE, MIN, MS } from '../../constant'
 
-const typeToPos = {
-  year: 0,
-  month: 1,
-  day: 2,
-  hour: 3,
-  minute: 4,
-  second: 5
-}
+const types = ['year', 'month', 'day', 'hour', 'minute', 'second', 'timeZoneName']
 
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
@@ -39,20 +32,19 @@ export default (o, c, d) => {
   const makeFormatParts = (timestamp, timezone, options) => {
     const date = new Date(timestamp)
     const dtf = getDateTimeFormat(timezone, options)
-    return dtf.formatToParts(date)
+    const formatResult = dtf.formatToParts(date)
+    const filled = []
+    formatResult.forEach(({ type, value }) => {
+      const i = types.indexOf(type)
+      if (i >= 0) {
+        filled[i] = value
+      }
+    })
+    return filled
   }
 
   const tzOffset = (timestamp, timezone) => {
-    const formatResult = makeFormatParts(timestamp, timezone)
-    const filled = []
-    for (let i = 0; i < formatResult.length; i += 1) {
-      const { type, value } = formatResult[i]
-      const pos = typeToPos[type]
-
-      if (pos >= 0) {
-        filled[pos] = parseInt(value, 10)
-      }
-    }
+    const filled = makeFormatParts(timestamp, timezone)
     const [Y, M, D, h, m, s] = filled
     const utcString = `${Y}-${M}-${D} ${h}:${m}:${s}`
     const utcTs = d.utc(utcString).valueOf()
@@ -115,8 +107,8 @@ export default (o, c, d) => {
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
-    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type || 'short' }).find(m => m.type.toLowerCase() === 'timezonename')
-    return result && result.value
+    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type || 'short' })[6]
+    return result
   }
 
   const oldStartOf = proto.startOf
