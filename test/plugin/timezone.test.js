@@ -72,21 +72,16 @@ describe('Parse', () => {
 
 describe('Convert', () => {
   it('convert to target time', () => {
-    const losAngeles = dayjs('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    const MlosAngeles = moment('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
-    expect(losAngeles.format()).toBe(MlosAngeles.format())
-    expect(losAngeles.valueOf()).toBe(1401624000000)
-    expect(losAngeles.valueOf()).toBe(MlosAngeles.valueOf())
-    expect(losAngeles.utcOffset()).toBe(-420)
-    expect(losAngeles.utcOffset()).toBe(MlosAngeles.utcOffset())
-  })
-
-  it('convert to target time', () => {
     [dayjs, moment].forEach((_) => {
       const losAngeles = _('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
       expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
       expect(losAngeles.valueOf()).toBe(1401624000000)
+      expect(losAngeles.utcOffset()).toBe(-420)
+
+      const prague = _('2023-10-02T00:00:00+02:00').tz('Europe/Prague')
+      expect(prague.format()).toBe('2023-10-02T00:00:00+02:00')
+      expect(prague.valueOf()).toBe(1696197600000)
+      expect(prague.utcOffset()).toBe(120)
     })
   })
 
