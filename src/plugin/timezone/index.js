@@ -1,4 +1,4 @@
-import { INVALID_DATE_STRING, MILLISECONDS_A_MINUTE, MIN, MS } from '../../constant'
+import { INVALID_DATE_STRING, MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND, MIN, MS } from '../../constant'
 
 const types = ['year', 'month', 'day', 'hour', 'minute', 'second', 'timeZoneName']
 
@@ -44,14 +44,13 @@ export default (o, c, d) => {
   }
 
   const tzOffset = (timestamp, timezone) => {
-    const filled = makeFormatParts(timestamp, timezone)
-    const [Y, M, D, h, m, s] = filled
+    const [Y, M, D, h, m, s] = makeFormatParts(timestamp, timezone)
     const utcString = `${Y}-${M}-${D} ${h}:${m}:${s}`
-    const utcTs = d.utc(utcString).valueOf()
+    const utcTs = +d.utc(utcString)
     let asTS = +timestamp
-    const over = asTS % 1000
+    const over = asTS % MILLISECONDS_A_SECOND
     asTS -= over
-    return (utcTs - asTS) / (60 * 1000)
+    return (utcTs - asTS) / MILLISECONDS_A_MINUTE
   }
 
   // find the right offset a given local time. The o input is our guess, which determines which
@@ -59,23 +58,19 @@ export default (o, c, d) => {
   // https://github.com/moment/luxon/blob/master/src/datetime.js#L76
   const fixOffset = (localTS, o0, tz) => {
     // Our UTC time is just a guess because our offset is just a guess
-    let utcGuess = localTS - (o0 * 60 * 1000)
+    const utcGuess = offset => localTS - (offset * MILLISECONDS_A_MINUTE)
+    const next = offset => tzOffset(utcGuess(offset), tz)
     // Test whether the zone matches the offset for this ts
-    const o2 = tzOffset(utcGuess, tz)
-    // If so, offset didn't change and we're done
-    if (o0 === o2) {
-      return [utcGuess, o0]
-    }
-    // If not, change the ts by the difference in the offset
-    utcGuess -= (o2 - o0) * 60 * 1000
-    // If that gives us the local time we want, we're done
-    const o3 = tzOffset(utcGuess, tz)
-    if (o2 === o3) {
-      return [utcGuess, o2]
-    }
-    // If it's different, we're in a hole time.
+    let o2 = next(o0)
+    let o3 = next(o2)
+    // If o2 !== o3, we're in a hole time.
     // The offset has changed, but the we don't adjust the time
-    return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
+    if (o2 > o3) {
+      const tmp = o2
+      o2 = o3
+      o3 = tmp
+    }
+    return d(utcGuess(o2)).utcOffset(o3)
   }
 
   const proto = c.prototype
@@ -107,7 +102,7 @@ export default (o, c, d) => {
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
-    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type || 'short' })[6]
+    const result = makeFormatParts(+this, zone, { timeZoneName: type || 'short' })[6]
     return result
   }
 
@@ -130,9 +125,8 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
-    const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
+    const localTs = +d.utc(input, parseFormat)
+    const ins = fixOffset(localTs, previousOffset, timezone)
     ins.$x.$timezone = timezone
     return ins
   }
