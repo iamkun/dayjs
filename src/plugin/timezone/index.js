@@ -1,4 +1,4 @@
-import { MIN, MS } from '../../constant'
+import { INVALID_DATE_STRING, MILLISECONDS_A_MINUTE, MIN, MS } from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -11,14 +11,15 @@ const typeToPos = {
 
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
-const dtfCache = {}
+const dtfCache = { __proto: null }
 const getDateTimeFormat = (timezone, options = {}) => {
   const timeZoneName = options.timeZoneName || 'short'
-  const key = `${timezone}|${timeZoneName}`
+  const hour12 = Boolean(options.hour12)
+  const key = `${timezone}|${timeZoneName}|${hour12}`
   let dtf = dtfCache[key]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
-      hour12: false,
+      hour12,
       timeZone: timezone,
       year: 'numeric',
       month: '2-digit',
@@ -26,7 +27,7 @@ const getDateTimeFormat = (timezone, options = {}) => {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      timeZoneName
+      timeZoneName: timeZoneName === 'undefined' ? undefined : timeZoneName
     })
     dtfCache[key] = dtf
   }
@@ -95,10 +96,12 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
-    const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
-    const isUTC = !Number(offset)
+    const target = this.isValid()
+      ? getDateTimeFormat(timezone, { timeZoneName: 'undefined', hour12: true }).format(date)
+      : INVALID_DATE_STRING
+    const diff = Math.round((date - new Date(target)) / MILLISECONDS_A_MINUTE)
+    const offset = -date.getTimezoneOffset() - diff
+    const isUTC = !offset
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
       ins = this.utcOffset(0, keepLocalTime)
