@@ -13,13 +13,12 @@ const typeToPos = {
 // as it is a *very* slow method.
 const dtfCache = { __proto: null }
 const getDateTimeFormat = (timezone, options = {}) => {
-  const timeZoneName = options.timeZoneName || 'short'
-  const hour12 = Boolean(options.hour12)
-  const key = `${timezone}|${timeZoneName}|${hour12}`
+  const { timeZoneName } = options
+  const key = `${timezone}|${timeZoneName}`
   let dtf = dtfCache[key]
   if (!dtf) {
     dtf = new Intl.DateTimeFormat('en-US', {
-      hour12,
+      hourCycle: 'h23',
       timeZone: timezone,
       year: 'numeric',
       month: '2-digit',
@@ -27,7 +26,7 @@ const getDateTimeFormat = (timezone, options = {}) => {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      timeZoneName: timeZoneName === 'undefined' ? undefined : timeZoneName
+      timeZoneName
     })
     dtfCache[key] = dtf
   }
@@ -37,7 +36,7 @@ const getDateTimeFormat = (timezone, options = {}) => {
 export default (o, c, d) => {
   let defaultTimezone
 
-  const makeFormatParts = (timestamp, timezone, options = {}) => {
+  const makeFormatParts = (timestamp, timezone, options) => {
     const date = new Date(timestamp)
     const dtf = getDateTimeFormat(timezone, options)
     return dtf.formatToParts(date)
@@ -54,12 +53,8 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
-    const hour = filled[3]
-    // Workaround for the same behavior in different node version
-    // https://github.com/nodejs/node/issues/33027
-    /* istanbul ignore next */
-    const fixedHour = hour === 24 ? 0 : hour
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
+    const [Y, M, D, h, m, s] = filled
+    const utcString = `${Y}-${M}-${D} ${h}:${m}:${s}`
     const utcTs = d.utc(utcString).valueOf()
     let asTS = +timestamp
     const over = asTS % 1000
@@ -97,7 +92,7 @@ export default (o, c, d) => {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = this.isValid()
-      ? getDateTimeFormat(timezone, { timeZoneName: 'undefined', hour12: true }).format(date)
+      ? getDateTimeFormat(timezone).format(date)
       : INVALID_DATE_STRING
     const diff = Math.round((date - new Date(target)) / MILLISECONDS_A_MINUTE)
     const offset = -date.getTimezoneOffset() - diff
@@ -120,7 +115,7 @@ export default (o, c, d) => {
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
-    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
+    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type || 'short' }).find(m => m.type.toLowerCase() === 'timezonename')
     return result && result.value
   }
 
