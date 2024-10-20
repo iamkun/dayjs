@@ -17,3 +17,6 @@ dayjs().add(1, 'year').format()
 // subtract
 dayjs().subtract(1, 'year').format()
 
+// diff
+dayjs().diff(dayjs().add(1, 'year'), 'year')
+
