@@ -120,7 +120,9 @@ export default (o, c, d) => {
       ? new Date(getDateTimeFormat(timezone).format(date))
       : NaN
     const diff = Math.round((date - target) / MILLISECONDS_A_MINUTE)
-    const offset = -date.getTimezoneOffset() - diff
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
+    const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
     const isUTC = !offset
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
