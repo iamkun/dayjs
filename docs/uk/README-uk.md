@@ -1,12 +1,13 @@
-English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md) | [עברית](./docs/he/README-he.md) | [Українська](./docs/ru/README-uk.md)
+Українська | [English](../../README.md) | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md) | [עברית](./docs/he/README-he.md)
 
-<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
+<p align="center"><a href="https://day.js.org/ru/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
-                                                                             alt="Day.js" /></a></p>
-<p align="center">Fast <b>2kB</b> alternative to Moment.js with the same modern API</p>
+                                                                             alt="Day.js"></a></p>
+<p align="center">Швидка <b>2kB</b> альтернатива Moment.js із аналогічним сумісним API</p>
+<br>
 <p align="center">
-    <a href="https://bundlephobia.com/package/dayjs"><img
-            src="https://img.shields.io/bundlephobia/minzip/dayjs?style=flat-square&color=%2345cc11"
+    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
+            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
@@ -22,94 +23,90 @@ English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/R
     </a>
 </p>
 
-> Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+> Day.js - це мініатюрна JavaScript бібліотека, яка парсить, валідує, керує, і відображає дати та час для сучасних браузерів, що має велику сумісність з Moment.js API. Якщо ви використовуєте Moment.js, ви вже знаєте, як користуватися Day.js.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
 ```
 
-* 🕒 Familiar Moment.js API & patterns
-* 💪 Immutable
-* 🔥 Chainable
-* 🌐 I18n support
-* 📦 2kb mini library
-* 👫 All browsers supported
+* 🕒 Добре знайомий API та патерни Moment.js
+* 💪 Стабільна
+* 🔥 З послідовним викликом методів
+* 🌐 Підтримка інтернаціоналізації (I18n)
+* 📦 2kb міні-бібліотека
+* 👫 Підтримується усіма браузерами
 
 ---
 
-## Getting Started
+## Початок роботи
 
-### Documentation
+### Документація
 
-You can find more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+Ви можете знайти більше детальної інформації, API, та інших документів на веб-сайті [day.js.org](https://day.js.org/).
 
-### Installation
+### Встановлення
 
 ```console
 npm install dayjs --save
 ```
 
-📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
+📚[Інструкція з встановлення](https://day.js.org/docs/ru/installation/installation)
 
 ### API
 
-It's easy to use Day.js APIs to parse, validate, manipulate, and display dates and times.
+API Day.js легко використовувати для парсингу, валідації, управління та відображення дат і часу.
 
 ```javascript
-dayjs('2018-08-08') // parse
+dayjs('2018-08-08') // парсинг
 
-dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // display
+dayjs().format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A') // відображення
 
-dayjs().set('month', 3).month() // get & set
+dayjs().set('month', 3).month() // отримання і встановлення
 
-dayjs().add(1, 'year') // manipulate
+dayjs().add(1, 'year') // управління
 
-dayjs().isBefore(dayjs()) // query
+dayjs().isBefore(dayjs()) // інформування
 ```
 
-📚[API Reference](https://day.js.org/docs/en/parse/parse)
+📚[Посилання на API](https://day.js.org/docs/ru/parse/parse)
 
 ### I18n
 
-Day.js has great support for internationalization.
+Day.js має чудову підтримку інтернаціоналізації.
 
-But none of them will be included in your build unless you use it.
+Проте жодна з локалізацій не буде включена до вашої збірки доти, доки ви не почнете її використовувати.
+```javascript
+import 'dayjs/locale/es' // завантаження за вимоги
+
+dayjs.locale('uk') // глобальне використання Української локалі
+
+dayjs('2018-05-05').locale('zh-cn').format() // використання спрощеної китайської локалі в конкретному випадку
+```
+📚[Інтернаціоналізація](https://day.js.org/docs/ru/i18n/i18n)
+
+### Плагін
+
+Плагін - це незалежний модуль, який може бути доданий до Day.js з метою розширення функціональних можливостей або додавання нових особливостей.
 
 ```javascript
-import 'dayjs/locale/es' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat' // завантаження за вимоги
 
-dayjs.locale('es') // use Spanish locale globally
+dayjs.extend(advancedFormat) // використання плагіну
 
-dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in a specific instance
+dayjs().format('Q Do k kk X x') // більше доступних форматів
 ```
 
-📚[Internationalization](https://day.js.org/docs/en/i18n/i18n)
+📚[Перелік плагінів](https://day.js.org/docs/ru/plugin/plugin)
 
-### Plugin
-
-A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
-
-```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
-
-dayjs.extend(advancedFormat) // use plugin
-
-dayjs().format('Q Do k kk X x') // more available formats
-```
-
-📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
-
-### Usage Trend
+### Тенденція використання
 
 <a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
   <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
 </a>
 
-## Sponsors
+## Спонсори
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
-
-[[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
+Підтримайте цей проект, ставши спонсором. Ваш логотип буде показаний тут із посиланням на ваш веб-сайт. [[Стати спонсором](https://opencollective.com/dayjs#sponsor)]
 
 <a href="https://toyokumo.co.jp" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
@@ -155,14 +152,13 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://github.com/user-attachments/assets/3fbc86c5-98a9-49c2-beae-1969026fcd76" alt="Route Optimizer and Route Planner Software">
 </a>
 
+## Контриб'ютори
 
-## Contributors
+Цей проект існує завдяки всім людям, що роблять свій внесок у його розвиток.
 
-This project exists thanks to all the people who contribute.
+Будь ласка, поставте 💖 зірочку 💖, щоб підтримати нас. Дякую.
 
-Please give us a 💖 star 💖 to support us. Thank you.
-
-And thank you to all our backers! 🙏
+Також висловлюю подяку всім нашим спонсорам! 🙏
 
 <a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
@@ -171,6 +167,6 @@ And thank you to all our backers! 🙏
 <br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
-## License
+## Лицензия
 
-Day.js is licensed under a [MIT License](./LICENSE).
+Day.js поширюється під [ліцензією MIT](./LICENSE-uk).
