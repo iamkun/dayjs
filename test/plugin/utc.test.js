@@ -348,3 +348,9 @@ it('utc keepLocalTime', () => {
 it('utc diff undefined edge case', () => {
   expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
 })
+
+describe('Handles an invalid date in the same way that moment.js does', () => {
+  it('returns null when calling toISOString', () => {
+    expect(dayjs('invalid').toISOString()).toBeNull()
+  })
+})
