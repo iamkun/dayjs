@@ -22,3 +22,6 @@ dayjs().diff(dayjs().add(1, 'year'), 'year')
 
 // isBefore
 dayjs().isBefore(dayjs().add(1, 'year'))
+
+// isAfter
+dayjs().isAfter(dayjs().subtract(1, 'year'))
