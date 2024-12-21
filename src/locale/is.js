@@ -42,11 +42,11 @@ function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
 
 const locale = {
   name: 'is',
-  weekdays: 'sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur'.split('_'),
-  months: 'janúar_febrúar_mars_apríl_maí_júní_júlí_ágúst_september_október_nóvember_desember'.split('_'),
+  weekdays: 'Sunnudagur_Mánudagur_Þriðjudagur_Miðvikudagur_Fimmtudagur_Föstudagur_Laugardagur'.split('_'),
+  months: 'Janúar_Febrúar_Mars_Apríl_Maí_Júní_Júlí_Ágúst_September_Október_Nóvember_Desember'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'sun_mán_þri_mið_fim_fös_lau'.split('_'),
-  monthsShort: 'jan_feb_mar_apr_maí_jún_júl_ágú_sep_okt_nóv_des'.split('_'),
+  weekdaysShort: 'Sun_Mán_Þri_Mið_Fim_Fös_Lau'.split('_'),
+  monthsShort: 'Jan_Feb_Mar_Apr_Maí_Jún_Júl_Ágú_Sep_Okt_Nóv_Des'.split('_'),
   weekdaysMin: 'Su_Má_Þr_Mi_Fi_Fö_La'.split('_'),
   ordinal: n => n,
   formats: {

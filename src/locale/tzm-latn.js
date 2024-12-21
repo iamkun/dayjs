@@ -3,12 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'tzm-latn',
-  weekdays: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
-  months: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split('_'),
+  weekdays: 'Asamas_Aynas_Asinas_Akras_Akwas_Asimwas_Asiḍyas'.split('_'),
+  months: 'Innayr_Brˤayrˤ_Marˤsˤ_Ibrir_Mayyw_Ywnyw_Ywlywz_Ɣwšt_Šwtanbir_Ktˤwbrˤ_Nwwanbir_Dwjnbir'.split('_'),
   weekStart: 6,
-  weekdaysShort: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
-  monthsShort: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split('_'),
-  weekdaysMin: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
+  weekdaysShort: 'Asamas_Aynas_Asinas_Akras_Akwas_Asimwas_Asiḍyas'.split('_'),
+  monthsShort: 'Innayr_Brˤayrˤ_Marˤsˤ_Ibrir_Mayyw_Ywnyw_Ywlywz_Ɣwšt_Šwtanbir_Ktˤwbrˤ_Nwwanbir_Dwjnbir'.split('_'),
+  weekdaysMin: 'Asamas_Aynas_Asinas_Akras_Akwas_Asimwas_Asiḍyas'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',

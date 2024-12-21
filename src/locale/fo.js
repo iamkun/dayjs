@@ -3,12 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'fo',
-  weekdays: 'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split('_'),
-  months: 'januar_februar_mars_apríl_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
+  weekdays: 'Sunnudagur_Mánadagur_Týsdagur_Mikudagur_Hósdagur_Fríggjadagur_Leygardagur'.split('_'),
+  months: 'Januar_Februar_Mars_Apríl_Mai_Juni_Juli_August_September_Oktober_November_Desember'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'sun_mán_týs_mik_hós_frí_ley'.split('_'),
-  monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
-  weekdaysMin: 'su_má_tý_mi_hó_fr_le'.split('_'),
+  weekdaysShort: 'Sun_Mán_Týs_Mik_Hós_Frí_Ley'.split('_'),
+  monthsShort: 'Jan_Feb_Mar_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Nov_Des'.split('_'),
+  weekdaysMin: 'Su_Má_Tý_Mi_Hó_Fr_Le'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',

@@ -3,11 +3,11 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'nn',
-  weekdays: 'sundag_måndag_tysdag_onsdag_torsdag_fredag_laurdag'.split('_'),
-  weekdaysShort: 'sun_mån_tys_ons_tor_fre_lau'.split('_'),
-  weekdaysMin: 'su_må_ty_on_to_fr_la'.split('_'),
-  months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
-  monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
+  weekdays: 'Sundag_Måndag_Tysdag_Onsdag_Torsdag_Fredag_Laurdag'.split('_'),
+  weekdaysShort: 'Sun_Mån_Tys_Ons_Tor_Fre_Lau'.split('_'),
+  weekdaysMin: 'Su_Må_Ty_On_To_Fr_La'.split('_'),
+  months: 'Januar_Februar_Mars_April_Mai_Juni_Juli_August_September_Oktober_November_Desember'.split('_'),
+  monthsShort: 'Jan_Feb_Mar_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Nov_Des'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
   relativeTime: {

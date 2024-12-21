@@ -68,12 +68,12 @@ function translate(number, withoutSuffix, key, isFuture) {
 /* eslint-enable */
 const locale = {
   name: 'sl',
-  weekdays: 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
-  months: 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split('_'),
+  weekdays: 'Nedelja_Ponedeljek_Torek_Sreda_Četrtek_Petek_Sobota'.split('_'),
+  months: 'Januar_Februar_Marec_April_Maj_Junij_Julij_Avgust_September_Oktober_November_December'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
-  monthsShort: 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split('_'),
-  weekdaysMin: 'ne_po_to_sr_če_pe_so'.split('_'),
+  weekdaysShort: 'Ned._Pon._Tor._Sre._Čet._Pet._Sob.'.split('_'),
+  monthsShort: 'Jan._Feb._Mar._Apr._Maj._Jun._Jul._Avg._Sep._Okt._Nov._Dec.'.split('_'),
+  weekdaysMin: 'Ne_Po_To_Sr_Če_Pe_So'.split('_'),
   ordinal: n => `${n}.`,
   formats: {
     LT: 'H:mm',

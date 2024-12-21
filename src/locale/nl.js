@@ -3,11 +3,11 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'nl',
-  weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
-  weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
-  weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
-  months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split('_'),
-  monthsShort: 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
+  weekdays: 'Zondag_Maandag_Dinsdag_Woensdag_Donderdag_Vrijdag_Zaterdag'.split('_'),
+  weekdaysShort: 'Zo._Ma._Di._Wo._Do._Vr._Za.'.split('_'),
+  weekdaysMin: 'Zo_Ma_Di_Wo_Do_Vr_Za'.split('_'),
+  months: 'Januari_Februari_Maart_April_Mei_Juni_Juli_Augustus_September_Oktober_November_December'.split('_'),
+  monthsShort: 'Jan_Feb_Mrt_Apr_Mei_Jun_Jul_Aug_Sep_Okt_Nov_Dec'.split('_'),
   ordinal: n => `[${n}${n === 1 || n === 8 || n >= 20 ? 'ste' : 'de'}]`,
   weekStart: 1,
   yearStart: 4,

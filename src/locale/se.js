@@ -3,12 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'se',
-  weekdays: 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split('_'),
-  months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split('_'),
+  weekdays: 'Sotnabeaivi_Vuossárga_Maŋŋebárga_Gaskavahkku_Duorastat_Bearjadat_Lávvardat'.split('_'),
+  months: 'Ođđajagemánnu_Guovvamánnu_Njukčamánnu_Cuoŋománnu_Miessemánnu_Geassemánnu_Suoidnemánnu_Borgemánnu_Čakčamánnu_Golggotmánnu_Skábmamánnu_Juovlamánnu'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'sotn_vuos_maŋ_gask_duor_bear_láv'.split('_'),
-  monthsShort: 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split('_'),
-  weekdaysMin: 's_v_m_g_d_b_L'.split('_'),
+  weekdaysShort: 'Sotn_Vuos_Maŋ_Gask_Duor_Bear_Láv'.split('_'),
+  monthsShort: 'Ođđj_Guov_Njuk_Cuo_Mies_Geas_Suoi_Borg_Čakč_Golg_Skáb_Juov'.split('_'),
+  weekdaysMin: 'S_V_M_G_D_B_L'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',

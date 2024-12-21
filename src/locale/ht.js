@@ -3,11 +3,11 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'ht',
-  weekdays: 'dimanch_lendi_madi_mèkredi_jedi_vandredi_samdi'.split('_'),
-  months: 'janvye_fevriye_mas_avril_me_jen_jiyè_out_septanm_oktòb_novanm_desanm'.split('_'),
-  weekdaysShort: 'dim._len._mad._mèk._jed._van._sam.'.split('_'),
-  monthsShort: 'jan._fev._mas_avr._me_jen_jiyè._out_sept._okt._nov._des.'.split('_'),
-  weekdaysMin: 'di_le_ma_mè_je_va_sa'.split('_'),
+  weekdays: 'Dimanch_Lendi_Madi_Mèkredi_Jedi_Vandredi_Samdi'.split('_'),
+  months: 'Janvye_Fevriye_Mas_Avril_Me_Jen_Jiyè_Out_Septanm_Oktòb_Novanm_Desanm'.split('_'),
+  weekdaysShort: 'Dim._Len._Mad._Mèk._Jed._Van._Sam.'.split('_'),
+  monthsShort: 'Jan._Fev._Mas_Avr._Me_Jen_Jiyè._Out_Sept._Okt._Nov._Des.'.split('_'),
+  weekdaysMin: 'Di_Le_Ma_Mè_Je_Va_Sa'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',

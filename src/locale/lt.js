@@ -17,11 +17,11 @@ months.f = monthFormat
 
 const locale = {
   name: 'lt',
-  weekdays: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_'),
-  weekdaysShort: 'sek_pir_ant_tre_ket_pen_šeš'.split('_'),
-  weekdaysMin: 's_p_a_t_k_pn_š'.split('_'),
+  weekdays: 'Sekmadienis_Pirmadienis_Antradienis_Trečiadienis_Ketvirtadienis_Penktadienis_Šeštadienis'.split('_'),
+  weekdaysShort: 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
+  weekdaysMin: 'S_P_A_T_K_Pn_Š'.split('_'),
   months,
-  monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
+  monthsShort: 'Sau_Vas_Kov_Bal_Geg_Bir_Lie_Rgp_Rgs_Spa_Lap_Grd'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
   relativeTime: {
