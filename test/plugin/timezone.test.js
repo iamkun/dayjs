@@ -330,3 +330,25 @@ describe('startOf and endOf', () => {
     expect(tzWithLocality.startOf('week').format('YYYY-MM-DD')).toEqual('2023-02-15')
   })
 })
+
+
+describe('UTC timezone', () => {
+  it('TZ with UTC with Locale', () => {
+    const test1 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Seoul').locale('en')
+    expect(test1.hour()).toBe(9)
+    const test2 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Hong_Kong').locale('en')
+    expect(test2.hour()).toBe(8)
+    const test3 = dayjs('2000-01-01T09:00:00+09:00').tz('Etc/UTC').locale('en')
+    expect(test3.hour()).toBe(0)
+  })
+
+  it('TZ with UTC', () => {
+    const dayjs1 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', false)
+    expect(dayjs1.format()).toBe('2000-01-01T00:01:00Z')
+    const moment1 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', false)
+    expect(moment1.format()).toBe('2000-01-01T00:01:00Z')
+    const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
+    const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
+    expect(dayjs2.format()).toBe(moment2.format())
+  })
+})
