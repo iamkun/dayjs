@@ -131,6 +131,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://avatars.githubusercontent.com/u/188567998?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/storyblok" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
 </a>
