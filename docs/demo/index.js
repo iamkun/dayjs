@@ -25,3 +25,6 @@ dayjs().isBefore(dayjs().add(1, 'year'))
 
 // isAfter
 dayjs().isAfter(dayjs().subtract(1, 'year'))
+
+// isSame
+dayjs().isSame(dayjs())
