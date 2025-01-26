@@ -119,24 +119,20 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://chudovo.com/" target="_blank">
-  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.ratrav.com" target="_blank">
-  <img width="70" src="https://images.opencollective.com/ratrav/8bad59c/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/sight-sound" target="_blank">
   <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.honrev.com" target="_blank">
-  <img width="70" src="https://github.com/user-attachments/assets/b3203350-34c1-4637-b8b1-d9b8bab346d3">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://chudovo.com/front-end-development/" target="_blank">
+  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/radioplusexperts" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/188567998?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/storyblok" target="_blank">
