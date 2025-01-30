@@ -12,14 +12,18 @@ export default (o, c) => { // locale needed later
 
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, (match) => {
+    const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|gg|GGGG|GG|Do|X|x|k{1,2}|S/g, (match) => {
       switch (match) {
         case 'Q':
           return Math.ceil((this.$M + 1) / 3)
         case 'Do':
           return locale.ordinal(this.$D)
+        case 'gg':
+          return String(this.weekYear()).slice(-2)
         case 'gggg':
           return this.weekYear()
+        case 'GG':
+          return String(this.isoWeekYear()).slice(-2)
         case 'GGGG':
           return this.isoWeekYear()
         case 'wo':
