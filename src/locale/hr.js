@@ -42,7 +42,7 @@ const locale = {
     dd: '%d dana',
     M: 'mjesec',
     MM: '%d mjeseca',
-    y: 'godina',
+    y: 'godinu',
     yy: '%d godine'
   },
   ordinal: n => `${n}.`
