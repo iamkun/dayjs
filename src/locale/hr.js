@@ -41,9 +41,26 @@ const locale = {
     d: 'dan',
     dd: '%d dana',
     M: 'mjesec',
-    MM: '%d mjeseca',
+    MM: number => {
+      if(number == 1) return 'mjesec';
+      return number + (number < 5 ? ' mjeseca' : ' mjeseci');
+    },
     y: 'godinu',
-    yy: '%d godine'
+    yy: number => {
+      let ending;
+      let baseNumber = number % 100;
+      
+      // The wording repeats every 10 years except the first 20
+      if(number <= 20) baseNumber = number
+      else baseNumber = number % 10
+
+      // Resove the "year" form
+      if(baseNumber == 0) ending = 'godina';  // This may happen on every 100th year
+      else if(baseNumber == 1) ending = 'godinu'; 
+      else ending = baseNumber < 5 ? 'godine' : 'godina'
+
+      return `${number} ${ending}`
+    }
   },
   ordinal: n => `${n}.`
 }
