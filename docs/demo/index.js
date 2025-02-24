@@ -10,3 +10,24 @@ dayjs().format('YYYY-MM-DD')
 
 // locale
 dayjs().locale('zh-cn').format()
+
+// add
+dayjs().add(1, 'year').format()
+
+// subtract
+dayjs().subtract(1, 'year').format()
+
+// diff
+dayjs().diff(dayjs().add(1, 'year'), 'year')
+
+// isBefore
+dayjs().isBefore(dayjs().add(1, 'year'))
+
+// isAfter
+dayjs().isAfter(dayjs().subtract(1, 'year'))
+
+// isSame
+dayjs().isSame(dayjs())
+
+// isLeapYear
+dayjs().isLeapYear()
