@@ -28,3 +28,6 @@ dayjs().isAfter(dayjs().subtract(1, 'year'))
 
 // isSame
 dayjs().isSame(dayjs())
+
+// isLeapYear
+dayjs().isLeapYear()
