@@ -34,6 +34,8 @@ const getDateTimeFormat = (timezone, options = {}) => {
 }
 
 export default (o, c, d) => {
+  const systemTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
   let defaultTimezone
 
   const makeFormatParts = (timestamp, timezone, options = {}) => {
@@ -96,7 +98,10 @@ export default (o, c, d) => {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
+    let diff = 0
+    if (timezone !== systemTimezone) {
+      diff = Math.round((date - new Date(target)) / 1000 / 60)
+    }
     const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
     const isUTC = !Number(offset)
     let ins
