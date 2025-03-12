@@ -80,3 +80,15 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+describe('Test America/Asuncion', () => {
+  it('Entering daylight saving time', () => {
+    const testDate = dayjs('2024-03-24T02:20:57.000+00:00').tz('America/Asuncion').format('YYYY-MM-DD HH:mm:ssZ')
+    expect(testDate).toBe('2024-03-23 23:20:57-03:00')
+  })
+
+  it('Exit daylight saving time', () => {
+    const testDate = dayjs('2024-03-24T03:20:57.000+00:00').tz('America/Asuncion').format('YYYY-MM-DD HH:mm:ssZ')
+    expect(testDate).toBe('2024-03-23 23:20:57-04:00')
+  })
+})
