@@ -96,7 +96,7 @@ export default (o, c, d) => {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const offset = Math.round(tzOffset(date.getTime(), timezone))
+    const offset = tzOffset(date.getTime(), timezone)
     const isUTC = !Number(offset)
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
