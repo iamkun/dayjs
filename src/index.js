@@ -77,6 +77,21 @@ const parseDate = (cfg) => {
       return new Date(d[1], m, d[3]
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
+
+    /**
+     * Handle 'MM-DD' format (e.g. '10-10') which is not caught by REGEX_PARSE
+     * @see https://github.com/iamkun/dayjs/issues/2844
+     */
+    if (/^\d{1,2}[-/.]\d{1,2}$/.test(date)) {
+      const parts = date.split(/[-/.]/)
+      const month = parseInt(parts[0], 10) - 1
+      const day = parseInt(parts[1], 10)
+
+      // Check if month and day are valid
+      if (month >= 0 && month <= 11 && day >= 1 && day <= 31) {
+        return new Date(new Date().getFullYear(), month, day)
+      }
+    }
   }
 
   return new Date(date) // everything else
