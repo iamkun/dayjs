@@ -31,3 +31,6 @@ dayjs().isSame(dayjs())
 
 // isLeapYear
 dayjs().isLeapYear()
+
+// isBetween
+dayjs().isBetween(dayjs().subtract(1, 'year'), dayjs().add(1, 'year'))
