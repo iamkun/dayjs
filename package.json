@@ -7,14 +7,34 @@
   "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./esm/index.js",
+      "import": null,
       "require": "./dayjs.min.js",
       "types": "./index.d.ts"
     },
+    "./esm": {
+      "import": "./esm/index.js",
+      "require": null,
+      "types": "./esm/index.d.ts"
+    },
     "./plugin/*": {
-      "import": "./esm/plugin/*/index.js",
+      "import": null,
       "require": "./plugin/*.js",
+      "types": "./plugin/*.d.ts"
+    },
+    "./esm/plugin/*": {
+      "import": "./esm/plugin/*/index.js",
+      "require": null,
       "types": "./esm/plugin/*/index.d.ts"
+    },
+    "./locale/*": {
+      "import": null,
+      "require": "./locale/*.js",
+      "types": "./locale/index.d.ts"
+    },
+    "./esm/locale/*": {
+      "import": "./esm/locale/*.js",
+      "require": null,
+      "types": "./esm/locale/index.d.ts"
     }
   },
   "scripts": {
@@ -93,5 +113,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "size-limit": "^0.18.0",
     "typescript": "^2.8.3"
-  }
+  },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }
