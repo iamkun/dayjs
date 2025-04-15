@@ -10,6 +10,11 @@
       "import": "./esm/index.js",
       "require": "./dayjs.min.js",
       "types": "./index.d.ts"
+    },
+    "./plugin/*": {
+      "import": "./esm/plugin/*/index.js",
+      "require": "./plugin/*.js",
+      "types": "./esm/plugin/*/index.d.ts"
     }
   },
   "scripts": {
