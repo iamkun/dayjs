@@ -357,13 +357,13 @@ class Dayjs {
     let result
     switch (unit) {
       case C.Y:
-        result = getMonth() / 12
+        result = (getMonth() / 12) || diff
         break
       case C.M:
-        result = getMonth()
+        result = getMonth() || diff
         break
       case C.Q:
-        result = getMonth() / 3
+        result = (getMonth() / 3) || diff
         break
       case C.W:
         result = (diff - zoneDelta) / C.MILLISECONDS_A_WEEK
