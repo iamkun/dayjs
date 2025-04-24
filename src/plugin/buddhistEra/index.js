@@ -29,31 +29,33 @@ export default (o, c) => { // locale needed later
   const oldParse = proto.parse
   proto.parse = function (cfg) {
     const [date, format] = cfg.args
-    let formatString = format || FORMAT_DEFAULT
-    const array = formatString.match(formatTokens)
+    let formatString = typeof format === 'string' ? format || FORMAT_DEFAULT : null
     let newDate
-    if (array) {
-      array.forEach((match) => {
-        formatString = formatString.replace(match, (_, i) => {
-          const yearString = cfg.args[0].substring(
-            i,
-            i + Math.min(match.length, 4)
-          )
-          let year
-          if (yearString.match(match4)) {
-            // replace buddhist era with common era
-            year = parseInt(yearString, 10) - yearBias
-          } else if (yearString.match(match2)) {
-            year = parseTwoDigitYear(parseInt(yearString, 10))
-          }
-          newDate =
-            date.substring(0, i) +
-            (year || yearString) +
-            date.substring(i + year.toString().length, date.length)
-          // replace formatting with common era's
-          return match.length === 4 ? 'YYYY' : 'YY'
+    if (formatString) {
+      const array = formatString.match(formatTokens)
+      if (array) {
+        array.forEach((match) => {
+          formatString = formatString.replace(match, (_, i) => {
+            const yearString = cfg.args[0].substring(
+              i,
+              i + Math.min(match.length, 4)
+            )
+            let year
+            if (yearString.match(match4)) {
+              // replace buddhist era with common era
+              year = parseInt(yearString, 10) - yearBias
+            } else if (yearString.match(match2)) {
+              year = parseTwoDigitYear(parseInt(yearString, 10))
+            }
+            newDate =
+              date.substring(0, i) +
+              (year || yearString) +
+              date.substring(i + year.toString().length, date.length)
+            // replace formatting with common era's
+            return match.length === 4 ? 'YYYY' : 'YY'
+          })
         })
-      })
+      }
     }
     // passes the date string with common era to other parsers
     oldParse.call(this, {
