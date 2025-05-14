@@ -19,8 +19,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies
-      run: npm install -g codecov && npm install
+      run: npm install
     - name: Run Lint
       run: npm run lint
     - name: Run tests
-      run: npm test && codecov 
+      run: npm test
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        slug: ZhenXiongQian/dayjs
