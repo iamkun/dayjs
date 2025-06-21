@@ -6,6 +6,22 @@ let L = 'en' // global locale
 const Ls = {} // global loaded locale
 Ls[L] = en
 
+/** Index to get the number of days */
+const MONTH_DAYS = {
+  0: 31, // January
+  1: 28, // February
+  2: 31, // March
+  3: 30, // April
+  4: 31, // May
+  5: 30, // June
+  6: 31, // July
+  7: 31, // August
+  8: 30, // September
+  9: 31, // October
+  10: 30, // November
+  11: 31 // December
+}
+
 const IS_DAYJS = '$isDayjsObject'
 
 // eslint-disable-next-line no-use-before-define
@@ -389,7 +405,14 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf(C.M).$D
+    const numberOfDays = MONTH_DAYS[this.$M]
+
+    // February (leap year)
+    if (this.$M === 1 && U.yearIsLeap(this.$y)) {
+      return numberOfDays + 1
+    }
+
+    return numberOfDays
   }
 
   $locale() { // get locale object
