@@ -329,7 +329,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/display/days-in-month
      */
-    daysInMonth(): number
+    daysInMonth(): 28 | 29 | 30 | 31
     /**
      * To get a copy of the native `Date` object parsed from the Day.js object use `dayjs#toDate`.
      * ```
