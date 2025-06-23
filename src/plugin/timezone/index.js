@@ -127,9 +127,10 @@ export default (o, c, d) => {
       return oldStartOf.call(this, units, startOf)
     }
 
-    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
+    const timezone = this.$x.$timezone
+    const withoutTz = this.clone().$set('$x', {})
     const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
-    return startOfWithoutTz.tz(this.$x.$timezone, true)
+    return startOfWithoutTz.tz(timezone, true)
   }
 
   d.tz = function (input, arg1, arg2) {
