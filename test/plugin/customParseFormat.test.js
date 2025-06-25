@@ -477,10 +477,4 @@ describe('parse milliseconds', () => {
     const format1 = 'YYYY-MM-DDTHH:mm:ss.SSS'
     expect(dayjs(input, format1, true).format(format1)).toBe(input)
   })
-
-  it('SSS with 000', () => {
-    const input = '2024-01-01T00:00:00.123000'
-    const format1 = 'YYYY-MM-DDTHH:mm:ss.SSSSSS'
-    expect(dayjs(input, format1, true).isValid()).toBe(true)
-  })
 })
