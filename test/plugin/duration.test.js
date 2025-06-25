@@ -305,7 +305,7 @@ describe('Format', () => {
       .add(9, 'months')
       .add(2, 'years')
       .add(10, 'milliseconds')
-    expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
+    expect(d.format('Y/YY.YYYY[TEST]M:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
 })

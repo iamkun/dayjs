@@ -460,3 +460,27 @@ it('parse w, ww', () => {
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
 })
+
+describe('parse milliseconds', () => {
+  it('S', () => {
+    const input = '2024-01-01T00:00:00.1'
+    const format1 = 'YYYY-MM-DDTHH:mm:ss.S'
+    expect(dayjs(input, format1, true).format(format1)).toBe(input)
+  })
+  it('SS', () => {
+    const input = '2024-01-01T00:00:00.12'
+    const format1 = 'YYYY-MM-DDTHH:mm:ss.SS'
+    expect(dayjs(input, format1, true).format(format1)).toBe(input)
+  })
+  it('SSS', () => {
+    const input = '2024-01-01T00:00:00.123'
+    const format1 = 'YYYY-MM-DDTHH:mm:ss.SSS'
+    expect(dayjs(input, format1, true).format(format1)).toBe(input)
+  })
+
+  it('SSS with 000', () => {
+    const input = '2024-01-01T00:00:00.123000'
+    const format1 = 'YYYY-MM-DDTHH:mm:ss.SSSSSS'
+    expect(dayjs(input, format1, true).isValid()).toBe(true)
+  })
+})
