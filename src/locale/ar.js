@@ -29,11 +29,11 @@ const numberMap = {
   '٠': '0'
 }
 
-const fromArabNumeralsRegex = /[١٢٣٤٥٦٧٨٩٠]/g;
-const fromArabComaRegex = /،/g;
+const fromArabNumeralsRegex = /[١٢٣٤٥٦٧٨٩٠]/g
+const fromArabComaRegex = /،/g
 
-const toArabNumeralsRegex = /\d/g;
-const toArabComaRegex = /,/g;
+const toArabNumeralsRegex = /\d/g
+const toArabComaRegex = /,/g
 
 const locale = {
   name: 'ar',
