@@ -1,4 +1,4 @@
-import moment from 'moment'
+// import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import '../../src/locale/zh-cn'
@@ -12,10 +12,9 @@ afterEach(() => {
 })
 
 it('Meridiem', () => {
-  const dayjsObj = dayjs().locale('zh-cn')
-  const momentObj = moment().locale('zh-cn')
-  for (let i = 0; i <= 24; i += 1) {
-    expect(dayjsObj.add(i, 'hour').format('A'))
-      .toEqual(momentObj.clone().add(i, 'hour').format('A'))
-  }
+  // the '中午' is different to moment.js 11-13
+  expect(dayjs('2020-01-01 10:59:59').locale('zh-cn').format('A')).toEqual('上午')
+  expect(dayjs('2020-01-01 11:00:00').locale('zh-cn').format('A')).toEqual('中午')
+  expect(dayjs('2020-01-01 12:59:59').locale('zh-cn').format('A')).toEqual('中午')
+  expect(dayjs('2020-01-01 13:00:00').locale('zh-cn').format('A')).toEqual('下午')
 })

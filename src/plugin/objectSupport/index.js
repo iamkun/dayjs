@@ -1,6 +1,7 @@
 export default (o, c, dayjs) => {
   const proto = c.prototype
-  const isObject = obj => !(obj instanceof Date) && !(obj instanceof Array) && obj instanceof Object
+  const isObject = obj => obj !== null && !(obj instanceof Date) && !(obj instanceof Array)
+        && !proto.$utils().u(obj) && (obj.constructor.name === 'Object')
   const prettyUnit = (u) => {
     const unit = proto.$utils().p(u)
     return unit === 'date' ? 'day' : unit
@@ -39,29 +40,36 @@ export default (o, c, dayjs) => {
 
   const oldSet = proto.set
   const oldAdd = proto.add
+  const oldSubtract = proto.subtract
 
   const callObject = function (call, argument, string, offset = 1) {
-    if (argument instanceof Object) {
-      const keys = Object.keys(argument)
-      let chain = this
-      keys.forEach((key) => {
-        chain = call.bind(chain)(argument[key] * offset, key)
-      })
-      return chain
-    }
-    return call.bind(this)(argument * offset, string)
+    const keys = Object.keys(argument)
+    let chain = this
+    keys.forEach((key) => {
+      chain = call.bind(chain)(argument[key] * offset, key)
+    })
+    return chain
   }
 
-  proto.set = function (string, int) {
-    int = int === undefined ? string : int
-    return callObject.bind(this)(function (i, s) {
-      return oldSet.bind(this)(s, i)
-    }, int, string)
+  proto.set = function (unit, value) {
+    value = value === undefined ? unit : value
+    if (unit.constructor.name === 'Object') {
+      return callObject.bind(this)(function (i, s) {
+        return oldSet.bind(this)(s, i)
+      }, value, unit)
+    }
+    return oldSet.bind(this)(unit, value)
   }
-  proto.add = function (number, string) {
-    return callObject.bind(this)(oldAdd, number, string)
+  proto.add = function (value, unit) {
+    if (value.constructor.name === 'Object') {
+      return callObject.bind(this)(oldAdd, value, unit)
+    }
+    return oldAdd.bind(this)(value, unit)
   }
-  proto.subtract = function (number, string) {
-    return callObject.bind(this)(oldAdd, number, string, -1)
+  proto.subtract = function (value, unit) {
+    if (value.constructor.name === 'Object') {
+      return callObject.bind(this)(oldAdd, value, unit, -1)
+    }
+    return oldSubtract.bind(this)(value, unit)
   }
 }

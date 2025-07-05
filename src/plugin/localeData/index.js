@@ -7,7 +7,7 @@ export default (o, c, dayjs) => { // locale needed later
     const locale = ins.name ? ins : ins.$locale()
     const targetLocale = getLocalePart(locale[target])
     const fullLocale = getLocalePart(locale[full])
-    const result = targetLocale || fullLocale.map(f => f.substr(0, num))
+    const result = targetLocale || fullLocale.map(f => f.slice(0, num))
     if (!localeOrder) return result
     const { weekStart } = locale
     return result.map((_, index) => (result[(index + (weekStart || 0)) % 7]))
@@ -29,7 +29,8 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysShort: instance =>
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
       longDateFormat: format => getLongDateFormat(this.$locale(), format),
-      meridiem: this.$locale().meridiem
+      meridiem: this.$locale().meridiem,
+      ordinal: this.$locale().ordinal
     }
   }
   proto.localeData = function () {
@@ -46,7 +47,8 @@ export default (o, c, dayjs) => { // locale needed later
       months: () => dayjs.months(),
       monthsShort: () => dayjs.monthsShort(),
       longDateFormat: format => getLongDateFormat(localeObject, format),
-      meridiem: localeObject.meridiem
+      meridiem: localeObject.meridiem,
+      ordinal: localeObject.ordinal
     }
   }
 

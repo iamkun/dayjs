@@ -1,4 +1,4 @@
-import { PluginFunc, ConfigType, QUnitType } from 'dayjs'
+import { PluginFunc, ConfigType, QUnitType, OpUnitType } from 'dayjs'
 
 declare const plugin: PluginFunc
 export = plugin
@@ -13,14 +13,14 @@ declare module 'dayjs' {
 
     subtract(value: number, unit: QUnitType): Dayjs
 
-    startOf(unit: QUnitType): Dayjs
+    startOf(unit: QUnitType | OpUnitType): Dayjs
 
-    endOf(unit: QUnitType): Dayjs
+    endOf(unit: QUnitType | OpUnitType): Dayjs
 
-    isSame(date: ConfigType, unit?: QUnitType): boolean
+    isSame(date?: ConfigType, unit?: QUnitType): boolean
 
-    isBefore(date: ConfigType, unit?: QUnitType): boolean
+    isBefore(date?: ConfigType, unit?: QUnitType): boolean
 
-    isAfter(date: ConfigType, unit?: QUnitType): boolean
+    isAfter(date?: ConfigType, unit?: QUnitType): boolean
   }
 }

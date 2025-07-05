@@ -68,4 +68,15 @@ describe('Update locale', () => {
     expect(dayjs().format(formatString))
       .toEqual(moment().format(formatString))
   })
+
+  it('Update invalid date string', () => {
+    const locale = 'en'
+    const localeSetting = { invalidDate: 'bad date' }
+    dayjs.updateLocale(locale, localeSetting)
+    moment.updateLocale(locale, localeSetting)
+    dayjs.locale(locale)
+    moment.locale(locale)
+    expect(dayjs('').format()).toBe(moment('').format())
+    expect(dayjs('otherString').format()).toBe(moment('otherString').format())
+  })
 })

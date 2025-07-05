@@ -110,3 +110,10 @@ it('meridiem', () => {
   expect(typeof dayjs().localeData().meridiem).toEqual('function')
   dayjs.locale('en')
 })
+
+it('ordinal', () => {
+  dayjs.locale('zh-cn')
+  expect(typeof dayjs.localeData().ordinal).toEqual('function')
+  expect(typeof dayjs().localeData().ordinal).toEqual('function')
+  dayjs.locale('en')
+})

@@ -47,3 +47,10 @@ it('RelativeTime: Time from X', () => {
       .toBe(moment().from(moment().add(t[0], t[1]), true))
   })
 })
+
+it('Meridiem', () => {
+  expect(dayjs('2020-01-01 03:00:00').locale('ru').format('A')).toEqual('ночи')
+  expect(dayjs('2020-01-01 11:00:00').locale('ru').format('A')).toEqual('утра')
+  expect(dayjs('2020-01-01 16:00:00').locale('ru').format('A')).toEqual('дня')
+  expect(dayjs('2020-01-01 20:00:00').locale('ru').format('A')).toEqual('вечера')
+})

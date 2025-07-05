@@ -1,16 +1,18 @@
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+简体中文 | [English](../../README.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)
+
+<p align="center"><a href="https://day.js.org/zh-CN/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Moment.js 的 <b>2kB</b> 轻量化方案，拥有同样强大的 API</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.org/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -105,6 +107,12 @@ dayjs().format('Q Do k kk X x') // 使用扩展后的API
 ```
 
 📚[插件列表](https://day.js.org/docs/zh-CN/plugin/plugin)
+
+### 使用量趋势
+
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
+</a>
 
 ## 开源协议
 

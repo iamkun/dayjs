@@ -21,6 +21,7 @@ const NY = 'America/New_York'
 const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
+const PARIS = 'Europe/Paris'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -101,7 +102,9 @@ describe('Convert', () => {
       const jun = _('2014-06-01T12:00:00Z')
       const dec = _('2014-12-01T12:00:00Z')
       expect(jun.tz('America/Los_Angeles').format('ha')).toBe('5am')
+      expect(jun.tz('America/Los_Angeles').utcOffset()).toBe(-7 * 60)
       expect(dec.tz('America/Los_Angeles').format('ha')).toBe('4am')
+      expect(dec.tz('America/Los_Angeles').utcOffset()).toBe(-8 * 60)
       expect(jun.tz(NY).format('ha')).toBe('8am')
       expect(dec.tz(NY).format('ha')).toBe('7am')
       expect(jun.tz(TOKYO).format('ha')).toBe('9pm')
@@ -210,6 +213,18 @@ describe('DST, a time that never existed Fall Back', () => {
   })
 })
 
+it('DST valueOf', () => {
+  const day1 = '2021-11-17T09:45:00.000Z'
+  const d1 = dayjs.utc(day1).tz(PARIS)
+  const m1 = moment.tz(day1, PARIS)
+  expect(d1.valueOf()).toBe(m1.valueOf())
+
+  const day2 = '2021-05-17T09:45:00.000Z'
+  const d2 = dayjs.utc(day2).tz(PARIS)
+  const m2 = moment.tz(day2, PARIS)
+  expect(d2.valueOf()).toBe(m2.valueOf())
+})
+
 describe('set Default', () => {
   it('default timezone', () => {
     const dateStr = '2014-06-01 12:00'
@@ -302,5 +317,38 @@ describe('startOf and endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
     expect(endOfDay.valueOf()).toEqual(originalDay.valueOf())
+  })
+
+  it('preserves locality when tz is called', () => {
+    const tzWithoutLocality = dayjs.tz('2023-02-17 00:00:00', NY)
+    const tzWithLocality = dayjs.tz('2023-02-17 00:00:00', NY).locale({
+      name: 'locale_test',
+      weekStart: 3
+    })
+
+    expect(tzWithoutLocality.startOf('week').format('YYYY-MM-DD')).toEqual('2023-02-12')
+    expect(tzWithLocality.startOf('week').format('YYYY-MM-DD')).toEqual('2023-02-15')
+  })
+})
+
+
+describe('UTC timezone', () => {
+  it('TZ with UTC with Locale', () => {
+    const test1 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Seoul').locale('en')
+    expect(test1.hour()).toBe(9)
+    const test2 = dayjs('2000-01-01T09:00:00+09:00').tz('Asia/Hong_Kong').locale('en')
+    expect(test2.hour()).toBe(8)
+    const test3 = dayjs('2000-01-01T09:00:00+09:00').tz('Etc/UTC').locale('en')
+    expect(test3.hour()).toBe(0)
+  })
+
+  it('TZ with UTC', () => {
+    const dayjs1 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', false)
+    expect(dayjs1.format()).toBe('2000-01-01T00:01:00Z')
+    const moment1 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', false)
+    expect(moment1.format()).toBe('2000-01-01T00:01:00Z')
+    const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
+    const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
+    expect(dayjs2.format()).toBe(moment2.format())
   })
 })

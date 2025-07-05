@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-:/.()\s]+)|(A|a|YYYY|YY?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -8,13 +8,19 @@ const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
 const matchSigned = /[+-]?\d+/ // -inf - inf
-const matchOffset = /[+-]\d\d:?(\d\d)?/ // +00:00 -00:00 +0000 or -0000 +00
-const matchWord = /\d*[^\s\d-:/()]+/ // Word
+const matchOffset = /[+-]\d\d:?(\d\d)?|Z/ // +00:00 -00:00 +0000 or -0000 +00 or Z
+const matchWord = /\d*[^-_:/,()\s\d]+/ // Word
 
-let locale
+let locale = {}
+
+let parseTwoDigitYear = function (input) {
+  input = +input
+  return input + (input > 68 ? 1900 : 2000)
+}
 
 function offsetFromString(string) {
   if (!string) return 0
+  if (string === 'Z') return 0
   const parts = string.match(/([+-]|\d\d)/g)
   const minutes = +(parts[1] * 60) + (+parts[2] || 0)
   return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
@@ -60,6 +66,9 @@ const expressions = {
   a: [matchWord, function (input) {
     this.afternoon = meridiemMatch(input, true)
   }],
+  Q: [match1, function (input) {
+    this.month = ((input - 1) * 3) + 1
+  }],
   S: [match1, function (input) {
     this.milliseconds = +input * 100
   }],
@@ -89,12 +98,14 @@ const expressions = {
       }
     }
   }],
+  w: [match1to2, addInput('week')],
+  ww: [match2, addInput('week')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
     const monthsShort = getLocalePart('monthsShort')
-    const matchIndex = (monthsShort || months.map(_ => _.substr(0, 3))).indexOf(input) + 1
+    const matchIndex = (monthsShort || months.map(_ => _.slice(0, 3))).indexOf(input) + 1
     if (matchIndex < 1) {
       throw new Error()
     }
@@ -110,8 +121,7 @@ const expressions = {
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
-    input = +input
-    this.year = input + (input > 68 ? 1900 : 2000)
+    this.year = parseTwoDigitYear(input)
   }],
   YYYY: [match4, addInput('year')],
   Z: zoneExpressions,
@@ -156,7 +166,7 @@ function makeParser(format) {
         start += token.length
       } else {
         const { regex, parser } = token
-        const part = input.substr(start)
+        const part = input.slice(start)
         const match = regex.exec(part)
         const value = match[0]
         parser.call(time, value)
@@ -168,11 +178,12 @@ function makeParser(format) {
   }
 }
 
-const parseFormattedInput = (input, format, utc) => {
+const parseFormattedInput = (input, format, utc, dayjs) => {
   try {
+    if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
     const {
-      year, month, day, hours, minutes, seconds, milliseconds, zone
+      year, month, day, hours, minutes, seconds, milliseconds, zone, week
     } = parser(input)
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
@@ -191,7 +202,12 @@ const parseFormattedInput = (input, format, utc) => {
     if (utc) {
       return new Date(Date.UTC(y, M, d, h, m, s, ms))
     }
-    return new Date(y, M, d, h, m, s, ms)
+    let newDate
+    newDate = new Date(y, M, d, h, m, s, ms)
+    if (week) {
+      newDate = dayjs(newDate).week(week).toDate()
+    }
+    return newDate
   } catch (e) {
     return new Date('') // Invalid Date
   }
@@ -200,6 +216,9 @@ const parseFormattedInput = (input, format, utc) => {
 
 export default (o, C, d) => {
   d.p.customParseFormat = true
+  if (o && o.parseTwoDigitYear) {
+    ({ parseTwoDigitYear } = o)
+  }
   const proto = C.prototype
   const oldParse = proto.parse
   proto.parse = function (cfg) {
@@ -215,18 +234,22 @@ export default (o, C, d) => {
       const isStrictWithLocale = args[3] === true
       const isStrict = isStrictWithoutLocale || isStrictWithLocale
       let pl = args[2]
-      if (isStrictWithLocale) [,, pl] = args
-      if (!isStrictWithoutLocale) {
-        locale = pl ? d.Ls[pl] : this.$locale()
+      if (isStrictWithLocale) [, , pl] = args
+      locale = this.$locale()
+      if (!isStrictWithoutLocale && pl) {
+        locale = d.Ls[pl]
       }
-      this.$d = parseFormattedInput(date, format, utc)
+      this.$d = parseFormattedInput(date, format, utc, d)
       this.init()
       if (pl && pl !== true) this.$L = this.locale(pl).$L
-      if (isStrict && date !== this.format(format)) {
+      // use != to treat
+      // input number 1410715640579 and format string '1410715640579' equal
+      // eslint-disable-next-line eqeqeq
+      if (isStrict && date != this.format(format)) {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
-      locale = undefined
+      locale = {}
     } else if (format instanceof Array) {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {

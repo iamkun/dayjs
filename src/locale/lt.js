@@ -34,7 +34,7 @@ const locale = {
     hh: '%d valandas',
     d: 'dieną',
     dd: '%d dienas',
-    M: 'menesį',
+    M: 'mėnesį',
     MM: '%d mėnesius',
     y: 'metus',
     yy: '%d metus'

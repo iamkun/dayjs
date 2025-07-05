@@ -1,16 +1,18 @@
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+한국어 | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)| [עברית](./docs/he/README-he.md)
+
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Moment.js와 호환되는 API를 가진 경량 라이브러리 (<b>2kB</b>)</p>
 <br>
 <p align="center">
     <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="http://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.org/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -21,7 +23,7 @@
     </a>
 </p>
 
-> Day.js는 Moment.js와 호환되는 대부분의 API를 사용하며, 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력하는 경량 JavaScript 라이브러리입니다. Moment.js를 사용하고 있다면, Day.js는 껌입니다.
+> Day.js는 대부분의 API가 Moment.js와 호환되며 최신 브라우저에서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력을 간편하게 처리하는 경량 JavaScript 라이브러리 입니다. Moment.js를 사용해본 경험이 있다면, Day.js도 쉽게 사용하실 수 있습니다.
 
 ```js
 dayjs()
@@ -42,9 +44,9 @@ dayjs()
 
 ## 시작해볼까요!
 
-### Documentation
+### 문서
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+더 많은 세부 사항과 API 및 다른 문서는 [day.js.org](https://day.js.org/) 웹사이트에서 확인하실 수 있습니다.
 
 ### 설치
 
@@ -56,7 +58,7 @@ npm install dayjs --save
 
 ### API
 
-Day.js API를 사용해서 날짜와 시간에 대한 구문 분석, 유효성 검사, 조작, 출력을 쉽게 할 수 있습니다.
+Day.js API를 사용하여 날짜와 시간의 구문 분석, 검증, 조작, 출력을 간편하게 처리할 수 있습니다.
 
 ```javascript
 dayjs('2018-08-08') // parse
@@ -76,9 +78,9 @@ dayjs().isBefore(dayjs()) // query
 
 ### I18n
 
-Day.js는 국제화에 대해 많은 지원을 합니다.
+Day.js는 국제화에 대한 많은 지원을 제공하고 있습니다.
 
-그러나 그것을 사용하지 않는다면, 그 누구도 당신의 빌드에 포함되지 않습니다.
+하지만 이 기능을 사용하지 않는 경우, 빌드에 포함되지 않습니다.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -94,7 +96,7 @@ dayjs('2018-05-05')
 
 ### Plugin
 
-플러그인은 기능을 확장하거나 새로운 기능을 추가하기 위해 Day.js에 추가할 수 있는 독립적인 모듈입니다.
+플러그인은 Day.js의 기능을 확장하거나 새로운 기능을 도입하기 위한 독립적인 모듈입니다.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
@@ -105,6 +107,12 @@ dayjs().format('Q Do k kk X x') // more available formats
 ```
 
 📚[플러그인 목록](https://day.js.org/docs/en/plugin/plugin)
+
+### 사용 트렌드
+
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
+</a>
 
 ## License
 

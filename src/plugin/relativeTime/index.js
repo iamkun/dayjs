@@ -19,7 +19,7 @@ export default (o, c, d) => {
     yy: '%d years'
   }
   d.en.relativeTime = relObj
-  const fromTo = (input, withoutSuffix, instance, isFrom) => {
+  proto.fromToBase = (input, withoutSuffix, instance, isFrom, postFormat) => {
     const loc = instance.$locale().relativeTime || relObj
     const T = o.thresholds || [
       { l: 's', r: 44, d: C.S },
@@ -46,11 +46,14 @@ export default (o, c, d) => {
           ? d(input).diff(instance, t.d, true)
           : instance.diff(input, t.d, true)
       }
-      const abs = (o.rounding || Math.round)(Math.abs(result))
+      let abs = (o.rounding || Math.round)(Math.abs(result))
       isFuture = result > 0
       if (abs <= t.r || !t.r) {
         if (abs <= 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute, 0 seconds -> 0 second
         const format = loc[t.l]
+        if (postFormat) {
+          abs = postFormat(`${abs}`)
+        }
         if (typeof format === 'string') {
           out = format.replace('%d', abs)
         } else {
@@ -66,6 +69,11 @@ export default (o, c, d) => {
     }
     return pastOrFuture.replace('%s', out)
   }
+
+  function fromTo(input, withoutSuffix, instance, isFrom) {
+    return proto.fromToBase(input, withoutSuffix, instance, isFrom)
+  }
+
   proto.to = function (input, withoutSuffix) {
     return fromTo(input, withoutSuffix, this, true)
   }

@@ -17,6 +17,10 @@ afterEach(() => {
 })
 
 describe('Creating', () => {
+  it('no argument', () => {
+    expect(dayjs.duration().toISOString()).toBe('P0D')
+    expect(dayjs.duration().asMilliseconds()).toBe(0)
+  })
   it('milliseconds', () => {
     expect(dayjs.duration(1, 'ms').toISOString()).toBe('PT0.001S')
     expect(dayjs.duration(100).toISOString()).toBe('PT0.1S')
@@ -26,6 +30,11 @@ describe('Creating', () => {
     expect(dayjs.duration(59, 'seconds').toISOString()).toBe('PT59S')
     expect(dayjs.duration(60, 'seconds').toISOString()).toBe('PT1M')
     expect(dayjs.duration(13213, 'seconds').toISOString()).toBe('PT3H40M13S')
+  })
+  it('two argument will bubble up to the next (negative number)', () => {
+    expect(dayjs.duration(-59, 'seconds').toISOString()).toBe('-PT59S')
+    expect(dayjs.duration(-60, 'seconds').toISOString()).toBe('-PT1M')
+    expect(dayjs.duration(-13213, 'seconds').toISOString()).toBe('-PT3H40M13S')
   })
   it('object with float', () => {
     expect(dayjs.duration({
@@ -53,8 +62,31 @@ describe('Creating', () => {
       ms: 1
     }).toISOString()).toBe('PT0.001S')
   })
+  it('object with negative millisecond', () => {
+    expect(dayjs.duration({
+      ms: -1
+    }).toISOString()).toBe('-PT0.001S')
+  })
+  it('convert to milliseconds', () => {
+    expect(+dayjs.duration(100)).toBe(100)
+  })
+  it('handles rounding to millisecond precision', () => {
+    expect(dayjs.duration(2 / 3).toISOString()).toBe('PT0.001S')
+  })
+  it('should handle round with millisecond precision when negative', () => {
+    expect(dayjs.duration(1000.5).toISOString()).toBe('PT1.001S')
+    expect(dayjs.duration(-1000.5).toISOString()).toBe('-PT1S')
+  })
+  it('should handle floating point rounding errors', () => {
+    // An example of this is when adding 2 to 0.812 seconds, which is how
+    // the seconds component is calculated in .toISOString().
+    // > 2 + 0.812
+    // 2.8120000000000003
+    expect(dayjs.duration(-2812).toISOString()).toBe('-PT2.812S') // was -PT2.8120000000000003S
+    expect(dayjs.duration(3121632.27382247).toISOString()).toBe('PT52M1.632S') // was PT52M1.6320000000000001S
+    expect(dayjs.duration(7647826.525774224).toISOString()).toBe('PT2H7M27.827S') // was PT2H7M27.826999999999998S
+  })
 })
-
 
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
@@ -63,11 +95,15 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Formatting missing components', () => {
+    expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
+  })
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
     expect(d.toISOString()).toBe('P2M25D')
-    expect(d.asDays()).toBe(85) // moment 85, count 2M as 61 days
-    expect(d.asWeeks()).toBe(12.142857142857142) // moment 12.285714285714286
+    expect(d.asDays()).toBe(85.83333333333333) // moment 86, count 2M as 61 days
+    expect(d.asWeeks()).toBe(12.261904761904763) // moment 12.285714285714286
+    expect(d.asMonths()).toBe(2.8219178082191783) // moment 2.8213721020965523
   })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
@@ -131,6 +167,26 @@ describe('Milliseconds', () => {
   expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
 })
 
+describe('Milliseconds', () => {
+  describe('Positive number', () => {
+    expect(dayjs.duration(500).milliseconds()).toBe(500)
+    expect(dayjs.duration(1500).milliseconds()).toBe(500)
+    expect(dayjs.duration(15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(500).asMilliseconds()).toBe(500)
+    expect(dayjs.duration(1500).asMilliseconds()).toBe(1500)
+    expect(dayjs.duration(15000).asMilliseconds()).toBe(15000)
+  })
+
+  describe('Negative number', () => {
+    expect(dayjs.duration(-500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).milliseconds()).toBe(-500)
+    expect(dayjs.duration(-15000).milliseconds()).toBe(0)
+    expect(dayjs.duration(-500).asMilliseconds()).toBe(-500)
+    expect(dayjs.duration(-1500).asMilliseconds()).toBe(-1500)
+    expect(dayjs.duration(-15000).asMilliseconds()).toBe(-15000)
+  })
+})
+
 describe('Add', () => {
   const a = dayjs.duration(1, 'days')
   const b = dayjs.duration(2, 'days')
@@ -139,10 +195,20 @@ describe('Add', () => {
   expect(a.add({ days: 5 }).days()).toBe(6)
 })
 
+describe('Add to a dayjs()', () => {
+  const a = dayjs()
+  const b = dayjs.duration({ hours: 7, minutes: 10 })
+  expect(a.add(b)).toEqual(a.add(7, 'hours').add(10, 'minutes'))
+})
+
 test('Add duration', () => {
   const a = dayjs('2020-10-01')
   const days = dayjs.duration(2, 'days')
   expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+
+  const b = dayjs('2023-02-01 00:00:00')
+  const p = dayjs.duration('P1Y1M1DT1H1M1S')
+  expect(b.add(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2024-03-02 01:01:01')
 })
 
 describe('Subtract', () => {
@@ -155,6 +221,10 @@ test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+
+  const b = dayjs('2023-03-02 02:02:02')
+  const p = dayjs.duration('P1Y1M1DT1H1M1S')
+  expect(b.subtract(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2022-02-01 01:01:01')
 })
 
 describe('Seconds', () => {
@@ -179,8 +249,15 @@ describe('Hours', () => {
 })
 
 describe('Days', () => {
-  expect(dayjs.duration(100000000).days()).toBe(1)
-  expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  it('positive number', () => {
+    expect(dayjs.duration(100000000).days()).toBe(1)
+    expect(dayjs.duration(100000000).asDays().toFixed(2)).toBe('1.16')
+  })
+
+  it('negative number', () => {
+    expect(dayjs.duration(-1).days()).toBe(0)
+    expect(dayjs.duration(-86399999).asDays()).toBeCloseTo(-0.999999, 4)
+  })
 })
 
 describe('Weeks', () => {
@@ -201,7 +278,7 @@ describe('Years', () => {
 describe('prettyUnit', () => {
   const d = dayjs.duration(2, 's')
   expect(d.toISOString()).toBe('PT2S')
-  expect(d.as('Second')).toBe(2)
+  expect(d.as('seconds')).toBe(2)
   expect(d.get('s')).toBe(2)
   expect(dayjs.duration({
     M: 12,

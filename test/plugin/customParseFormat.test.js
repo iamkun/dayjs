@@ -5,10 +5,13 @@ import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
+import weekOfYear from '../../src/plugin/weekOfYear'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
+dayjs.extend(weekOfYear) // test parse w, ww
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -108,6 +111,13 @@ describe('Timezone Offset', () => {
     const result = dayjs(input, format)
     expect(result.valueOf()).toBe(moment(input, format).valueOf())
     expect(result.valueOf()).toBe(1606820400000)
+  })
+  it('zulu', () => {
+    const input = '2021-01-26T15:38:43.000Z'
+    const format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+    const result = dayjs(input, format)
+    expect(result.valueOf()).toBe(moment(input, format).valueOf())
+    expect(result.valueOf()).toBe(1611675523000)
   })
   it('no timezone format token should parse in local time', () => {
     const input = '2020-12-01T20:00:00+01:00'
@@ -294,6 +304,8 @@ describe('Strict mode', () => {
     const format = 'YYYY-MM-DD'
     expect(dayjs(input, format).isValid()).toBe(true)
     expect(dayjs(input, format, true).isValid()).toBe(false)
+    expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
+    expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
   })
   it('with locale', () => {
     const input = '2018 三月 99'
@@ -335,4 +347,116 @@ describe('meridiem locale', () => {
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
   })
+})
+
+it('parse a string for MMM month format with underscore delimiter', () => {
+  const input = 'Jan_2021'
+  const format = 'MMM_YYYY'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '21_Jan_2021_123523'
+  const format2 = 'DD_MMM_YYYY_hhmmss'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+})
+
+it('custom two-digit year parse function', () => {
+  delete customParseFormat.$i // this allow plugin to be installed again
+  dayjs.extend(customParseFormat, {
+    parseTwoDigitYear: yearString => (+yearString) + 1800
+  })
+  const format = 'YY-MM-DD'
+  const input = '00-05-02'
+  expect(dayjs(input, format).year()).toBe(1800)
+  const input2 = '50-05-02'
+  expect(dayjs(input2, format).year()).toBe(1850)
+  const input3 = '99-05-02'
+  expect(dayjs(input3, format).year()).toBe(1899)
+})
+
+// issue 1852
+describe('parse with special separator characters', () => {
+  it('Output is NaN for a specific date format', () => {
+    const input = '20 Nov, 2022'
+    const format = 'DD MMM, YYYY'
+    const locale = 'en'
+    const resultDayjs = dayjs(input, format, locale)
+    const resultMoment = moment(input, format, locale)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+  it('parse comma separated date', () => {
+    const input = '20,11,2022'
+    const format = 'DD,MM,YYYY'
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+  it('parse comma separated date in strict mode', () => {
+    const input = '20,11,2022'
+    const format = 'DD,MM,YYYY'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+  it('parse date with multi character separator', () => {
+    const input = '20---11---2022'
+    const format = 'DD-/-MM-#-YYYY'
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+  it('parse date with multi character separator in strict mode', () => {
+    const input = '20-/-11-#-2022'
+    const format = 'DD-/-MM-#-YYYY'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+})
+
+it('parse X x', () => {
+  const input = '1410715640.579'
+  const format = 'X'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  const input2 = '1410715640579'
+  const format2 = 'x'
+  expect(dayjs(input2, format2).valueOf()).toBe(moment(input2, format2).valueOf())
+
+  // x X starct parse requires advancedFormat plugin
+  dayjs.extend(advancedFormat)
+  expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
+})
+
+it('parse Q, [Q]', () => {
+  const input1 = '2024-Q1'
+  const input2 = '2024-Q2'
+  const input3 = '2024-Q3'
+  const input4 = '2024-Q4'
+  const format = 'YYYY-[Q]Q'
+  expect(dayjs(input1, format).valueOf()).toBe(moment(input1, format).valueOf())
+  expect(dayjs(input2, format).valueOf()).toBe(moment(input2, format).valueOf())
+  expect(dayjs(input3, format).valueOf()).toBe(moment(input3, format).valueOf())
+  expect(dayjs(input4, format).valueOf()).toBe(moment(input4, format).valueOf())
+})
+
+it('parse w, ww', () => {
+  const input = '2024-w1'
+  const format1 = 'YYYY-[w]w'
+  expect(dayjs(input, format1).format(format1)).toBe(input)
+  const input2 = '2024-w32'
+  const format2 = 'YYYY-[w]ww'
+  expect(dayjs(input2, format2).format(format1)).toBe(input2)
 })
