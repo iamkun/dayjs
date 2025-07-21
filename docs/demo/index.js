@@ -43,3 +43,6 @@ dayjs().isSameOrBefore(dayjs().add(1, 'year'))
 
 // startOf
 dayjs().startOf('year').format()
+
+// endOf
+dayjs().endOf('year').format()
