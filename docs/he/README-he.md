@@ -12,8 +12,8 @@
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.com/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -24,7 +24,7 @@
     </a>
 </p>
 
-> Day.js היא ספרייה מינימלסטית לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות לדפדפנים מודרנים עם תאימות גבוהה ל-API של Moment.js. אם השתמשתם ב-Moment.js, אתם כבר יודעים את Day.js 
+> Day.js היא ספרייה מינימלסטית לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות לדפדפנים מודרנים עם תאימות גבוהה ל-API של Moment.js. אם השתמשתם ב-Moment.js, אתם כבר יודעים את Day.js
 
 <div dir="ltr">
 
@@ -43,13 +43,13 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 ---
 
-## צעדים ראשונים 
+## צעדים ראשונים
 
-### דוקומנטצייה 
+### דוקומנטצייה
 באתר [day.js.org](https://day.js.org/) ניתן למצוא פרטים נוספים, API, ותיעודים נוספים.
 
 
-### התקנה 
+### התקנה
 
 ```console
 npm install dayjs --save
@@ -58,7 +58,7 @@ npm install dayjs --save
 📚[מדריך התקנה](https://day.js.org/docs/en/installation/installation)
 
 ### API
-מאוד קל להשתמש ב-Day.js לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות. 
+מאוד קל להשתמש ב-Day.js לפענוח, אימות, מניפולציה והצגה של תאריכים ושעות.
 
 <div dir="ltr">
 
@@ -120,9 +120,14 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 
 📚[רשימת תוספים](https://day.js.org/docs/en/plugin/plugin)
 
-## ספונסרים 
-תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן. 
+### מגמת השימוש
 
+<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
+</a>
+
+### ספונסרים
+תמכו בפרויקט זה כדי להיות ספונסר. קבלו לוגו עם קישור לאתר שלכם שיופיע כאן.
 
 [[תמיכה דרך Github](https://github.com/sponsors/iamkun/)] [[תמיכה דרך OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
@@ -150,7 +155,7 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
 
-## תורמים 
+## תורמים
 
 פרויקט זה קיים הודות לכל האנשים שתמכו בו.
 
@@ -165,7 +170,7 @@ dayjs().format('Q Do k kk X x') // כעת יותר אפשרויות זמינות
 <br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
-## רישיון 
+## רישיון
 
 Day.js מורשה לשימוש עם [רישיון MIT](./LICENSE).
 </div>

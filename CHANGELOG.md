@@ -1,3 +1,56 @@
+## [1.11.12](https://github.com/iamkun/dayjs/compare/v1.11.11...v1.11.12) (2024-07-18)
+
+
+### Bug Fixes
+
+* Add NegativeYear Plugin support  ([#2640](https://github.com/iamkun/dayjs/issues/2640)) ([6a42e0d](https://github.com/iamkun/dayjs/commit/6a42e0d7398639238f575d51287daaf4d495a2a3))
+* add UTC support to negativeYear plugin ([#2692](https://github.com/iamkun/dayjs/issues/2692)) ([f3ef705](https://github.com/iamkun/dayjs/commit/f3ef705613af83333fe132b470896a65e12f31b0))
+* Fix zero offset issue when use tz with locale ([#2532](https://github.com/iamkun/dayjs/issues/2532)) ([d0e6738](https://github.com/iamkun/dayjs/commit/d0e6738a66e1b65d3706aad2f9168ebb43d4f887))
+* Improve typing for min/max plugin ([#2573](https://github.com/iamkun/dayjs/issues/2573)) ([4fbe94a](https://github.com/iamkun/dayjs/commit/4fbe94aaba8c815a42cf4d23dabac918ec50e68c))
+* timezone plugin correct parse UTC tz ([#2693](https://github.com/iamkun/dayjs/issues/2693)) ([b575c81](https://github.com/iamkun/dayjs/commit/b575c81a8c9c85c7a0baf6f608a12f9d3ba95bd1))
+
+## [1.11.11](https://github.com/iamkun/dayjs/compare/v1.11.10...v1.11.11) (2024-04-28)
+
+
+### Bug Fixes
+
+* day of week type literal ([#2630](https://github.com/iamkun/dayjs/issues/2630)) ([f68d73e](https://github.com/iamkun/dayjs/commit/f68d73efe562fdedd9e288ecb0ce6565e602f507))
+* improve locale "zh-hk" format and meridiem ([#2419](https://github.com/iamkun/dayjs/issues/2419)) ([a947a51](https://github.com/iamkun/dayjs/commit/a947a5171aad5695eaf593bc95fe073de0f0894a))
+* Update 'da' locale to match correct first week of year ([#2592](https://github.com/iamkun/dayjs/issues/2592)) ([44b0936](https://github.com/iamkun/dayjs/commit/44b0936ad709212b63e48672d8b9c225e2c3b830))
+* update locale Bulgarian monthsShort Jan ([#2538](https://github.com/iamkun/dayjs/issues/2538)) ([f0c9a41](https://github.com/iamkun/dayjs/commit/f0c9a41c6ec91528f3790e442b0c5dff15a4e640))
+
+## [1.11.10](https://github.com/iamkun/dayjs/compare/v1.11.9...v1.11.10) (2023-09-19)
+
+
+### Bug Fixes
+
+* Add Korean Day of Month with ordinal ([#2395](https://github.com/iamkun/dayjs/issues/2395)) ([dd55ee2](https://github.com/iamkun/dayjs/commit/dd55ee2aadd1009242235e47d558bbf028827896))
+* change back fa locale to the Gregorian calendar equivalent ([#2411](https://github.com/iamkun/dayjs/issues/2411)) ([95e9458](https://github.com/iamkun/dayjs/commit/95e9458b221fe35e59ee4a160a5db247313a68fb))
+* duration plugin - MILLISECONDS_A_MONTH const calculation ([#2362](https://github.com/iamkun/dayjs/issues/2362)) ([f0a0b54](https://github.com/iamkun/dayjs/commit/f0a0b546b074b3b511c2319a1ce83d412894b91f))
+* duration plugin getter get result  0 instead of undefined ([#2369](https://github.com/iamkun/dayjs/issues/2369)) ([061aa7e](https://github.com/iamkun/dayjs/commit/061aa7ed6c31696974665fc9b11a74d30841ebed))
+* fix isDayjs check logic ([#2383](https://github.com/iamkun/dayjs/issues/2383)) ([5f3f878](https://github.com/iamkun/dayjs/commit/5f3f8786c796cd432fe6bcb6966a810daea89203))
+* fix timezone plugin to get correct locale setting ([#2420](https://github.com/iamkun/dayjs/issues/2420)) ([4f45012](https://github.com/iamkun/dayjs/commit/4f4501256fa1bc72128aae1d841bbd782df86aed))
+* **locale:** add meridiem in `ar` locale ([#2418](https://github.com/iamkun/dayjs/issues/2418)) ([361be5c](https://github.com/iamkun/dayjs/commit/361be5c7c628614ee833d710acbe154a598b904d))
+* round durations to millisecond precision for ISO string ([#2367](https://github.com/iamkun/dayjs/issues/2367)) ([890a17a](https://github.com/iamkun/dayjs/commit/890a17a8d8ddd43c7c8b806e3afc7b27f3288d27))
+* sub-second precisions need to be rounded at the seconds field to avoid adding floats ([#2377](https://github.com/iamkun/dayjs/issues/2377)) ([a9d7d03](https://github.com/iamkun/dayjs/commit/a9d7d0398d22ebd4bfc3812ca0134a97606d54d9))
+* update $x logic to avoid plugin error ([#2429](https://github.com/iamkun/dayjs/issues/2429)) ([2254635](https://github.com/iamkun/dayjs/commit/22546357f30924fcff3b3ffa14fd04be21f97a5e))
+* Update Slovenian locale for relative time ([#2396](https://github.com/iamkun/dayjs/issues/2396)) ([5470a15](https://github.com/iamkun/dayjs/commit/5470a15e437fac803797363063b24f3ba3bd5299))
+* update uzbek language translation ([#2327](https://github.com/iamkun/dayjs/issues/2327)) ([0a91056](https://github.com/iamkun/dayjs/commit/0a910564d76dc7c128da8e0d85d8e11ebdb5660b))
+
+## [1.11.9](https://github.com/iamkun/dayjs/compare/v1.11.8...v1.11.9) (2023-07-01)
+
+
+### Bug Fixes
+
+* Add null to min and max plugin return type ([#2355](https://github.com/iamkun/dayjs/issues/2355)) ([62d9042](https://github.com/iamkun/dayjs/commit/62d9042eb84b78d78324694ccbeaad1679d37e68))
+* check if null passed to objectSupport parser ([#2175](https://github.com/iamkun/dayjs/issues/2175)) ([013968f](https://github.com/iamkun/dayjs/commit/013968f609c32e2269df69b4dd1feb2e8e1e035a))
+* dayjs.diff improve performance ([#2244](https://github.com/iamkun/dayjs/issues/2244)) ([33c80e1](https://github.com/iamkun/dayjs/commit/33c80e14cf14f70ceb4f54639e266cd70a3c3996))
+* dayjs(null) throws error, not return dayjs object as invalid date ([#2334](https://github.com/iamkun/dayjs/issues/2334)) ([c79e2f5](https://github.com/iamkun/dayjs/commit/c79e2f5d03eef5660b1f13385b69c0c9668d2f98))
+* objectSupport plugin causes an error when null is passed to dayjs function (closes [#2277](https://github.com/iamkun/dayjs/issues/2277)) ([#2342](https://github.com/iamkun/dayjs/issues/2342)) ([89bf31c](https://github.com/iamkun/dayjs/commit/89bf31ce0a36dcfc892029dc019d85d3654cf5fb))
+* Optimize format method ([#2313](https://github.com/iamkun/dayjs/issues/2313)) ([1fe1b1d](https://github.com/iamkun/dayjs/commit/1fe1b1d9a214d3b8c9f267b432801424a493f1c4))
+* update Duration plugin add/subtract take into account days in month ([#2337](https://github.com/iamkun/dayjs/issues/2337)) ([3b1060f](https://github.com/iamkun/dayjs/commit/3b1060f92183ab3a3c49289c2d87fbdd34c1eacc))
+* update MinMax plugin 1. ignore the 'null' in args 2. return the only one arg ([#2330](https://github.com/iamkun/dayjs/issues/2330)) ([3c2c6ee](https://github.com/iamkun/dayjs/commit/3c2c6ee4db00bbb43a7a3bb0b56bc0d0f03daddc))
+
 ## [1.11.8](https://github.com/iamkun/dayjs/compare/v1.11.7...v1.11.8) (2023-06-02)
 
 
