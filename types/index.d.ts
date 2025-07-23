@@ -352,7 +352,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/display/as-iso-string
      */
-    toISOString(): string
+    toISOString(keepOffset?: boolean): string
     /**
      * Returns a string representation of the date.
      * ```

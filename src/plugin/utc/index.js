@@ -11,7 +11,7 @@ function offsetFromString(value = '') {
   }
 
   const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT) || ['-', 0, 0]
-  const totalOffsetInMinutes = (+hoursOffset * 60) + (+minutesOffset)
+  const totalOffsetInMinutes = (+hoursOffset * 60) + +minutesOffset
 
   if (totalOffsetInMinutes === 0) {
     return 0
@@ -20,6 +20,7 @@ function offsetFromString(value = '') {
   return indicator === '+' ? totalOffsetInMinutes : -totalOffsetInMinutes
 }
 
+const pad = number => `${Math.floor(Math.abs(number))}`.padStart(2, '0')
 
 export default (option, Dayjs, dayjs) => {
   const proto = Dayjs.prototype
@@ -95,7 +96,8 @@ export default (option, Dayjs, dayjs) => {
     }
     if (input !== 0) {
       const localTimezoneOffset = this.$u
-        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+        ? this.toDate().getTimezoneOffset()
+        : -1 * this.utcOffset()
       ins = this.local().add(offset + localTimezoneOffset, MIN)
       ins.$offset = offset
       ins.$x.$localOffset = localTimezoneOffset
@@ -114,7 +116,8 @@ export default (option, Dayjs, dayjs) => {
 
   proto.valueOf = function () {
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset()) : 0
+      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset())
+      : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 
@@ -122,7 +125,22 @@ export default (option, Dayjs, dayjs) => {
     return !!this.$u
   }
 
-  proto.toISOString = function () {
+  proto.toISOString = function (keepOffset) {
+    if (typeof keepOffset === 'undefined') {
+      return this.toDate().toISOString()
+    }
+
+    const tzOffset = -this.toDate().getTimezoneOffset()
+    const offsetDiff = tzOffset >= 0 ? '+' : '-'
+    const dateMs = this.toDate().getTime() - (this.toDate().getTimezoneOffset() * 60000)
+    const dateStringWithOffset = new Date(dateMs).toISOString()
+
+    if (keepOffset) {
+      return dateStringWithOffset.replace(
+        'Z',
+        `${offsetDiff}${pad(tzOffset / 60)}:${pad(tzOffset % 60)}`
+      )
+    }
     return this.toDate().toISOString()
   }
 
