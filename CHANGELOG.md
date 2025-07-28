@@ -1,3 +1,10 @@
+## [1.11.13](https://github.com/iamkun/dayjs/compare/v1.11.12...v1.11.13) (2024-08-20)
+
+
+### Bug Fixes
+
+* customParseFormat supports Q quter / w ww weekOfYear ([#2705](https://github.com/iamkun/dayjs/issues/2705)) ([8ca74f1](https://github.com/iamkun/dayjs/commit/8ca74f178eff4bb4eb686676cf35fe7edb815536))
+
 ## [1.11.12](https://github.com/iamkun/dayjs/compare/v1.11.11...v1.11.12) (2024-07-18)
 
 
