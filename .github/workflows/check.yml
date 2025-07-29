@@ -4,6 +4,10 @@ on:
     branches: [ master, dev ]
   pull_request:
     branches: [dev]
+
+permissions:
+  contents: read #  to fetch code (actions/checkout)
+
 jobs:
   check:
     runs-on: ubuntu-latest
