@@ -53,7 +53,7 @@ export default (option, Dayjs, dayjs) => {
 
   const oldInit = proto.init
   proto.init = function () {
-    if (this.$u) {
+    if (this.$u && this.$utils().u(this.$offset)) {
       const { $d } = this
       this.$y = $d.getUTCFullYear()
       this.$M = $d.getUTCMonth()
@@ -87,15 +87,14 @@ export default (option, Dayjs, dayjs) => {
       }
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
-    let ins = this
+    let ins = this.clone()
     if (keepLocalTime) {
       ins.$offset = offset
       ins.$u = input === 0
       return ins
     }
     if (input !== 0) {
-      const localTimezoneOffset = this.$u
-        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+      const localTimezoneOffset = this.toDate().getTimezoneOffset()
       ins = this.local().add(offset + localTimezoneOffset, MIN)
       ins.$offset = offset
       ins.$x.$localOffset = localTimezoneOffset
