@@ -68,7 +68,7 @@ it('UTC and utcOffset', () => {
   const time = '2021-02-28 19:40:10'
   const hoursOffset = -8
   const daysJS = dayjs(time).utc().utcOffset(hoursOffset * 60, true)
-  const momentJS = moment(time).utc(true).utcOffset(hoursOffset, true)
+  const momentJS = moment(time).utc().utcOffset(hoursOffset * 60, true)
 
   expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
 })
