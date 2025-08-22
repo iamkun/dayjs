@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'gom-latn',
-  weekdays: "Aitar_Somar_Mongllar_Budvar_Brestar_Sukrar_Son'var".split('_'),
+  weekdays: 'Aitar_Somar_Mongllar_Budvar_Brestar_Sukrar_Son'var'.split('_'),
   months: 'Janer_Febrer_Mars_Abril_Mai_Jun_Julai_Agost_Setembr_Otubr_Novembr_Dezembr'.split('_'),
   weekStart: 1,
   weekdaysShort: 'Ait._Som._Mon._Bud._Bre._Suk._Son.'.split('_'),

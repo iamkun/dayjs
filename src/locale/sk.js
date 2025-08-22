@@ -51,11 +51,11 @@ function translate(number, withoutSuffix, key, isFuture) {
 /* eslint-enable */
 const locale = {
   name: 'sk',
-  weekdays: 'nedeľa_pondelok_utorok_streda_štvrtok_piatok_sobota'.split('_'),
-  weekdaysShort: 'ne_po_ut_st_št_pi_so'.split('_'),
-  weekdaysMin: 'ne_po_ut_st_št_pi_so'.split('_'),
-  months: 'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split('_'),
-  monthsShort: 'jan_feb_mar_apr_máj_jún_júl_aug_sep_okt_nov_dec'.split('_'),
+  weekdays: 'Nedeľa_Pondelok_Utorok_Streda_Štvrtok_Piatok_Sobota'.split('_'),
+  weekdaysShort: 'Ne_Po_Ut_St_Št_Pi_So'.split('_'),
+  weekdaysMin: 'Ne_Po_Ut_St_Št_Pi_So'.split('_'),
+  months: 'Január_Február_Marec_Apríl_Máj_Jún_Júl_August_September_Október_November_December'.split('_'),
+  monthsShort: 'Jan_Feb_Mar_Apr_Máj_Jún_Júl_Aug_Sep_Okt_Nov_Dec'.split('_'),
   weekStart: 1,
   yearStart: 4,
   ordinal: n => `${n}.`,

@@ -47,9 +47,9 @@ monthsShort.f = monthShortFormat
 
 const locale = {
   name: 'ru',
-  weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
-  weekdaysShort: 'вск_пнд_втр_срд_чтв_птн_сбт'.split('_'),
-  weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
+  weekdays: 'Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота'.split('_'),
+  weekdaysShort: 'Вск_Пнд_Втр_Срд_Чтв_Птн_Сбт'.split('_'),
+  weekdaysMin: 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
   months,
   monthsShort,
   weekStart: 1,

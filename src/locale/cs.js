@@ -50,11 +50,11 @@ function translate(number, withoutSuffix, key, isFuture) {
 /* eslint-enable */
 const locale = {
   name: 'cs',
-  weekdays: 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
-  weekdaysShort: 'ne_po_út_st_čt_pá_so'.split('_'),
-  weekdaysMin: 'ne_po_út_st_čt_pá_so'.split('_'),
-  months: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_'),
-  monthsShort: 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
+  weekdays: 'Neděle_Pondělí_Úterý_Středa_Čtvrtek_Pátek_Sobota'.split('_'),
+  weekdaysShort: 'Ne_Po_Út_St_Čt_Pá_So'.split('_'),
+  weekdaysMin: 'Ne_Po_Út_St_Čt_Pá_So'.split('_'),
+  months: 'Leden_Únor_Březen_Duben_Květen_Červen_Červenec_Srpen_Září_Říjen_Listopad_Prosinec'.split('_'),
+  monthsShort: 'Led_Úno_Bře_Dub_Kvě_Čvn_Čvc_Srp_Zář_Říj_Lis_Pro'.split('_'),
   weekStart: 1,
   yearStart: 4,
   ordinal: n => `${n}.`,

@@ -39,11 +39,11 @@ months.f = monthFormat
 
 const locale = {
   name: 'pl',
-  weekdays: 'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split('_'),
-  weekdaysShort: 'ndz_pon_wt_śr_czw_pt_sob'.split('_'),
+  weekdays: 'Niedziela_Poniedziałek_Wtorek_Środa_Czwartek_Piątek_Sobota'.split('_'),
+  weekdaysShort: 'Ndz_Pon_Wt_Śr_Czw_Pt_Sob'.split('_'),
   weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
   months,
-  monthsShort: 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
+  monthsShort: 'Sty_Lut_Mar_Kwi_Maj_Cze_Lip_Sie_Wrz_Paź_Lis_Gru'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
   yearStart: 4,
