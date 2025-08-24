@@ -6,6 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
+    "test-moment": "jest test/moment/index.test --coverage=false",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
@@ -55,6 +56,7 @@
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "@faker-js/faker": "^9.9.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -63,6 +65,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jest": "^21.15.0",
+    "fast-check": "^4.2.0",
     "gzip-size-cli": "^2.1.0",
     "jasmine-core": "^2.99.1",
     "jest": "^22.4.3",
