@@ -231,7 +231,7 @@ describe('UTC Offset', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = -8
     const daysJS = dayjs(time).utc().utcOffset(hoursOffset * 60, true)
-    const momentJS = moment(time).utc(true).utcOffset(hoursOffset, true)
+    const momentJS = moment(time).utc().utcOffset(hoursOffset * 60, true)
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
@@ -242,7 +242,7 @@ describe('UTC Offset', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = -8
     const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
-    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
+    const momentJS = moment(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}:00`, true)
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
@@ -253,7 +253,7 @@ describe('UTC Offset', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = 8
     const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}:00`, true)
-    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}:00`, true)
+    const momentJS = moment(time).utc().utcOffset(`+0${hoursOffset}:00`, true)
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
@@ -264,7 +264,7 @@ describe('UTC Offset', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = -8
     const daysJS = dayjs(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
-    const momentJS = moment(time).utc(true).utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
+    const momentJS = moment(time).utc().utcOffset(`-0${Math.abs(hoursOffset)}00`, true)
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
@@ -275,7 +275,7 @@ describe('UTC Offset', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = 8
     const daysJS = dayjs(time).utc().utcOffset(`+0${hoursOffset}00`, true)
-    const momentJS = moment(time).utc(true).utcOffset(`+0${hoursOffset}00`, true)
+    const momentJS = moment(time).utc().utcOffset(`+0${hoursOffset}00`, true)
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(hoursOffset * 60)
@@ -284,7 +284,7 @@ describe('UTC Offset', () => {
 
   it('get utc offset with an invalid string value, value: random', () => {
     const time = '2021-02-28 19:40:10'
-    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('random')
+    const daysJS = dayjs(time).utc(true).utcOffset('random')
     const momentJS = moment(time).utc(true).utcOffset('random')
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
@@ -294,12 +294,20 @@ describe('UTC Offset', () => {
 
   it('get utc offset with an invalid string value, value: 0', () => {
     const time = '2021-02-28 19:40:10'
-    const daysJS = dayjs(time, { utc: true }).utc(true).utcOffset('+0000')
+    const daysJS = dayjs(time).utc(true).utcOffset('+0000')
     const momentJS = moment(time).utc(true).utcOffset('+0000')
 
     expect(daysJS.toISOString()).toEqual(momentJS.toISOString())
     expect(daysJS.utcOffset()).toEqual(0)
     expect(daysJS.utcOffset()).toEqual(momentJS.utcOffset())
+  })
+
+  it('set utc offset hour with keepLocalTime', () => {
+    const time = '2024-10-20T01:00:00'
+    const daysJS = dayjs(time).utcOffset(0, true).set('hour', 2)
+
+    expect(daysJS.toISOString()).toEqual('2024-10-20T02:00:00.000Z')
+    expect(daysJS.utcOffset()).toEqual(0)
   })
 })
 
