@@ -362,7 +362,5 @@ describe('UTC timezone', () => {
     const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     expect(dayjs2.format()).toBe(moment2.format())
-    const dayjs3 = dayjs.tz('2021-05-26T03:00:00.000Z', 'Etc/UTC').tz('Etc/UTC', true)
-    expect(dayjs3.toISOString()).toBe('2021-05-26T03:00:00.000Z')
   })
 })

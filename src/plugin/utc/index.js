@@ -88,21 +88,20 @@ export default (option, Dayjs, dayjs) => {
     }
     const offset = Math.abs(input) <= 16 ? input * 60 : input
     let ins = this
-    if (input === 0) {
-      return this.utc(keepLocalTime)
-    }
     if (keepLocalTime) {
-      const localTimezoneOffset = -1 * this.utcOffset()
-      ins.$u = false
       ins.$offset = offset
-      ins.$x.$localOffset = localTimezoneOffset
+      ins.$u = input === 0
       return ins
     }
-    const localTimezoneOffset = this.$u
-      ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
-    ins = this.local().add(offset + localTimezoneOffset, MIN)
-    ins.$offset = offset
-    ins.$x.$localOffset = localTimezoneOffset
+    if (input !== 0) {
+      const localTimezoneOffset = this.$u
+        ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
+      ins = this.local().add(offset + localTimezoneOffset, MIN)
+      ins.$offset = offset
+      ins.$x.$localOffset = localTimezoneOffset
+    } else {
+      ins = this.utc()
+    }
     return ins
   }
 
@@ -114,13 +113,8 @@ export default (option, Dayjs, dayjs) => {
   }
 
   proto.valueOf = function () {
-    const { u } = this.$utils()
-    const addedOffset = !u(this.$offset)
-      ? this.$offset +
-        (u(this.$x.$localOffset)
-          ? this.$d.getTimezoneOffset()
-          : this.$x.$localOffset)
-      : 0
+    const addedOffset = !this.$utils().u(this.$offset)
+      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset()) : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 
