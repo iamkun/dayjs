@@ -92,6 +92,7 @@ export default (option, Dayjs, dayjs) => {
       return this.utc(keepLocalTime)
     }
     if (keepLocalTime) {
+      ins = this.clone()
       ins.$offset = offset
       ins.$u = false
       return ins
