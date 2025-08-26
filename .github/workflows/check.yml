@@ -9,18 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 12, 14, 16, 18 ]
+        node: [ 18, 20, 22 ]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Setup node
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ matrix.node }}
         cache: 'npm'
     - name: Install dependencies
       run: npm install -g codecov && npm install
     - name: Run Lint
       run: npm run lint
     - name: Run tests
-      run: npm test && codecov 
+      run: npm test
+    - name: Upload coverage
+      run: codecov || echo "Codecov upload failed, continuing..."
