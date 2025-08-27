@@ -18,6 +18,10 @@ jobs:
         run: npm run lint
       - name: Run tests
         run: npm test
+      - name: Debug CODECOV_TOKEN
+        run: |
+          echo "::add-mask::${{ secrets.CODECOV_TOKEN }}"
+          echo "Token length: ${#CODECOV_TOKEN}"
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
