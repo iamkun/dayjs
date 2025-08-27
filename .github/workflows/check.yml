@@ -8,3 +8,5 @@ on:
 jobs:
   check:
     uses: ./.github/workflows/lint-test.yml
+    with:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
