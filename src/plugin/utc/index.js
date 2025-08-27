@@ -105,7 +105,7 @@ export default (option, Dayjs, dayjs) => {
     ins = this.local().add(offset + localTimezoneOffset, MIN)
     ins.$offset = offset
     ins.$x.$localOffset = localTimezoneOffset
-    
+
     return ins
   }
 
