@@ -13,10 +13,12 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
       - name: Install dependencies
-        run: npm install -g codecov && npm install
+        run: npm install
       - name: Run Lint
         run: npm run lint
       - name: Run tests
         run: npm test
-      - name: Upload coverage
-        run: codecov || echo "Codecov upload failed, continuing..."
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: false
