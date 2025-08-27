@@ -7,8 +7,6 @@ on:
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
-    env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,4 +24,4 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ env.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}

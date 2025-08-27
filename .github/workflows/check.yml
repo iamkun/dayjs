@@ -9,4 +9,4 @@ jobs:
   check:
     uses: ./.github/workflows/lint-test.yml
     secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      inherit

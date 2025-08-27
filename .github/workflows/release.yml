@@ -7,7 +7,7 @@ jobs:
   lint-and-test:
     uses: ./.github/workflows/lint-test.yml
     secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      inherit
   release:
     needs: lint-and-test
     runs-on: ubuntu-latest
