@@ -1,0 +1,22 @@
+name: Lint
+on:
+  workflow_call:
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install -g codecov && npm install
+      - name: Run Lint
+        run: npm run lint
+      - name: Run tests
+        run: npm test
+      - name: Upload coverage
+        run: codecov || echo "Codecov upload failed, continuing..."
