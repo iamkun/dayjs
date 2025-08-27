@@ -149,3 +149,21 @@ test('utc startOf', () => {
   expect(d2d)
     .toBe(1500465600000)
 })
+
+test('cloning dates modified with utcOffset', () => {
+  const djs = dayjs('2023-10-29T00:00:00+03:00')
+
+  const tests = [
+    djs,
+    djs.utcOffset(-240),
+    djs.utcOffset(-240, true),
+    djs.utcOffset(120),
+    djs.utcOffset(120, true),
+    djs.utcOffset(0),
+    djs.utcOffset(0, true)
+  ]
+
+  tests.forEach((d) => {
+    expect(dayjs(d).format()).toEqual(d.format())
+  })
+})
