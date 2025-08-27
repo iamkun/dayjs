@@ -1,13 +1,18 @@
-name: Lint
 on:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Node.js
+      - uses: actions/checkout@v3
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
@@ -21,5 +26,4 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ inputs.CODECOV_TOKEN }}
-          verbose: true
+          token: ${{ env.CODECOV_TOKEN }}
