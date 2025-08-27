@@ -1,3 +1,17 @@
+## [1.11.14](https://github.com/iamkun/dayjs/compare/v1.11.13...v1.11.14) (2025-08-27)
+
+
+### Bug Fixes
+
+* .utcOffset(0, true) result and its clone are different bug ([#2505](https://github.com/iamkun/dayjs/issues/2505)) ([fefdcd4](https://github.com/iamkun/dayjs/commit/fefdcd4b6b807786f65139b6dd801e0014d7dc6f))
+
+## [1.11.13](https://github.com/iamkun/dayjs/compare/v1.11.12...v1.11.13) (2024-08-20)
+
+
+### Bug Fixes
+
+* customParseFormat supports Q quter / w ww weekOfYear ([#2705](https://github.com/iamkun/dayjs/issues/2705)) ([8ca74f1](https://github.com/iamkun/dayjs/commit/8ca74f178eff4bb4eb686676cf35fe7edb815536))
+
 ## [1.11.12](https://github.com/iamkun/dayjs/compare/v1.11.11...v1.11.12) (2024-07-18)
 
 
