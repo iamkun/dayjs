@@ -180,6 +180,8 @@ class Duration {
       mm: $u.s(this.$d.minutes, 2, '0'),
       s: this.$d.seconds,
       ss: $u.s(this.$d.seconds, 2, '0'),
+      S: String(Math.round(this.$d.milliseconds / 100)),
+      SS: $u.s(Math.round(this.$d.milliseconds / 10), 2, '0'),
       SSS: $u.s(this.$d.milliseconds, 3, '0')
     }
     return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
