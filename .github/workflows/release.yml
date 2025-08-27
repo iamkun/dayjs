@@ -6,7 +6,7 @@ on:
 jobs:
   lint-and-test:
     uses: ./.github/workflows/lint-test.yml
-    with:
+    env:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   release:
     needs: lint-and-test
