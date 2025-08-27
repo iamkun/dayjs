@@ -2,7 +2,7 @@ on:
   workflow_call:
     secrets:
       CODECOV_TOKEN:
-        required: true
+        required: false
 
 jobs:
   lint-and-test:
@@ -22,6 +22,9 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Upload coverage to Codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: env.CODECOV_TOKEN != null
         uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ env.CODECOV_TOKEN }}
