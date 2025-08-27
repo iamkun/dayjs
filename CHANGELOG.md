@@ -1,3 +1,10 @@
+## [1.11.14](https://github.com/iamkun/dayjs/compare/v1.11.13...v1.11.14) (2025-08-27)
+
+
+### Bug Fixes
+
+* .utcOffset(0, true) result and its clone are different bug ([#2505](https://github.com/iamkun/dayjs/issues/2505)) ([fefdcd4](https://github.com/iamkun/dayjs/commit/fefdcd4b6b807786f65139b6dd801e0014d7dc6f))
+
 ## [1.11.13](https://github.com/iamkun/dayjs/compare/v1.11.12...v1.11.13) (2024-08-20)
 
 
