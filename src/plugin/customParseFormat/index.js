@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|dd?d?d?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -96,6 +96,29 @@ const expressions = {
       if (ordinal(i).replace(/\[|\]/g, '') === input) {
         this.day = i
       }
+    }
+  }],
+  dd: [matchWord, function (input) {
+    const weekdays = getLocalePart('weekdays')
+    const weekdaysMin = getLocalePart('weekdaysMin')
+    const matchIndex = (weekdaysMin || weekdays.map(_ => _.slice(0, 2))).indexOf(input) + 1
+    if (matchIndex < 1) {
+      throw new Error()
+    }
+  }],
+  ddd: [matchWord, function (input) {
+    const weekdays = getLocalePart('weekdays')
+    const weekdaysShort = getLocalePart('weekdaysShort')
+    const matchIndex = (weekdaysShort || weekdays.map(_ => _.slice(0, 3))).indexOf(input) + 1
+    if (matchIndex < 1) {
+      throw new Error()
+    }
+  }],
+  dddd: [matchWord, function (input) {
+    const weekdays = getLocalePart('weekdays')
+    const matchIndex = weekdays.indexOf(input) + 1
+    if (matchIndex < 1) {
+      throw new Error()
     }
   }],
   w: [match1to2, addInput('week')],
