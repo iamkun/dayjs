@@ -1,3 +1,10 @@
+## [1.11.15](https://github.com/iamkun/dayjs/compare/v1.11.14...v1.11.15) (2025-08-28)
+
+
+### Bug Fixes
+
+* Fix misspellings in Irish or Irish Gaelic [ga] ([#2861](https://github.com/iamkun/dayjs/issues/2861)) ([9c14a42](https://github.com/iamkun/dayjs/commit/9c14a4245a8e764ee3260ff17a7ff48dfd09d279))
+
 ## [1.11.14](https://github.com/iamkun/dayjs/compare/v1.11.13...v1.11.14) (2025-08-27)
 
 
