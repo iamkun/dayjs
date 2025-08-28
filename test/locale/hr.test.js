@@ -10,9 +10,11 @@ it('Format month with locale function', () => {
     const testFormat2 = 'dddd, MMMM D YYYY'
     const testFormat3 = 'MMMM'
     const testFormat4 = 'MMM'
+    const testFormat5 = 'LL'
     expect(dayjsUK.format(testFormat1)).toEqual(momentUK.format(testFormat1))
     expect(dayjsUK.format(testFormat2)).toEqual(momentUK.format(testFormat2))
     expect(dayjsUK.format(testFormat3)).toEqual(momentUK.format(testFormat3))
     expect(dayjsUK.format(testFormat4)).toEqual(momentUK.format(testFormat4))
+    expect(dayjsUK.format(testFormat5)).toEqual(momentUK.format(testFormat5))
   }
 })

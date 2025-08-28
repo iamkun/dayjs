@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const monthFormat = 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split('_')
 const monthStandalone = 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_')
-const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/
+const MONTHS_IN_FORMAT = /D[oD]?(\[[^[\]]*\]|\s|\.)+MMMM?/
 
 const months = (dayjsInstance, format) => {
   if (MONTHS_IN_FORMAT.test(format)) {
@@ -37,13 +37,30 @@ const locale = {
     m: 'minuta',
     mm: '%d minuta',
     h: 'sat',
-    hh: '%d sati',
+    hh: '%d sata',
     d: 'dan',
     dd: '%d dana',
     M: 'mjesec',
-    MM: '%d mjeseci',
-    y: 'godina',
-    yy: '%d godine'
+    MM: number => {
+      if(number == 1) return 'mjesec';
+      return number + (number < 5 ? ' mjeseca' : ' mjeseci');
+    },
+    y: 'godinu',
+    yy: number => {
+      let ending;
+      let baseNumber = number % 100;
+      
+      // The wording repeats every 10 years except the first 20
+      if(number <= 20) baseNumber = number
+      else baseNumber = number % 10
+
+      // Resove the "year" form
+      if(baseNumber == 0) ending = 'godina';  // This may happen on every 100th year
+      else if(baseNumber == 1) ending = 'godinu'; 
+      else ending = baseNumber < 5 ? 'godine' : 'godina'
+
+      return `${number} ${ending}`
+    }
   },
   ordinal: n => `${n}.`
 }
