@@ -1,104 +1,129 @@
-import { MIN, MS } from '../../constant'
-
-const typeToPos = {
-  year: 0,
-  month: 1,
-  day: 2,
-  hour: 3,
-  minute: 4,
-  second: 5
-}
-
-// Cache time-zone lookups from Intl.DateTimeFormat,
-// as it is a *very* slow method.
-const dtfCache = {}
-const getDateTimeFormat = (timezone, options = {}) => {
-  const timeZoneName = options.timeZoneName || 'short'
-  const key = `${timezone}|${timeZoneName}`
-  let dtf = dtfCache[key]
-  if (!dtf) {
-    dtf = new Intl.DateTimeFormat('en-US', {
-      hour12: false,
-      timeZone: timezone,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZoneName
-    })
-    dtfCache[key] = dtf
-  }
-  return dtf
-}
+import { MILLISECONDS_A_MINUTE, MILLISECONDS_A_SECOND, MIN, MS } from '../../constant'
 
 export default (o, c, d) => {
   let defaultTimezone
+  const proto = c.prototype
 
-  const makeFormatParts = (timestamp, timezone, options = {}) => {
+  // Cache time-zone lookups from Intl.DateTimeFormat,
+  // as it is a *very* slow method.
+  const dtfCache = { __proto: null }
+  const getDateTimeFormat = (timezone, timeZoneName) => {
+    const key = `${timezone}|${timeZoneName}`
+    let dtf = dtfCache[key]
+    if (!dtf) {
+      dtf = new Intl.DateTimeFormat('en-US', {
+        hourCycle: 'h23',
+        timeZone: timezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName
+      })
+      dtfCache[key] = dtf
+    }
+    return dtf
+  }
+
+  const makeFormatParts = (timestamp, timezone, timeZoneName) => {
     const date = new Date(timestamp)
-    const dtf = getDateTimeFormat(timezone, options)
-    return dtf.formatToParts(date)
+    const dtf = getDateTimeFormat(timezone, timeZoneName)
+    const formatResult = dtf.formatToParts(date)
+    return formatResult
   }
 
   const tzOffset = (timestamp, timezone) => {
     const formatResult = makeFormatParts(timestamp, timezone)
-    const filled = []
-    for (let i = 0; i < formatResult.length; i += 1) {
-      const { type, value } = formatResult[i]
-      const pos = typeToPos[type]
-
-      if (pos >= 0) {
-        filled[pos] = parseInt(value, 10)
+    let Y
+    let M
+    let D
+    let h
+    let m
+    let s
+    formatResult.forEach((r) => {
+      switch (r.type) {
+        case 'year':
+          Y = r.value
+          break
+        case 'month':
+          M = r.value - 1
+          break
+        case 'day':
+          D = r.value
+          break
+        case 'hour':
+          h = r.value
+          break
+        case 'minute':
+          m = r.value
+          break
+        case 'second':
+          s = r.value
+          break
+        default:
+          break
       }
+    })
+    const utcTs = Date.UTC(Y, M, D, h, m, s)
+    const asTS = timestamp
+    const over = asTS % MILLISECONDS_A_SECOND
+    return (utcTs - (asTS - over)) / MILLISECONDS_A_MINUTE
+  }
+
+  const tzToFirstOffsetCache = { __proto__: null }
+  const initialValue = +d()
+  const tzToFirstOffset = (timezone) => {
+    let offset = tzToFirstOffsetCache[timezone]
+    if (offset == null) {
+      offset = tzOffset(initialValue, timezone)
+      tzToFirstOffsetCache[timezone] = offset
     }
-    const hour = filled[3]
-    // Workaround for the same behavior in different node version
-    // https://github.com/nodejs/node/issues/33027
-    /* istanbul ignore next */
-    const fixedHour = hour === 24 ? 0 : hour
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
-    const utcTs = d.utc(utcString).valueOf()
-    let asTS = +timestamp
-    const over = asTS % 1000
-    asTS -= over
-    return (utcTs - asTS) / (60 * 1000)
+    return offset
   }
 
   // find the right offset a given local time. The o input is our guess, which determines which
   // offset we'll pick in ambiguous cases (e.g. there are two 3 AMs b/c Fallback DST)
   // https://github.com/moment/luxon/blob/master/src/datetime.js#L76
-  const fixOffset = (localTS, o0, tz) => {
+  const fixOffset = (localTS, tz) => {
+    let o0 = tzToFirstOffset(tz)
+    let utcGuess
+    let o2
     // Our UTC time is just a guess because our offset is just a guess
-    let utcGuess = localTS - (o0 * 60 * 1000)
+    utcGuess = localTS - (o0 * MILLISECONDS_A_MINUTE)
     // Test whether the zone matches the offset for this ts
-    const o2 = tzOffset(utcGuess, tz)
+    o2 = tzOffset(utcGuess, tz)
     // If so, offset didn't change and we're done
-    if (o0 === o2) {
-      return [utcGuess, o0]
+    if (o0 !== o2) {
+      // If not, change the ts by the difference in the offset
+      o0 = o2
+      utcGuess = localTS - (o0 * MILLISECONDS_A_MINUTE)
+      o2 = tzOffset(utcGuess, tz)
+      // If that gives us the local time we want, we're done
+      // If it's different, we're in a hole time.
+      // The offset has changed, but the we don't adjust the time
+      if (o0 > o2) {
+        // swap o2 and o0
+        utcGuess = o0
+        o0 = o2
+        o2 = utcGuess
+        utcGuess = localTS - (o0 * MILLISECONDS_A_MINUTE)
+      }
     }
-    // If not, change the ts by the difference in the offset
-    utcGuess -= (o2 - o0) * 60 * 1000
-    // If that gives us the local time we want, we're done
-    const o3 = tzOffset(utcGuess, tz)
-    if (o2 === o3) {
-      return [utcGuess, o2]
-    }
-    // If it's different, we're in a hole time.
-    // The offset has changed, but the we don't adjust the time
-    return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
+    return d(utcGuess).utcOffset(o2)
   }
 
-  const proto = c.prototype
-
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
-    const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
+    const target = this.isValid()
+      ? new Date(getDateTimeFormat(timezone).format(date))
+      : NaN
+    const diff = Math.round((date - target) / MILLISECONDS_A_MINUTE)
+    // Because a bug at FF24, we're rounding the timezone offset around 15 minutes
+    // https://github.com/moment/moment/pull/1871
     const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
-    const isUTC = !Number(offset)
+    const isUTC = !offset
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
       ins = this.utcOffset(0, keepLocalTime)
@@ -106,6 +131,7 @@ export default (o, c, d) => {
       ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
         .utcOffset(offset, true)
       if (keepLocalTime) {
+        const oldOffset = this.utcOffset()
         const newOffset = ins.utcOffset()
         ins = ins.add(oldOffset - newOffset, MIN)
       }
@@ -117,8 +143,8 @@ export default (o, c, d) => {
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()
-    const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
-    return result && result.value
+    const result = makeFormatParts(+this, zone, type || 'short').find(i => i.type === 'timeZoneName').value
+    return result
   }
 
   const oldStartOf = proto.startOf
@@ -133,16 +159,14 @@ export default (o, c, d) => {
   }
 
   d.tz = function (input, arg1, arg2) {
-    const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
-    const previousOffset = tzOffset(+d(), timezone)
     if (typeof input !== 'string') {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
-    const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
+    const parseFormat = arg2 && arg1
+    const localTs = +d.utc(input, parseFormat)
+    const ins = fixOffset(localTs, timezone)
     ins.$x.$timezone = timezone
     return ins
   }
