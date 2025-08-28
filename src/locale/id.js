@@ -18,18 +18,18 @@ const locale = {
     LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm'
   },
   relativeTime: {
-    future: 'dalam %s',
+    future: '%s dari sekarang',
     past: '%s yang lalu',
     s: 'beberapa detik',
-    m: 'semenit',
+    m: '1 menit',
     mm: '%d menit',
-    h: 'sejam',
+    h: '1 jam',
     hh: '%d jam',
-    d: 'sehari',
+    d: '1 hari',
     dd: '%d hari',
-    M: 'sebulan',
+    M: '1 bulan',
     MM: '%d bulan',
-    y: 'setahun',
+    y: '1 tahun',
     yy: '%d tahun'
   },
   ordinal: n => `${n}.`
