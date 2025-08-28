@@ -22,3 +22,6 @@ locale.json
 
 #dev
 demo.js
+
+#tsc
+*.tsbuildinfo
