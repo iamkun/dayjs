@@ -22,7 +22,7 @@
     </a>
 </p>
 
-> Day.js යනු බොහෝ සෙයින් Moment.js-ගැළපෙන යෙ.ක්‍ර.මු. සහිත නවීන අතිරික්සු සඳහා දින සහ වේලාවන් ප්‍රදර්ශනයට, හැසිරවීමට, වලංගු කිරීමට සහ විග්‍රහ කිරීමට ඉතා කුඩා ජාවාස්ක්‍රිප්ට් එකතුවකි. Moment.js භාවිතා කරන්නේ නම්, Day.js භාවිතා කරන අයුරු ඔබ දැනටමත් දන්නවා.
+> Day.js යනු බොහෝ සෙයින් Moment.js-ගැළපෙන යෙ.ක්‍ර.මු. සහිත නවීන අතිරික්සු සඳහා දින සහ වේලාවන් ප්‍රදර්ශනයට, හැසිරවීමට, වලංගු කිරීමට සහ විග්‍රහයට ඉතා කුඩා ජාවාස්ක්‍රිප්ට් එකතුවකි. Moment.js භාවිතා කරන්නේ නම්, Day.js භාවිතා කරන අයුරු ඔබ දැනටමත් දන්නවා.
 
 ```js
 dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:mm:ss');
@@ -41,7 +41,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 
 ### ප්‍රලේඛනය
 
-[day.js.org](https://day.js.org/) වියමන අඩවියෙහි යෙ.ක්‍ර.මු. සහ වෙනත් ප්‍රලේඛනවල වැඩි විස්තර සොයා ගැනීමට හැකිය.
+[day.js.org](https://day.js.org/) අඩවියෙහි තවත් විස්තර, යෙ.ක්‍ර.මු. සහ වෙනත් ප්‍රලේඛන හමු වනු ඇත.
 
 ### ස්ථාපනය
 
@@ -53,7 +53,7 @@ npm install dayjs --save
 
 ### යෙ.ක්‍ර.මු.
 
-දින සහ වේලාවන් ප්‍රදර්ශනයට, හැසිරවීමට, වලංගු කිරීමට සහ විග්‍රහ කිරීමට Day.js යෙ.ක්‍ර.මු. භාවිතා කිරීම පහසුය.
+දින සහ වේලාවන් ප්‍රදර්ශනයට, හැසිරවීමට, වලංගු කිරීමට සහ විග්‍රහයට Day.js යෙ.ක්‍ර.මු. භාවිතය පහසුය.
 
 ```javascript
 dayjs('2018-08-08') // parse
@@ -71,9 +71,9 @@ dayjs().isBefore(dayjs()) // query
 
 ### I18n
 
-දේශීයකරණය සඳහා Day.js සුවිශේෂී ලෙස සහය දක්වයි.
+දේශීයකරණය සඳහා Day.js සුවිශේෂී ලෙස සහාය දක්වයි.
 
-නමුත් භාවිතා කරන්නේ නම් මිස ඒවා කිසිවක් ඔබගේ තැනීමට ඇතුළත් නොවේ.
+තවද, භාවිතා නොකරන කිසිවක් ඔබගේ තැනීමට ඇතුළත් නොවේ.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -86,7 +86,7 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 
 ### දිගුව
 
-දිගුවක් යනු ක්‍රියාකාරිත්වය විස්තීරණයට හෝ නව විශේෂාංග අඩංගු කිරීමට Day.js වෙත එකතු කළ හැකි ස්වාධීන ඒකකයකි.
+දිගුවක් යනු ක්‍රියාකාරිත්වය විස්තීරණයට හෝ නව විශේෂාංග අඩංගු කිරීමට Day.js වෙත එක් කළ හැකි ස්වාධීන ඒකකයකි.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
@@ -98,29 +98,65 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[ දිගු ලේඛනය](https://day.js.org/docs/en/plugin/plugin)
 
-### භාවිත ප්‍රමාණයේ ප්‍රසූතිය
+### භාවිතයට නැඹුරුව
 
 <a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
   <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
 </a>
 
-## අනුග්‍රාහකයින්
+## අනුග්‍රහකයින්
 
 අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත.
 
-[[ගිට්හබ් හරහා අනුග්‍රාහකයෙකු වන්න](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රාහකයෙකු වන්න](https://opencollective.com/dayjs#sponsor)]
+[[ගිට්හබ් හරහා අනුග්‍රහය දක්වන්න](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රහය දක්වන්න](https://opencollective.com/dayjs#sponsor)]
 
+<a href="https://toyokumo.co.jp" target="_blank">
+  <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/ken-swyfft" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://chudovo.com/" target="_blank">
+  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.ratrav.com" target="_blank">
+  <img width="70" src="https://images.opencollective.com/ratrav/8bad59c/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://opencollective.com/sight-sound" target="_blank">
+  <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.honrev.com" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/b3203350-34c1-4637-b8b1-d9b8bab346d3">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/alan-eu" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/18175329?s=52&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/vendure-ecommerce" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/39629390?s=52&v=4"></a>
+<a href="https://github.com/storyblok" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
+</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/Velc" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/1551649?s=52&v=4"></a>
+<a href="https://bestkru.com/" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
+</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/projectdiscovery" target="_blank"><img width="70" src="https://avatars.githubusercontent.com/u/50994705?s=52&v=4"></a>
+<a href="https://handsontable.com/docs/react-data-grid/?utm_source=Dayjs_GH&utm_medium=sponsorship&utm_campaign=library_sponsorship" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/426c3476-dc34-44d1-a904-ed58dbd20dd6">
+</a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
+<a href="https://route4me.com/" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/3fbc86c5-98a9-49c2-beae-1969026fcd76" alt="Route Optimizer and Route Planner Software">
+</a>
 
 ## දායකයින්
 
@@ -130,10 +166,11 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 ඒ වගේම අපගේ මූල්‍යදායකයින් සැමට ස්තුතියි! 🙏
 
-<a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
+<a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
+<a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
+<a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
+<a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
+<br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 ## බලපත්‍රය
