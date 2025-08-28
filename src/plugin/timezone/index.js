@@ -123,7 +123,8 @@ export default (o, c, d) => {
 
   const oldStartOf = proto.startOf
   proto.startOf = function (units, startOf) {
-    if (!this.$x || !this.$x.$timezone) {
+    if (this.$x && this.$x.$timezone) {
+      // timezone information is kept in $x: { timezone: "utc"}
       return oldStartOf.call(this, units, startOf)
     }
 
