@@ -1,3 +1,10 @@
+## [1.11.16](https://github.com/iamkun/dayjs/compare/v1.11.15...v1.11.16) (2025-08-29)
+
+
+### Bug Fixes
+
+* test release workflow (no code changes) ([c38c428](https://github.com/iamkun/dayjs/commit/c38c428a78c344699eff373adfc8c007bb3a514f))
+
 ## [1.11.15](https://github.com/iamkun/dayjs/compare/v1.11.14...v1.11.15) (2025-08-28)
 
 
