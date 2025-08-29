@@ -1,0 +1,30 @@
+on:
+  workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: false
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Run Lint
+        run: npm run lint
+      - name: Run tests
+        run: npm test
+      - name: Upload coverage to Codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        if: env.CODECOV_TOKEN != null
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ env.CODECOV_TOKEN }}
