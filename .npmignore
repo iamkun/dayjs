@@ -20,6 +20,7 @@ build
 babel.config.js
 prettier.config.js
 .eslintrc.json
+patches
 
 #doc
 CONTRIBUTING.md
