@@ -1,3 +1,10 @@
+## [1.11.17](https://github.com/iamkun/dayjs/compare/v1.11.16...v1.11.17) (2025-08-29)
+
+
+### Bug Fixes
+
+* [en-AU] locale use the same ordinal as moment ([#2878](https://github.com/iamkun/dayjs/issues/2878)) ([1b95ecd](https://github.com/iamkun/dayjs/commit/1b95ecd21d4feafe7ab113a2d48d7d8d93bb95c9))
+
 ## [1.11.16](https://github.com/iamkun/dayjs/compare/v1.11.15...v1.11.16) (2025-08-29)
 
 
