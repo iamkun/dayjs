@@ -2,6 +2,8 @@ name: Release
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   lint-and-test:
@@ -40,4 +42,4 @@ jobs:
         run: |
           npm install @semantic-release/changelog @semantic-release/git semantic-release
           npx patch-package
-          npx semantic-release --debug
+          npx semantic-release
