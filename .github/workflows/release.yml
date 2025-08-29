@@ -39,4 +39,4 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm install -g @semantic-release/changelog @semantic-release/git semantic-release
-          semantic-release
+          semantic-release --debug
