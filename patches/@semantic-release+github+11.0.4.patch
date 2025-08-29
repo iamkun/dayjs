@@ -1,5 +1,5 @@
 diff --git a/node_modules/@semantic-release/github/lib/success.js b/node_modules/@semantic-release/github/lib/success.js
-index 29c8def..576c68a 100644
+index 29c8def..396d84e 100644
 --- a/node_modules/@semantic-release/github/lib/success.js
 +++ b/node_modules/@semantic-release/github/lib/success.js
 @@ -15,6 +15,8 @@ import getReleaseLinks from "./get-release-links.js";
@@ -55,7 +55,7 @@ index 29c8def..576c68a 100644
        for (const { nodes, pageInfo } of responseAssociatedPRs) {
          if (nodes.length === 0) continue;
  
-@@ -116,8 +137,10 @@ export default async function success(pluginConfig, context, { Octokit }) {
+@@ -116,8 +137,11 @@ export default async function success(pluginConfig, context, { Octokit }) {
      });
  
      const uniqueAssociatedPRs = uniqBy(flatten(associatedPRs), "number");
@@ -63,10 +63,11 @@ index 29c8def..576c68a 100644
  
      const prs = await pFilter(uniqueAssociatedPRs, async ({ number }) => {
 +      console.log('number: ', number);
++      if (number === 1) return false;
        const commits = await octokit.paginate(
          "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits",
          {
-@@ -539,6 +562,7 @@ const loadSingleCommitAssociatedPRs = `#graphql
+@@ -539,6 +563,7 @@ const loadSingleCommitAssociatedPRs = `#graphql
   * @returns {object[]}
   */
  function buildIssuesOrPRsFromResponseNode(responseNodes) {
