@@ -352,3 +352,18 @@ describe('UTC timezone', () => {
     expect(dayjs2.format()).toBe(moment2.format())
   })
 })
+
+describe('add after startOf', () => {
+  it('corrects startOf month in UTC', () => {
+    const originalDay = dayjs.tz('2025-01-31', 'etc/UTC')
+    const startOfDay = originalDay.startOf('month')
+    expect(startOfDay.format('YYYY-MM-DD')).toEqual('2025-01-01')
+  })
+
+  it('corrects startOf and add in UTC', () => {
+    const originalDay = dayjs.tz('2025-01-31', 'etc/UTC')
+    const startOfDay = originalDay.startOf('month')
+    const addedDay = startOfDay.add(3, 'month')
+    expect(addedDay.format('YYYY-MM-DD')).toEqual('2025-04-01')
+  })
+})
