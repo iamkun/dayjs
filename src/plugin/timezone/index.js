@@ -1,5 +1,7 @@
 import { MIN, MS } from '../../constant'
 
+const matchOffset = /Z|[+-]\d\d:?\d\d/gi
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -135,11 +137,11 @@ export default (o, c, d) => {
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
-    const previousOffset = tzOffset(+d(), timezone)
-    if (typeof input !== 'string') {
+    if (typeof input !== 'string' || input.match(matchOffset)) {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
+    const previousOffset = tzOffset(+d(), timezone)
     const localTs = d.utc(input, parseFormat).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
