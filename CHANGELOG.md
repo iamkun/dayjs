@@ -1,3 +1,10 @@
+## [1.11.18](https://github.com/iamkun/dayjs/compare/v1.11.17...v1.11.18) (2025-08-30)
+
+
+### Bug Fixes
+
+* error semantic-release dependency ([8cfb313](https://github.com/iamkun/dayjs/commit/8cfb31386d840d31e9655870f4d8c01592eb753a))
+
 ## [1.11.17](https://github.com/iamkun/dayjs/compare/v1.11.16...v1.11.17) (2025-08-29)
 
 
