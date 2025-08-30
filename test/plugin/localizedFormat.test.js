@@ -116,3 +116,12 @@ it('Uses the localized uppercase formats as a base for lowercase formats, if not
     expect(spanishDate.format(option)).toBe(spanishDate.format(adaptedFormat))
   })
 })
+
+it('ReDos attack', () => {
+  const longFmt = '['.repeat(100000) + '\u0000'
+  const start = Date.now()
+  const output = dayjs().format(longFmt)
+  const elapsed = Date.now() - start
+  expect(output).toBe(longFmt)
+  expect(elapsed).toBeLessThan(3000)
+})
