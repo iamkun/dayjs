@@ -1,3 +1,24 @@
+## [1.11.17](https://github.com/iamkun/dayjs/compare/v1.11.16...v1.11.17) (2025-08-29)
+
+
+### Bug Fixes
+
+* [en-AU] locale use the same ordinal as moment ([#2878](https://github.com/iamkun/dayjs/issues/2878)) ([1b95ecd](https://github.com/iamkun/dayjs/commit/1b95ecd21d4feafe7ab113a2d48d7d8d93bb95c9))
+
+## [1.11.16](https://github.com/iamkun/dayjs/compare/v1.11.15...v1.11.16) (2025-08-29)
+
+
+### Bug Fixes
+
+* test release workflow (no code changes) ([c38c428](https://github.com/iamkun/dayjs/commit/c38c428a78c344699eff373adfc8c007bb3a514f))
+
+## [1.11.15](https://github.com/iamkun/dayjs/compare/v1.11.14...v1.11.15) (2025-08-28)
+
+
+### Bug Fixes
+
+* Fix misspellings in Irish or Irish Gaelic [ga] ([#2861](https://github.com/iamkun/dayjs/issues/2861)) ([9c14a42](https://github.com/iamkun/dayjs/commit/9c14a4245a8e764ee3260ff17a7ff48dfd09d279))
+
 ## [1.11.14](https://github.com/iamkun/dayjs/compare/v1.11.13...v1.11.14) (2025-08-27)
 
 
