@@ -1,3 +1,49 @@
+## [1.11.17](https://github.com/iamkun/dayjs/compare/v1.11.16...v1.11.17) (2025-08-29)
+
+
+### Bug Fixes
+
+* [en-AU] locale use the same ordinal as moment ([#2878](https://github.com/iamkun/dayjs/issues/2878)) ([1b95ecd](https://github.com/iamkun/dayjs/commit/1b95ecd21d4feafe7ab113a2d48d7d8d93bb95c9))
+
+## [1.11.16](https://github.com/iamkun/dayjs/compare/v1.11.15...v1.11.16) (2025-08-29)
+
+
+### Bug Fixes
+
+* test release workflow (no code changes) ([c38c428](https://github.com/iamkun/dayjs/commit/c38c428a78c344699eff373adfc8c007bb3a514f))
+
+## [1.11.15](https://github.com/iamkun/dayjs/compare/v1.11.14...v1.11.15) (2025-08-28)
+
+
+### Bug Fixes
+
+* Fix misspellings in Irish or Irish Gaelic [ga] ([#2861](https://github.com/iamkun/dayjs/issues/2861)) ([9c14a42](https://github.com/iamkun/dayjs/commit/9c14a4245a8e764ee3260ff17a7ff48dfd09d279))
+
+## [1.11.14](https://github.com/iamkun/dayjs/compare/v1.11.13...v1.11.14) (2025-08-27)
+
+
+### Bug Fixes
+
+* .utcOffset(0, true) result and its clone are different bug ([#2505](https://github.com/iamkun/dayjs/issues/2505)) ([fefdcd4](https://github.com/iamkun/dayjs/commit/fefdcd4b6b807786f65139b6dd801e0014d7dc6f))
+
+## [1.11.13](https://github.com/iamkun/dayjs/compare/v1.11.12...v1.11.13) (2024-08-20)
+
+
+### Bug Fixes
+
+* customParseFormat supports Q quter / w ww weekOfYear ([#2705](https://github.com/iamkun/dayjs/issues/2705)) ([8ca74f1](https://github.com/iamkun/dayjs/commit/8ca74f178eff4bb4eb686676cf35fe7edb815536))
+
+## [1.11.12](https://github.com/iamkun/dayjs/compare/v1.11.11...v1.11.12) (2024-07-18)
+
+
+### Bug Fixes
+
+* Add NegativeYear Plugin support  ([#2640](https://github.com/iamkun/dayjs/issues/2640)) ([6a42e0d](https://github.com/iamkun/dayjs/commit/6a42e0d7398639238f575d51287daaf4d495a2a3))
+* add UTC support to negativeYear plugin ([#2692](https://github.com/iamkun/dayjs/issues/2692)) ([f3ef705](https://github.com/iamkun/dayjs/commit/f3ef705613af83333fe132b470896a65e12f31b0))
+* Fix zero offset issue when use tz with locale ([#2532](https://github.com/iamkun/dayjs/issues/2532)) ([d0e6738](https://github.com/iamkun/dayjs/commit/d0e6738a66e1b65d3706aad2f9168ebb43d4f887))
+* Improve typing for min/max plugin ([#2573](https://github.com/iamkun/dayjs/issues/2573)) ([4fbe94a](https://github.com/iamkun/dayjs/commit/4fbe94aaba8c815a42cf4d23dabac918ec50e68c))
+* timezone plugin correct parse UTC tz ([#2693](https://github.com/iamkun/dayjs/issues/2693)) ([b575c81](https://github.com/iamkun/dayjs/commit/b575c81a8c9c85c7a0baf6f608a12f9d3ba95bd1))
+
 ## [1.11.11](https://github.com/iamkun/dayjs/compare/v1.11.10...v1.11.11) (2024-04-28)
 
 
