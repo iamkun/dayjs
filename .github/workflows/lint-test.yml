@@ -20,7 +20,7 @@ jobs:
       - name: Run Lint
         run: npm run lint
       - name: Run tests
-        run: npm test
+        run: npm test -- --coverage
       - name: Upload coverage to Codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
