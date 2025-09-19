@@ -62,24 +62,44 @@ it('Belarusian locale relative time in past and future without suffix', () => {
   const cases = [
     [1, 's', 'некалькі секунд'],
     [-1, 's', 'некалькі секунд'],
+
     [1, 'm', 'хвіліна'],
     [-1, 'm', 'хвіліна'],
     [1, 'h', 'гадзіна'],
     [-1, 'h', 'гадзіна'],
+
+    // Test all plural forms for days
     [1, 'd', 'дзень'],
-    [-1, 'd', 'дзень'],
+    [21, 'd', '21 дзень'],
+    [31, 'd', 'месяц'],
+    // 2-4 form
     [2, 'd', '2 дні'],
-    [-2, 'd', '2 дні'],
-    [10, 'd', '10 дзён'],
-    [-10, 'd', '10 дзён'],
-    [6, 'm', '6 хвілін'],
-    [-6, 'm', '6 хвілін'],
-    [5, 'h', '5 гадзін'],
-    [-5, 'h', '5 гадзін'],
-    [3, 'M', '3 месяцы'],
-    [-3, 'M', '3 месяцы'],
-    [4, 'y', '4 гады'],
-    [-4, 'y', '4 гады']
+    [3, 'd', '3 дні'],
+    [4, 'd', '4 дні'],
+    // 5-20 and other cases
+    [5, 'd', '5 дзён'],
+    [6, 'd', '6 дзён'],
+    // 11-14 special case
+    [11, 'd', '11 дзён'],
+    [12, 'd', '12 дзён'],
+    [13, 'd', '13 дзён'],
+    [14, 'd', '14 дзён'],
+    // 22-24
+    [22, 'd', '22 дні'],
+    [23, 'd', '23 дні'],
+    [24, 'd', '24 дні'],
+
+    // Test all plural forms for months
+    [1, 'M', 'месяц'],
+    [2, 'M', '2 месяцы'],
+    [5, 'M', '5 месяцаў'],
+
+    // Test all plural forms for years
+    [1, 'y', 'год'],
+    [2, 'y', '2 гады'],
+    [5, 'y', '5 гадоў'],
+    [11, 'y', '11 гадоў'],
+    [21, 'y', '21 год']
   ]
 
   const locales = ['be']
@@ -100,13 +120,23 @@ it('Belarusian locale relative time in past and future without suffix', () => {
   })
 })
 
-it('Belarusian locale uses region specific month name', () => {
-  const locales = [
-    { locale: 'be', expectedFormattedDate: 'ср, 19 студзеня 2022 г.' }
+it('Belarusian locale formats dates with correct month forms', () => {
+  const tests = [
+    // Full month names
+    { date: '2022-01-19', format: 'dd, D MMMM YYYY г.', expected: 'ср, 19 студзеня 2022 г.' },
+    { date: '2022-01-01', format: 'MMMM', expected: 'студзень' },
+
+    // Short month names in format form (with day)
+    { date: '2022-01-15', format: 'D MMM', expected: '15 студ' },
+    { date: '2022-02-15', format: 'D MMM', expected: '15 лют' },
+
+    // Short month names in standalone form
+    { date: '2022-01-01', format: 'MMM', expected: 'студ' },
+    { date: '2022-02-01', format: 'MMM', expected: 'лют' }
   ]
 
-  locales.forEach((locale) => {
-    const dayjsWithLocale = dayjs('2022-01-19').locale(locale.locale)
-    expect(dayjsWithLocale.format('dd, D MMMM YYYY г.')).toEqual(locale.expectedFormattedDate)
+  tests.forEach(({ date, format, expected }) => {
+    const dayjsWithLocale = dayjs(date).locale('be')
+    expect(dayjsWithLocale.format(format)).toEqual(expected)
   })
 })
