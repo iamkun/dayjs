@@ -99,12 +99,6 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
 
-### Usage Trend
-
-<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
-</a>
-
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
@@ -121,14 +115,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/sight-sound" target="_blank">
   <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://chudovo.com/front-end-development/" target="_blank">
-  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/radioplusexperts" target="_blank">
