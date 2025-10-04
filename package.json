@@ -5,7 +5,7 @@
   "main": "dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
+    "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest --coverage --coverageThreshold='{ \"global\": { \"lines\": 100} }'",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "eslint src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
@@ -55,6 +55,7 @@
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "@semantic-release/github": "^11.0.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
