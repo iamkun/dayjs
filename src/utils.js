@@ -45,14 +45,11 @@ const prettyUnit = (u) => {
 
 const isUndefined = s => s === undefined
 
-const yearIsLeap = year => ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)
-
 export default {
   s: padStart,
   z: padZoneStr,
   m: monthDiff,
   a: absFloor,
   p: prettyUnit,
-  u: isUndefined,
-  yearIsLeap
+  u: isUndefined
 }
