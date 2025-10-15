@@ -105,19 +105,19 @@ const expressions = {
   MMM: [matchWord, function (input) {
     const months = getLocalePart('months')
     const monthsShort = getLocalePart('monthsShort')
-    const matchIndex = (monthsShort || months.map(_ => _.slice(0, 3))).indexOf(input) + 1
-    if (matchIndex < 1) {
+    const matchIndex = (monthsShort || months.map(_ => _.slice(0, 3))).indexOf(input)
+    if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = (matchIndex % 12) + 1
   }],
   MMMM: [matchWord, function (input) {
     const months = getLocalePart('months')
-    const matchIndex = months.indexOf(input) + 1
-    if (matchIndex < 1) {
+    const matchIndex = months.indexOf(input)
+    if (matchIndex < 0) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = (matchIndex % 12) + 1
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
