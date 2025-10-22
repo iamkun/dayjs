@@ -348,7 +348,13 @@ class Dayjs {
   }
 
   diff(input, units, float) {
-    const unit = Utils.p(units)
+    let unit
+    if (typeof input === 'string' && !units) {
+      unit = Utils.p(input)
+      input = dayjs()
+    } else {
+      unit = Utils.p(units)
+    }
     const that = dayjs(input)
     const zoneDelta = (that.utcOffset() - this.utcOffset()) * C.MILLISECONDS_A_MINUTE
     const diff = this - that

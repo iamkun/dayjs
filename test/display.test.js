@@ -1,8 +1,8 @@
-import moment from 'moment'
 import MockDate from 'mockdate'
+import moment from 'moment'
 import dayjs from '../src'
-import th from '../src/locale/th'
 import '../src/locale/ja'
+import th from '../src/locale/th'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -218,6 +218,14 @@ describe('Difference', () => {
 
   it('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
+  })
+
+  it('diff with the current time if no date is supplied', () => {
+    const base = dayjs().add(36, 'hour')
+    const units = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', 'years']
+    units.forEach((u) => {
+      expect(base.diff(u)).toBe(base.diff(dayjs(), u))
+    })
   })
 })
 
