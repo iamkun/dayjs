@@ -9,7 +9,7 @@
 ---   
 
 <div align="center" style="margin-top: 30px;">
-<a href="https://app.requestly.io/api-client/?utm_source=github&utm_medium=partnered&utm_campaign=rq_dayjs_github">
+<a href="https://requestly.com/?utm_source=github&utm_medium=partnered&utm_campaign=rq_dayjs_github">
    <div>
    <img alt="Requestly sponsorship" width="400" src="https://github.com/user-attachments/assets/24670320-997d-4d62-9bca-955c59fe883d">
    </div>
@@ -155,6 +155,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/Ayo1984" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/117122666?v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/anonstories" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/240702364?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
