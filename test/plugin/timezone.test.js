@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import moment from 'moment-timezone'
 import dayjs from '../../src'
-import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import timezone from '../../src/plugin/timezone'
 import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
@@ -22,6 +22,7 @@ const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 const PARIS = 'Europe/Paris'
+const MELBOURNE = 'Australia/Melbourne'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -350,5 +351,24 @@ describe('UTC timezone', () => {
     const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     expect(dayjs2.format()).toBe(moment2.format())
+  })
+})
+
+describe('timezone: parsing UTC input when default timezone is set', () => {
+  beforeEach(() => {
+    dayjs.tz.setDefault(MELBOURNE)
+    moment.tz.setDefault(MELBOURNE)
+  })
+  afterEach(() => {
+    dayjs.tz.setDefault()
+    moment.tz.setDefault()
+  })
+
+  it('should honor Z (UTC) when parsing with tz()', () => {
+    const input = '2025-10-24T05:00:00Z'
+    const d = dayjs.tz(input, MELBOURNE)
+    const m = moment.tz(input, MELBOURNE)
+
+    expect(d.toISOString()).toBe(m.toISOString())
   })
 })
