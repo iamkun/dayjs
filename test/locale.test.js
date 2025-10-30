@@ -34,6 +34,28 @@ it('set locale for one instance only', () => {
     .toBe('Saturday 28, April')
 })
 
+// The following two tests were added in response to this bug:
+// <https://github.com/iamkun/dayjs/issues/1875>.
+it('handles region tags', () => {
+  expect(dayjs('2018-4-28')
+    .locale('es-us').format(format))
+    .toBe('sábado 28, abril')
+
+  expect(dayjs('2018-4-28')
+    .format(format))
+    .toBe('Saturday 28, April')
+})
+
+it('handles unknown region tags with the base language', () => {
+  expect(dayjs('2018-4-28')
+    .locale('es-XX').format(format))
+    .toBe('sábado 28, abril')
+
+  expect(dayjs('2018-4-28')
+    .format(format))
+    .toBe('Saturday 28, April')
+})
+
 it('set global locale', () => {
   dayjs.locale('en')
   expect(dayjs('2018-4-28').format(format))
