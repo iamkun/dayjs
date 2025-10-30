@@ -3,7 +3,1805 @@
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
+  "module": "esm/index.js",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dayjs.min.js",
+      "import": "./esm/index.js",
+      "types": "./index.d.ts"
+    },
+    "./locale/af": {
+      "require": "./locale/af.js",
+      "import": "./esm/locale/af.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/af": {
+      "require": "./locale/af.js",
+      "import": "./esm/locale/af.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/am": {
+      "require": "./locale/am.js",
+      "import": "./esm/locale/am.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/am": {
+      "require": "./locale/am.js",
+      "import": "./esm/locale/am.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-dz": {
+      "require": "./locale/ar-dz.js",
+      "import": "./esm/locale/ar-dz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-dz": {
+      "require": "./locale/ar-dz.js",
+      "import": "./esm/locale/ar-dz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-iq": {
+      "require": "./locale/ar-iq.js",
+      "import": "./esm/locale/ar-iq.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-iq": {
+      "require": "./locale/ar-iq.js",
+      "import": "./esm/locale/ar-iq.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-kw": {
+      "require": "./locale/ar-kw.js",
+      "import": "./esm/locale/ar-kw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-kw": {
+      "require": "./locale/ar-kw.js",
+      "import": "./esm/locale/ar-kw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-ly": {
+      "require": "./locale/ar-ly.js",
+      "import": "./esm/locale/ar-ly.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-ly": {
+      "require": "./locale/ar-ly.js",
+      "import": "./esm/locale/ar-ly.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-ma": {
+      "require": "./locale/ar-ma.js",
+      "import": "./esm/locale/ar-ma.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-ma": {
+      "require": "./locale/ar-ma.js",
+      "import": "./esm/locale/ar-ma.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-sa": {
+      "require": "./locale/ar-sa.js",
+      "import": "./esm/locale/ar-sa.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-sa": {
+      "require": "./locale/ar-sa.js",
+      "import": "./esm/locale/ar-sa.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar-tn": {
+      "require": "./locale/ar-tn.js",
+      "import": "./esm/locale/ar-tn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar-tn": {
+      "require": "./locale/ar-tn.js",
+      "import": "./esm/locale/ar-tn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ar": {
+      "require": "./locale/ar.js",
+      "import": "./esm/locale/ar.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ar": {
+      "require": "./locale/ar.js",
+      "import": "./esm/locale/ar.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/az": {
+      "require": "./locale/az.js",
+      "import": "./esm/locale/az.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/az": {
+      "require": "./locale/az.js",
+      "import": "./esm/locale/az.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/be": {
+      "require": "./locale/be.js",
+      "import": "./esm/locale/be.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/be": {
+      "require": "./locale/be.js",
+      "import": "./esm/locale/be.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bg": {
+      "require": "./locale/bg.js",
+      "import": "./esm/locale/bg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bg": {
+      "require": "./locale/bg.js",
+      "import": "./esm/locale/bg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bi": {
+      "require": "./locale/bi.js",
+      "import": "./esm/locale/bi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bi": {
+      "require": "./locale/bi.js",
+      "import": "./esm/locale/bi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bm": {
+      "require": "./locale/bm.js",
+      "import": "./esm/locale/bm.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bm": {
+      "require": "./locale/bm.js",
+      "import": "./esm/locale/bm.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bn-bd": {
+      "require": "./locale/bn-bd.js",
+      "import": "./esm/locale/bn-bd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bn-bd": {
+      "require": "./locale/bn-bd.js",
+      "import": "./esm/locale/bn-bd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bn": {
+      "require": "./locale/bn.js",
+      "import": "./esm/locale/bn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bn": {
+      "require": "./locale/bn.js",
+      "import": "./esm/locale/bn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bo": {
+      "require": "./locale/bo.js",
+      "import": "./esm/locale/bo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bo": {
+      "require": "./locale/bo.js",
+      "import": "./esm/locale/bo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/br": {
+      "require": "./locale/br.js",
+      "import": "./esm/locale/br.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/br": {
+      "require": "./locale/br.js",
+      "import": "./esm/locale/br.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/bs": {
+      "require": "./locale/bs.js",
+      "import": "./esm/locale/bs.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/bs": {
+      "require": "./locale/bs.js",
+      "import": "./esm/locale/bs.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ca": {
+      "require": "./locale/ca.js",
+      "import": "./esm/locale/ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ca": {
+      "require": "./locale/ca.js",
+      "import": "./esm/locale/ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/cs": {
+      "require": "./locale/cs.js",
+      "import": "./esm/locale/cs.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/cs": {
+      "require": "./locale/cs.js",
+      "import": "./esm/locale/cs.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/cv": {
+      "require": "./locale/cv.js",
+      "import": "./esm/locale/cv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/cv": {
+      "require": "./locale/cv.js",
+      "import": "./esm/locale/cv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/cy": {
+      "require": "./locale/cy.js",
+      "import": "./esm/locale/cy.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/cy": {
+      "require": "./locale/cy.js",
+      "import": "./esm/locale/cy.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/da": {
+      "require": "./locale/da.js",
+      "import": "./esm/locale/da.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/da": {
+      "require": "./locale/da.js",
+      "import": "./esm/locale/da.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/de-at": {
+      "require": "./locale/de-at.js",
+      "import": "./esm/locale/de-at.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/de-at": {
+      "require": "./locale/de-at.js",
+      "import": "./esm/locale/de-at.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/de-ch": {
+      "require": "./locale/de-ch.js",
+      "import": "./esm/locale/de-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/de-ch": {
+      "require": "./locale/de-ch.js",
+      "import": "./esm/locale/de-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/de": {
+      "require": "./locale/de.js",
+      "import": "./esm/locale/de.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/de": {
+      "require": "./locale/de.js",
+      "import": "./esm/locale/de.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/dv": {
+      "require": "./locale/dv.js",
+      "import": "./esm/locale/dv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/dv": {
+      "require": "./locale/dv.js",
+      "import": "./esm/locale/dv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/el": {
+      "require": "./locale/el.js",
+      "import": "./esm/locale/el.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/el": {
+      "require": "./locale/el.js",
+      "import": "./esm/locale/el.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-au": {
+      "require": "./locale/en-au.js",
+      "import": "./esm/locale/en-au.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-au": {
+      "require": "./locale/en-au.js",
+      "import": "./esm/locale/en-au.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-ca": {
+      "require": "./locale/en-ca.js",
+      "import": "./esm/locale/en-ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-ca": {
+      "require": "./locale/en-ca.js",
+      "import": "./esm/locale/en-ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-gb": {
+      "require": "./locale/en-gb.js",
+      "import": "./esm/locale/en-gb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-gb": {
+      "require": "./locale/en-gb.js",
+      "import": "./esm/locale/en-gb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-ie": {
+      "require": "./locale/en-ie.js",
+      "import": "./esm/locale/en-ie.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-ie": {
+      "require": "./locale/en-ie.js",
+      "import": "./esm/locale/en-ie.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-il": {
+      "require": "./locale/en-il.js",
+      "import": "./esm/locale/en-il.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-il": {
+      "require": "./locale/en-il.js",
+      "import": "./esm/locale/en-il.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-in": {
+      "require": "./locale/en-in.js",
+      "import": "./esm/locale/en-in.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-in": {
+      "require": "./locale/en-in.js",
+      "import": "./esm/locale/en-in.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-nz": {
+      "require": "./locale/en-nz.js",
+      "import": "./esm/locale/en-nz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-nz": {
+      "require": "./locale/en-nz.js",
+      "import": "./esm/locale/en-nz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-sg": {
+      "require": "./locale/en-sg.js",
+      "import": "./esm/locale/en-sg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-sg": {
+      "require": "./locale/en-sg.js",
+      "import": "./esm/locale/en-sg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en-tt": {
+      "require": "./locale/en-tt.js",
+      "import": "./esm/locale/en-tt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en-tt": {
+      "require": "./locale/en-tt.js",
+      "import": "./esm/locale/en-tt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/en": {
+      "require": "./locale/en.js",
+      "import": "./esm/locale/en.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/en": {
+      "require": "./locale/en.js",
+      "import": "./esm/locale/en.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/eo": {
+      "require": "./locale/eo.js",
+      "import": "./esm/locale/eo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/eo": {
+      "require": "./locale/eo.js",
+      "import": "./esm/locale/eo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/es-do": {
+      "require": "./locale/es-do.js",
+      "import": "./esm/locale/es-do.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/es-do": {
+      "require": "./locale/es-do.js",
+      "import": "./esm/locale/es-do.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/es-mx": {
+      "require": "./locale/es-mx.js",
+      "import": "./esm/locale/es-mx.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/es-mx": {
+      "require": "./locale/es-mx.js",
+      "import": "./esm/locale/es-mx.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/es-pr": {
+      "require": "./locale/es-pr.js",
+      "import": "./esm/locale/es-pr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/es-pr": {
+      "require": "./locale/es-pr.js",
+      "import": "./esm/locale/es-pr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/es-us": {
+      "require": "./locale/es-us.js",
+      "import": "./esm/locale/es-us.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/es-us": {
+      "require": "./locale/es-us.js",
+      "import": "./esm/locale/es-us.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/es": {
+      "require": "./locale/es.js",
+      "import": "./esm/locale/es.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/es": {
+      "require": "./locale/es.js",
+      "import": "./esm/locale/es.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/et": {
+      "require": "./locale/et.js",
+      "import": "./esm/locale/et.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/et": {
+      "require": "./locale/et.js",
+      "import": "./esm/locale/et.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/eu": {
+      "require": "./locale/eu.js",
+      "import": "./esm/locale/eu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/eu": {
+      "require": "./locale/eu.js",
+      "import": "./esm/locale/eu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fa": {
+      "require": "./locale/fa.js",
+      "import": "./esm/locale/fa.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fa": {
+      "require": "./locale/fa.js",
+      "import": "./esm/locale/fa.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fi": {
+      "require": "./locale/fi.js",
+      "import": "./esm/locale/fi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fi": {
+      "require": "./locale/fi.js",
+      "import": "./esm/locale/fi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fo": {
+      "require": "./locale/fo.js",
+      "import": "./esm/locale/fo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fo": {
+      "require": "./locale/fo.js",
+      "import": "./esm/locale/fo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fr-ca": {
+      "require": "./locale/fr-ca.js",
+      "import": "./esm/locale/fr-ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fr-ca": {
+      "require": "./locale/fr-ca.js",
+      "import": "./esm/locale/fr-ca.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fr-ch": {
+      "require": "./locale/fr-ch.js",
+      "import": "./esm/locale/fr-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fr-ch": {
+      "require": "./locale/fr-ch.js",
+      "import": "./esm/locale/fr-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fr": {
+      "require": "./locale/fr.js",
+      "import": "./esm/locale/fr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fr": {
+      "require": "./locale/fr.js",
+      "import": "./esm/locale/fr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/fy": {
+      "require": "./locale/fy.js",
+      "import": "./esm/locale/fy.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/fy": {
+      "require": "./locale/fy.js",
+      "import": "./esm/locale/fy.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ga": {
+      "require": "./locale/ga.js",
+      "import": "./esm/locale/ga.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ga": {
+      "require": "./locale/ga.js",
+      "import": "./esm/locale/ga.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/gd": {
+      "require": "./locale/gd.js",
+      "import": "./esm/locale/gd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/gd": {
+      "require": "./locale/gd.js",
+      "import": "./esm/locale/gd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/gl": {
+      "require": "./locale/gl.js",
+      "import": "./esm/locale/gl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/gl": {
+      "require": "./locale/gl.js",
+      "import": "./esm/locale/gl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/gom-latn": {
+      "require": "./locale/gom-latn.js",
+      "import": "./esm/locale/gom-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/gom-latn": {
+      "require": "./locale/gom-latn.js",
+      "import": "./esm/locale/gom-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/gu": {
+      "require": "./locale/gu.js",
+      "import": "./esm/locale/gu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/gu": {
+      "require": "./locale/gu.js",
+      "import": "./esm/locale/gu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/he": {
+      "require": "./locale/he.js",
+      "import": "./esm/locale/he.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/he": {
+      "require": "./locale/he.js",
+      "import": "./esm/locale/he.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/hi": {
+      "require": "./locale/hi.js",
+      "import": "./esm/locale/hi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/hi": {
+      "require": "./locale/hi.js",
+      "import": "./esm/locale/hi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/hr": {
+      "require": "./locale/hr.js",
+      "import": "./esm/locale/hr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/hr": {
+      "require": "./locale/hr.js",
+      "import": "./esm/locale/hr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ht": {
+      "require": "./locale/ht.js",
+      "import": "./esm/locale/ht.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ht": {
+      "require": "./locale/ht.js",
+      "import": "./esm/locale/ht.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/hu": {
+      "require": "./locale/hu.js",
+      "import": "./esm/locale/hu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/hu": {
+      "require": "./locale/hu.js",
+      "import": "./esm/locale/hu.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/hy-am": {
+      "require": "./locale/hy-am.js",
+      "import": "./esm/locale/hy-am.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/hy-am": {
+      "require": "./locale/hy-am.js",
+      "import": "./esm/locale/hy-am.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/id": {
+      "require": "./locale/id.js",
+      "import": "./esm/locale/id.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/id": {
+      "require": "./locale/id.js",
+      "import": "./esm/locale/id.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/is": {
+      "require": "./locale/is.js",
+      "import": "./esm/locale/is.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/is": {
+      "require": "./locale/is.js",
+      "import": "./esm/locale/is.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/it-ch": {
+      "require": "./locale/it-ch.js",
+      "import": "./esm/locale/it-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/it-ch": {
+      "require": "./locale/it-ch.js",
+      "import": "./esm/locale/it-ch.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/it": {
+      "require": "./locale/it.js",
+      "import": "./esm/locale/it.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/it": {
+      "require": "./locale/it.js",
+      "import": "./esm/locale/it.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ja": {
+      "require": "./locale/ja.js",
+      "import": "./esm/locale/ja.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ja": {
+      "require": "./locale/ja.js",
+      "import": "./esm/locale/ja.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/jv": {
+      "require": "./locale/jv.js",
+      "import": "./esm/locale/jv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/jv": {
+      "require": "./locale/jv.js",
+      "import": "./esm/locale/jv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ka": {
+      "require": "./locale/ka.js",
+      "import": "./esm/locale/ka.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ka": {
+      "require": "./locale/ka.js",
+      "import": "./esm/locale/ka.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/kk": {
+      "require": "./locale/kk.js",
+      "import": "./esm/locale/kk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/kk": {
+      "require": "./locale/kk.js",
+      "import": "./esm/locale/kk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/km": {
+      "require": "./locale/km.js",
+      "import": "./esm/locale/km.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/km": {
+      "require": "./locale/km.js",
+      "import": "./esm/locale/km.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/kn": {
+      "require": "./locale/kn.js",
+      "import": "./esm/locale/kn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/kn": {
+      "require": "./locale/kn.js",
+      "import": "./esm/locale/kn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ko": {
+      "require": "./locale/ko.js",
+      "import": "./esm/locale/ko.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ko": {
+      "require": "./locale/ko.js",
+      "import": "./esm/locale/ko.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ku": {
+      "require": "./locale/ku.js",
+      "import": "./esm/locale/ku.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ku": {
+      "require": "./locale/ku.js",
+      "import": "./esm/locale/ku.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ky": {
+      "require": "./locale/ky.js",
+      "import": "./esm/locale/ky.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ky": {
+      "require": "./locale/ky.js",
+      "import": "./esm/locale/ky.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/lb": {
+      "require": "./locale/lb.js",
+      "import": "./esm/locale/lb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/lb": {
+      "require": "./locale/lb.js",
+      "import": "./esm/locale/lb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/lo": {
+      "require": "./locale/lo.js",
+      "import": "./esm/locale/lo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/lo": {
+      "require": "./locale/lo.js",
+      "import": "./esm/locale/lo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/lt": {
+      "require": "./locale/lt.js",
+      "import": "./esm/locale/lt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/lt": {
+      "require": "./locale/lt.js",
+      "import": "./esm/locale/lt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/lv": {
+      "require": "./locale/lv.js",
+      "import": "./esm/locale/lv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/lv": {
+      "require": "./locale/lv.js",
+      "import": "./esm/locale/lv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/me": {
+      "require": "./locale/me.js",
+      "import": "./esm/locale/me.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/me": {
+      "require": "./locale/me.js",
+      "import": "./esm/locale/me.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/mi": {
+      "require": "./locale/mi.js",
+      "import": "./esm/locale/mi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/mi": {
+      "require": "./locale/mi.js",
+      "import": "./esm/locale/mi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/mk": {
+      "require": "./locale/mk.js",
+      "import": "./esm/locale/mk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/mk": {
+      "require": "./locale/mk.js",
+      "import": "./esm/locale/mk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ml": {
+      "require": "./locale/ml.js",
+      "import": "./esm/locale/ml.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ml": {
+      "require": "./locale/ml.js",
+      "import": "./esm/locale/ml.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/mn": {
+      "require": "./locale/mn.js",
+      "import": "./esm/locale/mn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/mn": {
+      "require": "./locale/mn.js",
+      "import": "./esm/locale/mn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/mr": {
+      "require": "./locale/mr.js",
+      "import": "./esm/locale/mr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/mr": {
+      "require": "./locale/mr.js",
+      "import": "./esm/locale/mr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ms-my": {
+      "require": "./locale/ms-my.js",
+      "import": "./esm/locale/ms-my.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ms-my": {
+      "require": "./locale/ms-my.js",
+      "import": "./esm/locale/ms-my.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ms": {
+      "require": "./locale/ms.js",
+      "import": "./esm/locale/ms.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ms": {
+      "require": "./locale/ms.js",
+      "import": "./esm/locale/ms.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/mt": {
+      "require": "./locale/mt.js",
+      "import": "./esm/locale/mt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/mt": {
+      "require": "./locale/mt.js",
+      "import": "./esm/locale/mt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/my": {
+      "require": "./locale/my.js",
+      "import": "./esm/locale/my.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/my": {
+      "require": "./locale/my.js",
+      "import": "./esm/locale/my.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/nb": {
+      "require": "./locale/nb.js",
+      "import": "./esm/locale/nb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/nb": {
+      "require": "./locale/nb.js",
+      "import": "./esm/locale/nb.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ne": {
+      "require": "./locale/ne.js",
+      "import": "./esm/locale/ne.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ne": {
+      "require": "./locale/ne.js",
+      "import": "./esm/locale/ne.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/nl-be": {
+      "require": "./locale/nl-be.js",
+      "import": "./esm/locale/nl-be.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/nl-be": {
+      "require": "./locale/nl-be.js",
+      "import": "./esm/locale/nl-be.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/nl": {
+      "require": "./locale/nl.js",
+      "import": "./esm/locale/nl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/nl": {
+      "require": "./locale/nl.js",
+      "import": "./esm/locale/nl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/nn": {
+      "require": "./locale/nn.js",
+      "import": "./esm/locale/nn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/nn": {
+      "require": "./locale/nn.js",
+      "import": "./esm/locale/nn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/oc-lnc": {
+      "require": "./locale/oc-lnc.js",
+      "import": "./esm/locale/oc-lnc.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/oc-lnc": {
+      "require": "./locale/oc-lnc.js",
+      "import": "./esm/locale/oc-lnc.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/pa-in": {
+      "require": "./locale/pa-in.js",
+      "import": "./esm/locale/pa-in.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/pa-in": {
+      "require": "./locale/pa-in.js",
+      "import": "./esm/locale/pa-in.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/pl": {
+      "require": "./locale/pl.js",
+      "import": "./esm/locale/pl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/pl": {
+      "require": "./locale/pl.js",
+      "import": "./esm/locale/pl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/pt-br": {
+      "require": "./locale/pt-br.js",
+      "import": "./esm/locale/pt-br.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/pt-br": {
+      "require": "./locale/pt-br.js",
+      "import": "./esm/locale/pt-br.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/pt": {
+      "require": "./locale/pt.js",
+      "import": "./esm/locale/pt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/pt": {
+      "require": "./locale/pt.js",
+      "import": "./esm/locale/pt.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/rn": {
+      "require": "./locale/rn.js",
+      "import": "./esm/locale/rn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/rn": {
+      "require": "./locale/rn.js",
+      "import": "./esm/locale/rn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ro": {
+      "require": "./locale/ro.js",
+      "import": "./esm/locale/ro.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ro": {
+      "require": "./locale/ro.js",
+      "import": "./esm/locale/ro.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ru": {
+      "require": "./locale/ru.js",
+      "import": "./esm/locale/ru.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ru": {
+      "require": "./locale/ru.js",
+      "import": "./esm/locale/ru.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/rw": {
+      "require": "./locale/rw.js",
+      "import": "./esm/locale/rw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/rw": {
+      "require": "./locale/rw.js",
+      "import": "./esm/locale/rw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sd": {
+      "require": "./locale/sd.js",
+      "import": "./esm/locale/sd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sd": {
+      "require": "./locale/sd.js",
+      "import": "./esm/locale/sd.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/se": {
+      "require": "./locale/se.js",
+      "import": "./esm/locale/se.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/se": {
+      "require": "./locale/se.js",
+      "import": "./esm/locale/se.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/si": {
+      "require": "./locale/si.js",
+      "import": "./esm/locale/si.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/si": {
+      "require": "./locale/si.js",
+      "import": "./esm/locale/si.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sk": {
+      "require": "./locale/sk.js",
+      "import": "./esm/locale/sk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sk": {
+      "require": "./locale/sk.js",
+      "import": "./esm/locale/sk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sl": {
+      "require": "./locale/sl.js",
+      "import": "./esm/locale/sl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sl": {
+      "require": "./locale/sl.js",
+      "import": "./esm/locale/sl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sq": {
+      "require": "./locale/sq.js",
+      "import": "./esm/locale/sq.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sq": {
+      "require": "./locale/sq.js",
+      "import": "./esm/locale/sq.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sr-cyrl": {
+      "require": "./locale/sr-cyrl.js",
+      "import": "./esm/locale/sr-cyrl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sr-cyrl": {
+      "require": "./locale/sr-cyrl.js",
+      "import": "./esm/locale/sr-cyrl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sr": {
+      "require": "./locale/sr.js",
+      "import": "./esm/locale/sr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sr": {
+      "require": "./locale/sr.js",
+      "import": "./esm/locale/sr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ss": {
+      "require": "./locale/ss.js",
+      "import": "./esm/locale/ss.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ss": {
+      "require": "./locale/ss.js",
+      "import": "./esm/locale/ss.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sv-fi": {
+      "require": "./locale/sv-fi.js",
+      "import": "./esm/locale/sv-fi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sv-fi": {
+      "require": "./locale/sv-fi.js",
+      "import": "./esm/locale/sv-fi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sv": {
+      "require": "./locale/sv.js",
+      "import": "./esm/locale/sv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sv": {
+      "require": "./locale/sv.js",
+      "import": "./esm/locale/sv.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/sw": {
+      "require": "./locale/sw.js",
+      "import": "./esm/locale/sw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/sw": {
+      "require": "./locale/sw.js",
+      "import": "./esm/locale/sw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ta": {
+      "require": "./locale/ta.js",
+      "import": "./esm/locale/ta.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ta": {
+      "require": "./locale/ta.js",
+      "import": "./esm/locale/ta.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/te": {
+      "require": "./locale/te.js",
+      "import": "./esm/locale/te.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/te": {
+      "require": "./locale/te.js",
+      "import": "./esm/locale/te.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tet": {
+      "require": "./locale/tet.js",
+      "import": "./esm/locale/tet.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tet": {
+      "require": "./locale/tet.js",
+      "import": "./esm/locale/tet.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tg": {
+      "require": "./locale/tg.js",
+      "import": "./esm/locale/tg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tg": {
+      "require": "./locale/tg.js",
+      "import": "./esm/locale/tg.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/th": {
+      "require": "./locale/th.js",
+      "import": "./esm/locale/th.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/th": {
+      "require": "./locale/th.js",
+      "import": "./esm/locale/th.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tk": {
+      "require": "./locale/tk.js",
+      "import": "./esm/locale/tk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tk": {
+      "require": "./locale/tk.js",
+      "import": "./esm/locale/tk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tl-ph": {
+      "require": "./locale/tl-ph.js",
+      "import": "./esm/locale/tl-ph.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tl-ph": {
+      "require": "./locale/tl-ph.js",
+      "import": "./esm/locale/tl-ph.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tlh": {
+      "require": "./locale/tlh.js",
+      "import": "./esm/locale/tlh.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tlh": {
+      "require": "./locale/tlh.js",
+      "import": "./esm/locale/tlh.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tr": {
+      "require": "./locale/tr.js",
+      "import": "./esm/locale/tr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tr": {
+      "require": "./locale/tr.js",
+      "import": "./esm/locale/tr.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tzl": {
+      "require": "./locale/tzl.js",
+      "import": "./esm/locale/tzl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tzl": {
+      "require": "./locale/tzl.js",
+      "import": "./esm/locale/tzl.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tzm-latn": {
+      "require": "./locale/tzm-latn.js",
+      "import": "./esm/locale/tzm-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tzm-latn": {
+      "require": "./locale/tzm-latn.js",
+      "import": "./esm/locale/tzm-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/tzm": {
+      "require": "./locale/tzm.js",
+      "import": "./esm/locale/tzm.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/tzm": {
+      "require": "./locale/tzm.js",
+      "import": "./esm/locale/tzm.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ug-cn": {
+      "require": "./locale/ug-cn.js",
+      "import": "./esm/locale/ug-cn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ug-cn": {
+      "require": "./locale/ug-cn.js",
+      "import": "./esm/locale/ug-cn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/uk": {
+      "require": "./locale/uk.js",
+      "import": "./esm/locale/uk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/uk": {
+      "require": "./locale/uk.js",
+      "import": "./esm/locale/uk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/ur": {
+      "require": "./locale/ur.js",
+      "import": "./esm/locale/ur.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/ur": {
+      "require": "./locale/ur.js",
+      "import": "./esm/locale/ur.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/uz-latn": {
+      "require": "./locale/uz-latn.js",
+      "import": "./esm/locale/uz-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/uz-latn": {
+      "require": "./locale/uz-latn.js",
+      "import": "./esm/locale/uz-latn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/uz": {
+      "require": "./locale/uz.js",
+      "import": "./esm/locale/uz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/uz": {
+      "require": "./locale/uz.js",
+      "import": "./esm/locale/uz.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/vi": {
+      "require": "./locale/vi.js",
+      "import": "./esm/locale/vi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/vi": {
+      "require": "./locale/vi.js",
+      "import": "./esm/locale/vi.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/x-pseudo": {
+      "require": "./locale/x-pseudo.js",
+      "import": "./esm/locale/x-pseudo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/x-pseudo": {
+      "require": "./locale/x-pseudo.js",
+      "import": "./esm/locale/x-pseudo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/yo": {
+      "require": "./locale/yo.js",
+      "import": "./esm/locale/yo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/yo": {
+      "require": "./locale/yo.js",
+      "import": "./esm/locale/yo.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/zh-cn": {
+      "require": "./locale/zh-cn.js",
+      "import": "./esm/locale/zh-cn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/zh-cn": {
+      "require": "./locale/zh-cn.js",
+      "import": "./esm/locale/zh-cn.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/zh-hk": {
+      "require": "./locale/zh-hk.js",
+      "import": "./esm/locale/zh-hk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/zh-hk": {
+      "require": "./locale/zh-hk.js",
+      "import": "./esm/locale/zh-hk.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/zh-tw": {
+      "require": "./locale/zh-tw.js",
+      "import": "./esm/locale/zh-tw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/zh-tw": {
+      "require": "./locale/zh-tw.js",
+      "import": "./esm/locale/zh-tw.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./locale/zh": {
+      "require": "./locale/zh.js",
+      "import": "./esm/locale/zh.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./esm/locale/zh": {
+      "require": "./locale/zh.js",
+      "import": "./esm/locale/zh.js",
+      "types": "./locale/types.d.ts"
+    },
+    "./plugin/advancedFormat": {
+      "require": "./plugin/advancedFormat.js",
+      "import": "./esm/plugin/advancedFormat.js",
+      "types": "./plugin/advancedFormat.d.ts"
+    },
+    "./esm/plugin/advancedFormat": {
+      "require": "./plugin/advancedFormat.js",
+      "import": "./esm/plugin/advancedFormat.js",
+      "types": "./plugin/advancedFormat.d.ts"
+    },
+    "./plugin/arraySupport": {
+      "require": "./plugin/arraySupport.js",
+      "import": "./esm/plugin/arraySupport.js",
+      "types": "./plugin/arraySupport.d.ts"
+    },
+    "./esm/plugin/arraySupport": {
+      "require": "./plugin/arraySupport.js",
+      "import": "./esm/plugin/arraySupport.js",
+      "types": "./plugin/arraySupport.d.ts"
+    },
+    "./plugin/badMutable": {
+      "require": "./plugin/badMutable.js",
+      "import": "./esm/plugin/badMutable.js",
+      "types": "./plugin/badMutable.d.ts"
+    },
+    "./esm/plugin/badMutable": {
+      "require": "./plugin/badMutable.js",
+      "import": "./esm/plugin/badMutable.js",
+      "types": "./plugin/badMutable.d.ts"
+    },
+    "./plugin/bigIntSupport": {
+      "require": "./plugin/bigIntSupport.js",
+      "import": "./esm/plugin/bigIntSupport.js",
+      "types": "./plugin/bigIntSupport.d.ts"
+    },
+    "./esm/plugin/bigIntSupport": {
+      "require": "./plugin/bigIntSupport.js",
+      "import": "./esm/plugin/bigIntSupport.js",
+      "types": "./plugin/bigIntSupport.d.ts"
+    },
+    "./plugin/buddhistEra": {
+      "require": "./plugin/buddhistEra.js",
+      "import": "./esm/plugin/buddhistEra.js",
+      "types": "./plugin/buddhistEra.d.ts"
+    },
+    "./esm/plugin/buddhistEra": {
+      "require": "./plugin/buddhistEra.js",
+      "import": "./esm/plugin/buddhistEra.js",
+      "types": "./plugin/buddhistEra.d.ts"
+    },
+    "./plugin/calendar": {
+      "require": "./plugin/calendar.js",
+      "import": "./esm/plugin/calendar.js",
+      "types": "./plugin/calendar.d.ts"
+    },
+    "./esm/plugin/calendar": {
+      "require": "./plugin/calendar.js",
+      "import": "./esm/plugin/calendar.js",
+      "types": "./plugin/calendar.d.ts"
+    },
+    "./plugin/customParseFormat": {
+      "require": "./plugin/customParseFormat.js",
+      "import": "./esm/plugin/customParseFormat.js",
+      "types": "./plugin/customParseFormat.d.ts"
+    },
+    "./esm/plugin/customParseFormat": {
+      "require": "./plugin/customParseFormat.js",
+      "import": "./esm/plugin/customParseFormat.js",
+      "types": "./plugin/customParseFormat.d.ts"
+    },
+    "./plugin/dayOfYear": {
+      "require": "./plugin/dayOfYear.js",
+      "import": "./esm/plugin/dayOfYear.js",
+      "types": "./plugin/dayOfYear.d.ts"
+    },
+    "./esm/plugin/dayOfYear": {
+      "require": "./plugin/dayOfYear.js",
+      "import": "./esm/plugin/dayOfYear.js",
+      "types": "./plugin/dayOfYear.d.ts"
+    },
+    "./plugin/devHelper": {
+      "require": "./plugin/devHelper.js",
+      "import": "./esm/plugin/devHelper.js",
+      "types": "./plugin/devHelper.d.ts"
+    },
+    "./esm/plugin/devHelper": {
+      "require": "./plugin/devHelper.js",
+      "import": "./esm/plugin/devHelper.js",
+      "types": "./plugin/devHelper.d.ts"
+    },
+    "./plugin/duration": {
+      "require": "./plugin/duration.js",
+      "import": "./esm/plugin/duration.js",
+      "types": "./plugin/duration.d.ts"
+    },
+    "./esm/plugin/duration": {
+      "require": "./plugin/duration.js",
+      "import": "./esm/plugin/duration.js",
+      "types": "./plugin/duration.d.ts"
+    },
+    "./plugin/isBetween": {
+      "require": "./plugin/isBetween.js",
+      "import": "./esm/plugin/isBetween.js",
+      "types": "./plugin/isBetween.d.ts"
+    },
+    "./esm/plugin/isBetween": {
+      "require": "./plugin/isBetween.js",
+      "import": "./esm/plugin/isBetween.js",
+      "types": "./plugin/isBetween.d.ts"
+    },
+    "./plugin/isLeapYear": {
+      "require": "./plugin/isLeapYear.js",
+      "import": "./esm/plugin/isLeapYear.js",
+      "types": "./plugin/isLeapYear.d.ts"
+    },
+    "./esm/plugin/isLeapYear": {
+      "require": "./plugin/isLeapYear.js",
+      "import": "./esm/plugin/isLeapYear.js",
+      "types": "./plugin/isLeapYear.d.ts"
+    },
+    "./plugin/isMoment": {
+      "require": "./plugin/isMoment.js",
+      "import": "./esm/plugin/isMoment.js",
+      "types": "./plugin/isMoment.d.ts"
+    },
+    "./esm/plugin/isMoment": {
+      "require": "./plugin/isMoment.js",
+      "import": "./esm/plugin/isMoment.js",
+      "types": "./plugin/isMoment.d.ts"
+    },
+    "./plugin/isSameOrAfter": {
+      "require": "./plugin/isSameOrAfter.js",
+      "import": "./esm/plugin/isSameOrAfter.js",
+      "types": "./plugin/isSameOrAfter.d.ts"
+    },
+    "./esm/plugin/isSameOrAfter": {
+      "require": "./plugin/isSameOrAfter.js",
+      "import": "./esm/plugin/isSameOrAfter.js",
+      "types": "./plugin/isSameOrAfter.d.ts"
+    },
+    "./plugin/isSameOrBefore": {
+      "require": "./plugin/isSameOrBefore.js",
+      "import": "./esm/plugin/isSameOrBefore.js",
+      "types": "./plugin/isSameOrBefore.d.ts"
+    },
+    "./esm/plugin/isSameOrBefore": {
+      "require": "./plugin/isSameOrBefore.js",
+      "import": "./esm/plugin/isSameOrBefore.js",
+      "types": "./plugin/isSameOrBefore.d.ts"
+    },
+    "./plugin/isToday": {
+      "require": "./plugin/isToday.js",
+      "import": "./esm/plugin/isToday.js",
+      "types": "./plugin/isToday.d.ts"
+    },
+    "./esm/plugin/isToday": {
+      "require": "./plugin/isToday.js",
+      "import": "./esm/plugin/isToday.js",
+      "types": "./plugin/isToday.d.ts"
+    },
+    "./plugin/isTomorrow": {
+      "require": "./plugin/isTomorrow.js",
+      "import": "./esm/plugin/isTomorrow.js",
+      "types": "./plugin/isTomorrow.d.ts"
+    },
+    "./esm/plugin/isTomorrow": {
+      "require": "./plugin/isTomorrow.js",
+      "import": "./esm/plugin/isTomorrow.js",
+      "types": "./plugin/isTomorrow.d.ts"
+    },
+    "./plugin/isYesterday": {
+      "require": "./plugin/isYesterday.js",
+      "import": "./esm/plugin/isYesterday.js",
+      "types": "./plugin/isYesterday.d.ts"
+    },
+    "./esm/plugin/isYesterday": {
+      "require": "./plugin/isYesterday.js",
+      "import": "./esm/plugin/isYesterday.js",
+      "types": "./plugin/isYesterday.d.ts"
+    },
+    "./plugin/isoWeek": {
+      "require": "./plugin/isoWeek.js",
+      "import": "./esm/plugin/isoWeek.js",
+      "types": "./plugin/isoWeek.d.ts"
+    },
+    "./esm/plugin/isoWeek": {
+      "require": "./plugin/isoWeek.js",
+      "import": "./esm/plugin/isoWeek.js",
+      "types": "./plugin/isoWeek.d.ts"
+    },
+    "./plugin/isoWeeksInYear": {
+      "require": "./plugin/isoWeeksInYear.js",
+      "import": "./esm/plugin/isoWeeksInYear.js",
+      "types": "./plugin/isoWeeksInYear.d.ts"
+    },
+    "./esm/plugin/isoWeeksInYear": {
+      "require": "./plugin/isoWeeksInYear.js",
+      "import": "./esm/plugin/isoWeeksInYear.js",
+      "types": "./plugin/isoWeeksInYear.d.ts"
+    },
+    "./plugin/localeData": {
+      "require": "./plugin/localeData.js",
+      "import": "./esm/plugin/localeData.js",
+      "types": "./plugin/localeData.d.ts"
+    },
+    "./esm/plugin/localeData": {
+      "require": "./plugin/localeData.js",
+      "import": "./esm/plugin/localeData.js",
+      "types": "./plugin/localeData.d.ts"
+    },
+    "./plugin/localizedFormat": {
+      "require": "./plugin/localizedFormat.js",
+      "import": "./esm/plugin/localizedFormat.js",
+      "types": "./plugin/localizedFormat.d.ts"
+    },
+    "./esm/plugin/localizedFormat": {
+      "require": "./plugin/localizedFormat.js",
+      "import": "./esm/plugin/localizedFormat.js",
+      "types": "./plugin/localizedFormat.d.ts"
+    },
+    "./plugin/minMax": {
+      "require": "./plugin/minMax.js",
+      "import": "./esm/plugin/minMax.js",
+      "types": "./plugin/minMax.d.ts"
+    },
+    "./esm/plugin/minMax": {
+      "require": "./plugin/minMax.js",
+      "import": "./esm/plugin/minMax.js",
+      "types": "./plugin/minMax.d.ts"
+    },
+    "./plugin/objectSupport": {
+      "require": "./plugin/objectSupport.js",
+      "import": "./esm/plugin/objectSupport.js",
+      "types": "./plugin/objectSupport.d.ts"
+    },
+    "./esm/plugin/objectSupport": {
+      "require": "./plugin/objectSupport.js",
+      "import": "./esm/plugin/objectSupport.js",
+      "types": "./plugin/objectSupport.d.ts"
+    },
+    "./plugin/pluralGetSet": {
+      "require": "./plugin/pluralGetSet.js",
+      "import": "./esm/plugin/pluralGetSet.js",
+      "types": "./plugin/pluralGetSet.d.ts"
+    },
+    "./esm/plugin/pluralGetSet": {
+      "require": "./plugin/pluralGetSet.js",
+      "import": "./esm/plugin/pluralGetSet.js",
+      "types": "./plugin/pluralGetSet.d.ts"
+    },
+    "./plugin/preParsePostFormat": {
+      "require": "./plugin/preParsePostFormat.js",
+      "import": "./esm/plugin/preParsePostFormat.js",
+      "types": "./plugin/preParsePostFormat.d.ts"
+    },
+    "./esm/plugin/preParsePostFormat": {
+      "require": "./plugin/preParsePostFormat.js",
+      "import": "./esm/plugin/preParsePostFormat.js",
+      "types": "./plugin/preParsePostFormat.d.ts"
+    },
+    "./plugin/quarterOfYear": {
+      "require": "./plugin/quarterOfYear.js",
+      "import": "./esm/plugin/quarterOfYear.js",
+      "types": "./plugin/quarterOfYear.d.ts"
+    },
+    "./esm/plugin/quarterOfYear": {
+      "require": "./plugin/quarterOfYear.js",
+      "import": "./esm/plugin/quarterOfYear.js",
+      "types": "./plugin/quarterOfYear.d.ts"
+    },
+    "./plugin/relativeTime": {
+      "require": "./plugin/relativeTime.js",
+      "import": "./esm/plugin/relativeTime.js",
+      "types": "./plugin/relativeTime.d.ts"
+    },
+    "./esm/plugin/relativeTime": {
+      "require": "./plugin/relativeTime.js",
+      "import": "./esm/plugin/relativeTime.js",
+      "types": "./plugin/relativeTime.d.ts"
+    },
+    "./plugin/timezone": {
+      "require": "./plugin/timezone.js",
+      "import": "./esm/plugin/timezone.js",
+      "types": "./plugin/timezone.d.ts"
+    },
+    "./esm/plugin/timezone": {
+      "require": "./plugin/timezone.js",
+      "import": "./esm/plugin/timezone.js",
+      "types": "./plugin/timezone.d.ts"
+    },
+    "./plugin/toArray": {
+      "require": "./plugin/toArray.js",
+      "import": "./esm/plugin/toArray.js",
+      "types": "./plugin/toArray.d.ts"
+    },
+    "./esm/plugin/toArray": {
+      "require": "./plugin/toArray.js",
+      "import": "./esm/plugin/toArray.js",
+      "types": "./plugin/toArray.d.ts"
+    },
+    "./plugin/toObject": {
+      "require": "./plugin/toObject.js",
+      "import": "./esm/plugin/toObject.js",
+      "types": "./plugin/toObject.d.ts"
+    },
+    "./esm/plugin/toObject": {
+      "require": "./plugin/toObject.js",
+      "import": "./esm/plugin/toObject.js",
+      "types": "./plugin/toObject.d.ts"
+    },
+    "./plugin/updateLocale": {
+      "require": "./plugin/updateLocale.js",
+      "import": "./esm/plugin/updateLocale.js",
+      "types": "./plugin/updateLocale.d.ts"
+    },
+    "./esm/plugin/updateLocale": {
+      "require": "./plugin/updateLocale.js",
+      "import": "./esm/plugin/updateLocale.js",
+      "types": "./plugin/updateLocale.d.ts"
+    },
+    "./plugin/utc": {
+      "require": "./plugin/utc.js",
+      "import": "./esm/plugin/utc.js",
+      "types": "./plugin/utc.d.ts"
+    },
+    "./esm/plugin/utc": {
+      "require": "./plugin/utc.js",
+      "import": "./esm/plugin/utc.js",
+      "types": "./plugin/utc.d.ts"
+    },
+    "./plugin/weekOfYear": {
+      "require": "./plugin/weekOfYear.js",
+      "import": "./esm/plugin/weekOfYear.js",
+      "types": "./plugin/weekOfYear.d.ts"
+    },
+    "./esm/plugin/weekOfYear": {
+      "require": "./plugin/weekOfYear.js",
+      "import": "./esm/plugin/weekOfYear.js",
+      "types": "./plugin/weekOfYear.d.ts"
+    },
+    "./plugin/weekYear": {
+      "require": "./plugin/weekYear.js",
+      "import": "./esm/plugin/weekYear.js",
+      "types": "./plugin/weekYear.d.ts"
+    },
+    "./esm/plugin/weekYear": {
+      "require": "./plugin/weekYear.js",
+      "import": "./esm/plugin/weekYear.js",
+      "types": "./plugin/weekYear.d.ts"
+    },
+    "./plugin/weekday": {
+      "require": "./plugin/weekday.js",
+      "import": "./esm/plugin/weekday.js",
+      "types": "./plugin/weekday.d.ts"
+    },
+    "./esm/plugin/weekday": {
+      "require": "./plugin/weekday.js",
+      "import": "./esm/plugin/weekday.js",
+      "types": "./plugin/weekday.d.ts"
+    }
+  },
   "scripts": {
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest --coverage --coverageThreshold='{ \"global\": { \"lines\": 100} }'",
     "test-tz": "date && jest test/timezone.test --coverage=false",
@@ -11,6 +1809,7 @@
     "prettier": "prettier --write \"docs/**/*.md\"",
     "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
     "build": "cross-env BABEL_ENV=build node build && npm run size",
+    "exports": "cross-env BABEL_ENV=build node build/exports",
     "sauce": "npx karma start karma.sauce.conf.js",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
     "size": "size-limit && gzip-size dayjs.min.js"
