@@ -1,5 +1,7 @@
 import { MIN, MS } from '../../constant'
 
+const matchTimestampInSeconds = /^\d{10}(?:\.\d{1,3})?$/
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -136,6 +138,9 @@ export default (o, c, d) => {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
     const previousOffset = tzOffset(+d(), timezone)
+    if (matchTimestampInSeconds.test(input)) {
+      return d.unix(input).tz(timezone)
+    }
     if (typeof input !== 'string') {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
