@@ -193,12 +193,15 @@ describe('Add', () => {
   expect(a.add(b).days()).toBe(3)
   expect(a.add(1, 'days').days()).toBe(2)
   expect(a.add({ days: 5 }).days()).toBe(6)
+  expect(a.add({ weeks: 1 }).days()).toBe(8)
 })
 
 describe('Add to a dayjs()', () => {
   const a = dayjs()
   const b = dayjs.duration({ hours: 7, minutes: 10 })
+  const c = dayjs.duration({ years: 1, months: 7, weeks: 10 })
   expect(a.add(b)).toEqual(a.add(7, 'hours').add(10, 'minutes'))
+  expect(a.add(c)).toEqual(a.add(1, 'years').add(7, 'months').add(10, 'weeks'))
 })
 
 test('Add duration', () => {
