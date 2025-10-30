@@ -72,21 +72,11 @@ describe('Parse', () => {
 
 describe('Convert', () => {
   it('convert to target time', () => {
-    const losAngeles = dayjs('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    const MlosAngeles = moment('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
-    expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
-    expect(losAngeles.format()).toBe(MlosAngeles.format())
-    expect(losAngeles.valueOf()).toBe(1401624000000)
-    expect(losAngeles.valueOf()).toBe(MlosAngeles.valueOf())
-    expect(losAngeles.utcOffset()).toBe(-420)
-    expect(losAngeles.utcOffset()).toBe(MlosAngeles.utcOffset())
-  })
-
-  it('convert to target time', () => {
     [dayjs, moment].forEach((_) => {
       const losAngeles = _('2014-06-01T12:00:00Z').tz('America/Los_Angeles')
       expect(losAngeles.format()).toBe('2014-06-01T05:00:00-07:00')
       expect(losAngeles.valueOf()).toBe(1401624000000)
+      expect(losAngeles.utcOffset()).toBe(-420)
     })
   })
 
@@ -179,15 +169,6 @@ describe('DST, a time that never existed Spring Forward', () => {
 describe('DST, a time that never existed Fall Back', () => {
   // In the fall, at the end of DST
 
-  it('2012-11-04 00:59:59', () => {
-    const s = '2012-11-04 00:59:59';
-    [dayjs, moment].forEach((_) => {
-      const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
-      expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352005199000)
-    })
-  })
   it('2012-11-04 00:59:59', () => {
     const s = '2012-11-04 00:59:59';
     [dayjs, moment].forEach((_) => {
