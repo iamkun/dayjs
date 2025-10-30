@@ -61,6 +61,11 @@ class Duration {
   constructor(input, unit, locale) {
     this.$d = {}
     this.$l = locale
+
+    Object.defineProperty(this, 'valueOf', {
+      value: () => this.asMilliseconds()
+    })
+
     if (input === undefined) {
       this.$ms = 0
       this.parseFromMilliseconds()
@@ -234,10 +239,6 @@ class Duration {
       .add(this.$ms, 'ms')
       .locale(this.$l)
       .fromNow(!withSuffix)
-  }
-
-  valueOf() {
-    return this.asMilliseconds()
   }
 
   milliseconds() { return this.get('milliseconds') }
