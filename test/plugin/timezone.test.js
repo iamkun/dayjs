@@ -42,6 +42,15 @@ describe('Parse', () => {
     expect(newYork.valueOf()).toBe(MnewYork.valueOf())
   })
 
+  it('parse target time string with timezone info', () => {
+    const newYork = dayjs.tz('2024-09-30 12:43:00 -0400', NY)
+    const DnewYork = dayjs('2024-09-30 12:43:00 -0400').tz(NY)
+    const MnewYork = moment('2024-09-30 12:43:00 -0400').tz(NY)
+    expect(newYork.format()).toBe('2024-09-30T12:43:00-04:00')
+    expect(newYork.format()).toBe(DnewYork.format())
+    expect(newYork.format()).toBe(MnewYork.format())
+  })
+
   it('parse timestamp, js Date, Day.js object', () => {
     const d = new Date('2020-08-07T12:00-07:00')
     const result = '2020-08-07T12:00:00-07:00'
