@@ -57,6 +57,16 @@ describe('Update locale', () => {
       .toEqual(moment().format(formatString))
   })
 
+  it('Update single value in case of object', () => {
+    const result = dayjs.updateLocale('zh-cn', {
+      formats: {
+        LL: '[testFormatLL]'
+      }
+    })
+    expect(result.formats.L).toEqual('YYYY/MM/DD')
+    expect(result.formats.LL).toEqual('[testFormatLL]')
+  })
+
   it('Update imported zh-cn locale', () => {
     moment.updateLocale('zh-cn', newLocale)
     dayjs.updateLocale('zh-cn', newLocale)
