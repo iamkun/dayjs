@@ -1,3 +1,27 @@
+<div align="center">
+	<a href="https://go.warp.dev/dayjs" target="_blank">
+		<img alt="Warp sponsorship" width="400" src="https://github.com/warpdotdev/brand-assets/blob/main/Github/Sponsor/Warp-Github-LG-02.png">
+		<br>
+		<h>Warp is built for coding with multiple AI agents</b>
+	</a>
+</div>
+
+---   
+
+<div align="center" style="margin-top: 30px;">
+<a href="https://requestly.com/?utm_source=github&utm_medium=partnered&utm_campaign=rq_dayjs_github">
+   <div>
+   <img alt="Requestly sponsorship" width="400" src="https://github.com/user-attachments/assets/24670320-997d-4d62-9bca-955c59fe883d">
+   </div>
+   <b>Requestly - Free & Open-Source alternative to Postman</b>
+   <div>
+      <sup>All-in-one platform to Test, Mock and Intercept APIs.</sup>
+   </div>
+</a>
+</div>
+
+---   
+
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md) | [עברית](./docs/he/README-he.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
@@ -99,12 +123,6 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[Plugin List](https://day.js.org/docs/en/plugin/plugin)
 
-### Usage Trend
-
-<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
-</a>
-
 ## Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website.
@@ -123,12 +141,8 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://chudovo.com/front-end-development/" target="_blank">
-  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
+<a href="https://opencollective.com/filerev" target="_blank">
+  <img width="70" src="https://images.opencollective.com/filerev/93a8f05/logo/256.png?height=256" />
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/radioplusexperts" target="_blank">
@@ -137,6 +151,14 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/storyblok" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/Ayo1984" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/117122666?v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://anonstories.com" target="_blank">
+  <img alt="Instagram Story Viewer" width="70" src="https://avatars.githubusercontent.com/u/240702364?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
