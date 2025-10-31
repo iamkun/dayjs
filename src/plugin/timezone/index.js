@@ -9,6 +9,8 @@ const typeToPos = {
   second: 5
 }
 
+const enParseFormat = 'M/D/YYYY, h:mm:ss A';
+
 // Cache time-zone lookups from Intl.DateTimeFormat,
 // as it is a *very* slow method.
 const dtfCache = {}
@@ -96,14 +98,14 @@ export default (o, c, d) => {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
+    const diff = Math.round((date - d(target, enParseFormat).toDate()) / 1000 / 60)
     const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
     const isUTC = !Number(offset)
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
       ins = this.utcOffset(0, keepLocalTime)
     } else {
-      ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
+      ins = d(target, enParseFormat, this.$L).$set(MS, this.$ms)
         .utcOffset(offset, true)
       if (keepLocalTime) {
         const newOffset = ins.utcOffset()
