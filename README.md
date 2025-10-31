@@ -100,7 +100,7 @@ Day.js has great support for internationalization.
 But none of them will be included in your build unless you use it.
 
 ```javascript
-import 'dayjs/locale/es' // load on demand
+import 'dayjs/locale/es.js' // load on demand
 
 dayjs.locale('es') // use Spanish locale globally
 
@@ -114,7 +114,7 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 A plugin is an independent module that can be added to Day.js to extend functionality or add new features.
 
 ```javascript
-import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
+import advancedFormat from 'dayjs/plugin/advancedFormat.js' // load on demand
 
 dayjs.extend(advancedFormat) // use plugin
 
