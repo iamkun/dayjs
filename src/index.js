@@ -60,19 +60,35 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
+function offsetFromString(string) {
+  if (!string) return 0
+  if (string === 'Z') return 0
+  const parts = string.match(/([+-]|\d\d)/g)
+  const minutes = +(parts[1] * 60) + (+parts[2] || 0)
+  return minutes === 0 ? 0 : parts[0] === '+' ? -minutes : minutes // eslint-disable-line no-nested-ternary
+}
+
 const parseDate = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
-  if (typeof date === 'string' && !/Z$/i.test(date)) {
+  if (typeof date === 'string') {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
       const m = d[2] - 1 || 0
       const ms = (d[7] || '0').substring(0, 3)
-      if (utc) {
+      let offset
+      if (!Utils.u(d[8])) {
+        offset = offsetFromString(d[8])
+      }
+      if (utc && Utils.u(offset)) {
         return new Date(Date.UTC(d[1], m, d[3]
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+      }
+      if (utc || !Utils.u(offset)) {
+        return new Date(Date.UTC(d[1], m, d[3]
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, +ms + (offset * 60 * 1000)))
       }
       return new Date(d[1], m, d[3]
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
