@@ -1,3 +1,13 @@
+## [1.11.19](https://github.com/iamkun/dayjs/compare/v1.11.18...v1.11.19) (2025-10-31)
+
+
+### Bug Fixes
+
+* added usage warnings for diff + updated unit tests ([#2948](https://github.com/iamkun/dayjs/issues/2948)) ([269a7a9](https://github.com/iamkun/dayjs/commit/269a7a9cf3649b7a4b328e771173701764a8480d))
+* dont instantiate regexes within ar locale functions to avoid performance overhead ([#2898](https://github.com/iamkun/dayjs/issues/2898)) ([af5e9f0](https://github.com/iamkun/dayjs/commit/af5e9f0e7649cbd1ecf707daab8303f2733f2563))
+* replace italian locale "un' ora fa" with "un'ora fa", add tests for it ([#2930](https://github.com/iamkun/dayjs/issues/2930)) ([9e9f76c](https://github.com/iamkun/dayjs/commit/9e9f76cf117fa834260b30193434bc4481b4b6be))
+* Updated Belarusian locale with relative time ([#2656](https://github.com/iamkun/dayjs/issues/2656)) ([1d8746c](https://github.com/iamkun/dayjs/commit/1d8746c23bd667bde80ee627a915301ebd69e1a2))
+
 ## [1.11.18](https://github.com/iamkun/dayjs/compare/v1.11.17...v1.11.18) (2025-08-30)
 
 
