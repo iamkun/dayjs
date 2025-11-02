@@ -328,6 +328,10 @@ class Dayjs {
           return String(this.$s)
         case 'ss':
           return Utils.s(this.$s, 2, '0')
+        case 'S':
+          return String(Math.round(this.$ms / 100))
+        case 'SS':
+          return Utils.s(Math.round(this.$ms / 10), 2, '0')
         case 'SSS':
           return Utils.s(this.$ms, 3, '0')
         case 'Z':
