@@ -60,8 +60,19 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
+const isLenient = (date, inputs) => {
+  if (
+    date.getFullYear() === Number(inputs.year) &&
+    date.getMonth() === Number(inputs.month) &&
+    date.getDate() === Number(inputs.day)
+  ) {
+    return false
+  }
+  return true
+}
+
 const parseDate = (cfg) => {
-  const { date, utc } = cfg
+  const { date, utc, disallowLenient } = cfg
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
@@ -74,8 +85,20 @@ const parseDate = (cfg) => {
         return new Date(Date.UTC(d[1], m, d[3]
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
       }
-      return new Date(d[1], m, d[3]
+      const parsedDate = new Date(d[1], m, d[3]
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+      if (disallowLenient && isLenient(parsedDate, {
+        year: d[1],
+        month: m,
+        day: d[3] || 1,
+        hour: d[4] || 0,
+        minute: d[5] || 0,
+        second: d[6] || 0,
+        millisecond: ms
+      })) {
+        return new Date(NaN)
+      }
+      return parsedDate
     }
   }
 
