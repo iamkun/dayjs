@@ -3,8 +3,13 @@ on:
   push:
     branches: [master]
 
+permissions:
+  contents: read
+
 jobs:
   lint-and-test:
+    permissions:
+      contents: read
     uses: ./.github/workflows/lint-test.yml
     secrets:
       inherit
