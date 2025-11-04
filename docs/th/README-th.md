@@ -8,6 +8,20 @@
 
 ---
 
+<div align="center" style="margin-top: 30px;">
+<a href="https://requestly.com/?utm_source=github&utm_medium=partnered&utm_campaign=rq_dayjs_github">
+   <div>
+   <img alt="Requestly sponsorship" width="400" src="https://github.com/user-attachments/assets/24670320-997d-4d62-9bca-955c59fe883d">
+   </div>
+   <b>Requestly - ทางเลือกฟรีและโอเพนซอร์สแทน Postman</b>
+   <div>
+      <sup>แพลตฟอร์มแบบครบวงจรสำหรับทดสอบ, จำลอง (Mock) และดักจับ (Intercept) API</sup>
+   </div>
+</a>
+</div>
+
+---   
+
 [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md) | [Türkçe](../tr/README-tr.md) | [සිංහල](../si/README-si.md) | [עברית](../he/README-he.md) | ไทย
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
