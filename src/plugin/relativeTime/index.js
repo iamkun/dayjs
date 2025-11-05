@@ -27,13 +27,14 @@ export default (o, c, d) => {
       { l: 'mm', r: 44, d: C.MIN },
       { l: 'h', r: 89 },
       { l: 'hh', r: 21, d: C.H },
-      { l: 'd', r: 35 },
-      { l: 'dd', r: 25, d: C.D },
-      { l: 'M', r: 45 },
-      { l: 'MM', r: 10, d: C.M },
-      { l: 'y', r: 17 },
+      { l: 'd', r: 30 }, // stay in days until ~30
+      { l: 'dd', r: 30, d: C.D }, // handle multiple days
+      { l: 'M', r: 1.5 }, // true month threshold (>= 1.5 months)
+      { l: 'MM', r: 11, d: C.M },
+      { l: 'y', r: 1.5 },
       { l: 'yy', d: C.Y }
     ]
+
     const Tl = T.length
     let result
     let out
