@@ -90,6 +90,11 @@ export default (o, c, d) => {
     return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
   }
 
+  const hasTimeZone = (dateTimeString) => {
+    const timeZoneRegex = /\+\d{4}|\-\d{4}|[\+\-]\d{2}:\d{2}|UTC|GMT$|Z$/i;
+    return timeZoneRegex.test(dateTimeString);
+  };
+
   const proto = c.prototype
 
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
@@ -136,8 +141,8 @@ export default (o, c, d) => {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
     const previousOffset = tzOffset(+d(), timezone)
-    if (typeof input !== 'string') {
-      // timestamp number || js Date || Day.js
+    if ((typeof input !== 'string') || hasTimeZone(input)) {
+      // timestamp number || js Date || Day.js || date with time zone
       return d(input).tz(timezone)
     }
     const localTs = d.utc(input, parseFormat).valueOf()
