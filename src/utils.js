@@ -6,6 +6,12 @@ const padStart = (string, length, pad) => {
   return `${Array((length + 1) - s.length).join(pad)}${string}`
 }
 
+const padEnd = (string, length, pad) => {
+  const s = String(string)
+  if (!s || s.length >= length) return string
+  return `${string}${Array((length + 1) - s.length).join(pad)}`
+}
+
 const padZoneStr = (instance) => {
   const negMinutes = -instance.utcOffset()
   const minutes = Math.abs(negMinutes)
@@ -47,6 +53,7 @@ const isUndefined = s => s === undefined
 
 export default {
   s: padStart,
+  e: padEnd,
   z: padZoneStr,
   m: monthDiff,
   a: absFloor,
