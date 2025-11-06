@@ -11,6 +11,8 @@ const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
 const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+const durationAspNetStyleRegex = /(\d+)?\.?\s?(\d{2}):(\d{2}):?(\d{2})?\.?(\d{1,3})?$/
+
 
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
@@ -82,6 +84,7 @@ class Duration {
     }
     if (typeof input === 'string') {
       const d = input.match(durationRegex)
+      const durationAspNetStyle = input.match(durationAspNetStyleRegex)
       if (d) {
         const properties = d.slice(2)
         const numberD = properties.map(value => (value != null ? Number(value) : 0));
@@ -93,6 +96,20 @@ class Duration {
           this.$d.hours,
           this.$d.minutes,
           this.$d.seconds
+        ] = numberD
+        this.calMilliseconds()
+        return this
+      }
+
+      if (durationAspNetStyle) {
+        const properties = durationAspNetStyle.slice(1)
+        const numberD = properties.map(value => (value != null ? Number(value) : 0));
+        [
+          this.$d.days,
+          this.$d.hours,
+          this.$d.minutes,
+          this.$d.seconds,
+          this.$d.milliseconds
         ] = numberD
         this.calMilliseconds()
         return this
