@@ -26,6 +26,15 @@ export default (o, c, d) => {
       }
       return oldLocale(preset, object, isLocal)
     }
+
+    const oldDiff = proto.diff
+    proto.diff = function (date, unit, float) {
+      const isInvalidDate = !date || !d(date).isValid()
+      if (isInvalidDate) {
+        console.warn('Invalid usage: diff() requires a valid comparison date as the first argument. https://day.js.org/docs/en/display/difference')
+      }
+
+      return oldDiff.call(this, date, unit, float)
+    }
   }
 }
-

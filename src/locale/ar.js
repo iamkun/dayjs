@@ -29,6 +29,12 @@ const numberMap = {
   '٠': '0'
 }
 
+const fromArabNumeralsRegex = /[١٢٣٤٥٦٧٨٩٠]/g
+const fromArabComaRegex = /،/g
+
+const toArabNumeralsRegex = /\d/g
+const toArabComaRegex = /,/g
+
 const locale = {
   name: 'ar',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -56,15 +62,15 @@ const locale = {
   preparse(string) {
     return string
       .replace(
-        /[١٢٣٤٥٦٧٨٩٠]/g,
+        fromArabNumeralsRegex,
         match => numberMap[match]
       )
-      .replace(/،/g, ',')
+      .replace(fromArabComaRegex, ',')
   },
   postformat(string) {
     return string
-      .replace(/\d/g, match => symbolMap[match])
-      .replace(/,/g, '،')
+      .replace(toArabNumeralsRegex, match => symbolMap[match])
+      .replace(toArabComaRegex, '،')
   },
   ordinal: n => n,
   formats: {
