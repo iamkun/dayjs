@@ -154,4 +154,24 @@ export default (o, c, d) => {
   d.tz.setDefault = function (timezone) {
     defaultTimezone = timezone
   }
+
+
+  // --- DST fix: Recompute timezone offset on every init ---
+  const oldInit = c.prototype.init
+  c.prototype.init = function (...args) {
+    const result = oldInit.apply(this, args)
+
+    if (this.$x && this.$x.$timezone) {
+      try {
+        const offset = tzOffset(this.$d, this.$x.$timezone)
+        if (typeof offset === 'number') {
+          this.$offset = offset
+        }
+      } catch (err) {
+        // silently ignore failures
+      }
+    }
+
+    return result
+  }
 }
