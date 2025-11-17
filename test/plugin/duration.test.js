@@ -309,3 +309,54 @@ describe('Format', () => {
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
 })
+
+it('humanize() with round: false option', () => {
+  // Test case from issue #2970: 45 minutes
+  expect(dayjs.duration({ minutes: 45 }).humanize({ round: false }))
+    .toBe('45 minutes')
+
+  // Test case from issue #2970: 10 seconds
+  expect(dayjs.duration({ seconds: 10 }).humanize({ round: false }))
+    .toBe('10 seconds')
+
+  // Test single second
+  expect(dayjs.duration({ seconds: 1 }).humanize({ round: false }))
+    .toBe('a few seconds')
+
+  // Test 1 minute
+  expect(dayjs.duration({ minutes: 1 }).humanize({ round: false }))
+    .toBe('a minute')
+
+  // Test 2 hours
+  expect(dayjs.duration({ hours: 2 }).humanize({ round: false }))
+    .toBe('2 hours')
+
+  // Test 1 year
+  expect(dayjs.duration({ years: 1 }).humanize({ round: false }))
+    .toBe('a year')
+
+  // --- Test backward compatibility (old way) ---
+  expect(dayjs.duration({ minutes: 45 }).humanize())
+    .toBe('an hour')
+
+  // --- Test suffix (withSuffix: true) + rounding off ---
+  expect(dayjs.duration({ minutes: 45 }).humanize({ round: false, withSuffix: true }))
+    .toBe('in 45 minutes')
+
+  // --- Test suffix (withSuffix: true) + rounding on (old way) ---
+  expect(dayjs.duration({ minutes: 45 }).humanize(true))
+    .toBe('in an hour')
+
+  // --- Test negative duration ---
+  expect(dayjs.duration({ minutes: -45 }).humanize({ round: false, withSuffix: true }))
+    .toBe('45 minutes ago')
+
+  // --- NEW TESTS FOR 100% COVERAGE ---
+  // Test fallback for zero/milliseconds
+  expect(dayjs.duration({ milliseconds: 100 }).humanize({ round: false }))
+    .toBe('a few seconds')
+
+  // Test fallback for zero/milliseconds WITH suffix
+  expect(dayjs.duration({ milliseconds: 200 }).humanize({ round: false, withSuffix: true }))
+    .toBe('in a few seconds')
+})
