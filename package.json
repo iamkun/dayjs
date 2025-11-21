@@ -5,7 +5,7 @@
   "main": "dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
+    "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest --coverage --coverageThreshold='{ \"global\": { \"lines\": 100} }'",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
@@ -36,21 +36,6 @@
       "src/**/*"
     ]
   },
-  "release": {
-    "prepare": [
-      {
-        "path": "@semantic-release/changelog"
-      },
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "CHANGELOG.md"
-          ]
-        }
-      ]
-    ]
-  },
   "keywords": [
     "dayjs",
     "date",
@@ -70,6 +55,7 @@
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
+    "@semantic-release/github": "^11.0.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -85,7 +71,7 @@
     "karma-jasmine": "^1.1.2",
     "karma-sauce-launcher": "^1.1.0",
     "mockdate": "^2.0.2",
-    "moment": "2.27.0",
+    "moment": "2.29.2",
     "moment-timezone": "0.5.31",
     "ncp": "^2.0.0",
     "pre-commit": "^1.2.2",

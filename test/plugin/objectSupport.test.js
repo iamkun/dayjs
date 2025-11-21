@@ -140,6 +140,12 @@ it('Constructor from Object UTC', () => {
     expect(moment.utc(tests[i][0]).format(fmt)).toBe(result)
   }
 })
+
+it('Constructor from null should return Invalid Date', () => {
+  expect(dayjs(null).isValid()).toBe(false)
+  expect(moment(null).isValid()).toBe(false)
+})
+
 it('Set from Object', () => {
   for (let i = 0; i < tests.length; i += 1) {
     expect(dayjs(now).set(tests[i][0]).format(fmt)).toBe(moment(now).set(tests[i][0]).format(fmt))
@@ -383,4 +389,12 @@ it('add decimal values of days and months', () => {
   expect(dayjs([2016, 1, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-01-01')
   expect(dayjs([2016, 7, 1]).add(1.6, 'years').format('YYYY-MM-DD')).toBe('2017-07-01')
   expect(dayjs([2016, 1, 1]).add(1.1, 'quarters').format('YYYY-MM-DD')).toBe('2016-04-01')
+})
+
+it('returns valid date on undefined', () => {
+  expect(dayjs().isValid()).toBe(true)
+})
+
+it('returns invalid date on null', () => {
+  expect(dayjs(null).isValid()).toBe(false)
 })

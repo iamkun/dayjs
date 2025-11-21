@@ -1,0 +1,43 @@
+name: Release
+on:
+  push:
+    branches: [master]
+
+jobs:
+  lint-and-test:
+    uses: ./.github/workflows/lint-test.yml
+    secrets:
+      inherit
+  release:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Build
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+        run: npm run build && npm run babel
+      - name: Verify provenance
+        run: npm audit signatures
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm install @semantic-release/changelog @semantic-release/git semantic-release --no-save
+          npx patch-package
+          npx semantic-release

@@ -3,6 +3,8 @@ import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
 import '../../src/locale/de'
+import '../../src/locale/de-at'
+import '../../src/locale/de-ch'
 
 dayjs.extend(relativeTime)
 
@@ -39,11 +41,15 @@ it('German locale relative time in past and future with suffix', () => {
     [4, 'y', 'in 4 Jahren'],
     [-4, 'y', 'vor 4 Jahren']
   ]
-  cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('de').fromNow())
-      .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('de').fromNow())
-      .toBe(moment().add(c[0], c[1]).locale('de').fromNow())
+
+  const locales = ['de', 'de-at', 'de-ch']
+  locales.forEach((locale) => {
+    cases.forEach((c) => {
+      expect(dayjs().add(c[0], c[1]).locale(locale).fromNow())
+        .toBe(c[2])
+      expect(dayjs().add(c[0], c[1]).locale(locale).fromNow())
+        .toBe(moment().add(c[0], c[1]).locale(locale).fromNow())
+    })
   })
 })
 
@@ -70,10 +76,27 @@ it('German locale relative time in past and future without suffix', () => {
     [4, 'y', '4 Jahre'],
     [-4, 'y', '4 Jahre']
   ]
-  cases.forEach((c) => {
-    expect(dayjs().add(c[0], c[1]).locale('de').fromNow(true))
-      .toBe(c[2])
-    expect(dayjs().add(c[0], c[1]).locale('de').fromNow(true))
-      .toBe(moment().add(c[0], c[1]).locale('de').fromNow(true))
+
+  const locales = ['de', 'de-at', 'de-ch']
+  locales.forEach((locale) => {
+    cases.forEach((c) => {
+      expect(dayjs().add(c[0], c[1]).locale(locale).fromNow(true))
+        .toBe(c[2])
+      expect(dayjs().add(c[0], c[1]).locale(locale).fromNow(true))
+        .toBe(moment().add(c[0], c[1]).locale(locale).fromNow(true))
+    })
+  })
+})
+
+it('German locales use region specific names', () => {
+  const locales = [
+    { locale: 'de', expectedFormattedDate: 'Mi., 19. Januar 2022' },
+    { locale: 'de-at', expectedFormattedDate: 'Mi., 19. Jänner 2022' },
+    { locale: 'de-ch', expectedFormattedDate: 'Mi, 19. Januar 2022' }
+  ]
+
+  locales.forEach((locale) => {
+    const dayjsWithLocale = dayjs('2022-01-19').locale(locale.locale)
+    expect(dayjsWithLocale.format('ddd, D. MMMM YYYY')).toEqual(locale.expectedFormattedDate)
   })
 })

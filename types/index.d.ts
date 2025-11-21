@@ -19,7 +19,7 @@ declare namespace dayjs {
 
   export type OptionType = FormatObject | string | string[]
 
-  export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
+  export type UnitTypeShort = 'd' | 'D' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms'
 
   export type UnitTypeLong = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date'
 
@@ -29,7 +29,7 @@ declare namespace dayjs {
 
   export type OpUnitType = UnitType | "week" | "weeks" | 'w';
   export type QUnitType = UnitType | "quarter" | "quarters" | 'Q';
-  export type ManipulateType = Omit<OpUnitType, 'date' | 'dates'>;
+  export type ManipulateType = Exclude<OpUnitType, 'date' | 'dates'>;
   class Dayjs {
     constructor (config?: ConfigType)
     /**
@@ -114,7 +114,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/get-set/day
      */
-    day(): number
+    day(): 0 | 1 | 2 | 3 | 4 | 5 | 6
     /**
      * Set the day of the week.
      *
@@ -382,7 +382,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/query/is-before
      */
-    isBefore(date: ConfigType, unit?: OpUnitType): boolean
+    isBefore(date?: ConfigType, unit?: OpUnitType): boolean
     /**
      * This indicates whether the Day.js object is the same as the other supplied date-time.
      * ```
@@ -394,7 +394,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/query/is-same
      */
-    isSame(date: ConfigType, unit?: OpUnitType): boolean
+    isSame(date?: ConfigType, unit?: OpUnitType): boolean
     /**
      * This indicates whether the Day.js object is after the other supplied date-time.
      * ```
@@ -408,7 +408,7 @@ declare namespace dayjs {
      *
      * Docs: https://day.js.org/docs/en/query/is-after
      */
-    isAfter(date: ConfigType, unit?: OpUnitType): boolean
+    isAfter(date?: ConfigType, unit?: OpUnitType): boolean
 
     locale(): string
 

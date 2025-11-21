@@ -50,3 +50,13 @@ it('RelativeTime: Time from X gets formatted', () => {
       .toBe(t[2])
   })
 })
+
+it('Format meridiem with locale function', () => {
+  for (let i = 0; i <= 23; i += 1) {
+    const hour = dayjs()
+      .startOf('day')
+      .add(i, 'hour')
+    const meridiem = i > 12 ? 'م' : 'ص'
+    expect(hour.locale('ar').format('A')).toBe(`${meridiem}`)
+  }
+})

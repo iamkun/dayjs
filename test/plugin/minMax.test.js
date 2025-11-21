@@ -55,3 +55,17 @@ it('If Invalid Date return Invalid Date', () => {
   expect(dayjs.min([arg1, arg2, arg3, arg4]).format())
     .toBe(arg4.format())
 })
+
+it('Ignore if exists an "null" argument', () => {
+  expect(dayjs.max(null, null, arg1, arg2, null, arg3).format())
+    .toBe(arg1.format())
+  expect(dayjs.min([null, null, arg1, arg2, null, arg3]).format())
+    .toBe(arg3.format())
+})
+
+it('Return the only date if just provided one argument', () => {
+  expect(dayjs.max(arg1).format())
+    .toBe(arg1.format())
+  expect(dayjs.min([arg1]).format())
+    .toBe(arg1.format())
+})

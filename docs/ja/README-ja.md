@@ -1,4 +1,6 @@
-<p align="center"><a href="#" target="_blank" rel="noopener noreferrer"><img width="550"
+日本語 | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md) | [Русский](../ru/README-ru.md)| [עברית](../he/README-he.md)
+
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Moment.js と同じ API を備えた <b>2kB</b> の軽量ライブラリ</p>
@@ -9,8 +11,8 @@
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square"
                                                        alt="NPM Version"></a>
-    <a href="https://travis-ci.org/iamkun/dayjs"><img
-            src="https://img.shields.io/travis/iamkun/dayjs/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://github.com/iamkun/dayjs/actions/workflows/check.yml"><img
+            src="https://img.shields.io/github/actions/workflow/status/iamkun/dayjs/check.yml?style=flat-square" alt="Build Status"></a>
     <a href="https://codecov.io/gh/iamkun/dayjs"><img
             src="https://img.shields.io/codecov/c/github/iamkun/dayjs/master.svg?style=flat-square" alt="Codecov"></a>
     <a href="https://github.com/iamkun/dayjs/blob/master/LICENSE"><img
@@ -42,9 +44,9 @@ dayjs()
 
 ## はじめに
 
-### Documentation
+### ドキュメント
 
-You can find for more details, API, and other docs on [day.js.org](https://day.js.org/) website.
+詳細、API、その他のドキュメントについては、[day.js.org](https://day.js.org/) のウェブサイトを参照してください。
 
 ### インストール
 

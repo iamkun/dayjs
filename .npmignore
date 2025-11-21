@@ -20,6 +20,7 @@ build
 babel.config.js
 prettier.config.js
 .eslintrc.json
+patches
 
 #doc
 CONTRIBUTING.md
@@ -29,3 +30,4 @@ docs
 .travis.yml
 karma.sauce.conf.js
 .github
+.releaserc

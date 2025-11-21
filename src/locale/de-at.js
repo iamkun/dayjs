@@ -1,6 +1,28 @@
 // German (Austria) [de-at]
 import dayjs from 'dayjs'
 
+const texts = {
+  s: 'ein paar Sekunden',
+  m: ['eine Minute', 'einer Minute'],
+  mm: '%d Minuten',
+  h: ['eine Stunde', 'einer Stunde'],
+  hh: '%d Stunden',
+  d: ['ein Tag', 'einem Tag'],
+  dd: ['%d Tage', '%d Tagen'],
+  M: ['ein Monat', 'einem Monat'],
+  MM: ['%d Monate', '%d Monaten'],
+  y: ['ein Jahr', 'einem Jahr'],
+  yy: ['%d Jahre', '%d Jahren']
+}
+
+function relativeTimeFormatter(number, withoutSuffix, key) {
+  let l = texts[key]
+  if (Array.isArray(l)) {
+    l = l[withoutSuffix ? 0 : 1]
+  }
+  return l.replace('%d', number)
+}
+
 const locale = {
   name: 'de-at',
   weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
@@ -21,17 +43,17 @@ const locale = {
   relativeTime: {
     future: 'in %s',
     past: 'vor %s',
-    s: 'ein paar Sekunden',
-    m: 'einer Minute',
-    mm: '%d Minuten',
-    h: 'einer Stunde',
-    hh: '%d Stunden',
-    d: 'einem Tag',
-    dd: '%d Tagen',
-    M: 'einem Monat',
-    MM: '%d Monaten',
-    y: 'einem Jahr',
-    yy: '%d Jahren'
+    s: relativeTimeFormatter,
+    m: relativeTimeFormatter,
+    mm: relativeTimeFormatter,
+    h: relativeTimeFormatter,
+    hh: relativeTimeFormatter,
+    d: relativeTimeFormatter,
+    dd: relativeTimeFormatter,
+    M: relativeTimeFormatter,
+    MM: relativeTimeFormatter,
+    y: relativeTimeFormatter,
+    yy: relativeTimeFormatter
   }
 }
 

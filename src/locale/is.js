@@ -1,6 +1,45 @@
 // Icelandic [is]
 import dayjs from 'dayjs'
 
+const texts = {
+  s: ['nokkrar sekúndur', 'nokkrar sekúndur', 'nokkrum sekúndum'],
+  m: ['mínúta', 'mínútu', 'mínútu'],
+  mm: ['mínútur', 'mínútur', 'mínútum'],
+  h: ['klukkustund', 'klukkustund', 'klukkustund'],
+  hh: ['klukkustundir', 'klukkustundir', 'klukkustundum'],
+  d: ['dagur', 'dag', 'degi'],
+  dd: ['dagar', 'daga', 'dögum'],
+  M: ['mánuður', 'mánuð', 'mánuði'],
+  MM: ['mánuðir', 'mánuði', 'mánuðum'],
+  y: ['ár', 'ár', 'ári'],
+  yy: ['ár', 'ár', 'árum']
+}
+
+function resolveTemplate(key, number, isFuture, withoutSuffix) {
+  const suffixIndex = isFuture
+    ? 1
+    : 2
+
+  const index = withoutSuffix
+    ? 0
+    : suffixIndex
+
+  const keyShouldBeSingular = key.length === 2 && number % 10 === 1
+
+  const correctedKey = keyShouldBeSingular ? key[0] : key
+  const unitText = texts[correctedKey]
+  const text = unitText[index]
+  return key.length === 1
+    ? text
+    : `%d ${text}`
+}
+
+function relativeTimeFormatter(number, withoutSuffix, key, isFuture) {
+  const template = resolveTemplate(key, number, isFuture, withoutSuffix)
+
+  return template.replace('%d', number)
+}
+
 const locale = {
   name: 'is',
   weekdays: 'sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur'.split('_'),
@@ -17,10 +56,24 @@ const locale = {
     LL: 'D. MMMM YYYY',
     LLL: 'D. MMMM YYYY [kl.] H:mm',
     LLLL: 'dddd, D. MMMM YYYY [kl.] H:mm'
+  },
+  relativeTime: {
+    future: 'eftir %s',
+    past: 'fyrir %s síðan',
+    s: relativeTimeFormatter,
+    m: relativeTimeFormatter,
+    mm: relativeTimeFormatter,
+    h: relativeTimeFormatter,
+    hh: relativeTimeFormatter,
+    d: relativeTimeFormatter,
+    dd: relativeTimeFormatter,
+    M: relativeTimeFormatter,
+    MM: relativeTimeFormatter,
+    y: relativeTimeFormatter,
+    yy: relativeTimeFormatter
   }
 }
 
 dayjs.locale(locale, null, true)
 
 export default locale
-

@@ -8,7 +8,7 @@ const locale = {
   weekdaysMin: '일_월_화_수_목_금_토'.split('_'),
   months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
   monthsShort: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
-  ordinal: n => n,
+  ordinal: n => `${n}일`,
   formats: {
     LT: 'A h:mm',
     LTS: 'A h:mm:ss',

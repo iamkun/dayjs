@@ -1,20 +1,20 @@
 module.exports = {
-  "env": {
-    "test": {
-      "presets": [
-        "@babel/preset-env"
+  env: {
+    test: {
+      presets: [
+        '@babel/preset-env'
       ]
     },
-    "build": {
-      "presets": [
+    build: {
+      presets: [
         [
-          "@babel/preset-env",
+          '@babel/preset-env',
           {
-            "modules": false,
-            "loose": true
+            modules: false,
+            loose: true
           }
         ]
       ]
     }
   }
-};
+}

@@ -2,6 +2,7 @@
 import dayjs from 'dayjs'
 
 const months = 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split('_')
+
 const symbolMap = {
   1: '١',
   2: '٢',
@@ -28,6 +29,12 @@ const numberMap = {
   '٠': '0'
 }
 
+const fromArabNumeralsRegex = /[١٢٣٤٥٦٧٨٩٠]/g
+const fromArabComaRegex = /،/g
+
+const toArabNumeralsRegex = /\d/g
+const toArabComaRegex = /,/g
+
 const locale = {
   name: 'ar',
   weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -36,6 +43,7 @@ const locale = {
   months,
   monthsShort: months,
   weekStart: 6,
+  meridiem: hour => (hour > 12 ? 'م' : 'ص'),
   relativeTime: {
     future: 'بعد %s',
     past: 'منذ %s',
@@ -54,15 +62,15 @@ const locale = {
   preparse(string) {
     return string
       .replace(
-        /[١٢٣٤٥٦٧٨٩٠]/g,
+        fromArabNumeralsRegex,
         match => numberMap[match]
       )
-      .replace(/،/g, ',')
+      .replace(fromArabComaRegex, ',')
   },
   postformat(string) {
     return string
-      .replace(/\d/g, match => symbolMap[match])
-      .replace(/,/g, '،')
+      .replace(toArabNumeralsRegex, match => symbolMap[match])
+      .replace(toArabComaRegex, '،')
   },
   ordinal: n => n,
   formats: {

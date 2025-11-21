@@ -1,0 +1,12 @@
+name: Lint & Unit Test
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  check:
+    uses: ./.github/workflows/lint-test.yml
+    secrets:
+      inherit

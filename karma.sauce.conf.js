@@ -1,6 +1,5 @@
 module.exports = function (config) {
-
-  var batches = [
+  const batches = [
     {
       sl_chrome_26: {
         base: 'SauceLabs',
@@ -75,9 +74,9 @@ module.exports = function (config) {
         browserName: 'android'
       }
     }
-  ];
+  ]
 
-  var batch = batches[process.argv[4] || 0]
+  const batch = batches[process.argv[4] || 0]
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
@@ -97,5 +96,5 @@ module.exports = function (config) {
     customLaunchers: batch,
     browsers: Object.keys(batch),
     singleRun: true
-  });
-};
+  })
+}
