@@ -139,6 +139,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://images.opencollective.com/carboneio/fe2066c/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://automatio.ai" target="_blank" alt="Automatio AI">
+  <img width="70" src="https://avatars.githubusercontent.com/u/1984909?v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/Ayo1984" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/117122666?v=4">
 </a>
