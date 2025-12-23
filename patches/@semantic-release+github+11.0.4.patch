@@ -1,0 +1,13 @@
+diff --git a/node_modules/@semantic-release/github/lib/success.js b/node_modules/@semantic-release/github/lib/success.js
+index 29c8def..7e57161 100644
+--- a/node_modules/@semantic-release/github/lib/success.js
++++ b/node_modules/@semantic-release/github/lib/success.js
+@@ -118,6 +118,8 @@ export default async function success(pluginConfig, context, { Octokit }) {
+     const uniqueAssociatedPRs = uniqBy(flatten(associatedPRs), "number");
+ 
+     const prs = await pFilter(uniqueAssociatedPRs, async ({ number }) => {
++      console.log('number: ', number);
++      if (number < 2000) return false;
+       const commits = await octokit.paginate(
+         "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits",
+         {

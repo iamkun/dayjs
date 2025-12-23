@@ -23,7 +23,7 @@ const locale = {
     s: 'qualche secondo',
     m: 'un minuto',
     mm: '%d minuti',
-    h: 'un\' ora',
+    h: 'un\'ora',
     hh: '%d ore',
     d: 'un giorno',
     dd: '%d giorni',
