@@ -108,6 +108,17 @@ describe('Parse ISO string', () => {
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
+  it('ISO string with minutes exceeding 60 should normalize', () => {
+    const d = dayjs.duration('PT75M')
+    expect(d.minutes()).toBe(15)
+    expect(d.hours()).toBe(1)
+    expect(d.format('H:m')).toBe('1:15')
+  })
+  it('ISO string with 70 minutes should normalize to 1 hour 10 minutes', () => {
+    const d = dayjs.duration('PT70M')
+    expect(d.minutes()).toBe(10)
+    expect(d.hours()).toBe(1)
+  })
 })
 
 it('Is duration', () => {
