@@ -5,8 +5,13 @@ on:
   pull_request:
     branches: [dev]
 
+permissions:
+  contents: read
+
 jobs:
   check:
     uses: ./.github/workflows/lint-test.yml
+    permissions:
+      contents: read
     secrets:
       inherit
