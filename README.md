@@ -83,7 +83,7 @@ dayjs().isBefore(dayjs()) // query
 
 Day.js has great support for internationalization.
 
-But none of them will be included in your build unless you use it.
+But none of them will be included in your build unless you use them.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
