@@ -134,10 +134,6 @@ Toa mchango wako kwa huu mradi kwa kuwa mfadhili. Nembo yako itaonekana hapa pam
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/storyblok" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/159320286" alt="BestKru">
 </a>
