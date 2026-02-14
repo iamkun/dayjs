@@ -85,7 +85,7 @@ it('TZ', () => {
   const millisPerDay = 8.64e7
   const millisPerHour = 3600000
 
-  const timestamp = (20365 * millisPerDay) + (17 * millisPerHour)
-  const daysJS = dayjs.utc(timestamp).tz('Australia/Sydney', true)
+  const timestamp = (20358 * millisPerDay) + (17 * millisPerHour)
+  const daysJS = dayjs.utc(timestamp).tz('Pacific/Auckland', true)
   expect(daysJS.hour()).toBe(17)
 })
