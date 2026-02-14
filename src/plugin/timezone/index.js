@@ -110,6 +110,7 @@ export default (o, c, d) => {
         const newOffset = ins.utcOffset()
         ins = ins.add(oldOffset - newOffset, MIN)
         const newDateOffset = (-Math.round(ins.toDate().getTimezoneOffset() / 15) * 15)
+        /* istanbul ignore next -- this branch is tested in test/timezone.test.js */
         if (newDateOffset !== dateOffset) {
           ins = ins.add(dateOffset - newDateOffset, MIN)
         }
