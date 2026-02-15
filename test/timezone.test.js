@@ -80,3 +80,9 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('DST transition case test', () => {
+  // Test DST transition boundary case
+  const result = dayjs('2025-11-02T09:00:00Z').tz('utc').startOf('day').toISOString()
+  expect(result).toBe('2025-11-02T00:00:00.000Z')
+})
