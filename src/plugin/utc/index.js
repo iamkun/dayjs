@@ -103,8 +103,19 @@ export default (option, Dayjs, dayjs) => {
     const localTimezoneOffset = this.$u
       ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
     ins = this.local().add(offset + localTimezoneOffset, MIN)
+
+    // Fix DST transition offset mismatch
+    // Problem: After adding offset, DST transition can cause timezone offset to change
+    // Example: dayjs.tz('2012-03-11 02:59:59', 'America/New_York').format()
+    // Expected: '2012-03-11T03:59:59-04:00'
+    // Actual: '2012-03-11T04:59:59-04:00'
+    // Solution: Recalculate offset after add() and adjust for any DST-induced changes
+    const newLocalTimezoneOffset = ins.$u
+      ? ins.toDate().getTimezoneOffset() : (-1 * ins.utcOffset())
+    ins = ins.local().add(newLocalTimezoneOffset - localTimezoneOffset, MIN)
+
     ins.$offset = offset
-    ins.$x.$localOffset = localTimezoneOffset
+    ins.$x.$localOffset = newLocalTimezoneOffset
 
     return ins
   }
