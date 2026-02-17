@@ -8,8 +8,15 @@ const locale = {
   weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
   monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
   weekdaysMin: 'di_lu_ma_me_je_ve_sa'.split('_'),
-  ordinal: (n) => {
-    const o = n === 1 ? 'er' : ''
+  ordinal: (n, p) => {
+    const isFirst = n === 1
+
+    if (p === 'W') {
+      const o = isFirst ? 're' : 'e'
+      return `${n}${o}`
+    }
+
+    const o = isFirst ? 'er' : ''
     return `${n}${o}`
   },
   formats: {
