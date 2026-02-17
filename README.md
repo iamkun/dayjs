@@ -1,13 +1,3 @@
-<div align="center">
-	<a href="https://go.warp.dev/dayjs" target="_blank">
-		<img alt="Warp sponsorship" width="400" src="https://github.com/warpdotdev/brand-assets/blob/main/Github/Sponsor/Warp-Github-LG-02.png">
-		<br>
-		<h>Warp is built for coding with multiple AI agents</b>
-	</a>
-</div>
-
----   
-
 English | [简体中文](./docs/zh-cn/README.zh-CN.md) | [日本語](./docs/ja/README-ja.md) | [Português Brasileiro](./docs/pt-br/README-pt-br.md) | [한국어](./docs/ko/README-ko.md) | [Español (España)](./docs/es-es/README-es-es.md) | [Русский](./docs/ru/README-ru.md) | [Türkçe](./docs/tr/README-tr.md) | [සිංහල](./docs/si/README-si.md) | [עברית](./docs/he/README-he.md)
 
 <p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
@@ -129,10 +119,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/filerev" target="_blank">
   <img width="70" src="https://images.opencollective.com/filerev/93a8f05/logo/256.png?height=256" />
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/storyblok" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4" />
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://opencollective.com/carboneio" target="_blank">
