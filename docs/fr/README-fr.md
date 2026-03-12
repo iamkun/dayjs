@@ -131,10 +131,6 @@ Soutenez ce projet en devenant sponsor. Votre logo apparaîtra ici avec un lien 
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/storyblok" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
   <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
 </a>

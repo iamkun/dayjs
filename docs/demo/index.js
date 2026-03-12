@@ -49,3 +49,6 @@ dayjs().endOf('year').format()
 
 // week
 dayjs().week()
+
+// weekday
+dayjs().weekday()
