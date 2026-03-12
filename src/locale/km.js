@@ -32,6 +32,10 @@ const locale = {
     MM: '%d ខែ',
     y: 'មួយឆ្នាំ',
     yy: '%d ឆ្នាំ'
+  },
+  meridiem: (hour, minute, isLowercase) => {
+    // OPTIONAL, AM/PM
+    return hour > 12 ? 'ល្ងាច' : 'ព្រឹក'
   }
 }
 
