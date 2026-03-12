@@ -1,3 +1,11 @@
+## [1.11.20](https://github.com/iamkun/dayjs/compare/v1.11.19...v1.11.20) (2026-03-12)
+
+
+### Bug Fixes
+
+* Update locale km.js to support meridiem ([#3017](https://github.com/iamkun/dayjs/issues/3017)) ([9d2b6a1](https://github.com/iamkun/dayjs/commit/9d2b6a1ec744ad5db13afd4d701f93349135dfec))
+* update updateLocale plugin to merge nested object properties instead of replacing ([#3012](https://github.com/iamkun/dayjs/issues/3012)) ([99691c5](https://github.com/iamkun/dayjs/commit/99691c5f3bd1371d3b763d5f9dfaed9a1945a477)), closes [#1118](https://github.com/iamkun/dayjs/issues/1118)
+
 ## [1.11.19](https://github.com/iamkun/dayjs/compare/v1.11.18...v1.11.19) (2025-10-31)
 
 
