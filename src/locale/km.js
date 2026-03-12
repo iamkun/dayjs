@@ -32,7 +32,8 @@ const locale = {
     MM: '%d ខែ',
     y: 'មួយឆ្នាំ',
     yy: '%d ឆ្នាំ'
-  }
+  },
+  meridiem: (hour) => (hour > 12 ? 'ល្ងាច' : 'ព្រឹក')
 }
 
 dayjs.locale(locale, null, true)
