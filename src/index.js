@@ -332,13 +332,14 @@ class Dayjs {
           return Utils.s(this.$ms, 3, '0')
         case 'Z':
           return zoneStr // 'ZZ' logic below
+        case 'ZZ':
+          return zoneStr.replace(':', '')
         default:
-          break
+          return match
       }
-      return null
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match) || zoneStr.replace(':', '')) // 'ZZ'
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match))
   }
 
   utcOffset() {

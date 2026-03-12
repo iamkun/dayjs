@@ -24,6 +24,8 @@ it('Format invalid date', () => {
 it('Format Year YY YYYY', () => {
   expect(dayjs().format('YY')).toBe(moment().format('YY'))
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
+  expect(dayjs().format('Y')).toBe('Y')
+  expect(dayjs().format('Y')).toBe('YYY')
 })
 
 it('Format Month M MM MMM MMMM', () => {
