@@ -308,4 +308,9 @@ describe('Format', () => {
     expect(d.format('Y/YY.YYYYTESTM:MM:D:DD:H:HH:m:mm:s:ss:SSS'))
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
+
+  test('formats YYY as YY + Y', () => {
+    const d = dayjs.duration(2, 'years')
+    expect(d.format('YYY')).toBe('022')
+  })
 })
