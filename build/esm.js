@@ -6,9 +6,9 @@ const { ncp } = require('ncp')
 const { promisify } = util
 
 const typeFileExt = '.d.ts'
-const localeDir = path.join(process.env.PWD, 'esm/locale')
-const pluginDir = path.join(process.env.PWD, 'esm/plugin')
-const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFileExt}`);
+const localeDir = path.join(process.cwd(), 'esm/locale')
+const pluginDir = path.join(process.cwd(), 'esm/plugin')
+const localeTypePath = path.join(process.cwd(), 'esm/locale', `index${typeFileExt}`);
 
 (async () => {
   try {
