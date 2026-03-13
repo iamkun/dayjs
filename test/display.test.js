@@ -22,7 +22,9 @@ it('Format invalid date', () => {
 })
 
 it('Format Year YY YYYY', () => {
+  const date = '0001-01-01T01:01:01.000Z'
   expect(dayjs().format('YY')).toBe(moment().format('YY'))
+  expect(dayjs(date).format('YY')).toBe(moment(date).format('YY'))
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
 })
 
