@@ -12,6 +12,8 @@ const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
 const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 
+const aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+))?$/
+
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
   months: MILLISECONDS_A_MONTH,
@@ -89,6 +91,19 @@ class Duration {
           this.$d.years,
           this.$d.months,
           this.$d.weeks,
+          this.$d.days,
+          this.$d.hours,
+          this.$d.minutes,
+          this.$d.seconds
+        ] = numberD
+        this.calMilliseconds()
+        return this
+      }
+      const aspNetD = input.match(aspNetRegex)
+      if (aspNetD) {
+        const properties = aspNetD.slice(2)
+        const numberD = properties.map(value => Number(value));
+        [
           this.$d.days,
           this.$d.hours,
           this.$d.minutes,
