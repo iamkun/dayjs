@@ -19,7 +19,12 @@ export default (o, c, d) => {
     const yearStartWeek = yearStartDay.startOf(W).subtract(1, MS)
     const diffInWeek = this.diff(yearStartWeek, W, true)
     if (diffInWeek < 0) {
-      return d(this).startOf('week').week()
+      // Date is before the year start week, so it belongs to the previous year's last week
+      // Calculate the previous year's year start day
+      const prevYearStartDay = d(this).startOf(Y).subtract(1, Y).date(yearStart)
+      const prevYearStartWeek = prevYearStartDay.startOf(W).subtract(1, MS)
+      const prevDiffInWeek = this.diff(prevYearStartWeek, W, true)
+      return Math.ceil(prevDiffInWeek)
     }
     return Math.ceil(diffInWeek)
   }
