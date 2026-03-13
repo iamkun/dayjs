@@ -126,7 +126,6 @@ export default (o, c, d) => {
     if (!this.$x || !this.$x.$timezone) {
       return oldStartOf.call(this, units, startOf)
     }
-
     const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
     const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
     return startOfWithoutTz.tz(this.$x.$timezone, true)
@@ -135,18 +134,22 @@ export default (o, c, d) => {
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
-    const previousOffset = tzOffset(+d(), timezone)
     if (typeof input !== 'string') {
-      // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
-    const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
+    // Parse naive local date (no system offset)
+    const local = parseFormat ? d.utc(input, parseFormat) : d.utc(input)
+    const localTS = local.valueOf()
+    // Interpret naive timestamp inside target zone
+    const guessedOffset = tzOffset(localTS, timezone)
+    // Resolve DST gaps/overlaps
+    const [targetTs, targetOffset] = fixOffset(localTS, guessedOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
+    // preserve milliseconds inside locale
+    ins.$set(MS, local.$ms)
     ins.$x.$timezone = timezone
     return ins
   }
-
   d.tz.guess = function () {
     return Intl.DateTimeFormat().resolvedOptions().timeZone
   }
