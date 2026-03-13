@@ -55,7 +55,18 @@ describe('Creating', () => {
       weeks: 5,
       months: 6,
       years: 7
-    }).toISOString()).toBe('P7Y6M39DT3H2M1.1S')
+    }).toISOString()).toBe('P7Y6M5W4DT3H2M1.1S')
+  })
+  it('object with only weeks', () => {
+    expect(dayjs.duration({
+      weeks: 2
+    }).toISOString()).toBe('P2W')
+  })
+  it('object with year and weeks', () => {
+    expect(dayjs.duration({
+      year: 1,
+      week: 2
+    }).toISOString()).toBe('P1Y2W')
   })
   it('object with millisecond', () => {
     expect(dayjs.duration({
@@ -100,13 +111,28 @@ describe('Parse ISO string', () => {
   })
   it('ISO string with week', () => {
     const d = dayjs.duration('P2M3W4D')
-    expect(d.toISOString()).toBe('P2M25D')
+    expect(d.toISOString()).toBe('P2M3W4D')
     expect(d.asDays()).toBe(85.83333333333333) // moment 86, count 2M as 61 days
     expect(d.asWeeks()).toBe(12.261904761904763) // moment 12.285714285714286
     expect(d.asMonths()).toBe(2.8219178082191783) // moment 2.8213721020965523
   })
+  it('ISO string with only weeks', () => {
+    expect(dayjs.duration('P3W').toISOString()).toBe('P3W')
+  })
+  it('ISO string preserves weeks and days separately', () => {
+    expect(dayjs.duration('P2Y3W5D').toISOString()).toBe('P2Y3W5D')
+  })
+  it('ISO string with weeks and time components', () => {
+    expect(dayjs.duration('P1Y2W3DT4H5M6S').toISOString()).toBe('P1Y2W3DT4H5M6S')
+  })
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
+  })
+  it('Negative duration with weeks', () => {
+    expect(dayjs.duration({
+      weeks: -2,
+      days: -3
+    }).toISOString()).toBe('-P2W3D')
   })
 })
 
@@ -209,6 +235,15 @@ test('Add duration', () => {
   const b = dayjs('2023-02-01 00:00:00')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
   expect(b.add(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2024-03-02 01:01:01')
+
+  // Test duration with weeks
+  const c = dayjs('2020-01-01')
+  const weeks = dayjs.duration({ week: 2 })
+  expect(c.add(weeks).format('YYYY-MM-DD')).toBe('2020-01-15')
+
+  const d = dayjs('2020-01-01')
+  const weeksAndDays = dayjs.duration('P2W3D')
+  expect(d.add(weeksAndDays).format('YYYY-MM-DD')).toBe('2020-01-18')
 })
 
 describe('Subtract', () => {
@@ -225,6 +260,15 @@ test('Subtract duration', () => {
   const b = dayjs('2023-03-02 02:02:02')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
   expect(b.subtract(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2022-02-01 01:01:01')
+
+  // Test duration with weeks
+  const c = dayjs('2020-01-20')
+  const weeks = dayjs.duration({ week: 2 })
+  expect(c.subtract(weeks).format('YYYY-MM-DD')).toBe('2020-01-06')
+
+  const d = dayjs('2020-01-20')
+  const weeksAndDays = dayjs.duration('P1W5D')
+  expect(d.subtract(weeksAndDays).format('YYYY-MM-DD')).toBe('2020-01-08')
 })
 
 describe('Seconds', () => {
