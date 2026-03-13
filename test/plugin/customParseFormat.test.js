@@ -4,6 +4,9 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/zh-tw'
+import '../../src/locale/zh'
+import '../../src/locale/ja'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -337,6 +340,7 @@ describe('Array format support', () => {
 describe('meridiem locale', () => {
   const format = 'YYYY年M月D日Ah点mm分ss秒'
   const format2 = 'YYYY-MM-DD HH:mm:ss'
+  const timeFormat = 'h:mm A'
   it('AM', () => {
     const input = '2018-05-02 01:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
@@ -346,6 +350,64 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+  it('parse pm and am correctly for zh-cn', () => {
+    const lang = 'zh-cn'
+    let date = dayjs('11:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 中午')
+    date = dayjs('12:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('12:00 中午')
+    date = dayjs('5:00 凌晨', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 凌晨')
+    date = dayjs('6:00 早上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('6:00 早上')
+    date = dayjs('5:00 下午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 下午')
+    date = dayjs('11:00 晚上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 晚上')
+    date = dayjs('10:00 上午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('10:00 上午')
+  })
+  it('parse pm and am correctly for zh', () => {
+    const lang = 'zh-cn'
+    let date = dayjs('11:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 中午')
+    date = dayjs('12:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('12:00 中午')
+    date = dayjs('5:00 凌晨', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 凌晨')
+    date = dayjs('6:00 早上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('6:00 早上')
+    date = dayjs('5:00 下午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 下午')
+    date = dayjs('11:00 晚上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 晚上')
+    date = dayjs('10:00 上午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('10:00 上午')
+  })
+  it('parse pm and am correctly for zh-tw', () => {
+    const lang = 'zh-cn'
+    let date = dayjs('11:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 中午')
+    date = dayjs('12:00 中午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('12:00 中午')
+    date = dayjs('5:00 凌晨', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 凌晨')
+    date = dayjs('6:00 早上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('6:00 早上')
+    date = dayjs('5:00 下午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('5:00 下午')
+    date = dayjs('11:00 晚上', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('11:00 晚上')
+    date = dayjs('10:00 上午', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('10:00 上午')
+  })
+  it('parse pm and am correctly for japanese', () => {
+    const lang = 'ja'
+    let date = dayjs('9:00 午後', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('9:00 午後')
+    date = dayjs('9:00 午前', timeFormat, lang).format(timeFormat)
+    expect(date).toBe('9:00 午前')
   })
 })
 
