@@ -352,3 +352,22 @@ describe('UTC timezone', () => {
     expect(dayjs2.format()).toBe(moment2.format())
   })
 })
+
+describe('Add with timezone', () => {
+  it('add day preserves timezone correctly', () => {
+    const time = 1762066800000
+    const tz = 'US/Pacific'
+
+    const a = dayjs.tz(time, tz).add(1, 'day')
+    const b = dayjs.tz(dayjs.tz(time, tz).add(1, 'day').valueOf(), tz)
+    const c = dayjs.tz(dayjs.tz(time, tz).add(1, 'day').startOf('millisecond').valueOf(), tz)
+
+    // All three should produce the same result
+    expect(a.valueOf()).toBe(b.valueOf())
+    expect(b.valueOf()).toBe(c.valueOf())
+    expect(a.format('YYYY-MM-DD HH:mm:ss')).toBe(b.format('YYYY-MM-DD HH:mm:ss'))
+    expect(b.format('YYYY-MM-DD HH:mm:ss')).toBe(c.format('YYYY-MM-DD HH:mm:ss'))
+    expect(a.valueOf()).toBe(1762156800000)
+    expect(a.format('YYYY-MM-DD HH:mm:ss')).toBe('2025-11-03 00:00:00')
+  })
+})
