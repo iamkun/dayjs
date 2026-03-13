@@ -9,11 +9,11 @@ dayjs.extend(advancedFormat).extend(weekOfYear)
 const zh = dayjs().locale('zh')
 const zhCN = dayjs().locale('zh-cn')
 
-test('ordinal', () => {
+it('ordinal', () => {
   expect(zh.format('wo')).toEqual(`${zh.format('w')}周`)
 })
 
-test('Meridiem', () => {
+it('Meridiem', () => {
   for (let i = 0; i <= 24; i += 1) {
     expect(zh.add(i, 'hour').format('A')).toBe(zhCN.add(i, 'hour').format('A'))
   }
