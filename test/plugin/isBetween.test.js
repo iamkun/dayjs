@@ -534,6 +534,52 @@ test('is between without units inclusivity', () => {
   expect(+m).toEqual(+mCopy, 'isBetween millisecond should not change moment')
 })
 
+test('is between with invalid date', () => {
+  const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
+
+  expect(m.isBetween(
+    null,
+    null,
+    null,
+    '[]'
+  )).toBe(false, 'start and end are null inclusive, is not between')
+
+  expect(m.isBetween(
+    null,
+    null,
+    null,
+    '()'
+  )).toBe(false, 'start and end are null exclusive, is not between')
+
+  expect(m.isBetween(
+    null,
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '[]'
+  )).toBe(false, 'start is null and end is not null inclusive, is not between')
+
+  expect(m.isBetween(
+    null,
+    dayjs(new Date(2012, 3, 2, 3, 4, 5, 10)),
+    null,
+    '()'
+  )).toBe(false, 'start is null and end is not null exclusive, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    null,
+    '[]'
+  )).toBe(false, 'start is not null and end is null inclusive, is not between')
+
+  expect(m.isBetween(
+    dayjs(new Date(2010, 3, 2, 3, 4, 5, 10)),
+    null,
+    null,
+    '()'
+  )).toBe(false, 'start is not null and end is null exclusive, is not between')
+})
+
 test('is between milliseconds inclusivity', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
