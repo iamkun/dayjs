@@ -9,8 +9,10 @@ declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, stri
 declare function dayjs (date?: dayjs.ConfigType, format?: dayjs.OptionType, locale?: string, strict?: boolean): dayjs.Dayjs
 
 declare namespace dayjs {
+  type ReadonlyDate = Omit<Date, `set${string}`>;
+
   interface ConfigTypeMap {
-    default: string | number | Date | Dayjs | null | undefined
+    default: string | number | Date | ReadonlyDate | Dayjs | null | undefined
   }
 
   export type ConfigType = ConfigTypeMap[keyof ConfigTypeMap]
