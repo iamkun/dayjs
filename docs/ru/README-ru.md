@@ -1,6 +1,6 @@
 Русский | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md)| [עברית](./docs/he/README-he.md)
 
-<p align="center"><a href="https://day.js.org/ru/" target="_blank" rel="noopener noreferrer"><img width="550"
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Быстрая <b>2kB</b> альтернатива Moment.js с тем же современным API</p>
@@ -50,7 +50,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 npm install dayjs --save
 ```
 
-📚[Инструкция по установке](https://day.js.org/docs/ru/installation/installation)
+📚[Инструкция по установке](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -68,7 +68,7 @@ dayjs().add(1, 'year') // управление
 dayjs().isBefore(dayjs()) // осведомление
 ```
 
-📚[Ссылка на API](https://day.js.org/docs/ru/parse/parse)
+📚[Ссылка на API](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
@@ -82,7 +82,7 @@ dayjs.locale('es') // глобальное использование Испан
 
 dayjs('2018-05-05').locale('zh-cn').format() // использование упрощённой Китайской локали в конкретном случае
 ```
-📚[Интернационализация](https://day.js.org/docs/ru/i18n/i18n)
+📚[Интернационализация](https://day.js.org/docs/en/i18n/i18n)
 
 ### Плагин
 
@@ -96,7 +96,7 @@ dayjs.extend(advancedFormat) // использование плагина
 dayjs().format('Q Do k kk X x') // больше доступных форматов
 ```
 
-📚[Список плагинов](https://day.js.org/docs/ru/plugin/plugin)
+📚[Список плагинов](https://day.js.org/docs/en/plugin/plugin)
 
 ## Спонсоры
 
