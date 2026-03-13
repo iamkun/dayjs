@@ -25,7 +25,7 @@ it('Format Year YY YYYY', () => {
   expect(dayjs().format('YY')).toBe(moment().format('YY'))
   expect(dayjs().format('YYYY')).toBe(moment().format('YYYY'))
   expect(dayjs().format('Y')).toBe('Y')
-  expect(dayjs().format('YYY')).toBe('YYY')
+  expect(dayjs().format('YYY')).toBe(`${moment().format('YY')}Y`)
 })
 
 it('Format Month M MM MMM MMMM', () => {
