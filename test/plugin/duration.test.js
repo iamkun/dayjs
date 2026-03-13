@@ -309,3 +309,32 @@ describe('Format', () => {
       .toBe('2/02.0002TEST9:09:6:06:8:08:5:05:1:01:010')
   })
 })
+
+it('duration.asObject()', () => {
+  const d = dayjs.duration({
+    years: 1,
+    months: 2,
+    days: 3,
+    hours: 4,
+    minutes: 5,
+    seconds: 6,
+    milliseconds: 7
+  })
+
+  const expectedObject = {
+    years: 1,
+    months: 2,
+    days: 3,
+    hours: 4,
+    minutes: 5,
+    seconds: 6,
+    milliseconds: 7
+  }
+
+  expect(d.asObject()).toEqual(expectedObject)
+
+  // Test from milliseconds (as suggested in issue)
+  const dFromMs = dayjs.duration(1000 * 60 * 60) // 1 hour
+  expect(dFromMs.asObject().hours).toBe(1)
+  expect(dFromMs.asObject().minutes).toBe(0)
+})
