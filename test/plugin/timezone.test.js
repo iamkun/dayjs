@@ -68,6 +68,18 @@ describe('Parse', () => {
     const newMs = dTz.millisecond()
     expect(oldMs).toEqual(newMs)
   })
+
+  it('should apply the offset of the target timezone taking into consideration the timezone of the original date', () => {
+    const dayjs1 = dayjs.tz('2022-03-11T14:29:26.319Z', 'America/Recife')
+    expect(dayjs1.format()).toBe('2022-03-11T11:29:26-03:00')
+    const dayjs2 = dayjs.tz('2012-02-01T13:50:21.01-03:00', 'America/Recife')
+    expect(dayjs2.format()).toBe('2012-02-01T13:50:21-03:00')
+    const dayjs3 = dayjs.tz('2022-02-03T13:50:21-00:00', 'America/Recife')
+    expect(dayjs3.format()).toBe('2022-02-03T10:50:21-03:00')
+    // TODO: support rfc2822 dates
+    // const dayjs4 = dayjs.tz('Fri, 11 Mar 2022 14:29:26 GMT', 'America/Recife')
+    // expect(dayjs4.format()).toBe('2022-03-11T11:29:26-03:00')
+  })
 })
 
 describe('Convert', () => {
