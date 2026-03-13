@@ -11,12 +11,12 @@ const locale = {
   weekdaysMin: 'Ah_Is_Sl_Rb_Km_Jm_Sb'.split('_'),
   ordinal: n => n,
   formats: {
-    LT: 'HH.mm',
-    LTS: 'HH.mm.ss',
+    LT: 'h:mm A',
+    LTS: 'h:mm:ss A',
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
-    LLL: 'D MMMM YYYY [pukul] HH.mm',
-    LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm'
+    LLL: 'D MMMM YYYY, h:mm A',
+    LLLL: 'dddd, D MMMM YYYY, h:mm A'
   },
   relativeTime: {
     future: 'dalam %s',
@@ -32,7 +32,22 @@ const locale = {
     MM: '%d bulan',
     y: 'setahun',
     yy: '%d tahun'
+  },
+  meridiem: (hour, minute, isLowercase) => {
+    const hm = (hour * 100) + minute;
+    
+    if (hm <= 59) {
+      return isLowercase ? 'tgh mlm' : 'tengah malam';
+    } else if (hm <= 1159) { 
+      return isLowercase ? 'pg' : 'pagi';
+    } else if (hm <= 1359) { 
+      return isLowercase ? 'tgh hari' : 'tengah hari';
+    } else if (hm <= 1859) { 
+      return isLowercase ? 'ptg' : 'petang';
+    }
+    return isLowercase ? 'mlm' : 'malam';
   }
+
 }
 
 dayjs.locale(locale, null, true)
