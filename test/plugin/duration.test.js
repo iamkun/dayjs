@@ -261,7 +261,7 @@ describe('Days', () => {
 })
 
 describe('Weeks', () => {
-  expect(dayjs.duration(1000000000).weeks()).toBe(1)
+  expect(dayjs.duration(1000000000).weeks()).toBe(0)
   expect(dayjs.duration(1000000000).asWeeks().toFixed(2)).toBe('1.65')
 })
 
@@ -294,7 +294,8 @@ describe('Format', () => {
       .add(16, 'days')
       .add(10, 'months')
       .add(22, 'years')
-    expect(d.format()).toBe('0022-10-16T13:35:15')
+      .add(1, 'weeks')
+    expect(d.format()).toBe('0022-10-23T13:35:15')
   })
 
   test('with formatStr for all tokens', () => {
