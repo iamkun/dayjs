@@ -48,10 +48,12 @@ describe('Parse', () => {
     const TjsDate = dayjs.tz(d, VAN)
     const Tdayjs = dayjs.tz(dayjs(d), VAN)
     const Timestamp = dayjs.tz(d.getTime(), VAN)
+    const TimestampInSeconds = dayjs.tz(d.getTime() / 1000, VAN)
     const Tmoment = moment.tz(d, VAN)
     expect(TjsDate.format()).toBe(result)
     expect(Tdayjs.format()).toBe(result)
     expect(Timestamp.format()).toBe(result)
+    expect(TimestampInSeconds.format()).toBe(result)
     expect(Tmoment.format()).toBe(result)
   })
 
