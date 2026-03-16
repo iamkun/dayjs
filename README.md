@@ -105,10 +105,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 [[Become a sponsor via Github](https://github.com/sponsors/iamkun/)] [[Become a sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
 
-<a href="https://toyokumo.co.jp" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/ken-swyfft" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
