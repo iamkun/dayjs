@@ -80,3 +80,14 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('Timezone year set keeps month/day and local time', () => {
+  const base = dayjs.utc('2022-04-17T15:30:00Z').tz('America/Chicago')
+  const byYear = base.year(2020)
+  const bySet = base.set('year', 2020)
+
+  expect(byYear.format()).toBe(moment.parseZone(base.format()).year(2020).format())
+  expect(bySet.format()).toBe(moment.parseZone(base.format()).year(2020).format())
+  expect(byYear.format('YYYY-MM-DD HH:mm')).toBe('2020-04-17 10:30')
+  expect(bySet.format('YYYY-MM-DD HH:mm')).toBe('2020-04-17 10:30')
+})
