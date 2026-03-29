@@ -43,7 +43,7 @@ const locale = {
   months,
   monthsShort: months,
   weekStart: 6,
-  meridiem: hour => (hour > 12 ? 'م' : 'ص'),
+  meridiem: hour => (hour >= 12 ? 'م' : 'ص'),
   relativeTime: {
     future: 'بعد %s',
     past: 'منذ %s',
