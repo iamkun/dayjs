@@ -2,8 +2,57 @@
   "name": "dayjs",
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
-  "main": "dayjs.min.js",
-  "types": "index.d.ts",
+  "main": "./dayjs.min.js",
+  "module": "./esm/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./dayjs.min.js",
+      "types": "./index.d.ts"
+    },
+    "./esm": {
+      "import": "./esm/index.js",
+      "types": "./esm/index.d.ts"
+    },
+    "./esm/index.js": {
+      "import": "./esm/index.js",
+      "types": "./esm/index.d.ts"
+    },
+    "./plugin/*": {
+      "require": "./plugin/*.js",
+      "types": "./plugin/*.d.ts"
+    },
+    "./plugin/*.js": {
+      "require": "./plugin/*.js",
+      "types": "./plugin/*.d.ts"
+    },
+    "./esm/plugin/*": {
+      "import": "./esm/plugin/*/index.js",
+      "types": "./esm/plugin/*/index.d.ts"
+    },
+    "./esm/plugin/*/index.js": {
+      "import": "./esm/plugin/*/index.js",
+      "types": "./esm/plugin/*/index.d.ts"
+    },
+    "./locale/*": {
+      "require": "./locale/*.js",
+      "types": "./locale/index.d.ts"
+    },
+    "./locale/*.js": {
+      "require": "./locale/*.js",
+      "types": "./locale/index.d.ts"
+    },
+    "./esm/locale/*": {
+      "import": "./esm/locale/*.js",
+      "types": "./esm/locale/index.d.ts"
+    },
+    "./esm/locale/*.js": {
+      "import": "./esm/locale/*.js",
+      "types": "./esm/locale/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest --coverage --coverageThreshold=\"{ \\\"global\\\": { \\\"lines\\\": 100} }\"",
     "test-tz": "date && jest test/timezone.test --coverage=false",
