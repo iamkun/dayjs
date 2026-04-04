@@ -140,6 +140,9 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
+    if (/(\+|-)\d\d(?::?\d\d)?|Z$/i.test(input)) {
+      return d(input, parseFormat).tz(timezone)
+    }
     const localTs = d.utc(input, parseFormat).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
