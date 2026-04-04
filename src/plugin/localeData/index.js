@@ -13,8 +13,11 @@ export default (o, c, dayjs) => { // locale needed later
     return result.map((_, index) => (result[(index + (weekStart || 0)) % 7]))
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
-  const getLongDateFormat = (l, format) =>
-    l.formats[format] || t(l.formats[format.toUpperCase()])
+  const getLongDateFormat = (l, format) => {
+    const { formats } = l
+    const upper = format.toUpperCase()
+    return formats[format] || formats[upper].replace(/(\s?\[[^\]]*\])|(MMMM|MM|DD|dddd)/g, (m, p1, p2) => p1 || p2.slice(1))
+  }
 
   const localeData = function () {
     return {
