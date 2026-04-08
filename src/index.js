@@ -146,6 +146,7 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.u(startOf) ? startOf : true
     const unit = Utils.p(units)
+    const hasCustomOffset = !this.$u && !Utils.u(this.$offset)
     const instanceFactory = (y, m, d) => Utils.w(this.$u ?
       Date.UTC(y, m, d) : new Date(y, m, d), this)
     const instanceFactorySet = (method, args) => {
@@ -153,9 +154,44 @@ class Dayjs {
       date[method].apply(date, args) // eslint-disable-line prefer-spread
       return Utils.w(date, this)
     }
+    const instanceFactorySetOffset = (method, slice) => {
+      const argumentStart = [0, 0, 0, 0]
+      const argumentEnd = [23, 59, 59, 999]
+      const date = this.toDate('s')
+      // eslint-disable-next-line prefer-spread
+      date[method].apply(date, (isStartOf ? argumentStart : argumentEnd).slice(slice))
+      return Utils.w(date, this)
+    }
     const instanceFactoryEnd = instance => Utils.w(instance.valueOf() - 1, this)
     const { $W, $M, $D } = this
     const utcPad = `set${this.$u ? 'UTC' : ''}`
+    if (hasCustomOffset) {
+      switch (unit) {
+        case C.Y:
+          return isStartOf ? instanceFactory(this.$y, 0, 1) :
+            instanceFactory(this.$y, 11, 31).endOf(C.D)
+        case C.M:
+          return isStartOf ? instanceFactory(this.$y, $M, 1) :
+            instanceFactory(this.$y, $M + 1, 0).endOf(C.D)
+        case C.W: {
+          const weekStart = this.$locale().weekStart || 0
+          const gap = ($W < weekStart ? $W + 7 : $W) - weekStart
+          return isStartOf ? instanceFactory(this.$y, $M, $D - gap) :
+            instanceFactory(this.$y, $M, $D + (6 - gap)).endOf(C.D)
+        }
+        case C.D:
+        case C.DATE:
+          return instanceFactorySetOffset(`${utcPad}Hours`, 0)
+        case C.H:
+          return instanceFactorySetOffset(`${utcPad}Minutes`, 1)
+        case C.MIN:
+          return instanceFactorySetOffset(`${utcPad}Seconds`, 2)
+        case C.S:
+          return instanceFactorySetOffset(`${utcPad}Milliseconds`, 3)
+        default:
+          return this.clone()
+      }
+    }
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(this.$y, 0, 1) :

@@ -150,6 +150,48 @@ test('utc startOf', () => {
     .toBe(1500465600000)
 })
 
+test('offset mode startOf/endOf matches moment for larger and smaller units', () => {
+  const d = '2019-09-11T12:34:56.789Z'
+  const units = ['year', 'hour', 'minute', 'second']
+
+  units.forEach((unit) => {
+    expect(dayjs(d).utcOffset(480).startOf(unit).valueOf())
+      .toBe(moment(d).utcOffset(480).startOf(unit).valueOf())
+    expect(dayjs(d).utcOffset(480).endOf(unit).valueOf())
+      .toBe(moment(d).utcOffset(480).endOf(unit).valueOf())
+  })
+
+  const original = dayjs(d).utcOffset(480)
+  expect(original.startOf('otherString').valueOf()).toBe(original.valueOf())
+  expect(original.endOf('otherString').valueOf()).toBe(original.valueOf())
+})
+
+test('offset mode startOf/endOf week respects locale weekStart', () => {
+  moment.updateLocale('offset-week-start', { week: { dow: 3 } })
+
+  const sunday = '2019-09-01T12:00:00Z'
+  const friday = '2019-09-06T12:00:00Z'
+  const locale = { name: 'offset-week-start', weekStart: 3 }
+
+  expect(dayjs(sunday).utcOffset(480).locale(locale).startOf('week')
+    .valueOf())
+    .toBe(moment(sunday).utcOffset(480).locale('offset-week-start').startOf('week')
+      .valueOf())
+  expect(dayjs(sunday).utcOffset(480).locale(locale).endOf('week')
+    .valueOf())
+    .toBe(moment(sunday).utcOffset(480).locale('offset-week-start').endOf('week')
+      .valueOf())
+
+  expect(dayjs(friday).utcOffset(480).locale(locale).startOf('week')
+    .valueOf())
+    .toBe(moment(friday).utcOffset(480).locale('offset-week-start').startOf('week')
+      .valueOf())
+  expect(dayjs(friday).utcOffset(480).locale(locale).endOf('week')
+    .valueOf())
+    .toBe(moment(friday).utcOffset(480).locale('offset-week-start').endOf('week')
+      .valueOf())
+})
+
 test('cloning dates modified with utcOffset', () => {
   const djs = dayjs('2023-10-29T00:00:00+03:00')
 
