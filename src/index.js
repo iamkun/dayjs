@@ -146,42 +146,42 @@ class Dayjs {
   startOf(units, startOf) { // startOf -> endOf
     const isStartOf = !Utils.u(startOf) ? startOf : true
     const unit = Utils.p(units)
-    const instanceFactory = (d, m) => {
-      const ins = Utils.w(this.$u ?
-        Date.UTC(this.$y, m, d) : new Date(this.$y, m, d), this)
-      return isStartOf ? ins : ins.endOf(C.D)
+    const instanceFactory = (y, m, d) => Utils.w(this.$u ?
+      Date.UTC(y, m, d) : new Date(y, m, d), this)
+    const instanceFactorySet = (method, args) => {
+      const date = this.toDate()
+      date[method].apply(date, args) // eslint-disable-line prefer-spread
+      return Utils.w(date, this)
     }
-    const instanceFactorySet = (method, slice) => {
-      const argumentStart = [0, 0, 0, 0]
-      const argumentEnd = [23, 59, 59, 999]
-      return Utils.w(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate('s'),
-        (isStartOf ? argumentStart : argumentEnd).slice(slice)
-      ), this)
-    }
+    const instanceFactoryEnd = instance => Utils.w(instance.valueOf() - 1, this)
     const { $W, $M, $D } = this
     const utcPad = `set${this.$u ? 'UTC' : ''}`
     switch (unit) {
       case C.Y:
-        return isStartOf ? instanceFactory(1, 0) :
-          instanceFactory(31, 11)
+        return isStartOf ? instanceFactory(this.$y, 0, 1) :
+          instanceFactoryEnd(instanceFactory(this.$y + 1, 0, 1))
       case C.M:
-        return isStartOf ? instanceFactory(1, $M) :
-          instanceFactory(0, $M + 1)
+        return isStartOf ? instanceFactory(this.$y, $M, 1) :
+          instanceFactoryEnd(instanceFactory(this.$y, $M + 1, 1))
       case C.W: {
         const weekStart = this.$locale().weekStart || 0
         const gap = ($W < weekStart ? $W + 7 : $W) - weekStart
-        return instanceFactory(isStartOf ? $D - gap : $D + (6 - gap), $M)
+        return isStartOf ? instanceFactory(this.$y, $M, $D - gap) :
+          instanceFactoryEnd(instanceFactory(this.$y, $M, $D + (7 - gap)))
       }
       case C.D:
       case C.DATE:
-        return instanceFactorySet(`${utcPad}Hours`, 0)
+        return isStartOf ? instanceFactory(this.$y, $M, $D) :
+          instanceFactoryEnd(instanceFactory(this.$y, $M, $D + 1))
       case C.H:
-        return instanceFactorySet(`${utcPad}Minutes`, 1)
+        return isStartOf ? instanceFactorySet(`${utcPad}Minutes`, [0, 0, 0]) :
+          instanceFactoryEnd(instanceFactorySet(`${utcPad}Minutes`, [60, 0, 0]))
       case C.MIN:
-        return instanceFactorySet(`${utcPad}Seconds`, 2)
+        return isStartOf ? instanceFactorySet(`${utcPad}Seconds`, [0, 0]) :
+          instanceFactoryEnd(instanceFactorySet(`${utcPad}Seconds`, [60, 0]))
       case C.S:
-        return instanceFactorySet(`${utcPad}Milliseconds`, 3)
+        return isStartOf ? instanceFactorySet(`${utcPad}Milliseconds`, [0]) :
+          instanceFactoryEnd(instanceFactorySet(`${utcPad}Milliseconds`, [1000]))
       default:
         return this.clone()
     }
