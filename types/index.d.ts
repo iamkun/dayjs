@@ -114,7 +114,7 @@ declare namespace dayjs {
      * ```
      * Docs: https://day.js.org/docs/en/get-set/day
      */
-    day(): number
+    day(): 0 | 1 | 2 | 3 | 4 | 5 | 6
     /**
      * Set the day of the week.
      *
