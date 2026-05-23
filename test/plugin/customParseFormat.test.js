@@ -307,6 +307,12 @@ describe('Strict mode', () => {
     expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
     expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
   })
+  it('rejects out-of-range dates with zone in strict mode', () => {
+    const input = '2024-02-31T22:03:08Z'
+    const format = 'YYYY-MM-DDTHH:mm:ssZ'
+    expect(moment(input, format, true).isValid()).toBe(false)
+    expect(dayjs(input, format, true).isValid()).toBe(false)
+  })
   it('with locale', () => {
     const input = '2018 三月 99'
     const format = 'YYYY MMMM DD'
