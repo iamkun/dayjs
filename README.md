@@ -176,6 +176,9 @@ And thank you to all our backers! 🙏
 
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
+## Downloads
+![Day.js Chart](./docs/assets/download.png)
+
 ## License
 
 Day.js is licensed under a [MIT License](./LICENSE).
