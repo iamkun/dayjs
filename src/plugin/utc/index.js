@@ -120,7 +120,7 @@ export default (option, Dayjs, dayjs) => {
     const { u } = this.$utils()
     const addedOffset = !u(this.$offset)
       ? this.$offset + (u(this.$x.$localOffset) ?
-        new Date().getTimezoneOffset() : this.$x.$localOffset)
+        this.$d.getTimezoneOffset() : this.$x.$localOffset)
       : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
