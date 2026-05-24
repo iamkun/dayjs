@@ -195,7 +195,7 @@ class Duration {
     if (pUnit === 'milliseconds') {
       base = this.$d.milliseconds !== undefined ? this.$d.milliseconds : (base % 1000)
     } else if (pUnit === 'weeks') {
-      base = roundNumber(base / unitToMS[pUnit])
+      base = this.$d.weeks !== undefined ? this.$d.weeks : roundNumber(base / unitToMS[pUnit])
     } else {
       base = this.$d[pUnit]
     }
