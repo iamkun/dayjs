@@ -2,7 +2,7 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import weekOfYear from '../../src/plugin/weekOfYear'
-import '../../src/locale/ka'
+import '../../src/locale/ky'
 
 dayjs.extend(weekOfYear)
 
@@ -14,7 +14,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-describe('yearStart: 4 - ISO 8601 week numbering (ka locale)', () => {
+describe('yearStart: 4 - ISO 8601 week numbering (ky locale)', () => {
   // yearStart: 4 means the first week of the year is the one containing Jan 4
   // (ISO 8601: week 1 is the week with the year's first Thursday)
   const cases = [
@@ -29,17 +29,17 @@ describe('yearStart: 4 - ISO 8601 week numbering (ka locale)', () => {
 
   cases.forEach(([date, expectedWeek, description]) => {
     it(description, () => {
-      dayjs.locale('ka')
-      moment.locale('ka')
+      dayjs.locale('ky')
+      moment.locale('ky')
       expect(dayjs(date).week()).toBe(expectedWeek)
       expect(dayjs(date).week()).toBe(moment(date).week())
     })
   })
 
   it('locale object exposes yearStart as 4', () => {
-    const kaLocale = dayjs()
-      .locale('ka')
+    const kyLocale = dayjs()
+      .locale('ky')
       .$locale()
-    expect(kaLocale.yearStart).toBe(4)
+    expect(kyLocale.yearStart).toBe(4)
   })
 })
