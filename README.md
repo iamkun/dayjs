@@ -73,7 +73,7 @@ dayjs().isBefore(dayjs()) // query
 
 Day.js has great support for internationalization.
 
-But none of them will be included in your build unless you use it.
+But none of them will be included in your build unless you use them.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -127,6 +127,10 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.netrouting.com" target="_blank" alt="Netrouting Dedicated Servers">
   <img width="70" src="https://netrouting.com/wp-content/uploads/2026/04/Logo-netrouting.png">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://anonstories.com" target="_blank">
+  <img alt="Instagram Story Viewer" width="70" src="https://avatars.githubusercontent.com/u/240702364?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.sayfone.com/call-rates " target="_blank">
