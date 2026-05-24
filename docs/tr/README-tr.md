@@ -37,7 +37,7 @@ dayjs()
 - 💪 Değişmez
 - 🔥 Zincirlenebilir
 - 🌐 I18n destekler
-- 📦 2kB boyutunda küçük bir kütaphane
+- 📦 2kB boyutunda küçük bir kütüphane
 - 👫 Bütün tarayıcılarda desteklenir
 
 ---
