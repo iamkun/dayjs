@@ -1,11 +1,13 @@
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import duration from '../../src/plugin/duration'
+import utc from '../../src/plugin/utc'
 import relativeTime from '../../src/plugin/relativeTime'
 import '../../src/locale/fr'
 import '../../src/locale/es'
 
 dayjs.extend(relativeTime)
+dayjs.extend(utc)
 dayjs.extend(duration)
 
 beforeEach(() => {
@@ -225,6 +227,17 @@ test('Subtract duration', () => {
   const b = dayjs('2023-03-02 02:02:02')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
   expect(b.subtract(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2022-02-01 01:01:01')
+})
+
+test('Subtract duration with weeks and milliseconds', () => {
+  const base = dayjs.utc('2018-06-27T00:00:00.000Z')
+
+  expect(base.subtract(dayjs.duration({ milliseconds: 1000 })).toISOString())
+    .toBe('2018-06-26T23:59:59.000Z')
+  expect(base.subtract(dayjs.duration({ weeks: 2 })).toISOString())
+    .toBe('2018-06-13T00:00:00.000Z')
+  expect(base.subtract(dayjs.duration({ weeks: 1, days: 3 })).toISOString())
+    .toBe('2018-06-17T00:00:00.000Z')
 })
 
 describe('Seconds', () => {
