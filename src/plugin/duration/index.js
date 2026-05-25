@@ -12,6 +12,100 @@ const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 const DURATION_REGEX_PARSE = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
 const DURATION_REGEX_FORMAT = /\[([^\]]+)]|YYYY|YY|Y|M{1,2}|D{1,2}|H{1,2}|m{1,2}|s{1,2}|SSS/g
 
+const tokenizeFormatString = (str) => {
+  const parts = []
+  let lastIndex = 0
+  const re = new RegExp(DURATION_REGEX_FORMAT.source, 'g')
+  let match = re.exec(str)
+
+  while (match !== null) {
+    if (match.index > lastIndex) {
+      parts.push({ type: 'literal', value: str.slice(lastIndex, match.index) })
+    }
+    if (match[1] !== undefined) {
+      const [, literalValue] = match
+      parts.push({ type: 'literal', value: literalValue })
+    } else {
+      const [tokenValue] = match
+      parts.push({ type: 'token', value: tokenValue })
+    }
+    ({ lastIndex } = re)
+    match = re.exec(str)
+  }
+
+  if (lastIndex < str.length) {
+    parts.push({ type: 'literal', value: str.slice(lastIndex) })
+  }
+
+  return parts
+}
+
+const formatDurationWithTrim = (formatStr, matches, trim) => {
+  const trimLarge = trim === true || trim === 'large' || trim === 'both'
+  const trimSmall = trim === 'small' || trim === 'both'
+  const parts = tokenizeFormatString(formatStr)
+  const segments = []
+  let prefix = ''
+  let index = 0
+
+  while (index < parts.length && parts[index].type === 'literal') {
+    prefix += parts[index].value
+    index += 1
+  }
+
+  while (index < parts.length) {
+    const { value: tokenValue } = parts[index]
+    index += 1
+    let suffix = ''
+
+    while (index < parts.length && parts[index].type === 'literal') {
+      suffix += parts[index].value
+      index += 1
+    }
+
+    segments.push({
+      token: tokenValue,
+      suffix,
+      num: Number(matches[tokenValue]) || 0
+    })
+  }
+
+  if (segments.length === 0) {
+    return prefix
+  }
+
+  let start = 0
+  let end = segments.length
+
+  if (trimLarge) {
+    while (start < end - 1 && segments[start].num === 0) {
+      start += 1
+    }
+  }
+
+  if (trimSmall) {
+    while (end > start + 1 && segments[end - 1].num === 0) {
+      end -= 1
+    }
+  }
+
+  if (start >= end) {
+    const last = segments[segments.length - 1]
+    return prefix + String(matches[last.token]) + last.suffix
+  }
+
+  let result = prefix
+
+  for (let i = start; i < end; i += 1) {
+    result += String(matches[segments[i].token])
+    if (i < end - 1) {
+      result += segments[i].suffix
+    }
+  }
+
+  return result
+}
+
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
   months: MILLISECONDS_A_MONTH,
@@ -164,7 +258,7 @@ class Duration {
     return this.toISOString()
   }
 
-  format(formatStr) {
+  format(formatStr, options) {
     const str = formatStr || 'YYYY-MM-DDTHH:mm:ss'
     const matches = {
       Y: this.$d.years,
@@ -182,7 +276,13 @@ class Duration {
       ss: $u.s(this.$d.seconds, 2, '0'),
       SSS: $u.s(this.$d.milliseconds, 3, '0')
     }
-    return str.replace(DURATION_REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
+    const trim = options && options.trim
+
+    if (!trim) {
+      return str.replace(DURATION_REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
+    }
+
+    return formatDurationWithTrim(str, matches, trim)
   }
 
   as(unit) {
