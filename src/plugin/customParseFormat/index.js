@@ -214,6 +214,21 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
 }
 
 
+function passesStrictParseCheck(input, format, instance) {
+  const formatted = instance.format(format)
+  // eslint-disable-next-line eqeqeq
+  if (input == formatted) return true
+
+  // `Z` suffix is equivalent to `+00:00` when formatting with the `Z` token
+  if (format.includes('Z') && /Z$/i.test(input)) {
+    const normalized = input.replace(/Z$/i, '+00:00')
+    if (normalized === formatted) return true
+    if (normalized === instance.utc().format(format)) return true
+  }
+
+  return false
+}
+
 export default (o, C, d) => {
   d.p.customParseFormat = true
   if (o && o.parseTwoDigitYear) {
@@ -244,8 +259,7 @@ export default (o, C, d) => {
       if (pl && pl !== true) this.$L = this.locale(pl).$L
       // use != to treat
       // input number 1410715640579 and format string '1410715640579' equal
-      // eslint-disable-next-line eqeqeq
-      if (isStrict && date != this.format(format)) {
+      if (isStrict && !passesStrictParseCheck(date, format, this)) {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
