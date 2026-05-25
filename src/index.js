@@ -105,6 +105,15 @@ class Dayjs {
     this.$m = $d.getMinutes()
     this.$s = $d.getSeconds()
     this.$ms = $d.getMilliseconds()
+
+    // moment.js interop: moment reads own date fields from object inputs
+    this.y = this.$y
+    this.M = this.$M
+    this.D = this.$D
+    this.h = this.$H
+    this.m = this.$m
+    this.s = this.$s
+    this.ms = this.$ms
   }
 
   // eslint-disable-next-line class-methods-use-this

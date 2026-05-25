@@ -212,4 +212,10 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d).toBe(null)
   })
+
+  it('moment accepts a Day.js instance as input', () => {
+    const d = dayjs('2026-03-01')
+    expect(moment(d).valueOf()).toBe(d.valueOf())
+    expect(moment(d).format('YYYY-MM-DD')).toBe('2026-03-01')
+  })
 })
