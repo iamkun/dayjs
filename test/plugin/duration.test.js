@@ -147,6 +147,12 @@ describe('Humanize', () => {
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('en un minuto')
     dayjs.locale('en')
   })
+
+  it('Invalid duration', () => {
+    expect(dayjs.duration(NaN).humanize()).toBe('invalid duration')
+    expect(dayjs.duration(NaN).humanize(true)).toBe('invalid duration')
+    expect(dayjs.duration(Infinity).humanize()).toBe('invalid duration')
+  })
 })
 
 describe('Clone', () => {
