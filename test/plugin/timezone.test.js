@@ -120,6 +120,12 @@ describe('Convert', () => {
       expect(t.format('Z')).toBe('+09:00')
     })
   })
+
+  it('format +00:00 for non-UTC timezone with zero offset (#3068)', () => {
+    const s = '2021-10-31T15:00:00+00:00'
+    expect(dayjs(s).tz('Europe/London').format()).toBe('2021-10-31T15:00:00+00:00')
+    expect(dayjs(s).tz('UTC').format()).toBe('2021-10-31T15:00:00Z')
+  })
 })
 
 
