@@ -193,6 +193,9 @@ class Duration {
     let base = this.$ms
     const pUnit = prettyUnit(unit)
     if (pUnit === 'milliseconds') {
+      if (this.$d.milliseconds != null) {
+        return this.$d.milliseconds || 0
+      }
       base %= 1000
     } else if (pUnit === 'weeks') {
       base = roundNumber(base / unitToMS[pUnit])
@@ -261,11 +264,12 @@ class Duration {
 const manipulateDuration = (date, duration, k) =>
   date.add(duration.years() * k, 'y')
     .add(duration.months() * k, 'M')
+    .add((duration.$d.weeks || 0) * k, 'w')
     .add(duration.days() * k, 'd')
     .add(duration.hours() * k, 'h')
     .add(duration.minutes() * k, 'm')
     .add(duration.seconds() * k, 's')
-    .add(duration.milliseconds() * k, 'ms')
+    .add((duration.$d.milliseconds != null ? duration.$d.milliseconds : 0) * k, 'ms')
 
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
