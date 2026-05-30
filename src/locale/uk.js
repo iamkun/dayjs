@@ -45,6 +45,7 @@ const locale = {
   months,
   monthsShort: 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   relativeTime: {
     future: 'за %s',
     past: '%s тому',
