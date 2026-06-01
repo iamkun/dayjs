@@ -217,6 +217,27 @@ describe('Subtract', () => {
   expect(a.subtract(b).days()).toBe(1)
 })
 
+test('Subtract duration with weeks', () => {
+  const a = dayjs('2020-10-01')
+  const weeks = dayjs.duration({ weeks: 2 })
+  expect(a.subtract(weeks).format('YYYY-MM-DD')).toBe('2020-09-17')
+
+  const b = dayjs('2020-10-01')
+  const mixed = dayjs.duration({ weeks: 1, days: 3 })
+  expect(b.subtract(mixed).format('YYYY-MM-DD')).toBe('2020-09-21')
+})
+
+test('Add/Subtract duration with milliseconds', () => {
+  const a = dayjs('2020-10-01 00:00:00.000')
+  const ms = dayjs.duration({ milliseconds: 1000 })
+  expect(a.subtract(ms).format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('2020-09-30 23:59:59.000')
+  expect(a.add(ms).format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('2020-10-01 00:00:01.000')
+
+  const b = dayjs('2020-10-01 00:00:00.000')
+  const mixedMs = dayjs.duration({ milliseconds: 1500 })
+  expect(b.subtract(mixedMs).format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('2020-09-30 23:59:58.500')
+})
+
 test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
