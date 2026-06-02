@@ -8,10 +8,14 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import utc from '../../src/plugin/utc'
+import timezone from '../../src/plugin/timezone'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
 dayjs.extend(weekOfYear) // test parse w, ww
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -312,6 +316,15 @@ describe('Strict mode', () => {
     const format = 'YYYY MMMM DD'
     expect(dayjs(input, format, 'zh-cn').isValid()).toBe(true)
     expect(dayjs(input, format, 'zh-cn', true).isValid()).toBe(false)
+  })
+  it('accepts Z suffix with Z format token (#2712)', () => {
+    const format = 'YYYY-MM-DDTHH:mm:ssZ'
+    const input = '2024-08-19T10:30:00Z'
+    dayjs.tz.setDefault('Asia/Shanghai')
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(dayjs.utc(input, format, true).isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+    expect(dayjs.utc(input, format, true).valueOf()).toBe(moment.utc(input, format, true).valueOf())
   })
 })
 
