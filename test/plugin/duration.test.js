@@ -313,4 +313,33 @@ describe('Format', () => {
     const d = dayjs.duration(2, 'years')
     expect(d.format('YYY')).toBe('022')
   })
+
+  test('trim large removes leading zero-value units', () => {
+    const d = dayjs.duration(123, 'minutes')
+    expect(d.format('D[d] H:mm:ss')).toBe('0d 2:03:00')
+    expect(d.format('D[d] H:mm:ss', { trim: true })).toBe('2:03:00')
+    expect(d.format('D[d] H:mm:ss', { trim: 'large' })).toBe('2:03:00')
+  })
+
+  test('trim large on default format keeps first non-zero unit', () => {
+    const d = dayjs.duration('PT1H')
+    expect(d.format()).toBe('0000-00-00T01:00:00')
+    expect(d.format(undefined, { trim: true })).toBe('01:00:00')
+  })
+
+  test('trim small removes trailing zero-value units', () => {
+    const d = dayjs.duration(90, 'minutes')
+    expect(d.format('H:mm:ss')).toBe('1:30:00')
+    expect(d.format('H:mm:ss', { trim: 'small' })).toBe('1:30')
+  })
+
+  test('trim both removes leading and trailing zero-value units', () => {
+    const d = dayjs.duration(90, 'minutes')
+    expect(d.format('D[d] H:mm:ss', { trim: 'both' })).toBe('1:30')
+  })
+
+  test('trim keeps smallest unit when duration is zero', () => {
+    const d = dayjs.duration(0)
+    expect(d.format('H:mm:ss', { trim: true })).toBe('00')
+  })
 })
