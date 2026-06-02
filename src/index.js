@@ -79,7 +79,23 @@ const parseDate = (cfg) => {
     }
   }
 
-  return new Date(date) // everything else
+  const parsed = new Date(date)
+  if (utc && typeof date === 'string' && !Number.isNaN(parsed.getTime())) {
+    const hasTimezone = /(?:Z|[+-]\d{2}(?::?\d{2})?\s*$|\b(?:GMT|UTC)\b)/i.test(date)
+    if (!hasTimezone) {
+      return new Date(Date.UTC(
+        parsed.getFullYear(),
+        parsed.getMonth(),
+        parsed.getDate(),
+        parsed.getHours(),
+        parsed.getMinutes(),
+        parsed.getSeconds(),
+        parsed.getMilliseconds()
+      ))
+    }
+  }
+
+  return parsed
 }
 
 class Dayjs {

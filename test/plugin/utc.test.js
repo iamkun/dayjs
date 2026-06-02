@@ -85,6 +85,12 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
+  it('Parse RFC2822-like date string in utc mode (#2819)', () => {
+    const d = 'Fri, Jan 28 2025'
+    expect(dayjs.utc(d).format('YYYY-MM-DD')).toEqual('2025-01-28')
+    expect(dayjs.utc(d).format('YYYY-MM-DD')).toEqual(moment.utc(d).format('YYYY-MM-DD'))
+  })
+
   it('Parse date string set utc in config', () => {
     const d = '2018-09-06T19:34:28Z'
     expect(dayjs(d, { utc: true }).format()).toEqual('2018-09-06T19:34:28Z')
