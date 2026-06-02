@@ -2,9 +2,11 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
+import localizedFormat from '../../src/plugin/localizedFormat'
 import '../../src/locale/ja'
 
 dayjs.extend(relativeTime)
+dayjs.extend(localizedFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -41,5 +43,12 @@ it('Finnish locale relative time in past and future', () => {
     .toBe('10日')
   expect(dayjs().add(-10, 'd').locale('ja').fromNow(true))
     .toBe(moment().add(-10, 'd').locale('ja').fromNow(true))
+})
+
+it('Japanese locale date formats', () => {
+  expect(dayjs('2019-02-01').locale('ja').format('L'))
+    .toBe('2019/02/01')
+  expect(dayjs('2019-02-01').locale('ja').format('l'))
+    .toBe('2019/2/1')
 })
 
