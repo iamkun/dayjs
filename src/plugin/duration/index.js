@@ -94,6 +94,7 @@ class Duration {
           this.$d.minutes,
           this.$d.seconds
         ] = numberD
+        this.normalizeIsoTimeComponents()
         this.calMilliseconds()
         return this
       }
@@ -105,6 +106,25 @@ class Duration {
     this.$ms = Object.keys(this.$d).reduce((total, unit) => (
       total + ((this.$d[unit] || 0) * (unitToMS[unit]))
     ), 0)
+  }
+
+  normalizeIsoTimeComponents() {
+    if (this.$d.seconds) {
+      this.$d.minutes = (this.$d.minutes || 0) + Math.trunc(this.$d.seconds / 60)
+      this.$d.seconds %= 60
+      if (this.$d.seconds < 0) {
+        this.$d.seconds += 60
+        this.$d.minutes -= 1
+      }
+    }
+    if (this.$d.minutes) {
+      this.$d.hours = (this.$d.hours || 0) + Math.trunc(this.$d.minutes / 60)
+      this.$d.minutes %= 60
+      if (this.$d.minutes < 0) {
+        this.$d.minutes += 60
+        this.$d.hours -= 1
+      }
+    }
   }
 
   parseFromMilliseconds() {
