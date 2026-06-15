@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ko'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -346,6 +347,26 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+})
+
+// issue 2031
+describe('parse localized meridiem (ko) in strict mode', () => {
+  const format = 'YYYY-MM-DD hh:mm A'
+  it('AM', () => {
+    expect(dayjs('2024-01-01 01:00 오전', format, 'ko', true).hour()).toBe(1)
+  })
+  it('PM', () => {
+    expect(dayjs('2024-01-01 01:00 오후', format, 'ko', true).hour()).toBe(13)
+  })
+  it('noon (12 PM)', () => {
+    expect(dayjs('2024-01-01 12:00 오후', format, 'ko', true).hour()).toBe(12)
+  })
+  it('midnight (12 AM)', () => {
+    expect(dayjs('2024-01-01 12:00 오전', format, 'ko', true).hour()).toBe(0)
+  })
+  it('11 PM', () => {
+    expect(dayjs('2024-01-01 11:00 오후', format, 'ko', true).hour()).toBe(23)
   })
 })
 
