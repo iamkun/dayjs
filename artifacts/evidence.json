@@ -1,0 +1,19 @@
+{
+  "summary": "Sourcey-generated documentation for Day.js (47k+ stars, MIT), built and deployed via GitHub Pages on a fork of the original repository at codeboost-tr.github.io/dayjs/. The deployment also includes an upstream PR (iamkun/dayjs#3148) contributing the Sourcey markdown sources and a GitHub Actions workflow directly to the project's repo, demonstrating a credible path to adoption by the maintainer.",
+  "observations": [
+    "Runx CLI version: runx-cli 0.6.13",
+    "Library: Day.js (iamkun/dayjs)",
+    "Repo URL: https://github.com/iamkun/dayjs",
+    "Pinned commit: f6a1556deca9daedb00372cf40637b3037d82498 (dev branch)",
+    "License: MIT",
+    "Adapter: Sourcey via sourcey.config.ts build command",
+    "Build command: npx sourcey build",
+    "Page count: 10",
+    "Page list: introduction, installation, parsing, get-set, manipulating, displaying, querying, formatting, plugins, i18n",
+    "API concept coverage count: 8 (parsing, get/set, manipulating, displaying, querying, formatting, plugins, i18n + introduction and installation)",
+    "API examples: dayjs(), dayjs.format(), dayjs.diff(), dayjs.add(), dayjs.subtract(), dayjs.startOf(), dayjs.endOf(), dayjs.get(), dayjs.set(), dayjs.isBefore(), dayjs.isAfter(), dayjs.isSame(), dayjs.unix(), dayjs.valueOf(), locale switching with dayjs.locale()",
+    "Parent domain justification: codeboost-tr.github.io hosts a fork of the original iamkun/dayjs repository. The fork mirrors the actual project codebase, and the Sourcey docs are contributed back upstream via PR iamkun/dayjs#3148, making this a credible intermediate home that the project can adopt through a straightforward merge.",
+    "Receipt reference: runx:receipt:sha256:b30f404afd6c564263bd4e7f731a77501c63049281d0ece973f04ccd44621b0f",
+    "Upstream PR: https://github.com/iamkun/dayjs/pull/3148"
+  ]
+}
