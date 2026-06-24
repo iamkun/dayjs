@@ -1,0 +1,11 @@
+{
+  "name": "dayjs-sourcey-docs",
+  "private": true,
+  "scripts": {
+    "build": "npx sourcey build",
+    "dev": "npx sourcey dev"
+  },
+  "devDependencies": {
+    "sourcey": "^3.6.4"
+  }
+}
