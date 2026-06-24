@@ -1,0 +1,16 @@
+# dayjs
+
+> **Day.js** is a minimalist JavaScript date library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+
+## Documentation
+
+- [Introduction to Day.js](/documentation/introduction.html): **Day.js** is a minimalist JavaScript date library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API. If you use Moment.js, you already know how to use Day.js.
+- [Installation](/documentation/installation.html): Once installed, creating and formatting dates is straightforward:
+- [Parsing](/documentation/parsing.html): Day.js supports multiple input formats for creating date objects.
+- [Get + Set](/documentation/get-set.html): Day.js provides getter and setter methods for reading and modifying date components.
+- [Manipulating](/documentation/manipulating.html): Day.js provides methods to add, subtract, and manipulate dates.
+- [Display](/documentation/displaying.html): Day.js provides methods to format and display dates in various ways.
+- [Query](/documentation/querying.html): Day.js provides methods to compare and query dates.
+- [Formatting Tokens](/documentation/formatting.html): The following tokens can be used in `dayjs().format(tokenString)`.
+- [Plugins](/documentation/plugins.html): Day.js has a plugin system to extend functionality. The core is intentionally minimal; plugins add features on demand.
+- [Internationalization (i18n)](/documentation/i18n.html): Day.js supports internationalization through locale files that are loaded on demand.

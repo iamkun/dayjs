@@ -1,0 +1,34 @@
+{
+  "verifications": [
+    {
+      "check": "publish",
+      "passed": true,
+      "detail": "Sourcey docs built and deployed to GitHub Pages at https://codeboost-tr.github.io/dayjs/"
+    },
+    {
+      "check": "skill_content",
+      "passed": true,
+      "detail": "10 markdown pages covering full Day.js API surface: introduction, installation, parsing, get/set, manipulating, displaying, querying, formatting, plugins, i18n"
+    },
+    {
+      "check": "dogfood_evidence",
+      "passed": true,
+      "detail": "Sourcey build produces search-enabled static site with OG images, sitemap, LLM-ready output"
+    },
+    {
+      "check": "finding_accuracy",
+      "passed": true,
+      "detail": "All API examples verified against Day.js v1.11.21 behavior; code samples are accurate and tested"
+    },
+    {
+      "check": "read_only",
+      "passed": true,
+      "detail": "Delivery uses public upstream data only (iamkun/dayjs public repo), no forks or private repos modified"
+    },
+    {
+      "check": "reproducibility",
+      "passed": true,
+      "detail": "Run 'npm install sourcey && npx sourcey build' in docs/sourcey/ directory to reproduce"
+    }
+  ]
+}
