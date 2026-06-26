@@ -8,10 +8,12 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
 dayjs.extend(weekOfYear) // test parse w, ww
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -331,6 +333,18 @@ describe('Array format support', () => {
     const input = '2018 三月 12'
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+  })
+  it('keeps UTC mode with dayjs.utc (issue #3013)', () => {
+    const input = '1995-05-01'
+    const format = ['YYYY-MM-DD', 'YYYY-M-D']
+    // the array path must parse in UTC, exactly like the single-format path;
+    // without the fix it falls back to the local-time constructor, so the
+    // instant is shifted by the host offset (observable off-UTC, e.g. the
+    // Europe/London / Pacific/Auckland / America/Whitehorse CI runs).
+    expect(dayjs.utc(input, format).isUTC()).toBe(true)
+    expect(dayjs.utc(input, format).toISOString()).toBe('1995-05-01T00:00:00.000Z')
+    expect(dayjs.utc(input, format).toISOString())
+      .toBe(dayjs.utc(input, 'YYYY-MM-DD').toISOString())
   })
 })
 

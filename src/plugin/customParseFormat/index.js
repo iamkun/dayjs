@@ -252,9 +252,10 @@ export default (o, C, d) => {
       locale = {}
     } else if (format instanceof Array) {
       const len = format.length
+      const parse = utc && d.utc ? d.utc : d
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
-        const result = d.apply(this, args)
+        const result = parse.apply(this, args)
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
