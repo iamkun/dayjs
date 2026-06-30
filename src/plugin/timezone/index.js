@@ -138,7 +138,7 @@ export default (o, c, d) => {
     const previousOffset = tzOffset(+d(), timezone)
     if (typeof input !== 'string') {
       // timestamp number || js Date || Day.js
-      return d(input).tz(timezone)
+      return d(input).tz(timezone, true)
     }
     const localTs = d.utc(input, parseFormat).valueOf()
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
