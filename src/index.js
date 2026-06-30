@@ -159,6 +159,28 @@ class Dayjs {
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
       ), this)
     }
+    const instanceFactorySetHours = (method, slice) => {
+      const argumentStart = [0, 0, 0, 0]
+      const argumentEnd = [23, 59, 59, 999];
+
+      const argument = isStartOf ? argumentStart : argumentEnd;
+
+        /** Compute the time zone offset in minutes */
+        const offsetMinute = this.utcOffset() + new Date().getTimezoneOffset();
+
+        const offsetDayjs = Utils.w(this.toDate()[method].apply( // eslint-disable-line prefer-spread
+          this.toDate('s'),
+          argument.slice(slice)
+        ), this)
+
+        const offsetDate = offsetDayjs.toDate()
+
+        if (offsetDate.getHours() === argument[0] && offsetDate.getMinutes() === argument[1] && offsetDate.getSeconds() === argument[2]) {
+          return offsetDayjs
+        }
+
+        return offsetDayjs.add(offsetMinute, "minute");
+    }
     const { $W, $M, $D } = this
     const utcPad = `set${this.$u ? 'UTC' : ''}`
     switch (unit) {
@@ -175,7 +197,7 @@ class Dayjs {
       }
       case C.D:
       case C.DATE:
-        return instanceFactorySet(`${utcPad}Hours`, 0)
+        return utcPad === 'set' ? instanceFactorySetHours(`${utcPad}Hours`, 0) : instanceFactorySet(`${utcPad}Hours`, 0)
       case C.H:
         return instanceFactorySet(`${utcPad}Minutes`, 1)
       case C.MIN:
