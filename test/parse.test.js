@@ -100,6 +100,39 @@ describe('Parse', () => {
     expect(dayjs('otherString').isValid()).toBe(false)
     expect(dayjs(null).toString().toLowerCase()).toBe(moment(null).toString().toLowerCase())
   })
+
+  describe('should correctly parse milliseconds less than three digits', () => {
+    it('should correctly parse hundreds of milliseconds without trailing zeros', () => {
+      const testCases = []
+      for (let i = 0; i < 30; i += 1) {
+        const base = '2022-01-25T09:54:22.'
+        const hundreds = Math.ceil(Math.random() * 9)
+        testCases.push({
+          input: `${base}${hundreds}`,
+          expectedOutput: new Date(`${base}${hundreds}`)
+        })
+      }
+      testCases.forEach((testCase) => {
+        expect(dayjs(testCase.input).toISOString()).toEqual(testCase.expectedOutput.toISOString())
+      })
+    })
+
+    it('should correctly parse tens of milliseconds without trailing zeros', () => {
+      const base = '2022-01-25T09:54:22.'
+      const testCases = []
+      for (let i = 0; i < 30; i += 1) {
+        const hundreds = Math.ceil(Math.random() * 9)
+        const tens = Math.ceil(Math.random() * 9)
+        testCases.push({
+          input: `${base}${hundreds}${tens}`,
+          expectedOutput: new Date(`${base}${hundreds}${tens}`)
+        })
+      }
+      testCases.forEach((testCase) => {
+        expect(dayjs(testCase.input).toISOString()).toEqual(testCase.expectedOutput.toISOString())
+      })
+    })
+  })
 })
 
 it('Unix Timestamp Number (milliseconds) 1523520536000', () => {
