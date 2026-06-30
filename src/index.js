@@ -283,11 +283,19 @@ class Dayjs {
     })
 
     const matches = (match) => {
+      const year = this.$y
+      // console.log($W, $M, year)
+      // if ($W === 1 && $M === 11) {
+      //   year += 1
+      // }
+      // if ($M === 0 && $W >= 52) {
+      //   year -= 1
+      // }
       switch (match) {
         case 'YY':
-          return String(this.$y).slice(-2)
+          return String(year).slice(-2)
         case 'YYYY':
-          return Utils.s(this.$y, 4, '0')
+          return Utils.s(year, 4, '0')
         case 'M':
           return $M + 1
         case 'MM':
