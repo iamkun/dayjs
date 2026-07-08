@@ -209,6 +209,10 @@ test('Add duration', () => {
   const b = dayjs('2023-02-01 00:00:00')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
   expect(b.add(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2024-03-02 01:01:01')
+
+  const c = dayjs('2023-01-13T00:00:00.000Z')
+  const halfAYear = dayjs.duration(6, 'months')
+  expect(c.add(halfAYear).format('YYYY-MM-DD')).toBe('2023-07-13')
 })
 
 describe('Subtract', () => {
