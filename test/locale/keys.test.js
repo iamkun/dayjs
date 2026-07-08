@@ -31,6 +31,7 @@ Locale.forEach((locale) => {
       monthsShort,
       weekdaysMin,
       weekStart,
+      quarterStart,
       yearStart,
       meridiem
     } = locale.content
@@ -45,6 +46,7 @@ Locale.forEach((locale) => {
     if (weekdaysShort) expect(weekdaysShort).toEqual(expect.any(Array))
     if (weekdaysMin) expect(weekdaysMin).toEqual(expect.any(Array))
     if (weekStart) expect(weekStart).toEqual(expect.any(Number))
+    if (quarterStart) expect(quarterStart).toEqual(expect.any(Number))
     if (yearStart) expect(yearStart).toEqual(expect.any(Number))
 
     // months could be a function or array

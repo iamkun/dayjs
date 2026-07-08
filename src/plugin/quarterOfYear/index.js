@@ -6,7 +6,12 @@ export default (o, c) => {
     if (!this.$utils().u(quarter)) {
       return this.month((this.month() % 3) + ((quarter - 1) * 3))
     }
-    return Math.ceil((this.month() + 1) / 3)
+
+    const startMonth = this.$locale().quarterStart || 1
+    const month = this.month() + 1
+    const value = Math.ceil(((month - startMonth) + 1) / 3)
+
+    return value > 0 ? value : 4 + value
   }
 
   const oldAdd = proto.add
@@ -25,10 +30,13 @@ export default (o, c) => {
     const isStartOf = !utils.u(startOf) ? startOf : true
     const unit = utils.p(units)
     if (unit === Q) {
+      const startMonth = (this.$locale().quarterStart || 1) - 1
+
       const quarter = this.quarter() - 1
-      return isStartOf ? this.month(quarter * 3)
+
+      return isStartOf ? this.month(quarter * 3).add(startMonth, 'month')
         .startOf(M).startOf(D) :
-        this.month((quarter * 3) + 2).endOf(M).endOf(D)
+        this.month((quarter * 3) + 2).add(startMonth, 'month').endOf(M).endOf(D)
     }
     return oldStartOf.bind(this)(units, startOf)
   }
