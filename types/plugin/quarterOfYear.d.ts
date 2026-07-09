@@ -9,9 +9,9 @@ declare module 'dayjs' {
 
     quarter(quarter: number): Dayjs
 
-    add(value: number, unit: QUnitType): Dayjs
+    add(value: number, unit: QUnitType | OpUnitType): Dayjs
 
-    subtract(value: number, unit: QUnitType): Dayjs
+    subtract(value: number, unit: QUnitType | OpUnitType): Dayjs
 
     startOf(unit: QUnitType | OpUnitType): Dayjs
 
