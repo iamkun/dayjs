@@ -285,7 +285,7 @@ class Dayjs {
     const matches = (match) => {
       switch (match) {
         case 'YY':
-          return String(this.$y).slice(-2)
+          return String(this.$y).slice(-2).padStart(2, '0')
         case 'YYYY':
           return Utils.s(this.$y, 4, '0')
         case 'M':
