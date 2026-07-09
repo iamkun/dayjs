@@ -33,12 +33,26 @@ const testArrs = [
   [2010, 6, 10]
 ]
 
-describe('parse array local', () => {
-  testArrs.forEach((testArr) => {
-    it(testArr, () => {
-      expect(dayjs(testArr).format())
-        .toBe(moment(testArr).format())
-    })
+describe('parse full array local', () => {
+  it('parse and format full date array', () => {
+    expect(dayjs([2010, 1, 14, 15, 25, 50, 125]).format())
+      .toBe('2010-01-14T15:25:50+00:00')
+  })
+
+  it('parse and format a date array that contain only the year', () => {
+    expect(dayjs([2010]).format())
+      .toBe('2010-01-01T00:00:00+00:00')
+  })
+
+  it('parse and format a date array that contain only the year and the month', () => {
+    expect(dayjs([2010, 6]).format())
+      .toBe('2010-06-01T00:00:00+00:00')
+  })
+
+
+  it('parse and format a date array that contain a date without a time', () => {
+    expect(dayjs([2010, 6, 10]).format())
+      .toBe('2010-06-10T00:00:00+00:00')
   })
 })
 
