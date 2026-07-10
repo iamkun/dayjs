@@ -100,6 +100,16 @@ it('Format Week of Year wo', () => {
     .toBe(moment(d).locale('zh-cn').format('wo'))
 })
 
+it('Format Week Year gg', () => {
+  const d = '2018-12-31'
+  expect(dayjs(d).format('gg')).toBe(moment(d).format('gg'))
+})
+
+it('Format Iso Week Year GG', () => {
+  const d = '2021-01-01'
+  expect(dayjs(d).format('GG')).toBe(moment(d).format('GG'))
+})
+
 it('Format Week Year gggg', () => {
   const d = '2018-12-31'
   expect(dayjs(d).format('gggg')).toBe(moment(d).format('gggg'))
