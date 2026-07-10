@@ -132,6 +132,31 @@ export default (o, c, d) => {
     return startOfWithoutTz.tz(this.$x.$timezone, true)
   }
 
+  const oldAdd = proto.add
+  proto.add = function (number, units) {
+    if (!this.$x || !this.$x.$timezone) {
+      return oldAdd.call(this, number, units)
+    }
+
+    const unit = this.$utils().p(units)
+    // For calendar units (day, week, month, year), work in timezone context
+    // For time units (ms, second, minute, hour), use timestamp-based approach
+    if (unit === 'd' || unit === 'day' || unit === 'D' || unit === 'date' ||
+        unit === 'w' || unit === 'week' || unit === 'W' ||
+        unit === 'M' || unit === 'month' ||
+        unit === 'y' || unit === 'year' || unit === 'Y' ||
+        unit === 'Q' || unit === 'quarter') {
+      // Format in timezone, add without timezone, convert back
+      const formatted = this.format('YYYY-MM-DD HH:mm:ss:SSS')
+      const withoutTz = d(formatted, { locale: this.$L })
+      const addedWithoutTz = oldAdd.call(withoutTz, number, units)
+      return addedWithoutTz.tz(this.$x.$timezone, true)
+    }
+
+    // For time units, use the original add method which works with timestamps
+    return oldAdd.call(this, number, units)
+  }
+
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
