@@ -33,6 +33,51 @@ const getDateTimeFormat = (timezone, options = {}) => {
   return dtf
 }
 
+/**
+ * Parse US locale date string to date components
+ * @param {string} str - US locale date string
+ *                       (e.g., '3/9/2025, 2:00:00 AM' '3/9/2025, 2:00:00.123 AM')
+ */
+function parseUSLocaleDate(str) {
+  const [datePart, timePartRaw] = str.split(',').map(s => s.trim())
+
+  const [month, day, year] = datePart.split('/').map(Number)
+
+  // Split "2:00:00.123 AM"
+  const parts = timePartRaw.split(' ')
+  const timePart = parts[0]
+  const period = parts[1] // AM / PM
+
+  const [h, m, sRaw] = timePart.split(':')
+
+  let second = 0
+  let millisecond = 0
+
+  if (sRaw.includes('.')) {
+    const [sec, ms] = sRaw.split('.')
+    second = Number(sec)
+    millisecond = Number(ms)
+  } else {
+    second = Number(sRaw)
+  }
+
+  let hour = Number(h)
+  const minute = Number(m)
+
+  if (period === 'PM' && hour !== 12) hour += 12
+  if (period === 'AM' && hour === 12) hour = 0
+
+  return {
+    year,
+    month,
+    day,
+    hour,
+    minute,
+    second,
+    millisecond
+  }
+}
+
 export default (o, c, d) => {
   let defaultTimezone
 
@@ -96,7 +141,25 @@ export default (o, c, d) => {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const diff = Math.round((date - new Date(target)) / 1000 / 60)
+
+
+    // Use string parsing instead of new Date(target) to avoid DST transition errors
+    const {
+      day, hour, minute
+    } = parseUSLocaleDate(target)
+    let deltaDay = date.getDate() - day
+    // Cross month adjustment
+    if (Math.abs(deltaDay) > 1) deltaDay = -Math.sign(deltaDay)
+
+    const diff = [
+      deltaDay,
+      (date.getHours() - hour),
+      (date.getMinutes() - minute)
+    ].reduce((sum, v, i) => {
+      const factors = [24 * 60, 60, 1]
+      return sum + (v * factors[i])
+    }, 0)
+
     const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
     const isUTC = !Number(offset)
     let ins
