@@ -66,6 +66,10 @@ const parseDate = (cfg) => {
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
   if (typeof date === 'string' && !/Z$/i.test(date)) {
+    // eslint-disable-next-line no-restricted-globals
+    if (!isNaN(date) && isFinite(date)) {
+      return new Date(Number(date))
+    }
     const d = date.match(C.REGEX_PARSE)
     if (d) {
       const m = d[2] - 1 || 0
@@ -78,6 +82,7 @@ const parseDate = (cfg) => {
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
+
 
   return new Date(date) // everything else
 }
