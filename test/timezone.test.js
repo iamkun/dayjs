@@ -80,3 +80,12 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+it('TZ', () => {
+  const millisPerDay = 8.64e7
+  const millisPerHour = 3600000
+
+  const timestamp = (20358 * millisPerDay) + (17 * millisPerHour)
+  const daysJS = dayjs.utc(timestamp).tz('Pacific/Auckland', true)
+  expect(daysJS.hour()).toBe(17)
+})

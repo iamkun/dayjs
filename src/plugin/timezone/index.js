@@ -95,9 +95,10 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     const oldOffset = this.utcOffset()
     const date = this.toDate()
+    const dateOffset = (-Math.round(date.getTimezoneOffset() / 15) * 15)
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const diff = Math.round((date - new Date(target)) / 1000 / 60)
-    const offset = (-Math.round(date.getTimezoneOffset() / 15) * 15) - diff
+    const offset = dateOffset - diff
     const isUTC = !Number(offset)
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
@@ -108,6 +109,11 @@ export default (o, c, d) => {
       if (keepLocalTime) {
         const newOffset = ins.utcOffset()
         ins = ins.add(oldOffset - newOffset, MIN)
+        const newDateOffset = (-Math.round(ins.toDate().getTimezoneOffset() / 15) * 15)
+        /* istanbul ignore next -- this branch is tested in test/timezone.test.js */
+        if (newDateOffset !== dateOffset) {
+          ins = ins.add(dateOffset - newDateOffset, MIN)
+        }
       }
     }
     ins.$x.$timezone = timezone
