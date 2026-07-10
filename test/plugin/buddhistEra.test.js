@@ -36,3 +36,16 @@ it('Skips format strings inside brackets', () => {
   expect(dayjs().format('[BBBB]')).toBe('BBBB')
   expect(dayjs().format('[BB]')).toBe('BB')
 })
+
+it('Parses Buddhist Era 2 digits', () => {
+  expect(dayjs('02/29/67', 'MM/DD/BB').valueOf()).toBe(moment('02/29/24').valueOf())
+  expect(dayjs('01/01/00', 'MM/DD/BB').valueOf()).toBe(moment('01/01/57').valueOf())
+  expect(dayjs('01/01/99', 'MM/DD/BB').valueOf()).toBe(moment('01/01/56').valueOf())
+})
+
+it('Parses Buddhist Era 4 digits', () => {
+  expect(dayjs('02/29/2567', 'MM/DD/BBBB').valueOf()).toBe(moment('02/29/2024').valueOf())
+  expect(dayjs('01/01/2500', 'MM/DD/BBBB').valueOf()).toBe(moment('01/01/1957').valueOf())
+  expect(dayjs('01/01/2599', 'MM/DD/BBBB').valueOf()).toBe(moment('01/01/2056').valueOf())
+  expect(dayjs('01/01/2499', 'MM/DD/BBBB').valueOf()).toBe(moment('01/01/1956').valueOf())
+})
