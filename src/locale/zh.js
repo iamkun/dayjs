@@ -59,6 +59,14 @@ const locale = {
       return '下午'
     }
     return '晚上'
+  },
+  calendar: {
+    lastDay: '[昨天] LT',
+    sameDay: '[今天] LT',
+    nextDay: '[明天] LT',
+    lastWeek: '[上周]dd LT',
+    nextWeek: '[下周]dd LT',
+    sameElse: 'L'
   }
 }
 
