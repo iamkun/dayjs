@@ -12,7 +12,7 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('is same or after year', () => {
+it('is same or after year', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 5, 6, 7, 8, 9, 10)), 'year')).toBe(true, 'year match')
@@ -27,7 +27,7 @@ test('is same or after year', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter year should not change moment')
 })
 
-test('is same or after without units', () => {
+it('is same or after without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2012, 3, 2, 3, 5, 5, 10)))).toBe(false, 'year is later')
@@ -49,14 +49,14 @@ test('is same or after without units', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter second should not change moment')
 })
 
-test('is same or after without date', () => {
+it('is same or after without date', () => {
   const past = dayjs().subtract(1, 'day')
   const future = dayjs().add(1, 'day')
   expect(past.isSameOrAfter()).toBe(false, 'past is before now')
   expect(future.isSameOrAfter()).toBe(true, 'future is not before now')
 })
 
-test('is same or after month', () => {
+it('is same or after month', () => {
   const m = dayjs(new Date(2011, 2, 3, 4, 5, 6, 7))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 2, 6, 7, 8, 9, 10)), 'month')).toBe(true, 'month match')
@@ -73,7 +73,7 @@ test('is same or after month', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter month should not change moment')
 })
 
-test('is same or after day', () => {
+it('is same or after day', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 1, 2, 7, 8, 9, 10)), 'day')).toBe(true, 'day match')
@@ -92,7 +92,7 @@ test('is same or after day', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter day should not change moment')
 })
 
-test('is same or after hour', () => {
+it('is same or after hour', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 1, 2, 3, 8, 9, 10)), 'hour')).toBe(true, 'hour match')
@@ -113,7 +113,7 @@ test('is same or after hour', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter hour should not change moment')
 })
 
-test('is same or after minute', () => {
+it('is same or after minute', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 1, 2, 3, 4, 9, 10)), 'minute')).toBe(true, 'minute match')
@@ -136,7 +136,7 @@ test('is same or after minute', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter minute should not change moment')
 })
 
-test('is same or after second', () => {
+it('is same or after second', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 1, 2, 3, 4, 5, 10)), 'second')).toBe(true, 'second match')
@@ -161,7 +161,7 @@ test('is same or after second', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter second should not change moment')
 })
 
-test('is same or after millisecond', () => {
+it('is same or after millisecond', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
   expect(m.isSameOrAfter(dayjs(new Date(2011, 3, 2, 3, 4, 5, 10)), 'millisecond')).toBe(true, 'millisecond match')
@@ -184,7 +184,7 @@ test('is same or after millisecond', () => {
   expect(+m).toEqual(+mCopy, 'isSameOrAfter millisecond should not change moment')
 })
 
-test('is same or after with invalid moments', () => {
+it('is same or after with invalid moments', () => {
   const m = dayjs()
   const invalid = dayjs(null)
   expect(invalid.isSameOrAfter(invalid)).toBe(false, 'invalid moments are not considered equal')
