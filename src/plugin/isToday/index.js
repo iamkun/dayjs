@@ -1,9 +1,8 @@
 export default (o, c, d) => {
   const proto = c.prototype
   proto.isToday = function () {
-    const comparisonTemplate = 'YYYY-MM-DD'
+    const date = this
     const now = d()
-
-    return this.format(comparisonTemplate) === now.format(comparisonTemplate)
+    return date.year() === now.year() && date.month() === now.month() && date.date() === now.date()
   }
 }
