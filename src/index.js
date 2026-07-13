@@ -112,6 +112,20 @@ class Dayjs {
     return Utils
   }
 
+  $getUtcPadUnits() {
+    const utcPad = `set${this.$u ? 'UTC' : ''}`
+    return {
+      [C.D]: `${utcPad}Date`,
+      [C.DATE]: `${utcPad}Date`,
+      [C.M]: `${utcPad}Month`,
+      [C.Y]: `${utcPad}FullYear`,
+      [C.H]: `${utcPad}Hours`,
+      [C.MIN]: `${utcPad}Minutes`,
+      [C.S]: `${utcPad}Seconds`,
+      [C.MS]: `${utcPad}Milliseconds`
+    }
+  }
+
   isValid() {
     return !(this.$d.toString() === C.INVALID_DATE_STRING)
   }
@@ -160,7 +174,7 @@ class Dayjs {
       ), this)
     }
     const { $W, $M, $D } = this
-    const utcPad = `set${this.$u ? 'UTC' : ''}`
+    const utcPadUnits = this.$getUtcPadUnits()
     switch (unit) {
       case C.Y:
         return isStartOf ? instanceFactory(1, 0) :
@@ -175,13 +189,13 @@ class Dayjs {
       }
       case C.D:
       case C.DATE:
-        return instanceFactorySet(`${utcPad}Hours`, 0)
+        return instanceFactorySet(utcPadUnits[C.H], 0)
       case C.H:
-        return instanceFactorySet(`${utcPad}Minutes`, 1)
+        return instanceFactorySet(utcPadUnits[C.MIN], 1)
       case C.MIN:
-        return instanceFactorySet(`${utcPad}Seconds`, 2)
+        return instanceFactorySet(utcPadUnits[C.MIN], 2)
       case C.S:
-        return instanceFactorySet(`${utcPad}Milliseconds`, 3)
+        return instanceFactorySet(utcPadUnits[C.MS], 3)
       default:
         return this.clone()
     }
@@ -193,17 +207,8 @@ class Dayjs {
 
   $set(units, int) { // private set
     const unit = Utils.p(units)
-    const utcPad = `set${this.$u ? 'UTC' : ''}`
-    const name = {
-      [C.D]: `${utcPad}Date`,
-      [C.DATE]: `${utcPad}Date`,
-      [C.M]: `${utcPad}Month`,
-      [C.Y]: `${utcPad}FullYear`,
-      [C.H]: `${utcPad}Hours`,
-      [C.MIN]: `${utcPad}Minutes`,
-      [C.S]: `${utcPad}Seconds`,
-      [C.MS]: `${utcPad}Milliseconds`
-    }[unit]
+    const utcPadUnits = this.$getUtcPadUnits()
+    const name = utcPadUnits[unit]
     const arg = unit === C.D ? this.$D + (int - this.$W) : int
 
     if (unit === C.M || unit === C.Y) {
