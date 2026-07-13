@@ -3,7 +3,7 @@ import * as C from './constant'
 const padStart = (string, length, pad) => {
   const s = String(string)
   if (!s || s.length >= length) return string
-  return `${Array((length + 1) - s.length).join(pad)}${string}`
+  return `${Array((length + 1) - s.length).fill('').join(pad)}${string}`
 }
 
 const padZoneStr = (instance) => {
