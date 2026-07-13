@@ -2,9 +2,11 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
+import customParseFormat from '../../src/plugin/customParseFormat'
 import '../../src/locale/ru'
 
 dayjs.extend(relativeTime)
+dayjs.extend(customParseFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -53,4 +55,29 @@ it('Meridiem', () => {
   expect(dayjs('2020-01-01 11:00:00').locale('ru').format('A')).toEqual('утра')
   expect(dayjs('2020-01-01 16:00:00').locale('ru').format('A')).toEqual('дня')
   expect(dayjs('2020-01-01 20:00:00').locale('ru').format('A')).toEqual('вечера')
+})
+
+describe('issue 1656', () => {
+  it('Dayjs returns next year instead of passed one in "ru"', () => {
+    const input = '11 декабря 2019'
+    const format = 'DD MMMM YYYY'
+    const locale = 'ru'
+    const resultDayjs = dayjs(input, format, locale)
+    const resultMoment = moment(input, format, locale)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('11-12-2019')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('11-12-2019')
+  })
+  it('Dayjs returns next year instead of passed one in "ru" 2', () => {
+    const input = '11 декабрь 2019'
+    const format = 'DD MMMM YYYY'
+    const locale = 'ru'
+    const resultDayjs = dayjs(input, format, locale)
+    const resultMoment = moment(input, format, locale)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('DD-MM-YYYY')).toBe('11-12-2019')
+    expect(resultMoment.format('DD-MM-YYYY')).toBe('11-12-2019')
+  })
 })
