@@ -110,6 +110,26 @@ describe('Parse ISO string', () => {
   })
 })
 
+describe('Parse ASP string', () => {
+  it('Full ASP string', () => {
+    expect(dayjs.duration('0.00:00:34').asMilliseconds()).toBe(34000)
+    expect(dayjs.duration('1.00:00:07').asMilliseconds()).toBe(86407000)
+    expect(dayjs.duration('1 00:00:07').asMilliseconds()).toBe(86407000)
+  })
+  it('Part ASP string', () => {
+    expect(dayjs.duration('00:00:34').asMilliseconds()).toBe(34000)
+  })
+  it('ASP string with day', () => {
+    expect(dayjs.duration('1 00:00:00').asDays()).toBe(1)
+    expect(dayjs.duration('00:00:00').asDays()).toBe(0)
+  })
+  it('ASP string with hour/minute/second', () => {
+    expect(dayjs.duration('01:00:00').asHours()).toBe(1)
+    expect(dayjs.duration('00:01:00').asMinutes()).toBe(1)
+    expect(dayjs.duration('00:00:01').asSeconds()).toBe(1)
+  })
+})
+
 it('Is duration', () => {
   expect(dayjs.isDuration(dayjs.duration())).toBe(true)
   expect(dayjs.isDuration(dayjs.duration(1))).toBe(true)
