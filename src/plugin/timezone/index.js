@@ -114,6 +114,10 @@ export default (o, c, d) => {
     return ins
   }
 
+  proto.getTimezone = function () {
+    return this.$x.$timezone
+  }
+
   proto.offsetName = function (type) {
     // type: short(default) / long
     const zone = this.$x.$timezone || d.tz.guess()

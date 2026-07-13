@@ -7,6 +7,7 @@ declare module 'dayjs' {
   interface Dayjs {
     tz(timezone?: string, keepLocalTime?: boolean): Dayjs
     offsetName(type?: 'short' | 'long'): string | undefined
+    getTimezone(): string | undefined
   }
 
   interface DayjsTimezone {
