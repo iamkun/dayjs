@@ -89,6 +89,16 @@ describe('Parse', () => {
     expect(ds.millisecond()).toEqual(ms.millisecond())
   })
 
+  it('parses millisecond with fewer than 3 digits as a decimal fraction', () => {
+    const dates = ['2019-03-25T06:41:00.5', '2019-03-25T06:41:00.05', '2019-03-25T06:41:00.005']
+    dates.forEach((date) => {
+      const ds = dayjs(date)
+      const ms = moment(date)
+      expect(ds.valueOf()).toEqual(ms.valueOf())
+      expect(ds.millisecond()).toEqual(ms.millisecond())
+    })
+  })
+
   it('String Other, Undefined and Null and isValid', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
