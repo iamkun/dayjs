@@ -22,6 +22,7 @@ const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 const PARIS = 'Europe/Paris'
+const GUADELOUPE = 'America/Guadeloupe'
 
 describe('Guess', () => {
   it('return string', () => {
@@ -350,5 +351,46 @@ describe('UTC timezone', () => {
     const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     expect(dayjs2.format()).toBe(moment2.format())
+  })
+})
+
+// America/Guadeloupe observes a fixed UTC−4 offset (no DST). Converting an instant with
+// .tz() must not inherit the host timezone's DST transition. Fails on hosts with EU-style
+// spring DST (e.g. Europe/Paris, Europe/London); covered by npm run test-tz-plugin.
+// https://github.com/iamkun/dayjs/issues/1260
+describe('Fixed-offset zone across host DST (America/Guadeloupe)', () => {
+  // EU spring-forward Sunday in 2050; Guadeloupe local midnight is 04:00Z.
+  const instant = '2050-03-27T04:00:00.000Z'
+
+  it('keeps UTC−4 when converting an instant around host spring DST', () => {
+    const d = dayjs(instant).tz(GUADELOUPE)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.format()).toBe('2050-03-27T00:00:00-04:00')
+  })
+
+  it('matches moment for America/Guadeloupe around host spring DST', () => {
+    const d = dayjs(instant).tz(GUADELOUPE)
+    const m = moment(instant).tz(GUADELOUPE)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('advances the calendar day when adding 1 day across host spring DST', () => {
+    let date = new Date('2050-03-26T04:00:00.000Z')
+    const days = []
+    for (let i = 0; i < 3; i += 1) {
+      const cur = dayjs(date).tz(GUADELOUPE)
+      days.push({
+        day: cur.format('YYYY-MM-DD'),
+        offset: cur.utcOffset()
+      })
+      date = cur.add(1, 'day').toDate()
+    }
+    expect(days.map(d => d.day)).toEqual([
+      '2050-03-26',
+      '2050-03-27',
+      '2050-03-28'
+    ])
+    expect(days.map(d => d.offset)).toEqual([-240, -240, -240])
   })
 })
