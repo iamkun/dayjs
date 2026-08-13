@@ -22,6 +22,17 @@ const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
 const PARIS = 'Europe/Paris'
+const GUADELOUPE = 'America/Guadeloupe'
+const SYDNEY = 'Australia/Sydney'
+const LA = 'America/Los_Angeles'
+const MEL = 'Australia/Melbourne'
+const LONDON = 'Europe/London'
+
+const matchMoment = (d, m) => {
+  expect(d.format()).toBe(m.format())
+  expect(d.valueOf()).toBe(m.valueOf())
+  expect(d.utcOffset()).toBe(m.utcOffset())
+}
 
 describe('Guess', () => {
   it('return string', () => {
@@ -188,19 +199,6 @@ describe('DST, a time that never existed Fall Back', () => {
       expect(d.valueOf()).toBe(1352005199000)
     })
   })
-  it('2012-11-04 00:59:59', () => {
-    const s = '2012-11-04 00:59:59';
-    [dayjs, moment].forEach((_) => {
-      const d = _.tz(s, NY)
-      expect(d.format()).toBe('2012-11-04T00:59:59-04:00')
-      expect(d.utcOffset()).toBe(-240)
-      expect(d.valueOf()).toBe(1352005199000)
-    })
-  })
-
-  // there's no sense to test "2012-11-04 01:59:59 America/New_York"
-  // cause it's an invalid date and never exist
-  // and dayjs result it as "2012-11-04T01:59:00-05:00"
 
   it('2012-11-04 02:00:00', () => {
     const s = '2012-11-04 02:00:00';
@@ -280,6 +278,26 @@ describe('keepLocalTime', () => {
     expect(base.tz('Europe/Berlin').format()).toBe('2013-11-18T17:55:00+01:00')
     expect(base.tz('Europe/Berlin', true).format()).toBe('2013-11-18T11:55:00+01:00')
   })
+
+  // keepLocalTime must not inherit the host DST skip (EU spring-forward Sunday).
+  it('keeps UTC wall clock when converting to America/Guadeloupe around host spring DST', () => {
+    const instant = '2050-03-27T04:00:00.000Z'
+    const d = dayjs.utc(instant).tz(GUADELOUPE, true)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.format()).toBe('2050-03-27T04:00:00-04:00')
+    const m = moment.utc(instant).tz(GUADELOUPE, true)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('keeps local time when converting between DST-desynced zones', () => {
+    const d = dayjs.tz('2024-03-20 12:00', NY).tz(PARIS, true)
+    expect(d.utcOffset()).toBe(60)
+    expect(d.format()).toBe('2024-03-20T12:00:00+01:00')
+    const m = moment.tz('2024-03-20 12:00', NY).tz(PARIS, true)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
 })
 
 describe('Get offsetName', () => {
@@ -350,5 +368,439 @@ describe('UTC timezone', () => {
     const dayjs2 = dayjs('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     const moment2 = moment('2000-01-01T09:01:00+09:00').tz('Etc/UTC', true)
     expect(dayjs2.format()).toBe(moment2.format())
+  })
+})
+
+// America/Guadeloupe observes a fixed UTC−4 offset (no DST). Converting an instant with
+// .tz() must not inherit the host timezone's DST transition. Fails on hosts with EU-style
+// spring DST (e.g. Europe/Paris, Europe/London); covered by npm run test-tz-plugin.
+// https://github.com/iamkun/dayjs/issues/1260
+describe('Fixed-offset zone across host DST (America/Guadeloupe)', () => {
+  // EU spring-forward Sunday in 2050; Guadeloupe local midnight is 04:00Z.
+  const instant = '2050-03-27T04:00:00.000Z'
+
+  it('keeps UTC−4 when converting an instant around host spring DST', () => {
+    const d = dayjs(instant).tz(GUADELOUPE)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.format()).toBe('2050-03-27T00:00:00-04:00')
+  })
+
+  it('matches moment for America/Guadeloupe around host spring DST', () => {
+    const d = dayjs(instant).tz(GUADELOUPE)
+    const m = moment(instant).tz(GUADELOUPE)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('advances the calendar day when adding 1 day across host spring DST', () => {
+    let date = new Date('2050-03-26T04:00:00.000Z')
+    const days = []
+    for (let i = 0; i < 3; i += 1) {
+      const cur = dayjs(date).tz(GUADELOUPE)
+      days.push({
+        day: cur.format('YYYY-MM-DD'),
+        offset: cur.utcOffset()
+      })
+      date = cur.add(1, 'day').toDate()
+    }
+    expect(days.map(d => d.day)).toEqual([
+      '2050-03-26',
+      '2050-03-27',
+      '2050-03-28'
+    ])
+    expect(days.map(d => d.offset)).toEqual([-240, -240, -240])
+  })
+
+  // 02:00–02:59 does not exist in Europe/Paris on this Sunday. Parsing the
+  // target wall clock as host local time would jump to 03:xx; Guadeloupe still
+  // has those hours (fixed UTC−4).
+  it('keeps the target wall clock when it falls in the host spring-forward gap', () => {
+    const cases = [
+      ['2050-03-27T06:00:00.000Z', '2050-03-27T02:00:00-04:00'],
+      ['2050-03-27T06:30:00.000Z', '2050-03-27T02:30:00-04:00'],
+      ['2050-03-27T06:59:00.000Z', '2050-03-27T02:59:00-04:00']
+    ]
+    cases.forEach(([iso, expected]) => {
+      const d = dayjs(iso).tz(GUADELOUPE)
+      const m = moment(iso).tz(GUADELOUPE)
+      expect(d.format()).toBe(expected)
+      expect(d.format()).toBe(m.format())
+      expect(d.utcOffset()).toBe(-240)
+      expect(d.utcOffset()).toBe(m.utcOffset())
+      expect(d.valueOf()).toBe(new Date(iso).getTime())
+      expect(d.valueOf()).toBe(m.valueOf())
+    })
+  })
+})
+
+// Target zones that observe DST must not inherit the host timezone's DST state.
+// US and EU calendars are out of sync in mid-March (US already DST, EU still standard)
+// and late October (EU already standard, US still DST). Southern-hemisphere DST is
+// inverted year-round. Covered by npm run test-tz-plugin across host timezones.
+// https://github.com/iamkun/dayjs/issues/1260
+describe('DST-observing zone across host DST', () => {
+  const springDesync = '2024-03-20T12:00:00.000Z'
+  const fallDesync = '2024-10-30T12:00:00.000Z'
+  const southernSummer = '2024-01-15T12:00:00.000Z'
+
+  it('converts to America/New_York while US is in DST and EU is not', () => {
+    const d = dayjs(springDesync).tz(NY)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.format()).toBe('2024-03-20T08:00:00-04:00')
+    const m = moment(springDesync).tz(NY)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('converts to Europe/Paris while EU is still on standard time', () => {
+    const d = dayjs(springDesync).tz(PARIS)
+    expect(d.utcOffset()).toBe(60)
+    expect(d.format()).toBe('2024-03-20T13:00:00+01:00')
+    const m = moment(springDesync).tz(PARIS)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('converts to America/New_York while US is still in DST and EU has fallen back', () => {
+    const d = dayjs(fallDesync).tz(NY)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.format()).toBe('2024-10-30T08:00:00-04:00')
+    const m = moment(fallDesync).tz(NY)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('converts to Europe/Paris after EU has fallen back', () => {
+    const d = dayjs(fallDesync).tz(PARIS)
+    expect(d.utcOffset()).toBe(60)
+    expect(d.format()).toBe('2024-10-30T13:00:00+01:00')
+    const m = moment(fallDesync).tz(PARIS)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('converts to Australia/Sydney while southern hemisphere is in DST', () => {
+    const d = dayjs(southernSummer).tz(SYDNEY)
+    expect(d.utcOffset()).toBe(660)
+    expect(d.format()).toBe('2024-01-15T23:00:00+11:00')
+    const m = moment(southernSummer).tz(SYDNEY)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+
+  it('converts to Europe/Paris while northern hemisphere is on standard time', () => {
+    const d = dayjs(southernSummer).tz(PARIS)
+    expect(d.utcOffset()).toBe(60)
+    expect(d.format()).toBe('2024-01-15T13:00:00+01:00')
+    const m = moment(southernSummer).tz(PARIS)
+    expect(d.format()).toBe(m.format())
+    expect(d.utcOffset()).toBe(m.utcOffset())
+  })
+})
+
+// Parse/startOf must not use the host calendar; mutations must refresh the target
+// offset; overlap instants stay distinct. Compared to moment-timezone.
+describe('DST edge cases vs moment', () => {
+  it('parses a wall clock that falls in the host spring-forward gap', () => {
+    ['02:00', '02:30', '02:59'].forEach((time) => {
+      const s = `2050-03-27 ${time}`
+      matchMoment(dayjs.tz(s, GUADELOUPE), moment.tz(s, GUADELOUPE))
+    })
+  })
+
+  it('startOf hour when the wall clock falls in the host spring-forward gap', () => {
+    const iso = '2050-03-27T06:30:00.000Z'
+    matchMoment(
+      dayjs(iso).tz(GUADELOUPE).startOf('hour'),
+      moment(iso).tz(GUADELOUPE).startOf('hour')
+    )
+  })
+
+  it('startOf / endOf day when the wall clock falls in the host spring-forward gap', () => {
+    const iso = '2050-03-27T06:30:00.000Z'
+    matchMoment(
+      dayjs(iso).tz(GUADELOUPE).startOf('day'),
+      moment(iso).tz(GUADELOUPE).startOf('day')
+    )
+    matchMoment(
+      dayjs(iso).tz(GUADELOUPE).endOf('day'),
+      moment(iso).tz(GUADELOUPE).endOf('day')
+    )
+  })
+
+  it('parses the fall-back overlap the same way as moment', () => {
+    ['01:00', '01:30', '01:59'].forEach((time) => {
+      const s = `2012-11-04 ${time}`
+      matchMoment(dayjs.tz(s, NY), moment.tz(s, NY))
+    })
+  })
+
+  it('keeps the two 01:30 instants distinct when converting', () => {
+    matchMoment(
+      dayjs('2012-11-04T05:30:00.000Z').tz(NY),
+      moment('2012-11-04T05:30:00.000Z').tz(NY)
+    )
+    matchMoment(
+      dayjs('2012-11-04T06:30:00.000Z').tz(NY),
+      moment('2012-11-04T06:30:00.000Z').tz(NY)
+    )
+  })
+
+  it('converts through the host fall-back overlap', () => {
+    const iso = '2024-10-27T05:30:00.000Z'
+    matchMoment(dayjs(iso).tz(GUADELOUPE), moment(iso).tz(GUADELOUPE))
+    matchMoment(
+      dayjs(iso).tz(GUADELOUPE).startOf('hour'),
+      moment(iso).tz(GUADELOUPE).startOf('hour')
+    )
+  })
+
+  it('adds hours across the target spring-forward', () => {
+    const s = '2012-03-11 01:30'
+    matchMoment(dayjs.tz(s, NY).add(1, 'hour'), moment.tz(s, NY).add(1, 'hour'))
+    matchMoment(dayjs.tz(s, NY).add(2, 'hour'), moment.tz(s, NY).add(2, 'hour'))
+    matchMoment(
+      dayjs.tz('2024-03-31 01:30', PARIS).add(1, 'hour'),
+      moment.tz('2024-03-31 01:30', PARIS).add(1, 'hour')
+    )
+  })
+
+  it('subtracts an hour backwards across the target spring-forward', () => {
+    matchMoment(
+      dayjs.tz('2012-03-11 03:30', NY).subtract(1, 'hour'),
+      moment.tz('2012-03-11 03:30', NY).subtract(1, 'hour')
+    )
+  })
+
+  it('adds a calendar day across target spring-forward and fall-back', () => {
+    matchMoment(
+      dayjs.tz('2012-03-10 12:00', NY).add(1, 'day'),
+      moment.tz('2012-03-10 12:00', NY).add(1, 'day')
+    )
+    matchMoment(
+      dayjs.tz('2012-11-03 12:00', NY).add(1, 'day'),
+      moment.tz('2012-11-03 12:00', NY).add(1, 'day')
+    )
+  })
+
+  it('adds a month across target DST and matches moment valueOf', () => {
+    matchMoment(
+      dayjs.tz('2012-03-11 12:00', NY).add(1, 'month'),
+      moment.tz('2012-03-11 12:00', NY).add(1, 'month')
+    )
+  })
+
+  it('sets hour after the target spring-forward gap', () => {
+    matchMoment(
+      dayjs.tz('2012-03-11 01:00', NY).hour(3),
+      moment.tz('2012-03-11 01:00', NY).hour(3)
+    )
+  })
+
+  it('startOf day on target DST transition Sundays', () => {
+    matchMoment(
+      dayjs.tz('2012-03-11 12:00', NY).startOf('day'),
+      moment.tz('2012-03-11 12:00', NY).startOf('day')
+    )
+    matchMoment(
+      dayjs.tz('2012-11-04 12:00', NY).startOf('day'),
+      moment.tz('2012-11-04 12:00', NY).startOf('day')
+    )
+    matchMoment(
+      dayjs.tz('2021-04-04 08:00', MEL).startOf('day'),
+      moment.tz('2021-04-04 08:00', MEL).startOf('day')
+    )
+  })
+
+  it('keepLocalTime around LA spring-forward matches moment', () => {
+    matchMoment(
+      dayjs('2022-03-13T01:59:59Z').utc().tz(LA, true),
+      moment('2022-03-13T01:59:59Z').utc().tz(LA, true)
+    )
+    matchMoment(
+      dayjs('2022-03-13T03:00:01Z').utc().tz(LA, true),
+      moment('2022-03-13T03:00:01Z').utc().tz(LA, true)
+    )
+  })
+
+  it('converts 30-minute DST (Australia/Lord_Howe)', () => {
+    matchMoment(
+      dayjs('2024-01-15T12:00:00.000Z').tz('Australia/Lord_Howe'),
+      moment('2024-01-15T12:00:00.000Z').tz('Australia/Lord_Howe')
+    )
+    matchMoment(
+      dayjs('2024-07-15T12:00:00.000Z').tz('Australia/Lord_Howe'),
+      moment('2024-07-15T12:00:00.000Z').tz('Australia/Lord_Howe')
+    )
+  })
+
+  it('converts Europe/London in winter (UTC+0)', () => {
+    matchMoment(
+      dayjs('2024-01-15T12:00:00.000Z').tz(LONDON),
+      moment('2024-01-15T12:00:00.000Z').tz(LONDON)
+    )
+    matchMoment(
+      dayjs.tz('2024-01-15 12:00', LONDON),
+      moment.tz('2024-01-15 12:00', LONDON)
+    )
+  })
+
+  it('parses a fall-back overlap independently of the current season', () => {
+    ['2024-01-15T12:00:00Z', '2024-07-15T12:00:00Z'].forEach((now) => {
+      MockDate.set(now)
+      matchMoment(
+        dayjs.tz('2012-11-04 01:30', NY),
+        moment.tz('2012-11-04 01:30', NY)
+      )
+    })
+  })
+
+  it('preserves both sides of an overlap during wall-clock operations', () => {
+    const operations = [
+      date => date.startOf('hour'),
+      date => date.endOf('hour'),
+      date => date.minute(45)
+    ]
+    const instants = [
+      '2012-11-04T05:30:00.000Z',
+      '2012-11-04T06:30:00.000Z'
+    ]
+    instants.forEach((instant) => {
+      operations.forEach((operation) => {
+        matchMoment(
+          operation(dayjs(instant).tz(NY)),
+          operation(moment(instant).tz(NY))
+        )
+      })
+    })
+  })
+
+  it('returns an invalid instance for invalid input', () => {
+    const invalidString = dayjs.tz('not-a-date', NY)
+    const invalidDate = dayjs.tz(new Date(NaN), NY)
+    expect(invalidString.isValid()).toBe(false)
+    expect(invalidString.format()).toBe('Invalid Date')
+    expect(invalidDate.isValid()).toBe(false)
+    expect(invalidDate.format()).toBe('Invalid Date')
+  })
+
+  it('adds hours through both sides of a fall-back overlap', () => {
+    [1, 2, 3].forEach((hours) => {
+      matchMoment(
+        dayjs.tz('2012-11-04 00:30', NY).add(hours, 'hour'),
+        moment.tz('2012-11-04 00:30', NY).add(hours, 'hour')
+      )
+    })
+  })
+
+  it('adds weeks and years across target DST changes', () => {
+    matchMoment(
+      dayjs.tz('2012-03-04 12:00', NY).add(1, 'week'),
+      moment.tz('2012-03-04 12:00', NY).add(1, 'week')
+    )
+    matchMoment(
+      dayjs.tz('2011-11-04 12:00', NY).add(1, 'year'),
+      moment.tz('2011-11-04 12:00', NY).add(1, 'year')
+    )
+  })
+
+  it('moves from London UTC+0 to UTC+1 using calendar and duration arithmetic', () => {
+    const input = '2024-03-30 12:00'
+    matchMoment(
+      dayjs.tz(input, LONDON).add(1, 'day'),
+      moment.tz(input, LONDON).add(1, 'day')
+    )
+    matchMoment(
+      dayjs.tz(input, LONDON).add(24, 'hour'),
+      moment.tz(input, LONDON).add(24, 'hour')
+    )
+  })
+
+  it('handles 30-minute DST changes during arithmetic', () => {
+    const zone = 'Australia/Lord_Howe'
+    const input = '2024-04-06 12:00'
+    matchMoment(
+      dayjs.tz(input, zone).add(1, 'day'),
+      moment.tz(input, zone).add(1, 'day')
+    )
+    matchMoment(
+      dayjs.tz(input, zone).add(24, 'hour'),
+      moment.tz(input, zone).add(24, 'hour')
+    )
+  })
+
+  it('handles the 30-minute Lord Howe gap and both sides of its overlap', () => {
+    const zone = 'Australia/Lord_Howe'
+    matchMoment(
+      dayjs.tz('2024-10-06 02:15', zone),
+      moment.tz('2024-10-06 02:15', zone)
+    )
+    const overlapInstants = [
+      '2024-04-06T14:45:00.000Z',
+      '2024-04-06T15:15:00.000Z'
+    ]
+    overlapInstants.forEach((instant) => {
+      matchMoment(dayjs(instant).tz(zone), moment(instant).tz(zone))
+    })
+  })
+
+  it('preserves timezone state through clone chains', () => {
+    const instant = '2012-11-04T06:30:00.000Z'
+    const d = dayjs(instant).tz(NY)
+    const m = moment(instant).tz(NY)
+    matchMoment(d.clone(), m.clone())
+    matchMoment(d.clone().add(1, 'hour'), m.clone().add(1, 'hour'))
+    matchMoment(d.clone().minute(45), m.clone().minute(45))
+  })
+
+  it('keeps local time when converting a host-local instance', () => {
+    const input = '2024-03-20 12:34:56.789'
+    matchMoment(
+      dayjs(input).tz(GUADELOUPE, true),
+      moment(input).tz(GUADELOUPE, true)
+    )
+  })
+
+  it('diffs elapsed hours and calendar days across target DST', () => {
+    const dBefore = dayjs.tz('2012-03-10 12:00', NY)
+    const dAfter = dayjs.tz('2012-03-11 12:00', NY)
+    const mBefore = moment.tz('2012-03-10 12:00', NY)
+    const mAfter = moment.tz('2012-03-11 12:00', NY)
+    expect(dAfter.diff(dBefore, 'hour')).toBe(mAfter.diff(mBefore, 'hour'))
+    expect(dAfter.diff(dBefore, 'day', true)).toBe(mAfter.diff(mBefore, 'day', true))
+  })
+
+  it('handles quarter-hour and date-line offsets', () => {
+    const instant = '2024-01-01T12:00:00.000Z'
+    const zones = ['Asia/Kathmandu', 'Pacific/Chatham', 'Pacific/Kiritimati']
+    zones.forEach((zone) => {
+      matchMoment(dayjs(instant).tz(zone), moment(instant).tz(zone))
+      matchMoment(
+        dayjs.tz('2024-01-01 00:15', zone),
+        moment.tz('2024-01-01 00:15', zone)
+      )
+    })
+  })
+
+  it('preserves calendar boundaries through timezone arithmetic', () => {
+    matchMoment(
+      dayjs.tz('2024-01-31 12:00', PARIS).add(2, 'month'),
+      moment.tz('2024-01-31 12:00', PARIS).add(2, 'month')
+    )
+    matchMoment(
+      dayjs.tz('2024-02-29 12:00', NY).add(1, 'year'),
+      moment.tz('2024-02-29 12:00', NY).add(1, 'year')
+    )
+  })
+
+  it('preserves locale through timezone mutations', () => {
+    const locale = {
+      name: 'timezone_mutation_locale',
+      weekStart: 3
+    }
+    const date = dayjs.tz('2012-03-10 12:00', NY).locale(locale)
+    expect(date.add(1, 'day').locale()).toBe(locale.name)
+    expect(date.add(1, 'hour').locale()).toBe(locale.name)
+    expect(date.hour(13).locale()).toBe(locale.name)
   })
 })
