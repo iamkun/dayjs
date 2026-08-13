@@ -5,7 +5,7 @@
   "main": "dayjs.min.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && cross-env TZ=Europe/Paris npm run test-tz-plugin && cross-env TZ=Europe/London npm run test-tz-plugin && jest --coverage --coverageThreshold=\"{ \\\"global\\\": { \\\"lines\\\": 100} }\"",
+    "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && cross-env TZ=Europe/Paris npm run test-tz-plugin && cross-env TZ=Europe/London npm run test-tz-plugin && cross-env TZ=America/New_York npm run test-tz-plugin && cross-env TZ=Pacific/Auckland npm run test-tz-plugin && jest --coverage --coverageThreshold=\"{ \\\"global\\\": { \\\"lines\\\": 100} }\"",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "test-tz-plugin": "date && jest test/plugin/timezone.test --coverage=false",
     "lint": "./node_modules/.bin/eslint src/* test/* build/*",
