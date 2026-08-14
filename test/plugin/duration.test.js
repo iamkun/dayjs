@@ -133,6 +133,15 @@ describe('Humanize', () => {
     expect(dayjs.duration(-1, 'minutes').humanize(true)).toBe('a minute ago')
   })
 
+  it('Fixed unit decomposition (issue #3170)', () => {
+    // 闰年口径回归：humanize 与 asYears 一致（9999Y 不再因日历 diff 变 9992）
+    expect(dayjs.duration('P9999Y').humanize()).toBe('9999 years')
+    expect(dayjs.duration('P9999Y').humanize(true)).toBe('in 9999 years')
+    // 月量级由日历分数改为固定口径（与 moment 一致）
+    expect(dayjs.duration(18, 'months').humanize()).toBe('2 years')
+    expect(dayjs.duration(-18, 'months').humanize(true)).toBe('2 years ago')
+  })
+
   it('Locale', () => {
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
     expect(dayjs.duration(1, 'minutes').locale('fr').humanize(true)).toBe('dans une minute')
