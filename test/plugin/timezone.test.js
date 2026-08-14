@@ -352,3 +352,17 @@ describe('UTC timezone', () => {
     expect(dayjs2.format()).toBe(moment2.format())
   })
 })
+
+describe('Historical timezone offset change', () => {
+  // Also run this file with TZ=Asia/Kuala_Lumpur (see package.json test-tz-kl).
+  it('subtract(years) keeps the calendar date across Malaysia 1981 UTC+7:30 to UTC+8', () => {
+    const parsed = dayjs('20811225', 'YYYYMMDD')
+    const subtracted = parsed.subtract(100, 'years')
+    expect(subtracted.format('YYYY-MM-DD')).toBe('1981-12-25')
+    expect(subtracted.date()).toBe(25)
+
+    const fromTz = dayjs.tz('2081-12-25', 'Asia/Kuala_Lumpur').subtract(100, 'years')
+    expect(fromTz.format('YYYY-MM-DD')).toBe('1981-12-25')
+    expect(fromTz.date()).toBe(25)
+  })
+})
