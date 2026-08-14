@@ -389,7 +389,9 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf(C.M).$D
+    // Calendar length; local endOf('month') 23:59:59.999 can land on the next
+    // day after historical midnight offset changes (e.g. Asia/Kuala_Lumpur 1981).
+    return new Date(Date.UTC(this.$y, this.$M + 1, 0)).getUTCDate()
   }
 
   $locale() { // get locale object
