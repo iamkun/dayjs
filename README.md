@@ -124,10 +124,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
   <img width="70" src="https://images.opencollective.com/carboneio/fe2066c/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/radioplusexperts" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/188567998?v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://www.netrouting.com" target="_blank" alt="Netrouting Dedicated Servers">
   <img width="70" src="https://netrouting.com/wp-content/uploads/2026/04/Logo-netrouting.png">
 </a>
@@ -166,6 +162,12 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/mvpsnet" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/89784111?s=96&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://onlydoc.com/" target="_blank" alt><img alt="" width="70" src="https://github.com/user-attachments/assets/f5d5938e-48a1-420b-af72-c4012d3941c1" /></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://unaimytext.com" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/8510473a-c097-4bc9-8c61-b7515194f6f5">
 </a>
 
 
