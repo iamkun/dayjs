@@ -45,14 +45,14 @@ it('Diff (DST)', () => {
 it('UTC add day in DST', () => {
   const testDate = '2019-03-10'
   const dayTest = dayjs(testDate)
-    .utc()
+    .tz('utc')
     .startOf('day')
   const momentTest = moment(testDate)
     .utc()
     .startOf('day')
-  expect(dayTest.add(1, 'day').format())
+  expect(dayTest.add(1, 'day').format('YYYY-MM-DDTHH:mm:ss[Z]'))
     .toBe(momentTest.clone().add(1, 'day').format())
-  expect(dayTest.add(2, 'day').format())
+  expect(dayTest.add(2, 'day').format('YYYY-MM-DDTHH:mm:ss[Z]'))
     .toBe(momentTest.clone().add(2, 'day').format())
 })
 
