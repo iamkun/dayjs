@@ -1,3 +1,10 @@
+## [1.11.22](https://github.com/iamkun/dayjs/compare/v1.11.21...v1.11.22) (2026-08-16)
+
+
+### Bug Fixes
+
+* **plugin:** timezone compute instance .tz() offset without host DST ([#3174](https://github.com/iamkun/dayjs/issues/3174)) ([e27ee80](https://github.com/iamkun/dayjs/commit/e27ee8021a512b5770ffe683e010830bb9b6fb6d)), closes [#3169](https://github.com/iamkun/dayjs/issues/3169)
+
 ## [1.11.21](https://github.com/iamkun/dayjs/compare/v1.11.20...v1.11.21) (2026-05-26)
 
 
