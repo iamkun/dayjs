@@ -1,12 +1,12 @@
 import { MIN, MS } from '../../constant'
 
-const typeToPos = {
+const typeValue = {
   year: 0,
-  month: 1,
-  day: 2,
-  hour: 3,
-  minute: 4,
-  second: 5
+  month: 0,
+  day: 0,
+  hour: 0,
+  minute: 0,
+  second: 0
 }
 
 // Cache time-zone lookups from Intl.DateTimeFormat,
@@ -37,29 +37,31 @@ export default (o, c, d) => {
   let defaultTimezone
 
   const makeFormatParts = (timestamp, timezone, options = {}) => {
-    const date = new Date(timestamp)
     const dtf = getDateTimeFormat(timezone, options)
-    return dtf.formatToParts(date)
+    return dtf.formatToParts(timestamp)
   }
 
   const tzOffset = (timestamp, timezone) => {
     const formatResult = makeFormatParts(timestamp, timezone)
-    const filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
       const { type, value } = formatResult[i]
-      const pos = typeToPos[type]
-
-      if (pos >= 0) {
-        filled[pos] = parseInt(value, 10)
+      if (type in typeValue) {
+        typeValue[type] = parseInt(value, 10)
       }
     }
-    const hour = filled[3]
+    const { hour } = typeValue
     // Workaround for the same behavior in different node version
     // https://github.com/nodejs/node/issues/33027
     /* istanbul ignore next */
     const fixedHour = hour === 24 ? 0 : hour
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
-    const utcTs = d.utc(utcString).valueOf()
+    const utcTs = Date.UTC(
+      typeValue.year,
+      typeValue.month - 1,
+      typeValue.day,
+      fixedHour,
+      typeValue.minute,
+      typeValue.second
+    ).valueOf()
     let asTS = +timestamp
     const over = asTS % 1000
     asTS -= over
