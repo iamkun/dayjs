@@ -93,6 +93,7 @@ export default (o, c, d) => {
   const proto = c.prototype
 
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
+    if (!this.isValid()) return this
     const oldOffset = this.utcOffset()
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
@@ -140,6 +141,11 @@ export default (o, c, d) => {
       return d(input).tz(timezone)
     }
     const localTs = d.utc(input, parseFormat).valueOf()
+    if (Number.isNaN(localTs)) {
+      const ins = d(NaN)
+      ins.$x.$timezone = timezone
+      return ins
+    }
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
     const ins = d(targetTs).utcOffset(targetOffset)
     ins.$x.$timezone = timezone

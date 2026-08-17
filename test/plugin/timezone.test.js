@@ -569,3 +569,15 @@ describe('DST edge cases vs moment', () => {
     })
   })
 })
+
+it('does not throw for invalid Day.js values (regression #111.22)', () => {
+  const invalid = dayjs('invalid')
+  expect(invalid.isValid()).toBe(false)
+  expect(() => invalid.tz('Europe/Skopje')).not.toThrow()
+  expect(invalid.tz('Europe/Skopje').isValid()).toBe(false)
+})
+
+it('does not throw for invalid string in d.tz()', () => {
+  expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
+  expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
