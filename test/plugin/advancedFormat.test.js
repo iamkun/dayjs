@@ -124,6 +124,22 @@ it('Format offsetName z zzz', () => {
   expect(dayjs().format('zzz')).toBeDefined()
 })
 
+it('Format offsetName z zzz with Europe/Berlin timeZone', () => {
+  const dtz = dayjs().tz('Europe/Berlin')
+  expect(dtz.format('z')).toBe('CEST')
+  expect(dtz.format('zzz')).toBe('Central European Summer Time')
+  expect(dayjs().format('z')).toBeDefined()
+  expect(dayjs().format('zzz')).toBeDefined()
+})
+
+it('Format offsetName z zzz with Asia/Kolkata timeZone', () => {
+  const dtz = dayjs.tz('2012-03-11 01:59:59', 'Asia/Kolkata')
+  expect(dtz.format('z')).toBe('IST')
+  expect(dtz.format('zzz')).toBe('India Standard Time')
+  expect(dayjs().format('z')).toBeDefined()
+  expect(dayjs().format('zzz')).toBeDefined()
+})
+
 it('Skips format strings inside brackets', () => {
   expect(dayjs().format('[Q]')).toBe('Q')
   expect(dayjs().format('[Do]')).toBe('Do')
