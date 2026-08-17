@@ -80,3 +80,35 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+// The wall clock right after a fall back is the one that just happened, so the
+// Date setters startOf/endOf rely on can resolve it to the earlier offset and
+// drop the result a whole hour. Only one hour fall backs are collected, so that
+// the repeated wall clock covers a whole hour; a host without DST yields none.
+const fallBacks = () => {
+  const result = []
+  let previous = new Date(Date.UTC(2015, 0, 1)).getTimezoneOffset()
+  for (let t = Date.UTC(2015, 0, 1); t < Date.UTC(2030, 0, 1); t += 3600000) {
+    const offset = new Date(t).getTimezoneOffset()
+    if (offset - previous === 60) result.push(t) // the clock was moved back here
+    previous = offset
+  }
+  return result
+}
+
+it('startOf/endOf below a day in a repeated hour (DST)', () => {
+  fallBacks().forEach((transition) => {
+    const time = transition + (15 * 60 * 1000) + 45123 // inside the repeated hour
+    const dayjsTest = dayjs(time)
+    const momentTest = moment(time);
+    ['hour', 'minute', 'second'].forEach((unit) => {
+      expect(dayjsTest.startOf(unit).valueOf()).toBe(momentTest.clone().startOf(unit).valueOf())
+      expect(dayjsTest.endOf(unit).valueOf()).toBe(momentTest.clone().endOf(unit).valueOf())
+      expect(dayjsTest.isSame(dayjsTest, unit)).toBe(true)
+    })
+    // startOf only clears the fields below its unit, it never moves the clock
+    expect(time - dayjsTest.startOf('second').valueOf()).toBe(dayjsTest.millisecond())
+    expect(time - dayjsTest.startOf('minute').valueOf())
+      .toBe((dayjsTest.second() * 1000) + dayjsTest.millisecond())
+  })
+})
