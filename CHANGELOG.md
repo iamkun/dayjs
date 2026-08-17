@@ -1,3 +1,11 @@
+## [1.11.23](https://github.com/iamkun/dayjs/compare/v1.11.22...v1.11.23) (2026-08-17)
+
+
+### Bug Fixes
+
+* **plugin:** timezone plugin prevent RangeError for invalid Day.js values ([#3180](https://github.com/iamkun/dayjs/issues/3180)) ([dad46e6](https://github.com/iamkun/dayjs/commit/dad46e6fe5198d77d87ed3b121937f77adaee0a6))
+* **plugin:** timezone plugin prevent RangeError for invalid Day.js values ([#3180](https://github.com/iamkun/dayjs/issues/3180)) ([#3181](https://github.com/iamkun/dayjs/issues/3181)) ([2a3785f](https://github.com/iamkun/dayjs/commit/2a3785fd27084d6bb78dfe8c3d7320c736ef4862))
+
 ## [1.11.22](https://github.com/iamkun/dayjs/compare/v1.11.21...v1.11.22) (2026-08-16)
 
 
