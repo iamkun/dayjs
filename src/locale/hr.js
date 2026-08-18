@@ -33,17 +33,32 @@ const locale = {
   relativeTime: {
     future: 'za %s',
     past: 'prije %s',
-    s: 'sekunda',
+    s: 'par sekundi',
     m: 'minuta',
-    mm: '%d minuta',
+    mm: (number) => {
+      if (number === 1) return 'minuta'
+      return number + (number < 5 ? ' minute' : ' minuta')
+    },
     h: 'sat',
-    hh: '%d sati',
+    hh: (number) => {
+      if (number === 1) return 'sat'
+      return number + (number < 5 ? ' sata' : ' sati')
+    },
     d: 'dan',
-    dd: '%d dana',
+    dd: (number) => {
+      if (number === 1) return 'dan'
+      return `${number} dana`
+    },
     M: 'mjesec',
-    MM: '%d mjeseci',
-    y: 'godina',
-    yy: '%d godine'
+    MM: (number) => {
+      if (number === 1) return 'mjesec'
+      return number + (number < 5 ? ' mjeseca' : ' mjeseci')
+    },
+    y: 'godinu',
+    yy: (number) => {
+      if (number === 1) return 'godinu'
+      return number + (number < 5 ? ' godine' : ' godina')
+    }
   },
   ordinal: n => `${n}.`
 }
