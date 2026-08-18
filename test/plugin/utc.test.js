@@ -348,3 +348,60 @@ it('utc keepLocalTime', () => {
 it('utc diff undefined edge case', () => {
   expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
 })
+
+describe('valueOf — addedOffset branches', () => {
+  const isoString = '2021-02-28T19:40:10Z'
+
+  it('branch 1: no $offset set — addedOffset is 0, valueOf equals raw timestamp', () => {
+    // $offset is undefined: addedOffset = 0, so valueOf() == $d.valueOf()
+    const d = dayjs(isoString)
+    expect(d.valueOf()).toBe(new Date(isoString).getTime())
+    expect(d.valueOf()).toBe(moment(isoString).valueOf())
+  })
+
+  it('branch 2: $offset set, $x.$localOffset is null (keepLocalTime=true) — uses new Date().getTimezoneOffset()', () => {
+    // utcOffset(n, true) sets $offset but leaves $x.$localOffset unset
+    // addedOffset = $offset + new Date().getTimezoneOffset()
+    const offsetMinutes = 480 // UTC+8
+    const d = dayjs(isoString).utcOffset(offsetMinutes, true)
+    const m = moment(isoString).utcOffset(offsetMinutes, true)
+    expect(d.valueOf()).toBe(m.valueOf())
+    // utcOffset() getter should reflect the applied offset
+    expect(d.utcOffset()).toBe(offsetMinutes)
+  })
+
+  it('branch 2: negative offset with keepLocalTime=true', () => {
+    const offsetMinutes = -300 // UTC-5
+    const d = dayjs(isoString).utcOffset(offsetMinutes, true)
+    const m = moment(isoString).utcOffset(offsetMinutes, true)
+    expect(d.valueOf()).toBe(m.valueOf())
+    expect(d.utcOffset()).toBe(offsetMinutes)
+  })
+
+  it('branch 3: $offset set, $x.$localOffset is set (keepLocalTime=false) — uses stored localOffset', () => {
+    // utcOffset(n) sets both $offset and $x.$localOffset
+    // addedOffset = $offset + $x.$localOffset
+    const offsetMinutes = 480 // UTC+8
+    const d = dayjs(isoString).utcOffset(offsetMinutes)
+    const m = moment(isoString).utcOffset(offsetMinutes)
+    expect(d.valueOf()).toBe(m.valueOf())
+    // the underlying UTC timestamp is the same regardless of offset
+    expect(d.valueOf()).toBe(new Date(isoString).getTime())
+  })
+
+  it('branch 3: negative offset (keepLocalTime=false)', () => {
+    const offsetMinutes = -300 // UTC-5
+    const d = dayjs(isoString).utcOffset(offsetMinutes)
+    const m = moment(isoString).utcOffset(offsetMinutes)
+    expect(d.valueOf()).toBe(m.valueOf())
+    expect(d.valueOf()).toBe(new Date(isoString).getTime())
+  })
+
+  it('branch 3: zero offset (keepLocalTime=false) — routes through utc(), addedOffset stays 0', () => {
+    const d = dayjs(isoString).utcOffset(0)
+    const m = moment(isoString).utcOffset(0)
+    expect(d.valueOf()).toBe(m.valueOf())
+    expect(d.valueOf()).toBe(new Date(isoString).getTime())
+  })
+})
+
