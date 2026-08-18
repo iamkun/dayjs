@@ -47,6 +47,12 @@ describe('Parse', () => {
     expect(dayjs(time).valueOf()).toBe(moment(time).valueOf())
   })
 
+  it('rejects out-of-range ISO 8601 dates with zone', () => {
+    const time = '2024-02-31T22:03:08Z'
+    expect(moment(time).isValid()).toBe(false)
+    expect(dayjs(time).isValid()).toBe(false)
+  })
+
   it('String RFC 2822, time and zone', () => {
     const time = 'Mon, 11 Feb 2019 09:46:50 GMT+1'
     const expected = '2019-02-11T08:46:50.000Z'

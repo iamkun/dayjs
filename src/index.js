@@ -7,6 +7,13 @@ const Ls = {} // global loaded locale
 Ls[L] = en
 
 const IS_DAYJS = '$isDayjsObject'
+const REGEX_PARSE_WITH_ZONE = /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})[Tt\s].*(?:[Zz]|[+-]\d\d:?\d\d)$/
+
+const isInvalidParsedDate = (d) => {
+  const m = +d[2]
+  const day = +d[3]
+  return m < 1 || m > 12 || day < 1 || day > new Date(d[1], m, 0).getDate()
+}
 
 // eslint-disable-next-line no-use-before-define
 const isDayjs = d => d instanceof Dayjs || !!(d && d[IS_DAYJS])
@@ -65,17 +72,21 @@ const parseDate = (cfg) => {
   if (date === null) return new Date(NaN) // null is invalid
   if (Utils.u(date)) return new Date() // today
   if (date instanceof Date) return new Date(date)
-  if (typeof date === 'string' && !/Z$/i.test(date)) {
-    const d = date.match(C.REGEX_PARSE)
-    if (d) {
-      const m = d[2] - 1 || 0
-      const ms = (d[7] || '0').substring(0, 3)
-      if (utc) {
-        return new Date(Date.UTC(d[1], m, d[3]
-          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+  if (typeof date === 'string') {
+    const zonedDate = date.match(REGEX_PARSE_WITH_ZONE)
+    if (zonedDate && isInvalidParsedDate(zonedDate)) return new Date(NaN)
+    if (!/Z$/i.test(date)) {
+      const d = date.match(C.REGEX_PARSE)
+      if (d) {
+        const m = d[2] - 1 || 0
+        const ms = (d[7] || '0').substring(0, 3)
+        if (utc) {
+          return new Date(Date.UTC(d[1], m, d[3]
+            || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+        }
+        return new Date(d[1], m, d[3]
+          || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
       }
-      return new Date(d[1], m, d[3]
-        || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
     }
   }
 
