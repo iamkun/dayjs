@@ -256,7 +256,9 @@ export default (o, C, d) => {
         args[1] = format[i - 1]
         const result = d.apply(this, args)
         if (result.isValid()) {
-          this.$d = result.$d
+          this.$d = utc
+            ? parseFormattedInput(date, format[i - 1], utc, d)
+            : result.$d
           this.$L = result.$L
           this.init()
           break
