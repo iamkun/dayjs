@@ -7,6 +7,7 @@ declare interface ILocale {
   monthsShort?: string[]
   weekdaysMin?: string[]
   ordinal?: (n: number) => number | string
+  meridiem?: (hour: number, minute?: number, isLowerCase?: boolean) => string
   formats: Partial<{
     LT: string
     LTS: string
