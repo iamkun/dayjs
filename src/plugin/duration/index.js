@@ -261,11 +261,13 @@ class Duration {
 const manipulateDuration = (date, duration, k) =>
   date.add(duration.years() * k, 'y')
     .add(duration.months() * k, 'M')
+    // use raw values here: milliseconds() is a remainder, and weeks would be skipped
+    .add((duration.$d.weeks || 0) * k, 'w')
     .add(duration.days() * k, 'd')
     .add(duration.hours() * k, 'h')
     .add(duration.minutes() * k, 'm')
     .add(duration.seconds() * k, 's')
-    .add(duration.milliseconds() * k, 'ms')
+    .add((duration.$d.milliseconds || 0) * k, 'ms')
 
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
