@@ -145,6 +145,22 @@ it('parse HH:mm:ss but only one digit', () => {
   expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
 })
 
+it('parse delimiterless Hmm and hmm', () => {
+  const cases = [
+    ['600', 'Hmm', '6:00 AM'],
+    ['930', 'Hmm', '9:30 AM'],
+    ['1230', 'Hmm', '12:30 PM'],
+    ['600', 'hmm', '6:00 AM'],
+    ['930', 'hmm', '9:30 AM'],
+    ['1230', 'hmm', '12:30 PM']
+  ]
+
+  cases.forEach(([input, format, output]) => {
+    expect(dayjs(input, format).format('h:mm A')).toBe(output)
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  })
+})
+
 describe('parse YYYY / YYYY-MM only', () => {
   it('YYYY', () => {
     const input = '2001 +08:00'
