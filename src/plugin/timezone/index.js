@@ -126,9 +126,13 @@ export default (o, c, d) => {
     if (!this.$x || !this.$x.$timezone) {
       return oldStartOf.call(this, units, startOf)
     }
-
-    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
-    const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
+    let ins
+    if (this.$x.$timezone.toUpperCase() === 'UTC') {
+      ins = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), {locale: this.$L, utc: true })
+    } else {
+      ins = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
+    }
+    const startOfWithoutTz = oldStartOf.call(ins, units, startOf)
     return startOfWithoutTz.tz(this.$x.$timezone, true)
   }
 
