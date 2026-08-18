@@ -57,3 +57,10 @@ it('hour', () => {
   const result2 = dayjs(str).locale('uk').to(str0, true)
   expect(result2).toEqual('година') // different from moment.js
 })
+
+it('Meridiem', () => {
+  expect(dayjs('2026-01-01 03:00:00').locale('uk').format('A')).toEqual('ночі')
+  expect(dayjs('2026-01-01 11:00:00').locale('uk').format('A')).toEqual('ранку')
+  expect(dayjs('2026-01-01 16:00:00').locale('uk').format('A')).toEqual('дня')
+  expect(dayjs('2026-01-01 20:00:00').locale('uk').format('A')).toEqual('вечора')
+})
