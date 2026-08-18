@@ -69,7 +69,8 @@ const parseDate = (cfg) => {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
       const m = d[2] - 1 || 0
-      const ms = (d[7] || '0').substring(0, 3)
+      const msLength = 3
+      const ms = (d[7] || '0').substring(0, msLength).padEnd(msLength, '0')
       if (utc) {
         return new Date(Date.UTC(d[1], m, d[3]
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
