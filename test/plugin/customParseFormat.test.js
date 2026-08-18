@@ -127,6 +127,44 @@ describe('Timezone Offset', () => {
   })
 })
 
+describe('strict mode with timezone offset', () => {
+  it('parses ISO 8601 zulu time in strict mode', () => {
+    const input = '2024-08-19T10:30:00Z'
+    const format = 'YYYY-MM-DDTHH:mm:ssZ'
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(moment(input, format, true).isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+  })
+  it('parses ISO 8601 with milliseconds in strict mode', () => {
+    const input = '2021-01-26T15:38:43.000Z'
+    const format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+  })
+  it('parses a non-local timezone offset in strict mode', () => {
+    const input = '2020-12-01T20:00:00+09'
+    const format = 'YYYY-MM-DD[T]HH:mm:ssZZ'
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+    const input2 = '09/04/2024 21:12:50 +00:00'
+    const format2 = 'MM/DD/YYYY HH:mm:ss Z'
+    expect(dayjs(input2, format2, true).isValid()).toBe(true)
+    expect(dayjs(input2, format2, true).valueOf()).toBe(moment(input2, format2, true).valueOf())
+  })
+  it('parses zulu time against a ZZ token in strict mode', () => {
+    const input = '2024-08-19T10:30:00Z'
+    const format = 'YYYY-MM-DDTHH:mm:ssZZ'
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(moment(input, format, true).isValid()).toBe(true)
+  })
+  it('still rejects an out-of-range date in strict mode', () => {
+    const input = '2024-02-31T22:03:08Z'
+    const format = 'YYYY-MM-DDTHH:mm:ssZ'
+    expect(dayjs(input, format, true).isValid()).toBe(false)
+    expect(moment(input, format, true).isValid()).toBe(false)
+  })
+})
+
 it('parse hh:mm', () => {
   const input = '12:00'
   const format = 'hh:mm'
