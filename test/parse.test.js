@@ -212,4 +212,24 @@ describe('REGEX_PARSE', () => {
     expect(dayjs(date).valueOf()).toBe(moment(date).valueOf())
     expect(d).toBe(null)
   })
+
+  it('0022-01-01', () => {
+    const date = '0022-01-01'
+    expect(dayjs(date).get('year')).toBe(22)
+  })
+
+  it('0000-01-01', () => {
+    const date = '0000-01-01'
+    expect(dayjs(date).get('year')).toBe(0)
+  })
+
+  it('0099-01-01', () => {
+    const date = '0099-01-01'
+    expect(dayjs(date).get('year')).toBe(99)
+  })
+
+  it('0777-01-01', () => {
+    const date = '0777-01-01'
+    expect(dayjs(date).get('year')).toBe(777)
+  })
 })

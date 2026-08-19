@@ -102,6 +102,12 @@ describe('Parse UTC ', () => {
     expect(ds.valueOf()).toEqual(ms.valueOf())
     expect(ds.millisecond()).toEqual(ms.millisecond())
   })
+
+  it('parses 0022-01-01', () => {
+    const date = '0022-01-01'
+
+    expect(dayjs(date, { utc: true }).get('year')).toBe(22)
+  })
 })
 
 it('Clone retains the UTC mode', () => {
