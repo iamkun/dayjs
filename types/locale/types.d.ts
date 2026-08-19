@@ -31,3 +31,7 @@ declare interface ILocale {
     yy: string
   }>
 }
+
+declare const locale: ILocale
+
+export = locale
