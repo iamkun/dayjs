@@ -14,6 +14,9 @@ module.exports = {
             loose: true
           }
         ]
+      ],
+      plugins: [
+        ['add-import-extension', { extension: 'js' }]
       ]
     }
   }
