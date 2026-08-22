@@ -45,14 +45,25 @@ const getLocalePart = (name) => {
 }
 const meridiemMatch = (input, isLowerCase) => {
   let isAfternoon
-  const { meridiem } = locale
-  if (!meridiem) {
-    isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
-  } else {
-    for (let i = 1; i <= 24; i += 1) {
-      // todo: fix input === meridiem(i, 0, isLowerCase)
+  // Use locale meridiem function or create a default one
+  const meridiem = locale.meridiem || ((hour, minute, isLower) => {
+    const m = hour < 12 ? 'am' : 'pm'
+    return isLower ? m : m.toUpperCase()
+  })
+
+  // Check PM hours (13-23) first, then AM hours (1-12)
+  // This ensures correct matching for locales
+  // meridiem returns the same string for all AM or all PM hours
+  for (let i = 13; i <= 23; i += 1) {
+    if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
+      isAfternoon = true
+      break
+    }
+  }
+  if (isAfternoon === undefined) {
+    for (let i = 1; i <= 12; i += 1) {
       if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
-        isAfternoon = i > 12
+        isAfternoon = false
         break
       }
     }
