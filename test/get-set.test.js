@@ -64,7 +64,8 @@ it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
   expect(dayjs().millisecond(0).valueOf()).toBe(moment().millisecond(0).valueOf())
   expect(dayjs().millisecond(1).valueOf()).toBe(moment().millisecond(1).valueOf())
-  expect(dayjs().get('MS')).toBe(dayjs().get('ms'))
+  const now = dayjs()
+  expect(now.get('MS')).toBe(now.get('ms'))
 })
 
 it('Set Millisecond with short and mixed-case units', () => {
@@ -136,4 +137,3 @@ it('Immutable Set', () => {
   expect(dayjsA.valueOf()).not.toBe(dayjsB.valueOf())
   expect(momentA.valueOf()).toBe(momentB.valueOf())
 })
-
