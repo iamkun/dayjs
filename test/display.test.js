@@ -218,6 +218,21 @@ describe('Difference', () => {
     expect(dayjs('2018-01-01').diff(dayjs('2018-01-01'), 'month')).toEqual(0)
   })
 
+  it('diff Invalid Date returns NaN for year/month/quarter', () => {
+    const invalid = dayjs('not a date')
+    const valid = dayjs('2018-08-08')
+    const units = ['year', 'month', 'quarter']
+    units.forEach((unit) => {
+      expect(Number.isNaN(invalid.diff(valid, unit, true))).toBe(true)
+      expect(Number.isNaN(valid.diff(invalid, unit, true))).toBe(true)
+      expect(Number.isNaN(invalid.diff(valid, unit))).toBe(true)
+      expect(Number.isNaN(valid.diff(invalid, unit))).toBe(true)
+      expect(Number.isNaN(invalid.diff(invalid, unit, true))).toBe(true)
+    })
+    expect(Number.isNaN(invalid.diff(valid, 'day', true))).toBe(true)
+    expect(Object.is(valid.diff(valid, 'month', true), 0)).toBe(true)
+  })
+
   it('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
   })

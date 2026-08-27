@@ -21,8 +21,10 @@ const monthDiff = (a, b) => {
   const anchor = a.clone().add(wholeMonthDiff, C.M)
   const c = b - anchor < 0
   const anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), C.M)
+  // `+ 0` normalizes -0 to +0 (the original purpose of `|| 0`) without
+  // coercing NaN to 0 when either operand is an Invalid Date.
   return +(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) :
-    (anchor2 - anchor)))) || 0)
+    (anchor2 - anchor)))) + 0)
 }
 
 const absFloor = n => (n < 0 ? Math.ceil(n) || 0 : Math.floor(n))
