@@ -10,6 +10,7 @@ const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
 const DURATION_REGEX_PARSE = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+const TIME_REGEX_PARSE = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/
 const DURATION_REGEX_FORMAT = /\[([^\]]+)]|YYYY|YY|Y|M{1,2}|D{1,2}|H{1,2}|m{1,2}|s{1,2}|SSS/g
 
 const unitToMS = {
@@ -94,6 +95,17 @@ class Duration {
           this.$d.minutes,
           this.$d.seconds
         ] = numberD
+        this.calMilliseconds()
+        return this
+      }
+      const t = input.match(TIME_REGEX_PARSE)
+      if (t) {
+        const sign = t[1] === '-' ? -1 : 1
+        this.$d.days = sign * (t[2] ? Number(t[2]) : 0)
+        this.$d.hours = sign * Number(t[3])
+        this.$d.minutes = sign * Number(t[4])
+        this.$d.seconds = sign * (t[5] ? Number(t[5]) : 0)
+        this.$d.milliseconds = sign * (t[6] ? Math.round(Number(`0${t[6]}`) * 1000) : 0)
         this.calMilliseconds()
         return this
       }
