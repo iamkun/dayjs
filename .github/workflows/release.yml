@@ -37,6 +37,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm install @semantic-release/changelog @semantic-release/git semantic-release --no-save
-          npx patch-package
-          npx semantic-release
+          npm install --ignore-scripts --no-save \
+            @semantic-release/changelog@7.0.0 \
+            @semantic-release/git@11.0.1 \
+            patch-package@8.0.1 \
+            semantic-release@25.0.9
+          npm audit signatures
+          ./node_modules/.bin/patch-package
+          ./node_modules/.bin/semantic-release
