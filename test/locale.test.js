@@ -145,3 +145,9 @@ it('Not supported locale string fallback to previous one (global)', () => {
   dayjs.locale(NOT_SUPPORTED_LOCALE_STRING)
   expect(dayjs().locale()).toBe('es')
 })
+
+it('Object prototype keys are not treated as loaded locales', () => {
+  dayjs.locale('en')
+  expect(dayjs.locale('__proto__')).toBe('en')
+  expect(dayjs('2018-4-28').format(format)).toBe('Saturday 28, April')
+})
