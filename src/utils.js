@@ -18,7 +18,16 @@ const monthDiff = (a, b) => {
   // function from moment.js in order to keep the same result
   if (a.date() < b.date()) return -monthDiff(b, a)
   const wholeMonthDiff = ((b.year() - a.year()) * 12) + (b.month() - a.month())
-  const anchor = a.clone().add(wholeMonthDiff, C.M)
+  let anchor = a.clone().add(wholeMonthDiff, C.M)
+  // #1000 A Feb 29 anniversary does not exist in a non-leap year: `add`
+  // clamps it to Feb 28, which makes `diff` report a full year one day
+  // early (a person born on 2016-02-29 turns 1 on 2017-03-01, not on
+  // 2017-02-28). Roll such anchors over to Mar 1, following the common
+  // legal convention for leap-day anniversaries.
+  if (a.month() === 1 && a.date() === 29
+    && anchor.month() === 1 && anchor.date() === 28) {
+    anchor = anchor.add(1, C.D)
+  }
   const c = b - anchor < 0
   const anchor2 = a.clone().add(wholeMonthDiff + (c ? -1 : 1), C.M)
   return +(-(wholeMonthDiff + ((b - anchor) / (c ? (anchor - anchor2) :
