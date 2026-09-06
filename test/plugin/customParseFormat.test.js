@@ -8,10 +8,12 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
 dayjs.extend(weekOfYear) // test parse w, ww
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -331,6 +333,19 @@ describe('Array format support', () => {
     const input = '2018 三月 12'
     const format = ['YYYY', 'MM', 'YYYY MMMM DD']
     expect(dayjs(input, format, 'zh-cn', true).format('YYYY MMMM DD')).toBe(input)
+  })
+  it('keeps UTC mode when parsing with an array of formats', () => {
+    const input = '1995-05-01'
+    const formats = ['YYYY-MM-DD']
+    // an array of formats must behave the same as the single format in UTC mode
+    expect(dayjs.utc(input, formats).toISOString()).toBe(
+      dayjs.utc(input, 'YYYY-MM-DD').toISOString()
+    )
+    expect(dayjs.utc(input, formats).toISOString()).toBe('1995-05-01T00:00:00.000Z')
+    // fallback to a later format also stays in UTC
+    expect(
+      dayjs.utc('05/01/1995', ['YYYY-MM-DD', 'MM/DD/YYYY']).toISOString()
+    ).toBe('1995-05-01T00:00:00.000Z')
   })
 })
 

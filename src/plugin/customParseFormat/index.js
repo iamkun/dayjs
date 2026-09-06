@@ -252,9 +252,12 @@ export default (o, C, d) => {
       locale = {}
     } else if (format instanceof Array) {
       const len = format.length
+      // Preserve UTC mode when trying each format; `d` alone would re-parse in
+      // local time, so an array of formats silently dropped `dayjs.utc()`.
+      const parseFn = utc && d.utc ? d.utc : d
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
-        const result = d.apply(this, args)
+        const result = parseFn.apply(this, args)
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
