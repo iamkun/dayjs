@@ -236,6 +236,15 @@ it('Days in Month', () => {
   expect(dayjs('20140201').daysInMonth()).toBe(moment('20140201').daysInMonth())
 })
 
+it('Days in Month across a historical timezone offset change (#3003)', () => {
+  // Malaysia moved from +07:30 to +08:00 on 1982-01-01;
+  // December 1981 still has 31 days. Fails before the fix when the
+  // host timezone is Asia/Kuala_Lumpur (or Asia/Singapore).
+  expect(dayjs('1981-12-01').daysInMonth()).toBe(31)
+  expect(dayjs('1981-12-01').daysInMonth())
+    .toBe(moment('1981-12-01').daysInMonth())
+})
+
 it('Utc Offset', () => {
   expect(dayjs('2013-01-01T00:00:00.000').utcOffset()).toBe(moment('2013-01-01T00:00:00.000').utcOffset())
   expect(dayjs('2013-01-01T05:00:00.000').utcOffset()).toBe(moment('2013-01-01T05:00:00.000').utcOffset())
