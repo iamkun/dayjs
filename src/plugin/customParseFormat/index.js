@@ -7,6 +7,7 @@ const match2 = /\d\d/ // 00 - 99
 const match3 = /\d{3}/ // 000 - 999
 const match4 = /\d{4}/ // 0000 - 9999
 const match1to2 = /\d\d?/ // 0 - 99
+const match1to2Has2DigitsAhead = /\d\d?(?=\d{2})/
 const matchSigned = /[+-]?\d+/ // -inf - inf
 const matchOffset = /[+-]\d\d:?(\d\d)?|Z/ // +00:00 -00:00 +0000 or -0000 +00 or Z
 const matchWord = /\d*[^-_:/,()\s\d]+/ // Word
@@ -147,12 +148,25 @@ function makeParser(format) {
   format = u(format, locale && locale.formats)
   const array = format.match(formattingTokens)
   const { length } = array
+  const tokenPositions = []
+  let tokenPosition = 0
+  for (let i = 0; i < length; i += 1) {
+    const token = array[i]
+    const position = format.indexOf(token, tokenPosition)
+    tokenPositions.push(position)
+    tokenPosition = position + token.length
+  }
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
     const parseTo = expressions[token]
-    const regex = parseTo && parseTo[0]
+    let regex = parseTo && parseTo[0]
     const parser = parseTo && parseTo[1]
     if (parser) {
+      const nextToken = array[i + 1]
+      const isDelimiterlessHmm = tokenPositions[i] + token.length === tokenPositions[i + 1]
+      if ((token === 'H' || token === 'h') && nextToken === 'mm' && isDelimiterlessHmm) {
+        regex = match1to2Has2DigitsAhead
+      }
       array[i] = { regex, parser }
     } else {
       array[i] = token.replace(/^\[|\]$/g, '')
