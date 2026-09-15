@@ -35,6 +35,12 @@ it('Warning Enable customParseFormat plugin while passing the second format para
   expect(consoleSpy).toHaveBeenCalledWith('To parse a date-time string like 2020 using the given format, you should enable customParseFormat plugin first. https://day.js.org/docs/en/parse/string-format')
 })
 
+it('Warning Enable customParseFormat plugin for date with format string (MM/DD/YYYY)', () => {
+  const consoleSpy = jest.spyOn(console, 'warn')
+  dayjs('11/1/2004', 'MM/DD/YYYY')
+  expect(consoleSpy).toHaveBeenCalledWith('To parse a date-time string like 11/1/2004 using the given format, you should enable customParseFormat plugin first. https://day.js.org/docs/en/parse/string-format')
+})
+
 it('Warning: Setting locale before loading locale', () => {
   const consoleSpy = jest.spyOn(console, 'warn')
   dayjs.locale('zh-cn')
