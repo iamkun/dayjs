@@ -28,6 +28,11 @@ it('Format Year YY YYYY', () => {
   expect(dayjs().format('YYY')).toBe(`${moment().format('YY')}Y`)
 })
 
+it('Format single digit Year YY YYYY', () => {
+  const date = '0001-01-01T01:01:01.000Z'
+  expect(dayjs(date).format('YY')).toBe(moment(date).format('YY'))
+})
+
 it('Format Month M MM MMM MMMM', () => {
   expect(dayjs().format('M')).toBe(moment().format('M'))
   expect(dayjs().format('MM')).toBe(moment().format('MM'))
