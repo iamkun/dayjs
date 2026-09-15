@@ -70,12 +70,27 @@ const parseDate = (cfg) => {
     if (d) {
       const m = d[2] - 1 || 0
       const ms = (d[7] || '0').substring(0, 3)
+
+      let r
       if (utc) {
-        return new Date(Date.UTC(d[1], m, d[3]
+        r = new Date(Date.UTC(d[1], m, d[3]
           || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms))
+
+        if (d[1] >= 0 && d[1] <= 99) {
+          r.setUTCFullYear(d[1])
+        }
+
+        return r
       }
-      return new Date(d[1], m, d[3]
+
+      r = new Date(d[1], m, d[3]
         || 1, d[4] || 0, d[5] || 0, d[6] || 0, ms)
+
+      if (d[1] >= 0 && d[1] <= 99) {
+        r.setFullYear(d[1])
+      }
+
+      return r
     }
   }
 
