@@ -201,7 +201,7 @@ describe('Add to a dayjs()', () => {
   expect(a.add(b)).toEqual(a.add(7, 'hours').add(10, 'minutes'))
 })
 
-test('Add duration', () => {
+it('Add duration', () => {
   const a = dayjs('2020-10-01')
   const days = dayjs.duration(2, 'days')
   expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
@@ -217,7 +217,7 @@ describe('Subtract', () => {
   expect(a.subtract(b).days()).toBe(1)
 })
 
-test('Subtract duration', () => {
+it('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
@@ -287,7 +287,7 @@ describe('prettyUnit', () => {
 })
 
 describe('Format', () => {
-  test('no formatStr', () => {
+  it('no formatStr', () => {
     const d = dayjs.duration(15, 'seconds')
       .add(13, 'hours')
       .add(35, 'minutes')
@@ -297,7 +297,7 @@ describe('Format', () => {
     expect(d.format()).toBe('0022-10-16T13:35:15')
   })
 
-  test('with formatStr for all tokens', () => {
+  it('with formatStr for all tokens', () => {
     const d = dayjs.duration(1, 'seconds')
       .add(8, 'hours')
       .add(5, 'minutes')

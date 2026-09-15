@@ -12,17 +12,17 @@ afterEach(() => {
   MockDate.reset()
 })
 
-test('bounds can be swapped', () => {
+it('bounds can be swapped', () => {
   expect(dayjs('2018-01-01').isBetween(dayjs('2017-12-31'), dayjs('2018-01-02'))).toBeTruthy()
   expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-02'), dayjs('2017-12-31'))).toBeTruthy()
 })
 
-test('bounds can be swapped with inclusivity', () => {
+it('bounds can be swapped with inclusivity', () => {
   expect(dayjs('2018-01-01').isBetween(dayjs('2017-12-31'), dayjs('2018-01-01'), null, '[]')).toBeTruthy()
   expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-01'), dayjs('2017-12-31'), null, '[]')).toBeTruthy()
 })
 
-test('is between without units', () => {
+it('is between without units', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
 
@@ -135,7 +135,7 @@ test('is between without units', () => {
   expect(+m).toEqual(+mCopy, 'isBetween second should not change moment')
 })
 
-test('is between year', () => {
+it('is between year', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
 
@@ -173,7 +173,7 @@ test('is between year', () => {
   expect(+m).toEqual(+mCopy, 'isBetween year should not change moment')
 })
 
-test('is between month', () => {
+it('is between month', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
 
@@ -211,7 +211,7 @@ test('is between month', () => {
   expect(+m).toEqual(+mCopy, 'isBetween month should not change moment')
 })
 
-test('is between day', () => {
+it('is between day', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
 
@@ -249,7 +249,7 @@ test('is between day', () => {
   expect(+m).toEqual(+mCopy, 'isBetween day should not change moment')
 })
 
-test('is between hour', () => {
+it('is between hour', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBetween(
@@ -283,7 +283,7 @@ test('is between hour', () => {
     .toEqual(+mCopy, 'isBetween hour should not change moment')
 })
 
-test('is between minute', () => {
+it('is between minute', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBetween(
@@ -317,7 +317,7 @@ test('is between minute', () => {
     .toEqual(+mCopy, 'isBetween minute should not change moment')
 })
 
-test('is between second', () => {
+it('is between second', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
   expect(m.isBetween(
@@ -349,7 +349,7 @@ test('is between second', () => {
   expect(+m).toEqual(+mCopy, 'isBetween second should not change moment')
 })
 
-test('is between millisecond', () => {
+it('is between millisecond', () => {
   const m = dayjs(new Date(2011, 1, 2, 3, 4, 5, 6))
   const mCopy = dayjs(m)
 
@@ -387,7 +387,7 @@ test('is between millisecond', () => {
   expect(+m).toEqual(+mCopy, 'isBetween millisecond should not change moment')
 })
 
-test('is between without units inclusivity', () => {
+it('is between without units inclusivity', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
 
@@ -534,7 +534,7 @@ test('is between without units inclusivity', () => {
   expect(+m).toEqual(+mCopy, 'isBetween millisecond should not change moment')
 })
 
-test('is between milliseconds inclusivity', () => {
+it('is between milliseconds inclusivity', () => {
   const m = dayjs(new Date(2011, 3, 2, 3, 4, 5, 10))
   const mCopy = dayjs(m)
 
