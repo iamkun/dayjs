@@ -4,6 +4,9 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ko'
+import '../../src/locale/ja'
+import '../../src/locale/ar-dz'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -334,9 +337,11 @@ describe('Array format support', () => {
   })
 })
 
-describe('meridiem locale', () => {
+describe('meridiem locale - zh-cn', () => {
   const format = 'YYYY年M月D日Ah点mm分ss秒'
   const format2 = 'YYYY-MM-DD HH:mm:ss'
+
+  // Original roundtrip tests
   it('AM', () => {
     const input = '2018-05-02 01:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
@@ -346,6 +351,156 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+
+  // Test all 6 Chinese meridiem periods
+  describe('format - all time periods', () => {
+    it('凌晨 (0:00-5:59) - early morning', () => {
+      const input = '2018-05-02 03:30:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('凌晨 3:30')
+    })
+    it('早上 (6:00-8:59) - morning', () => {
+      const input = '2018-05-02 07:30:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('早上 7:30')
+    })
+    it('上午 (9:00-10:59) - late morning', () => {
+      const input = '2018-05-02 09:30:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('上午 9:30')
+    })
+    it('中午 (11:00-12:59) - noon', () => {
+      const input = '2018-05-02 12:00:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('中午 12:00')
+    })
+    it('下午 (13:00-17:59) - afternoon', () => {
+      const input = '2018-05-02 15:30:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('下午 3:30')
+    })
+    it('晚上 (18:00-23:59) - evening', () => {
+      const input = '2018-05-02 20:30:00'
+      const result = dayjs(input).locale('zh-cn').format('A h:mm')
+      expect(result).toBe('晚上 8:30')
+    })
+  })
+
+  describe('parse - all time periods', () => {
+    it('凌晨 - early morning', () => {
+      const input = '凌晨 3:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(3)
+    })
+    it('早上 - morning', () => {
+      const input = '早上 7:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(7)
+    })
+    it('上午 - late morning', () => {
+      const input = '上午 9:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(9)
+    })
+    it('中午 - noon', () => {
+      const input = '中午 11:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(11)
+    })
+    it('下午 - afternoon', () => {
+      const input = '下午 3:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(15)
+    })
+    it('晚上 - evening', () => {
+      const input = '晚上 8:30'
+      const result = dayjs(input, 'A h:mm', 'zh-cn')
+      expect(result.hour()).toBe(20)
+    })
+  })
+})
+
+describe('parsing meridiem - ko', () => {
+  it('AM', () => {
+    const input = '오전 1:30'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ko')
+    expect(result.hour()).toBe(1)
+  })
+  it('PM', () => {
+    const input = '오후 3:45'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ko')
+    expect(result.hour()).toBe(15)
+  })
+  it('noon (12 PM)', () => {
+    const input = '오후 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ko')
+    expect(result.hour()).toBe(12)
+  })
+  it('midnight (12 AM)', () => {
+    const input = '오전 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ko')
+    expect(result.hour()).toBe(0)
+  })
+})
+
+describe('parsing meridiem - ja', () => {
+  it('AM', () => {
+    const input = '午前 1:30'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ja')
+    expect(result.hour()).toBe(1)
+  })
+  it('PM', () => {
+    const input = '午後 3:45'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ja')
+    expect(result.hour()).toBe(15)
+  })
+
+  it('noon (12 PM)', () => {
+    const input = '午後 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ja')
+    expect(result.hour()).toBe(12)
+  })
+  it('midnight (12 AM)', () => {
+    const input = '午前 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ja')
+    expect(result.hour()).toBe(0)
+  })
+})
+
+describe('parsing meridiem - ar-dz', () => {
+  it('AM', () => {
+    const input = 'ص 1:30'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ar-dz')
+    expect(result.hour()).toBe(1)
+  })
+  it('PM', () => {
+    const input = 'م 3:45'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ar-dz')
+    expect(result.hour()).toBe(15)
+  })
+
+  it('noon (12 PM)', () => {
+    const input = 'م 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ar-dz')
+    expect(result.hour()).toBe(12)
+  })
+  it('midnight (12 AM)', () => {
+    const input = 'ص 12:00'
+    const format = 'A h:mm'
+    const result = dayjs(input, format, 'ar-dz')
+    expect(result.hour()).toBe(0)
   })
 })
 
