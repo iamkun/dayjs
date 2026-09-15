@@ -420,7 +420,7 @@ class Dayjs {
     // ie 8 return
     // new Dayjs(this.valueOf() + this.$d.getTimezoneOffset() * 60000)
     // .format('YYYY-MM-DDTHH:mm:ss.SSS[Z]')
-    return this.$d.toISOString()
+    return this.isValid() ? this.$d.toISOString() : null
   }
 
   toString() {
