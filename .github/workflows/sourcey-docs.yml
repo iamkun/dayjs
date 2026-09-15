@@ -1,0 +1,44 @@
+name: Sourcey Docs
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "docs/sourcey/**"
+  pull_request:
+    branches: [dev]
+    paths:
+      - "docs/sourcey/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs/sourcey
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: "docs/sourcey/package-lock.json"
+      - run: npm install
+      - run: npm run build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/sourcey/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
