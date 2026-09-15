@@ -21,3 +21,21 @@ it('Meridiem', () => {
   expect(dayjs('2020-01-01 16:00:00').locale('ar-ma').format('A')).toEqual('م')
   expect(dayjs('2020-01-01 20:00:00').locale('ar-ma').format('A')).toEqual('م')
 })
+
+it('weekStart should be Monday (1)', () => {
+  expect(locale.weekStart).toBe(1)
+})
+
+it('Week starts on Monday', () => {
+  // 2024-01-01 is a Monday
+  const monday = dayjs('2024-01-01').locale('ar-ma')
+  // startOf('week') on a Monday should return the same day
+  expect(monday.startOf('week').format('YYYY-MM-DD')).toBe('2024-01-01')
+
+  // 2024-01-05 is a Friday — startOf('week') should go back to Monday Jan 1
+  const friday = dayjs('2024-01-05').locale('ar-ma')
+  expect(friday.startOf('week').format('YYYY-MM-DD')).toBe('2024-01-01')
+
+  // endOf('week') on Monday should be Sunday
+  expect(monday.endOf('week').format('YYYY-MM-DD')).toBe('2024-01-07')
+})
