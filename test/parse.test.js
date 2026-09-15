@@ -92,9 +92,10 @@ describe('Parse', () => {
   it('String Other, Undefined and Null and isValid', () => {
     global.console.warn = jest.genMockFunction()// moment.js otherString will throw warn
     expect(dayjs('otherString').toString().toLowerCase()).toBe(moment('otherString').toString().toLowerCase())
-    expect(dayjs(undefined).toDate()).toEqual(moment(undefined).toDate())
     expect(dayjs().isValid()).toBe(true)
-    expect(dayjs(undefined).isValid()).toBe(true)
+    // explicitly passing undefined is treated as invalid (differs from no-arg call)
+    expect(dayjs(undefined).isValid()).toBe(false)
+    expect(dayjs(undefined).format()).toBe('Invalid Date')
     expect(dayjs('').isValid()).toBe(false)
     expect(dayjs(null).isValid()).toBe(false)
     expect(dayjs('otherString').isValid()).toBe(false)
