@@ -219,6 +219,26 @@ describe('UTC with customParseFormat', () => {
     expect(instant.format()).toBe('2011-02-02T03:04:05Z')
     expect(instant.format()).toBe(momentInstant.format())
   })
+
+  it('Array format - parses in UTC, not local time', () => {
+    dayjs.extend(customParseFormat)
+    const date = '1995-05-01'
+    const formats = ['YYYY-MM-DD', 'YYYY-M-D']
+    const result = dayjs.utc(date, formats)
+    expect(result.isValid()).toBe(true)
+    expect(result.toISOString()).toBe('1995-05-01T00:00:00.000Z')
+    expect(result.isUTC()).toBe(true)
+  })
+
+  it('Array format - second format matches, parsed in UTC', () => {
+    dayjs.extend(customParseFormat)
+    const date = '1995-5-1'
+    const formats = ['YYYY-MM-DD', 'YYYY-M-D']
+    const result = dayjs.utc(date, formats)
+    expect(result.isValid()).toBe(true)
+    expect(result.toISOString()).toBe('1995-05-01T00:00:00.000Z')
+    expect(result.isUTC()).toBe(true)
+  })
 })
 
 describe('UTC Offset', () => {
