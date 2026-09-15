@@ -12,7 +12,10 @@ const locale = {
   yearStart: 4,
   ordinal: (n) => {
     const b = n % 10
-    const o = (b === 1) || (b === 2) ? 'a' : 'e'
+    const c = n % 100
+    const isSpecialCase = c >= 11 && c <= 19
+
+    const o = (b === 1 || b === 2) && !isSpecialCase ? 'a' : 'e'
     return `[${n}${o}]`
   },
   formats: {
