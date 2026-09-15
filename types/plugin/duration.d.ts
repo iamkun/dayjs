@@ -25,12 +25,24 @@ declare namespace plugin {
     & ((ISO_8601: string) => Duration)
   type AddDurationType = CreateDurationType & ((duration: Duration) => Duration)
 
+  interface DurationAsObject {
+    years: number;
+    months: number;
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
+  }
+
   interface Duration {
     new (input: string | number | object, unit?: string, locale?: string): Duration
 
     clone(): Duration
 
     humanize(withSuffix?: boolean): string
+
+    asObject(): DurationAsObject
 
     milliseconds(): number
     asMilliseconds(): number
