@@ -10,12 +10,12 @@ const locale = {
   monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ogs_Sep_Okt_Nov_Dis'.split('_'),
   weekStart: 1,
   formats: {
-    LT: 'HH.mm',
-    LTS: 'HH.mm.ss',
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
-    LLL: 'D MMMM YYYY HH.mm',
-    LLLL: 'dddd, D MMMM YYYY HH.mm'
+    LLL: 'D MMMM YYYY HH:mm',
+    LLLL: 'dddd, D MMMM YYYY HH:mm'
   },
   relativeTime: {
     future: 'dalam %s',
