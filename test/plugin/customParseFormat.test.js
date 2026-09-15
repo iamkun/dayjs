@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/gl'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -424,6 +425,39 @@ describe('parse with special separator characters', () => {
     expect(resultDayjs.isValid()).toBe(true)
     expect(resultDayjs.format('DD-MM-YYYY')).toBe('20-11-2022')
     expect(resultMoment.format('DD-MM-YYYY')).toBe('20-11-2022')
+  })
+  // issue 2818 - dot separator swallowed the following month-name token
+  it('parse MMM month name with dot separator', () => {
+    const input = '29.Jul.2021'
+    const format = 'DD.MMM.YYYY'
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+    expect(resultDayjs.format('YYYY-MM-DD')).toBe('2021-07-29')
+  })
+  it('parse MMMM month name with dot separator', () => {
+    const input = '29.July.2021'
+    const format = 'DD.MMMM.YYYY'
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.valueOf()).toBe(resultMoment.valueOf())
+    expect(resultDayjs.format('YYYY-MM-DD')).toBe('2021-07-29')
+  })
+  it('parse locale short month that itself contains a dot (gl) with dot separator', () => {
+    const input = '29.xan..2021' // gl monthsShort for January is "xan."
+    const format = 'DD.MMM.YYYY'
+    const resultDayjs = dayjs(input, format, 'gl')
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD')).toBe('2021-01-29')
+  })
+  it('parse locale short month that itself contains a dot (gl) with space separator', () => {
+    const input = '29 xan. 2021'
+    const format = 'DD MMM YYYY'
+    const resultDayjs = dayjs(input, format, 'gl')
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(resultDayjs.format('YYYY-MM-DD')).toBe('2021-01-29')
   })
 })
 

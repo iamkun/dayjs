@@ -43,6 +43,23 @@ const getLocalePart = (name) => {
     part.indexOf ? part : part.s.concat(part.f)
   )
 }
+const escapeRegExp = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+// Build a regex that matches the actual month names of the active locale.
+// Using the concrete names (longest first) prevents a generic "word" match
+// from greedily swallowing a following separator such as `.` (issue #2818),
+// while still supporting locales whose month names contain a `.` (e.g. gl).
+const matchMonthName = (token) => {
+  const months = getLocalePart('months')
+  const monthsShort = getLocalePart('monthsShort')
+  const names = token === 'MMMM'
+    ? months
+    : (monthsShort || months.map(m => m.slice(0, 3)))
+  return new RegExp(names
+    .slice()
+    .sort((a, b) => b.length - a.length)
+    .map(escapeRegExp)
+    .join('|'))
+}
 const meridiemMatch = (input, isLowerCase) => {
   let isAfternoon
   const { meridiem } = locale
@@ -153,7 +170,10 @@ function makeParser(format) {
     const regex = parseTo && parseTo[0]
     const parser = parseTo && parseTo[1]
     if (parser) {
-      array[i] = { regex, parser }
+      array[i] = {
+        regex: (token === 'MMM' || token === 'MMMM') ? matchMonthName(token) : regex,
+        parser
+      }
     } else {
       array[i] = token.replace(/^\[|\]$/g, '')
     }
