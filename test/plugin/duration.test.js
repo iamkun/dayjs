@@ -263,6 +263,16 @@ describe('Days', () => {
 describe('Weeks', () => {
   expect(dayjs.duration(1000000000).weeks()).toBe(1)
   expect(dayjs.duration(1000000000).asWeeks().toFixed(2)).toBe('1.65')
+
+  it('weeks() returns parsed value from ISO string, not total ms', () => {
+    // P1Y1M1DT1H1M1S has 0 weeks — should not derive weeks from total ms
+    expect(dayjs.duration('P1Y1M1DT1H1M1S').weeks()).toBe(0)
+    // P2W has 2 weeks
+    expect(dayjs.duration('P2W').weeks()).toBe(2)
+    // Object input
+    expect(dayjs.duration({ weeks: 3 }).weeks()).toBe(3)
+    expect(dayjs.duration({ days: 14 }).weeks()).toBe(2) // fallback: derives weeks from total ms
+  })
 })
 
 describe('Month', () => {
