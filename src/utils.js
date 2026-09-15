@@ -40,7 +40,8 @@ const prettyUnit = (u) => {
     ms: C.MS,
     Q: C.Q
   }
-  return special[u] || String(u || '').toLowerCase().replace(/s$/, '')
+  const lower = String(u || '').toLowerCase()
+  return special[u] || special[lower] || lower.replace(/s$/, '')
 }
 
 const isUndefined = s => s === undefined
