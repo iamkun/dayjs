@@ -229,6 +229,10 @@ class Duration {
     return wrapper(this.$ms, this)
   }
 
+  normalize() {
+    return wrapper(this.$ms, this)
+  }
+
   humanize(withSuffix) {
     return $d()
       .add(this.$ms, 'ms')
