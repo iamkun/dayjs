@@ -95,6 +95,16 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('Normalizes overflowing ISO time components', () => {
+    expect(dayjs.duration('PT75M').hours()).toBe(1)
+    expect(dayjs.duration('PT75M').minutes()).toBe(15)
+    expect(dayjs.duration('PT75M').format('H:m')).toBe('1:15')
+    expect(dayjs.duration('PT75M').asMinutes()).toBe(75)
+    expect(dayjs.duration('PT70M').hours()).toBe(1)
+    expect(dayjs.duration('PT70M').minutes()).toBe(10)
+    expect(dayjs.duration('PT90S').minutes()).toBe(1)
+    expect(dayjs.duration('PT90S').seconds()).toBe(30)
+  })
   it('Formatting missing components', () => {
     expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
   })
