@@ -11,7 +11,7 @@ function offsetFromString(value = '') {
   }
 
   const [indicator, hoursOffset, minutesOffset] = `${offset[0]}`.match(REGEX_OFFSET_HOURS_MINUTES_FORMAT) || ['-', 0, 0]
-  const totalOffsetInMinutes = (+hoursOffset * 60) + (+minutesOffset)
+  const totalOffsetInMinutes = (+hoursOffset * 60) + (+(minutesOffset || 0))
 
   if (totalOffsetInMinutes === 0) {
     return 0
