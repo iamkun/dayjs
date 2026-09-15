@@ -28,6 +28,48 @@ it('get isoWeekYear', () => {
   expect(dayjs().isoWeekYear()).toBe(moment().isoWeekYear())
 })
 
+it('2024-12-29 to ISO Year 2025, ISO Week 1, then +1 week', () => {
+  const testCase = {
+    initialDate: '2024-12-29',
+    targetIsoYear: 2025,
+    targetIsoWeek: 1,
+    addWeeks: 1
+  }
+
+  const momentResult = moment(testCase.initialDate)
+    .isoWeekYear(testCase.targetIsoYear)
+    .isoWeek(testCase.targetIsoWeek)
+    .add(testCase.addWeeks, 'week')
+
+  const dayjsResult = dayjs(testCase.initialDate)
+    .isoWeekYear(testCase.targetIsoYear)
+    .isoWeek(testCase.targetIsoWeek)
+    .add(testCase.addWeeks, 'week')
+
+  expect(dayjsResult.valueOf()).toBe(momentResult.valueOf())
+})
+
+it('2024-01-01 to ISO Year 2023, ISO Week 2, then -1 week', () => {
+  const testCase = {
+    initialDate: '2024-01-01',
+    targetIsoYear: 2023,
+    targetIsoWeek: 52,
+    weeks: 1
+  }
+
+  const momentResult = moment(testCase.initialDate)
+    .isoWeekYear(testCase.targetIsoYear)
+    .isoWeek(testCase.targetIsoWeek)
+    .subtract(testCase.weeks, 'week')
+
+  const dayjsResult = dayjs(testCase.initialDate)
+    .isoWeekYear(testCase.targetIsoYear)
+    .isoWeek(testCase.targetIsoWeek)
+    .subtract(testCase.weeks, 'week')
+
+  expect(dayjsResult.valueOf()).toBe(momentResult.valueOf())
+})
+
 it('startOf/endOf isoWeek', () => {
   const ISOWEEK = 'isoWeek'
   expect(dayjs().startOf(ISOWEEK).valueOf()).toBe(moment().startOf(ISOWEEK).valueOf())
