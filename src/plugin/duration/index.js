@@ -258,14 +258,21 @@ class Duration {
   asYears() { return this.as('years') }
 }
 
-const manipulateDuration = (date, duration, k) =>
-  date.add(duration.years() * k, 'y')
-    .add(duration.months() * k, 'M')
-    .add(duration.days() * k, 'd')
-    .add(duration.hours() * k, 'h')
-    .add(duration.minutes() * k, 'm')
-    .add(duration.seconds() * k, 's')
-    .add(duration.milliseconds() * k, 'ms')
+const manipulateDuration = (date, duration, k) => {
+  const add = (value, unit) => {
+    if (value) {
+      date = date.add(value * k, unit)
+    }
+  }
+  add(duration.years(), 'y')
+  add(duration.months(), 'M')
+  add(duration.days(), 'd')
+  add(duration.hours(), 'h')
+  add(duration.minutes(), 'm')
+  add(duration.seconds(), 's')
+  add(duration.milliseconds(), 'ms')
+  return date
+}
 
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
