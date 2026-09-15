@@ -127,13 +127,8 @@ class Duration {
   toISOString() {
     const Y = getNumberUnitFormat(this.$d.years, 'Y')
     const M = getNumberUnitFormat(this.$d.months, 'M')
-
-    let days = +this.$d.days || 0
-    if (this.$d.weeks) {
-      days += this.$d.weeks * 7
-    }
-
-    const D = getNumberUnitFormat(days, 'D')
+    const W = getNumberUnitFormat(this.$d.weeks, 'W')
+    const D = getNumberUnitFormat(this.$d.days, 'D')
     const H = getNumberUnitFormat(this.$d.hours, 'H')
     const m = getNumberUnitFormat(this.$d.minutes, 'M')
 
@@ -148,6 +143,7 @@ class Duration {
     const negativeMode =
       Y.negative ||
       M.negative ||
+      W.negative ||
       D.negative ||
       H.negative ||
       m.negative ||
@@ -156,7 +152,7 @@ class Duration {
     const T = H.format || m.format || S.format ? 'T' : ''
     const P = negativeMode ? '-' : ''
 
-    const result = `${P}P${Y.format}${M.format}${D.format}${T}${H.format}${m.format}${S.format}`
+    const result = `${P}P${Y.format}${M.format}${W.format}${D.format}${T}${H.format}${m.format}${S.format}`
     return result === 'P' || result === '-P' ? 'P0D' : result
   }
 
@@ -261,6 +257,7 @@ class Duration {
 const manipulateDuration = (date, duration, k) =>
   date.add(duration.years() * k, 'y')
     .add(duration.months() * k, 'M')
+    .add((duration.$d.weeks || 0) * k, 'w')
     .add(duration.days() * k, 'd')
     .add(duration.hours() * k, 'h')
     .add(duration.minutes() * k, 'm')
