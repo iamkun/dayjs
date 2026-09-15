@@ -9,6 +9,7 @@ const locale = {
   months: 'Ýanwar_Fewral_Mart_Aprel_Maý_Iýun_Iýul_Awgust_Sentýabr_Oktýabr_Noýabr_Dekabr'.split('_'),
   monthsShort: 'Ýan_Few_Mar_Apr_Maý_Iýn_Iýl_Awg_Sen_Okt_Noý_Dek'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
