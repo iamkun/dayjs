@@ -11,7 +11,7 @@ export const englishFormats = {
   LLLL: 'dddd, MMMM D, YYYY h:mm A'
 }
 
-export const u = (formatStr, formats) => formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
+export const u = (formatStr, formats = {}) => formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
   const B = b && b.toUpperCase()
-  return a || formats[b] || englishFormats[b] || t(formats[B])
+  return a || formats[b] || englishFormats[b] || t(formats[B] || englishFormats[B])
 })
