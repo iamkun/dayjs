@@ -221,6 +221,22 @@ describe('Difference', () => {
   it('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
   })
+
+  it('diff with an Invalid Date operand returns NaN for every unit (matches moment)', () => {
+    const invalid = dayjs('not a date')
+    const valid = dayjs('2018-08-08')
+    const mInvalid = moment('not a date')
+    const mValid = moment('2018-08-08')
+    const units = ['milliseconds', 'seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'quarters', 'years']
+    units.forEach((unit) => {
+      expect(invalid.diff(valid, unit)).toBe(mInvalid.diff(mValid, unit))
+      expect(invalid.diff(valid, unit, true)).toBe(mInvalid.diff(mValid, unit, true))
+      expect(valid.diff(invalid, unit)).toBe(mValid.diff(mInvalid, unit))
+      expect(valid.diff(invalid, unit, true)).toBe(mValid.diff(mInvalid, unit, true))
+      // explicit: month-based units must not swallow NaN into 0
+      expect(Number.isNaN(invalid.diff(valid, unit, true))).toBe(true)
+    })
+  })
 })
 
 it('Unix Timestamp (milliseconds)', () => {
