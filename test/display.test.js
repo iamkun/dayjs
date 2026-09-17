@@ -218,6 +218,11 @@ describe('Difference', () => {
     expect(dayjs('2018-01-01').diff(dayjs('2018-01-01'), 'month')).toEqual(0)
   })
 
+  it('Invalid Date diff -> NaN', () => {
+    expect(dayjs('invalid').diff(dayjs(), 'month', true)).toBeNaN()
+    expect(dayjs('invalid').diff(dayjs(), 'year', true)).toBeNaN()
+  })
+
   it('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
   })
