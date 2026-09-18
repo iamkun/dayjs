@@ -2,8 +2,10 @@ import * as C from './constant'
 
 const padStart = (string, length, pad) => {
   const s = String(string)
-  if (!s || s.length >= length) return string
-  return `${Array((length + 1) - s.length).join(pad)}${string}`
+  const neg = s[0] === '-'
+  const abs = neg ? s.slice(1) : s
+  if (!abs || abs.length >= length) return string
+  return `${neg ? '-' : ''}${Array((length + 1) - abs.length).join(pad)}${abs}`
 }
 
 const padZoneStr = (instance) => {
