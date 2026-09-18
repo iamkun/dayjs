@@ -1,4 +1,4 @@
-import { MIN, MS } from '../../constant'
+import { MIN } from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -42,7 +42,9 @@ export default (o, c, d) => {
     return dtf.formatToParts(date)
   }
 
-  const tzOffset = (timestamp, timezone) => {
+  // The wall clock a timezone shows for an instant, as
+  // [year, month, day, hour, minute, second].
+  const tzFields = (timestamp, timezone) => {
     const formatResult = makeFormatParts(timestamp, timezone)
     const filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
@@ -53,12 +55,16 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
-    const hour = filled[3]
     // Workaround for the same behavior in different node version
     // https://github.com/nodejs/node/issues/33027
     /* istanbul ignore next */
-    const fixedHour = hour === 24 ? 0 : hour
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
+    if (filled[3] === 24) filled[3] = 0
+    return filled
+  }
+
+  const tzOffset = (timestamp, timezone) => {
+    const filled = tzFields(timestamp, timezone)
+    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${filled[3]}:${filled[4]}:${filled[5]}:000`
     const utcTs = d.utc(utcString).valueOf()
     let asTS = +timestamp
     const over = asTS % 1000
@@ -96,14 +102,17 @@ export default (o, c, d) => {
     if (!this.isValid()) return this
     const oldOffset = this.utcOffset()
     const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
     const offset = tzOffset(+date, timezone)
     const isUTC = !Number(offset)
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
       ins = this.utcOffset(0, keepLocalTime)
     } else {
-      ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
+      // Build the target wall clock from the fields the timezone reports, rather
+      // than formatting it and parsing that back in the host timezone.
+      const [year, month, day, hour, minute, second] = tzFields(+date, timezone)
+      const wallClock = Date.UTC(year, month - 1, day, hour, minute, second, this.$ms)
+      ins = d(wallClock, { locale: this.$L, utc: true })
         .utcOffset(offset, true)
       if (keepLocalTime) {
         const newOffset = ins.utcOffset()
