@@ -1,6 +1,7 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
+import '../../src/locale/en-gb'
 import '../../src/locale/fr'
 import '../../src/locale/ru'
 import '../../src/locale/zh-cn'
@@ -19,7 +20,7 @@ afterEach(() => {
 })
 
 describe('Instance localeData', () => {
-  ['zh-cn', 'en', 'fr'].forEach((lo) => {
+  ['zh-cn', 'en', 'en-gb', 'fr'].forEach((lo) => {
     it(`Locale: ${lo}`, () => {
       dayjs.locale(lo)
       moment.locale(lo)
@@ -28,6 +29,7 @@ describe('Instance localeData', () => {
       const dayjsLocaleData = dayjs().localeData()
       const momentLocaleData = moment().localeData()
       expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
+      expect(dayjsLocaleData.firstDayOfYear()).toBe(momentLocaleData.firstDayOfYear())
       expect(dayjsLocaleData.months(d)).toBe(momentLocaleData.months(m))
       expect(dayjsLocaleData.months()).toEqual(momentLocaleData.months())
       expect(dayjsLocaleData.monthsShort(d)).toBe(momentLocaleData.monthsShort(m))
@@ -50,12 +52,13 @@ describe('Instance localeData', () => {
 
 
 it('Global localeData', () => {
-  ['zh-cn', 'en', 'fr'].forEach((lo) => {
+  ['zh-cn', 'en', 'en-gb', 'fr'].forEach((lo) => {
     dayjs.locale(lo)
     moment.locale(lo)
     const dayjsLocaleData = dayjs.localeData()
     const momentLocaleData = moment.localeData()
     expect(dayjsLocaleData.firstDayOfWeek()).toBe(momentLocaleData.firstDayOfWeek())
+    expect(dayjsLocaleData.firstDayOfYear()).toBe(momentLocaleData.firstDayOfYear())
     expect(dayjsLocaleData.months()).toEqual(momentLocaleData.months())
     expect(dayjsLocaleData.monthsShort()).toEqual(momentLocaleData.monthsShort())
     expect(dayjsLocaleData.weekdays()).toEqual(momentLocaleData.weekdays())
@@ -116,4 +119,16 @@ it('ordinal', () => {
   expect(typeof dayjs.localeData().ordinal).toEqual('function')
   expect(typeof dayjs().localeData().ordinal).toEqual('function')
   dayjs.locale('en')
+})
+
+it('firstDayOfYear', () => {
+  // en: week starts Sunday, week 1 contains Jan 1 -> 7 + 0 - 1 = 6 (moment doy)
+  expect(dayjs().locale('en').localeData().firstDayOfYear()).toBe(6)
+  // en-gb: week starts Monday, week 1 contains Jan 4 -> 7 + 1 - 4 = 4
+  expect(dayjs().locale('en-gb').localeData().firstDayOfYear()).toBe(4)
+  expect(dayjs().locale({ name: 'no-year-start', weekStart: 1 }).localeData().firstDayOfYear()).toBe(7)
+  dayjs.locale('en-gb')
+  expect(dayjs.localeData().firstDayOfYear()).toBe(4)
+  dayjs.locale('en')
+  expect(dayjs.localeData().firstDayOfYear()).toBe(6)
 })
