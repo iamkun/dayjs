@@ -263,6 +263,17 @@ it('As ISO 8601 String -> toISOString e.g. 2013-02-04T22:44:30.652Z', () => {
   expect(dayjs().toISOString()).toBe(moment().toISOString())
 })
 
+it('Negative years formatted with YYYY keep the sign and pad with zeroes', () => {
+  [[-1, '-0001'], [-10, '-0010'], [-100, '-0100'], [-1000, '-1000']].forEach(([year, expected]) => {
+    const date = new Date(0)
+    date.setFullYear(year, 5, 15) // mid-year so the local timezone cannot shift the year
+    expect(dayjs(date).format('YYYY')).toBe(expected)
+    expect(dayjs(date).format('YYYY')).toBe(moment(date).format('YYYY'))
+  })
+  expect(dayjs('-000001-06-15').format('YYYY')).toBe('-0001')
+  expect(dayjs('-000001-06-15').year()).toBe(-1)
+})
+
 it('Year 1 formatted with YYYY should pad with zeroes', () => {
   const date = new Date(1, 0, 1)
   date.setUTCFullYear(1) // Required because 0-99 are parsed as 19xx in JS: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#year
