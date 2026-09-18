@@ -52,7 +52,7 @@ const meridiemMatch = (input, isLowerCase) => {
     for (let i = 1; i <= 24; i += 1) {
       // todo: fix input === meridiem(i, 0, isLowerCase)
       if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
-        isAfternoon = i > 12
+        isAfternoon = i >= 12
         break
       }
     }
