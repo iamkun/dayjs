@@ -9,6 +9,7 @@ declare module 'dayjs' {
 
   interface InstanceLocaleDataReturn {
     firstDayOfWeek(): number;
+    firstDayOfYear(): number;
     weekdays(instance?: Dayjs): WeekdayNames;
     weekdaysShort(instance?: Dayjs): WeekdayNames;
     weekdaysMin(instance?: Dayjs): WeekdayNames;
@@ -21,6 +22,7 @@ declare module 'dayjs' {
 
   interface GlobalLocaleDataReturn {
     firstDayOfWeek(): number;
+    firstDayOfYear(): number;
     weekdays(): WeekdayNames;
     weekdaysShort(): WeekdayNames;
     weekdaysMin(): WeekdayNames;

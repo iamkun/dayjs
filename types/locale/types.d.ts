@@ -3,6 +3,7 @@ declare interface ILocale {
   weekdays?: string[]
   months?: string[]
   weekStart?: number
+  yearStart?: number
   weekdaysShort?: string[]
   monthsShort?: string[]
   weekdaysMin?: string[]
