@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import dayjs from '../../src'
 import duration from '../../src/plugin/duration'
 import relativeTime from '../../src/plugin/relativeTime'
+import updateLocale from '../../src/plugin/updateLocale'
 import '../../src/locale/fr'
 import '../../src/locale/es'
 
@@ -131,6 +132,40 @@ describe('Humanize', () => {
     expect(dayjs.duration(24, 'hours').humanize()).toBe('a day')
     expect(dayjs.duration(1, 'minutes').humanize(true)).toBe('in a minute')
     expect(dayjs.duration(-1, 'minutes').humanize(true)).toBe('a minute ago')
+  })
+
+  it('Singular units with %d in locale', () => {
+    dayjs.extend(updateLocale)
+    const { relativeTime: enRelativeTime } = dayjs.Ls.en
+    dayjs.updateLocale('en', {
+      relativeTime: {
+        future: 'in %s',
+        past: '%s ago',
+        s: '%d seconds',
+        m: '%d minute',
+        mm: '%d minutes',
+        h: '%d hour',
+        hh: '%d hours',
+        d: '%d day',
+        dd: '%d days',
+        M: '%d month',
+        MM: '%d months',
+        y: '%d year',
+        yy: '%d years'
+      }
+    })
+    try {
+      expect(dayjs.duration(1, 'minutes').humanize()).toBe('1 minute')
+      expect(dayjs.duration(24, 'hours').humanize()).toBe('1 day')
+      expect(dayjs.duration(1, 'month').humanize()).toBe('1 month')
+      expect(dayjs.duration(30, 'days').humanize()).toBe('1 month')
+      expect(dayjs.duration('P1M').humanize()).toBe('1 month')
+      expect(dayjs.duration(1, 'year').humanize()).toBe('1 year')
+      expect(dayjs.duration(25, 'days').humanize()).toBe('25 days')
+      expect(dayjs.duration(1, 'month').humanize(true)).toBe('in 1 month')
+    } finally {
+      dayjs.updateLocale('en', { relativeTime: enRelativeTime })
+    }
   })
 
   it('Locale', () => {
