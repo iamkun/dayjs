@@ -22,5 +22,9 @@ declare module 'dayjs' {
     isBefore(date?: ConfigType, unit?: QUnitType): boolean
 
     isAfter(date?: ConfigType, unit?: QUnitType): boolean
+
+    isSameOrAfter(date?: ConfigType, unit?: QUnitType): boolean
+
+    isSameOrBefore(date?: ConfigType, unit?: QUnitType): boolean
   }
 }
