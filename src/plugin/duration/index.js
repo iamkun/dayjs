@@ -84,7 +84,7 @@ class Duration {
       const d = input.match(DURATION_REGEX_PARSE)
       if (d) {
         const properties = d.slice(2)
-        const numberD = properties.map(value => (value != null ? Number(value) : 0));
+        const numberD = properties.map(value => (value != null ? Number(value.replace(',', '.')) : 0));
         [
           this.$d.years,
           this.$d.months,

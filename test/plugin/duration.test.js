@@ -95,6 +95,18 @@ describe('Parse ISO string', () => {
   it('Part ISO string', () => {
     expect(dayjs.duration('PT2777H46M40S').toISOString()).toBe('PT2777H46M40S')
   })
+  it('ISO string with a decimal comma', () => {
+    const d = dayjs.duration('PT1,5S')
+    expect(d.asMilliseconds()).toBe(1500)
+    expect(d.toISOString()).toBe('PT1.5S')
+  })
+  it('decimal commas and points parse to the same duration', () => {
+    const inputs = ['P1,5Y', 'P1,5M', 'P1,5W', 'P1,5D', 'PT1,5H', 'PT1,5M', 'PT-1,5S']
+    inputs.forEach((input) => {
+      expect(dayjs.duration(input).asMilliseconds())
+        .toBe(dayjs.duration(input.replace(',', '.')).asMilliseconds())
+    })
+  })
   it('Formatting missing components', () => {
     expect(dayjs.duration('PT1H').format('YYYY-MM-DDTHH:mm:ss')).toBe('0000-00-00T01:00:00')
   })
