@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ko'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -341,11 +342,28 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 01:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+    expect(dayjs(input, format2).locale('zh-cn').format(format)).toBe(date)
   })
   it('PM', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+    expect(dayjs(input, format2).locale('zh-cn').format(format2)).toBe(input)
+  })
+})
+
+describe('meridiem translation', () => {
+  it('zh-cn', () => {
+    const tests = ['1:30 凌晨', '8:30 早上', '10:30 上午', '11:30 中午', '12:30 中午', '4:30 下午', '11:30 晚上']
+    tests.forEach(test => expect(dayjs(test, 'h:mm A', 'zh-cn', true).format('h:mm A')).toEqual(test))
+  })
+  it('ko', () => {
+    const tests = ['오전 12:00', '오전 3:30', '오후 12:00', '오후 3:30']
+    tests.forEach(test => expect(dayjs(test, 'A h:mm', 'ko', true).format('A h:mm')).toEqual(test))
+  })
+  it('ru', () => {
+    const tests = ['1:30 ночи', '11:30 утра', '12:30 дня', '9:30 вечера']
+    tests.forEach(test => expect(dayjs(test, 'h:mm A', 'ru', true).format('h:mm A')).toEqual(test))
   })
 })
 
