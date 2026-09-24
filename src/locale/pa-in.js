@@ -19,7 +19,7 @@ const locale = {
   },
   relativeTime: {
     future: '%s ਵਿੱਚ',
-    past: '%s ਪਿਛਲੇ',
+    past: '%s ਪਹਿਲਾਂ',
     s: 'ਕੁਝ ਸਕਿੰਟ',
     m: 'ਇਕ ਮਿੰਟ',
     mm: '%d ਮਿੰਟ',
