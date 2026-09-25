@@ -581,3 +581,35 @@ it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
 })
+
+// Before 1970, timestamps are negative and `%` keeps their sign, so the milliseconds
+// were removed by rounding toward zero, one second off the wall clock read from Intl.
+describe('Before 1970 with milliseconds', () => {
+  it('keeps a whole-minute offset', () => {
+    const d = dayjs.tz('1960-08-15 12:00:00.999', NY)
+    const m = moment.tz('1960-08-15 12:00:00.999', NY)
+    expect(d.utcOffset()).toBe(-240)
+    expect(d.valueOf()).toBe(m.valueOf())
+  })
+
+  it('converts an instant', () => {
+    const instant = '1960-01-16T12:00:00.500Z'
+    const d = dayjs(instant).tz('Europe/London')
+    expect(d.utcOffset()).toBe(0)
+    expect(d.format('YYYY-MM-DD HH:mm:ss.SSS')).toBe('1960-01-16 12:00:00.500')
+    expect(dayjs(instant).tz(NY).utcOffset()).toBe(-300)
+  })
+
+  it('endOf', () => {
+    const d = dayjs.tz('1960-08-15 12:00', NY)
+    const m = moment.tz('1960-08-15 12:00', NY)
+    expect(d.endOf('day').valueOf()).toBe(m.clone().endOf('day').valueOf())
+    expect(d.endOf('month').valueOf()).toBe(m.clone().endOf('month').valueOf())
+    expect(d.endOf('month').format('YYYY-MM-DD HH:mm:ss.SSS Z')).toBe('1960-08-31 23:59:59.999 -04:00')
+  })
+
+  it('daysInMonth', () => {
+    expect(dayjs.tz('1960-08-15 12:00', NY).daysInMonth()).toBe(31)
+    expect(dayjs.tz('1960-01-16 12:00', 'Europe/London').daysInMonth()).toBe(31)
+  })
+})

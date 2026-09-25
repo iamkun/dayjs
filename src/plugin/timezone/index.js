@@ -62,7 +62,8 @@ export default (o, c, d) => {
     const utcTs = d.utc(utcString).valueOf()
     let asTS = +timestamp
     const over = asTS % 1000
-    asTS -= over
+    // `%` keeps the sign of negative timestamps (before 1970), so round down explicitly
+    asTS -= over >= 0 ? over : 1000 + over
     return (utcTs - asTS) / (60 * 1000)
   }
 
