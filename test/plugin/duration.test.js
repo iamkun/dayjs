@@ -88,6 +88,48 @@ describe('Creating', () => {
   })
 })
 
+describe('Parse time string', () => {
+  it('HH:mm:ss', () => {
+    const d = dayjs.duration('02:04:33')
+    expect(d.hours()).toBe(2)
+    expect(d.minutes()).toBe(4)
+    expect(d.seconds()).toBe(33)
+    expect(d.asSeconds()).toBe(7473)
+    expect(d.toISOString()).toBe('PT2H4M33S')
+  })
+  it('HH:mm', () => {
+    const d = dayjs.duration('23:59')
+    expect(d.hours()).toBe(23)
+    expect(d.minutes()).toBe(59)
+    expect(d.seconds()).toBe(0)
+    expect(d.toISOString()).toBe('PT23H59M')
+  })
+  it('days.HH:mm:ss', () => {
+    const d = dayjs.duration('7.23:59:59')
+    expect(d.days()).toBe(7)
+    expect(d.hours()).toBe(23)
+    expect(d.minutes()).toBe(59)
+    expect(d.seconds()).toBe(59)
+  })
+  it('HH:mm:ss.SSS (fractional seconds)', () => {
+    const d = dayjs.duration('23:59:59.999')
+    expect(d.hours()).toBe(23)
+    expect(d.minutes()).toBe(59)
+    expect(d.seconds()).toBe(59)
+    expect(d.milliseconds()).toBe(999)
+  })
+  it('negative time string', () => {
+    const d = dayjs.duration('-23:59:59')
+    expect(d.hours()).toBe(-23)
+    expect(d.minutes()).toBe(-59)
+    expect(d.seconds()).toBe(-59)
+    expect(d.toISOString()).toBe('-PT23H59M59S')
+  })
+  it('Invalid string still returns P0D', () => {
+    expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
+  })
+})
+
 describe('Parse ISO string', () => {
   it('Full ISO string', () => {
     expect(dayjs.duration('P7Y6M4DT3H2M1S').toISOString()).toBe('P7Y6M4DT3H2M1S')
