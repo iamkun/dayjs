@@ -41,11 +41,11 @@ export default (o, c, dayjs) => { // locale needed later
     const localeObject = getDayjsLocaleObject()
     return {
       firstDayOfWeek: () => localeObject.weekStart || 0,
-      weekdays: () => dayjs.weekdays(),
-      weekdaysShort: () => dayjs.weekdaysShort(),
-      weekdaysMin: () => dayjs.weekdaysMin(),
-      months: () => dayjs.months(),
-      monthsShort: () => dayjs.monthsShort(),
+      weekdays: () => getShort(localeObject, 'weekdays'),
+      weekdaysShort: () => getShort(localeObject, 'weekdaysShort', 'weekdays', 3),
+      weekdaysMin: () => getShort(localeObject, 'weekdaysMin', 'weekdays', 2),
+      months: () => getShort(localeObject, 'months'),
+      monthsShort: () => getShort(localeObject, 'monthsShort', 'months', 3),
       longDateFormat: format => getLongDateFormat(localeObject, format),
       meridiem: localeObject.meridiem,
       ordinal: localeObject.ordinal
