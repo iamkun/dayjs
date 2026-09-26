@@ -219,6 +219,20 @@ describe('UTC with customParseFormat', () => {
     expect(instant.format()).toBe('2011-02-02T03:04:05Z')
     expect(instant.format()).toBe(momentInstant.format())
   })
+
+  it('keeps UTC when format is an array', () => {
+    dayjs.extend(customParseFormat)
+    const input = '1995-05-01'
+    const formats = ['YYYY-MM-DD', 'YYYY-M-D']
+    const withArray = dayjs.utc(input, formats)
+    const single = dayjs.utc(input, 'YYYY-MM-DD')
+    const momentArray = moment.utc(input, formats)
+    expect(withArray.format()).toBe('1995-05-01T00:00:00Z')
+    expect(withArray.format()).toBe(single.format())
+    expect(withArray.toISOString()).toBe(single.toISOString())
+    expect(withArray.toISOString()).toBe(momentArray.toISOString())
+    expect(withArray.isUTC()).toBe(true)
+  })
 })
 
 describe('UTC Offset', () => {
