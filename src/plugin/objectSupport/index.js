@@ -53,7 +53,7 @@ export default (o, c, dayjs) => {
 
   proto.set = function (unit, value) {
     value = value === undefined ? unit : value
-    if (unit.constructor.name === 'Object') {
+    if (isObject(unit)) {
       return callObject.bind(this)(function (i, s) {
         return oldSet.bind(this)(s, i)
       }, value, unit)
@@ -61,13 +61,13 @@ export default (o, c, dayjs) => {
     return oldSet.bind(this)(unit, value)
   }
   proto.add = function (value, unit) {
-    if (value.constructor.name === 'Object') {
+    if (isObject(value)) {
       return callObject.bind(this)(oldAdd, value, unit)
     }
     return oldAdd.bind(this)(value, unit)
   }
   proto.subtract = function (value, unit) {
-    if (value.constructor.name === 'Object') {
+    if (isObject(value)) {
       return callObject.bind(this)(oldAdd, value, unit, -1)
     }
     return oldSubtract.bind(this)(value, unit)
