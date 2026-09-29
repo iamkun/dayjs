@@ -40,5 +40,6 @@ const localeTypePath = path.join(process.env.PWD, 'esm/locale', `index${typeFile
     })
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
+    process.exitCode = 1
   }
 })()
