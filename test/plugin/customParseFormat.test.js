@@ -427,6 +427,37 @@ describe('parse with special separator characters', () => {
   })
 })
 
+describe('parse with dot separator characters', () => {
+  it('parse dot separated date', () => {
+    const input = '25.Sep.2022'
+    const format = 'DD.MMM.YYYY'
+    const resultDayjs = dayjs(input, format)
+    const resultMoment = moment(input, format)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  })
+  it('parse dot separated date in strict mode', () => {
+    const input = '25.Sep.2022'
+    const format = 'DD.MMM.YYYY'
+    const resultDayjs = dayjs(input, format, true)
+    const resultMoment = moment(input, format, true)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+  })
+  it('only the MMM separated with dot', () => {
+    const input = '25 Sep. 2022'
+    const format = 'DD MMM. YYYY'
+    const locale = 'en'
+    const resultDayjs = dayjs(input, format, locale)
+    const resultMoment = moment(input, format, locale)
+    expect(resultMoment.isValid()).toBe(true)
+    expect(resultDayjs.isValid()).toBe(true)
+    expect(dayjs(input, format, true).valueOf()).toBe(moment(input, format, true).valueOf())
+  })
+})
+
 it('parse X x', () => {
   const input = '1410715640.579'
   const format = 'X'
