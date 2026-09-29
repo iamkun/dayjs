@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ko'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -346,6 +347,21 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+  // issue 2975: locales whose meridiem(12) is already PM (e.g. Korean 오후)
+  it('PM when locale meridiem treats hour 12 as afternoon', () => {
+    const input = '2025-11-18 오후 4:10:27'
+    const parsed = dayjs(input, 'YYYY-MM-DD A h:mm:ss', 'ko')
+    expect(parsed.isValid()).toBe(true)
+    expect(parsed.hour()).toBe(16)
+    expect(parsed.minute()).toBe(10)
+    expect(parsed.second()).toBe(27)
+  })
+  it('AM when locale meridiem treats hour 12 as afternoon', () => {
+    const input = '2025-11-18 오전 4:10:27'
+    const parsed = dayjs(input, 'YYYY-MM-DD A h:mm:ss', 'ko')
+    expect(parsed.isValid()).toBe(true)
+    expect(parsed.hour()).toBe(4)
   })
 })
 
