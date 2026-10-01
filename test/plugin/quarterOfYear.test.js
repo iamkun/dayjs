@@ -2,6 +2,7 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
 import quarterOfYear from '../../src/plugin/quarterOfYear'
+import updateLocale from '../../src/plugin/updateLocale'
 
 dayjs.extend(quarterOfYear)
 
@@ -48,4 +49,57 @@ it('startOf endOf quarter', () => {
     .toBe(moment().startOf('quarter').format())
   expect(dayjs().endOf('quarter').format())
     .toBe(moment().endOf('quarter').format())
+})
+
+
+it('handle different start month ', () => {
+  const testDifferentMonth = (startMonth, quarters) => {
+    dayjs.updateLocale('en', {
+      quarterStart: startMonth
+    })
+
+    Object.keys(quarters).forEach((quarter) => {
+      const months = quarters[quarter]
+      const numericQuarter = parseInt(quarter, 10)
+
+      months.forEach((month) => {
+        const monthString = month > 9 ? month.toString() : `0${month}`
+        const date = `2013-${monthString}-01T00:00:00.000`
+
+        expect(dayjs(date).quarter()).toBe(numericQuarter)
+
+        const quarterStart = dayjs(date).startOf('quarter').month() + 1
+        const quarterEnd = dayjs(date).endOf('quarter').month() + 1
+
+        expect(quarterStart).toBe(months[0])
+        expect(quarterEnd).toBe(months[2])
+      })
+    })
+  }
+
+  dayjs.extend(updateLocale)
+
+  // quarter starts in january
+  testDifferentMonth(1, {
+    1: [1, 2, 3],
+    2: [4, 5, 6],
+    3: [7, 8, 9],
+    4: [10, 11, 12]
+  })
+
+  // quarter starts in feb
+  testDifferentMonth(2, {
+    1: [2, 3, 4],
+    2: [5, 6, 7],
+    3: [8, 9, 10],
+    4: [11, 12, 1]
+  })
+
+  // first quarter starts in july
+  testDifferentMonth(7, {
+    1: [7, 8, 9],
+    2: [10, 11, 12],
+    3: [1, 2, 3],
+    4: [4, 5, 6]
+  })
 })
