@@ -11,10 +11,9 @@ export default (o, c) => {
 
   const oldAdd = proto.add
   proto.add = function (number, units) {
-    number = Number(number) // eslint-disable-line no-param-reassign
     const unit = this.$utils().p(units)
     if (unit === Q) {
-      return this.add(number * 3, M)
+      return this.add(Number(number) * 3, M)
     }
     return oldAdd.bind(this)(number, units)
   }
