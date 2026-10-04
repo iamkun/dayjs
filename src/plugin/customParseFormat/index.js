@@ -109,7 +109,7 @@ const expressions = {
     if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = ((matchIndex - 1) % 12) + 1
   }],
   MMMM: [matchWord, function (input) {
     const months = getLocalePart('months')
@@ -117,7 +117,7 @@ const expressions = {
     if (matchIndex < 1) {
       throw new Error()
     }
-    this.month = (matchIndex % 12) || matchIndex
+    this.month = ((matchIndex - 1) % 12) + 1
   }],
   Y: [matchSigned, addInput('year')],
   YY: [match2, function (input) {
