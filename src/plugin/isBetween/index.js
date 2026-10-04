@@ -2,6 +2,9 @@ export default (o, c, d) => {
   c.prototype.isBetween = function (a, b, u, i) {
     const dA = d(a)
     const dB = d(b)
+    if (!dA.isValid() || !dB.isValid()) {
+      return false
+    }
     i = i || '()'
     const dAi = i[0] === '('
     const dBi = i[1] === ')'
