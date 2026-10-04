@@ -3,7 +3,7 @@ import en from './locale/en'
 import U from './utils'
 
 let L = 'en' // global locale
-const Ls = {} // global loaded locale
+const Ls = Object.create(null) // global loaded locale
 Ls[L] = en
 
 const IS_DAYJS = '$isDayjsObject'
