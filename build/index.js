@@ -68,5 +68,6 @@ async function listLocaleJson(localeArr) {
     await listLocaleJson(locales)
   } catch (e) {
     console.error(e) // eslint-disable-line no-console
+    process.exitCode = 1
   }
 })()
