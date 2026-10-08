@@ -252,6 +252,10 @@ export default (o, C, d) => {
       locale = {}
     } else if (format instanceof Array) {
       const len = format.length
+      if (!len) {
+        this.$d = new Date('')
+        this.init()
+      }
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
         const result = d.apply(this, args)
