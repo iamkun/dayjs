@@ -3,11 +3,13 @@ import moment from 'moment-timezone'
 import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
+import objectSupport from '../../src/plugin/objectSupport'
 import utc from '../../src/plugin/utc'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(customParseFormat)
+dayjs.extend(objectSupport)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -580,4 +582,203 @@ it('does not throw for invalid Day.js values (regression #111.22)', () => {
 it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
+
+// Adding, setting and startOf on a zoned instance kept the offset of the instant it started from,
+// so a step across the zone's DST change showed the right wall clock at the wrong instant, or the
+// right instant with the old offset. https://github.com/iamkun/dayjs/issues/1271
+describe('Arithmetic on zoned instances across DST', () => {
+  const LA = 'US/Pacific'
+  const TEL_AVIV = 'Asia/Tel_Aviv'
+
+  it('add(day) across spring forward keeps the wall clock and takes the new offset', () => {
+    const d = dayjs.tz('2021-03-13 12:00', NY).add(1, 'day')
+    expect(d.format()).toBe('2021-03-14T12:00:00-04:00')
+    matchMoment(d, moment.tz('2021-03-13 12:00', NY).add(1, 'day'))
+  })
+
+  it('add(day) across fall back lands on the next calendar day (#1271)', () => {
+    const d = dayjs.tz('2020-10-24', LONDON).add(2, 'day')
+    expect(d.toISOString()).toBe('2020-10-26T00:00:00.000Z')
+    matchMoment(d, moment.tz('2020-10-24', LONDON).add(2, 'day'))
+  })
+
+  it('add(week) on a converted instance takes the new offset', () => {
+    const d = dayjs.utc('2020-03-04T10:00:00Z').tz(NY).add(1, 'week')
+    expect(d.format()).toBe('2020-03-11T05:00:00-04:00')
+    matchMoment(d, moment.utc('2020-03-04T10:00:00Z').tz(NY).add(1, 'week'))
+  })
+
+  it('add(day) over a 25-hour day gives the instant that re-parsing gives (#2957)', () => {
+    const start = 1762066800000 // 2025-11-02 00:00 PDT
+    const a = dayjs.tz(start, LA).add(1, 'day')
+    expect(a.valueOf()).toBe(1762156800000)
+    expect(a.format('YYYY-MM-DD HH:mm:ss')).toBe('2025-11-03 00:00:00')
+    expect(dayjs.tz(a.valueOf(), LA).format()).toBe(a.format())
+    matchMoment(a, moment.tz(start, LA).add(1, 'day'))
+  })
+
+  it('add(hour) is elapsed time and takes the offset at the new instant (#1622)', () => {
+    let d = dayjs.tz('2021-10-31', TEL_AVIV).startOf('day')
+    let m = moment.tz('2021-10-31', TEL_AVIV).startOf('day')
+    const seen = []
+    for (let i = 0; i < 5; i += 1) {
+      seen.push(d.format('HH:mmZ'))
+      matchMoment(d, m)
+      d = d.add(1, 'hour')
+      m = m.clone().add(1, 'hour')
+    }
+    expect(seen).toEqual(['00:00+03:00', '01:00+03:00', '01:00+02:00', '02:00+02:00', '03:00+02:00'])
+  })
+
+  it('add(24, hour) and add(1, day) differ across a transition', () => {
+    const base = dayjs.tz('2021-03-13 12:00', NY)
+    expect(base.add(24, 'hour').format()).toBe('2021-03-14T13:00:00-04:00')
+    expect(base.add(1, 'day').format()).toBe('2021-03-14T12:00:00-04:00')
+    expect(base.add(1, 'day').valueOf() - base.valueOf()).toBe(23 * 60 * 60 * 1000)
+  })
+
+  it('add(month) and add(year) take the offset of the target date', () => {
+    matchMoment(
+      dayjs.tz('2021-02-14 12:00', NY).add(1, 'month'),
+      moment.tz('2021-02-14 12:00', NY).add(1, 'month')
+    )
+    matchMoment(
+      dayjs.tz('2020-07-01 09:30', NY).add(5, 'month'),
+      moment.tz('2020-07-01 09:30', NY).add(5, 'month')
+    )
+    matchMoment(
+      dayjs.tz('2020-11-01 00:30', NY).add(1, 'year'),
+      moment.tz('2020-11-01 00:30', NY).add(1, 'year')
+    )
+  })
+
+  it('subtract(day) back across spring forward', () => {
+    matchMoment(
+      dayjs.tz('2021-03-15 12:00', NY).subtract(1, 'day'),
+      moment.tz('2021-03-15 12:00', NY).subtract(1, 'day')
+    )
+  })
+
+  it('add(millisecond) with and without a unit is elapsed time', () => {
+    const edge = dayjs.tz('2021-11-07 01:59:59.999', NY)
+    expect(edge.format('HH:mm:ss.SSS Z')).toBe('01:59:59.999 -04:00')
+    expect(edge.add(1).format('HH:mm:ss.SSS Z')).toBe('01:00:00.000 -05:00')
+    expect(edge.add(1, 'ms').valueOf()).toBe(edge.valueOf() + 1)
+    expect(edge.add(1, 'second').format('HH:mm:ss.SSS Z')).toBe('01:00:00.999 -05:00')
+    expect(edge.add(1, 'minute').format('HH:mm:ss.SSS Z')).toBe('01:00:59.999 -05:00')
+  })
+
+  it('set() and the setters take the offset of the new wall clock', () => {
+    matchMoment(
+      dayjs.tz('2021-03-13 12:00', NY).set('date', 14),
+      moment.tz('2021-03-13 12:00', NY).set('date', 14)
+    )
+    matchMoment(
+      dayjs.tz('2021-11-07 00:30', NY).hour(5),
+      moment.tz('2021-11-07 00:30', NY).hour(5)
+    )
+    matchMoment(
+      dayjs.tz('2024-03-31 03:00', PARIS).year(2023),
+      moment.tz('2024-03-31 03:00', PARIS).year(2023)
+    )
+    expect(dayjs.tz('2021-03-13 12:00', NY).date(14).format()).toBe('2021-03-14T12:00:00-04:00')
+  })
+
+  it('startOf and endOf on the days of a transition', () => {
+    matchMoment(
+      dayjs.tz('2021-11-07 12:00', NY).startOf('day'),
+      moment.tz('2021-11-07 12:00', NY).startOf('day')
+    )
+    matchMoment(
+      dayjs.tz('2021-03-14 12:00', NY).endOf('day'),
+      moment.tz('2021-03-14 12:00', NY).endOf('day')
+    )
+    matchMoment(
+      dayjs.tz('2021-03-31 12:00', NY).startOf('month').add(1, 'month'),
+      moment.tz('2021-03-31 12:00', NY).startOf('month').add(1, 'month')
+    )
+    expect(dayjs.tz('2021-11-07 12:00', NY).startOf('day').format()).toBe('2021-11-07T00:00:00-04:00')
+    expect(dayjs.tz('2021-03-14 12:00', NY).endOf('day').format()).toBe('2021-03-14T23:59:59-04:00')
+  })
+
+  it('startOf(day) on a day that begins inside a gap lands on its first instant', () => {
+    // Chile springs forward at midnight, so 2021-09-05 starts at 01:00
+    const d = dayjs.tz('2021-09-05 12:00', 'America/Santiago').startOf('day')
+    expect(d.format()).toBe('2021-09-05T01:00:00-03:00')
+    expect(d.valueOf()).toBe(Date.UTC(2021, 8, 5, 4))
+  })
+
+  it('add(day) into a gap moves forward, as dayjs.tz(string) does', () => {
+    const d = dayjs.tz('2021-03-13 02:30', NY).add(1, 'day')
+    expect(d.format()).toBe('2021-03-14T03:30:00-04:00')
+    expect(d.format()).toBe(dayjs.tz('2021-03-14 02:30', NY).format())
+  })
+
+  it('keeps the side of a fall-back overlap it started on', () => {
+    const fromDaylight = dayjs.tz('2021-11-06 01:30', NY).add(1, 'day')
+    expect(fromDaylight.format()).toBe('2021-11-07T01:30:00-04:00')
+    const fromStandard = dayjs.tz('2021-11-08 01:30', NY).subtract(1, 'day')
+    expect(fromStandard.format()).toBe('2021-11-07T01:30:00-05:00')
+    expect(fromStandard.valueOf() - fromDaylight.valueOf()).toBe(60 * 60 * 1000)
+  })
+
+  it('works the same on instances from .tz() and from dayjs.tz()', () => {
+    const converted = dayjs('2021-03-13T17:00:00Z').tz(NY)
+    const parsed = dayjs.tz('2021-03-13 12:00', NY)
+    expect(converted.add(1, 'day').format()).toBe(parsed.add(1, 'day').format())
+    expect(converted.add(1, 'day').valueOf()).toBe(parsed.add(1, 'day').valueOf())
+    expect(converted.set('hour', 1).format()).toBe(parsed.set('hour', 1).format())
+    expect(converted.add(3, 'hour').format()).toBe(parsed.add(3, 'hour').format())
+  })
+
+  it('moves between a zero offset and a daylight offset', () => {
+    const winter = dayjs.tz('2021-11-01 12:00', LONDON)
+    expect(winter.utcOffset()).toBe(0)
+    matchMoment(winter.subtract(2, 'day'), moment.tz('2021-11-01 12:00', LONDON).subtract(2, 'day'))
+    matchMoment(winter.subtract(2, 'day').add(2, 'day'), moment.tz('2021-11-01 12:00', LONDON))
+    const summer = dayjs.tz('2021-10-30 12:00', LONDON)
+    matchMoment(summer.add(2, 'day'), moment.tz('2021-10-30 12:00', LONDON).add(2, 'day'))
+  })
+
+  // objectSupport splits an object into one call per unit, each of which reaches the override
+  // because objectSupport is installed after timezone
+  it('takes object arguments through objectSupport', () => {
+    const base = dayjs.tz('2021-03-13 12:00', NY)
+    expect(base.add({ days: 1 }).format()).toBe('2021-03-14T12:00:00-04:00')
+    expect(base.add({ hours: 24 }).format()).toBe('2021-03-14T13:00:00-04:00')
+    expect(base.subtract({ days: -1, hours: 1 }).format()).toBe('2021-03-14T11:00:00-04:00')
+    expect(base.set({ date: 14, hour: 1 }).format()).toBe('2021-03-14T01:00:00-05:00')
+    expect(base.set({ date: 14, hour: 3 }).format()).toBe('2021-03-14T03:00:00-04:00')
+  })
+
+  it('keeps the locale and the week start', () => {
+    const d = dayjs.tz('2023-02-17 00:00:00', NY).locale({ name: 'tz_locale', weekStart: 3 })
+    expect(d.add(1, 'day').locale()).toBe('tz_locale')
+    expect(d.add(1, 'hour').locale()).toBe('tz_locale')
+    expect(d.startOf('week').format('YYYY-MM-DD')).toBe('2023-02-15')
+    expect(d.add(7, 'day').startOf('week').format('YYYY-MM-DD')).toBe('2023-02-22')
+  })
+
+  it('leaves invalid instances invalid', () => {
+    const invalid = dayjs.tz('invalid', NY)
+    expect(invalid.add(1, 'day').isValid()).toBe(false)
+    expect(invalid.add(1, 'hour').isValid()).toBe(false)
+    expect(invalid.set('date', 1).isValid()).toBe(false)
+    expect(invalid.startOf('day').isValid()).toBe(false)
+    const valid = dayjs.tz('2021-03-13 12:00', NY)
+    expect(valid.set('date', NaN).isValid()).toBe(false)
+    expect(valid.add(NaN, 'hour').isValid()).toBe(false)
+    expect(valid.add(Infinity, 'day').isValid()).toBe(false)
+  })
+
+  // dayjs.tz(string) built its result by shifting a host-local Date, so on a host inside the hours
+  // before its own DST change the fields came out an hour off while valueOf() was right.
+  it('dayjs.tz(string) shows the wall clock it was given on a host near its own DST change', () => {
+    expect(dayjs.tz('2021-03-14 12:00', TOKYO).format()).toBe('2021-03-14T12:00:00+09:00')
+    expect(dayjs.tz('2021-11-07 12:00', TOKYO).format()).toBe('2021-11-07T12:00:00+09:00')
+    expect(dayjs.tz('2021-03-28 12:00', TOKYO).format()).toBe('2021-03-28T12:00:00+09:00')
+    expect(dayjs.tz('2021-10-31 12:00', TOKYO).format()).toBe('2021-10-31T12:00:00+09:00')
+    expect(dayjs.tz('2021-09-26 12:00', 'Pacific/Kiritimati').format()).toBe('2021-09-26T12:00:00+14:00')
+  })
 })
