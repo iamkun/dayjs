@@ -1,4 +1,4 @@
-import { MIN, MS } from '../../constant'
+import { MIN } from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -42,7 +42,8 @@ export default (o, c, d) => {
     return dtf.formatToParts(date)
   }
 
-  const tzOffset = (timestamp, timezone) => {
+  // The wall clock the timezone shows at timestamp, as [year, month, day, hour, minute, second]
+  const tzWall = (timestamp, timezone) => {
     const formatResult = makeFormatParts(timestamp, timezone)
     const filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
@@ -53,18 +54,23 @@ export default (o, c, d) => {
         filled[pos] = parseInt(value, 10)
       }
     }
-    const hour = filled[3]
     // Workaround for the same behavior in different node version
     // https://github.com/nodejs/node/issues/33027
     /* istanbul ignore next */
-    const fixedHour = hour === 24 ? 0 : hour
-    const utcString = `${filled[0]}-${filled[1]}-${filled[2]} ${fixedHour}:${filled[4]}:${filled[5]}:000`
-    const utcTs = d.utc(utcString).valueOf()
+    if (filled[3] === 24) filled[3] = 0
+    return filled
+  }
+
+  // Minutes east of UTC that a wall clock implies at timestamp
+  const wallOffset = (wall, timestamp) => {
+    const utcTs = Date.UTC(wall[0], wall[1] - 1, wall[2], wall[3], wall[4], wall[5])
     let asTS = +timestamp
     const over = asTS % 1000
     asTS -= over
     return (utcTs - asTS) / (60 * 1000)
   }
+
+  const tzOffset = (timestamp, timezone) => wallOffset(tzWall(timestamp, timezone), timestamp)
 
   // find the right offset a given local time. The o input is our guess, which determines which
   // offset we'll pick in ambiguous cases (e.g. there are two 3 AMs b/c Fallback DST)
@@ -95,16 +101,17 @@ export default (o, c, d) => {
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     if (!this.isValid()) return this
     const oldOffset = this.utcOffset()
-    const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const offset = tzOffset(+date, timezone)
+    const timestamp = this.valueOf()
+    const wall = tzWall(timestamp, timezone)
+    const offset = wallOffset(wall, timestamp)
     const isUTC = !Number(offset)
     let ins
     if (isUTC) { // if utcOffset is 0, turn it to UTC mode
       ins = this.utcOffset(0, keepLocalTime)
     } else {
-      ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
-        .utcOffset(offset, true)
+      // A host-local Date showing the target wall clock, which utcOffset(offset, true) keeps
+      const local = new Date(wall[0], wall[1] - 1, wall[2], wall[3], wall[4], wall[5], this.$ms)
+      ins = d(local, { locale: this.$L }).utcOffset(offset, true)
       if (keepLocalTime) {
         const newOffset = ins.utcOffset()
         ins = ins.add(oldOffset - newOffset, MIN)
