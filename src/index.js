@@ -118,15 +118,16 @@ class Dayjs {
 
   isSame(that, units) {
     const other = dayjs(that)
+    if (Utils.u(units)) return this.valueOf() === other.valueOf()
     return this.startOf(units) <= other && other <= this.endOf(units)
   }
 
   isAfter(that, units) {
-    return dayjs(that) < this.startOf(units)
+    return dayjs(that) < (Utils.u(units) ? this : this.startOf(units))
   }
 
   isBefore(that, units) {
-    return this.endOf(units) < dayjs(that)
+    return (Utils.u(units) ? this : this.endOf(units)) < dayjs(that)
   }
 
   $g(input, get, set) {
