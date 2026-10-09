@@ -338,7 +338,14 @@ class Dayjs {
       return null
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match) || zoneStr.replace(':', '')) // 'ZZ'
+    const parts = str.split(C.REGEX_FORMAT)
+    let result = parts[0]
+    for (let i = 1; i < parts.length; i += 2) {
+      const token = parts[i]
+      const value = token[0] === '[' ? token.slice(1, -1) : matches(token)
+      result += (value || zoneStr.replace(':', '')) + parts[i + 1] // null is 'ZZ'
+    }
+    return result
   }
 
   utcOffset() {
