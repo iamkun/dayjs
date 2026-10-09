@@ -226,7 +226,9 @@ class Duration {
   }
 
   clone() {
-    return wrapper(this.$ms, this)
+    const that = wrapper(this.$ms, this)
+    that.$d = { ...this.$d }
+    return that
   }
 
   humanize(withSuffix) {
