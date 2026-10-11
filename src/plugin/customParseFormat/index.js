@@ -153,27 +153,43 @@ function makeParser(format) {
     const regex = parseTo && parseTo[0]
     const parser = parseTo && parseTo[1]
     if (parser) {
-      array[i] = { regex, parser }
+      array[i] = { regex, parser, token }
     } else {
       array[i] = token.replace(/^\[|\]$/g, '')
     }
   }
   return function (input) {
     const time = {}
+    const doubleDigits = []
     for (let i = 0, start = 0; i < length; i += 1) {
-      const token = array[i]
-      if (typeof token === 'string') {
-        start += token.length
+      const item = array[i]
+      if (typeof item === 'string') {
+        start += item.length
       } else {
-        const { regex, parser } = token
+        const { regex, parser, token } = item
         const part = input.slice(start)
         const match = regex.exec(part)
         const value = match[0]
         parser.call(time, value)
         input = input.replace(value, '')
+        if (value.length === 2 && ['M', 'D', 'H', 'h', 'm', 's', 'w'].indexOf(token) > -1) {
+          doubleDigits.push(token)
+        }
       }
     }
     correctHours(time)
+    if (doubleDigits.length) {
+      time.format = format.replace(formattingTokens, (match, literal, separator, token) => {
+        const idx = doubleDigits.indexOf(token)
+        if (idx > -1) {
+          doubleDigits.splice(idx, 1)
+          return token + token
+        }
+        return match
+      })
+    } else {
+      time.format = format
+    }
     return time
   }
 }
@@ -183,7 +199,7 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
     if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
     const {
-      year, month, day, hours, minutes, seconds, milliseconds, zone, week
+      year, month, day, hours, minutes, seconds, milliseconds, zone, week, format: parsedFormat
     } = parser(input)
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
@@ -196,17 +212,18 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
     const m = minutes || 0
     const s = seconds || 0
     const ms = milliseconds || 0
-    if (zone) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
-    }
-    if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
-    }
     let newDate
-    newDate = new Date(y, M, d, h, m, s, ms)
-    if (week) {
-      newDate = dayjs(newDate).week(week).toDate()
+    if (zone) {
+      newDate = new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+    } else if (utc) {
+      newDate = new Date(Date.UTC(y, M, d, h, m, s, ms))
+    } else {
+      newDate = new Date(y, M, d, h, m, s, ms)
+      if (week) {
+        newDate = dayjs(newDate).week(week).toDate()
+      }
     }
+    newDate.format = parsedFormat
     return newDate
   } catch (e) {
     return new Date('') // Invalid Date
@@ -245,7 +262,7 @@ export default (o, C, d) => {
       // use != to treat
       // input number 1410715640579 and format string '1410715640579' equal
       // eslint-disable-next-line eqeqeq
-      if (isStrict && date != this.format(format)) {
+      if (isStrict && date != this.format(this.$d.format || format)) {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
