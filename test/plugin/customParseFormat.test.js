@@ -307,6 +307,23 @@ describe('Strict mode', () => {
     expect(dayjs('2020-Jan-01', 'YYYY-MMM-DD', true).isValid()).toBe(true)
     expect(dayjs('30/1/2020 10:59 PM', 'D/M/YYYY h:mm A', true).isValid()).toBe(true)
   })
+
+  it('localized format with strict mode', () => {
+    const input = '03/22/2024 06:35 AM'
+    const format = 'L LT'
+
+    expect(dayjs(input, format, 'en', true).isValid()).toBe(true)
+    expect(dayjs('03/22/2024 6:35 AM', format, 'en', true).isValid()).toBe(true)
+    expect(dayjs('3/22/2024 06:35 AM', format, 'en', true).isValid()).toBe(false)
+    expect(dayjs(input, format, true).isValid()).toBe(true)
+    expect(dayjs(input, 'MM/DD/YYYY h:mm A', true).isValid()).toBe(true)
+    expect(dayjs('03/22/2024 6:35 AM', 'MM/DD/YYYY h:mm A', true).isValid()).toBe(true)
+    expect(dayjs('03/22/2024 6:35 AM', 'MM/DD/YYYY hh:mm A', true).isValid()).toBe(false)
+    expect(dayjs('2024-03-05', 'YYYY-M-D', true).isValid()).toBe(true)
+    expect(dayjs('2024-3-5', 'YYYY-M-D', true).isValid()).toBe(true)
+    expect(dayjs('2024-3-5', 'YYYY-MM-DD', true).isValid()).toBe(false)
+  })
+
   it('with locale', () => {
     const input = '2018 三月 99'
     const format = 'YYYY MMMM DD'
