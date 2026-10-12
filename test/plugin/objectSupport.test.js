@@ -141,6 +141,43 @@ it('Constructor from Object UTC', () => {
   }
 })
 
+const smallYearObjects = [
+  { year: 0 },
+  { year: 1 },
+  { year: 99 },
+  { year: 0, month: 1, day: 29 },
+  {
+    year: 4, month: 1, day: 29, hour: 12, minute: 34, second: 56, millisecond: 789
+  },
+  { year: 100, month: 1, day: 28 }
+]
+
+smallYearObjects.forEach((input) => {
+  it(`preserves object years locally: ${JSON.stringify(input)}`, () => {
+    expect(dayjs(input).valueOf()).toBe(moment(input).valueOf())
+  })
+  it(`preserves object years in UTC: ${JSON.stringify(input)}`, () => {
+    expect(dayjs.utc(input).valueOf()).toBe(moment.utc(input).valueOf())
+    expect(dayjs.utc(input).isUTC()).toBe(true)
+  })
+})
+
+it('preserves calendar overflow for small object years', () => {
+  const inputs = [
+    [{ year: 0, month: 12 }, '0001-01-01'],
+    [{ year: 99, month: 12 }, '0100-01-01'],
+    [{ year: 0, month: 1, day: 30 }, '0000-03-01'],
+    [{ year: 99, month: 11, day: 32 }, '0100-01-01'],
+    [{
+      year: 99, month: 11, day: 31, hour: 24
+    }, '0100-01-01']
+  ]
+  inputs.forEach(([input, expected]) => {
+    expect(dayjs(input).format('YYYY-MM-DD')).toBe(expected)
+    expect(dayjs.utc(input).format('YYYY-MM-DD')).toBe(expected)
+  })
+})
+
 it('Constructor from null should return Invalid Date', () => {
   expect(dayjs(null).isValid()).toBe(false)
   expect(moment(null).isValid()).toBe(false)
