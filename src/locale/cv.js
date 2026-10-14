@@ -10,6 +10,29 @@ const locale = {
   monthsShort: 'кӑр_нар_пуш_ака_май_ҫӗр_утӑ_ҫур_авн_юпа_чӳк_раш'.split('_'),
   weekdaysMin: 'вр_тн_ыт_юн_кҫ_эр_шм'.split('_'),
   ordinal: n => n,
+  relativeTime: {
+    future: (output) => {
+      let affix = 'ран'
+      if (/сехет$/i.exec(output)) {
+        affix = 'рен'
+      } else if (/ҫул$/i.exec(output)) {
+        affix = 'тан'
+      }
+      return output + affix
+    },
+    past: '%s каялла',
+    s: 'пӗр-ик ҫеккунт',
+    m: 'пӗр минут',
+    mm: '%d минут',
+    h: 'пӗр сехет',
+    hh: '%d сехет',
+    d: 'пӗр кун',
+    dd: '%d кун',
+    M: 'пӗр уйӑх',
+    MM: '%d уйӑх',
+    y: 'пӗр ҫул',
+    yy: '%d ҫул'
+  },
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',
