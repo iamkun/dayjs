@@ -1,7 +1,7 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
-import locale, { englishToArabicNumbersMap } from '../../src/locale/ku'
+import locale from '../../src/locale/ku'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
 
 dayjs.extend(preParsePostFormat)
@@ -21,7 +21,7 @@ it('Format meridiem correctly', () => {
       .add(i, 'hour')
     const hour = (i % 12 || 12)
       .toString()
-      .replace(/\d/g, match => englishToArabicNumbersMap[match])
+      .replace(/\d/g, match => '٠١٢٣٤٥٦٧٨٩'[match])
     const m = i < 12 ? 'پ.ن' : 'د.ن'
     expect(dayjsKu.locale('ku').format('h A')).toBe(`${hour} ${m}`)
   }
