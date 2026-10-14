@@ -9,6 +9,12 @@ const locale = {
   monthsShort: 'දුරු_නව_මැදි_බක්_වෙස_පොසො_ඇස_නිකි_බින_වප්_ඉල්_උඳු'.split('_'),
   weekdaysMin: 'ඉ_ස_අ_බ_බ්‍ර_සි_සෙ'.split('_'),
   ordinal: n => n,
+  meridiem: (hour, minute, isLowercase) => {
+    if (hour > 11) {
+      return isLowercase ? 'ප.ව.' : 'පස් වරු'
+    }
+    return isLowercase ? 'පෙ.ව.' : 'පෙර වරු'
+  },
   formats: {
     LT: 'a h:mm',
     LTS: 'a h:mm:ss',

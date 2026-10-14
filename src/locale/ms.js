@@ -32,7 +32,19 @@ const locale = {
     y: 'setahun',
     yy: '%d tahun'
   },
-  ordinal: n => `${n}.`
+  ordinal: n => `${n}.`,
+  meridiem: (hour) => {
+    if (hour < 11) {
+      return 'pagi'
+    }
+    if (hour < 15) {
+      return 'tengahari'
+    }
+    if (hour < 19) {
+      return 'petang'
+    }
+    return 'malam'
+  }
 }
 
 dayjs.locale(locale, null, true)

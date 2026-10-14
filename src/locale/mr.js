@@ -9,6 +9,21 @@ const locale = {
   monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split('_'),
   weekdaysMin: 'र_सो_मं_बु_गु_शु_श'.split('_'),
   ordinal: n => n,
+  meridiem: (hour) => {
+    if (hour < 6) {
+      return 'पहाटे'
+    }
+    if (hour < 12) {
+      return 'सकाळी'
+    }
+    if (hour < 17) {
+      return 'दुपारी'
+    }
+    if (hour < 20) {
+      return 'सायंकाळी'
+    }
+    return 'रात्री'
+  },
   formats: {
     LT: 'A h:mm वाजता',
     LTS: 'A h:mm:ss वाजता',
