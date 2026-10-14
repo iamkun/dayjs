@@ -29,7 +29,7 @@ export default (o, c, d) => {
 
     const oldDiff = proto.diff
     proto.diff = function (date, unit, float) {
-      const isInvalidDate = !date || !d(date).isValid()
+      const isInvalidDate = date == null || !d(date).isValid()
       if (isInvalidDate) {
         console.warn('Invalid usage: diff() requires a valid comparison date as the first argument. https://day.js.org/docs/en/display/difference')
       }
