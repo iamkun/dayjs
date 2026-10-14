@@ -24,6 +24,21 @@ const locale = {
     yy: '%d वर्ष'
   },
   ordinal: n => `${n}`.replace(/\d/g, i => '०१२३४५६७८९'[i]),
+  meridiem: (hour) => {
+    if (hour < 3) {
+      return 'राति'
+    }
+    if (hour < 12) {
+      return 'बिहान'
+    }
+    if (hour < 16) {
+      return 'दिउँसो'
+    }
+    if (hour < 20) {
+      return 'साँझ'
+    }
+    return 'राति'
+  },
   formats: {
     LT: 'Aको h:mm बजे',
     LTS: 'Aको h:mm:ss बजे',
