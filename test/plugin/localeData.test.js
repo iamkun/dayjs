@@ -111,6 +111,54 @@ it('meridiem', () => {
   dayjs.locale('en')
 })
 
+describe('meridiem without a locale-specific function', () => {
+  afterEach(() => {
+    dayjs.locale('en')
+  });
+  ['en', 'fr'].forEach((lo) => {
+    it(`returns AM/PM for ${lo} in global and instance locale data`, () => {
+      dayjs.locale(lo)
+      const globalLocaleData = dayjs.localeData()
+      const instanceLocaleData = dayjs().locale(lo).localeData()
+      const cases = [
+        [0, 0, 'AM'],
+        [11, 59, 'AM'],
+        [12, 0, 'PM'],
+        [23, 59, 'PM']
+      ]
+
+      cases.forEach(([hour, minute, expected]) => {
+        [globalLocaleData, instanceLocaleData].forEach((data) => {
+          expect(data.meridiem(hour, minute)).toBe(expected)
+          expect(data.meridiem(hour, minute, false)).toBe(expected)
+          expect(data.meridiem(hour, minute, true)).toBe(expected.toLowerCase())
+        })
+      })
+    })
+  })
+})
+
+describe('locale-specific meridiem', () => {
+  afterEach(() => {
+    dayjs.locale('en')
+  });
+  ['zh-cn', 'ru'].forEach((lo) => {
+    it(`keeps ${lo} day periods in global and instance locale data`, () => {
+      dayjs.locale(lo)
+      const globalLocaleData = dayjs.localeData()
+      const instanceLocaleData = dayjs().locale(lo).localeData();
+      [[0, 0], [11, 59], [12, 0], [12, 30], [13, 0], [23, 59]]
+        .forEach(([hour, minute]) => {
+          const date = dayjs('2024-01-01').locale(lo).hour(hour).minute(minute);
+          [globalLocaleData, instanceLocaleData].forEach((data) => {
+            expect(data.meridiem(hour, minute, false)).toBe(date.format('A'))
+            expect(data.meridiem(hour, minute, true)).toBe(date.format('a'))
+          })
+        })
+    })
+  })
+})
+
 it('ordinal', () => {
   dayjs.locale('zh-cn')
   expect(typeof dayjs.localeData().ordinal).toEqual('function')
