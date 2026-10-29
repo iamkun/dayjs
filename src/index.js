@@ -23,9 +23,16 @@ const parseLocale = (preset, object, isLocal) => {
       Ls[presetLower] = object
       l = presetLower
     }
+    if (!l) {
+      const presetNormalized = presetLower.replace(/_/g, '-')
+      if (Ls[presetNormalized]) {
+        l = presetNormalized
+      }
+    }
     const presetSplit = preset.split('-')
     if (!l && presetSplit.length > 1) {
-      return parseLocale(presetSplit[0])
+      // Keep base-language fallback limited to registered names.
+      return Ls[presetSplit[0].toLowerCase()] ? parseLocale(presetSplit[0]) : L
     }
   } else {
     const { name } = preset

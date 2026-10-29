@@ -2,6 +2,8 @@ import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../src'
 import es from '../src/locale/es'
+import '../src/locale/zh-tw'
+import '../src/locale/pt-br'
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -79,6 +81,67 @@ it('User custom locale', () => {
     })
     .format(format))
     .toBe('week 28, month')
+})
+
+describe('Underscore locale aliases', () => {
+  afterEach(() => {
+    dayjs.locale('en')
+  })
+
+  const aliases = [['zh_TW', 'zh-tw'], ['ZH_tw', 'zh-tw'], ['pt_BR', 'pt-br']]
+  aliases.forEach(([alias, locale]) => {
+    it(`resolves ${alias} globally`, () => {
+      expect(dayjs.locale(alias)).toBe(locale)
+      expect(dayjs('2018-4-28').format(format))
+        .toBe(dayjs('2018-4-28').locale(locale).format(format))
+    })
+
+    it(`resolves ${alias} for an instance without changing the global locale`, () => {
+      dayjs.locale('en')
+      const origin = dayjs('2018-4-28')
+      expect(origin.locale(alias).locale()).toBe(locale)
+      expect(origin.locale()).toBe('en')
+      expect(dayjs.locale()).toBe('en')
+    })
+  })
+
+  it('normalizes every underscore separator', () => {
+    dayjs.locale('custom-variant-region', es, true)
+    expect(dayjs().locale('custom_variant_region').locale()).toBe('custom-variant-region')
+    expect(dayjs().locale('custom_variant-region').locale()).toBe('custom-variant-region')
+  })
+
+  it('preserves unsupported mixed names without resolving an alias in the fallback', () => {
+    dayjs.locale('en')
+    expect(dayjs().locale('pt_BR-extra').locale()).toBe('en')
+    expect(dayjs.locale()).toBe('en')
+    expect(dayjs.locale('pt_BR-extra')).toBe('en')
+    expect(dayjs().locale('custom_variant_region-extra').locale()).toBe('en')
+    expect(dayjs.locale()).toBe('en')
+  })
+
+  it('preserves registered underscore names and registration by string', () => {
+    dayjs.locale('custom-name', es, true)
+    dayjs.locale('custom_name', { ...es, name: 'custom_name' }, true)
+    expect(dayjs().locale('custom_name').locale()).toBe('custom_name')
+  })
+
+  it('preserves underscore names registered by locale object', () => {
+    dayjs.locale({ ...es, name: 'object_name' }, null, true)
+    expect(dayjs().locale('object_name').locale()).toBe('object_name')
+  })
+
+  it('preserves unsupported underscore names without changing the global locale', () => {
+    dayjs.locale('en')
+    expect(dayjs().locale('es_UNKNOWN').locale()).toBe('en')
+    expect(dayjs.locale()).toBe('en')
+  })
+
+  it('retains the current locale for an unknown alias', () => {
+    dayjs.locale('es')
+    expect(dayjs.locale('unknown_REGION')).toBe('es')
+    expect(dayjs().locale('unknown_REGION').locale()).toBe('es')
+  })
 })
 
 describe('Instance locale inheritance', () => {
