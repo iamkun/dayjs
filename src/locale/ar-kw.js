@@ -8,6 +8,7 @@ const locale = {
   weekdaysShort: 'احد_اثنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
   monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split('_'),
   weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+  weekStart: 6,
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',

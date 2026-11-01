@@ -20,4 +20,12 @@ it('Meridiem', () => {
   expect(dayjs('2020-01-01 11:00:00').locale('ar-iq').format('A')).toEqual('ص')
   expect(dayjs('2020-01-01 16:00:00').locale('ar-iq').format('A')).toEqual('م')
   expect(dayjs('2020-01-01 20:00:00').locale('ar-iq').format('A')).toEqual('م')
+
+  it('weekStart is Saturday per CLDR weekData', () => {
+    const sat = dayjs('2026-10-31').locale('ar-iq') // a Saturday
+    expect(sat.startOf('week').format('YYYY-MM-DD')).toEqual('2026-10-31')
+    expect(dayjs('2026-11-01').locale('ar-iq').startOf('week').format('YYYY-MM-DD')).toEqual('2026-10-31')
+    expect(dayjs('2026-10-30').locale('ar-iq').startOf('week').format('YYYY-MM-DD')).toEqual('2026-10-24')
+  })
+
 })
