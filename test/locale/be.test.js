@@ -140,3 +140,42 @@ it('Belarusian locale formats dates with correct month forms', () => {
     expect(dayjsWithLocale.format(format)).toEqual(expected)
   })
 })
+
+it('Belarusian locale month names match CLDR 49', () => {
+  const monthsStandalone = [
+    'студзень', 'люты', 'сакавік', 'красавік',
+    'май', 'чэрвень', 'ліпень', 'жнівень',
+    'верасень', 'кастрычнік', 'лістапад', 'снежань'
+  ]
+  const monthsFormat = [
+    'студзеня', 'лютага', 'сакавіка', 'красавіка',
+    'мая', 'чэрвеня', 'ліпеня', 'жніўня',
+    'верасня', 'кастрычніка', 'лістапада', 'снежня'
+  ]
+
+  monthsStandalone.forEach((expected, index) => {
+    expect(dayjs('2026-01-15').locale('be').month(index).format('MMMM'))
+      .toEqual(expected)
+  })
+
+  monthsFormat.forEach((expected, index) => {
+    expect(dayjs('2026-01-15').locale('be').month(index).format('D MMMM YYYY'))
+      .toEqual(`15 ${expected} 2026`)
+  })
+})
+
+it('Belarusian locale short month names for May match CLDR 49', () => {
+  // monthsShortFormat (with a day number)
+  expect(dayjs('2026-05-15').locale('be').format('D MMM')).toEqual('15 мая')
+  // monthsShortStandalone (without a day number)
+  expect(dayjs('2026-05-01').locale('be').format('MMM')).toEqual('май')
+})
+
+it('Belarusian locale short weekday names match CLDR 49', () => {
+  // 2026-03-15 is a Sunday
+  const expected = ['нд', 'пн', 'аў', 'ср', 'чц', 'пт', 'сб']
+  expected.forEach((weekday, index) => {
+    expect(dayjs('2026-03-15').locale('be').add(index, 'day').format('ddd'))
+      .toEqual(weekday)
+  })
+})
