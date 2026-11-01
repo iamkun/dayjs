@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'rw',
+  weekStart: 1,
   weekdays: 'Ku Cyumweru_Kuwa Mbere_Kuwa Kabiri_Kuwa Gatatu_Kuwa Kane_Kuwa Gatanu_Kuwa Gatandatu'.split('_'),
   months: 'Mutarama_Gashyantare_Werurwe_Mata_Gicurasi_Kamena_Nyakanga_Kanama_Nzeri_Ukwakira_Ugushyingo_Ukuboza'.split('_'),
   relativeTime: {
