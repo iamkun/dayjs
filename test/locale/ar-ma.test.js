@@ -21,3 +21,10 @@ it('Meridiem', () => {
   expect(dayjs('2020-01-01 16:00:00').locale('ar-ma').format('A')).toEqual('م')
   expect(dayjs('2020-01-01 20:00:00').locale('ar-ma').format('A')).toEqual('م')
 })
+
+it('weekStart', () => {
+  const d = dayjs('2026-03-11').locale('ar-ma') // Wednesday
+  expect(dayjs.Ls['ar-ma'].weekStart).toBe(1)
+  expect(d.startOf('week').day()).toBe(1)
+  expect(d.endOf('week').day()).toBe(0)
+})
