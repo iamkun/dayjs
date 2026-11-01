@@ -3,19 +3,19 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'ca',
-  weekdays: 'Diumenge_Dilluns_Dimarts_Dimecres_Dijous_Divendres_Dissabte'.split('_'),
-  weekdaysShort: 'Dg._Dl._Dt._Dc._Dj._Dv._Ds.'.split('_'),
-  weekdaysMin: 'Dg_Dl_Dt_Dc_Dj_Dv_Ds'.split('_'),
-  months: 'Gener_Febrer_Març_Abril_Maig_Juny_Juliol_Agost_Setembre_Octubre_Novembre_Desembre'.split('_'),
-  monthsShort: 'Gen._Febr._Març_Abr._Maig_Juny_Jul._Ag._Set._Oct._Nov._Des.'.split('_'),
+  weekdays: 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split('_'),
+  weekdaysShort: 'dg._dl._dt._dc._dj._dv._ds.'.split('_'),
+  weekdaysMin: 'dg_dl_dt_dc_dj_dv_ds'.split('_'),
+  months: 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split('_'),
+  monthsShort: 'gen._febr._març_abr._maig_juny_jul._ag._set._oct._nov._des.'.split('_'),
   weekStart: 1,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
     L: 'DD/MM/YYYY',
-    LL: 'D MMMM [de] YYYY',
-    LLL: 'D MMMM [de] YYYY [a les] H:mm',
-    LLLL: 'dddd D MMMM [de] YYYY [a les] H:mm',
+    LL: 'D [de] MMMM [de] YYYY',
+    LLL: 'D [de] MMMM [de] YYYY [a les] H:mm',
+    LLLL: 'dddd D [de] MMMM [de] YYYY [a les] H:mm',
     ll: 'D MMM YYYY',
     lll: 'D MMM YYYY, H:mm',
     llll: 'ddd D MMM YYYY, H:mm'
