@@ -98,13 +98,19 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const offset = tzOffset(+date, timezone)
-    const isUTC = !Number(offset)
+    const isUTC = timezone === 'UTC' || timezone === 'Etc/UTC'
     let ins
-    if (isUTC) { // if utcOffset is 0, turn it to UTC mode
+    if (isUTC) { // Explicit UTC zones use UTC mode.
       ins = this.utcOffset(0, keepLocalTime)
     } else {
       ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
-        .utcOffset(offset, true)
+      if (offset) {
+        ins = ins.utcOffset(offset, true)
+      } else {
+        // A geographic timezone at UTC+0 is still an offset-mode date, not UTC mode.
+        ins.$offset = offset
+        ins.$u = false
+      }
       if (keepLocalTime) {
         const newOffset = ins.utcOffset()
         ins = ins.add(oldOffset - newOffset, MIN)
@@ -147,7 +153,9 @@ export default (o, c, d) => {
       return ins
     }
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
+    const ins = targetOffset
+      ? d(targetTs).utcOffset(targetOffset)
+      : d(targetTs).tz(timezone)
     ins.$x.$timezone = timezone
     return ins
   }
