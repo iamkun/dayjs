@@ -1,18 +1,32 @@
-export default (o, c, dayjs) => {
+export default (o, c) => {
   const proto = c.prototype
+
+  const getStringDate = (date) => {
+    const makeTwoDigit = (value) => {
+      if ((value % 10) === 1) {
+        return `0${value}`
+      }
+      return value
+    }
+    // Date part YYYY, MM, DD
+    const dP = date.slice(0, 3).map(makeTwoDigit).join('-')
+    // Time part HH:MM:SS
+    const tP = date.length > 5 ? date.slice(3, date.length - 1).join(':') : date[3]
+    // Zone Part
+    const zP = date[7]
+    return `${dP}${tP ? `T${tP}` : ''}${zP ? `.${zP}Z` : ''}`
+  }
+
   const parseDate = (cfg) => {
     const { date, utc } = cfg
     if (Array.isArray(date)) {
+      if (!date.length) {
+        return new Date()
+      }
       if (utc) {
-        if (!date.length) {
-          return new Date()
-        }
         return new Date(Date.UTC.apply(null, date))
       }
-      if (date.length === 1) {
-        return dayjs(String(date[0])).toDate()
-      }
-      return new (Function.prototype.bind.apply(Date, [null].concat(date)))()
+      return getStringDate(date)
     }
     return date
   }
