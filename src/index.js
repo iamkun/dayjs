@@ -25,7 +25,7 @@ const parseLocale = (preset, object, isLocal) => {
     }
     const presetSplit = preset.split('-')
     if (!l && presetSplit.length > 1) {
-      return parseLocale(presetSplit[0])
+      return parseLocale(presetSplit[0], object, isLocal)
     }
   } else {
     const { name } = preset
@@ -84,7 +84,7 @@ const parseDate = (cfg) => {
 
 class Dayjs {
   constructor(cfg) {
-    this.$L = parseLocale(cfg.locale, null, true)
+    this.$L = parseLocale(cfg.locale, null, true) || L
     this.parse(cfg) // for plugin
     this.$x = this.$x || cfg.x || {}
     this[IS_DAYJS] = true
