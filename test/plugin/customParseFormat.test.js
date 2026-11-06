@@ -283,6 +283,14 @@ it('correctly parse ordinal', () => {
     .toBe(momentCN.locale())
 })
 
+describe('month doesn\'t lead to the next year', () => {
+  it('MMMM', () => {
+    const input = '03 декабря'
+    const format1 = 'D MMMM'
+    expect(dayjs(input, format1, 'ru').valueOf()).toBe(moment(input, format1, 'ru').valueOf())
+  })
+})
+
 describe('month function locale', () => {
   it('MMMM', () => {
     const input = '08 мая 2020'
