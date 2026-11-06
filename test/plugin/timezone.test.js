@@ -132,6 +132,50 @@ describe('Convert', () => {
 })
 
 
+describe('formatToParts fallback (#3270)', () => {
+  // 2026-10-21T22:00:00Z is 2026-10-22T00:00:00+02:00 in Europe/Paris,
+  // whatever timezone the test process itself runs in.
+  const TS = Date.UTC(2026, 9, 21, 22, 0, 0)
+  const EXPECTED = '2026-10-22T00:00:00+02:00'
+  const realFormatToParts = Intl.DateTimeFormat.prototype.formatToParts
+
+  afterEach(() => {
+    Intl.DateTimeFormat.prototype.formatToParts = realFormatToParts
+  })
+
+  it('normal path keeps working', () => {
+    expect(dayjs(TS).tz(PARIS).format()).toBe(EXPECTED)
+  })
+
+  it('falls back when formatToParts is missing', () => {
+    Intl.DateTimeFormat.prototype.formatToParts = undefined
+    expect(dayjs(TS).tz(PARIS).format()).toBe(EXPECTED)
+  })
+
+  it('falls back when formatToParts returns unexpected parts', () => {
+    Intl.DateTimeFormat.prototype.formatToParts = function formatToParts(date) {
+      return [{ type: 'literal', value: this.format(date) }]
+    }
+    expect(dayjs(TS).tz(PARIS).format()).toBe(EXPECTED)
+  })
+
+  it('throws a RangeError when no Intl path can resolve the offset', () => {
+    const RealDateTimeFormat = Intl.DateTimeFormat
+    Intl.DateTimeFormat = function DateTimeFormat() {
+      this.format = () => 'not a date'
+      this.formatToParts = () => [{ type: 'literal', value: 'x' }]
+    }
+    try {
+      // Asia/Shanghai is not used elsewhere in this file, so its cached
+      // formatter cannot come from an earlier test.
+      expect(() => dayjs(TS).tz('Asia/Shanghai').format()).toThrow(RangeError)
+    } finally {
+      Intl.DateTimeFormat = RealDateTimeFormat
+    }
+  })
+})
+
+
 describe('DST, a time that never existed Spring Forward', () => {
   // 11 March 2012, 02:00:00 clocks were
   // turned forward 1 hour to 11 March 2012, 03:00:00 local

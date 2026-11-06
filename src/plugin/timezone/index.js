@@ -42,16 +42,52 @@ export default (o, c, d) => {
     return dtf.formatToParts(date)
   }
 
-  const tzOffset = (timestamp, timezone) => {
-    const formatResult = makeFormatParts(timestamp, timezone)
-    const filled = []
-    for (let i = 0; i < formatResult.length; i += 1) {
-      const { type, value } = formatResult[i]
-      const pos = typeToPos[type]
+  // Parse an en-US rendering like "10/22/2026, 00:00:00" into
+  // [year, month, day, hour, minute, second] entries.
+  const parseFormattedDate = (formatted) => {
+    const match = /^(\d{1,2})\/(\d{1,2})\/(\d{4}),?\s+(\d{1,2}):(\d{1,2}):(\d{1,2})/.exec(formatted)
+    if (!match) return []
+    const [, month, day, year, hour, minute, second] = match
+    return [year, month, day, hour, minute, second].map(value => parseInt(value, 10))
+  }
 
-      if (pos >= 0) {
-        filled[pos] = parseInt(value, 10)
+  const allFinite = filled => filled.length > 5 && filled.slice(0, 6).every(Number.isFinite)
+
+  const tzOffset = (timestamp, timezone) => {
+    const filled = []
+    try {
+      const formatResult = makeFormatParts(timestamp, timezone)
+      for (let i = 0; i < formatResult.length; i += 1) {
+        const { type, value } = formatResult[i]
+        const pos = typeToPos[type]
+
+        if (pos >= 0) {
+          filled[pos] = parseInt(value, 10)
+        }
       }
+    } catch (e) {
+      // formatToParts missing (e.g. older Hermes): the fallback below handles it.
+    }
+    if (!allFinite(filled)) {
+      // Runtimes with a missing or unreliable formatToParts still provide
+      // Intl.DateTimeFormat#format, so parse its plain en-US output instead.
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        hour12: false,
+        timeZone: timezone,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      })
+      const parsed = parseFormattedDate(dtf.format(new Date(timestamp)))
+      for (let i = 0; i < parsed.length; i += 1) {
+        filled[i] = parsed[i]
+      }
+    }
+    if (!allFinite(filled)) {
+      throw new RangeError(`Cannot resolve time zone offset for ${timezone}`)
     }
     const hour = filled[3]
     // Workaround for the same behavior in different node version
