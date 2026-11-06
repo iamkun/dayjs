@@ -15,6 +15,10 @@ export default (o, c, dayjs) => { // locale needed later
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
   const getLongDateFormat = (l, format) =>
     l.formats[format] || t(l.formats[format.toUpperCase()])
+  const getMeridiem = locale => locale.meridiem || ((hour, minute, isLowercase) => {
+    const meridiem = hour < 12 ? 'AM' : 'PM'
+    return isLowercase ? meridiem.toLowerCase() : meridiem
+  })
 
   const localeData = function () {
     return {
@@ -29,7 +33,7 @@ export default (o, c, dayjs) => { // locale needed later
       weekdaysShort: instance =>
         (instance ? instance.format('ddd') : getShort(this, 'weekdaysShort', 'weekdays', 3)),
       longDateFormat: format => getLongDateFormat(this.$locale(), format),
-      meridiem: this.$locale().meridiem,
+      meridiem: getMeridiem(this.$locale()),
       ordinal: this.$locale().ordinal
     }
   }
@@ -47,7 +51,7 @@ export default (o, c, dayjs) => { // locale needed later
       months: () => dayjs.months(),
       monthsShort: () => dayjs.monthsShort(),
       longDateFormat: format => getLongDateFormat(localeObject, format),
-      meridiem: localeObject.meridiem,
+      meridiem: getMeridiem(localeObject),
       ordinal: localeObject.ordinal
     }
   }
