@@ -23,6 +23,16 @@ const unitToMS = {
   weeks: MILLISECONDS_A_WEEK
 }
 
+const RELATIVE_TIME_UNITS = ['years', 'months', 'days', 'hours', 'minutes', 'seconds']
+const RELATIVE_TIME_UNIT_MAP = {
+  years: 'y',
+  months: 'M',
+  days: 'd',
+  hours: 'h',
+  minutes: 'm',
+  seconds: 's'
+}
+
 const isDuration = d => d instanceof Duration // eslint-disable-line no-use-before-define
 
 let $d
@@ -229,11 +239,58 @@ class Duration {
     return wrapper(this.$ms, this)
   }
 
-  humanize(withSuffix) {
-    return $d()
-      .add(this.$ms, 'ms')
-      .locale(this.$l)
-      .fromNow(!withSuffix)
+  humanize(options) {
+    let withSuffix = false
+    let round = true
+
+    if (typeof options === 'boolean') {
+      withSuffix = options
+    } else if (typeof options === 'object' && options !== null) {
+      ({ withSuffix, round = true } = options)
+    }
+
+    if (round) {
+      return $d()
+        .add(this.$ms, 'ms')
+        .locale(this.$l)
+        .fromNow(!withSuffix)
+    }
+
+    const loc = $d().locale(this.$l).$locale().relativeTime
+    let resultStr = ''
+    const isFuture = this.$ms > 0
+
+    for (let i = 0; i < RELATIVE_TIME_UNITS.length; i += 1) {
+      const unitName = RELATIVE_TIME_UNITS[i]
+      const val = this.get(unitName)
+      if (val) {
+        const absVal = Math.abs(val)
+        const unitKey = RELATIVE_TIME_UNIT_MAP[unitName]
+
+        let locKey = unitKey
+        if (absVal !== 1) {
+          const pluralKey = `${unitKey}${unitKey}`
+          if (loc[pluralKey]) {
+            locKey = pluralKey
+          }
+        }
+
+        const format = loc[locKey]
+        resultStr = format.replace('%d', absVal)
+        break
+      }
+    }
+
+    if (!resultStr) {
+      resultStr = loc.s
+    }
+
+    if (withSuffix) {
+      const pastOrFuture = isFuture ? loc.future : loc.past
+      return pastOrFuture.replace('%s', resultStr)
+    }
+
+    return resultStr
   }
 
   valueOf() {
