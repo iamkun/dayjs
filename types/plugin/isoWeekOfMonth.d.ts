@@ -1,0 +1,16 @@
+import { PluginFunc } from 'dayjs'
+
+declare const plugin: PluginFunc
+export = plugin
+
+declare module 'dayjs' {
+  interface IsoWeekOfMonthResult {
+    week: number
+    month: number
+    year: number
+  }
+
+  interface Dayjs {
+    isoWeekOfMonth(): IsoWeekOfMonthResult
+  }
+}
