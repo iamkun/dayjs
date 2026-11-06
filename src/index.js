@@ -265,7 +265,6 @@ class Dayjs {
     if (!this.isValid()) return locale.invalidDate || C.INVALID_DATE_STRING
 
     const str = formatStr || C.FORMAT_DEFAULT
-    const zoneStr = Utils.z(this)
     const { $H, $m, $M } = this
     const {
       weekdays, months, meridiem
@@ -330,15 +329,19 @@ class Dayjs {
           return Utils.s(this.$s, 2, '0')
         case 'SSS':
           return Utils.s(this.$ms, 3, '0')
-        case 'Z':
-          return zoneStr // 'ZZ' logic below
+        case 'ZZ':
+        case 'Z': {
+          const zoneStr = Utils.z(this)
+          if (match === 'ZZ') return zoneStr.replace(':', '')
+          return zoneStr
+        }
         default:
           break
       }
       return null
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match) || zoneStr.replace(':', '')) // 'ZZ'
+    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match))
   }
 
   utcOffset() {
