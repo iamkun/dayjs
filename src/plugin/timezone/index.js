@@ -39,18 +39,36 @@ export default (o, c, d) => {
   const makeFormatParts = (timestamp, timezone, options = {}) => {
     const date = new Date(timestamp)
     const dtf = getDateTimeFormat(timezone, options)
+    // formatToParts is missing in some environments (e.g. Hermes on iOS)
+    if (typeof dtf.formatToParts !== 'function') return []
     return dtf.formatToParts(date)
   }
 
   const tzOffset = (timestamp, timezone) => {
     const formatResult = makeFormatParts(timestamp, timezone)
-    const filled = []
+    let filled = []
     for (let i = 0; i < formatResult.length; i += 1) {
       const { type, value } = formatResult[i]
       const pos = typeToPos[type]
 
       if (pos >= 0) {
         filled[pos] = parseInt(value, 10)
+      }
+    }
+    for (let i = 0; i < 6; i += 1) {
+      if (!(filled[i] >= 0)) {
+        // formatToParts is missing or did not return the expected parts:
+        // read the wall-clock time of the zone from toLocaleString instead
+        const wallClock = new Date(new Date(timestamp).toLocaleString('en-US', { timeZone: timezone }))
+        filled = [
+          wallClock.getFullYear(),
+          wallClock.getMonth() + 1,
+          wallClock.getDate(),
+          wallClock.getHours(),
+          wallClock.getMinutes(),
+          wallClock.getSeconds()
+        ]
+        break
       }
     }
     const hour = filled[3]

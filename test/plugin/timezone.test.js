@@ -581,3 +581,73 @@ it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
 })
+
+describe('Intl.DateTimeFormat formatToParts missing or unreliable #3270', () => {
+  const { prototype } = Intl.DateTimeFormat
+  const descriptor = Object.getOwnPropertyDescriptor(prototype, 'formatToParts')
+  const restore = () => Object.defineProperty(prototype, 'formatToParts', descriptor)
+  const withoutFormatToParts = (fn) => {
+    const expected = fn()
+    try {
+      delete prototype.formatToParts
+      expect(fn()).toEqual(expected)
+    } finally {
+      restore()
+    }
+    try {
+      prototype.formatToParts = function (date) {
+        return [{ type: 'literal', value: this.format(date) }]
+      }
+      expect(fn()).toEqual(expected)
+    } finally {
+      restore()
+    }
+    return expected
+  }
+  const instants = [
+    '2026-01-15T12:00:00.123Z',
+    '2026-07-15T12:00:00.000Z',
+    '2026-10-21T22:00:00.000Z',
+    '2026-10-22T00:00:00.000Z'
+  ]
+  const zones = [NY, TOKYO, PARIS, GUADELOUPE, SYDNEY, LONDON, 'Asia/Kolkata', 'UTC']
+
+  it('instance .tz() falls back to toLocaleString', () => {
+    instants.forEach((instant) => {
+      zones.forEach((zone) => {
+        const expected = withoutFormatToParts(() => {
+          const d = dayjs(instant).tz(zone)
+          return [d.format('YYYY-MM-DDTHH:mm:ss.SSSZ'), d.utcOffset(), d.valueOf()]
+        })
+        expect(expected[0]).toBe(moment(instant).tz(zone).format('YYYY-MM-DDTHH:mm:ss.SSSZ'))
+      })
+    })
+  })
+
+  it('keeps local midnight in the calendar day (issue repro)', () => {
+    const midnight = new Date(2026, 9, 22)
+    withoutFormatToParts(() => dayjs(midnight).tz(PARIS).format())
+  })
+
+  it('instance .tz() with keepLocalTime falls back to toLocaleString', () => {
+    zones.forEach((zone) => {
+      withoutFormatToParts(() => dayjs('2026-07-15T12:00:00').tz(zone, true).format())
+    })
+  })
+
+  it('dayjs.tz() parsing falls back to toLocaleString', () => {
+    zones.forEach((zone) => {
+      const expected = withoutFormatToParts(() => dayjs.tz('2026-10-22 00:00', zone).format())
+      expect(expected).toBe(moment.tz('2026-10-22 00:00', zone).format())
+    })
+  })
+
+  it('offsetName returns undefined instead of throwing', () => {
+    try {
+      delete prototype.formatToParts
+      expect(dayjs('2026-07-15T12:00:00Z').tz(NY).offsetName()).toBeUndefined()
+    } finally {
+      restore()
+    }
+  })
+})
