@@ -13,17 +13,17 @@ const locale = {
   relativeTime: {
     future: 'in %s',
     past: '%s ago',
-    s: 'a few seconds',
-    m: 'a minute',
-    mm: '%d minutes',
-    h: 'an hour',
-    hh: '%d hours',
-    d: 'a day',
-    dd: '%d days',
-    M: 'a month',
-    MM: '%d months',
-    y: 'a year',
-    yy: '%d years'
+    s: 'few sec',
+    m: '1 min',
+    mm: '%d min',
+    h: '1 hr',
+    hh: '%d hr',
+    d: '1 d',
+    dd: '%d d',
+    M: '1 mo',
+    MM: '%d mo',
+    y: '1 yr',
+    yy: '%d yr'
   },
   formats: {
     LT: 'HH:mm',
