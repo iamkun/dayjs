@@ -199,13 +199,11 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
     if (zone) {
       return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
     }
-    if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
-    }
-    let newDate
-    newDate = new Date(y, M, d, h, m, s, ms)
+    let newDate = utc
+      ? new Date(Date.UTC(y, M, d, h, m, s, ms))
+      : new Date(y, M, d, h, m, s, ms)
     if (week) {
-      newDate = dayjs(newDate).week(week).toDate()
+      newDate = (utc ? dayjs.utc(newDate) : dayjs(newDate)).week(week).toDate()
     }
     return newDate
   } catch (e) {

@@ -8,10 +8,12 @@ import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
 import weekOfYear from '../../src/plugin/weekOfYear'
+import utc from '../../src/plugin/utc'
 
 dayjs.extend(customParseFormat)
 dayjs.extend(localizedFormats)
 dayjs.extend(weekOfYear) // test parse w, ww
+dayjs.extend(utc)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -459,4 +461,12 @@ it('parse w, ww', () => {
   const input2 = '2024-w32'
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
+})
+
+it('parse w, ww in UTC mode', () => {
+  const input = '2024-w32'
+  const format = 'YYYY-[w]ww'
+  expect(dayjs.utc(input, format).format(format)).toBe(input)
+  expect(dayjs.utc(input, format).isUTC()).toBe(true)
+  expect(dayjs.utc('2024-w1', 'YYYY-[w]w').format('YYYY-[w]w')).toBe('2024-w1')
 })
