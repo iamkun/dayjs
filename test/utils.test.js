@@ -2,6 +2,7 @@ import Utils from '../src/utils'
 
 const prettyUnit = Utils.p
 const padStart = Utils.s
+const padEnd = Utils.e
 const padZoneStr = Utils.z
 
 it('PrettyUnit', () => {
@@ -41,4 +42,9 @@ it('PadZoneStr', () => {
 it('PadStart', () => {
   expect(padStart(1, 2, '0')).toBe('01')
   expect(padStart(0, 2, '0')).toBe('00')
+})
+
+it('PadEnd', () => {
+  expect(padEnd(1, 2, '0')).toBe('10')
+  expect(padEnd(0, 2, '0')).toBe('00')
 })
