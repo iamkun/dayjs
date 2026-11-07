@@ -134,3 +134,16 @@ it('utc mode', () => {
   expect(d).toBe(1)
   expect(moment.utc(1577836800000).isoWeek()).toBe(d)
 })
+
+
+it('year whose local start is shifted by a UTC offset change', () => {
+  // Nepal moved +05:30 -> +05:45 at 1986-01-01 00:00 local, so 00:00-00:15 that day
+  // never happened and startOf('year') lands at 00:15. These are plain calendar
+  // facts (ISO 8601: week 01 holds the year's first Thursday) and must hold in
+  // every runtime timezone; the `test-isoweek-tz` script runs this file under
+  // TZ=Asia/Kathmandu, where they failed.
+  expect(dayjs('1986-01-06').isoWeek()).toBe(2)
+  expect(dayjs('1986-06-15').isoWeek()).toBe(24)
+  expect(dayjs('1986-12-25').isoWeek()).toBe(52)
+  expect(dayjs('1986-06-15').isoWeek()).toBe(moment('1986-06-15').isoWeek())
+})

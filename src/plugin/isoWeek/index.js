@@ -27,7 +27,7 @@ export default (o, c, d) => {
     }
     const nowWeekThursday = getCurrentWeekThursday(this)
     const diffWeekThursday = getYearFirstThursday(this.isoWeekYear(), this.$u)
-    return nowWeekThursday.diff(diffWeekThursday, W) + 1
+    return Math.round(nowWeekThursday.diff(diffWeekThursday, W, true)) + 1
   }
 
   proto.isoWeekday = function (week) {
