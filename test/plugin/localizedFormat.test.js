@@ -23,7 +23,7 @@ it('Declares English localized formats', () => {
 })
 
 it('Should not interpolate characters inside square brackets', () => {
-  const date = new Date(0)
+  const date = new Date(1970, 0, 1)
   const actualDate = dayjs(date)
   const expectedDate = moment(date)
 
