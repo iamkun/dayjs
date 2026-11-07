@@ -1,7 +1,7 @@
 // Kurdish [ku]
 import dayjs from 'dayjs'
 
-export const englishToArabicNumbersMap = {
+const englishToArabicNumbersMap = {
   1: '١',
   2: '٢',
   3: '٣',

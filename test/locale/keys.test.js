@@ -13,12 +13,19 @@ fs.readdirSync(path.join(__dirname, localeDir))
     Locale.push({
       name: file,
       // eslint-disable-next-line import/no-dynamic-require, global-require
+      module: require(fPath),
+      // eslint-disable-next-line import/no-dynamic-require, global-require
       content: require(fPath).default,
       file: fs.readFileSync(fPath, 'utf-8')
     })
   })
 
 Locale.forEach((locale) => {
+  it(`Locale ${locale.name} has only a default export`, () => {
+    // a named export makes the UMD build export a wrapper, not the locale
+    expect(Object.keys(locale.module)).toEqual(['default'])
+  })
+
   it(`Locale keys for ${locale.content.name}`, () => {
     const {
       name,
