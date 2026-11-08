@@ -131,6 +131,46 @@ describe('Convert', () => {
   })
 })
 
+describe('Zero-offset timezones', () => {
+  it('keeps geographic zero-offset zones out of UTC mode', () => {
+    const input = dayjs('2021-10-31T15:00:00+00:00')
+    const zones = ['Europe/London', 'Africa/Abidjan', 'Atlantic/Reykjavik', 'Africa/Accra']
+
+    zones.forEach((zone) => {
+      const converted = input.tz(zone)
+      expect(converted.format()).toBe('2021-10-31T15:00:00+00:00')
+      expect(converted.isUTC()).toBe(false)
+      expect(converted.utcOffset()).toBe(0)
+      expect(converted.valueOf()).toBe(input.valueOf())
+    })
+  })
+
+  it('keeps parsed geographic zero-offset zones out of UTC mode', () => {
+    const zones = ['Europe/London', 'Africa/Abidjan', 'Atlantic/Reykjavik', 'Africa/Accra']
+
+    zones.forEach((zone) => {
+      const parsed = dayjs.tz('2021-10-31 15:00:00.789', zone)
+      expect(parsed.format()).toBe('2021-10-31T15:00:00+00:00')
+      expect(parsed.millisecond()).toBe(789)
+      expect(parsed.isUTC()).toBe(false)
+      expect(parsed.utcOffset()).toBe(0)
+      expect(parsed.valueOf()).toBe(Date.UTC(2021, 9, 31, 15, 0, 0, 789))
+    })
+  })
+
+  it('keeps explicit UTC zones in UTC mode', () => {
+    const input = dayjs('2021-10-31T15:00:00+00:00')
+    const zones = ['UTC', 'Etc/UTC']
+
+    zones.forEach((zone) => {
+      const converted = input.tz(zone)
+      expect(converted.format()).toBe('2021-10-31T15:00:00Z')
+      expect(converted.isUTC()).toBe(true)
+      expect(converted.valueOf()).toBe(input.valueOf())
+    })
+  })
+})
+
 
 describe('DST, a time that never existed Spring Forward', () => {
   // 11 March 2012, 02:00:00 clocks were
@@ -515,14 +555,18 @@ describe('DST edge cases vs moment', () => {
   })
 
   it('converts Europe/London in winter (UTC+0)', () => {
-    matchMoment(
-      dayjs('2024-01-15T12:00:00.000Z').tz(LONDON),
-      moment('2024-01-15T12:00:00.000Z').tz(LONDON)
-    )
-    matchMoment(
-      dayjs.tz('2024-01-15 12:00', LONDON),
-      moment.tz('2024-01-15 12:00', LONDON)
-    )
+    const instant = '2024-01-15T12:00:00.000Z'
+    const converted = dayjs(instant).tz(LONDON)
+    const convertedMoment = moment(instant).tz(LONDON)
+    expect(converted.format()).toBe('2024-01-15T12:00:00+00:00')
+    expect(converted.valueOf()).toBe(convertedMoment.valueOf())
+    expect(converted.utcOffset()).toBe(convertedMoment.utcOffset())
+
+    const parsed = dayjs.tz('2024-01-15 12:00', LONDON)
+    const parsedMoment = moment.tz('2024-01-15 12:00', LONDON)
+    expect(parsed.format()).toBe('2024-01-15T12:00:00+00:00')
+    expect(parsed.valueOf()).toBe(parsedMoment.valueOf())
+    expect(parsed.utcOffset()).toBe(parsedMoment.utcOffset())
   })
 
   it('handles the 30-minute Lord Howe gap and both sides of its overlap', () => {
