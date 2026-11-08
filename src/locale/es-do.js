@@ -9,6 +9,7 @@ const locale = {
   months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split('_'),
   monthsShort: 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   relativeTime: {
     future: 'en %s',
     past: 'hace %s',
