@@ -37,6 +37,33 @@ export default (o, c, d) => {
     return this.day() || 7
   }
 
+  const oldAdd = proto.add
+  proto.add = function (number, units) {
+    number = Number(number) // eslint-disable-line no-param-reassign
+    const unit = this.$utils().p(units)
+    if (unit === isoWeekPrettyUnit) {
+      return this.add(number * 7, D)
+    }
+    return oldAdd.bind(this)(number, units)
+  }
+
+  const oldDiff = proto.diff
+  proto.diff = function (input, units, float) {
+    const unit = this.$utils().p(units)
+    if (unit === isoWeekPrettyUnit) {
+      return oldDiff.bind(this)(input, W, float)
+    }
+    return oldDiff.bind(this)(input, units, float)
+  }
+
+  const oldGet = proto.get
+  proto.get = function (unit) {
+    if (this.$utils().p(unit) === isoWeekPrettyUnit) {
+      return this.isoWeek()
+    }
+    return oldGet.bind(this)(unit)
+  }
+
   const oldStartOf = proto.startOf
   proto.startOf = function (units, startOf) {
     const utils = this.$utils()

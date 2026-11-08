@@ -134,3 +134,27 @@ it('utc mode', () => {
   expect(d).toBe(1)
   expect(moment.utc(1577836800000).isoWeek()).toBe(d)
 })
+
+it('add subtract isoWeek', () => {
+  const d = '2026-01-01T12:00:00.000'
+  expect(dayjs(d).add(1, 'isoWeek').valueOf()).toBe(dayjs(d).add(1, 'week').valueOf())
+  expect(dayjs(d).add(1, 'isoWeek').valueOf()).toBe(moment(d).add(1, 'isoWeek').valueOf())
+  expect(dayjs(d).subtract(1, 'isoWeek').valueOf()).toBe(moment(d).subtract(1, 'isoWeek').valueOf())
+  expect(dayjs(d).add(2, 'isoWeek').valueOf() - dayjs(d).valueOf()).toBe(1209600000)
+})
+
+it('diff isoWeek', () => {
+  const d1 = '2026-01-01T12:00:00.000'
+  const d2 = '2026-01-08T12:00:00.000'
+  expect(dayjs(d2).diff(dayjs(d1), 'isoWeek')).toBe(1)
+  expect(dayjs(d1).diff(dayjs(d2), 'isoWeek')).toBe(-1)
+  expect(dayjs(d2).diff(dayjs(d1), 'isoWeek', true)).toBe(1)
+  expect(dayjs(d2).diff(dayjs(d1), 'isoWeek')).toBe(dayjs(d2).diff(dayjs(d1), 'week'))
+})
+
+it('get isoWeek', () => {
+  const d = '2026-01-01T12:00:00.000'
+  expect(dayjs(d).get('isoWeek')).toBe(1)
+  expect(dayjs(d).get('isoWeek')).toBe(moment(d).get('isoWeek'))
+  expect(dayjs(d).get('month')).toBe(0)
+})
