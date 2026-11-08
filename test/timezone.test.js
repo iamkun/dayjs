@@ -3,9 +3,11 @@ import moment from 'moment'
 import dayjs from '../src'
 import timezone from '../src/plugin/timezone'
 import utc from '../src/plugin/utc'
+import weekday from '../src/plugin/weekday'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(weekday)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -23,6 +25,28 @@ it('Add Time days (DST)', () => {
   // London (-60)
   expect(dayjs('2018-10-28').add(1, 'd').format()).toBe(moment('2018-10-28').add(1, 'd').format())
   expect(dayjs('2018-10-26').add(1, 'w').format()).toBe(moment('2018-10-26').add(1, 'w').format())
+})
+
+it('Set month and year keeps the time when the 1st is in a DST gap', () => {
+  // New Zealand: DST started on 1995-10-01 at 02:00
+  // America/Whitehorse: DST started on 2001-04-01 at 02:00
+  [['1995-09-13 02:30', '1995-10-13 02:30', '1994-10-13 02:30'],
+    ['2001-03-15 02:30', '2001-04-15 02:30', '2000-04-15 02:30']].forEach(([prevMonth, day, prevYear]) => {
+    expect(dayjs(prevMonth).add(1, 'month').format()).toBe(moment(prevMonth).add(1, 'month').format())
+    expect(dayjs(day).month(dayjs(day).month()).format())
+      .toBe(moment(day).month(moment(day).month()).format())
+    expect(dayjs(prevYear).add(1, 'year').format()).toBe(moment(prevYear).add(1, 'year').format())
+  })
+})
+
+it('Set weekday keeps the time when the start of week is in a DST gap', () => {
+  // New Zealand: DST started on 2024-09-29 at 02:00
+  // London: DST started on 2024-03-31 at 01:00
+  // America/Whitehorse: DST started on 2019-03-10 at 02:00
+  ['2024-10-02 02:30', '2024-04-03 01:30', '2019-03-13 02:30'].forEach((day) => {
+    expect(dayjs(day).weekday(3).format()).toBe(moment(day).weekday(3).format())
+    expect(dayjs(day).weekday(5).format()).toBe(moment(day).weekday(5).format())
+  })
 })
 
 it('Utc Offset', () => {

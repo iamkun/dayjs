@@ -7,7 +7,7 @@ export default (o, c) => {
     if (this.$utils().u(input)) {
       return weekday
     }
-    return this.subtract(weekday, 'day').add(input, 'day')
+    return this.add(input - weekday, 'day')
   }
 }
 

@@ -211,7 +211,11 @@ class Dayjs {
       const date = this.clone().set(C.DATE, 1)
       date.$d[name](arg)
       date.init()
-      this.$d = date.set(C.DATE, Math.min(this.$D, date.daysInMonth())).$d
+      const day = Math.min(this.$D, date.daysInMonth())
+      // set month (and year) together with the date in one call, so the time
+      // is not shifted when the 1st of the month falls in a DST gap
+      if (unit === C.M) this.$d[name](arg, day)
+      else this.$d[name](arg, this.$M, day)
     } else if (name) this.$d[name](arg)
 
     this.init()
