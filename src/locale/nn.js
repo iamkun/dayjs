@@ -10,6 +10,7 @@ const locale = {
   monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
   ordinal: n => `${n}.`,
   weekStart: 1,
+  yearStart: 4,
   relativeTime: {
     future: 'om %s',
     past: 'for %s sidan',
