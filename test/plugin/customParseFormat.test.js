@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/cy'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -459,4 +460,78 @@ it('parse w, ww', () => {
   const input2 = '2024-w32'
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
+})
+
+it('parse d, dd, ddd, dddd', () => {
+  const format = 'dddd, D MMMM YYYY'
+  const input = 'Monday, 15 January 2024'
+  expect(dayjs(input, format).valueOf()).toBe(moment(input, format).valueOf())
+  expect(dayjs(input, format).format(format)).toBe(input)
+
+  const shortFormat = 'ddd, D MMMM YYYY'
+  const shortInput = 'Mon, 15 January 2024'
+  expect(dayjs(shortInput, shortFormat).valueOf())
+    .toBe(moment(shortInput, shortFormat).valueOf())
+
+  const minFormat = 'dd, D MMMM YYYY'
+  const minInput = 'Mo, 15 January 2024'
+  expect(dayjs(minInput, minFormat).format('YYYY-MM-DD')).toBe('2024-01-15')
+
+  const numberFormat = 'd, D MMMM YYYY'
+  const numberInput = '1, 15 January 2024'
+  expect(dayjs(numberInput, numberFormat).format('YYYY-MM-DD')).toBe('2024-01-15')
+})
+
+it('parse a weekday name that is consumed but not applied', () => {
+  // The resulting date comes from the year, month and day. A weekday that
+  // disagrees with them is consumed so the rest of the input stays aligned,
+  // but it does not move the date. Strict mode still rejects it, which is
+  // covered below. Note moment invalidates this in non-strict mode too.
+  const format = 'dddd, D MMMM YYYY'
+  expect(dayjs('Friday, 15 January 2024', format).format('YYYY-MM-DD'))
+    .toBe('2024-01-15')
+})
+
+it('parse weekday names that contain a space', () => {
+  // Welsh weekday names are two words, e.g. "Dydd Llun". A generic word
+  // pattern consumes only the first word and misaligns everything after it.
+  const format = 'dddd, D MMMM YYYY'
+  const text = dayjs('2024-01-15').locale('cy').format(format)
+  expect(text).toContain(' ')
+  expect(dayjs(text, format, 'cy').format('YYYY-MM-DD')).toBe('2024-01-15')
+})
+
+it('parse the localized LLLL format, which starts with dddd', () => {
+  const date = dayjs('2024-01-15 13:45')
+  const text = date.format('LLLL')
+  expect(dayjs(text, 'LLLL').format('YYYY-MM-DD HH:mm')).toBe('2024-01-15 13:45')
+})
+
+it('parse dd and ddd when the locale has no short weekday names', () => {
+  // Falls back to a slice of the full names, exactly as `format` does.
+  dayjs.locale({
+    name: 'test-no-short-weekdays',
+    weekdays: 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+  }, null, true)
+  const ddd = dayjs('Mon, 15 January 2024', 'ddd, D MMMM YYYY', 'test-no-short-weekdays')
+  expect(ddd.format('YYYY-MM-DD')).toBe('2024-01-15')
+  const dd = dayjs('Mo, 15 January 2024', 'dd, D MMMM YYYY', 'test-no-short-weekdays')
+  expect(dd.format('YYYY-MM-DD')).toBe('2024-01-15')
+})
+
+it('parse dddd when the locale has no weekday names at all', () => {
+  dayjs.locale({
+    name: 'test-no-weekdays',
+    months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_')
+  }, null, true)
+  const d = dayjs('Monday, 15 January 2024', 'dddd, D MMMM YYYY', 'test-no-weekdays')
+  expect(d.format('YYYY-MM-DD')).toBe('2024-01-15')
+})
+
+it('parse strict mode rejects a weekday that does not match the date', () => {
+  const format = 'dddd, D MMMM YYYY'
+  // 2024-01-15 is a Monday, so Friday must be rejected in strict mode.
+  expect(dayjs('Friday, 15 January 2024', format, true).isValid()).toBe(false)
+  expect(dayjs('Monday, 15 January 2024', format, true).isValid()).toBe(true)
 })

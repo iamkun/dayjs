@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|dd?d?d?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -43,6 +43,35 @@ const getLocalePart = (name) => {
     part.indexOf ? part : part.s.concat(part.f)
   )
 }
+const escapeRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+// Weekday names cannot be matched with a generic word pattern: several
+// locales use names that contain a space, such as Welsh "Dydd Llun" or
+// Irish "Dé Luain", and a pattern that stops at the first space would
+// consume only part of the name and misalign everything after it. Match
+// the locale's own names instead, longest first so a short name cannot
+// shadow a longer one that begins with it.
+const matchFromList = (list) => {
+  if (!Array.isArray(list) || !list.length) return matchWord
+  return new RegExp(list
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length)
+    .map(escapeRegExp)
+    .join('|'))
+}
+// Mirrors how `format` resolves these tokens: the dedicated list when the
+// locale defines one, otherwise a slice of the full weekday names.
+const weekdayNames = (token) => {
+  const { weekdays } = locale
+  if (!Array.isArray(weekdays)) return null
+  if (token === 'dddd') return weekdays
+  const isShort = token === 'ddd'
+  const names = isShort ? locale.weekdaysShort : locale.weekdaysMin
+  return Array.isArray(names) ? names : weekdays.map(n => n.slice(0, isShort ? 3 : 2))
+}
+// The weekday is implied by the year, month and day, so it is consumed
+// without being applied. In strict mode the parsed result is reformatted
+// and compared with the input, which still rejects a mismatched weekday.
+const skipInput = () => {}
 const meridiemMatch = (input, isLowerCase) => {
   let isAfternoon
   const { meridiem } = locale
@@ -88,6 +117,10 @@ const expressions = {
   hh: [match1to2, addInput('hours')],
   D: [match1to2, addInput('day')],
   DD: [match2, addInput('day')],
+  d: [match1, skipInput],
+  dd: [() => matchFromList(weekdayNames('dd')), skipInput],
+  ddd: [() => matchFromList(weekdayNames('ddd')), skipInput],
+  dddd: [() => matchFromList(weekdayNames('dddd')), skipInput],
   Do: [matchWord, function (input) {
     const { ordinal } = locale;
     [this.day] = input.match(/\d+/)
@@ -150,7 +183,9 @@ function makeParser(format) {
   for (let i = 0; i < length; i += 1) {
     const token = array[i]
     const parseTo = expressions[token]
-    const regex = parseTo && parseTo[0]
+    // Tokens whose pattern depends on the active locale supply a factory
+    // instead of a fixed expression.
+    const regex = parseTo && (parseTo[0] instanceof RegExp ? parseTo[0] : parseTo[0]())
     const parser = parseTo && parseTo[1]
     if (parser) {
       array[i] = { regex, parser }
