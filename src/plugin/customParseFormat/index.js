@@ -1,6 +1,6 @@
 import { u } from '../localizedFormat/utils'
 
-const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
+const formattingTokens = /(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|GGGG|WW?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g
 
 const match1 = /\d/ // 0 - 9
 const match2 = /\d\d/ // 00 - 99
@@ -100,6 +100,9 @@ const expressions = {
   }],
   w: [match1to2, addInput('week')],
   ww: [match2, addInput('week')],
+  W: [match1to2, addInput('isoWeek')],
+  WW: [match2, addInput('isoWeek')],
+  GGGG: [match4, addInput('isoYear')],
   M: [match1to2, addInput('month')],
   MM: [match2, addInput('month')],
   MMM: [matchWord, function (input) {
@@ -182,9 +185,15 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
   try {
     if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
     const parser = makeParser(format)
+    const parserResult = parser(input)
     const {
-      year, month, day, hours, minutes, seconds, milliseconds, zone, week
-    } = parser(input)
+      month, day, hours, minutes, seconds, milliseconds, zone, week, isoYear
+    } = parserResult
+    let { year, isoWeek } = parserResult
+    year = year || isoYear
+    if (isoYear && !isoWeek) {
+      isoWeek = 1
+    }
     const now = new Date()
     const d = day || ((!year && !month) ? now.getDate() : 1)
     const y = year || now.getFullYear()
@@ -206,6 +215,9 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
     newDate = new Date(y, M, d, h, m, s, ms)
     if (week) {
       newDate = dayjs(newDate).week(week).toDate()
+    } else if (isoWeek) {
+      newDate = dayjs(newDate).add(7, 'day').isoWeek(isoWeek).isoWeekday(1)
+        .toDate()
     }
     return newDate
   } catch (e) {
