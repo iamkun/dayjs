@@ -10,6 +10,7 @@ const locale = {
   monthsShort: 'Ιαν_Φεβ_Μαρ_Απρ_Μαι_Ιουν_Ιουλ_Αυγ_Σεπτ_Οκτ_Νοε_Δεκ'.split('_'),
   ordinal: n => n,
   weekStart: 1,
+  yearStart: 4,
   relativeTime: {
     future: 'σε %s',
     past: 'πριν %s',
