@@ -287,6 +287,15 @@ describe('prettyUnit', () => {
 })
 
 describe('Format', () => {
+  test('formats missing object components as zero without normalizing supplied units', () => {
+    const d = dayjs.duration({ hours: 25, seconds: 5 })
+    expect(d.format()).toBe('0000-00-00T25:00:05')
+    expect(d.format('Y/YY/YYYY/M/MM/D/DD/H/HH/m/mm/s/ss/SSS'))
+      .toBe('0/00/0000/0/00/0/00/25/25/0/00/5/05/000')
+    expect(d.toISOString()).toBe('PT25H5S')
+    expect(dayjs.duration({}).format()).toBe('0000-00-00T00:00:00')
+  })
+
   test('no formatStr', () => {
     const d = dayjs.duration(15, 'seconds')
       .add(13, 'hours')

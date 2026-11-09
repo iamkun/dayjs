@@ -166,21 +166,25 @@ class Duration {
 
   format(formatStr) {
     const str = formatStr || 'YYYY-MM-DDTHH:mm:ss'
+    const {
+      years = 0, months = 0, days = 0, hours = 0,
+      minutes = 0, seconds = 0, milliseconds = 0
+    } = this.$d
     const matches = {
-      Y: this.$d.years,
-      YY: $u.s(this.$d.years, 2, '0'),
-      YYYY: $u.s(this.$d.years, 4, '0'),
-      M: this.$d.months,
-      MM: $u.s(this.$d.months, 2, '0'),
-      D: this.$d.days,
-      DD: $u.s(this.$d.days, 2, '0'),
-      H: this.$d.hours,
-      HH: $u.s(this.$d.hours, 2, '0'),
-      m: this.$d.minutes,
-      mm: $u.s(this.$d.minutes, 2, '0'),
-      s: this.$d.seconds,
-      ss: $u.s(this.$d.seconds, 2, '0'),
-      SSS: $u.s(this.$d.milliseconds, 3, '0')
+      Y: years,
+      YY: $u.s(years, 2, '0'),
+      YYYY: $u.s(years, 4, '0'),
+      M: months,
+      MM: $u.s(months, 2, '0'),
+      D: days,
+      DD: $u.s(days, 2, '0'),
+      H: hours,
+      HH: $u.s(hours, 2, '0'),
+      m: minutes,
+      mm: $u.s(minutes, 2, '0'),
+      s: seconds,
+      ss: $u.s(seconds, 2, '0'),
+      SSS: $u.s(milliseconds, 3, '0')
     }
     return str.replace(DURATION_REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
   }
