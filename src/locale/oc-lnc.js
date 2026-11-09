@@ -9,6 +9,7 @@ const locale = {
   months: 'genièr_febrièr_març_abrial_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split('_'),
   monthsShort: 'gen_feb_març_abr_mai_junh_julh_ago_set_oct_nov_dec'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   formats: {
     LT: 'H:mm',
     LTS: 'H:mm:ss',
