@@ -102,9 +102,11 @@ it('Format Minute m mm', () => {
 it('Format Second s ss SSS', () => {
   expect(dayjs().format('s')).toBe(moment().format('s'))
   expect(dayjs().format('ss')).toBe(moment().format('ss'))
+  expect(dayjs().format('S')).toBe(moment().format('S'))
+  expect(dayjs().format('SS')).toBe(moment().format('SS'))
   expect(dayjs().format('SSS')).toBe(moment().format('SSS'))
   const date = '2011-11-05T14:48:01.002Z'
-  expect(dayjs(date).format('s-ss-SSS')).toBe(moment(date).format('s-ss-SSS'))
+  expect(dayjs(date).format('s-ss-S-SS-SSS')).toBe(moment(date).format('s-ss-S-SS-SSS'))
 })
 
 it('Format Time Zone ZZ', () => {
