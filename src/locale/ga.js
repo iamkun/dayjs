@@ -6,6 +6,7 @@ const locale = {
   weekdays: 'Dé Domhnaigh_Dé Luain_Dé Máirt_Dé Céadaoin_Déardaoin_Dé hAoine_Dé Sathairn'.split('_'),
   months: 'Eanáir_Feabhra_Márta_Aibreán_Bealtaine_Meitheamh_Iúil_Lúnasa_Meán Fómhair_Deireadh Fómhair_Samhain_Nollaig'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   weekdaysShort: 'Dom_Lua_Mái_Céa_Déa_Aoi_Sat'.split('_'),
   monthsShort: 'Ean_Fea_Már_Aib_Beal_Mei_Iúil_Lún_MFómh_DFómh_Samh_Noll'.split('_'),
   weekdaysMin: 'Do_Lu_Má_Cé_Dé_Ao_Sa'.split('_'),
