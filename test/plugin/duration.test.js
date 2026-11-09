@@ -150,6 +150,61 @@ describe('Humanize', () => {
 })
 
 describe('Clone', () => {
+  it('preserves calendar components when cloning', () => {
+    const original = dayjs.duration({ months: 1, days: 31, hours: 2 })
+    const cloned = original.clone()
+    expect(cloned).not.toBe(original)
+    expect(cloned.$d).not.toBe(original.$d)
+    expect(cloned.months()).toBe(1)
+    expect(cloned.days()).toBe(31)
+    expect(cloned.hours()).toBe(2)
+    expect(cloned.asMilliseconds()).toBe(original.asMilliseconds())
+    expect(cloned.toISOString()).toBe(original.toISOString())
+    const start = dayjs('2024-01-01')
+    expect(start.add(cloned).valueOf()).toBe(start.add(original).valueOf())
+  })
+
+  it('preserves calendar components when changing locale', () => {
+    const original = dayjs.duration('P31D')
+    const localized = original.locale('fr')
+    expect(localized.days()).toBe(31)
+    expect(localized.months()).toBe(0)
+    expect(localized.toISOString()).toBe('P31D')
+    expect(localized.$l).toBe('fr')
+    expect(original.$l).toBe('en')
+    expect(original.toISOString()).toBe('P31D')
+  })
+
+  it('preserves component values and exact milliseconds for every input form', () => {
+    const inputs = [
+      {
+        years: 1,
+        months: -1,
+        weeks: 2,
+        days: 31,
+        hours: 25,
+        minutes: 61,
+        seconds: 62,
+        milliseconds: 1001
+      },
+      'P1Y2M3W4DT5H6M7.008S',
+      123456789.123,
+      0,
+      -123456789.123
+    ]
+    inputs.forEach((input) => {
+      const original = dayjs.duration(input)
+      const cloned = original.clone()
+      const units = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'milliseconds']
+      units.forEach((unit) => {
+        expect(cloned.get(unit)).toBe(original.get(unit))
+      })
+      expect(cloned.asMilliseconds()).toBe(original.asMilliseconds())
+      expect(cloned.toISOString()).toBe(original.toISOString())
+      expect(cloned.format('Y M D H m s SSS')).toBe(original.format('Y M D H m s SSS'))
+    })
+  })
+
   it('Locale clone', () => {
     const d = dayjs.duration(1, 'minutes').locale('fr')
     const r = 'dans une minute'
