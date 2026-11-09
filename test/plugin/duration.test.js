@@ -211,6 +211,14 @@ test('Add duration', () => {
   expect(b.add(p).format('YYYY-MM-DD HH:mm:ss')).toBe('2024-03-02 01:01:01')
 })
 
+test('Add duration with weeks', () => {
+  const a = dayjs('2020-10-01')
+  expect(a.add(dayjs.duration({ weeks: 1 })).format('YYYY-MM-DD')).toBe('2020-10-08')
+  expect(a.add(dayjs.duration('P1W')).format('YYYY-MM-DD')).toBe('2020-10-08')
+  expect(a.add(dayjs.duration({ weeks: 1, days: 3 })).format('YYYY-MM-DD')).toBe('2020-10-11')
+  expect(a.add(dayjs.duration({ weeks: -1 })).format('YYYY-MM-DD')).toBe('2020-09-24')
+})
+
 describe('Subtract', () => {
   const a = dayjs.duration(3, 'days')
   const b = dayjs.duration(2, 'days')
@@ -221,6 +229,8 @@ test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
   const days = dayjs.duration(2, 'days')
   expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+  expect(a.subtract(dayjs.duration({ weeks: 1 })).format('YYYY-MM-DD')).toBe('2020-10-13')
+  expect(a.subtract(dayjs.duration('P1W')).format('YYYY-MM-DD')).toBe('2020-10-13')
 
   const b = dayjs('2023-03-02 02:02:02')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
