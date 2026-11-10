@@ -389,7 +389,11 @@ class Dayjs {
   }
 
   daysInMonth() {
-    return this.endOf(C.M).$D
+    // Calendrical computation in UTC so the result is immune to
+    // historical timezone offset changes (e.g. Asia/Kuala_Lumpur moving
+    // from +07:30 to +08:00 on 1982-01-01, which used to make
+    // endOf('month') spill into the next month). See #3003.
+    return new Date(Date.UTC(this.$y, this.$M + 1, 0)).getUTCDate()
   }
 
   $locale() { // get locale object
