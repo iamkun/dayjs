@@ -92,20 +92,24 @@ export default (option, Dayjs, dayjs) => {
       return this.utc(keepLocalTime)
     }
 
-    let ins = this.clone()
-
     if (keepLocalTime) {
+      const ins = this.clone()
       ins.$offset = offset
       ins.$u = false
       return ins
     }
 
-    const localTimezoneOffset = this.$u
-      ? this.toDate().getTimezoneOffset() : -1 * this.utcOffset()
-    ins = this.local().add(offset + localTimezoneOffset, MIN)
+    // The wall clock at the new offset, read as the UTC fields of a Date and rebuilt as the local
+    // fields of a host-local Date, the shape keepLocalTime keeps. Shifting a host-local Date by the
+    // offset instead reads an hour off whenever the host's own DST change falls inside the shift.
+    const wall = new Date(this.valueOf() + (offset * MILLISECONDS_A_MINUTE))
+    const local = new Date(
+      wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate(), wall.getUTCHours(),
+      wall.getUTCMinutes(), wall.getUTCSeconds(), wall.getUTCMilliseconds()
+    )
+    local.setFullYear(wall.getUTCFullYear()) // the constructor maps years 0 to 99 to 1900 to 1999
+    const ins = dayjs(local, { locale: this.$L })
     ins.$offset = offset
-    ins.$x.$localOffset = localTimezoneOffset
-
     return ins
   }
 
@@ -118,7 +122,7 @@ export default (option, Dayjs, dayjs) => {
 
   proto.valueOf = function () {
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset()) : 0
+      ? this.$offset + this.$d.getTimezoneOffset() : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 

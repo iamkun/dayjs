@@ -80,3 +80,76 @@ it('UTC diff in DST', () => {
   expect(day1.diff(day2, 'd'))
     .toBe(-3)
 })
+
+// utcOffset(n) built its result by shifting a host-local Date by the offset. On a host whose own
+// DST change fell inside that shift the fields came out an hour off while valueOf() stayed right.
+// npm run test-tz runs this file under Europe/London and Pacific/Auckland, which the cases below
+// are chosen for.
+describe('utcOffset(n) on a host near its own DST change', () => {
+  const cases = [
+    // the London spring forward, 2021-03-28 01:00Z, falls inside a +09:00 shift
+    ['2021-03-27T20:00:00Z', 540, '2021-03-28T05:00:00+09:00'],
+    // the London fall back, 2021-10-31 01:00Z, falls inside a -05:00 shift
+    ['2021-10-31T03:00:00Z', -300, '2021-10-30T22:00:00-05:00'],
+    // the Auckland spring forward, 2021-09-25 14:00Z, falls inside a +09:00 shift from UTC+13
+    ['2021-09-25T15:00:00Z', 540, '2021-09-26T00:00:00+09:00'],
+    // the Auckland fall back, 2022-04-02 14:00Z, falls inside a -05:00 shift from UTC+12
+    ['2022-04-02T15:00:00Z', -300, '2022-04-02T10:00:00-05:00'],
+    // a quarter-hour offset across the London spring forward
+    ['2021-03-27T18:00:00Z', 825, '2021-03-28T07:45:00+13:45']
+  ]
+
+  cases.forEach(([instant, offset, expected]) => {
+    it(`shows ${expected} for ${instant} at ${offset}`, () => {
+      const d = dayjs(instant).utcOffset(offset)
+      const m = moment(instant).utcOffset(offset)
+      expect(d.format()).toBe(expected)
+      expect(d.format()).toBe(m.format())
+      expect(d.valueOf()).toBe(new Date(instant).getTime())
+      expect(d.toISOString()).toBe(new Date(instant).toISOString())
+      expect(d.utcOffset()).toBe(offset)
+      expect(d.toDate().getTime()).toBe(d.valueOf())
+    })
+  })
+
+  it('shows the wall clock of the offset every 20 minutes of 2021 at three offsets', () => {
+    // A wall clock inside the host's own spring-forward gap has no host-local Date, so those few
+    // instants are skipped and counted instead (https://github.com/iamkun/dayjs/issues/2303).
+    const offsets = [540, -300, 345]
+    const step = 20 * 60 * 1000
+    const end = Date.UTC(2022, 0, 1)
+    const mismatches = []
+    let skipped = 0
+    offsets.forEach((offset) => {
+      for (let ts = Date.UTC(2021, 0, 1); ts < end; ts += step) {
+        const wall = new Date(ts + (offset * 60 * 1000))
+        const local = new Date(
+          wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate(),
+          wall.getUTCHours(), wall.getUTCMinutes()
+        )
+        if (local.getHours() !== wall.getUTCHours()) {
+          skipped += 1
+        } else {
+          const d = dayjs(ts).utcOffset(offset)
+          const expected = wall.toISOString().slice(0, 16).replace('T', ' ')
+          if (d.format('YYYY-MM-DD HH:mm') !== expected || d.valueOf() !== ts) {
+            mismatches.push(`${offset} at ${new Date(ts).toISOString()}: ${d.format()}`)
+          }
+        }
+      }
+    })
+    expect(mismatches.slice(0, 5)).toEqual([])
+    expect(mismatches).toHaveLength(0)
+    expect(skipped).toBeLessThanOrEqual(9)
+  })
+
+  it('keeps years below 100', () => {
+    const instant = new Date(Date.UTC(2000, 5, 15, 12))
+    instant.setUTCFullYear(50)
+    const d = dayjs(instant).utcOffset(120)
+    expect(d.year()).toBe(50)
+    expect(d.format('YYYY-MM-DD HH:mm')).toBe('0050-06-15 14:00')
+    // Year 50 hosts kept LMT offsets with seconds, which getTimezoneOffset rounds to minutes
+    expect(Math.abs(d.valueOf() - instant.getTime())).toBeLessThan(60 * 1000)
+  })
+})
