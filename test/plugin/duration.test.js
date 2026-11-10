@@ -108,6 +108,34 @@ describe('Parse ISO string', () => {
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
+  it('negative duration with leading sign -P1D', () => {
+    expect(dayjs.duration('-P1D').asMilliseconds()).toBe(-86400000)
+    expect(dayjs.duration('-P1D').toISOString()).toBe('-P1D')
+  })
+  it('negative duration with leading sign -PT1H', () => {
+    expect(dayjs.duration('-PT1H').asMilliseconds()).toBe(-3600000)
+    expect(dayjs.duration('-PT1H').toISOString()).toBe('-PT1H')
+  })
+  it('negative duration with leading sign -P1DT2H', () => {
+    expect(dayjs.duration('-P1DT2H').asMilliseconds()).toBe(-(86400000 + 7200000))
+    expect(dayjs.duration('-P1DT2H').toISOString()).toBe('-P1DT2H')
+  })
+  it('negative duration with leading sign -P1Y', () => {
+    expect(dayjs.duration('-P1Y').asMilliseconds()).toBe(-31536000000)
+    expect(dayjs.duration('-P1Y').toISOString()).toBe('-P1Y')
+  })
+  it('positive duration with leading sign +P1D', () => {
+    expect(dayjs.duration('+P1D').asMilliseconds()).toBe(86400000)
+    expect(dayjs.duration('+P1D').toISOString()).toBe('P1D')
+  })
+  it('positive duration P1D stays positive', () => {
+    expect(dayjs.duration('P1D').asMilliseconds()).toBe(86400000)
+    expect(dayjs.duration('P1D').toISOString()).toBe('P1D')
+  })
+  it('round trip -86400000 to ISO and back', () => {
+    expect(dayjs.duration(-86400000).toISOString()).toBe('-P1D')
+    expect(dayjs.duration('-P1D').asMilliseconds()).toBe(-86400000)
+  })
 })
 
 it('Is duration', () => {

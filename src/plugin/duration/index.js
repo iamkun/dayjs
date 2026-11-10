@@ -83,8 +83,16 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(DURATION_REGEX_PARSE)
       if (d) {
+        const sign = d[1]
         const properties = d.slice(2)
-        const numberD = properties.map(value => (value != null ? Number(value) : 0));
+        const numberD = properties.map(value => (value != null ? Number(value) : 0))
+
+        if (sign === '-') {
+          for (let i = 0; i < numberD.length; i += 1) {
+            numberD[i] = -numberD[i]
+          }
+        }
+
         [
           this.$d.years,
           this.$d.months,
