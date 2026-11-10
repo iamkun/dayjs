@@ -82,4 +82,22 @@ describe('dev-helper: diff() usage warnings', () => {
     dayjs('2025-01-10').diff(dayjs(), 'days')
     expect(consoleSpy).not.toHaveBeenCalledWith(diffWarningMsg)
   })
+
+  it('does NOT warn when diff() is called with zero (Unix epoch)', () => {
+    const consoleSpy = jest.spyOn(console, 'warn')
+    dayjs(1000).diff(0, 'second')
+    expect(consoleSpy).not.toHaveBeenCalledWith(diffWarningMsg)
+  })
+
+  it('warns when diff() is called with undefined', () => {
+    const consoleSpy = jest.spyOn(console, 'warn')
+    dayjs('2025-01-10').diff(undefined, 'days')
+    expect(consoleSpy).toHaveBeenCalledWith(diffWarningMsg)
+  })
+
+  it('warns when diff() is called with null', () => {
+    const consoleSpy = jest.spyOn(console, 'warn')
+    dayjs('2025-01-10').diff(null, 'days')
+    expect(consoleSpy).toHaveBeenCalledWith(diffWarningMsg)
+  })
 })
