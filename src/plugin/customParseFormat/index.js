@@ -214,6 +214,15 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
 }
 
 
+// Preset ISO format patterns
+const PRESET_FORMATS = {
+  ISO_8601: 'YYYY-MM-DDTHH:mm:ss',
+  ISO_DATE: 'YYYY-MM-DD',
+  ISO_TIME: 'HH:mm:ss',
+  ISO_DATETIME: 'YYYY-MM-DDTHH:mm:ss',
+  ISO_DATETIME_FULL: 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+}
+
 export default (o, C, d) => {
   d.p.customParseFormat = true
   if (o && o.parseTwoDigitYear) {
@@ -228,7 +237,12 @@ export default (o, C, d) => {
       args
     } = cfg
     this.$u = utc
-    const format = args[1]
+    let format = args[1]
+    // Support preset format aliases for convenience
+    if (typeof format === 'string' && format in PRESET_FORMATS) {
+      format = PRESET_FORMATS[format]
+      args[1] = format
+    }
     if (typeof format === 'string') {
       const isStrictWithoutLocale = args[2] === true
       const isStrictWithLocale = args[3] === true

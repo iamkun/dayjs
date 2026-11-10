@@ -460,3 +460,91 @@ it('parse w, ww', () => {
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
 })
+
+
+describe('Preset ISO formats (Issue #2871)', () => {
+  it('ISO_DATE preset format with valid date', () => {
+    const input = '2025-12-31'
+    const result = dayjs(input, 'ISO_DATE')
+    expect(result.isValid()).toBe(true)
+    expect(result.format('YYYY-MM-DD')).toBe('2025-12-31')
+  })
+
+  it('ISO_DATE preset format with invalid month', () => {
+    const input = '2025-13-01'
+    const result = dayjs(input, 'ISO_DATE', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_DATE preset format with invalid day', () => {
+    const input = '2025-01-36'
+    const result = dayjs(input, 'ISO_DATE', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_DATE preset format with Feb 30', () => {
+    const input = '2025-02-30'
+    const result = dayjs(input, 'ISO_DATE', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_DATE preset format with Feb 29 non-leap year', () => {
+    const input = '2025-02-29'
+    const result = dayjs(input, 'ISO_DATE', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_DATE preset format with Feb 29 leap year', () => {
+    const input = '2024-02-29'
+    const result = dayjs(input, 'ISO_DATE', true)
+    expect(result.isValid()).toBe(true)
+    expect(result.format('YYYY-MM-DD')).toBe('2024-02-29')
+  })
+
+  it('ISO_DATETIME preset format - Issue #2871 example', () => {
+    const input = '2025-13-36T14:19:39'
+    const result = dayjs(input, 'ISO_DATETIME', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_DATETIME preset format with valid datetime', () => {
+    const input = '2025-12-31T14:19:39'
+    const result = dayjs(input, 'ISO_DATETIME', true)
+    expect(result.isValid()).toBe(true)
+    expect(result.format('YYYY-MM-DDTHH:mm:ss')).toBe('2025-12-31T14:19:39')
+  })
+
+  it('ISO_8601 preset format with valid datetime', () => {
+    const input = '2025-12-31T14:19:39'
+    const result = dayjs(input, 'ISO_8601', true)
+    expect(result.isValid()).toBe(true)
+    expect(result.format('YYYY-MM-DDTHH:mm:ss')).toBe('2025-12-31T14:19:39')
+  })
+
+  it('ISO_8601 preset format with invalid components', () => {
+    const input = '2025-13-36T14:19:39'
+    const result = dayjs(input, 'ISO_8601', true)
+    expect(result.isValid()).toBe(false)
+  })
+
+  it('ISO_TIME preset format', () => {
+    const input = '14:19:39'
+    const result = dayjs(input, 'ISO_TIME', true)
+    expect(result.isValid()).toBe(true)
+    expect(result.format('HH:mm:ss')).toBe('14:19:39')
+  })
+
+  it('preset format without strict mode falls back to lenient parsing', () => {
+    const input = '2025-13-36T14:19:39'
+    const result = dayjs(input, 'ISO_DATETIME')
+    expect(result.isValid()).toBe(true) // Lenient parsing normalizes
+    expect(result.format('YYYY-MM-DD')).toBe('2026-02-05')
+  })
+
+  it('default free-format parsing remains lenient', () => {
+    const input = '2025-13-36T14:19:39'
+    const result = dayjs(input)
+    expect(result.isValid()).toBe(true)
+    expect(result.format('YYYY-MM-DD HH:mm:ss')).toBe('2026-02-05 14:19:39')
+  })
+})
