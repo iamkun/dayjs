@@ -48,7 +48,7 @@ export default (o, c, d) => {
       }
       let abs = (o.rounding || Math.round)(Math.abs(result))
       isFuture = result > 0
-      if (abs <= t.r || !t.r) {
+      if (abs <= t.r || t.r === undefined) {
         if (abs <= 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute, 0 seconds -> 0 second
         const format = loc[t.l]
         if (postFormat) {
