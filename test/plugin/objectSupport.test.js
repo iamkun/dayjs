@@ -25,6 +25,17 @@ const currentUTCYear = now.getUTCFullYear()
 const currentUTCMonth = utils.s(now.getUTCMonth() + 1, 2, '0')
 const currentUTCDate = utils.s(now.getUTCDate(), 2, '0')
 const fmt = 'YYYY-MM-DD HH:mm:ss.SSS'
+
+it('preserves core behavior for nullish arithmetic and setter arguments', () => {
+  const date = dayjs('2026-09-26')
+  expect(date.add(null, 'day').valueOf()).toBe(date.valueOf())
+  expect(date.subtract(null, 'day').valueOf()).toBe(date.valueOf())
+  expect(date.add(undefined, 'day').isValid()).toBe(false)
+  expect(date.subtract(undefined, 'day').isValid()).toBe(false)
+  expect(date.set(null, 1).valueOf()).toBe(date.valueOf())
+  expect(date.set(undefined, 1).valueOf()).toBe(date.valueOf())
+})
+
 const tests = [
   [{ year: 2010 }, '2010-01-01 00:00:00.000'],
   [{ year: 2010, month: 1 }, '2010-02-01 00:00:00.000'],
