@@ -25,7 +25,7 @@ export default (o, c, d) => {
     /* eslint-enable no-nested-ternary */
     const currentFormat = format[retVal] || calendarFormat[retVal]
     if (typeof currentFormat === 'function') {
-      return currentFormat.call(this, d())
+      return currentFormat.call(this, d(referenceTime || undefined))
     }
     return this.format(currentFormat)
   }

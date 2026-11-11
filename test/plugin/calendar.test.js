@@ -125,6 +125,43 @@ it('callback is a function and first argument a moment that depicts now', () => 
   expect(callbacks.sameDay).toBeCalledWith(now)
 })
 
+it('passes the explicit reference time to callbacks in every calendar category', () => {
+  MockDate.set('2026-10-05T12:00:00Z')
+  const reference = dayjs('2020-01-15T12:34:56.789')
+  const categories = [
+    ['lastWeek', -3],
+    ['lastDay', -1],
+    ['sameDay', 0],
+    ['nextDay', 1],
+    ['nextWeek', 3],
+    ['sameElse', 10]
+  ]
+  const references = [
+    reference,
+    reference.toDate(),
+    reference.valueOf(),
+    '2020-01-15T12:34:56.789'
+  ]
+  references.forEach((referenceTime) => {
+    categories.forEach(([category, offset]) => {
+      const instance = reference.add(offset, 'day')
+      let receivedReference
+      let callbackScope
+      const callback = jest.fn(function cb(now) {
+        receivedReference = now
+        callbackScope = this
+        return 'callback value'
+      })
+      expect(instance.calendar(referenceTime, { [category]: callback }))
+        .toBe('callback value')
+      expect(callback).toHaveBeenCalledTimes(1)
+      expect(dayjs.isDayjs(receivedReference)).toBe(true)
+      expect(receivedReference.valueOf()).toBe(reference.valueOf())
+      expect(callbackScope).toBe(instance)
+    })
+  })
+})
+
 it('set global calendar in locale file', () => {
   const now = '2019-04-03T14:21:22.000Z'
   zhCn.calendar = {
