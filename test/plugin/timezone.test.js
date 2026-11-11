@@ -25,6 +25,13 @@ const PARIS = 'Europe/Paris'
 const GUADELOUPE = 'America/Guadeloupe'
 const SYDNEY = 'Australia/Sydney'
 const LONDON = 'Europe/London'
+const CHATHAM = 'Pacific/Chatham'
+const KATHMANDU = 'Asia/Kathmandu'
+const ADELAIDE = 'Australia/Adelaide'
+const LORD_HOWE = 'Australia/Lord_Howe'
+const ST_JOHNS = 'America/St_Johns'
+const KOLKATA = 'Asia/Kolkata'
+const UTC = 'UTC'
 
 const matchMoment = (d, m) => {
   expect(d.format()).toBe(m.format())
@@ -580,4 +587,107 @@ it('does not throw for invalid Day.js values (regression #111.22)', () => {
 it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
+
+const referenceDtfCache = {}
+const referenceDtf = (zone) => {
+  if (!referenceDtfCache[zone]) {
+    referenceDtfCache[zone] = new Intl.DateTimeFormat('en-CA', {
+      timeZone: zone,
+      hourCycle: 'h23',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    })
+  }
+  return referenceDtfCache[zone]
+}
+
+// The wall clock Intl reads for an instant in a zone, as 'YYYY-MM-DD HH:mm:ss'.
+// The expectations below come from this rather than from hand-typed strings, so
+// they follow the platform's tz database instead of pinning one release of it.
+const intlWallClock = (date, zone) => {
+  const parts = {}
+  referenceDtf(zone).formatToParts(date).forEach(({ type, value }) => {
+    parts[type] = value
+  })
+  // Some Node versions report hour 24 where the standard says 00.
+  // https://github.com/nodejs/node/issues/33027
+  const hour = parts.hour === '24' ? '00' : parts.hour
+  return `${parts.year}-${parts.month}-${parts.day} ${hour}:${parts.minute}:${parts.second}`
+}
+
+// .tz() must read the target zone's wall clock from Intl and keep it, never by
+// re-parsing a locale string in the host zone. When the target's wall clock names
+// an hour the host skips at its own spring-forward, that parse has no such instant
+// to return and the engine shifts the fields an hour forward.
+// https://github.com/iamkun/dayjs/issues/2303
+//
+// A fixed instant only shows this on a host whose own gap swallows the converted
+// wall clock, and the host timezone is a property of the process: the cases below
+// are chosen against the gaps of the hosts npm test runs this file under
+// (Europe/Paris, Europe/London, America/New_York, Pacific/Auckland). The sweep
+// needs no such arrangement - over a year and five zones it crosses whatever gap
+// the current host has, which is what makes it the guard here.
+describe('Target zone across the host spring-forward gap', () => {
+  const cases = [
+    // US hosts skip 02:00-03:00 on 2026-03-08. Chatham reads this instant as 02:12
+    // that day (UTC+13:45), which is exactly a skipped US wall clock.
+    { instant: '2026-03-07T12:27:20.000Z', zone: CHATHAM },
+    // Southern-hemisphere hosts spring forward in the small hours of October.
+    { instant: '2026-10-03T13:20:00.000Z', zone: LORD_HOWE },
+    // Quarter-hour, whole-hour and zero offsets over the same instants, which no
+    // host gap swallows: the conversions the fix must leave where they were.
+    { instant: '2026-03-07T12:27:20.000Z', zone: KATHMANDU },
+    { instant: '2022-04-02T16:30:01.000Z', zone: ADELAIDE },
+    { instant: '2024-03-31T01:30:00.000Z', zone: UTC }
+  ]
+
+  cases.forEach(({ instant, zone }) => {
+    it(`reads ${zone} the way Intl does for ${instant}`, () => {
+      const date = new Date(instant)
+      const converted = dayjs(date).tz(zone)
+      expect(converted.format('YYYY-MM-DD HH:mm:ss')).toBe(intlWallClock(date, zone))
+      expect(converted.valueOf()).toBe(date.getTime())
+    })
+
+    // Converting an instance already in the target zone is a no-op.
+    it(`converts ${instant} to ${zone} idempotently`, () => {
+      const once = dayjs(new Date(instant)).tz(zone)
+      const twice = once.tz(zone)
+      expect(twice.format()).toBe(once.format())
+      expect(twice.valueOf()).toBe(once.valueOf())
+      expect(twice.utcOffset()).toBe(once.utcOffset())
+    })
+  })
+
+  it('keeps the milliseconds of the instant it converts', () => {
+    const date = new Date('2026-03-07T12:27:20.456Z')
+    const converted = dayjs(date).tz(CHATHAM)
+    expect(converted.millisecond()).toBe(456)
+    expect(converted.valueOf()).toBe(date.getTime())
+  })
+
+  it('matches Intl every 20 minutes of 2026 in five zones', () => {
+    const zones = [CHATHAM, LORD_HOWE, ST_JOHNS, KOLKATA, UTC]
+    const step = 20 * 60 * 1000
+    const end = Date.UTC(2027, 0, 1)
+    const mismatches = []
+    zones.forEach((zone) => {
+      for (let ts = Date.UTC(2026, 0, 1); ts < end; ts += step) {
+        const date = new Date(ts)
+        const converted = dayjs(date).tz(zone)
+        const expected = intlWallClock(date, zone)
+        if (converted.format('YYYY-MM-DD HH:mm:ss') !== expected
+          || converted.valueOf() !== ts) {
+          mismatches.push(`${zone} ${date.toISOString()}: ${converted.format()} != ${expected}`)
+        }
+      }
+    })
+    expect(mismatches.slice(0, 5)).toEqual([])
+    expect(mismatches).toHaveLength(0)
+  })
 })
