@@ -68,6 +68,19 @@ it('Global localeData', () => {
   })
 })
 
+it('Global localeData retains its locale after the global locale changes', () => {
+  dayjs.locale('fr')
+  const french = dayjs.localeData()
+  dayjs.locale('en')
+  const expected = dayjs().locale('fr').localeData()
+  const parts = ['months', 'monthsShort', 'weekdays', 'weekdaysShort', 'weekdaysMin']
+  parts.forEach((part) => {
+    expect(french[part]()).toEqual(expected[part]())
+  })
+  expect(french.firstDayOfWeek()).toBe(1)
+  expect(dayjs.months()[0]).toBe('January')
+})
+
 
 it('Listing the months and weekdays', () => {
   ['zh-cn', 'en', 'fr'].forEach((lo) => {
