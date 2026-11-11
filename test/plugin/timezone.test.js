@@ -18,6 +18,7 @@ afterEach(() => {
 })
 
 const NY = 'America/New_York'
+const LOS_ANGELES = 'America/Los_Angeles'
 const VAN = 'America/Vancouver'
 const DEN = 'America/Denver'
 const TOKYO = 'Asia/Tokyo'
@@ -128,6 +129,21 @@ describe('Convert', () => {
       const t = _('2020-08-06T03:48:10.258Z').tz(TOKYO)
       expect(t.format('Z')).toBe('+09:00')
     })
+  })
+})
+
+
+describe('zero-offset localOffset (#1675)', () => {
+  // A correct localOffset of 0 must not fall through to the machine offset:
+  // the parsed instant is independent of the timezone this process runs in.
+  it('parses zones without leaking the machine offset', () => {
+    // 19:30 in Los Angeles (PDT, UTC-7) is 02:30 UTC the next day;
+    // 09:30 in Tokyo (UTC+9, no DST) is 00:30 UTC the same day.
+    // These instants land past the machine-zone DST transition for
+    // Europe/London in the test matrix, which is what makes a leaked
+    // machine offset visible there.
+    expect(dayjs.tz('2026-10-24 19:30', LOS_ANGELES).toISOString()).toBe('2026-10-25T02:30:00.000Z')
+    expect(dayjs.tz('2026-03-29 09:30', TOKYO).toISOString()).toBe('2026-03-29T00:30:00.000Z')
   })
 })
 
