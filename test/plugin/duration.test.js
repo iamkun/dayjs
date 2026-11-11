@@ -108,6 +108,22 @@ describe('Parse ISO string', () => {
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
+  it('applies a leading ISO 8601 sign to the whole duration', () => {
+    expect(dayjs.duration('P1D').asMilliseconds()).toBe(86400000)
+    expect(dayjs.duration('+P1D').asMilliseconds()).toBe(86400000)
+    expect(dayjs.duration('-P1D').asMilliseconds()).toBe(-86400000)
+    expect(dayjs.duration('-PT1H').asMilliseconds()).toBe(-3600000)
+    expect(dayjs.duration('-P1DT2H').asMilliseconds()).toBe(-(86400000 + 7200000))
+    expect(dayjs.duration('-P1W').asMilliseconds()).toBe(-604800000)
+    expect(dayjs.duration('-P1D').toISOString()).toBe('-P1D')
+    expect(dayjs.duration('-PT1H').toISOString()).toBe('-PT1H')
+    // In-component signs already worked; leading sign must invert those too.
+    expect(dayjs.duration('P-1D').asMilliseconds()).toBe(-86400000)
+    expect(dayjs.duration('-P-1D').asMilliseconds()).toBe(86400000)
+    // Round-trip: toISOString() emits a leading "-" for negative durations.
+    expect(dayjs.duration(dayjs.duration(-86400000).toISOString()).asMilliseconds())
+      .toBe(-86400000)
+  })
 })
 
 it('Is duration', () => {

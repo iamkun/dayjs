@@ -83,8 +83,11 @@ class Duration {
     if (typeof input === 'string') {
       const d = input.match(DURATION_REGEX_PARSE)
       if (d) {
+        // ISO 8601-2: a leading "-" / "+" applies to the whole duration.
+        // In-component signs such as P-1D stay as-is when there is no leading sign.
+        const sign = d[1] === '-' ? -1 : 1
         const properties = d.slice(2)
-        const numberD = properties.map(value => (value != null ? Number(value) : 0));
+        const numberD = properties.map(value => (value != null ? Number(value) * sign : 0));
         [
           this.$d.years,
           this.$d.months,
