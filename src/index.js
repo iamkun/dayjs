@@ -147,8 +147,15 @@ class Dayjs {
     const isStartOf = !Utils.u(startOf) ? startOf : true
     const unit = Utils.p(units)
     const instanceFactory = (d, m) => {
-      const ins = Utils.w(this.$u ?
-        Date.UTC(this.$y, m, d) : new Date(this.$y, m, d), this)
+      let date
+      if (this.$y >= 0 && this.$y < 100) {
+        date = new Date(0)
+        date[`set${this.$u ? 'UTC' : ''}FullYear`](this.$y, m, d)
+        date[`set${this.$u ? 'UTC' : ''}Hours`](0, 0, 0, 0)
+      } else {
+        date = this.$u ? Date.UTC(this.$y, m, d) : new Date(this.$y, m, d)
+      }
+      const ins = Utils.w(date, this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
     const instanceFactorySet = (method, slice) => {
