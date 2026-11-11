@@ -82,4 +82,10 @@ describe('dev-helper: diff() usage warnings', () => {
     dayjs('2025-01-10').diff(dayjs(), 'days')
     expect(consoleSpy).not.toHaveBeenCalledWith(diffWarningMsg)
   })
+
+  it('does NOT warn when diff() compares with the Unix epoch', () => {
+    const consoleSpy = jest.spyOn(console, 'warn')
+    expect(dayjs(1000).diff(0, 'second')).toBe(1)
+    expect(consoleSpy).not.toHaveBeenCalledWith(diffWarningMsg)
+  })
 })
