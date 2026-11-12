@@ -108,6 +108,13 @@ describe('Parse ISO string', () => {
   it('Invalid ISO string', () => {
     expect(dayjs.duration('Invalid').toISOString()).toBe('P0D')
   })
+  it('Negative ISO string round-trips', () => {
+    expect(dayjs.duration('-P1Y').asYears()).toBe(-1)
+    expect(dayjs.duration('-P1DT2H').asHours()).toBe(-26)
+    expect(dayjs.duration('-PT59S').toISOString()).toBe('-PT59S')
+    const d = dayjs.duration(-1, 'years')
+    expect(dayjs.duration(d.toISOString()).asMilliseconds()).toBe(d.asMilliseconds())
+  })
 })
 
 it('Is duration', () => {
