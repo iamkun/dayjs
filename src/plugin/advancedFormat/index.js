@@ -1,4 +1,5 @@
 import { FORMAT_DEFAULT } from '../../constant'
+import replaceFormat from '../../format'
 
 export default (o, c) => { // locale needed later
   const proto = c.prototype
@@ -12,7 +13,7 @@ export default (o, c) => { // locale needed later
 
     const utils = this.$utils()
     const str = formatStr || FORMAT_DEFAULT
-    const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, (match) => {
+    const replace = (match) => {
       switch (match) {
         case 'Q':
           return Math.ceil((this.$M + 1) / 3)
@@ -44,8 +45,13 @@ export default (o, c) => { // locale needed later
         default:
           return match
       }
-    })
+    }
+    const result = replaceFormat(
+      str,
+      /\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g,
+      /Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g,
+      replace
+    )
     return oldFormat.bind(this)(result)
   }
 }
-

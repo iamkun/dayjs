@@ -1,5 +1,6 @@
 import * as C from './constant'
 import en from './locale/en'
+import replaceFormat from './format'
 import U from './utils'
 
 let L = 'en' // global locale
@@ -338,7 +339,12 @@ class Dayjs {
       return null
     }
 
-    return str.replace(C.REGEX_FORMAT, (match, $1) => $1 || matches(match) || zoneStr.replace(':', '')) // 'ZZ'
+    return replaceFormat(
+      str,
+      C.REGEX_FORMAT,
+      C.REGEX_FORMAT_TOKENS,
+      (match, $1) => $1 || matches(match) || zoneStr.replace(':', '') // 'ZZ'
+    )
   }
 
   utcOffset() {
