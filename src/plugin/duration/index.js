@@ -284,7 +284,7 @@ export default (option, Dayjs, dayjs) => {
       return manipulateDuration(this, value, 1)
     }
 
-    return oldAdd.bind(this)(value, unit)
+    return oldAdd.call(this, value, unit)
   }
 
   Dayjs.prototype.subtract = function (value, unit) {
@@ -292,6 +292,6 @@ export default (option, Dayjs, dayjs) => {
       return manipulateDuration(this, value, -1)
     }
 
-    return oldSubtract.bind(this)(value, unit)
+    return oldSubtract.call(this, value, unit)
   }
 }
