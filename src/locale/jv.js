@@ -11,12 +11,12 @@ const locale = {
   weekdaysMin: 'Mg_Sn_Sl_Rb_Km_Jm_Sp'.split('_'),
   ordinal: n => n,
   formats: {
-    LT: 'HH.mm',
-    LTS: 'HH.mm.ss',
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
     L: 'DD/MM/YYYY',
     LL: 'D MMMM YYYY',
-    LLL: 'D MMMM YYYY [pukul] HH.mm',
-    LLLL: 'dddd, D MMMM YYYY [pukul] HH.mm'
+    LLL: 'D MMMM YYYY [pukul] HH:mm',
+    LLLL: 'dddd, D MMMM YYYY [pukul] HH:mm'
   },
   relativeTime: {
     future: 'wonten ing %s',
