@@ -64,6 +64,15 @@ it('Millisecond', () => {
   expect(dayjs().millisecond()).toBe(moment().millisecond())
   expect(dayjs().millisecond(0).valueOf()).toBe(moment().millisecond(0).valueOf())
   expect(dayjs().millisecond(1).valueOf()).toBe(moment().millisecond(1).valueOf())
+  expect(dayjs().get('MS')).toBe(dayjs().get('ms'))
+})
+
+it('Set Millisecond with short and mixed-case units', () => {
+  const d = dayjs('2024-06-15T12:34:56.789')
+  expect(d.get('MS')).toBe(789)
+  expect(d.set('MS', 500).millisecond()).toBe(500)
+  expect(d.set('Ms', 250).millisecond()).toBe(250)
+  expect(d.startOf('MS').valueOf()).toBe(d.startOf('ms').valueOf())
 })
 
 it('Set Day', () => {
