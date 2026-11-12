@@ -16,16 +16,16 @@ const locale = {
     return `[${n}${o}]`
   },
   formats: {
-    LT: 'HH.mm',
-    LTS: 'HH.mm.ss',
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
     L: 'DD.MM.YYYY',
     LL: 'D. MMMM YYYY',
-    LLL: 'D. MMMM YYYY, [kl.] HH.mm',
-    LLLL: 'dddd, D. MMMM YYYY, [kl.] HH.mm',
+    LLL: 'D. MMMM YYYY, [kl.] HH:mm',
+    LLLL: 'dddd, D. MMMM YYYY, [kl.] HH:mm',
     l: 'D.M.YYYY',
     ll: 'D. MMM YYYY',
-    lll: 'D. MMM YYYY, [kl.] HH.mm',
-    llll: 'ddd, D. MMM YYYY, [kl.] HH.mm'
+    lll: 'D. MMM YYYY, [kl.] HH:mm',
+    llll: 'ddd, D. MMM YYYY, [kl.] HH:mm'
   },
   relativeTime: {
     future: 'om %s',
