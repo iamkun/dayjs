@@ -1,4 +1,12 @@
-import { MIN, MS } from '../../constant'
+import {
+  H,
+  MILLISECONDS_A_HOUR,
+  MILLISECONDS_A_MINUTE,
+  MILLISECONDS_A_SECOND,
+  MIN,
+  MS,
+  S
+} from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -92,6 +100,48 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
+  // Adding an elapsed-time unit moves the instant, and the wall clock follows from the zone's
+  // offset there. Adding any other unit moves the wall clock, and fixOffset finds the instant.
+  const MS_PER_UNIT = {
+    [MS]: 1,
+    [S]: MILLISECONDS_A_SECOND,
+    [MIN]: MILLISECONDS_A_MINUTE,
+    [H]: MILLISECONDS_A_HOUR
+  }
+
+  const zoneOf = ins => (ins.$x && ins.$x.$timezone && ins.isValid() ? ins.$x.$timezone : null)
+
+  // Builds what proto.tz builds: a host-local Date holding the wall clock, behind a display offset.
+  // Built from the instant, so the fields are the same on every host.
+  const zoned = (timestamp, offset, timezone, locale) => {
+    const wall = new Date(timestamp + (offset * MILLISECONDS_A_MINUTE))
+    const local = new Date(
+      wall.getUTCFullYear(), wall.getUTCMonth(), wall.getUTCDate(), wall.getUTCHours(),
+      wall.getUTCMinutes(), wall.getUTCSeconds(), wall.getUTCMilliseconds()
+    )
+    const ins = d(local, { locale }).utcOffset(offset, true)
+    ins.$x.$timezone = timezone
+    return ins
+  }
+
+  // The instant that a wall clock, held as a UTC instance, names in timezone. offset picks the side
+  // of a fall-back overlap, as it does for d.tz(string).
+  const fromWall = (wall, timezone, offset) => {
+    if (!wall.isValid()) return zoned(NaN, offset, timezone, wall.$L)
+    const [targetTs, targetOffset] = fixOffset(wall.valueOf(), offset, timezone)
+    return zoned(targetTs, targetOffset, timezone, wall.$L)
+  }
+
+  // Runs a core method on the wall clock a zoned instance shows, then resolves the result back to
+  // an instant. The wall clock is a UTC instance, so core's setters never meet the host timezone.
+  const onWallClock = (ins, method, args) => {
+    const wall = d(Date.UTC(ins.$y, ins.$M, ins.$D, ins.$H, ins.$m, ins.$s, ins.$ms), {
+      utc: true,
+      locale: ins.$L
+    })
+    return fromWall(method.apply(wall, args), ins.$x.$timezone, ins.utcOffset())
+  }
+
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
     if (!this.isValid()) return this
     const oldOffset = this.utcOffset()
@@ -123,13 +173,26 @@ export default (o, c, d) => {
 
   const oldStartOf = proto.startOf
   proto.startOf = function (units, startOf) {
-    if (!this.$x || !this.$x.$timezone) {
-      return oldStartOf.call(this, units, startOf)
-    }
+    if (!zoneOf(this)) return oldStartOf.call(this, units, startOf)
+    return onWallClock(this, oldStartOf, [units, startOf])
+  }
 
-    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
-    const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
-    return startOfWithoutTz.tz(this.$x.$timezone, true)
+  const oldSet = proto.set
+  proto.set = function (units, int) {
+    if (!zoneOf(this)) return oldSet.call(this, units, int)
+    return onWallClock(this, oldSet, [units, int])
+  }
+
+  const oldAdd = proto.add
+  proto.add = function (number, units) {
+    const timezone = zoneOf(this)
+    // An object is for objectSupport or duration, which split it into calls with a unit
+    if (!timezone || (number && typeof number === 'object')) return oldAdd.call(this, number, units)
+    const unit = this.$utils().p(units) || MS
+    if (!MS_PER_UNIT[unit]) return onWallClock(this, oldAdd, [number, units])
+    const timestamp = this.valueOf() + (Number(number) * MS_PER_UNIT[unit])
+    const offset = d(timestamp).isValid() ? tzOffset(timestamp, timezone) : this.utcOffset()
+    return zoned(timestamp, offset, timezone, this.$L)
   }
 
   d.tz = function (input, arg1, arg2) {
@@ -147,9 +210,7 @@ export default (o, c, d) => {
       return ins
     }
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
-    ins.$x.$timezone = timezone
-    return ins
+    return zoned(targetTs, targetOffset, timezone)
   }
 
   d.tz.guess = function () {
