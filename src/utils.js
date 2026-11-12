@@ -1,9 +1,10 @@
 import * as C from './constant'
 
 const padStart = (string, length, pad) => {
-  const s = String(string)
+  let s = String(string)
   if (!s || s.length >= length) return string
-  return `${Array((length + 1) - s.length).join(pad)}${string}`
+  while (s.length < length) s = pad + s
+  return s
 }
 
 const padZoneStr = (instance) => {
