@@ -37,6 +37,19 @@ describe('Update locale', () => {
       .toEqual(moment().format(formatString))
   })
 
+  it('Does not update inherited Object prototype properties', () => {
+    const property = 'dayjsPrototypePollution'
+    delete Object.prototype[property]
+
+    try {
+      const result = dayjs.updateLocale('__proto__', { [property]: true })
+      expect(result).toBeUndefined()
+      expect(Object.prototype[property]).toBeUndefined()
+    } finally {
+      delete Object.prototype[property]
+    }
+  })
+
   it('Return value', () => {
     const result1 = dayjs.updateLocale('en')
     expect(typeof result1).toEqual('object')
