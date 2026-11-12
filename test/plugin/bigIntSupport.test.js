@@ -25,6 +25,16 @@ it('Parse BigInt ts and tsms', () => {
   expect(dayjs(tsms).valueOf()).toBe(momentTsms.valueOf())
   expect(dayjs(tsms).valueOf()).toBe(dayjs(tsmsBig).valueOf())
   expect(dayjs.unix(ts).valueOf()).toBe(momentTs.valueOf())
-  expect(dayjs.unix(tsBig).valueOf()).toBe(dayjs.unix(tsBig).valueOf())
+  expect(dayjs.unix(tsBig).valueOf()).toBe(momentTs.valueOf())
+})
+
+;[
+  [0, 0],
+  [-1, -1000],
+  [-1666311003, -1666311003000]
+].forEach(([seconds, milliseconds]) => {
+  it(`Parse BigInt unix timestamp ${seconds}`, () => {
+    expect(dayjs.unix(BigInt(seconds)).valueOf()).toBe(milliseconds)
+  })
 })
 
