@@ -30,7 +30,11 @@ async function listLocaleJson(localeArr) {
       name: localeData.match(localeNameRegex)[1]
     })
   }))
-  promisifyWriteFile(path.join(__dirname, '../locale.json'), JSON.stringify(localeListArr), 'utf8')
+  await promisifyWriteFile(
+    path.join(__dirname, '../locale.json'),
+    JSON.stringify(localeListArr.sort((a, b) => (a.key > b.key) - (a.key < b.key))),
+    'utf8'
+  )
 }
 
 (async () => {
