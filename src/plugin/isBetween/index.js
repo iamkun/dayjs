@@ -1,5 +1,6 @@
 export default (o, c, d) => {
   c.prototype.isBetween = function (a, b, u, i) {
+    if (!this.isValid()) return false
     const dA = d(a)
     const dB = d(b)
     i = i || '()'

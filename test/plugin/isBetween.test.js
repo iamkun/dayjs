@@ -17,6 +17,17 @@ test('bounds can be swapped', () => {
   expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-02'), dayjs('2017-12-31'))).toBeTruthy()
 })
 
+test('invalid date is never between', () => {
+  const a = dayjs('2022-01-28')
+  const b = dayjs('2022-02-28')
+  const inclusivities = ['()', '[]', '[)', '(]']
+  inclusivities.forEach((i) => {
+    expect(dayjs(null).isBetween(a, b, 'day', i)).toBe(false)
+    expect(dayjs('not a date').isBetween(a, b, 'day', i)).toBe(false)
+    expect(dayjs(null).isBetween(a, b, null, i)).toBe(false)
+  })
+})
+
 test('bounds can be swapped with inclusivity', () => {
   expect(dayjs('2018-01-01').isBetween(dayjs('2017-12-31'), dayjs('2018-01-01'), null, '[]')).toBeTruthy()
   expect(dayjs('2018-01-01').isBetween(dayjs('2018-01-01'), dayjs('2017-12-31'), null, '[]')).toBeTruthy()
