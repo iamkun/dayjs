@@ -34,9 +34,9 @@ export default (o, c) => { // locale needed later
         case 'kk':
           return utils.s(String(this.$H === 0 ? 24 : this.$H), match === 'k' ? 1 : 2, '0')
         case 'X':
-          return Math.floor(this.$d.getTime() / 1000)
+          return this.unix()
         case 'x':
-          return this.$d.getTime()
+          return this.valueOf()
         case 'z':
           return `[${this.offsetName()}]`
         case 'zzz':

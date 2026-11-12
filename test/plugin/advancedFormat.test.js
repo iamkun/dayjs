@@ -42,6 +42,27 @@ it('Format Timestamp X x', () => {
   expect(dayjs().format('x')).toBe(moment().format('x'))
 })
 
+it('Format Timestamp X x respects fixed offsets', () => {
+  [0, 330, -270].forEach((offset) => {
+    const date = dayjs(1640995200123).utcOffset(offset)
+    expect(date.format('X x')).toBe('1640995200 1640995200123')
+  })
+})
+
+it('Format Timestamp X x respects named time zones', () => {
+  ['UTC', 'Asia/Tokyo', 'America/New_York', 'Asia/Kathmandu'].forEach((zone) => {
+    const date = dayjs(1640995200123).tz(zone)
+    expect(date.format('X x')).toBe('1640995200 1640995200123')
+  })
+})
+
+it('Format Timestamp X floors negative fractional seconds', () => {
+  [0, 330, -270].forEach((offset) => {
+    const date = dayjs(-1).utcOffset(offset)
+    expect(date.format('X x')).toBe('-1 -1')
+  })
+})
+
 it('Format Day of Month Do 1 - 31', () => {
   expect(dayjs().format('Do')).toBe(moment().format('Do'))
   let d = '2018-05-02 00:00:00.000'
