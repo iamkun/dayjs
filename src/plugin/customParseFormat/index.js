@@ -254,7 +254,7 @@ export default (o, C, d) => {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
-        const result = d.apply(this, args)
+        const result = new C({ date, utc, args })
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
