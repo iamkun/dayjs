@@ -49,11 +49,36 @@ const meridiemMatch = (input, isLowerCase) => {
   if (!meridiem) {
     isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
   } else {
+    const labelOf = hour => meridiem(hour, 0, isLowerCase)
+    let matchedHour
+    // Prefer an exact match so labels that share a character
+    // (e.g. 午前 / 午後) cannot collide via indexOf.
     for (let i = 1; i <= 24; i += 1) {
-      // todo: fix input === meridiem(i, 0, isLowerCase)
-      if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
-        isAfternoon = i > 12
+      if (input === labelOf(i)) {
+        matchedHour = i
         break
+      }
+    }
+    if (matchedHour === undefined) {
+      for (let i = 1; i <= 24; i += 1) {
+        const label = labelOf(i)
+        if (label && input.indexOf(label) > -1) {
+          matchedHour = i
+          break
+        }
+      }
+    }
+    if (matchedHour !== undefined) {
+      const label = labelOf(matchedHour)
+      // A label is afternoon if the locale uses it for any hour after
+      // noon. `i > 12` was wrong: Japanese/Korean switch to 午後/오후
+      // at hour 12, so the first match was classified as morning.
+      isAfternoon = false
+      for (let h = 13; h <= 23; h += 1) {
+        if (labelOf(h) === label) {
+          isAfternoon = true
+          break
+        }
       }
     }
   }

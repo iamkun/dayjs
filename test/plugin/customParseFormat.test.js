@@ -4,6 +4,8 @@ import dayjs from '../../src'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
+import '../../src/locale/ja'
+import '../../src/locale/ko'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import advancedFormat from '../../src/plugin/advancedFormat'
 import localizedFormats from '../../src/plugin/localizedFormat'
@@ -346,6 +348,19 @@ describe('meridiem locale', () => {
     const input = '2018-05-02 20:02:03'
     const date = dayjs(input).locale('zh-cn').format(format)
     expect(dayjs(date, format, 'zh-cn').format(format2)).toBe(input)
+  })
+
+  // https://github.com/iamkun/dayjs/issues/2442
+  it('parses Japanese 午後 as afternoon', () => {
+    expect(dayjs('9:00 午後', 'h:mm A', 'ja').hour()).toBe(21)
+    expect(dayjs('9:00 午後', 'h:mm A', 'ja').format('h:mm A')).toBe('9:00 午後')
+    expect(dayjs('9:00 午前', 'h:mm A', 'ja').hour()).toBe(9)
+    expect(dayjs('9:00 午前', 'h:mm A', 'ja').format('h:mm A')).toBe('9:00 午前')
+  })
+
+  it('parses Korean 오후 as afternoon', () => {
+    expect(dayjs('9:00 오후', 'h:mm A', 'ko').hour()).toBe(21)
+    expect(dayjs('9:00 오전', 'h:mm A', 'ko').hour()).toBe(9)
   })
 })
 
