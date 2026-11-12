@@ -12,7 +12,7 @@ export default (o, c, d) => {
     return yearFirstDay.add(addDiffDays, D)
   }
 
-  const getCurrentWeekThursday = ins => ins.add((4 - ins.isoWeekday()), D)
+  const getCurrentWeekThursday = ins => d(ins).add((4 - ins.isoWeekday()), D)
 
   const proto = c.prototype
 
