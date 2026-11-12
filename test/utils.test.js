@@ -41,4 +41,14 @@ it('PadZoneStr', () => {
 it('PadStart', () => {
   expect(padStart(1, 2, '0')).toBe('01')
   expect(padStart(0, 2, '0')).toBe('00')
+  expect(padStart(123, 2, '0')).toBe(123)
+  expect(padStart('', 2, '0')).toBe('')
+})
+
+it('PadStart keeps the sign of negative numbers', () => {
+  expect(padStart(-1, 4, '0')).toBe('-0001')
+  expect(padStart(-10, 4, '0')).toBe('-0010')
+  expect(padStart(-100, 4, '0')).toBe('-0100')
+  expect(padStart(-1000, 4, '0')).toBe(-1000)
+  expect(padStart(-10000, 4, '0')).toBe(-10000)
 })
