@@ -12,7 +12,8 @@ export default (_, c, dayjs) => {
         newDate = dayjs(normalData)
       }
       const fullYear = newDate.year()
-      if (date.indexOf(`-${fullYear}`) !== -1) {
+      const normalizedDate = date.replace(/^-(0\d{3})(?=\D|$)/, (match, year) => `-${Number(year)}`)
+      if (normalizedDate.indexOf(`-${fullYear}`) !== -1) {
         return dayjs(newDate).subtract(fullYear * 2, 'year').toDate()
       }
       return date
