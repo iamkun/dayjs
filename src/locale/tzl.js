@@ -11,12 +11,12 @@ const locale = {
   weekdaysMin: 'Sú_Lú_Ma_Má_Xh_Vi_Sá'.split('_'),
   ordinal: n => n,
   formats: {
-    LT: 'HH.mm',
-    LTS: 'HH.mm.ss',
+    LT: 'HH:mm',
+    LTS: 'HH:mm:ss',
     L: 'DD.MM.YYYY',
     LL: 'D. MMMM [dallas] YYYY',
-    LLL: 'D. MMMM [dallas] YYYY HH.mm',
-    LLLL: 'dddd, [li] D. MMMM [dallas] YYYY HH.mm'
+    LLL: 'D. MMMM [dallas] YYYY HH:mm',
+    LLLL: 'dddd, [li] D. MMMM [dallas] YYYY HH:mm'
   }
 }
 
