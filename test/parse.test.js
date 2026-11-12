@@ -213,3 +213,18 @@ describe('REGEX_PARSE', () => {
     expect(d).toBe(null)
   })
 })
+
+describe('Timestamp string', () => {
+  // #2955
+  it('timestamp passed as string is invalid', () => {
+    expect(dayjs('1762232987879').isValid()).toBe(false)
+    expect(dayjs('1581314281').isValid()).toBe(false)
+    expect(dayjs('123456789').isValid()).toBe(false)
+  })
+  it('digit-only date formats still parse', () => {
+    expect(dayjs('2018').year()).toBe(2018)
+    expect(dayjs('201805').format('YYYY-MM')).toBe('2018-05')
+    expect(dayjs('20180517').format('YYYY-MM-DD')).toBe('2018-05-17')
+    expect(dayjs('20210102T012345').isValid()).toBe(true)
+  })
+})
