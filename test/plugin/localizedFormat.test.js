@@ -116,3 +116,16 @@ it('Uses the localized uppercase formats as a base for lowercase formats, if not
     expect(spanishDate.format(option)).toBe(spanishDate.format(adaptedFormat))
   })
 })
+
+it('Uses English formats in other locales as default for lowercase formats', () => {
+  const date = new Date()
+  const actualDate = dayjs(date)
+  const expectedDate = moment(date)
+  const mockLocale = {
+    name: 'mock-lowercase',
+    weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  };
+  ['l', 'll', 'lll', 'llll'].forEach(option =>
+    expect(actualDate.locale(mockLocale).format(option)).toBe(expectedDate.format(option)))
+})

@@ -460,3 +460,14 @@ it('parse w, ww', () => {
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
 })
+
+it('parse localized format in a locale without formats', () => {
+  dayjs.locale('mock', {
+    name: 'mock',
+    weekdays: Array(7).fill(' '),
+    months: Array(12).fill(' ')
+  })
+  expect(dayjs('02/05/2018', 'L', 'mock').format('YYYY-MM-DD')).toBe('2018-02-05')
+  expect(dayjs('2/5/2018', 'l', 'mock').format('YYYY-MM-DD')).toBe('2018-02-05')
+  expect(dayjs('2/5/2018 1:02 AM', 'l LT', 'mock').format('YYYY-MM-DD HH:mm')).toBe('2018-02-05 01:02')
+})
