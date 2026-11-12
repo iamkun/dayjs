@@ -36,6 +36,24 @@ describe('Guess', () => {
   it('return string', () => {
     expect(typeof dayjs.tz.guess()).toBe('string')
   })
+  it('maps deprecated IANA aliases to canonical names', () => {
+    const { DateTimeFormat } = Intl
+    Intl.DateTimeFormat = () => ({ resolvedOptions: () => ({ timeZone: 'Asia/Calcutta' }) })
+    try {
+      expect(dayjs.tz.guess()).toBe('Asia/Kolkata')
+    } finally {
+      Intl.DateTimeFormat = DateTimeFormat
+    }
+  })
+  it('keeps canonical names untouched', () => {
+    const { DateTimeFormat } = Intl
+    Intl.DateTimeFormat = () => ({ resolvedOptions: () => ({ timeZone: 'Asia/Kolkata' }) })
+    try {
+      expect(dayjs.tz.guess()).toBe('Asia/Kolkata')
+    } finally {
+      Intl.DateTimeFormat = DateTimeFormat
+    }
+  })
 })
 
 
