@@ -186,24 +186,31 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
       year, month, day, hours, minutes, seconds, milliseconds, zone, week
     } = parser(input)
     const now = new Date()
-    const d = day || ((!year && !month) ? now.getDate() : 1)
-    const y = year || now.getFullYear()
+    const hasYear = year !== undefined
+    const d = day || ((!hasYear && !month) ? now.getDate() : 1)
+    const y = hasYear ? year : now.getFullYear()
     let M = 0
-    if (!(year && !month)) {
+    if (!(hasYear && !month)) {
       M = month > 0 ? month - 1 : now.getMonth()
     }
     const h = hours || 0
     const m = minutes || 0
     const s = seconds || 0
     const ms = milliseconds || 0
-    if (zone) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
-    }
-    if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
-    }
+    // Date maps years 0-99 to 1900-1999. A Gregorian cycle preserves leap days
+    // and overflow while avoiding that conversion, including zone rollovers.
+    const yearOffset = y >= 0 && y < 100 ? 400 : 0
     let newDate
-    newDate = new Date(y, M, d, h, m, s, ms)
+    if (zone || utc) {
+      newDate = new Date(Date.UTC(
+        y + yearOffset, M, d, h, m, s,
+        ms + (zone ? zone.offset * 60 * 1000 : 0)
+      ))
+      if (yearOffset) newDate.setUTCFullYear(newDate.getUTCFullYear() - yearOffset)
+      return newDate
+    }
+    newDate = new Date(y + yearOffset, M, d, h, m, s, ms)
+    if (yearOffset) newDate.setFullYear(newDate.getFullYear() - yearOffset)
     if (week) {
       newDate = dayjs(newDate).week(week).toDate()
     }
