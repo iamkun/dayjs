@@ -151,13 +151,27 @@ class Dayjs {
         Date.UTC(this.$y, m, d) : new Date(this.$y, m, d), this)
       return isStartOf ? ins : ins.endOf(C.D)
     }
-    const instanceFactorySet = (method, slice) => {
+    const instanceFactorySet = (method, slice, keepOffset) => {
       const argumentStart = [0, 0, 0, 0]
       const argumentEnd = [23, 59, 59, 999]
-      return Utils.w(this.toDate()[method].apply( // eslint-disable-line prefer-spread
-        this.toDate('s'),
+      const date = this.toDate('s')
+      // In UTC mode the setters are setUTC* and no wall clock is ambiguous.
+      const trackOffset = keepOffset && !this.$u
+      const oldOffset = trackOffset ? date.getTimezoneOffset() : 0
+      const time = this.toDate()[method].apply( // eslint-disable-line prefer-spread
+        date,
         (isStartOf ? argumentStart : argumentEnd).slice(slice)
-      ), this)
+      )
+      if (!trackOffset) return Utils.w(time, this)
+      // A Date setter resolves the wall clock that repeats at a DST fall back to
+      // its first occurrence, moving the result a whole offset step away from the
+      // instant it came from. Units below a day never leave the offset they
+      // started in, so pull the result back when that offset still holds there.
+      const newOffset = date.getTimezoneOffset()
+      const shifted = time + ((oldOffset - newOffset) * C.MILLISECONDS_A_MINUTE)
+      const keep = oldOffset === newOffset ||
+        new Date(shifted).getTimezoneOffset() === oldOffset
+      return Utils.w(keep ? shifted : time, this)
     }
     const { $W, $M, $D } = this
     const utcPad = `set${this.$u ? 'UTC' : ''}`
@@ -177,11 +191,11 @@ class Dayjs {
       case C.DATE:
         return instanceFactorySet(`${utcPad}Hours`, 0)
       case C.H:
-        return instanceFactorySet(`${utcPad}Minutes`, 1)
+        return instanceFactorySet(`${utcPad}Minutes`, 1, true)
       case C.MIN:
-        return instanceFactorySet(`${utcPad}Seconds`, 2)
+        return instanceFactorySet(`${utcPad}Seconds`, 2, true)
       case C.S:
-        return instanceFactorySet(`${utcPad}Milliseconds`, 3)
+        return instanceFactorySet(`${utcPad}Milliseconds`, 3, true)
       default:
         return this.clone()
     }
