@@ -118,6 +118,43 @@ it('Time from now with UTC', () => {
   expect(dutc.fromNow()).toBe(mutc.fromNow())
 })
 
+it('Singular thresholds substitute 1 into %d', () => {
+  dayjs.extend(updateLocale)
+  const { relativeTime: enRelativeTime } = dayjs.Ls.en
+  dayjs.updateLocale('en', {
+    relativeTime: {
+      future: 'in %s',
+      past: '%s ago',
+      s: '%d seconds',
+      m: '%d minute',
+      mm: '%d minutes',
+      h: '%d hour',
+      hh: '%d hours',
+      d: '%d day',
+      dd: '%d days',
+      M: '%d month',
+      MM: '%d months',
+      y: '%d year',
+      yy: '%d years'
+    }
+  })
+  try {
+    expect(dayjs().subtract(60, 'second').fromNow()).toBe('1 minute ago')
+    expect(dayjs().subtract(1, 'hour').fromNow()).toBe('1 hour ago')
+    expect(dayjs().subtract(1, 'day').fromNow()).toBe('1 day ago')
+    expect(dayjs().subtract(28, 'day').fromNow()).toBe('1 month ago')
+    expect(dayjs().subtract(11, 'month').fromNow()).toBe('1 year ago')
+    expect(dayjs().add(60, 'second').fromNow()).toBe('in 1 minute')
+    expect(dayjs().add(1, 'day').toNow()).toBe('1 day ago')
+    // thresholds with a diff unit keep the computed value
+    expect(dayjs().subtract(30, 'second').fromNow()).toBe('30 seconds ago')
+    expect(dayjs().subtract(5, 'day').fromNow()).toBe('5 days ago')
+    expect(dayjs().subtract(3, 'month').fromNow()).toBe('3 months ago')
+  } finally {
+    dayjs.updateLocale('en', { relativeTime: enRelativeTime })
+  }
+})
+
 it('Custom thresholds and rounding support', () => {
   expect(dayjs().subtract(45, 'm').fromNow()).toBe('an hour ago')
   delete relativeTime.$i // this allow plugin to be installed again

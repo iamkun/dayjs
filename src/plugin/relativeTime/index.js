@@ -50,6 +50,7 @@ export default (o, c, d) => {
       isFuture = result > 0
       if (abs <= t.r || !t.r) {
         if (abs <= 1 && i > 0) t = T[i - 1] // 1 minutes -> a minute, 0 seconds -> 0 second
+        if (!t.d) abs = 1 // singular threshold: always 1 unit, e.g. '%d minute' -> '1 minute'
         const format = loc[t.l]
         if (postFormat) {
           abs = postFormat(`${abs}`)
