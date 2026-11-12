@@ -57,7 +57,7 @@ async function listLocaleJson(localeArr) {
       }))
     }
 
-    build(configFactory({
+    await build(configFactory({
       input: './src/index.js',
       fileName: './dayjs.min.js'
     }))
