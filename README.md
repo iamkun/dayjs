@@ -47,6 +47,8 @@ You can find more details, API, and other docs on [day.js.org](https://day.js.or
 
 ```console
 npm install dayjs --save
+# or
+deno install dayjs
 ```
 
 📚[Installation Guide](https://day.js.org/docs/en/installation/installation)
