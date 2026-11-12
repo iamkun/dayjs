@@ -10,6 +10,12 @@ const locale = {
   monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aŭg_sep_okt_nov_dec'.split('_'),
   weekdaysMin: 'di_lu_ma_me_ĵa_ve_sa'.split('_'),
   ordinal: n => n,
+  meridiem: (hour, minute, isLowercase) => {
+    if (hour > 11) {
+      return isLowercase ? 'p.t.m.' : 'P.T.M.'
+    }
+    return isLowercase ? 'a.t.m.' : 'A.T.M.'
+  },
   formats: {
     LT: 'HH:mm',
     LTS: 'HH:mm:ss',

@@ -10,6 +10,18 @@ const locale = {
   monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ogs_Sep_Okt_Nov_Dis'.split('_'),
   weekdaysMin: 'Ah_Is_Sl_Rb_Km_Jm_Sb'.split('_'),
   ordinal: n => n,
+  meridiem: (hour) => {
+    if (hour < 11) {
+      return 'pagi'
+    }
+    if (hour < 15) {
+      return 'tengahari'
+    }
+    if (hour < 19) {
+      return 'petang'
+    }
+    return 'malam'
+  },
   formats: {
     LT: 'HH.mm',
     LTS: 'HH.mm.ss',

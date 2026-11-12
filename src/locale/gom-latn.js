@@ -10,6 +10,21 @@ const locale = {
   monthsShort: 'Jan._Feb._Mars_Abr._Mai_Jun_Jul._Ago._Set._Otu._Nov._Dez.'.split('_'),
   weekdaysMin: 'Ai_Sm_Mo_Bu_Br_Su_Sn'.split('_'),
   ordinal: n => n,
+  meridiem: (hour) => {
+    if (hour < 4) {
+      return 'rati'
+    }
+    if (hour < 12) {
+      return 'sokallim'
+    }
+    if (hour < 16) {
+      return 'donparam'
+    }
+    if (hour < 20) {
+      return 'sanje'
+    }
+    return 'rati'
+  },
   formats: {
     LT: 'A h:mm [vazta]',
     LTS: 'A h:mm:ss [vazta]',

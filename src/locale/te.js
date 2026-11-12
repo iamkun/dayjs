@@ -9,6 +9,21 @@ const locale = {
   monthsShort: 'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జులై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split('_'),
   weekdaysMin: 'ఆ_సో_మం_బు_గు_శు_శ'.split('_'),
   ordinal: n => n,
+  meridiem: (hour) => {
+    if (hour < 4) {
+      return 'రాత్రి'
+    }
+    if (hour < 10) {
+      return 'ఉదయం'
+    }
+    if (hour < 17) {
+      return 'మధ్యాహ్నం'
+    }
+    if (hour < 20) {
+      return 'సాయంత్రం'
+    }
+    return 'రాత్రి'
+  },
   formats: {
     LT: 'A h:mm',
     LTS: 'A h:mm:ss',

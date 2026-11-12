@@ -79,3 +79,13 @@ it('RelativeTime: Time from X', () => {
       .toBe(moment().from(moment().add(t[0], t[1]), true))
   })
 })
+
+it('Meridiem', () => {
+  for (let i = 0; i < 24; i += 1) {
+    dayjs.locale('bn')
+    moment.locale('bn')
+    const time = `2020-01-01 ${String(i).padStart(2, '0')}:00:00`
+    expect(dayjs(time).format('A')).toBe(moment(time).format('A'))
+    expect(dayjs(time).format('a')).toBe(moment(time).format('a'))
+  }
+})

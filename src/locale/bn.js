@@ -41,6 +41,21 @@ const locale = {
     return string.replace(/\d/g, match => symbolMap[match])
   },
   ordinal: n => n,
+  meridiem: (hour) => {
+    if (hour < 4) {
+      return 'রাত'
+    }
+    if (hour < 10) {
+      return 'সকাল'
+    }
+    if (hour < 17) {
+      return 'দুপুর'
+    }
+    if (hour < 20) {
+      return 'বিকাল'
+    }
+    return 'রাত'
+  },
   formats: {
     LT: 'A h:mm সময়',
     LTS: 'A h:mm:ss সময়',
