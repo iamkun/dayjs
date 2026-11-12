@@ -218,6 +218,19 @@ describe('Difference', () => {
     expect(dayjs('2018-01-01').diff(dayjs('2018-01-01'), 'month')).toEqual(0)
   })
 
+  it('MonthDiff for leap-day anniversaries (#1000)', () => {
+    // a leap-day anniversary rolls over to Mar 1 in non-leap years
+    expect(dayjs('2017-02-28').diff(dayjs('2016-02-29'), 'year')).toEqual(0)
+    expect(dayjs('2017-03-01').diff(dayjs('2016-02-29'), 'year')).toEqual(1)
+    expect(dayjs('2017-02-28').diff(dayjs('2016-02-29'), 'month')).toEqual(11)
+    expect(dayjs('2017-03-01').diff(dayjs('2016-02-29'), 'month')).toEqual(12)
+    // leap-year anniversaries are unaffected
+    expect(dayjs('2020-02-28').diff(dayjs('2016-02-29'), 'year')).toEqual(3)
+    expect(dayjs('2020-02-29').diff(dayjs('2016-02-29'), 'year')).toEqual(4)
+    // non leap-day boundaries keep clamping to end of month
+    expect(dayjs('2016-02-29').diff(dayjs('2016-01-31'), 'month')).toEqual(1)
+  })
+
   it('undefined edge case', () => {
     expect(dayjs().diff(undefined, 'seconds')).toBeDefined()
   })
