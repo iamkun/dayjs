@@ -113,7 +113,8 @@ class Dayjs {
   }
 
   isValid() {
-    return !(this.$d.toString() === C.INVALID_DATE_STRING)
+    // eslint-disable-next-line no-restricted-globals
+    return !isNaN(this.$d.getTime())
   }
 
   isSame(that, units) {
