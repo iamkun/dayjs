@@ -35,6 +35,7 @@ const addInput = function (property) {
 const zoneExpressions = [matchOffset, function (input) {
   const zone = this.zone || (this.zone = {})
   zone.offset = offsetFromString(input)
+  zone.input = input
 }]
 
 const getLocalePart = (name) => {
@@ -178,9 +179,31 @@ function makeParser(format) {
   }
 }
 
+const isStrictMatch = (input, format, zone, instance) => {
+  // A `Z`/`ZZ` token is rendered by `format()` as the *local* timezone offset, so the
+  // naive strict round-trip comparison below would reject valid inputs whose offset
+  // differs from the local one. Compare instead in the input's own offset, which is
+  // equivalent to re-rendering the parsed instant in UTC.
+  const wallClock = new Date(instance.$d.getTime() - (zone.offset * 60 * 1000))
+  const shadow = instance.clone()
+  shadow.$d = wallClock
+  shadow.$u = true
+  shadow.utcOffset = () => 0
+  shadow.$y = wallClock.getUTCFullYear()
+  shadow.$M = wallClock.getUTCMonth()
+  shadow.$D = wallClock.getUTCDate()
+  shadow.$W = wallClock.getUTCDay()
+  shadow.$H = wallClock.getUTCHours()
+  shadow.$m = wallClock.getUTCMinutes()
+  shadow.$s = wallClock.getUTCSeconds()
+  shadow.$ms = wallClock.getUTCMilliseconds()
+  const canonical = format.indexOf('ZZ') > -1 ? '+0000' : '+00:00'
+  return input.replace(zone.input, canonical) === shadow.format(format)
+}
+
 const parseFormattedInput = (input, format, utc, dayjs) => {
   try {
-    if (['x', 'X'].indexOf(format) > -1) return new Date((format === 'X' ? 1000 : 1) * input)
+    if (['x', 'X'].indexOf(format) > -1) return { date: new Date((format === 'X' ? 1000 : 1) * input) }
     const parser = makeParser(format)
     const {
       year, month, day, hours, minutes, seconds, milliseconds, zone, week
@@ -197,19 +220,22 @@ const parseFormattedInput = (input, format, utc, dayjs) => {
     const s = seconds || 0
     const ms = milliseconds || 0
     if (zone) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000)))
+      return {
+        date: new Date(Date.UTC(y, M, d, h, m, s, ms + (zone.offset * 60 * 1000))),
+        zone
+      }
     }
     if (utc) {
-      return new Date(Date.UTC(y, M, d, h, m, s, ms))
+      return { date: new Date(Date.UTC(y, M, d, h, m, s, ms)) }
     }
     let newDate
     newDate = new Date(y, M, d, h, m, s, ms)
     if (week) {
       newDate = dayjs(newDate).week(week).toDate()
     }
-    return newDate
+    return { date: newDate }
   } catch (e) {
-    return new Date('') // Invalid Date
+    return { date: new Date('') } // Invalid Date
   }
 }
 
@@ -239,13 +265,16 @@ export default (o, C, d) => {
       if (!isStrictWithoutLocale && pl) {
         locale = d.Ls[pl]
       }
-      this.$d = parseFormattedInput(date, format, utc, d)
+      const result = parseFormattedInput(date, format, utc, d)
+      this.$d = result.date
       this.init()
+      const { zone } = result
       if (pl && pl !== true) this.$L = this.locale(pl).$L
       // use != to treat
       // input number 1410715640579 and format string '1410715640579' equal
-      // eslint-disable-next-line eqeqeq
-      if (isStrict && date != this.format(format)) {
+      if (isStrict && (zone ? !isStrictMatch(date, format, zone, this)
+        // eslint-disable-next-line eqeqeq
+        : date != this.format(format))) {
         this.$d = new Date('')
       }
       // reset global locale to make parallel unit test
