@@ -13,6 +13,8 @@ export default (o, c, dayjs) => { // locale needed later
     return result.map((_, index) => (result[(index + (weekStart || 0)) % 7]))
   }
   const getDayjsLocaleObject = () => dayjs.Ls[dayjs.locale()]
+  // moment's doy encoding: 7 + dow - (January date that is always in week 1)
+  const getFirstDayOfYear = l => (7 + (l.weekStart || 0)) - (l.yearStart || 1)
   const getLongDateFormat = (l, format) =>
     l.formats[format] || t(l.formats[format.toUpperCase()])
 
@@ -23,6 +25,7 @@ export default (o, c, dayjs) => { // locale needed later
       monthsShort: instance =>
         (instance ? instance.format('MMM') : getShort(this, 'monthsShort', 'months', 3)),
       firstDayOfWeek: () => this.$locale().weekStart || 0,
+      firstDayOfYear: () => getFirstDayOfYear(this.$locale()),
       weekdays: instance => (instance ? instance.format('dddd') : getShort(this, 'weekdays')),
       weekdaysMin: instance =>
         (instance ? instance.format('dd') : getShort(this, 'weekdaysMin', 'weekdays', 2)),
@@ -41,6 +44,7 @@ export default (o, c, dayjs) => { // locale needed later
     const localeObject = getDayjsLocaleObject()
     return {
       firstDayOfWeek: () => localeObject.weekStart || 0,
+      firstDayOfYear: () => getFirstDayOfYear(localeObject),
       weekdays: () => dayjs.weekdays(),
       weekdaysShort: () => dayjs.weekdaysShort(),
       weekdaysMin: () => dayjs.weekdaysMin(),
