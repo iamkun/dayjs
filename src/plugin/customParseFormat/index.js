@@ -49,10 +49,13 @@ const meridiemMatch = (input, isLowerCase) => {
   if (!meridiem) {
     isAfternoon = input === (isLowerCase ? 'pm' : 'PM')
   } else {
-    for (let i = 1; i <= 24; i += 1) {
-      // todo: fix input === meridiem(i, 0, isLowerCase)
+    // Iterate over a full 24-hour range so the meridiem string for each hour is
+    // checked. The previous loop started at hour 1 and used an `i > 12` check,
+    // but a PM string first matched at i=12 (12 > 12 === false) and was misread
+    // as AM for non-English locales such as `ko` (오전/오후). (#2031)
+    for (let i = 0; i <= 23; i += 1) {
       if (input.indexOf(meridiem(i, 0, isLowerCase)) > -1) {
-        isAfternoon = i > 12
+        isAfternoon = i >= 12
         break
       }
     }
