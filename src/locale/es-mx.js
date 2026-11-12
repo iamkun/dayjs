@@ -25,12 +25,12 @@ const locale = {
   },
   ordinal: n => `${n}º`,
   formats: {
-    LT: 'H:mm',
-    LTS: 'H:mm:ss',
+    LT: 'h:mm A',
+    LTS: 'h:mm:ss A',
     L: 'DD/MM/YYYY',
     LL: 'D [de] MMMM [de] YYYY',
-    LLL: 'D [de] MMMM [de] YYYY H:mm',
-    LLLL: 'dddd, D [de] MMMM [de] YYYY H:mm'
+    LLL: 'D [de] MMMM [de] YYYY h:mm A',
+    LLLL: 'dddd, D [de] MMMM [de] YYYY h:mm A'
   }
 }
 
