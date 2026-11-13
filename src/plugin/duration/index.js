@@ -78,6 +78,7 @@ class Duration {
         this.$d[prettyUnit(k)] = input[k]
       })
       this.calMilliseconds()
+      this.parseFromMilliseconds()
       return this
     }
     if (typeof input === 'string') {
