@@ -1,4 +1,7 @@
-import { MIN, MS } from '../../constant'
+import { D, W, M, Y, MILLISECONDS_A_DAY } from '../../constant'
+
+const WALL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSS'
+const CALENDAR_UNITS = [D, W, M, Y]
 
 const typeToPos = {
   year: 0,
@@ -92,26 +95,61 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
-  proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
-    if (!this.isValid()) return this
-    const oldOffset = this.utcOffset()
-    const date = this.toDate()
-    const target = date.toLocaleString('en-US', { timeZone: timezone })
-    const offset = tzOffset(+date, timezone)
-    const isUTC = !Number(offset)
+  // Build an instance in `timezone` from a wall-clock time expressed as a UTC timestamp.
+  // `guess` picks the side of an ambiguous (fall-back) wall time.
+  const fromWallClock = (wallTs, timezone, guess, locale) => {
+    const [ts, offset] = fixOffset(wallTs, guess, timezone)
     let ins
-    if (isUTC) { // if utcOffset is 0, turn it to UTC mode
-      ins = this.utcOffset(0, keepLocalTime)
+    if (offset === 0) {
+      ins = d(ts, { locale }).utc()
     } else {
-      ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
-        .utcOffset(offset, true)
-      if (keepLocalTime) {
-        const newOffset = ins.utcOffset()
-        ins = ins.add(oldOffset - newOffset, MIN)
-      }
+      // Start from a host-local Date whose fields already show the zone's wall clock, so the
+      // utc plugin never shifts it across a host DST change, then attach the zone offset.
+      const w = new Date(ts + (offset * 60 * 1000))
+      const local = new Date(
+        w.getUTCFullYear(), w.getUTCMonth(), w.getUTCDate(),
+        w.getUTCHours(), w.getUTCMinutes(), w.getUTCSeconds(), w.getUTCMilliseconds()
+      )
+      ins = d(local, { locale }).utcOffset(offset, true)
     }
     ins.$x.$timezone = timezone
     return ins
+  }
+  // The instance's wall clock as a UTC-mode instance, so calendar math never sees a DST change
+  const wallClock = ins => d.utc(ins.format(WALL_FORMAT)).locale(ins.$L)
+
+  proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
+    if (!this.isValid()) return this
+    if (keepLocalTime) {
+      // resolve the offset at the *target* wall-clock time, not at the current instant
+      return fromWallClock(wallClock(this).valueOf(), timezone, tzOffset(+this, timezone), this.$L)
+    }
+    // Convert the instant: read the zone's offset at it, then build from the zone's wall clock
+    const offset = tzOffset(+this, timezone)
+    return fromWallClock(+this + (offset * 60 * 1000), timezone, offset, this.$L)
+  }
+
+  // Calendar arithmetic (day/week/month/year) and setters operate on the wall clock of the zone,
+  // then the zone offset is re-resolved. Exact units (h/m/s/ms) move the instant.
+  const oldAdd = proto.add
+  proto.add = function (number, units) {
+    const timezone = this.$x && this.$x.$timezone
+    if (!timezone || !this.isValid()) return oldAdd.call(this, number, units)
+    if (CALENDAR_UNITS.indexOf(this.$utils().p(units)) > -1) {
+      const wall = oldAdd.call(wallClock(this), number, units)
+      return fromWallClock(wall.valueOf(), timezone, this.utcOffset(), this.$L)
+    }
+    // elapsed time: add to the real instant (as UTC, so no host DST applies), then convert back
+    const instant = oldAdd.call(d.utc(this.valueOf()), number, units).valueOf()
+    return d(instant, { locale: this.$L }).tz(timezone)
+  }
+
+  const oldSet = proto.set
+  proto.set = function (unit, value) {
+    const timezone = this.$x && this.$x.$timezone
+    if (!timezone || !this.isValid()) return oldSet.call(this, unit, value)
+    const wall = oldSet.call(wallClock(this), unit, value)
+    return fromWallClock(wall.valueOf(), timezone, this.utcOffset(), this.$L)
   }
 
   proto.offsetName = function (type) {
@@ -127,15 +165,13 @@ export default (o, c, d) => {
       return oldStartOf.call(this, units, startOf)
     }
 
-    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
-    const startOfWithoutTz = oldStartOf.call(withoutTz, units, startOf)
-    return startOfWithoutTz.tz(this.$x.$timezone, true)
+    const wall = oldStartOf.call(wallClock(this), units, startOf)
+    return fromWallClock(wall.valueOf(), this.$x.$timezone, this.utcOffset(), this.$L)
   }
 
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
-    const previousOffset = tzOffset(+d(), timezone)
     if (typeof input !== 'string') {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
@@ -146,10 +182,10 @@ export default (o, c, d) => {
       ins.$x.$timezone = timezone
       return ins
     }
-    const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
-    ins.$x.$timezone = timezone
-    return ins
+    // Guess with the offset in force a day earlier: an ambiguous fall-back time then resolves to
+    // the earlier instant (like moment), regardless of today's date.
+    const previousOffset = tzOffset(localTs - MILLISECONDS_A_DAY, timezone)
+    return fromWallClock(localTs, timezone, previousOffset)
   }
 
   d.tz.guess = function () {
