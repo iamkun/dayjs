@@ -236,6 +236,18 @@ class Duration {
       .fromNow(!withSuffix)
   }
 
+  asObject() {
+    return {
+      years: this.years(),
+      months: this.months(),
+      days: this.days(),
+      hours: this.hours(),
+      minutes: this.minutes(),
+      seconds: this.seconds(),
+      milliseconds: this.milliseconds()
+    }
+  }
+
   valueOf() {
     return this.asMilliseconds()
   }
