@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'se',
-  weekdays: 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split('_'),
+  weekdays: 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorasdat_bearjadat_lávvardat'.split('_'),
   months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split('_'),
   weekStart: 1,
   weekdaysShort: 'sotn_vuos_maŋ_gask_duor_bear_láv'.split('_'),
