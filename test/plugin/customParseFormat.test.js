@@ -290,10 +290,24 @@ describe('month function locale', () => {
     const format = 'DD MMMM YYYY'
     expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
     expect(dayjs(input2, format, 'ru').valueOf()).toBe(moment(input2, format, 'ru').valueOf())
+
+    const inputDec = '01 декабря 2024'
+    const inputDec2 = '01 декабрь 2024'
+    expect(dayjs(inputDec, format, 'ru').year()).toBe(2024)
+    expect(dayjs(inputDec, format, 'ru').valueOf()).toBe(moment(inputDec, format, 'ru').valueOf())
+    expect(dayjs(inputDec2, format, 'ru').year()).toBe(2024)
+    expect(dayjs(inputDec2, format, 'ru').valueOf()).toBe(moment(inputDec2, format, 'ru').valueOf())
+
+    const inputUkDec = '01 грудня 2024'
+    expect(dayjs(inputUkDec, format, 'uk').year()).toBe(2024)
+    expect(dayjs(inputUkDec, format, 'uk').valueOf()).toBe(moment(inputUkDec, format, 'uk').valueOf())
   })
   it('MMM', () => {
     const input = '08 февр. 2020'
     const format = 'DD MMM YYYY'
+    const inputDecShort = '01 дек. 2024'
+    expect(dayjs(inputDecShort, format, 'ru').year()).toBe(2024)
+    expect(dayjs(inputDecShort, format, 'ru').valueOf()).toBe(moment(inputDecShort, format, 'ru').valueOf())
     expect(dayjs(input, format, 'ru').valueOf()).toBe(moment(input, format, 'ru').valueOf())
   })
 })
