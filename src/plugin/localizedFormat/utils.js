@@ -11,7 +11,20 @@ export const englishFormats = {
   LLLL: 'dddd, MMMM D, YYYY h:mm A'
 }
 
-export const u = (formatStr, formats) => formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
-  const B = b && b.toUpperCase()
-  return a || formats[b] || englishFormats[b] || t(formats[B])
-})
+export const globalFormats = {
+  LTS: 'HH:mm:ss',
+  LT: 'HH:mm',
+  L: 'DD/MM/YYYY',
+  LL: 'D MMMM YYYY',
+  LLL: 'D MMMM YYYY HH:mm',
+  LLLL: 'dddd, D MMMM YYYY HH:mm'
+}
+
+export const u = (formatStr, formats, useGlobal) => {
+  const fallbackFormats = useGlobal ? globalFormats : englishFormats
+  return formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
+    const B = b && b.toUpperCase()
+    return a || formats[b] || fallbackFormats[b] || t(formats[B] || fallbackFormats[B])
+  })
+}
+

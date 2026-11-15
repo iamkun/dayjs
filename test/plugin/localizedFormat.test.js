@@ -75,6 +75,30 @@ it('Uses English formats in other locales as default', () => {
   expect(actualDate.locale(mockLocale).format('L')).toBe(expectedDate.format('L'))
 })
 
+it('Uses global formats as fallback when global option is enabled', () => {
+  dayjs.extend(localizedFormat, { global: true })
+  const date = new Date('2020-01-02T03:04:05')
+  const mockLocale = {
+    name: 'mock-global',
+    weekdays: Array(7).fill(' '),
+    months: Array(12).fill(' ')
+  }
+  const instance = dayjs(date).locale(mockLocale)
+
+  expect(instance.format('L')).toBe('02/01/2020')
+  expect(instance.format('LL')).toBe('2 January 2020')
+  expect(instance.format('LLL')).toBe('2 January 2020 03:04')
+  expect(instance.format('LLLL')).toBe('Thursday, 2 January 2020 03:04')
+  expect(instance.format('l')).toBe('2/1/2020')
+  expect(instance.format('ll')).toBe('2 Jan 2020')
+  expect(instance.format('lll')).toBe('2 Jan 2020 03:04')
+  expect(instance.format('llll')).toBe('Thursday, 2 Jan 2020 3:04')
+
+  // Reset plugin option back to default
+  dayjs.extend(localizedFormat)
+})
+
+
 it('Leaves the default format intact', () => {
   const date = new Date()
   const actualDate = dayjs(date)
