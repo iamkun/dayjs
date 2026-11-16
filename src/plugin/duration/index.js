@@ -230,6 +230,10 @@ class Duration {
   }
 
   humanize(withSuffix) {
+    if (!Number.isFinite(this.$ms)) {
+      return 'invalid duration'
+    }
+
     return $d()
       .add(this.$ms, 'ms')
       .locale(this.$l)
