@@ -8,5 +8,9 @@ declare module 'dayjs' {
     week(): number
 
     week(value : number): Dayjs
+
+    weeks(): number
+
+    weeks(value : number): Dayjs
   }
 }
