@@ -3,12 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'uz-latn',
-  weekdays: 'Yakshanba_Dushanba_Seshanba_Chorshanba_Payshanba_Juma_Shanba'.split('_'),
-  months: 'Yanvar_Fevral_Mart_Aprel_May_Iyun_Iyul_Avgust_Sentabr_Oktabr_Noyabr_Dekabr'.split('_'),
+  weekdays: 'yakshanba_dushanba_seshanba_chorshanba_payshanba_juma_shanba'.split('_'),
+  months: 'yanvar_fevral_mart_aprel_may_iyun_iyul_avgust_sentabr_oktabr_noyabr_dekabr'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'Yak_Dush_Sesh_Chor_Pay_Jum_Shan'.split('_'),
-  monthsShort: 'Yan_Fev_Mar_Apr_May_Iyun_Iyul_Avg_Sen_Okt_Noy_Dek'.split('_'),
-  weekdaysMin: 'Ya_Du_Se_Cho_Pa_Ju_Sha'.split('_'),
+  weekdaysShort: 'yak_dush_sesh_chor_pay_jum_shan'.split('_'),
+  monthsShort: 'yan_fev_mar_apr_may_iyun_iyul_avg_sen_okt_noy_dek'.split('_'),
+  weekdaysMin: 'ya_du_se_cho_pa_ju_sha'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
@@ -19,7 +19,7 @@ const locale = {
     LLLL: 'D MMMM YYYY, dddd HH:mm'
   },
   relativeTime: {
-    future: 'Yaqin %s ichida',
+    future: '%sdan keyin',
     past: '%s oldin',
     s: 'soniya',
     m: 'bir daqiqa',

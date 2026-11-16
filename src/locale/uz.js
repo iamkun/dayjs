@@ -3,12 +3,12 @@ import dayjs from 'dayjs'
 
 const locale = {
   name: 'uz',
-  weekdays: 'Якшанба_Душанба_Сешанба_Чоршанба_Пайшанба_Жума_Шанба'.split('_'),
+  weekdays: 'якшанба_душанба_сешанба_чоршанба_пайшанба_жума_шанба'.split('_'),
   months: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split('_'),
   weekStart: 1,
-  weekdaysShort: 'Якш_Душ_Сеш_Чор_Пай_Жум_Шан'.split('_'),
+  weekdaysShort: 'якш_душ_сеш_чор_пай_жум_шан'.split('_'),
   monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
-  weekdaysMin: 'Як_Ду_Се_Чо_Па_Жу_Ша'.split('_'),
+  weekdaysMin: 'як_ду_се_чо_па_жу_ша'.split('_'),
   ordinal: n => n,
   formats: {
     LT: 'HH:mm',
@@ -19,11 +19,11 @@ const locale = {
     LLLL: 'D MMMM YYYY, dddd HH:mm'
   },
   relativeTime: {
-    future: 'Якин %s ичида',
+    future: '%sдан кейин',
     past: '%s олдин',
-    s: 'фурсат',
-    m: 'бир дакика',
-    mm: '%d дакика',
+    s: 'сония',
+    m: 'бир дақиқа',
+    mm: '%d дақиқа',
     h: 'бир соат',
     hh: '%d соат',
     d: 'бир кун',
