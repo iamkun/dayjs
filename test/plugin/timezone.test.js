@@ -663,7 +663,8 @@ describe('DST-aware calendar arithmetic vs moment', () => {
   })
 
   it('moves a result inside the spring-forward gap forward, like parsing does', () => {
-    // moment's own result here depends on the host zone, so compare with the parse of the gap time
+    // The pinned moment-timezone 0.5.31 gives a host-dependent result here (moment 2.31 agrees
+    // with this), so compare with the parse of the gap time
     const d = dayjs.tz('2012-03-10 02:30', NY).add(1, 'day')
     expect(d.format()).toBe('2012-03-11T03:30:00-04:00')
     expect(d.valueOf()).toBe(dayjs.tz('2012-03-11 02:30', NY).valueOf())
@@ -699,17 +700,27 @@ describe('DST-aware calendar arithmetic vs moment', () => {
   })
 
   it('keeps the wall clock in tz(zone, true) when the target zone changes offset (#2609)', () => {
-    // moment's keepLocalTime uses the offset at the original instant, so on some hosts it is off
-    // by an hour too (e.g. the #2609 comment case from a Los Angeles host). Compare with parsing.
+    // The pinned moment-timezone 0.5.31 has a keepLocalTime bug that makes some of these an hour
+    // off on some hosts (fixed in moment 2.31), so compare with parsing the wall time in the zone.
     matchMoment(dayjs('2024-03-10').tz(LA, true), moment.tz('2024-03-10', LA))
     matchMoment(dayjs('2025-11-01T23:00').tz(NY, true), moment.tz('2025-11-01 23:00', NY))
     expect(dayjs('2025-11-01T23:00').tz(NY, true).toISOString()).toBe('2025-11-02T03:00:00.000Z')
-    // moment uses the offset at the original instant here and lands on +01:00 from US hosts;
-    // midnight on 2023-10-29 in Paris is still CEST (+02:00)
+    // midnight on 2023-10-29 in Paris is still CEST (+02:00); moment-timezone 0.5.31 gives
+    // +01:00 from US hosts
     const parisMidnight = dayjs('2023-10-29').tz(PARIS, true)
     expect(parisMidnight.format()).toBe('2023-10-29T00:00:00+02:00')
     expect(parisMidnight.valueOf()).toBe(dayjs.tz('2023-10-29', PARIS).valueOf())
     matchMoment(dayjs('2024-01-15 12:00').tz(LONDON, true), moment.tz('2024-01-15 12:00', LONDON))
+    // 03:00:01 on LA's spring-forward day is already PDT; moment-timezone 0.5.31 says -08:00
+    expect(dayjs('2022-03-13T03:00:01Z').utc().tz(LA, true).format())
+      .toBe('2022-03-13T03:00:01-07:00')
+  })
+
+  it('keeps the UTC wall clock converting to a fixed zone on the EU spring-forward day', () => {
+    // the case left out of #3174: 04:00 exists in Guadeloupe (UTC-4, no DST) whatever the host does
+    const d = dayjs.utc('2050-03-27T04:00:00.000Z').tz(GUADELOUPE, true)
+    expect(d.format()).toBe('2050-03-27T04:00:00-04:00')
+    expect(d.utcOffset()).toBe(-240)
   })
 
   it('shows the right wall clock when the host crosses DST at a different time (#2609)', () => {
