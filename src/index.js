@@ -60,22 +60,20 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
-// The Date constructor rolls a part that is out of range over into the next one:
-// 2025-02-30 becomes 2 March and T25:00 becomes 01:00 the next day.
-// Check the parts first, so that a date or time that does not exist is invalid.
+const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
 const isExistingDate = (d) => {
   const year = +d[1]
   const month = d[2] === undefined ? 1 : +d[2]
   const day = d[3] === '' ? 1 : +d[3]
-  const [hour, minute, second] = [d[4], d[5], d[6]].map(part => +(part || 0))
+  const hour = +(d[4] || 0)
+  const minute = +(d[5] || 0)
+  const second = +(d[6] || 0)
   const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
-  // a month outside 1 to 12 has no entry here, so it fails the day check below
-  const monthLengths = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-  const daysInMonth = monthLengths[month - 1]
-  // 24:00:00 is valid ISO 8601: the end of the day
+  const daysInMonth = month === 2 && isLeapYear ? 29 : DAYS_IN_MONTH[month - 1]
   const isEndOfDay = hour === 24 && !minute && !second && !+(d[7] || 0)
-  return day >= 1 && day <= daysInMonth && minute <= 59 && second <= 59
-    && (hour <= 23 || isEndOfDay)
+  return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth
+    && minute <= 59 && second <= 59 && (hour <= 23 || isEndOfDay)
 }
 
 const parseDate = (cfg) => {
