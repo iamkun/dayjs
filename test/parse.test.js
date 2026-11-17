@@ -73,6 +73,21 @@ describe('Parse', () => {
     expect(dayjs([2018, 5, 1, 13, 52, 44]).isValid()).toBe(false) // Arrays with time part
   })
 
+  it('rejects a string whose day, month or hour does not exist', () => {
+    const doesNotExist = ['2025-02-30', '1900-02-29', '2025-13-01', '2025-01-01T25:00:00']
+    doesNotExist.forEach((date) => {
+      expect(dayjs(date).isValid()).toBe(false)
+    })
+  })
+
+  it('accepts the last day of a month, a leap day and 24:00', () => {
+    const real = ['2025-04-30', '2024-02-29', '2025-12-31T23:59:59', '2025-01-01T24:00:00']
+    real.forEach((date) => {
+      expect(dayjs(date).isValid()).toBe(true)
+    })
+    expect(dayjs('2025-01-01T24:00:00').format('YYYY-MM-DD')).toBe('2025-01-02')
+  })
+
   it('parses Arrays with date part', () => {
     const dateParts = [2018, 5, 1]
     const expected = '2018-05-01T00:00:00.000Z'

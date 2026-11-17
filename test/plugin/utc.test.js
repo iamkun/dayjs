@@ -54,6 +54,11 @@ describe('Parse UTC ', () => {
     expect(dayjs().utc().format()).toBe(moment().utc().format())
   })
 
+  it('rejects a utc string whose day does not exist', () => {
+    expect(dayjs.utc('2025-02-30').isValid()).toBe(false)
+    expect(dayjs.utc('2024-02-29').isValid()).toBe(true)
+  })
+
   it('Parse date string without timezone', () => {
     const d = '2018-09-06'
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())

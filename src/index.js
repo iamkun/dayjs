@@ -60,6 +60,22 @@ Utils.l = parseLocale
 Utils.i = isDayjs
 Utils.w = wrapper
 
+const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+const isExistingDate = (d) => {
+  const year = +d[1]
+  const month = d[2] === undefined ? 1 : +d[2]
+  const day = d[3] === '' ? 1 : +d[3]
+  const hour = +(d[4] || 0)
+  const minute = +(d[5] || 0)
+  const second = +(d[6] || 0)
+  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+  const daysInMonth = month === 2 && isLeapYear ? 29 : DAYS_IN_MONTH[month - 1]
+  const isEndOfDay = hour === 24 && !minute && !second && !+(d[7] || 0)
+  return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth
+    && minute <= 59 && second <= 59 && (hour <= 23 || isEndOfDay)
+}
+
 const parseDate = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
@@ -68,6 +84,7 @@ const parseDate = (cfg) => {
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
     if (d) {
+      if (!isExistingDate(d)) return new Date(NaN)
       const m = d[2] - 1 || 0
       const ms = (d[7] || '0').substring(0, 3)
       if (utc) {
