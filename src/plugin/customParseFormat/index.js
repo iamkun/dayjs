@@ -254,7 +254,9 @@ export default (o, C, d) => {
       const len = format.length
       for (let i = 1; i <= len; i += 1) {
         args[1] = format[i - 1]
-        const result = d.apply(this, args)
+        // In UTC mode each format must be tried with the UTC constructor,
+        // otherwise the trial parse falls back to local time (#3013)
+        const result = utc && d.utc ? d.utc(...args) : d.apply(this, args)
         if (result.isValid()) {
           this.$d = result.$d
           this.$L = result.$L
