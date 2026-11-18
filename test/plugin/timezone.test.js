@@ -4,10 +4,12 @@ import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
+import isoWeek from '../../src/plugin/isoWeek'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(customParseFormat)
+dayjs.extend(isoWeek)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -580,4 +582,70 @@ it('does not throw for invalid Day.js values (regression #111.22)', () => {
 it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
+
+describe('diff and isoWeek with customParseFormat loaded', () => {
+  // customParseFormat sets $u to false on parsed instances (including dayjs.tz()), while
+  // dayjs(new Date()) leaves $u undefined. Both are non-UTC and must be diffed the same way.
+  const HOUR = 3600 * 1000
+  const kolkata = () => dayjs.tz('2025-07-06 04:37', 'Asia/Kolkata')
+  const host = () => dayjs(new Date(2025, 0, 1)) // 2025-01-01 00:00 on the host clock
+  // difference between the two wall clocks, 2025-07-06 04:37 and 2025-01-01 00:00
+  const wallClockMs = Date.UTC(2025, 6, 6, 4, 37) - Date.UTC(2025, 0, 1, 0, 0)
+  // real elapsed time, 04:37 in Asia/Kolkata (+05:30) is 23:07 UTC the day before
+  const kolkataInstantMs = Date.UTC(2025, 6, 6, 4, 37) - (330 * 60 * 1000)
+  const elapsedMs = kolkataInstantMs - new Date(2025, 0, 1).getTime()
+
+  it('creates instances with $u false and undefined', () => {
+    expect(kolkata().$u).toBe(false)
+    expect(host().$u).toBeUndefined()
+    expect(host().local().$u).toBe(false)
+  })
+
+  it('does not depend on whether the other instance has $u false or undefined', () => {
+    ['year', 'month', 'week', 'day', 'hour', 'minute', 'second', 'millisecond'].forEach((unit) => {
+      expect(kolkata().diff(host(), unit, true)).toBe(kolkata().diff(host().local(), unit, true))
+    })
+  })
+
+  it('compares the wall clock of each instance for day and week', () => {
+    expect(kolkata().diff(host(), 'day', true)).toBeCloseTo(wallClockMs / (24 * HOUR), 8)
+    expect(kolkata().diff(host(), 'week', true)).toBeCloseTo(wallClockMs / (7 * 24 * HOUR), 8)
+    expect(kolkata().diff(host(), 'day')).toBe(186)
+    expect(kolkata().diff(host(), 'week')).toBe(26)
+  })
+
+  it('compares the real elapsed time for hour, minute and second', () => {
+    expect(kolkata().diff(host(), 'hour', true)).toBeCloseTo(elapsedMs / HOUR, 8)
+    expect(kolkata().diff(host(), 'minute', true)).toBeCloseTo(elapsedMs / (60 * 1000), 8)
+    expect(kolkata().diff(host(), 'second')).toBe(Math.trunc(elapsedMs / 1000))
+  })
+
+  it('keeps the same result when one instance is UTC and the other is not', () => {
+    const utcInstance = dayjs.utc('2025-07-06T04:37:00Z')
+    const hostInstance = host()
+    const utcElapsedMs = Date.UTC(2025, 6, 6, 4, 37) - hostInstance.valueOf()
+    expect(utcInstance.diff(hostInstance, 'hour', true)).toBeCloseTo(utcElapsedMs / HOUR, 8)
+    expect(utcInstance.diff(hostInstance, 'day', true)).toBe(utcInstance.local().diff(hostInstance.local(), 'day', true))
+  })
+
+  it('gives consecutive instants a non-decreasing isoWeek in Europe/Paris', () => {
+    const before = dayjs.utc('2024-01-16T22:00:00.000Z').tz('Europe/Paris').isoWeek()
+    const after = dayjs.utc('2024-01-16T23:00:00.000Z').tz('Europe/Paris').isoWeek()
+    expect(before).toBe(3)
+    expect(after).toBe(3)
+  })
+
+  const isoWeekCases = [
+    ['2025-07-06 04:37', 'Pacific/Chatham'],
+    ['2025-07-06 04:37', 'Asia/Kolkata'],
+    ['2026-01-01 08:15', 'Pacific/Auckland'],
+    ['2024-12-30 23:30', 'America/New_York'],
+    ['2021-01-03 00:10', 'Europe/Paris']
+  ]
+  isoWeekCases.forEach(([time, zone]) => {
+    it(`isoWeek of ${time} in ${zone} matches moment-timezone`, () => {
+      expect(dayjs.tz(time, zone).isoWeek()).toBe(moment.tz(time, zone).isoWeek())
+    })
+  })
 })
