@@ -1,4 +1,4 @@
-import { MIN, MS } from '../../constant'
+import { MIN, MS, REGEX_PARSE } from '../../constant'
 
 const typeToPos = {
   year: 0,
@@ -140,7 +140,24 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
+    // Without a format, dayjs.utc() only understands ISO-like strings
+    // (REGEX_PARSE) as UTC; anything else falls back to `new Date()`,
+    // which parses in the host's local time, so the wall clock would be
+    // shifted by the host offset (#2928). For such strings, recover the
+    // wall-clock timestamp from the host-local parse instead. Strings
+    // with an explicit offset keep the existing path (see #2946).
+    let localTs
+    if (!parseFormat && !REGEX_PARSE.test(input) && !/[Zz]|[+-]\d\d:?(\d\d)?$/.test(input)) {
+      const parsed = d(input)
+      localTs = parsed.isValid()
+        ? Date.UTC(
+          parsed.year(), parsed.month(), parsed.date(),
+          parsed.hour(), parsed.minute(), parsed.second(), parsed.millisecond()
+        )
+        : NaN
+    } else {
+      localTs = d.utc(input, parseFormat).valueOf()
+    }
     if (Number.isNaN(localTs)) {
       const ins = d(NaN)
       ins.$x.$timezone = timezone

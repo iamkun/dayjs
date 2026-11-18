@@ -581,3 +581,27 @@ it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
 })
+
+// issue 2928: dayjs.tz() parsed non-ISO strings in the host's local time
+// instead of as wall time in the target zone
+describe('dayjs.tz() with non-ISO strings and no format', () => {
+  it('parses as wall time in the default timezone', () => {
+    dayjs.tz.setDefault('UTC')
+    expect(dayjs.tz('01 Aug 2025').toISOString()).toBe('2025-08-01T00:00:00.000Z')
+    dayjs.tz.setDefault()
+  })
+
+  it('parses as wall time in an explicit timezone', () => {
+    expect(dayjs.tz('01 Aug 2025', 'Australia/Melbourne').toISOString())
+      .toBe('2025-07-31T14:00:00.000Z')
+    expect(dayjs.tz('10/15/2020 12:30', DEN).format('YYYY-MM-DD HH:mm'))
+      .toBe('2020-10-15 12:30')
+  })
+
+  it('keeps ISO strings and explicit formats unchanged', () => {
+    expect(dayjs.tz('2025-08-01 12:00', NY).format('YYYY-MM-DD HH:mm'))
+      .toBe('2025-08-01 12:00')
+    expect(dayjs.tz('01 Aug 2025', 'DD MMM YYYY', NY).format('YYYY-MM-DD HH:mm'))
+      .toBe('2025-08-01 00:00')
+  })
+})
