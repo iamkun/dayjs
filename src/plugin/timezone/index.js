@@ -90,6 +90,17 @@ export default (o, c, d) => {
     return [localTS - (Math.min(o2, o3) * 60 * 1000), Math.max(o2, o3)]
   }
 
+  const makeZeroOffsetDate = (timestamp, timezone, locale) => {
+    const utcDate = d.utc(timestamp)
+    const ins = locale ? utcDate.locale(locale) : utcDate
+    ins.$u = false
+    ins.$offset = 0
+    // A zero local offset override keeps valueOf() independent of the host timezone.
+    ins.$x.$localOffset = 0
+    ins.$x.$timezone = timezone
+    return ins
+  }
+
   const proto = c.prototype
 
   proto.tz = function (timezone = defaultTimezone, keepLocalTime) {
@@ -98,17 +109,19 @@ export default (o, c, d) => {
     const date = this.toDate()
     const target = date.toLocaleString('en-US', { timeZone: timezone })
     const offset = tzOffset(+date, timezone)
-    const isUTC = !Number(offset)
+    const isUTC = timezone === 'UTC' || timezone === 'Etc/UTC'
     let ins
-    if (isUTC) { // if utcOffset is 0, turn it to UTC mode
+    if (isUTC) { // Explicit UTC zones use UTC mode.
       ins = this.utcOffset(0, keepLocalTime)
+    } else if (offset === 0) {
+      ins = makeZeroOffsetDate(+date, timezone, this.$L)
     } else {
       ins = d(target, { locale: this.$L }).$set(MS, this.$ms)
-        .utcOffset(offset, true)
-      if (keepLocalTime) {
-        const newOffset = ins.utcOffset()
-        ins = ins.add(oldOffset - newOffset, MIN)
-      }
+      ins = ins.utcOffset(offset, true)
+    }
+    if (!isUTC && keepLocalTime) {
+      const newOffset = ins.utcOffset()
+      ins = ins.add(oldOffset - newOffset, MIN)
     }
     ins.$x.$timezone = timezone
     return ins
@@ -147,7 +160,14 @@ export default (o, c, d) => {
       return ins
     }
     const [targetTs, targetOffset] = fixOffset(localTs, previousOffset, timezone)
-    const ins = d(targetTs).utcOffset(targetOffset)
+    let ins
+    if (targetOffset) {
+      ins = d(targetTs).utcOffset(targetOffset)
+    } else if (timezone === 'UTC' || timezone === 'Etc/UTC') {
+      ins = d.utc(targetTs)
+    } else {
+      ins = makeZeroOffsetDate(targetTs, timezone)
+    }
     ins.$x.$timezone = timezone
     return ins
   }
