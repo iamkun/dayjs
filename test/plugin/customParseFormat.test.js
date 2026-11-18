@@ -460,3 +460,35 @@ it('parse w, ww', () => {
   const format2 = 'YYYY-[w]ww'
   expect(dayjs(input2, format2).format(format1)).toBe(input2)
 })
+
+describe('parse day strings', () => {
+  it('parse day from string', () => {
+    const input1 = 'Friday, 10 Jan 2025'
+    const format1 = 'dddd, DD MMM YYYY'
+    expect(dayjs(input1, format1).format(format1)).toBe(input1)
+    expect(dayjs(input1, format1).valueOf()).toBe(moment(input1, format1).valueOf())
+    const input2 = '10 Jan 2025'
+    const format2 = 'DD MMM YYYY'
+    expect(dayjs(input2, format2).format('dddd')).toBe(moment(input1, format1).format('dddd'))
+  })
+
+  it('parse day from short string', () => {
+    const input1 = 'Fri, 10 Jan 2025'
+    const format1 = 'ddd, DD MMM YYYY'
+    expect(dayjs(input1, format1).format(format1)).toBe(input1)
+    expect(dayjs(input1, format1).valueOf()).toBe(moment(input1, format1).valueOf())
+    const input2 = '10 Jan 2025'
+    const format2 = 'DD MMM YYYY'
+    expect(dayjs(input2, format2).format('ddd')).toBe(moment(input1, format1).format('ddd'))
+  })
+
+  it('parse day from min string', () => {
+    const input1 = 'Fr, 10 Jan 2025'
+    const format1 = 'dd, DD MMM YYYY'
+    expect(dayjs(input1, format1).format(format1)).toBe(input1)
+    expect(dayjs(input1, format1).valueOf()).toBe(moment(input1, format1).valueOf())
+    const input2 = '10 Jan 2025'
+    const format2 = 'DD MMM YYYY'
+    expect(dayjs(input2, format2).format('dd')).toBe(moment(input1, format1).format('dd'))
+  })
+})
