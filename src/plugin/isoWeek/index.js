@@ -16,7 +16,23 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
-  proto.isoWeekYear = function () {
+  proto.isoWeekYear = function (year) {
+    if (!this.$utils().u(year)) {
+      const currentIsoWeek = this.isoWeek()
+      const currentIsoWeekday = this.isoWeekday()
+
+      const newYearThursday = getYearFirstThursday(year, this.$u)
+
+      const newDate = newYearThursday
+        .add(currentIsoWeek - 1, W)
+        .isoWeekday(currentIsoWeekday)
+
+      this.$d = newDate.toDate()
+      this.init()
+
+      return this
+    }
+
     const nowWeekThursday = getCurrentWeekThursday(this)
     return nowWeekThursday.year()
   }
