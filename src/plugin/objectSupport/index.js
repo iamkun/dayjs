@@ -60,15 +60,20 @@ export default (o, c, dayjs) => {
     }
     return oldSet.bind(this)(unit, value)
   }
+  // Add each key through the full add chain, so plugins extended after this one
+  // (e.g. timezone) still handle every unit
+  const addUnit = function (value, unit) {
+    return this.add(value, unit)
+  }
   proto.add = function (value, unit) {
     if (value.constructor.name === 'Object') {
-      return callObject.bind(this)(oldAdd, value, unit)
+      return callObject.bind(this)(addUnit, value, unit)
     }
     return oldAdd.bind(this)(value, unit)
   }
   proto.subtract = function (value, unit) {
     if (value.constructor.name === 'Object') {
-      return callObject.bind(this)(oldAdd, value, unit, -1)
+      return callObject.bind(this)(addUnit, value, unit, -1)
     }
     return oldSubtract.bind(this)(value, unit)
   }

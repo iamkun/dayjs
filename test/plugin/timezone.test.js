@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
+import '../../src/locale/fr'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -580,6 +581,116 @@ it('does not throw for invalid Day.js values (regression #111.22)', () => {
 it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
+
+// Every operation on a zoned instance that ends up invalid must return an invalid instance
+// that keeps its zone and locale, never reach Intl with an invalid Date (which throws)
+describe('Invalid dates through zoned operations', () => {
+  const SKOPJE = 'Europe/Skopje'
+  const expectInvalidIn = (ins, zone, locale = 'en') => {
+    expect(ins.isValid()).toBe(false)
+    expect(ins.format()).toBe('Invalid Date')
+    expect(ins.$x.$timezone).toBe(zone)
+    expect(ins.$L).toBe(locale)
+  }
+
+  it('startOf / endOf on an invalid zoned instance', () => {
+    const invalid = dayjs.tz('invalid', SKOPJE)
+    expectInvalidIn(invalid.startOf('day'), SKOPJE)
+    expectInvalidIn(invalid.endOf('day'), SKOPJE)
+    expectInvalidIn(invalid.startOf('month'), SKOPJE)
+    expectInvalidIn(invalid.endOf('week'), SKOPJE)
+  })
+
+  it('add / subtract / set on an invalid zoned instance', () => {
+    const invalid = dayjs.tz('invalid', SKOPJE)
+    expectInvalidIn(invalid.add(1, 'day'), SKOPJE)
+    expectInvalidIn(invalid.add(1, 'hour'), SKOPJE)
+    expectInvalidIn(invalid.subtract(1, 'month'), SKOPJE)
+    expectInvalidIn(invalid.set('date', 1), SKOPJE)
+  })
+
+  it('a valid zoned instance made invalid by add / subtract', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS)
+    const units = ['day', 'week', 'month', 'year', 'hour', 'minute', 'second', 'millisecond']
+    units.forEach((unit) => {
+      expectInvalidIn(valid.add(NaN, unit), PARIS)
+      expectInvalidIn(valid.subtract(NaN, unit), PARIS)
+    })
+  })
+
+  it('a valid zoned instance made invalid by set', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS)
+    const units = ['date', 'month', 'year', 'hour', 'minute']
+    units.forEach((unit) => {
+      expectInvalidIn(valid.set(unit, NaN), PARIS)
+    })
+    expectInvalidIn(valid.date(NaN), PARIS)
+  })
+
+  it('keeps the locale on the invalid result', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS).locale('fr')
+    expectInvalidIn(valid.add(NaN, 'day'), PARIS, 'fr')
+    expectInvalidIn(valid.add(NaN, 'hour'), PARIS, 'fr')
+    expectInvalidIn(valid.set('date', NaN), PARIS, 'fr')
+    expectInvalidIn(dayjs.tz('invalid', PARIS).locale('fr').startOf('day'), PARIS, 'fr')
+  })
+})
+
+// quarterOfYear, duration and objectSupport split their values into plain units. Whether they
+// are extended before or after timezone (e.g. alphabetically), each unit must still get the
+// DST-aware handling. Each order loads its own copy of dayjs so this file's instance is untouched.
+describe('Plugin extension order (quarterOfYear, duration, objectSupport)', () => {
+  const load = (names) => {
+    // a fresh module registry gives a separate dayjs (and prototype) for this order
+    jest.resetModules()
+    const lib = require('../../src').default // eslint-disable-line global-require
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    names.forEach(name => lib.extend(require(`../../src/plugin/${name}`).default))
+    return lib
+  }
+  const ORDERS = {
+    'extended after timezone': ['utc', 'timezone', 'quarterOfYear', 'duration', 'objectSupport'],
+    // quarterOfYear goes first: it coerces any value with Number(), so extended after duration or
+    // objectSupport it breaks them on its own, timezone or not (a separate quarterOfYear issue)
+    'extended before timezone': ['quarterOfYear', 'duration', 'objectSupport', 'utc', 'timezone']
+  }
+
+  Object.keys(ORDERS).forEach((label) => {
+    describe(label, () => {
+      const dj = load(ORDERS[label])
+
+      it('add / subtract quarters across the spring-forward', () => {
+        expect(dj.tz('2021-01-15 12:00', NY).add(1, 'quarter').format()).toBe('2021-04-15T12:00:00-04:00')
+        expect(dj.tz('2021-04-15 12:00', NY).subtract(1, 'quarter').format()).toBe('2021-01-15T12:00:00-05:00')
+        matchMoment(
+          dj.tz('2021-01-15 12:00', NY).add(1, 'quarter'),
+          moment.tz('2021-01-15 12:00', NY).add(1, 'quarter')
+        )
+      })
+
+      it('add / subtract durations across the spring-forward', () => {
+        expect(dj.tz('2021-03-13 12:00', NY).add(dj.duration(1, 'day')).format())
+          .toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-03-13 12:00', NY).add(dj.duration({ days: 1, hours: 1 })).format())
+          .toBe('2021-03-14T13:00:00-04:00')
+        expect(dj.tz('2021-03-15 12:00', NY).subtract(dj.duration(2, 'day')).format())
+          .toBe('2021-03-13T12:00:00-05:00')
+        matchMoment(
+          dj.tz('2021-03-13 12:00', NY).add(dj.duration(1, 'day')),
+          moment.tz('2021-03-13 12:00', NY).add(moment.duration(1, 'day'))
+        )
+      })
+
+      it('add / subtract objects across the spring-forward', () => {
+        expect(dj.tz('2021-03-13 12:00', NY).add({ days: 1 }).format()).toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-02-14 12:00', NY).add({ months: 1 }).format()).toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-03-15 12:00', NY).subtract({ days: 2 }).format()).toBe('2021-03-13T12:00:00-05:00')
+        expect(dj.tz('2021-03-13 12:00', NY).add({ days: 1, hours: 1 }).format())
+          .toBe('2021-03-14T13:00:00-04:00')
+      })
+    })
+  })
 })
 
 // https://github.com/iamkun/dayjs/issues/1271

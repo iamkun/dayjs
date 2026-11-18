@@ -1,4 +1,4 @@
-import { D, W, M, Y, MILLISECONDS_A_DAY } from '../../constant'
+import { D, W, M, Y, Q, MILLISECONDS_A_DAY } from '../../constant'
 
 const WALL_FORMAT = 'YYYY-MM-DDTHH:mm:ss.SSS'
 const CALENDAR_UNITS = [D, W, M, Y]
@@ -95,9 +95,18 @@ export default (o, c, d) => {
 
   const proto = c.prototype
 
+  // An invalid instance that still carries its zone and locale
+  const invalidIn = (timezone, locale) => {
+    const ins = d(NaN, { locale })
+    ins.$x.$timezone = timezone
+    return ins
+  }
+
   // Build an instance in `timezone` from a wall-clock time expressed as a UTC timestamp.
   // `guess` picks the side of an ambiguous (fall-back) wall time.
   const fromWallClock = (wallTs, timezone, guess, locale) => {
+    // Intl throws on an invalid Date, so an invalid result (e.g. add(NaN, 'day')) stops here
+    if (Number.isNaN(wallTs)) return invalidIn(timezone, locale)
     const [ts, offset] = fixOffset(wallTs, guess, timezone)
     let ins
     if (offset === 0) {
@@ -135,12 +144,20 @@ export default (o, c, d) => {
   proto.add = function (number, units) {
     const timezone = this.$x && this.$x.$timezone
     if (!timezone || !this.isValid()) return oldAdd.call(this, number, units)
-    if (CALENDAR_UNITS.indexOf(this.$utils().p(units)) > -1) {
+    const unit = this.$utils().p(units)
+    // Quarters, durations and objects belong to plugins (quarterOfYear, duration, objectSupport)
+    // that split them into plain units. Hand them over on this instance so each unit comes back
+    // through this add, whether those plugins were extended before or after this one.
+    if (unit === Q || (number !== null && typeof number === 'object')) {
+      return oldAdd.call(this, number, units)
+    }
+    if (CALENDAR_UNITS.indexOf(unit) > -1) {
       const wall = oldAdd.call(wallClock(this), number, units)
       return fromWallClock(wall.valueOf(), timezone, this.utcOffset(), this.$L)
     }
     // elapsed time: add to the real instant (as UTC, so no host DST applies), then convert back
     const instant = oldAdd.call(d.utc(this.valueOf()), number, units).valueOf()
+    if (Number.isNaN(instant)) return invalidIn(timezone, this.$L)
     return d(instant, { locale: this.$L }).tz(timezone)
   }
 
@@ -177,11 +194,7 @@ export default (o, c, d) => {
       return d(input).tz(timezone)
     }
     const localTs = d.utc(input, parseFormat).valueOf()
-    if (Number.isNaN(localTs)) {
-      const ins = d(NaN)
-      ins.$x.$timezone = timezone
-      return ins
-    }
+    if (Number.isNaN(localTs)) return invalidIn(timezone)
     // Guess with the offset in force a day earlier: an ambiguous fall-back time then resolves to
     // the earlier instant (like moment), regardless of today's date.
     const previousOffset = tzOffset(localTs - MILLISECONDS_A_DAY, timezone)
