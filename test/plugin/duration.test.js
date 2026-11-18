@@ -203,8 +203,8 @@ describe('Add to a dayjs()', () => {
 
 test('Add duration', () => {
   const a = dayjs('2020-10-01')
-  const days = dayjs.duration(2, 'days')
-  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-03')
+  const days = dayjs.duration({ weeks: 2, days: 2 })
+  expect(a.add(days).format('YYYY-MM-DD')).toBe('2020-10-17')
 
   const b = dayjs('2023-02-01 00:00:00')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
@@ -219,8 +219,8 @@ describe('Subtract', () => {
 
 test('Subtract duration', () => {
   const a = dayjs('2020-10-20')
-  const days = dayjs.duration(2, 'days')
-  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-18')
+  const days = dayjs.duration({ weeks: 2, days: 2 })
+  expect(a.subtract(days).format('YYYY-MM-DD')).toBe('2020-10-04')
 
   const b = dayjs('2023-03-02 02:02:02')
   const p = dayjs.duration('P1Y1M1DT1H1M1S')
@@ -295,6 +295,11 @@ describe('Format', () => {
       .add(10, 'months')
       .add(22, 'years')
     expect(d.format()).toBe('0022-10-16T13:35:15')
+  })
+  test('format for weeks', () => {
+    const d = dayjs.duration(2, 'weeks').add(3, 'days')
+    expect(d.format('D')).toBe('17')
+    expect(d.format('DD')).toBe('17')
   })
 
   test('with formatStr for all tokens', () => {
