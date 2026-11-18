@@ -53,7 +53,8 @@ export default (option, Dayjs, dayjs) => {
 
   const oldInit = proto.init
   proto.init = function () {
-    if (this.$u) {
+    // Zero-offset timezone instances keep their wall-clock fields in UTC to avoid host-DST gaps.
+    if (this.$u || this.$offset === 0) {
       const { $d } = this
       this.$y = $d.getUTCFullYear()
       this.$M = $d.getUTCMonth()
@@ -117,8 +118,11 @@ export default (option, Dayjs, dayjs) => {
   }
 
   proto.valueOf = function () {
+    const localOffset = this.$x.$localOffset
+    const hasLocalOffset = !this.$utils().u(localOffset)
     const addedOffset = !this.$utils().u(this.$offset)
-      ? this.$offset + (this.$x.$localOffset || this.$d.getTimezoneOffset()) : 0
+      ? this.$offset + (hasLocalOffset ? localOffset : this.$d.getTimezoneOffset())
+      : 0
     return this.$d.valueOf() - (addedOffset * MILLISECONDS_A_MINUTE)
   }
 

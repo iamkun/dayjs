@@ -1,4 +1,4 @@
-# Proposed Fix for Day.js Issue #3068
+# Fix for Day.js Issue #3068
 
 ## Summary
 
@@ -8,42 +8,30 @@ This makes the default `format()` output end in `Z` instead of `+00:00` and
 sets the internal UTC-mode flag even though the requested timezone is a named
 geographic timezone.
 
-The root cause is in both the timezone and UTC plugins:
+The initial fix avoided UTC mode for named zero-offset zones, but reparsing a
+localized wall-clock string still made the result depend on the host timezone.
+For example, `02:30` is a valid London time on 2026-03-08, but it falls in
+New York's spring-forward gap and is normalized to `03:30` when parsed as a
+host-local time.
 
-1. `src/plugin/timezone/index.js` sets `isUTC` whenever `offset` is zero.
-2. `src/plugin/utc/index.js` sends `utcOffset(0, true)` to `.utc()` before it
-   handles `keepLocalTime`, so the zero-offset non-UTC case cannot retain its
-   non-UTC mode.
+The corrected implementation constructs zero-offset dates from their
+timestamp using UTC fields, then records them as offset-mode dates with
+`$offset = 0` and `$u = false`. The UTC plugin reads those cached fields in
+UTC and treats the explicit zero host-offset adjustment as zero, preserving
+both the wall-clock time and instant without parsing a host-local date.
 
-## Proposed Change
+## Implementation
 
-In `src/plugin/timezone/index.js`, reserve UTC mode for explicitly requested
-UTC zones:
+`src/plugin/timezone/index.js` reserves UTC mode for explicitly requested
+`UTC` and `Etc/UTC` zones. Named geographic zero-offset zones use a timestamp-
+based construction path for both `.tz()` conversion and `dayjs.tz()` parsing.
+The same representation is used for `keepLocalTime` conversions, with the
+existing offset adjustment applied afterward.
 
-```javascript
-const isUTC = timezone === 'UTC' || timezone === 'Etc/UTC'
-```
-
-In `src/plugin/utc/index.js`, handle `keepLocalTime` before the zero-offset
-shortcut. The relevant logic should be ordered as follows:
-
-```javascript
-let ins = this.clone()
-
-if (keepLocalTime) {
-  ins.$offset = offset
-  ins.$u = false
-  return ins
-}
-
-if (offset === 0) {
-  return this.utc(keepLocalTime)
-}
-```
-
-This allows named zero-offset zones to take the non-UTC timezone path and
-retain `$offset = 0` with `$u = false`, while explicit `UTC` and `Etc/UTC`
-conversions keep their existing `Z` formatting.
+`src/plugin/utc/index.js` initializes zero-offset instances from UTC date
+fields and honors an explicit zero local-offset adjustment when calculating
+`valueOf()`. Explicit UTC conversions and parsing retain UTC mode and `Z`
+formatting.
 
 ## Verification Performed
 
@@ -60,12 +48,16 @@ for:
 - Summer London (`+01:00`) and named zero-offset zones `Africa/Abidjan`,
   `Atlantic/Reykjavik`, and `Africa/Accra`.
 - Explicit `UTC` and `Etc/UTC` retaining `Z`.
+- Host-DST gap regressions under `TZ=America/New_York` for both
+  `dayjs(...).tz('Europe/London')` and `dayjs.tz(..., 'Europe/London')`,
+  including their expected timestamps.
 - Negative and positive offsets in `America/New_York` and `Asia/Tokyo`.
 - Adding one hour preserving the expected timestamp.
 
-The existing runtime drafts `scratch/test_fix.mjs` and
-`scratch/test_full_suite.mjs` also printed the expected values for their
-covered cases.
+The targeted timezone plugin suite under `TZ=America/New_York` passed all new
+zero-offset regression cases. The suite also reports one unrelated existing
+fall-back overlap parsing failure: Day.js chooses `-05:00` where the test
+expects Moment's `-04:00`.
 
 ### Rejected Shortcut
 
@@ -83,11 +75,11 @@ reported formatting/state behavior. It does not make every later
 crossing a daylight-saving transition; that behavior is separate from this
 change and should not be inferred as fixed by these checks.
 
-The repository's Jest suite was not run because dependencies are not installed
-(`node_modules` is absent). The in-memory checks do not replace the full
-project test suite.
+The complete timezone plugin suite was run under `TZ=America/New_York`; it
+reported 58 passing tests and the unrelated fall-back overlap failure noted
+above. The full project test suite was not run.
 
 ## Change Status
 
-This document records the proposed change and its runtime verification only.
-No source code or existing project files were modified.
+The source implementation and regression tests are included in the working
+tree.

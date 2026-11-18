@@ -158,6 +158,23 @@ describe('Zero-offset timezones', () => {
     })
   })
 
+  it('preserves zero-offset wall time across a host DST gap when converting', () => {
+    const input = dayjs('2026-03-08T02:30:00Z')
+    const converted = input.tz(LONDON)
+
+    expect(converted.format()).toBe('2026-03-08T02:30:00+00:00')
+    expect(converted.valueOf()).toBe(input.valueOf())
+    expect(converted.isUTC()).toBe(false)
+  })
+
+  it('preserves zero-offset wall time across a host DST gap when parsing', () => {
+    const parsed = dayjs.tz('2026-03-08 02:30', LONDON)
+
+    expect(parsed.format()).toBe('2026-03-08T02:30:00+00:00')
+    expect(parsed.valueOf()).toBe(Date.UTC(2026, 2, 8, 2, 30))
+    expect(parsed.isUTC()).toBe(false)
+  })
+
   it('keeps explicit UTC zones in UTC mode', () => {
     const input = dayjs('2021-10-31T15:00:00+00:00')
     const zones = ['UTC', 'Etc/UTC']
@@ -167,6 +184,11 @@ describe('Zero-offset timezones', () => {
       expect(converted.format()).toBe('2021-10-31T15:00:00Z')
       expect(converted.isUTC()).toBe(true)
       expect(converted.valueOf()).toBe(input.valueOf())
+
+      const parsed = dayjs.tz('2021-10-31 15:00:00', zone)
+      expect(parsed.format()).toBe('2021-10-31T15:00:00Z')
+      expect(parsed.isUTC()).toBe(true)
+      expect(parsed.valueOf()).toBe(Date.UTC(2021, 9, 31, 15, 0, 0))
     })
   })
 })
