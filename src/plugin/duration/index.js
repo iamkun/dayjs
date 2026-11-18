@@ -266,6 +266,7 @@ const manipulateDuration = (date, duration, k) =>
     .add(duration.minutes() * k, 'm')
     .add(duration.seconds() * k, 's')
     .add(duration.milliseconds() * k, 'ms')
+    .add(duration.weeks() * k, 'w')
 
 export default (option, Dayjs, dayjs) => {
   $d = dayjs
