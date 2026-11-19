@@ -4,6 +4,7 @@ import dayjs from '../../src'
 import timezone from '../../src/plugin/timezone'
 import customParseFormat from '../../src/plugin/customParseFormat'
 import utc from '../../src/plugin/utc'
+import '../../src/locale/fr'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -478,7 +479,7 @@ describe('DST-observing zone across host DST', () => {
 })
 
 // Conversion and parse cases that pass with tzOffset() in proto.tz.
-// Calendar arithmetic (startOf / set / add) stays in the follow-up PR.
+// Calendar arithmetic (startOf / set / add) is covered by 'DST-aware calendar arithmetic' below.
 describe('DST edge cases vs moment', () => {
   it('parses the fall-back overlap the same way as moment', () => {
     ['01:00', '01:30', '01:59'].forEach((time) => {
@@ -580,4 +581,283 @@ it('does not throw for invalid Day.js values (regression #111.22)', () => {
 it('does not throw for invalid string in d.tz()', () => {
   expect(() => dayjs.tz('invalid', 'Europe/Skopje')).not.toThrow()
   expect(dayjs.tz('invalid', 'Europe/Skopje').isValid()).toBe(false)
+})
+
+// Every operation on a zoned instance that ends up invalid must return an invalid instance
+// that keeps its zone and locale, never reach Intl with an invalid Date (which throws)
+describe('Invalid dates through zoned operations', () => {
+  const SKOPJE = 'Europe/Skopje'
+  const expectInvalidIn = (ins, zone, locale = 'en') => {
+    expect(ins.isValid()).toBe(false)
+    expect(ins.format()).toBe('Invalid Date')
+    expect(ins.$x.$timezone).toBe(zone)
+    expect(ins.$L).toBe(locale)
+  }
+
+  it('startOf / endOf on an invalid zoned instance', () => {
+    const invalid = dayjs.tz('invalid', SKOPJE)
+    expectInvalidIn(invalid.startOf('day'), SKOPJE)
+    expectInvalidIn(invalid.endOf('day'), SKOPJE)
+    expectInvalidIn(invalid.startOf('month'), SKOPJE)
+    expectInvalidIn(invalid.endOf('week'), SKOPJE)
+  })
+
+  it('add / subtract / set on an invalid zoned instance', () => {
+    const invalid = dayjs.tz('invalid', SKOPJE)
+    expectInvalidIn(invalid.add(1, 'day'), SKOPJE)
+    expectInvalidIn(invalid.add(1, 'hour'), SKOPJE)
+    expectInvalidIn(invalid.subtract(1, 'month'), SKOPJE)
+    expectInvalidIn(invalid.set('date', 1), SKOPJE)
+  })
+
+  it('a valid zoned instance made invalid by add / subtract', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS)
+    const units = ['day', 'week', 'month', 'year', 'hour', 'minute', 'second', 'millisecond']
+    units.forEach((unit) => {
+      expectInvalidIn(valid.add(NaN, unit), PARIS)
+      expectInvalidIn(valid.subtract(NaN, unit), PARIS)
+    })
+  })
+
+  it('a valid zoned instance made invalid by set', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS)
+    const units = ['date', 'month', 'year', 'hour', 'minute']
+    units.forEach((unit) => {
+      expectInvalidIn(valid.set(unit, NaN), PARIS)
+    })
+    expectInvalidIn(valid.date(NaN), PARIS)
+  })
+
+  it('keeps the locale on the invalid result', () => {
+    const valid = dayjs.tz('2024-01-15', PARIS).locale('fr')
+    expectInvalidIn(valid.add(NaN, 'day'), PARIS, 'fr')
+    expectInvalidIn(valid.add(NaN, 'hour'), PARIS, 'fr')
+    expectInvalidIn(valid.set('date', NaN), PARIS, 'fr')
+    expectInvalidIn(dayjs.tz('invalid', PARIS).locale('fr').startOf('day'), PARIS, 'fr')
+  })
+})
+
+// quarterOfYear, duration and objectSupport split their values into plain units. Whether they
+// are extended before or after timezone (e.g. alphabetically), each unit must still get the
+// DST-aware handling. Each order loads its own copy of dayjs so this file's instance is untouched.
+describe('Plugin extension order (quarterOfYear, duration, objectSupport)', () => {
+  const load = (names) => {
+    // a fresh module registry gives a separate dayjs (and prototype) for this order
+    jest.resetModules()
+    const lib = require('../../src').default // eslint-disable-line global-require
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    names.forEach(name => lib.extend(require(`../../src/plugin/${name}`).default))
+    return lib
+  }
+  const ORDERS = {
+    'extended after timezone': ['utc', 'timezone', 'quarterOfYear', 'duration', 'objectSupport'],
+    // quarterOfYear goes first: it coerces any value with Number(), so extended after duration or
+    // objectSupport it breaks them on its own, timezone or not (a separate quarterOfYear issue)
+    'extended before timezone': ['quarterOfYear', 'duration', 'objectSupport', 'utc', 'timezone']
+  }
+
+  Object.keys(ORDERS).forEach((label) => {
+    describe(label, () => {
+      const dj = load(ORDERS[label])
+
+      it('add / subtract quarters across the spring-forward', () => {
+        expect(dj.tz('2021-01-15 12:00', NY).add(1, 'quarter').format()).toBe('2021-04-15T12:00:00-04:00')
+        expect(dj.tz('2021-04-15 12:00', NY).subtract(1, 'quarter').format()).toBe('2021-01-15T12:00:00-05:00')
+        matchMoment(
+          dj.tz('2021-01-15 12:00', NY).add(1, 'quarter'),
+          moment.tz('2021-01-15 12:00', NY).add(1, 'quarter')
+        )
+      })
+
+      it('add / subtract durations across the spring-forward', () => {
+        expect(dj.tz('2021-03-13 12:00', NY).add(dj.duration(1, 'day')).format())
+          .toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-03-13 12:00', NY).add(dj.duration({ days: 1, hours: 1 })).format())
+          .toBe('2021-03-14T13:00:00-04:00')
+        expect(dj.tz('2021-03-15 12:00', NY).subtract(dj.duration(2, 'day')).format())
+          .toBe('2021-03-13T12:00:00-05:00')
+        matchMoment(
+          dj.tz('2021-03-13 12:00', NY).add(dj.duration(1, 'day')),
+          moment.tz('2021-03-13 12:00', NY).add(moment.duration(1, 'day'))
+        )
+      })
+
+      it('add / subtract objects across the spring-forward', () => {
+        expect(dj.tz('2021-03-13 12:00', NY).add({ days: 1 }).format()).toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-02-14 12:00', NY).add({ months: 1 }).format()).toBe('2021-03-14T12:00:00-04:00')
+        expect(dj.tz('2021-03-15 12:00', NY).subtract({ days: 2 }).format()).toBe('2021-03-13T12:00:00-05:00')
+        expect(dj.tz('2021-03-13 12:00', NY).add({ days: 1, hours: 1 }).format())
+          .toBe('2021-03-14T13:00:00-04:00')
+      })
+    })
+  })
+})
+
+// https://github.com/iamkun/dayjs/issues/1271
+// https://github.com/iamkun/dayjs/issues/2609
+// https://github.com/mui/mui-x/issues/10584
+describe('DST-aware calendar arithmetic vs moment', () => {
+  const BERLIN = 'Europe/Berlin'
+  const LA = 'America/Los_Angeles'
+
+  it('adds days across the fall-back and re-resolves the offset (#1271)', () => {
+    matchMoment(
+      dayjs.tz('2020-10-24', LONDON).add(2, 'day'),
+      moment.tz('2020-10-24', LONDON).add(2, 'day')
+    )
+    expect(dayjs.tz('2020-10-24', LONDON).add(2, 'day').toISOString())
+      .toBe('2020-10-26T00:00:00.000Z')
+    expect(dayjs.tz('2020-10-25', BERLIN).add(1, 'day')
+      .diff(dayjs.tz('2020-10-26', BERLIN))).toBe(0)
+  })
+
+  it('adds and subtracts days, weeks, months and years across spring-forward', () => {
+    const units = [
+      [1, 'day'], [-1, 'day'], [1, 'week'], [-2, 'week'],
+      [1, 'month'], [-1, 'month'], [1, 'year']
+    ]
+    const starts = [
+      ['2021-03-12 19:00', NY], ['2021-04-12 19:00', NY],
+      ['2023-03-25 12:00', PARIS], ['2023-10-28 00:00', PARIS],
+      ['2023-04-01 08:00', SYDNEY], ['2023-09-30 08:00', SYDNEY]
+    ]
+    starts.forEach(([input, zone]) => {
+      units.forEach(([n, unit]) => {
+        matchMoment(dayjs.tz(input, zone).add(n, unit), moment.tz(input, zone).add(n, unit))
+        matchMoment(
+          dayjs.tz(input, zone).subtract(n, unit),
+          moment.tz(input, zone).subtract(n, unit)
+        )
+      })
+    })
+  })
+
+  it('walks consecutive days across DST without repeating a date (mui-x#10584)', () => {
+    [LONDON, PARIS, NY, SYDNEY].forEach((zone) => {
+      let d = dayjs.tz('2023-10-25', zone)
+      let m = moment.tz('2023-10-25', zone)
+      const seen = new Set()
+      for (let i = 0; i < 14; i += 1) {
+        matchMoment(d, m)
+        seen.add(d.format('YYYY-MM-DD'))
+        d = d.add(1, 'day')
+        m = m.add(1, 'day')
+      }
+      expect(seen.size).toBe(14)
+    })
+  })
+
+  it('adds exact units as elapsed time and reports the new offset', () => {
+    matchMoment(
+      dayjs.tz('2020-10-25 00:00', LONDON).add(3, 'hour'),
+      moment.tz('2020-10-25 00:00', LONDON).add(3, 'hour')
+    )
+    matchMoment(
+      dayjs.tz('2012-03-11 01:30', NY).add(90, 'minute'),
+      moment.tz('2012-03-11 01:30', NY).add(90, 'minute')
+    )
+  })
+
+  it('keeps the current offset for an ambiguous result, like moment', () => {
+    matchMoment(
+      dayjs.tz('2012-11-03 01:30', NY).add(1, 'day'),
+      moment.tz('2012-11-03 01:30', NY).add(1, 'day')
+    )
+    matchMoment(
+      dayjs.tz('2012-11-05 01:30', NY).subtract(1, 'day'),
+      moment.tz('2012-11-05 01:30', NY).subtract(1, 'day')
+    )
+    matchMoment(
+      dayjs('2012-11-04T06:30:00.000Z').tz(NY).add(1, 'day'),
+      moment('2012-11-04T06:30:00.000Z').tz(NY).add(1, 'day')
+    )
+  })
+
+  it('moves a result inside the spring-forward gap forward, like parsing does', () => {
+    // The pinned moment-timezone 0.5.31 gives a host-dependent result here (moment 2.31 agrees
+    // with this), so compare with the parse of the gap time
+    const d = dayjs.tz('2012-03-10 02:30', NY).add(1, 'day')
+    expect(d.format()).toBe('2012-03-11T03:30:00-04:00')
+    expect(d.valueOf()).toBe(dayjs.tz('2012-03-11 02:30', NY).valueOf())
+  })
+
+  it('re-resolves the offset in setters', () => {
+    matchMoment(dayjs.tz('2023-10-20', LONDON).date(30), moment.tz('2023-10-20', LONDON).date(30))
+    matchMoment(dayjs.tz('2023-10-20', LONDON).month(11), moment.tz('2023-10-20', LONDON).month(11))
+    matchMoment(dayjs.tz('2012-11-04 12:00', NY).hour(1), moment.tz('2012-11-04 12:00', NY).hour(1))
+    matchMoment(
+      dayjs('2012-11-04T06:30:00.000Z').tz(NY).minute(45),
+      moment('2012-11-04T06:30:00.000Z').tz(NY).minute(45)
+    )
+  })
+
+  it('computes startOf / endOf across DST (#2609)', () => {
+    matchMoment(
+      dayjs.tz('2023-10-30', PARIS).startOf('week'),
+      moment.tz('2023-10-30', PARIS).startOf('week')
+    )
+    matchMoment(
+      dayjs.tz('2023-10-28', LONDON).endOf('week'),
+      moment.tz('2023-10-28', LONDON).endOf('week')
+    )
+    matchMoment(
+      dayjs.tz('2012-11-04 12:00', NY).endOf('day'),
+      moment.tz('2012-11-04 12:00', NY).endOf('day')
+    )
+    matchMoment(
+      dayjs.tz('2012-03-11 12:00', NY).startOf('day'),
+      moment.tz('2012-03-11 12:00', NY).startOf('day')
+    )
+  })
+
+  it('keeps the wall clock in tz(zone, true) when the target zone changes offset (#2609)', () => {
+    // The pinned moment-timezone 0.5.31 has a keepLocalTime bug that makes some of these an hour
+    // off on some hosts (fixed in moment 2.31), so compare with parsing the wall time in the zone.
+    matchMoment(dayjs('2024-03-10').tz(LA, true), moment.tz('2024-03-10', LA))
+    matchMoment(dayjs('2025-11-01T23:00').tz(NY, true), moment.tz('2025-11-01 23:00', NY))
+    expect(dayjs('2025-11-01T23:00').tz(NY, true).toISOString()).toBe('2025-11-02T03:00:00.000Z')
+    // midnight on 2023-10-29 in Paris is still CEST (+02:00); moment-timezone 0.5.31 gives
+    // +01:00 from US hosts
+    const parisMidnight = dayjs('2023-10-29').tz(PARIS, true)
+    expect(parisMidnight.format()).toBe('2023-10-29T00:00:00+02:00')
+    expect(parisMidnight.valueOf()).toBe(dayjs.tz('2023-10-29', PARIS).valueOf())
+    matchMoment(dayjs('2024-01-15 12:00').tz(LONDON, true), moment.tz('2024-01-15 12:00', LONDON))
+    // 03:00:01 on LA's spring-forward day is already PDT; moment-timezone 0.5.31 says -08:00
+    expect(dayjs('2022-03-13T03:00:01Z').utc().tz(LA, true).format())
+      .toBe('2022-03-13T03:00:01-07:00')
+  })
+
+  it('keeps the UTC wall clock converting to a fixed zone on the EU spring-forward day', () => {
+    // the case left out of #3174: 04:00 exists in Guadeloupe (UTC-4, no DST) whatever the host does
+    const d = dayjs.utc('2050-03-27T04:00:00.000Z').tz(GUADELOUPE, true)
+    expect(d.format()).toBe('2050-03-27T04:00:00-04:00')
+    expect(d.utcOffset()).toBe(-240)
+  })
+
+  it('shows the right wall clock when the host crosses DST at a different time (#2609)', () => {
+    matchMoment(dayjs.tz('2024-03-10', LA), moment.tz('2024-03-10', LA))
+    expect(dayjs.tz('2024-03-10', LA).format('YYYY-MM-DD')).toBe('2024-03-10')
+    matchMoment(dayjs.tz('2023-10-29', SYDNEY), moment.tz('2023-10-29', SYDNEY))
+  })
+
+  it('resolves an ambiguous parse the same way whatever today is', () => {
+    ['2026-07-01T12:00:00Z', '2026-11-13T12:00:00Z'].forEach((now) => {
+      MockDate.set(new Date(now))
+      matchMoment(dayjs.tz('2012-11-04 01:30', NY), moment.tz('2012-11-04 01:30', NY))
+      matchMoment(dayjs.tz('2023-10-29 01:30', LONDON), moment.tz('2023-10-29 01:30', LONDON))
+    })
+  })
+
+  it('keeps startOf(day) on the same calendar day when the host changes DST that night', () => {
+    // reported on #3169 from a Europe/Athens host; Athens springs forward the same night
+    const d = dayjs.utc('2026-03-29T01:30:00Z').tz(SYDNEY)
+    expect(d.startOf('day').format()).toBe('2026-03-29T00:00:00+11:00')
+  })
+
+  it('leaves instances without a timezone untouched', () => {
+    const local = dayjs('2023-10-28 12:00')
+    expect(local.add(2, 'day').format()).toBe(dayjs('2023-10-30 12:00').format())
+    expect(local.date(30).format()).toBe(dayjs('2023-10-30 12:00').format())
+    expect(dayjs.utc('2023-10-28').add(1, 'day').format()).toBe('2023-10-29T00:00:00Z')
+  })
 })
