@@ -1,4 +1,7 @@
-import { MIN, MS } from '../../constant'
+import { MIN, MS, REGEX_PARSE } from '../../constant'
+
+const REGEX_NAMED_OFFSET = /z|\b(?:UTC?|GMT|[ECMP][SD]T)\b/i
+const REGEX_NUMERIC_OFFSET = /(?:\s[+-]\d|[+-]\d\d(?::?\d\d)?)(?:\s*\([^)]*\))*\s*$/
 
 const typeToPos = {
   year: 0,
@@ -140,7 +143,24 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
+    let localTs
+    if (!parseFormat && !REGEX_PARSE.test(input)
+      && !REGEX_NAMED_OFFSET.test(input) && !REGEX_NUMERIC_OFFSET.test(input)) {
+      // Parse the wall clock before the host's DST rules can change the time.
+      localTs = Date.parse(`${input} GMT`)
+      // An engine may accept a legacy date string only without the suffix.
+      if (Number.isNaN(localTs)) {
+        const parsed = d(input)
+        if (parsed.isValid()) {
+          localTs = Date.UTC(
+            parsed.year(), parsed.month(), parsed.date(),
+            parsed.hour(), parsed.minute(), parsed.second(), parsed.millisecond()
+          )
+        }
+      }
+    } else {
+      localTs = d.utc(input, parseFormat).valueOf()
+    }
     if (Number.isNaN(localTs)) {
       const ins = d(NaN)
       ins.$x.$timezone = timezone
