@@ -1,5 +1,8 @@
 import { MIN, MS, REGEX_PARSE } from '../../constant'
 
+const REGEX_NAMED_OFFSET = /z|\b(?:UTC?|GMT|[ECMP][SD]T)\b/i
+const REGEX_NUMERIC_OFFSET = /(?:\s[+-]\d|[+-]\d\d(?::?\d\d)?)(?:\s*\([^)]*\))*\s*$/
+
 const typeToPos = {
   year: 0,
   month: 1,
@@ -140,21 +143,21 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    // Without a format, dayjs.utc() only understands ISO-like strings
-    // (REGEX_PARSE) as UTC; anything else falls back to `new Date()`,
-    // which parses in the host's local time, so the wall clock would be
-    // shifted by the host offset (#2928). For such strings, recover the
-    // wall-clock timestamp from the host-local parse instead. Strings
-    // with an explicit offset keep the existing path (see #2946).
     let localTs
-    if (!parseFormat && !REGEX_PARSE.test(input) && !/[Zz]|[+-]\d\d:?(\d\d)?$/.test(input)) {
-      const parsed = d(input)
-      localTs = parsed.isValid()
-        ? Date.UTC(
-          parsed.year(), parsed.month(), parsed.date(),
-          parsed.hour(), parsed.minute(), parsed.second(), parsed.millisecond()
-        )
-        : NaN
+    if (!parseFormat && !REGEX_PARSE.test(input)
+      && !REGEX_NAMED_OFFSET.test(input) && !REGEX_NUMERIC_OFFSET.test(input)) {
+      // Parse the wall clock before the host's DST rules can change the time.
+      localTs = Date.parse(`${input} GMT`)
+      // An engine may accept a legacy date string only without the suffix.
+      if (Number.isNaN(localTs)) {
+        const parsed = d(input)
+        if (parsed.isValid()) {
+          localTs = Date.UTC(
+            parsed.year(), parsed.month(), parsed.date(),
+            parsed.hour(), parsed.minute(), parsed.second(), parsed.millisecond()
+          )
+        }
+      }
     } else {
       localTs = d.utc(input, parseFormat).valueOf()
     }

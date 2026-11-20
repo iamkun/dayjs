@@ -598,9 +598,27 @@ describe('dayjs.tz() with non-ISO strings and no format', () => {
       .toBe('2020-10-15 12:30')
   })
 
+  it('preserves wall time through a DST gap in the host timezone', () => {
+    expect(dayjs.tz('03/09/2025 02:30', 'UTC').toISOString())
+      .toBe('2025-03-09T02:30:00.000Z')
+    expect(dayjs.tz('Mar 9 2025 02:30', TOKYO).toISOString())
+      .toBe('2025-03-08T17:30:00.000Z')
+  })
+
+  it('preserves explicit offsets in non-ISO strings', () => {
+    expect(dayjs.tz('Fri, 01 Aug 2025 12:00:00 GMT', 'UTC').toISOString())
+      .toBe('2025-08-01T12:00:00.000Z')
+    expect(dayjs.tz('01 Aug 2025 02:30 EST', 'UTC').toISOString())
+      .toBe('2025-08-01T07:30:00.000Z')
+    expect(dayjs.tz('01 Aug 2025 02:30 -0700 (PDT)', 'UTC').toISOString())
+      .toBe('2025-08-01T09:30:00.000Z')
+  })
+
   it('keeps ISO strings and explicit formats unchanged', () => {
     expect(dayjs.tz('2025-08-01 12:00', NY).format('YYYY-MM-DD HH:mm'))
       .toBe('2025-08-01 12:00')
+    expect(dayjs.tz('+001990-08-01T12:00:00.123', 'UTC').toISOString())
+      .toBe('1990-08-01T12:00:00.123Z')
     expect(dayjs.tz('01 Aug 2025', 'DD MMM YYYY', NY).format('YYYY-MM-DD HH:mm'))
       .toBe('2025-08-01 00:00')
   })
