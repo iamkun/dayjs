@@ -236,6 +236,9 @@ class Dayjs {
     if (unit === C.M) {
       return this.set(C.M, this.$M + number)
     }
+    if (unit === C.Q) {
+      return this.set(C.M, this.$M + (number * 3))
+    }
     if (unit === C.Y) {
       return this.set(C.Y, this.$y + number)
     }
