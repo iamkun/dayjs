@@ -61,6 +61,12 @@ it('Add Time days', () => {
   expect(dayjs('20160131').add(1, 'months').valueOf()).toBe(moment('20160131').add(1, 'months').valueOf())
   expect(dayjs('20160229').add(1, 'year').valueOf()).toBe(moment('20160229').add(1, 'year').valueOf())
 
+  expect(dayjs('2026-01-15').add(1, 'quarter').valueOf()).toBe(moment('2026-01-15').add(1, 'quarter').valueOf())
+  expect(dayjs('2026-01-15').add(2, 'quarters').valueOf()).toBe(moment('2026-01-15').add(2, 'quarters').valueOf())
+  expect(dayjs('2026-01-15').add(1, 'Q').valueOf()).toBe(moment('2026-01-15').add(1, 'Q').valueOf())
+  expect(dayjs('2026-11-30').add(1, 'quarter').valueOf()).toBe(moment('2026-11-30').add(1, 'quarter').valueOf())
+  expect(dayjs('2026-01-15').subtract(1, 'quarter').valueOf()).toBe(moment('2026-01-15').subtract(1, 'quarter').valueOf())
+
   expect(dayjs().add('2', 'years').valueOf()).toBe(moment().add('2', 'years').valueOf())
 })
 
