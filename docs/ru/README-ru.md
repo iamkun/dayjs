@@ -1,6 +1,6 @@
 Русский | [English](../../README.md) | [简体中文](../zh-cn/README.zh-CN.md) | [日本語](../ja/README-ja.md) | [Português Brasileiro](../pt-br/README-pt-br.md) | [한국어](../ko/README-ko.md) | [Español (España)](../es-es/README-es-es.md)| [עברית](./docs/he/README-he.md)
 
-<p align="center"><a href="https://day.js.org/ru/" target="_blank" rel="noopener noreferrer"><img width="550"
+<p align="center"><a href="https://day.js.org/" target="_blank" rel="noopener noreferrer"><img width="550"
                                                                              src="https://user-images.githubusercontent.com/17680888/39081119-3057bbe2-456e-11e8-862c-646133ad4b43.png"
                                                                              alt="Day.js"></a></p>
 <p align="center">Быстрая <b>2kB</b> альтернатива Moment.js с тем же современным API</p>
@@ -50,7 +50,7 @@ dayjs().startOf('month').add(1, 'day').set('year', 2018).format('YYYY-MM-DD HH:m
 npm install dayjs --save
 ```
 
-📚[Инструкция по установке](https://day.js.org/docs/ru/installation/installation)
+📚[Инструкция по установке](https://day.js.org/docs/en/installation/installation)
 
 ### API
 
@@ -68,7 +68,7 @@ dayjs().add(1, 'year') // управление
 dayjs().isBefore(dayjs()) // осведомление
 ```
 
-📚[Ссылка на API](https://day.js.org/docs/ru/parse/parse)
+📚[Ссылка на API](https://day.js.org/docs/en/parse/parse)
 
 ### I18n
 
@@ -82,7 +82,7 @@ dayjs.locale('es') // глобальное использование Испан
 
 dayjs('2018-05-05').locale('zh-cn').format() // использование упрощённой Китайской локали в конкретном случае
 ```
-📚[Интернационализация](https://day.js.org/docs/ru/i18n/i18n)
+📚[Интернационализация](https://day.js.org/docs/en/i18n/i18n)
 
 ### Плагин
 
@@ -96,22 +96,11 @@ dayjs.extend(advancedFormat) // использование плагина
 dayjs().format('Q Do k kk X x') // больше доступных форматов
 ```
 
-📚[Список плагинов](https://day.js.org/docs/ru/plugin/plugin)
-
-### Тенденция использования
-
-<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
-</a>
+📚[Список плагинов](https://day.js.org/docs/en/plugin/plugin)
 
 ## Спонсоры
 
 Поддержите этот проект, став спонсором. Ваш логотип будет показан здесь с ссылкой на ваш веб-сайт. [[Стать спонсором](https://opencollective.com/dayjs#sponsor)]
-
-<a href="https://opencollective.com/dayjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/dayjs/sponsor/1/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/dayjs/sponsor/2/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/dayjs/sponsor/3/website" target="_blank"><img src="https://opencollective.com/dayjs/sponsor/3/avatar.svg"></a>
 
 ## Контрибьюторы
 
@@ -121,10 +110,6 @@ dayjs().format('Q Do k kk X x') // больше доступных формат�
 
 Также выражаю благодарность всем нашим спонсорам! 🙏
 
-<a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 ## Лицензия

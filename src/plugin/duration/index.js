@@ -3,14 +3,14 @@ import {
   MILLISECONDS_A_HOUR,
   MILLISECONDS_A_MINUTE,
   MILLISECONDS_A_SECOND,
-  MILLISECONDS_A_WEEK,
-  REGEX_FORMAT
+  MILLISECONDS_A_WEEK
 } from '../../constant'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12
 
-const durationRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+const DURATION_REGEX_PARSE = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/
+const DURATION_REGEX_FORMAT = /\[([^\]]+)]|YYYY|YY|Y|M{1,2}|D{1,2}|H{1,2}|m{1,2}|s{1,2}|SSS/g
 
 const unitToMS = {
   years: MILLISECONDS_A_YEAR,
@@ -81,7 +81,7 @@ class Duration {
       return this
     }
     if (typeof input === 'string') {
-      const d = input.match(durationRegex)
+      const d = input.match(DURATION_REGEX_PARSE)
       if (d) {
         const properties = d.slice(2)
         const numberD = properties.map(value => (value != null ? Number(value) : 0));
@@ -182,7 +182,7 @@ class Duration {
       ss: $u.s(this.$d.seconds, 2, '0'),
       SSS: $u.s(this.$d.milliseconds, 3, '0')
     }
-    return str.replace(REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
+    return str.replace(DURATION_REGEX_FORMAT, (match, $1) => $1 || String(matches[match]))
   }
 
   as(unit) {

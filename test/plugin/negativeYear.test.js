@@ -22,10 +22,12 @@ describe('negativeYear', () => {
     const date = '-2021/01/03'
     const date2 = '01/03/-2021'
     const date3 = '01-03--2021'
+    const date4 = '-03-15'
     const d = date.match(REGEX_PARSE)
     expect(dayjs(date).format('YYYY-MM-DD')).toBe('-2021-01-03')
     expect(dayjs(date2).format('YYYY-MM-DD')).toBe('Invalid Date')
     expect(dayjs(date3).format()).toBe('Invalid Date')
+    expect(dayjs(date4).format('YYYY-MM-DD')).toBe('2001-03-15')
     expect(d).toBe(null)
   })
 

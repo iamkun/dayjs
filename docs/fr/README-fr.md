@@ -73,7 +73,7 @@ dayjs().isBefore(dayjs()) // query
 
 Day.js offre une excellente prise en charge de l'internationalisation.
 
-Mais aucun d'entre eu ne sera inclus dans votre construction si vous ne l'utilisez pas.
+Mais aucun d'entre eux ne sera inclus dans votre construction si vous ne l'utilisez pas.
 
 ```javascript
 import 'dayjs/locale/es' // load on demand
@@ -87,7 +87,7 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 
 ### Plugin
 
-Un plugin est un module indépendant qui peut être ajouté à Day.js pour en étendre les fonctionnalités ou en ajouter de nuovelles.
+Un plugin est un module indépendant qui peut être ajouté à Day.js pour en étendre les fonctionnalités ou en ajouter de nouvelles.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
@@ -99,50 +99,6 @@ dayjs().format('Q Do k kk X x') // more available formats
 
 📚[Liste des plugins](https://day.js.org/docs/en/plugin/plugin)
 
-### Tendance d'utilisation
-
-<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
-</a>
-
-## Sponsors
-
-Soutenez ce projet en devenant sponsor. Votre logo apparaîtra ici avec un lien vers votre site web.
-
-[[Devenir sponsor via Github](https://github.com/sponsors/iamkun/)] [[Devenir sponsor via OpenCollective](https://opencollective.com/dayjs#sponsor)]
-
-<a href="https://toyokumo.co.jp" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/alan-eu" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/18175329?s=52&v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/sight-and-sound-ministries" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/232316426-cb99b4cf-0ccb-4e73-a6ce-e16dba6aadf4.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/chudovo" target="_blank">
-  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/ken-swyfft" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/storyblok" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/anonstories" target="_blank"><img width="70" src="https://images.opencollective.com/anonstories/7e826c0/avatar/256.png"></a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/datawrapper" target="_blank"><img width="70" src="https://images.opencollective.com/datawrapper/c13e229/logo.png"></a>
-
 ## Contributeurs
 
 Ce projet existe grâce à toutes les personnes qui y contribuent.
@@ -151,11 +107,6 @@ Donnez-nous une 💖 étoile 💖 pour nous soutenir. Nous vous remercions.
 
 Et merci à tous nos donateurs ! 🙏
 
-<a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
-<br />
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 ## Licence

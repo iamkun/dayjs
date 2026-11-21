@@ -69,6 +69,35 @@ describe('Update locale', () => {
       .toEqual(moment().format(formatString))
   })
 
+  it('Partial update to nested object (formats)', () => {
+    dayjs.locale('en')
+    // First, get the original formats
+    const originalLocale = dayjs.Ls.en
+    const originalLT = originalLocale.formats && originalLocale.formats.LT
+
+    // Update only L format
+    dayjs.updateLocale('en', {
+      formats: {
+        L: 'DD/MM/YYYY'
+      }
+    })
+
+    const updatedLocale = dayjs.Ls.en
+    // The updated key should have the new value
+    expect(updatedLocale.formats.L).toBe('DD/MM/YYYY')
+    // Other keys in formats should be preserved
+    expect(updatedLocale.formats.LT).toBe(originalLT)
+  })
+
+  it('Non-object values should still be replaced entirely', () => {
+    const newMonths = new Array(12).fill('newMonth')
+    dayjs.updateLocale('en', {
+      months: newMonths
+    })
+    const updatedLocale = dayjs.Ls.en
+    expect(updatedLocale.months).toEqual(newMonths)
+  })
+
   it('Update invalid date string', () => {
     const locale = 'en'
     const localeSetting = { invalidDate: 'bad date' }

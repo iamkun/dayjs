@@ -105,6 +105,7 @@ dayjs().format('Q Do k kk X x') // more available formats
 </a>
 
 ## අනුග්‍රහකයින්
+## අනුග්‍රාහකයින්
 
 අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත.
 
@@ -171,6 +172,15 @@ dayjs().format('Q Do k kk X x') // more available formats
 <a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
 <a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
 <br />
+
+## දායකයින්
+
+මෙම ව්‍යාපෘතිය පවතිනුයේ දායක වූ සියළුම දෙනාට ස්තූති වන්නටය.
+
+අපට සහාය වීමට 💖 තරුවක් 💖 ලබා දෙන්න. ඔබට තුති.
+
+ඒ වගේම අපගේ මූල්‍යදායකයින් සැමට ස්තුතියි! 🙏
+
 <a href="https://opencollective.com/dayjs#backers" target="_blank"><img src="https://opencollective.com/dayjs/contributors.svg?width=890" /></a>
 
 ## බලපත්‍රය
