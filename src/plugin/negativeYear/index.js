@@ -5,7 +5,7 @@ export default (_, c, dayjs) => {
     const { date, utc } = cfg
     if (typeof date === 'string' && date.charAt(0) === '-') {
       const normalData = date.slice(1)
-      let newDate = dayjs(normalData)
+      let newDate
       if (utc) {
         newDate = dayjs.utc(normalData)
       } else {
