@@ -3,6 +3,8 @@
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
   "main": "dayjs.min.js",
+  "module": "esm/index.js",
+  "sideEffects": false,
   "types": "index.d.ts",
   "scripts": {
     "test": "cross-env TZ=Pacific/Auckland npm run test-tz && cross-env TZ=Europe/London npm run test-tz && cross-env TZ=America/Whitehorse npm run test-tz && npm run test-tz && cross-env TZ=Europe/Paris npm run test-tz-plugin && cross-env TZ=Europe/London npm run test-tz-plugin && cross-env TZ=America/New_York npm run test-tz-plugin && cross-env TZ=Pacific/Auckland npm run test-tz-plugin && jest --coverage --coverageThreshold=\"{ \\\"global\\\": { \\\"lines\\\": 100} }\"",
