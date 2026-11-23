@@ -132,6 +132,25 @@ export default (o, c, d) => {
     return startOfWithoutTz.tz(this.$x.$timezone, true)
   }
 
+  const old$set = proto.$set
+  proto.$set = function (units, int) {
+    if (!this.$x || !this.$x.$timezone) {
+      return old$set.call(this, units, int)
+    }
+
+    // Apply the mutation in wall-clock time to avoid system timezone drift.
+    const withoutTz = d(this.format('YYYY-MM-DD HH:mm:ss:SSS'), { locale: this.$L })
+    const withSet = old$set.call(withoutTz, units, int)
+    const withTz = withSet.tz(this.$x.$timezone, true)
+
+    this.$d = withTz.$d
+    this.$offset = withTz.$offset
+    this.$u = withTz.$u
+    this.$x = withTz.$x
+    this.init()
+    return this
+  }
+
   d.tz = function (input, arg1, arg2) {
     const parseFormat = arg2 && arg1
     const timezone = arg2 || arg1 || defaultTimezone
