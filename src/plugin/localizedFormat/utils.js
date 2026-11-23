@@ -8,7 +8,11 @@ export const englishFormats = {
   L: 'MM/DD/YYYY',
   LL: 'MMMM D, YYYY',
   LLL: 'MMMM D, YYYY h:mm A',
-  LLLL: 'dddd, MMMM D, YYYY h:mm A'
+  LLLL: 'dddd, MMMM D, YYYY h:mm A',
+  l: 'M/D/YYYY',
+  ll: 'MMM D, YYYY',
+  lll: 'MMM D, YYYY h:mm A',
+  llll: 'ddd, MMM D, YYYY h:mm A'
 }
 
 export const u = (formatStr, formats) => formatStr.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g, (_, a, b) => {
