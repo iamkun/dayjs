@@ -76,7 +76,7 @@ describe('Parse UTC ', () => {
     expect(dayjs.utc(d2).format()).toEqual(moment.utc(d2).format())
   })
 
-  it('Parse date string without timezone', () => {
+  it('Parse date and time  string without timezone', () => {
     const d = '2017-04-22 19:50:16'
     expect(dayjs.utc(d).format()).toEqual('2017-04-22T19:50:16Z')
     expect(dayjs.utc(d).format()).toEqual(moment.utc(d).format())
@@ -208,7 +208,6 @@ describe('UTC and local', () => {
   })
 })
 
-
 describe('UTC with customParseFormat', () => {
   it('Custom Parse Format', () => {
     dayjs.extend(customParseFormat)
@@ -227,7 +226,7 @@ describe('UTC Offset', () => {
     expect(dayjs().utc().utcOffset()).toBe(moment().utc().utcOffset())
   })
 
-  it('get utc offset with a number value', () => {
+  it('"dayjs(time).utc().utcOffset" for offset "8"', () => {
     const time = '2021-02-28 19:40:10'
     const hoursOffset = -8
     const daysJS = dayjs(time).utc().utcOffset(hoursOffset * 60, true)
