@@ -1,8 +1,21 @@
 import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
-import locale, { englishToArabicNumbersMap } from '../../src/locale/ku'
+import locale from '../../src/locale/ku'
 import preParsePostFormat from '../../src/plugin/preParsePostFormat'
+
+const englishToArabicNumbersMap = {
+  1: '١',
+  2: '٢',
+  3: '٣',
+  4: '٤',
+  5: '٥',
+  6: '٦',
+  7: '٧',
+  8: '٨',
+  9: '٩',
+  0: '٠'
+}
 
 dayjs.extend(preParsePostFormat)
 
@@ -35,4 +48,10 @@ it('Preparse with locale function', () => {
       .add(i, 'day')
     expect(dayjs(momentKu.format()).format()).toEqual(momentKu.format())
   }
+})
+
+it('ku locale export is a locale object (not a wrapper)', () => {
+  expect(typeof locale).toBe('object')
+  expect(locale.name).toBe('ku')
+  expect(typeof dayjs('2020-01-01').locale('ku').format('MMMM')).toBe('string')
 })
