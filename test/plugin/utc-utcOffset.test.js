@@ -75,14 +75,14 @@ it('utcOffset keepLocalTime', () => {
     .toBe(moment(d2).utcOffset(5, true).format())
 })
 
-test('UTC mode', () => {
+it('UTC mode', () => {
   const d = dayjs.utc('2000-01-01T06:00:00Z')
   expect(d.isUTC()).toBeTruthy()
   expect(d.utcOffset(0).isUTC()).toBeTruthy()
   expect(d.utcOffset(1).isUTC()).toBeFalsy()
 })
 
-test('change hours when changing the utc offset in UTC mode', () => {
+it('change hours when changing the utc offset in UTC mode', () => {
   const d = dayjs.utc('2000-01-01T06:31:00Z')
   expect(d.hour()).toBe(6)
   expect(d.utcOffset(0).hour()).toBe(6)
@@ -93,7 +93,7 @@ test('change hours when changing the utc offset in UTC mode', () => {
   expect(d.utcOffset(-1380).format('HH:mm')).toBe('07:31')
 })
 
-test('correctly set and add hours in offset mode', () => {
+it('correctly set and add hours in offset mode', () => {
   const d10 = dayjs('2000-01-30T06:31:00+10:00').utcOffset(10)
   const dm8 = dayjs('2000-01-30T06:31:00-08:00').utcOffset(-8)
 
@@ -106,7 +106,7 @@ test('correctly set and add hours in offset mode', () => {
   expect(dm8.hour(5).add(-10, 'hour').hour()).toBe(19)
 })
 
-test('keep hours when adding month in offset mode', () => {
+it('keep hours when adding month in offset mode', () => {
   const d10 = dayjs('2000-01-30T06:31:00+10:00').utcOffset(10)
   const dm8 = dayjs('2000-01-30T06:31:00-08:00').utcOffset(-8)
 
@@ -117,7 +117,7 @@ test('keep hours when adding month in offset mode', () => {
   expect(dm8.add(-2, 'month').hour()).toBe(6)
 })
 
-test('utc costrustor', () => {
+it('utc costrustor', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0).getTime()
   expect(moment(d).utc().utcOffset(480).valueOf())
     .toBe(dayjs(d).utc().utcOffset(480).valueOf())
@@ -130,7 +130,7 @@ test('utc costrustor', () => {
       .valueOf())
 })
 
-test('utc startOf', () => {
+it('utc startOf', () => {
   const d = new Date(2019, 8, 11, 0, 0, 0, 0).getTime()
   expect(moment(d).utc().utcOffset(480).endOf('day')
     .valueOf())
