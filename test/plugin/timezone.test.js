@@ -331,6 +331,13 @@ describe('startOf and endOf', () => {
     expect(startOfDay.valueOf()).toEqual(originalDay.valueOf())
   })
 
+  it('handles startOf after DST ends in the target timezone', () => {
+    const melbourneDaylightTime = dayjs.tz('2021-04-01 08:00', 'Australia/Melbourne')
+    const melbourneStandardTime = dayjs.tz('2021-04-15 08:00', 'Australia/Melbourne')
+    expect(melbourneDaylightTime.startOf('day').format()).toBe('2021-04-01T00:00:00+11:00')
+    expect(melbourneStandardTime.startOf('day').format()).toBe('2021-04-15T00:00:00+10:00')
+  })
+
   it('corrects for timezone offset in endOf', () => {
     const originalDay = dayjs.tz('2009-12-31 23:59:59.999', NY)
     const endOfDay = originalDay.endOf('day')
