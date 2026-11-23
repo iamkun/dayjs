@@ -25,7 +25,7 @@ const parseLocale = (preset, object, isLocal) => {
     }
     const presetSplit = preset.split('-')
     if (!l && presetSplit.length > 1) {
-      return parseLocale(presetSplit[0])
+      return parseLocale(presetSplit[0], object, isLocal)
     }
   } else {
     const { name } = preset
