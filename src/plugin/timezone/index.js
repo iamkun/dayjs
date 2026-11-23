@@ -140,6 +140,10 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
+    if (/Z$/i.test(input)) {
+      // ISO_8601 string
+      return d.utc(input).tz(timezone)
+    }
     const localTs = d.utc(input, parseFormat).valueOf()
     if (Number.isNaN(localTs)) {
       const ins = d(NaN)
