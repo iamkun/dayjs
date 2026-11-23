@@ -1,6 +1,7 @@
 import MockDate from 'mockdate'
 import moment from 'moment'
 import dayjs from '../../src'
+import '../../src/locale/be'
 import '../../src/locale/ru'
 import uk from '../../src/locale/uk'
 import '../../src/locale/zh-cn'
@@ -211,8 +212,21 @@ it('parse month from short string with locale in argument', () => {
   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
 })
 
+it('parse last month of year from short format string with locale', () => {
+  const input = '2018 снеж. 03'
+  const format = 'YYYY MMM DD'
+  expect(dayjs(input, format, 'be').valueOf()).toBe(moment(input, format, 'be').valueOf())
+})
+
 it('parse month from string with locale in argument', () => {
   const input = '2018 лютий 03'
+  const format = 'YYYY MMMM DD'
+
+  expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
+})
+
+it('parse last month of year from format string with locale', () => {
+  const input = '2018 грудня 03'
   const format = 'YYYY MMMM DD'
 
   expect(dayjs(input, format, 'uk').valueOf()).toBe(moment(input, format, 'uk').valueOf())
