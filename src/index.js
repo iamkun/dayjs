@@ -63,7 +63,10 @@ Utils.w = wrapper
 const parseDate = (cfg) => {
   const { date, utc } = cfg
   if (date === null) return new Date(NaN) // null is invalid
-  if (Utils.u(date)) return new Date() // today
+  if (Utils.u(date)) {
+    return cfg.args && cfg.args.length > 0
+      ? new Date(NaN) : new Date()
+  } // undefined is invalid; no args means today
   if (date instanceof Date) return new Date(date)
   if (typeof date === 'string' && !/Z$/i.test(date)) {
     const d = date.match(C.REGEX_PARSE)
