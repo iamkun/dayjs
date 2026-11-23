@@ -9,6 +9,7 @@ const locale = {
   months: 'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split('_'),
   monthsShort: 'яну_фев_мар_апр_май_юни_юли_авг_сеп_окт_ное_дек'.split('_'),
   weekStart: 1,
+  yearStart: 4,
   ordinal: (n) => {
     const last2Digits = n % 100
     if (last2Digits > 10 && last2Digits < 20) {
