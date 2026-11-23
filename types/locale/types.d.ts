@@ -3,10 +3,11 @@ declare interface ILocale {
   weekdays?: string[]
   months?: string[]
   weekStart?: number
+  yearStart?: number
   weekdaysShort?: string[]
   monthsShort?: string[]
   weekdaysMin?: string[]
-  ordinal?: (n: number) => number | string
+  ordinal?: (n: number, period?: string) => number | string
   formats: Partial<{
     LT: string
     LTS: string
@@ -14,6 +15,10 @@ declare interface ILocale {
     LL: string
     LLL: string
     LLLL: string
+    l: string
+    ll: string
+    lll: string
+    llll: string
   }>
   relativeTime: Partial<{
     future: string
@@ -30,4 +35,5 @@ declare interface ILocale {
     y: string
     yy: string
   }>
+  meridiem?: (hour: number, minute: number) => string
 }
