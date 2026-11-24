@@ -1,4 +1,20 @@
-import { MIN, MS } from '../../constant'
+import { MIN, MS, REGEX_PARSE } from '../../constant'
+
+const REGEX_NAMED_OFFSET = /(?:\b|\d)z\b|\b(?:UTC?|GMT|[ECMP][SD]T)\b/i
+const REGEX_NUMERIC_OFFSET = /(?:^|\s|:\d+(?:\.\d+)?|[ap]m)[+-]\d{1,2}(?::?\d{2})?\b|[+-]\d\d(?::?\d\d)?\s*$/i
+const REGEX_EXPANDED_ISO_TIME = /^[+-]\d{6}-\d{2}-\d{2}T/i
+
+const hasExplicitOffset = (input) => {
+  // Legacy dates can include parenthesized comments, even around a zone name.
+  let commentDepth = 0
+  const date = input.split(/([()])/).filter((part) => {
+    if (part === '(') commentDepth += 1
+    else if (part === ')') commentDepth = Math.max(0, commentDepth - 1)
+    else return !commentDepth
+    return false
+  }).join(' ')
+  return REGEX_NAMED_OFFSET.test(date) || REGEX_NUMERIC_OFFSET.test(date)
+}
 
 const typeToPos = {
   year: 0,
@@ -140,7 +156,24 @@ export default (o, c, d) => {
       // timestamp number || js Date || Day.js
       return d(input).tz(timezone)
     }
-    const localTs = d.utc(input, parseFormat).valueOf()
+    let localTs
+    if (!parseFormat && !REGEX_PARSE.test(input) && !hasExplicitOffset(input)) {
+      // Parse the wall clock before the host's DST rules can change the time.
+      const suffix = REGEX_EXPANDED_ISO_TIME.test(input) ? 'Z' : ' GMT'
+      localTs = Date.parse(input + suffix)
+      // Best effort for other native formats that reject an explicit UTC suffix.
+      if (Number.isNaN(localTs)) {
+        const parsed = d(input)
+        if (parsed.isValid()) {
+          localTs = Date.UTC(
+            parsed.year(), parsed.month(), parsed.date(),
+            parsed.hour(), parsed.minute(), parsed.second(), parsed.millisecond()
+          )
+        }
+      }
+    } else {
+      localTs = d.utc(input, parseFormat).valueOf()
+    }
     if (Number.isNaN(localTs)) {
       const ins = d(NaN)
       ins.$x.$timezone = timezone
