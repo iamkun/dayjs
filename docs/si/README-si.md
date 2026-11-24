@@ -5,8 +5,8 @@
                                                                              alt="Day.js"></a></p>
 <p align="center">නවීන යෙ.ක්‍ර.මු. සමඟින් Moment.js සඳහා <b>කි.බ. 2</b> ක වේගවත් විකල්පයකි</p>
 <p align="center">
-    <a href="https://unpkg.com/dayjs/dayjs.min.js"><img
-            src="https://img.badgesize.io/https://unpkg.com/dayjs/dayjs.min.js?compression=gzip&style=flat-square"
+    <a href="https://bundlephobia.com/package/dayjs"><img
+            src="https://img.shields.io/bundlephobia/minzip/dayjs?style=flat-square&color=%2345cc11"
             alt="Gzip Size"></a>
     <a href="https://www.npmjs.com/package/dayjs"><img src="https://img.shields.io/npm/v/dayjs.svg?style=flat-square&colorB=51C838"
                                                        alt="NPM Version"></a>
@@ -84,9 +84,9 @@ dayjs('2018-05-05').locale('zh-cn').format() // use Chinese Simplified locale in
 ```
 📚[ දේශීයකරණය](https://day.js.org/docs/en/i18n/i18n)
 
-### දිගුව
+### පේනු
 
-දිගුවක් යනු ක්‍රියාකාරිත්වය විස්තීරණයට හෝ නව විශේෂාංග අඩංගු කිරීමට Day.js වෙත එක් කළ හැකි ස්වාධීන ඒකකයකි.
+පේනුවක් යනු ක්‍රියාකාරිත්වය විස්තීරණයට හෝ නව විශේෂාංග අඩංගු කිරීමට Day.js වෙත එක් කළ හැකි ස්වාධීන ඒකකයකි.
 
 ```javascript
 import advancedFormat from 'dayjs/plugin/advancedFormat' // load on demand
@@ -96,55 +96,39 @@ dayjs.extend(advancedFormat) // use plugin
 dayjs().format('Q Do k kk X x') // more available formats
 ```
 
-📚[ දිගු ලේඛනය](https://day.js.org/docs/en/plugin/plugin)
+📚[ පේනු ලේඛනය](https://day.js.org/docs/en/plugin/plugin)
 
-### භාවිතයට නැඹුරුව
-
-<a href="https://npm-compare.com/moment,dayjs/#timeRange=THREE_YEARS" target="_blank">
-  <img src="https://user-images.githubusercontent.com/3455798/270162667-c7bd2ebe-675e-45c6-a2c9-dc67f3b65d6e.png">
-</a>
+## බාගැනීම්
+![Day.js Chart](/docs/assets/download.png)
 
 ## අනුග්‍රහකයින්
-## අනුග්‍රාහකයින්
 
 අනුග්‍රහය දැක්වීමෙන් මෙම ව්‍යාපෘතියට සහාය වන්න. ඔබගේ අඩවියේ සබැඳියක් සමඟ ඔබගේ ලාංඡනය මෙහි පෙන්වනු ඇත.
 
-[[ගිට්හබ් හරහා අනුග්‍රහය දක්වන්න](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රහය දක්වන්න](https://opencollective.com/dayjs#sponsor)]
+[[ගිට්හබ් හරහා අනුග්‍රහය](https://github.com/sponsors/iamkun/)] [[ඕපන්කලෙක්ටිව් හරහා අනුග්‍රහය](https://opencollective.com/dayjs#sponsor)]
 
-<a href="https://toyokumo.co.jp" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/197092231-2367b5eb-1e43-467e-a311-23f7cd97b086.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://github.com/ken-swyfft" target="_blank">
   <img width="70" src="https://avatars.githubusercontent.com/u/65305317?v=4">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://chudovo.com/" target="_blank">
-  <img width="70" src="https://images.opencollective.com/chudovo/3c866f5/logo/256.png?height=256">
+<a href="https://opencollective.com/filerev" target="_blank">
+  <img width="70" src="https://images.opencollective.com/filerev/93a8f05/logo/256.png?height=256" />
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.ratrav.com" target="_blank">
-  <img width="70" src="https://images.opencollective.com/ratrav/8bad59c/logo/256.png?height=256">
+<a href="https://opencollective.com/carboneio" target="_blank">
+  <img width="70" src="https://images.opencollective.com/carboneio/fe2066c/logo/256.png?height=256">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://opencollective.com/sight-sound" target="_blank">
-  <img width="70" src="https://images.opencollective.com/sight-sound/54f7220/logo/256.png?height=256">
+<a href="https://www.netrouting.com" target="_blank" alt="Netrouting Dedicated Servers">
+  <img width="70" src="https://netrouting.com/wp-content/uploads/2026/04/Logo-netrouting.png">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.honrev.com" target="_blank">
-  <img width="70" src="https://github.com/user-attachments/assets/b3203350-34c1-4637-b8b1-d9b8bab346d3">
+<a href="https://www.sayfone.com/call-rates " target="_blank">
+  <img alt="Sayfone Cheap international calls" width="70" src="https://github.com/user-attachments/assets/68f91139-b190-421b-bcd7-43a8e3d84fe7">
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/alan-eu" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/18175329?s=52&v=4">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.exoflare.com/open-source/?utm_source=dayjs&utm_campaign=open_source" target="_blank">
-  <img width="70" src="https://user-images.githubusercontent.com/17680888/162761622-1407a849-0c41-4591-8aa9-f98114ec2092.png">
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/storyblok" target="_blank">
-  <img width="70" src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4">
+<a href="https://automatio.ai" target="_blank" alt="Automatio AI">
+  <img width="70" src="https://avatars.githubusercontent.com/u/1984909?v=4" />
 </a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://bestkru.com/" target="_blank">
@@ -158,20 +142,20 @@ dayjs().format('Q Do k kk X x') // more available formats
 <a href="https://route4me.com/" target="_blank">
   <img width="70" src="https://github.com/user-attachments/assets/3fbc86c5-98a9-49c2-beae-1969026fcd76" alt="Route Optimizer and Route Planner Software">
 </a>
-
-## දායකයින්
-
-මෙම ව්‍යාපෘතිය පවතිනුයේ දායක වූ සියළුම දෙනාට ස්තූති වන්නටය.
-
-අපට සහාය වීමට 💖 තරුවක් 💖 ලබා දෙන්න. ඔබට තුති.
-
-ඒ වගේම අපගේ මූල්‍යදායකයින් සැමට ස්තුතියි! 🙏
-
-<a href="https://opencollective.com/dayjs/backer/0/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/0/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/1/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/1/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/2/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/2/avatar.svg?requireActive=false"></a>
-<a href="https://opencollective.com/dayjs/backer/3/website?requireActive=false" target="_blank"><img width="35" src="https://opencollective.com/dayjs/backer/3/avatar.svg?requireActive=false"></a>
-<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/sentdm" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/153308555?s=200&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/mvpsnet" target="_blank">
+  <img width="70" src="https://avatars.githubusercontent.com/u/89784111?s=96&v=4">
+</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://onlydoc.com/" target="_blank" alt><img alt="" width="70" src="https://github.com/user-attachments/assets/f5d5938e-48a1-420b-af72-c4012d3941c1" /></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://unaimytext.com" target="_blank">
+  <img width="70" src="https://github.com/user-attachments/assets/8510473a-c097-4bc9-8c61-b7515194f6f5">
+</a>
 
 ## දායකයින්
 
