@@ -601,8 +601,33 @@ describe('dayjs.tz() with non-ISO strings and no format', () => {
   it('preserves wall time through a DST gap in the host timezone', () => {
     expect(dayjs.tz('03/09/2025 02:30', 'UTC').toISOString())
       .toBe('2025-03-09T02:30:00.000Z')
+    // Tokyo has no DST gap on this date, and its UTC instant falls on the previous day.
     expect(dayjs.tz('Mar 9 2025 02:30', TOKYO).toISOString())
       .toBe('2025-03-08T17:30:00.000Z')
+  })
+
+  it('ignores zone-like text in date comments but recognizes an attached Z', () => {
+    expect(dayjs.tz('Mar 9 2025 02:30 (fizz)', 'UTC').toISOString())
+      .toBe('2025-03-09T02:30:00.000Z')
+    expect(dayjs.tz('Mar 9 2025 02:30 (GMT)', 'UTC').toISOString())
+      .toBe('2025-03-09T02:30:00.000Z')
+    expect(dayjs.tz('2025-03-09T02:30:00z', 'UTC').toISOString())
+      .toBe('2025-03-09T02:30:00.000Z')
+  })
+
+  it('preserves numeric offsets before the year and after single-digit minutes', () => {
+    expect(dayjs.tz('Fri Aug 1 02:30 -0700 2025', 'UTC').toISOString())
+      .toBe('2025-08-01T09:30:00.000Z')
+    expect(dayjs.tz('Mar 9 2025 2:3-0500', 'UTC').toISOString())
+      .toBe('2025-03-09T07:03:00.000Z')
+    expect(dayjs.tz('Fri Aug 1 02:30 -0700 invalid', 'UTC').isValid()).toBe(false)
+  })
+
+  it('preserves expanded-year ISO wall time in a host DST gap', () => {
+    expect(dayjs.tz('+002025-03-09T02:30:00.123', 'UTC').toISOString())
+      .toBe('2025-03-09T02:30:00.123Z')
+    expect(dayjs.tz('+002025-03-09T02:30:00.123-05:00', 'UTC').toISOString())
+      .toBe('2025-03-09T07:30:00.123Z')
   })
 
   it('preserves explicit offsets in non-ISO strings', () => {
