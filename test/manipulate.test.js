@@ -64,6 +64,16 @@ it('Add Time days', () => {
   expect(dayjs().add('2', 'years').valueOf()).toBe(moment().add('2', 'years').valueOf())
 })
 
+it('Add and subtract quarters', () => {
+  const date = dayjs('2026-01-15T12:34:56.789')
+  const format = 'YYYY-MM-DD HH:mm:ss.SSS'
+
+  expect(date.add(1, 'quarter').format(format)).toBe('2026-04-15 12:34:56.789')
+  expect(date.add(2, 'quarters').format(format)).toBe('2026-07-15 12:34:56.789')
+  expect(date.add(1, 'Q').format(format)).toBe('2026-04-15 12:34:56.789')
+  expect(date.subtract(1, 'quarter').format(format)).toBe('2025-10-15 12:34:56.789')
+})
+
 it('Add Time with decimal', () => {
   expect(dayjs().add(0.4, 'day').valueOf()).toBe(moment().add(0.4, 'day').valueOf())
   expect(dayjs().add(0.5, 'day').valueOf()).toBe(moment().add(0.5, 'day').valueOf())
