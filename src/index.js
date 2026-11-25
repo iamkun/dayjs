@@ -233,6 +233,9 @@ class Dayjs {
       const d = dayjs(this)
       return Utils.w(d.date(d.date() + Math.round(n * number)), this)
     }
+    if (unit === C.Q) {
+      return this.add(number * 3, C.M)
+    }
     if (unit === C.M) {
       return this.set(C.M, this.$M + number)
     }
