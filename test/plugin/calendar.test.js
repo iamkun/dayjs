@@ -125,6 +125,18 @@ it('callback is a function and first argument a moment that depicts now', () => 
   expect(callbacks.sameDay).toBeCalledWith(now)
 })
 
+it('callback receives an explicit reference time', () => {
+  const reference = dayjs('2020-01-15T12:00:00')
+  let received
+  reference.calendar(reference, {
+    sameDay(arg) {
+      received = arg.valueOf()
+      return '[Today]'
+    }
+  })
+  expect(received).toBe(reference.valueOf())
+})
+
 it('set global calendar in locale file', () => {
   const now = '2019-04-03T14:21:22.000Z'
   zhCn.calendar = {
