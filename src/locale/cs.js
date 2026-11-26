@@ -48,12 +48,27 @@ function translate(number, withoutSuffix, key, isFuture) {
   }
 }
 /* eslint-enable */
+const monthsFormat = 'ledna_února_března_dubna_května_června_července_srpna_září_října_listopadu_prosince'.split('_')
+const monthsStandalone = 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_')
+
+// Czech uses the genitive month when a day number precedes it, e.g. "16. října 2026".
+const MONTHS_IN_FORMAT = /D\.?(\[[^[\]]*\]|\s)+MMMM?/
+
+const months = (dayjsInstance, format) => {
+  if (MONTHS_IN_FORMAT.test(format)) {
+    return monthsFormat[dayjsInstance.month()]
+  }
+  return monthsStandalone[dayjsInstance.month()]
+}
+months.s = monthsStandalone
+months.f = monthsFormat
+
 const locale = {
   name: 'cs',
   weekdays: 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
   weekdaysShort: 'ne_po_út_st_čt_pá_so'.split('_'),
   weekdaysMin: 'ne_po_út_st_čt_pá_so'.split('_'),
-  months: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split('_'),
+  months,
   monthsShort: 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
   weekStart: 1,
   yearStart: 4,

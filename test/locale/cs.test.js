@@ -2,9 +2,11 @@ import moment from 'moment'
 import MockDate from 'mockdate'
 import dayjs from '../../src'
 import relativeTime from '../../src/plugin/relativeTime'
+import localizedFormat from '../../src/plugin/localizedFormat'
 import '../../src/locale/cs'
 
 dayjs.extend(relativeTime)
+dayjs.extend(localizedFormat)
 
 beforeEach(() => {
   MockDate.set(new Date())
@@ -49,4 +51,22 @@ it('RelativeTime: Time from X', () => {
     expect(dayjsDay.from(dayjsCompare, true))
       .toBe(momentDay.from(momentCompare, true))
   })
+})
+
+it('Format: month in a date uses the genitive case', () => {
+  dayjs.locale('cs')
+  const d = dayjs('2026-10-16')
+
+  expect(d.format('LL')).toBe('16. října 2026')
+  expect(d.format('LLL')).toBe('16. října 2026 0:00')
+  expect(d.format('LLLL')).toBe('pátek 16. října 2026 0:00')
+  expect(d.format('D. MMMM YYYY')).toBe('16. října 2026')
+})
+
+it('Format: a standalone month stays in the nominative case', () => {
+  dayjs.locale('cs')
+  const d = dayjs('2026-10-16')
+
+  expect(d.format('MMMM')).toBe('říjen')
+  expect(d.format('MMMM YYYY')).toBe('říjen 2026')
 })
