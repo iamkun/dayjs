@@ -116,6 +116,7 @@ export default (o, c, d) => {
 
   proto.offsetName = function (type) {
     // type: short(default) / long
+    if (!this.isValid()) return undefined
     const zone = this.$x.$timezone || d.tz.guess()
     const result = makeFormatParts(this.valueOf(), zone, { timeZoneName: type }).find(m => m.type.toLowerCase() === 'timezonename')
     return result && result.value

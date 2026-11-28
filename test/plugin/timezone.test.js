@@ -312,6 +312,13 @@ describe('Get offsetName', () => {
     const d = dtz.offsetName('long')
     expect(d).toBe('Eastern Standard Time')
   })
+  it('returns undefined for invalid instances instead of throwing', () => {
+    // #3180 guarded tz() but not offsetName(): new Date(NaN) makes
+    // Intl.DateTimeFormat.formatToParts throw RangeError
+    expect(dayjs.tz('invalid', NY).offsetName()).toBe(undefined)
+    expect(dayjs.tz('invalid', NY).offsetName('long')).toBe(undefined)
+    expect(dayjs('invalid').offsetName()).toBe(undefined)
+  })
 })
 
 describe('CustomPraseFormat', () => {
