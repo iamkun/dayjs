@@ -2,6 +2,7 @@ import { FORMAT_DEFAULT } from '../../constant'
 import { u, englishFormats } from './utils'
 
 export default (o, c, d) => {
+  d.p.localizedFormat = true
   const proto = c.prototype
   const oldFormat = proto.format
 

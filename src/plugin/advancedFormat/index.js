@@ -1,6 +1,7 @@
 import { FORMAT_DEFAULT } from '../../constant'
+import { u } from '../localizedFormat/utils'
 
-export default (o, c) => { // locale needed later
+export default (o, c, d) => { // locale needed later
   const proto = c.prototype
   const oldFormat = proto.format
   proto.format = function (formatStr) {
@@ -11,7 +12,12 @@ export default (o, c) => { // locale needed later
     }
 
     const utils = this.$utils()
-    const str = formatStr || FORMAT_DEFAULT
+    const { formats = {} } = locale
+    // when localizedFormat is installed, expand localized format tokens (L, LL, ...)
+    // first, so that advancedFormat tokens inside locale formats are replaced below
+    const str = d.p.localizedFormat
+      ? u(formatStr || FORMAT_DEFAULT, formats)
+      : formatStr || FORMAT_DEFAULT
     const result = str.replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, (match) => {
       switch (match) {
         case 'Q':
